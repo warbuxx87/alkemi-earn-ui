@@ -80,7 +80,7 @@ class Home extends Component {
                         <div className='Platform'>
                             <span className='Platform-title'> {t_net} </span>
                             <span className='Platform-img'>
-                                <img src='images/favicon.ico' alt='Alkemi Network Icon' />
+                                <img src='images/alkemi-logo-icon-white.png' />
                             </span>
                         </div>
 
@@ -96,7 +96,7 @@ class Home extends Component {
                         <div className='card card-margin-right'>
                             <div className='card-top'>
                                 <div className='card-top-left'>
-                                    <img src={'images/Home_USDX.svg'} alt='' />
+                                    <img src={'images/Home_USDC.svg'} alt='' />
                                     <span>USDX</span>
                                 </div>
                                 <div className='card-top-right'>
