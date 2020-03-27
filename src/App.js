@@ -91,8 +91,6 @@ class App extends Component {
     window.addEventListener('load', async () => {
         if (window.ethereum) {
             try {
-                await ethereum.enable()
-                console.log(window.ethereum)
 
                 // add accounts changed
                 if (window.ethereum.on) {
