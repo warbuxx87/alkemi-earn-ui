@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 // import { Alert } from 'antd';
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MediaQuery from 'react-responsive';
 
 import Home from './pages/home/home';
@@ -87,39 +87,52 @@ class App extends Component {
       }
     )
 
-    // add accounts changed
-    if (window.ethereum.on) {
-      window.ethereum.on('accountsChanged', (accounts) => {
-        console.log('accountsChanged: ', accounts[0]);
-        this.setState({
-          my_account: accounts[0],
-          i_have_supply_usdx: false,
-          i_have_supply_usdt: false,
-          i_have_supply_imbtc: false,
-          i_have_supply_weth: false,
-          i_have_supply_hbtc: false,
-          i_have_borrow_usdx: false,
-          i_have_borrow_usdt: false,
-          i_have_borrow_imbtc: false,
-          i_have_borrow_hbtc: false,
-          i_have_borrow_weth: false
-        }, async () => {
-          console.log('connected: ', this.state.my_account)
-          let timer_Next = setInterval(() => {
-            if (!(this.state.USDx_decimals && this.state.WETH_decimals && this.state.imBTC_decimals && this.state.USDT_decimals && this.state.my_account && this.state.HBTC_decimals)) {
-              console.log('111111111: not get yet...');
-            } else {
-              console.log('2222222222: i got it...');
-              clearInterval(timer_Next);
-              this.setState({ i_am_ready: true })
-              // to do something...
-              this.get_my_status();
-              this.get_5_tokens_status();
+
+    window.addEventListener('load', async () => {
+        if (window.ethereum) {
+            try {
+                await ethereum.enable()
+                console.log(window.ethereum)
+
+                // add accounts changed
+                if (window.ethereum.on) {
+                  window.ethereum.on('accountsChanged', (accounts) => {
+                    console.log('accountsChanged: ', accounts[0]);
+                    this.setState({
+                      my_account: accounts[0],
+                      i_have_supply_usdx: false,
+                      i_have_supply_usdt: false,
+                      i_have_supply_imbtc: false,
+                      i_have_supply_weth: false,
+                      i_have_supply_hbtc: false,
+                      i_have_borrow_usdx: false,
+                      i_have_borrow_usdt: false,
+                      i_have_borrow_imbtc: false,
+                      i_have_borrow_hbtc: false,
+                      i_have_borrow_weth: false
+                    }, async () => {
+                      console.log('connected: ', this.state.my_account)
+                      let timer_Next = setInterval(() => {
+                        if (!(this.state.USDx_decimals && this.state.WETH_decimals && this.state.imBTC_decimals && this.state.USDT_decimals && this.state.my_account && this.state.HBTC_decimals)) {
+                          console.log('111111111: not get yet...');
+                        } else {
+                          console.log('2222222222: i got it...');
+                          clearInterval(timer_Next);
+                          this.setState({ i_am_ready: true })
+                          // to do something...
+                          this.get_my_status();
+                          this.get_5_tokens_status();
+                        }
+                      }, 100)
+                    })
+                  });
+                }
+            } catch (error) {
+                console.error(error)
             }
-          }, 100)
-        })
-      });
-    }
+        }
+    })
+
   }
 
 
@@ -453,25 +466,27 @@ class App extends Component {
     return (
       <MediaQuery maxWidth={736}>
         {(match) => (
-          <Switch>
-            <React.Fragment>
-              <div className="App">
-                <Route exact path="/" render={() => <Home data={this.state} connect={this.connect} />} />
+          <BrowserRouter>
+            <Switch>
+              <React.Fragment>
+                <div className="App">
+                  <Route exact path="/" render={() => <Home data={this.state} connect={this.connect} />} />
 
-                <Route path="/supply-usdx" render={() => <SupplyUSDx data={this.state} supply_APR={this.state.usdx_supply_APR} />} />
-                <Route path="/supply-usdt" render={() => <SupplyUSDT data={this.state} supply_APR={this.state.usdt_supply_APR} />} />
-                <Route path="/supply-imbtc" render={() => <SupplyimBTC data={this.state} supply_APR={this.state.imbtc_supply_APR} />} />
-                <Route path="/supply-weth" render={() => <SupplyWETH data={this.state} supply_APR={this.state.weth_supply_APR} />} />
-                <Route path="/supply-hbtc" render={() => <SupplyHBTC data={this.state} supply_APR={this.state.hbtc_supply_APR} />} />
+                  <Route path="/supply-usdx" render={() => <SupplyUSDx data={this.state} supply_APR={this.state.usdx_supply_APR} />} />
+                  <Route path="/supply-usdt" render={() => <SupplyUSDT data={this.state} supply_APR={this.state.usdt_supply_APR} />} />
+                  <Route path="/supply-imbtc" render={() => <SupplyimBTC data={this.state} supply_APR={this.state.imbtc_supply_APR} />} />
+                  <Route path="/supply-weth" render={() => <SupplyWETH data={this.state} supply_APR={this.state.weth_supply_APR} />} />
+                  <Route path="/supply-hbtc" render={() => <SupplyHBTC data={this.state} supply_APR={this.state.hbtc_supply_APR} />} />
 
-                <Route path="/borrow-usdx" render={() => <BorrowUSDx data={this.state} borrow_APR={this.state.usdx_borrow_APR} />} />
-                <Route path="/borrow-usdt" render={() => <BorrowUSDT data={this.state} borrow_APR={this.state.usdt_borrow_APR} />} />
-                <Route path="/borrow-imbtc" render={() => <BorrowimBTC data={this.state} borrow_APR={this.state.imbtc_borrow_APR} />} />
-                <Route path="/borrow-weth" render={() => <BorrowWETH data={this.state} borrow_APR={this.state.weth_borrow_APR} />} />
-                <Route path="/borrow-hbtc" render={() => <BorrowHBTC data={this.state} borrow_APR={this.state.hbtc_borrow_APR} />} />
-              </div>
-            </React.Fragment>
-          </Switch>
+                  <Route path="/borrow-usdx" render={() => <BorrowUSDx data={this.state} borrow_APR={this.state.usdx_borrow_APR} />} />
+                  <Route path="/borrow-usdt" render={() => <BorrowUSDT data={this.state} borrow_APR={this.state.usdt_borrow_APR} />} />
+                  <Route path="/borrow-imbtc" render={() => <BorrowimBTC data={this.state} borrow_APR={this.state.imbtc_borrow_APR} />} />
+                  <Route path="/borrow-weth" render={() => <BorrowWETH data={this.state} borrow_APR={this.state.weth_borrow_APR} />} />
+                  <Route path="/borrow-hbtc" render={() => <BorrowHBTC data={this.state} borrow_APR={this.state.hbtc_borrow_APR} />} />
+                </div>
+              </React.Fragment>
+            </Switch>
+          </BrowserRouter>
         )}
       </MediaQuery>
     );
