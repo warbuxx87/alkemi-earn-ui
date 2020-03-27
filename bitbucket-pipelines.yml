@@ -11,8 +11,8 @@ pipelines:
           - apt-get update
           - apt-get install jq zip -y
           - npm install
-          - react-scripts build
-          - react-scripts test
+          - npm run build
+          - npm run test
   branches:
     master:
       - step:
@@ -25,8 +25,8 @@ pipelines:
             - apt-get update
             - apt-get install jq zip -y
             - npm install
-            - react-scripts build
-            - react-scripts test
+            - npm run build
+            - npm run test
             - declare -x VERSION=$(jq -r '.version' package.json)
             - echo "$VERSION"
             - zip -r application.zip .
