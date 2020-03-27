@@ -65,22 +65,27 @@ class AppNoWeb3 extends Component {
               this.setState({
                 USDX_item: item
               })
+                return null;
             } else if (item.symbol === 'WETH') {
               this.setState({
                 WETH_item: item
               })
+                return null;
             } else if (item.symbol === 'USDT') {
               this.setState({
                 USDT_item: item
               })
+                return null;
             } else if (item.symbol === 'HBTC') {
               this.setState({
                 HBTC_item: item
               })
+                return null;
             } else {
               this.setState({
                 imBTC_item: item
               })
+                return null;
             }
           })
         }
