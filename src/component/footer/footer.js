@@ -5,15 +5,6 @@ import { IntlProvider, FormattedMessage } from 'react-intl';
 import en_US from '../../language/en_US.js';
 import zh_CN from '../../language/zh_CN';
 
-const clickFAQ = () => {
-    console.log('aaaaa');
-    if (navigator.language === 'zh-CN') {
-        window.open('https://docs.alkemi.network/faqcn', '_blank');
-    } else {
-        window.open('https://docs.alkemi.network/faq', '_blank');
-    }
-}
-
 const Footer = () => {
     return (
         <IntlProvider locale={'en'} messages={navigator.language === 'zh-CN' ? zh_CN : en_US} >

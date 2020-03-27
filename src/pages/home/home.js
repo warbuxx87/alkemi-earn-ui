@@ -77,13 +77,13 @@ class Home extends Component {
                                 </React.Fragment>
                             }
                         </div>
-
                         <div className='Platform'>
-                            <span className='Platform-title'>{this.t_net}</span>
+                            <span className='Platform-title'> {t_net} </span>
                             <span className='Platform-img'>
                                 <img src='images/down.svg' alt='' />
                             </span>
                         </div>
+
 
                         <div className='clear'></div>
                     </div>
