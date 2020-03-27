@@ -80,7 +80,7 @@ class Home extends Component {
                         <div className='Platform'>
                             <span className='Platform-title'> {t_net} </span>
                             <span className='Platform-img'>
-                                <img src='images/down.svg' alt='' />
+                                <img src='images/favicon.ico' alt='Alkemi Network Icon' />
                             </span>
                         </div>
 
