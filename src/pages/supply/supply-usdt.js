@@ -14,7 +14,6 @@ import {
   get_my_balance,
   get_supplied__available_to_withdraw,
   handle_approve,
-  handle_supply_click,
   handle_withdraw_click,
   format_num_to_K,
   handle_supply_click_special

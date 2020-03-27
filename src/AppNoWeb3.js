@@ -127,16 +127,6 @@ class AppNoWeb3 extends Component {
                     <img src='images/down.svg' alt='' />
                   </span>
                   <div className='Platform-fixed'>
-                    <ul>
-                      <li>
-                        <a href='https://alkemi.network' target='_blank'>
-                          <span className='img'>
-                            <img src='images/USDX_li.svg' alt='' />
-                          </span>
-                          <span className='title'>USDX</span>
-                        </a>
-                      </li>
-                    </ul>
                   </div>
                 </div>
                 <div className='clear'></div>

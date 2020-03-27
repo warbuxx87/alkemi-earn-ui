@@ -27,7 +27,7 @@ const Footer = () => {
                             <a href='https://github.com/project-alkemi' target='_blank' rel="noopener noreferrer">GitHub</a>
                         </span>
                         <span className='content-new'>
-                            <a onClick={() => { clickFAQ() }}>FAQ</a>
+                            <a href='https://docs.alkemi.network/faq' target='_blank' rel="noopener noreferrer">GitHub</a>
                         </span>
                     </div>
 

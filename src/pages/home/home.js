@@ -79,29 +79,10 @@ class Home extends Component {
                         </div>
 
                         <div className='Platform'>
-                            <span className='Platform-title'>Alkemi Network</span>
+                            <span className='Platform-title'>{this.t_net}</span>
                             <span className='Platform-img'>
                                 <img src='images/down.svg' alt='' />
                             </span>
-
-                            <div className='Platform-fixed'>
-                                <ul>
-                                    {/* <li>
-                                        <span className='img'>
-                                            <img src='images/USDX_li.svg' alt='' />
-                                        </span>
-                                        <span className='title'>USDX</span>
-                                    </li> */}
-                                    <li>
-                                        <a href='https://alkemi.network/' target='_blank'>
-                                            <span className='img'>
-                                                <img src='images/USDX_li.svg' alt='' />
-                                            </span>
-                                            <span className='title'>USDX</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
 
                         <div className='clear'></div>
