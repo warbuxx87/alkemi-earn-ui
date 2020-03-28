@@ -7,6 +7,8 @@ import MediaQuery from 'react-responsive';
 import Home from './pages/home/home';
 import Web3 from 'web3';
 
+import Markets from './pages/markets/markets';
+
 import SupplyUSDx from './pages/supply/supply-usdx';
 import SupplyUSDT from './pages/supply/supply-usdt';
 import SupplyimBTC from './pages/supply/supply-imbtc';
@@ -469,7 +471,7 @@ class App extends Component {
               <React.Fragment>
                 <div className="App">
                   <Route exact path="/" render={() => <Home data={this.state} connect={this.connect} />} />
-
+                  <Route path="/markets" render={() => <Markets />} />
                   <Route path="/supply-usdx" render={() => <SupplyUSDx data={this.state} supply_APR={this.state.usdx_supply_APR} />} />
                   <Route path="/supply-usdt" render={() => <SupplyUSDT data={this.state} supply_APR={this.state.usdt_supply_APR} />} />
                   <Route path="/supply-imbtc" render={() => <SupplyimBTC data={this.state} supply_APR={this.state.imbtc_supply_APR} />} />
@@ -481,6 +483,7 @@ class App extends Component {
                   <Route path="/borrow-imbtc" render={() => <BorrowimBTC data={this.state} borrow_APR={this.state.imbtc_borrow_APR} />} />
                   <Route path="/borrow-weth" render={() => <BorrowWETH data={this.state} borrow_APR={this.state.weth_borrow_APR} />} />
                   <Route path="/borrow-hbtc" render={() => <BorrowHBTC data={this.state} borrow_APR={this.state.hbtc_borrow_APR} />} />
+
                 </div>
               </React.Fragment>
             </Switch>
