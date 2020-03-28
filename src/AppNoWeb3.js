@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.scss';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MediaQuery from 'react-responsive';
+import Markets from './pages/markets/markets';
 import { format_str_to_kmb } from './util.js';
 // import { unmountComponentAtNode } from 'react-dom';
 import { Button } from 'antd';
@@ -111,8 +113,21 @@ class AppNoWeb3 extends Component {
     return (
       <MediaQuery maxWidth={736}>
         {(match) => (
+                        <React.Fragment>
+          <BrowserRouter>
+            <Switch>
+
+                <div className="App">
+
+                  <Route path="/markets" render={() => <Markets />} />
+              
+
+                </div>
+
+            </Switch>
+          </BrowserRouter>
           <IntlProvider locale={'en'} messages={navigator.language === 'zh-CN' ? zh_CN : en_US} >
-            <React.Fragment>
+
               <div className='top'>
                 <div className='logo'>
                   <img className='logo-img' src='images/alkemi_logo.svg' alt='' />
@@ -537,8 +552,9 @@ class AppNoWeb3 extends Component {
                 <div className='clear'></div>
                 <Footer />
               </div>
-            </React.Fragment>
+
           </IntlProvider>
+                    </React.Fragment>
         )}
       </MediaQuery>
     );

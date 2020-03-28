@@ -146,8 +146,6 @@ export const get_borrow_balance = (mContract, account, token_address, that) => {
 }
 
 
-// ***** 分割线 *****  ***** 分割线 *****  ***** 分割线 *****  ***** 分割线 *****  ***** 分割线 *****  ***** 分割线 *****  ***** 分割线 ***** ***** 分割线 *****
-
 
 export const handle_supply_max = (that, balance, decimals) => {
   var to_show;
