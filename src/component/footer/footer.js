@@ -18,7 +18,7 @@ const Footer = () => {
                             <a href='https://github.com/project-alkemi' target='_blank' rel="noopener noreferrer">GitHub</a>
                         </span>
                         <span className='content-new'>
-                            <a href='https://docs.alkemi.network/faq' target='_blank' rel="noopener noreferrer">GitHub</a>
+                            <a href='https://docs.alkemi.network/faq' target='_blank' rel="noopener noreferrer">FAQ</a>
                         </span>
                     </div>
 
@@ -27,10 +27,10 @@ const Footer = () => {
                             <FormattedMessage id='Products' />
                         </span>
                         <span className='content-new'>
-                            <a href='https://markets.alkemi.network/' target='_blank' rel="noopener noreferrer">Markets</a>
+                            <a href='/markets' target='_blank' rel="noopener noreferrer">Markets</a>
                         </span>
                         <span className='content-new'>
-                            <a href='https://monitor.alkemi.network/' target='_blank' rel="noopener noreferrer">Monitor</a>
+                            <a href='/monitor' target='_blank' rel="noopener noreferrer">Monitor</a>
                         </span>
                     </div>
                 </div>

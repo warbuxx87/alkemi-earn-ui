@@ -96,8 +96,8 @@ class Home extends Component {
                         <div className='card card-margin-right'>
                             <div className='card-top'>
                                 <div className='card-top-left'>
-                                    <img src={'images/Home_USDC.svg'} alt='' />
-                                    <span>USDX</span>
+                                    <img src={'images/Home_USDx.svg'} alt='' />
+                                    <span>USDx</span>
                                 </div>
                                 <div className='card-top-right'>
                                     <span className='market'>
