@@ -3,23 +3,7 @@ import "./App.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MediaQuery from "react-responsive";
 
-import Web3 from "web3";
-
 import Markets from "./pages/markets/markets";
-
-import SupplyUSDx from "./pages/supply/supply-usdx";
-import SupplyUSDT from "./pages/supply/supply-usdt";
-import SupplyimBTC from "./pages/supply/supply-imbtc";
-import SupplyWETH from "./pages/supply/supply-weth";
-import SupplyHBTC from "./pages/supply/supply-hbtc";
-
-import BorrowUSDx from "./pages/borrow/borrow-usdx";
-import BorrowUSDT from "./pages/borrow/borrow-usdt";
-import BorrowWETH from "./pages/borrow/borrow-weth";
-import BorrowimBTC from "./pages/borrow/borrow-imbtc";
-import BorrowHBTC from "./pages/borrow/borrow-hbtc";
-
-import { get_tokens_decimals, format_bn } from "./util.js";
 
 import { format_str_to_kmb } from "./util.js";
 // import { unmountComponentAtNode } from 'react-dom';
