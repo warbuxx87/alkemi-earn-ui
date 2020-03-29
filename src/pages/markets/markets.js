@@ -74,10 +74,10 @@ export default class Markets extends React.Component {
     }
 
     // test
-    // this.markets_api = 'https://test.lendf.me/v2/info?data=markets';
+    // this.markets_api = 'http://localhost:8080/info?data=markets';
 
     // product
-    this.markets_api = 'https://api.lendf.me/v2/info?data=markets';
+    this.markets_api = 'https://api.alkemi.network/info?data=markets';
 
     this.get_markets_data();
 
