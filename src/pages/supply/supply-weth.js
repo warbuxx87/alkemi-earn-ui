@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import RecordBoard from '../../container/recordBoard/recordBoard';
+import RecordBoard from '../../container/recordBoard';
 import { Link } from "react-router-dom";
 import { Tabs, Button, Input } from 'antd';
 import MediaQuery from 'react-responsive';
 import './supply.scss';
 import Web3 from 'web3';
 import MyStatus from '../../component/header/my-status';
-import Footer from '../../component/footer/footer';
+import Footer from '../../component/footer';
 
 import {
   get_tokens_decimals,

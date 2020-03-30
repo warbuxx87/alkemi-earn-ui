@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import RecordBoard from '../../container/recordBoard/recordBoard';
+import RecordBoard from '../../container/recordBoard';
 import { Link } from "react-router-dom";
 import MediaQuery from 'react-responsive';
 import './borrow.scss';
 import { Tabs, Button, Input } from 'antd';
-import Footer from '../../component/footer/footer';
+import Footer from '../../component/footer';
 
 import {
   get_tokens_decimals,

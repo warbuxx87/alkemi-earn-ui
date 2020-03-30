@@ -99,9 +99,7 @@ class LiquidateNoWeb3 extends React.Component {
                 <React.Fragment>
                     <div className='top'>
                         <div className='top-left'>
-                            <a href='https://www.alkemi.network/' target='_blank' rel="noopener noreferrer">
-                                <img src={logo} alt='' />
-                            </a>
+
                         </div>
                         <div className='top-right'>
                             {

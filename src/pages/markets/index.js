@@ -3,7 +3,7 @@ import logo from '../../logo.svg';
 import './markets.scss';
 import _ from 'lodash';
 
-import MyProgress from '../../component/progress/progress';
+import MyProgress from '../../component/progress';
 
 //import BTC from '../../images/BTC.svg';
 import imBTC from '../../images/imBTC.svg';
@@ -225,12 +225,6 @@ export default class Markets extends React.Component {
   render() {
     return (
       <IntlProvider locale={'en'} messages={this.state.cur_language === '中文' ? zh_CN : en_US} >
-          <div className="logo">
-            <a href='https://www.alkemi.network/' target='_blank' rel="noopener noreferrer">
-              <img src={logo} alt='' />
-            </a>
-          </div>
-
 
           <div className='header'>
             <div className='header-con'>

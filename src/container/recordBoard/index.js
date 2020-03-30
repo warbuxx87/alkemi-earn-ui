@@ -157,7 +157,7 @@ class RecordBoard extends Component {
                                             img_src = 'loading_01'
                                         }
                                     } else if (item.status === 'success') {
-                                        // item.action; //   wrap unwrap  
+                                        // item.action; //   wrap unwrap
                                         img_src = item.action;
                                     }
 

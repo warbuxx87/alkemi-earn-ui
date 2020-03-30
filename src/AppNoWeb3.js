@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MediaQuery from "react-responsive";
 
 import HomeNoWeb3 from './pages/home/homeNoWeb3';
-import Markets from "./pages/markets/markets";
+import Markets from "./pages/markets";
 import LiquidateNoWeb3 from './pages/liquidate/liquidateNoWeb3';
-import Footer from './component/footer/footer';
+import Footer from './component/footer';
 
 class AppNoWeb3 extends Component {
   constructor(props) {

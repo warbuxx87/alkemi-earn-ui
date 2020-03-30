@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Tabs, Button, Input } from 'antd';
-import RecordBoard from '../../container/recordBoard/recordBoard';
-import Footer from '../../component/footer/footer';
+import RecordBoard from '../../container/recordBoard';
+import Footer from '../../component/footer';
 import {
   format_bn,
   get_tokens_decimals,

@@ -12,10 +12,10 @@ import en_US from '../../language/en_US.js';
 import zh_CN from '../../language/zh_CN';
 
 import MyStatus from '../../component/header/my-status';
-import Footer from '../../component/footer/footer';
+import Footer from '../../component/footer';
 
 
-class Home extends Component {
+class OldHome extends Component {
 
     componentDidMount = () => { }
 
@@ -824,4 +824,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default OldHome;
