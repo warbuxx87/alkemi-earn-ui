@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 // import MediaQuery from 'react-responsive';
 import { Button } from 'antd';
 import './home.scss';
 
-import { format_str_to_kmb, format_num_to_K } from '../../util.js';
+import { format_str_to_kmb } from '../../util.js';
 
 // add i18n.
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import en_US from '../../language/en_US.js';
 import zh_CN from '../../language/zh_CN';
 
-import MyStatus from '../../component/header/my-status';
 import Footer from '../../component/footer/footer';
 
 
@@ -31,21 +29,7 @@ class HomeNoWeb3 extends Component {
     this.markets_api = "https://api.lendf.me/v1/info?data=markets";
   }
 
-  // format str_num to_K
-  format_num_to_K = str_num => {
-    // console.log(str_num);
-    var part_a = str_num.split(".")[0];
-    var part_b = str_num.split(".")[1]; // .substr(0,2)
 
-    if (part_b.length > 2) {
-      part_b = part_b.substr(0, 2);
-    }
-
-    var reg = /\d{1,3}(?=(\d{3})+$)/g;
-    part_a = (part_a + "").replace(reg, "$&,");
-
-    return part_a + "." + part_b;
-  };
   // format aprs
   format_APR = str_num => {
     // console.log(str_num);

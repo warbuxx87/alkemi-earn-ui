@@ -6,16 +6,6 @@ import MediaQuery from "react-responsive";
 import HomeNoWeb3 from './pages/home/homeNoWeb3';
 import Markets from "./pages/markets/markets";
 
-import { format_str_to_kmb } from "./util.js";
-// import { unmountComponentAtNode } from 'react-dom';
-import { Button } from "antd";
-import Footer from "./component/footer/footer";
-
-// add i18n.
-import { IntlProvider, FormattedMessage } from "react-intl";
-import en_US from "./language/en_US.js";
-import zh_CN from "./language/zh_CN";
-
 class AppNoWeb3 extends Component {
   constructor(props) {
     super(props);
