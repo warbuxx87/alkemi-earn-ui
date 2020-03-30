@@ -225,7 +225,6 @@ export default class Markets extends React.Component {
   render() {
     return (
       <IntlProvider locale={'en'} messages={this.state.cur_language === '中文' ? zh_CN : en_US} >
-        <div className="App">
           <div className="logo">
             <a href='https://www.alkemi.network/' target='_blank' rel="noopener noreferrer">
               <img src={logo} alt='' />
@@ -628,8 +627,6 @@ export default class Markets extends React.Component {
             </div>
             <div className='clear'></div>
           </div>
-
-        </div>
       </IntlProvider>
     )
   }
