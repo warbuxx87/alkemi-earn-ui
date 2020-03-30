@@ -30,7 +30,7 @@ const Footer = () => {
                             <a href='/markets' target='_blank' rel="noopener noreferrer">Markets</a>
                         </span>
                         <span className='content-new'>
-                            <a href='/monitor' target='_blank' rel="noopener noreferrer">Monitor</a>
+                            <a href='/liquidate' target='_blank' rel="noopener noreferrer">Liquidate</a>
                         </span>
                     </div>
                 </div>

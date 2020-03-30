@@ -570,63 +570,6 @@ export default class Markets extends React.Component {
               </table>
             </div>
           </div>
-
-
-          <div className='footer'>
-            <div className='footer-left'>
-              <div className='footer-left-res'>
-                <span className='title'>
-                  <FormattedMessage id='Resource' />
-                </span>
-                <span className='content-new'>
-                  <a href='https://github.com/project-alkemi' target='_blank' rel="noopener noreferrer">GitHub</a>
-                </span>
-              </div>
-
-              <div className='footer-left-pro'>
-                <span className='title mb10'>
-                  <FormattedMessage id='Products' />
-                </span>
-                <span className='content-new'>
-                  <a href='https://dapp.alkemi.network/' target='_blank' rel="noopener noreferrer">Debt Facility</a>
-                </span>
-                <span className='content-new'>
-                  <a href='https://monitor.alkemi.network/' target='_blank' rel="noopener noreferrer">Monitor</a>
-                </span>
-              </div>
-            </div>
-
-            <div className='footer-right'>
-              <a href='https://twitter.com/AlkemiOfficial' target='_blank' rel="noopener noreferrer">
-                <img src={twitter} alt='' />
-              </a>
-              <a href='https://medium.com/alkemi' target='_blank' rel="noopener noreferrer">
-                <img src={medium} alt='' />
-              </a>
-              <a href='https://t.me/alkemiofficial' target='_blank' rel="noopener noreferrer">
-                <img src={telegram} alt='' />
-              </a>
-              <div className='clear'></div>
-
-              <div className='footer-right-fixed'>
-                <div className='fixed1'>
-                  {
-                    this.state.cur_language
-                  }
-                </div>
-                <span className='fixed-img'>
-                  <img src={up} alt='' />
-                </span>
-                <div className='fixed2'>
-                  <ul>
-                    <li onClick={() => { this.setState({ cur_language: '中文' }) }}>{'中文'}</li>
-                    <li onClick={() => { this.setState({ cur_language: 'English' }) }}>{'English'}</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className='clear'></div>
-          </div>
       </IntlProvider>
     )
   }

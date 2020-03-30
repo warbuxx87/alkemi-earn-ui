@@ -15,7 +15,6 @@ import MyStatus from '../../component/header/my-status';
 import Footer from '../../component/footer/footer';
 
 
-
 class Home extends Component {
 
     componentDidMount = () => { }
@@ -817,11 +816,7 @@ class Home extends Component {
                             </div>
                         </div>
 
-
-
-
                         <div className='clear'></div>
-                        <Footer />
                     </div>
                 </React.Fragment>
             </IntlProvider>
