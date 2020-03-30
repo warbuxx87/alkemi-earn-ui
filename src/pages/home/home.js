@@ -92,7 +92,7 @@ class Home extends Component {
                     <MyStatus data={this.props.data} />
 
                     <div className='card-wrap'>
-                        {/* USDX */}
+                        {/* USDx */}
                         <div className='card card-margin-right'>
                             <div className='card-top'>
                                 <div className='card-top-left'>
