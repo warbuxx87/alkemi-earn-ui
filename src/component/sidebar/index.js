@@ -22,7 +22,7 @@ import Lending from '../../pages/lending';
 import Borrowing from '../../pages/borrowing';
 import Markets from '../../pages/markets';
 import Liquidate from '../../pages/liquidate/liquidateNoWeb3';
-
+import Connect from '../../pages/connect';
 
 
 const drawerWidth = 339;
@@ -272,7 +272,7 @@ export default function PermanentDrawerLeft() {
 
         <main className={classes.content}>
           {/* <div className={classes.toolbar} /> */}
-
+          <Route exact path="/" component={Connect} />
           <Route path="/lending" component={Lending} />
           <Route path="/borrowing" component={Borrowing} />
           <Route path="/markets" component={Markets} />
