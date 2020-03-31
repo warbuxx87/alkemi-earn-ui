@@ -793,8 +793,6 @@ export const handle_repay_max = (that, balance, borrowed, decimals) => {
 }
 
 
-// ***** 分割线 *****  ***** 分割线 *****  ***** 分割线 *****  ***** 分割线 *****  ***** 分割线 *****  ***** 分割线 *****  ***** 分割线 ***** ***** 分割线 *****
-
 
 export const format_bn = (numStr, decimals, decimalPlace = decimals) => {
   numStr = numStr.toLocaleString().replace(/,/g, '');

@@ -91,7 +91,7 @@ class LiquidateNoWeb3 extends React.Component {
 
   render() {
     return (
-      <div className="lending">
+      <div>
         <IntlProvider
           locale={"en"}
           messages={this.state.cur_language === "中文" ? zh_CN : en_US}
@@ -267,6 +267,7 @@ class LiquidateNoWeb3 extends React.Component {
                   </>
                 )}
               </div>
+              <div className="clear"></div>
 
               <div className="main-body-right">
                 <div className="main-body-balance">
