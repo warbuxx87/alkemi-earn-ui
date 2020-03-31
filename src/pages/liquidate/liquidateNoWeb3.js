@@ -11,16 +11,6 @@ import zh_CN from "../../language/zh_CN";
 
 import {
   open_it_onetherscan,
-  get_balance,
-  get_allowance,
-  get_list_data,
-  format_Shortfall,
-  handle_list_click,
-  input_chang,
-  click_liquidate,
-  click_max,
-  format_bn,
-  handle_approve,
   to_ethscan_with_account,
   i_want_received_token,
   i_want_send_token,
@@ -28,21 +18,12 @@ import {
   get_main_data_timer,
   format_num_K,
   get_history,
-  change_page_history
+  change_page_history,
+  handle_list_click,
+  format_Shortfall
 } from "./utils";
 
-import logo from "../../images/logo.svg";
-import logo_d from "../../images/logo-d.png";
-import telegram from "../../images/telegram.svg";
-import twitter from "../../images/twitter.svg";
-import lock from "../../images/lock.svg";
-import medium from "../../images/medium.svg";
-import wrong from "../../images/wrong.svg";
-import up from "../../images/up.svg";
-import down from "../../images/down.svg";
 import back from "../../images/back.svg";
-
-let address = require("../../ABIs/address_map.json");
 
 class LiquidateNoWeb3 extends React.Component {
   constructor(porps) {
@@ -104,7 +85,7 @@ class LiquidateNoWeb3 extends React.Component {
                 }}
                 className="h3-switch"
               >
-                <img src={back} />
+                <img alt='back button' src={back} />
                 <span>
                   {!this.state.show_history ? "History" : "Liquidation"}
                 </span>

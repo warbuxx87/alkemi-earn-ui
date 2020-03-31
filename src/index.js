@@ -28,7 +28,7 @@ ReactDOM.render(
       if (response) {
         const { status, data } = response;
         if (status === 400) {
-            if(data.errors && data.errors[0].errorCode ==8015)
+            if(data.errors && data.errors[0].errorCode === 8015)
               store.dispatch({ type: TOKEN_EXPIRED_REQUEST });
         }
         if (status === 401) {

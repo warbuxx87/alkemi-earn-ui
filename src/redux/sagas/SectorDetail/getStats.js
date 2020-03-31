@@ -11,10 +11,10 @@ const getCookie = (cname) => {
   var ca = decodedCookie.split(';');
   for(var i = 0; i <ca.length; i++) {
     var c = ca[i];
-    while (c.charAt(0) == ' ') {
+    while (c.charAt(0) === ' ') {
       c = c.substring(1);
     }
-    if (c.indexOf(name) == 0) {
+    if (c.indexOf(name) === 0) {
       return c.substring(name.length, c.length);
     }
   }
@@ -30,7 +30,7 @@ function* requestGetStats(action) {
         if (cookieStat && res.data.length > 0) {
             for (let i = 0; i < res.data.length; i++) {
               let stat = res.data[i];
-              if (stat.id == cookieStat) {
+              if (stat.id === cookieStat) {
                 chosenStat = stat;
                 break;
               }

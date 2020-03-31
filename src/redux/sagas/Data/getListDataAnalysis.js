@@ -23,6 +23,7 @@ function* requestGetListUser(data) {
       else {
         newData[type].push(item);
       }
+      return null;
     })
     //   Object.keys(newData).map(function(key, index) {
     //     title = key;

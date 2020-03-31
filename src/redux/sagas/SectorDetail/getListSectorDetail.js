@@ -4,7 +4,7 @@ import {
     GET_LIST_SECTOR_DETAIL_REQUEST,
 } from '../../reducers/SectorDetail/actionTypes';
 import { getListSectorDetailAPI } from '../../../services/SectorDetail/getListSectorDetail';
-import { LOADING } from '../../reducers/SectorDetail/actionTypes';
+// import { LOADING } from '../../reducers/SectorDetail/actionTypes';
 
 const getCookie = (cname) => {
   var name = cname + "=";
@@ -12,10 +12,10 @@ const getCookie = (cname) => {
   var ca = decodedCookie.split(';');
   for(var i = 0; i <ca.length; i++) {
     var c = ca[i];
-    while (c.charAt(0) == ' ') {
+    while (c.charAt(0) === ' ') {
       c = c.substring(1);
     }
-    if (c.indexOf(name) == 0) {
+    if (c.indexOf(name) === 0) {
       return c.substring(name.length, c.length);
     }
   }
@@ -50,7 +50,7 @@ function* requestGetListSectorDetail() {
           }
         }
 
-        if (Object.keys(sector).length == 0 || Object.keys(product).length == 0) {
+        if (Object.keys(sector).length === 0 || Object.keys(product).length === 0) {
           sectorId  = res.data.sectors[0].id;
           sector    = res.data.sectors[0];
           product   = sector && sector.children.length > 0 ? sector.children[0] : {};

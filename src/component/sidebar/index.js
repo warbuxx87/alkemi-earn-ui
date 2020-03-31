@@ -151,8 +151,8 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function PermanentDrawerLeft() {
-  const [title, setTitle] = useState('Home');
-  const [drawer, setDrawer] = useState(false);
+//  const [title, setTitle] = useState('Home');
+//  const [drawer, setDrawer] = useState(false);
   const [status, setStatus] = useState(null);
   const classes = useStyles();
   const onItemClick = (e) => {
@@ -198,19 +198,19 @@ export default function PermanentDrawerLeft() {
           <Divider className={classes.divider}  />
 
           <List className={classes.menuList}>
-            <ListItem className={ status!= null && status == 1 ? classes.menuItem : '' } button component={Link} to="/" onClick={() => onItemClick(1)}>
+            <ListItem className={ status!= null && status === 1 ? classes.menuItem : '' } button component={Link} to="/" onClick={() => onItemClick(1)}>
               <ListItemText className={classes.menuItemText}>Dashboard</ListItemText>
             </ListItem>
-            <ListItem className={ status!= null && status == 2 ? classes.menuItem : '' } button component={Link} to="/lending" onClick={() => onItemClick(2)}>
+            <ListItem className={ status!= null && status === 2 ? classes.menuItem : '' } button component={Link} to="/lending" onClick={() => onItemClick(2)}>
               <ListItemText className={classes.menuItemText}>Lending</ListItemText>
             </ListItem>
-            <ListItem className={ status!= null && status == 3 ? classes.menuItem : '' } button component={Link} to="/borrowing" onClick={() => onItemClick(3)}>
+            <ListItem className={ status!= null && status === 3 ? classes.menuItem : '' } button component={Link} to="/borrowing" onClick={() => onItemClick(3)}>
               <ListItemText className={classes.menuItemText}>Borrowing</ListItemText>
             </ListItem>
-            <ListItem className={ status!= null && status == 4 ? classes.menuItem : '' } button component={Link} to="/markets" onClick={() => onItemClick(4)}>
+            <ListItem className={ status!= null && status === 4 ? classes.menuItem : '' } button component={Link} to="/markets" onClick={() => onItemClick(4)}>
               <ListItemText className={classes.menuItemText}>Markets</ListItemText>
             </ListItem>
-            <ListItem className={ status!= null && status == 5 ? classes.menuItem : '' } button component={Link} to="/liquidate" onClick={() => onItemClick(5)}>
+            <ListItem className={ status!= null && status === 5 ? classes.menuItem : '' } button component={Link} to="/liquidate" onClick={() => onItemClick(5)}>
               <ListItemText className={classes.menuItemText}>Liquidate</ListItemText>
             </ListItem>
           </List>

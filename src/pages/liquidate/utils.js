@@ -645,8 +645,10 @@ export const get_main_data_timer = (that) => {
     }
 
     var list_api;
+    // not used
+    //var last_num;
     if (Number(that.state.totalPageNumber) === Number(that.state.pageNumber) && (that.state.totalSize % that.state.pageNumber !== 0)) {
-        var last_num = that.state.totalSize % that.state.pageNumber;
+    //    last_num = that.state.totalSize % that.state.pageNumber;
         list_api = url_map[that.state.net_type]['account_list_url'] + '?pageNumber=' + that.state.pageNumber + '&pageSize=15';
     } else {
         list_api = url_map[that.state.net_type]['account_list_url'] + '?pageNumber=' + that.state.pageNumber + '&pageSize=15';

@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../../logo.svg';
 import './markets.scss';
 import _ from 'lodash';
 
@@ -13,10 +12,6 @@ import USDx from '../../images/USDx.svg';
 import UUDD from '../../images/UUDD.svg';
 import USDT from '../../images/USDT.svg';
 import WETH from '../../images/WETH.svg';
-import telegram from '../../images/telegram.svg';
-import twitter from '../../images/twitter.svg';
-import medium from '../../images/medium.svg';
-import up from '../../images/up.svg';
 import UUTT from '../../images/USDT.svg';
 import WBTC from '../../images/WBTC.svg';
 import DAI from '../../images/DAI.svg';

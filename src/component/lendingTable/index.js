@@ -85,7 +85,7 @@ export default function CustomizedTables() {
         <TableHead>
         <TableRow >
                 {columns.map((column,i) => (
-                  <StyledTableCell key={i} className={classes.row}
+                  <StyledTableCell key={i} className={[classes.row, classes.lending]}
                     key={column.id}
                     align={column.align}
                     style={{ minWidth: column.minWidth }}

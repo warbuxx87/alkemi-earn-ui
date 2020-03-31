@@ -13,7 +13,7 @@ function* requestGetListMarketComm(action) {
     yield put({
       type: UPDATE_IS_LOAD_MORE_MARKET_COMM,
       payload : {
-        isloadMore : action.payload.page == 1 ? false : true,
+        isloadMore : action.payload.page === 1 ? false : true,
         isLoad : true
       }
     });
@@ -23,7 +23,7 @@ function* requestGetListMarketComm(action) {
       type: GET_LIST_MARKET_COMM_REDUCER,
       listData: {
         ...action.payload,
-        data: action.payload.page != 1 ? data.concat(ListData.data) : ListData.data,
+        data: action.payload.page !== 1 ? data.concat(ListData.data) : ListData.data,
         isFull : isEmpty(ListData.data)
       }
     });

@@ -1,6 +1,5 @@
 import React from "react";
-import { Flex, Box, Text, Blockie, QR } from "rimble-ui";
-import ShortHash from "./ShortHash";
+import { Flex, Box, Text, QR } from "rimble-ui";
 
 class AccountOverview extends React.Component {
   trimEth = eth => {

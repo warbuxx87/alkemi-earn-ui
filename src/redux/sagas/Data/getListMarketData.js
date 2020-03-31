@@ -12,7 +12,7 @@ function* requestGetListUser(data) {
     yield put({
       type: UPDATE_IS_LOAD_MORE_MARKET_DATA,
       payload : {
-        isloadMore : data.payload.position == 0 ? false : true,
+        isloadMore : data.payload.position === 0 ? false : true,
         isLoad : true
       }
     });
@@ -25,7 +25,7 @@ function* requestGetListUser(data) {
         total: 0
       }
     };
-    if(data.payload.country != 0) {
+    if(data.payload.country !== 0) {
       ListData = yield call(getListData, data.payload);
     }
 
@@ -33,7 +33,7 @@ function* requestGetListUser(data) {
     yield put({
         type: GET_LIST_MARKET_DATA_REDUCER,
         listData: {
-          products: data.payload.position != 0 ? products.concat(ListData.data.products) : ListData.data.products,
+          products: data.payload.position !== 0 ? products.concat(ListData.data.products) : ListData.data.products,
           position: ListData.data.position,
           total: ListData.data.total
         },
