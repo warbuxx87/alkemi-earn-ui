@@ -1,6 +1,5 @@
 let url_map = require('../../ABIs/url_map.json');
 
-
 export const get_balance = (that) => {
     that.state.USDx.methods.balanceOf(that.state.my_account).call((err, res_usdx_balance) => {
         that.setState({ my_usdx_balance: res_usdx_balance });
@@ -46,7 +45,6 @@ export const get_balance = (that) => {
         that.setState({ my_dsr_balance: res_wbtc_balance });
     })
 }
-
 
 export const get_allowance = (that, address_liquidator) => {
     that.state.USDx.methods.allowance(that.state.my_account, address_liquidator).call((err, res_usdx_allowance) => {
@@ -130,7 +128,6 @@ export const get_allowance = (that, address_liquidator) => {
     });
 }
 
-
 export const get_list_data = (that, num) => {
     that.setState({ data_is_ok: false });
     let list_api = url_map[that.state.net_type]['account_list_url'] + '?pageNumber=1&pageSize=15';
@@ -166,7 +163,6 @@ export const get_list_data = (that, num) => {
             }
         })
 }
-
 
 export const handle_list_click = (that, key) => {
     // console.log(key)
@@ -206,7 +202,6 @@ export const handle_list_click = (that, key) => {
             })
     })
 }
-
 
 export const handle_approve = (that, token_contract, address_liquidator, token) => {
     token_contract.methods.approve(address_liquidator, -1).estimateGas(
@@ -294,7 +289,6 @@ export const handle_approve = (that, token_contract, address_liquidator, token) 
 
 }
 
-
 export const format_bn = (numStr, decimals, decimalPlace = decimals) => {
     numStr = numStr.toLocaleString().replace(/,/g, '');
     var str = (10 ** decimals).toLocaleString().replace(/,/g, '').slice(1);
@@ -307,7 +301,6 @@ export const format_bn = (numStr, decimals, decimalPlace = decimals) => {
     var length = res.indexOf('.') + 1 + decimalPlace;
     return res.slice(0, length >= res.length ? res.length : length);
 }
-
 
 export const format_Shortfall = (num) => {
     if (Number(num) === 0) {
@@ -324,11 +317,9 @@ export const format_Shortfall = (num) => {
     }
 }
 
-
 export const format_persent = (num) => {
     return (num * 100).toFixed(2) + '%';
 }
-
 
 export const input_chang = (that, value) => {
     console.log(value);
@@ -399,7 +390,6 @@ export const input_chang = (that, value) => {
         }
     })
 }
-
 
 export const click_liquidate = (that) => {
     if (!that.state.data_is_ok || !that.state.is_btn_enable || !that.state.amount_to_liquidate) {
@@ -484,7 +474,6 @@ export const click_liquidate = (that) => {
         })
 }
 
-
 export const click_max = (that) => {
     var t_balance = that.state.max_liquidate_amount;
     var to_show;
@@ -510,7 +499,6 @@ export const click_max = (that) => {
         })
     }
 }
-
 
 export const i_want_received_token = (that, item) => {
     that.setState({
@@ -540,7 +528,6 @@ export const i_want_received_token = (that, item) => {
     })
 }
 
-
 export const i_want_send_token = (that, item) => {
     that.setState({
         max_liquidate_amount: '',
@@ -568,7 +555,6 @@ export const i_want_send_token = (that, item) => {
             })
     });
 }
-
 
 export const change_page = (that, page, pageSize) => {
     that.setState({
@@ -614,7 +600,6 @@ export const change_page = (that, page, pageSize) => {
         })
 }
 
-
 export const change_page_history = (that, page, pageSize, key) => {
     var history_api = url_map[that.state.net_type]['history_url'] + '&pageNumber=' + page + '&pageSize=15';
     console.log('change_page_history: ', history_api);
@@ -636,7 +621,6 @@ export const change_page_history = (that, page, pageSize, key) => {
             }
         })
 }
-
 
 export const get_main_data_timer = (that) => {
     if (that.state.page_changeing) {
@@ -684,8 +668,6 @@ export const get_main_data_timer = (that) => {
         })
 }
 
-
-
 export const format_num_K = (str_num) => {
     var reg = /\d{1,3}(?=(\d{3})+$)/g;
 
@@ -701,7 +683,6 @@ export const format_num_K = (str_num) => {
         return str_num;
     }
 }
-
 
 export const to_ethscan_with_account = (that, account) => {
     var url;
@@ -751,8 +732,6 @@ export const get_history = (that) => {
         })
 }
 
-
-
 export const open_it_onetherscan = (that, hash) => {
     var url;
     if (that.state.net_type === 'rinkeby') {
@@ -763,4 +742,3 @@ export const open_it_onetherscan = (that, hash) => {
 
     window.open(url, "_blank");
 }
-

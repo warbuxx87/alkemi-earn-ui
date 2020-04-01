@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 import MyProgress from '../../component/progress';
 
-//import BTC from '../../images/BTC.svg';
 import imBTC from '../../images/imBTC.svg';
 import HUBTC from '../../images/HBTC.svg';
 import HBTC from '../../images/HBTC.svg';
@@ -20,14 +19,19 @@ import usdc from '../../images/usdc.png';
 import tusd from '../../images/tusd.png';
 import pax from '../../images/pax.png';
 
+import {
+  get_markets_data,
+  compare_supply,
+  compare_borrow,
+  format_str_to_kmb,
+  format_str_to_percent,
+  format_str_to_K
+  }   from './utils';
 
 // add i18n.
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import en_US from '../../language/en_US.js';
 import zh_CN from '../../language/zh_CN';
-
-
-
 
 export default class Markets extends React.Component {
   constructor(porps) {
@@ -83,139 +87,50 @@ export default class Markets extends React.Component {
   }
 
   get_markets_data = () => {
-    fetch(this.markets_api)
-      .then((res) => { return res.text() })
-      .then((data) => {
-        if (data) {
-          var obj_data = JSON.parse(data);
-          console.log(obj_data);
+      fetch(this.markets_api)
+        .then((res) => { return res.text() })
+        .then((data) => {
+          if (data) {
+            var obj_data = JSON.parse(data);
+            console.log(obj_data);
 
-          var arr_markets = [];
-          var key_arr = Object.keys(obj_data.markets);
-          for (var i = 0; i < key_arr.length; i++) {
-            arr_markets.push(obj_data.markets[key_arr[i]])
-          }
-          console.log(arr_markets);
-          // return;
-
-          this.setState({
-            data: obj_data,
-            data_is_ok: true,
-            data_markets: arr_markets
-          }, () => {
-            var supply_array = _.cloneDeep(this.state.data_markets);
-            var borrow_array = _.cloneDeep(this.state.data_markets);
-
-            supply_array.sort(this.compare_supply);
-            borrow_array.sort(this.compare_borrow);
-
-            for (var i = 0; i < supply_array.length; i++) {
-              supply_array[i].persentage_supply = Number((supply_array[i].grossSupplyUSD / this.state.data.totalSupplyBalanceUSD * 100)).toFixed(1);
+            var arr_markets = [];
+            var key_arr = Object.keys(obj_data.markets);
+            for (var i = 0; i < key_arr.length; i++) {
+              arr_markets.push(obj_data.markets[key_arr[i]])
             }
-            for (var j = 0; j < borrow_array.length; j++) {
-              borrow_array[j].persentage_borrow = Number((borrow_array[j].totalBorrowUSD / this.state.data.totalBorrowBalanceUSD * 100)).toFixed(1);
-            }
+            console.log(arr_markets);
+            // return;
 
             this.setState({
-              supply_array: supply_array,
-              borrow_array: borrow_array,
-              array_is_ok: true
+              data: obj_data,
+              data_is_ok: true,
+              data_markets: arr_markets
+            }, () => {
+              var supply_array = _.cloneDeep(this.state.data_markets);
+              var borrow_array = _.cloneDeep(this.state.data_markets);
+
+              supply_array.sort(this.compare_supply);
+              borrow_array.sort(this.compare_borrow);
+
+              for (var i = 0; i < supply_array.length; i++) {
+                supply_array[i].persentage_supply = Number((supply_array[i].grossSupplyUSD / this.state.data.totalSupplyBalanceUSD * 100)).toFixed(1);
+              }
+              for (var j = 0; j < borrow_array.length; j++) {
+                borrow_array[j].persentage_borrow = Number((borrow_array[j].totalBorrowUSD / this.state.data.totalBorrowBalanceUSD * 100)).toFixed(1);
+              }
+
+              this.setState({
+                supply_array: supply_array,
+                borrow_array: borrow_array,
+                array_is_ok: true
+              })
+              // console.log(supply_array);
+              // console.log(borrow_array);
             })
-            // console.log(supply_array);
-            // console.log(borrow_array);
-          })
-        }
-      })
-  }
-
-
-  compare_supply = (val1, val2) => {
-    return val2.grossSupplyUSD - val1.grossSupplyUSD;
-  };
-
-  compare_borrow = (val1, val2) => {
-    return val2.totalBorrowUSD - val1.totalBorrowUSD;
-  };
-
-  format_str_to_kmb = (str_num) => {
-    var t_num = Number(str_num);
-    var out_a, out_b, t_index;
-
-    if (t_num >= 1E9) {
-      out_a = Math.floor(t_num / 1E9);
-      if ((t_num % 1E9 / 1E9).toString().indexOf('.') > 0) {
-        t_index = (t_num % 1E9 / 1E9).toString().indexOf('.') + 1;
-        out_b = (t_num % 1E9 / 1E9).toString().substr(t_index, 2);
-      } else {
-        out_b = '00';
-      }
-      return out_a + '.' + out_b + 'G';
+          }
+        })
     }
-    if (t_num >= 1E6) {
-      out_a = Math.floor(t_num / 1E6);
-      if ((t_num % 1E6 / 1E6).toString().indexOf('.') > 0) {
-        t_index = (t_num % 1E6 / 1E6).toString().indexOf('.') + 1;
-        out_b = (t_num % 1E6 / 1E6).toString().substr(t_index, 2);
-      } else {
-        out_b = '00';
-      }
-      return out_a + '.' + out_b + 'M';
-    }
-    if (t_num >= 1E3) {
-      out_a = Math.floor(t_num / 1E3);
-      if ((t_num % 1E3 / 1E3).toString().indexOf('.') > 0) {
-        t_index = (t_num % 1E3 / 1E3).toString().indexOf('.') + 1;
-        out_b = (t_num % 1E3 / 1E3).toString().substr(t_index, 2);
-      } else {
-        out_b = '00';
-      }
-      return out_a + '.' + out_b + 'K';
-    }
-
-    if (str_num.indexOf('.') > 0) {
-      var aaa = str_num.split('.')[0];
-      var bbb = str_num.split('.')[1];
-      return str_num = aaa + '.' + bbb.substr(0, 2);
-    }
-
-    return str_num;
-  }
-
-  format_str_to_persent = (str_num) => {
-    // console.log(str_num)
-    var index_num = str_num.indexOf('.') + 2;
-    var cpmp_str = str_num.replace(/\./, '');
-    var res_str = cpmp_str.slice(0, index_num) + '.' + cpmp_str.substr(index_num, 2);
-    // console.log(Number(res_str))
-
-    if (Number(res_str) === 0) {
-      return '<0.01%'
-    } else {
-      return Number(res_str) + '%';
-    }
-  }
-
-  format_str_to_K = (str_num) => {
-    var reg = /\d{1,3}(?=(\d{3})+$)/g;
-
-    if (str_num.indexOf('.') > 0) {
-      str_num = str_num.slice(0, str_num.indexOf('.') + 3);
-    }
-
-    if (str_num.indexOf('.') > 0) {
-      var part_a = str_num.split('.')[0];
-      var part_b = str_num.split('.')[1];
-
-      part_a = (part_a + '').replace(reg, '$&,');
-
-      return part_a + '.' + part_b;
-    } else {
-      str_num = (str_num + '').replace(reg, '$&,');
-      return str_num;
-    }
-  }
-
-
 
   render() {
     return (
@@ -228,7 +143,7 @@ export default class Markets extends React.Component {
                   <FormattedMessage id='Total_Supply_Balance' />
                 </span>
                 <span className='item-num'>$
-                {this.state.data_is_ok ? this.format_str_to_K(this.state.data.totalSupplyBalanceUSD) : '0.00'}
+                {this.state.data_is_ok ? format_str_to_K(this.state.data.totalSupplyBalanceUSD) : '0.00'}
                 </span>
               </div>
 
@@ -237,7 +152,7 @@ export default class Markets extends React.Component {
                   <FormattedMessage id='Total_Borrow_Balance' />
                 </span>
                 <span className='item-num item-num-borrow'>$
-                {this.state.data_is_ok ? this.format_str_to_K(this.state.data.totalBorrowBalanceUSD) : '0.00'}
+                {this.state.data_is_ok ? format_str_to_K(this.state.data.totalBorrowBalanceUSD) : '0.00'}
                 </span>
               </div>
 
@@ -246,7 +161,7 @@ export default class Markets extends React.Component {
                   <FormattedMessage id='Total_Collateralization_ratio' />
                 </span>
                 <span className='item-num item-num-ratio'>
-                  {this.state.data_is_ok ? this.format_str_to_persent(this.state.data.totalCollateralizationRatio) : '...'}
+                  {this.state.data_is_ok ? format_str_to_percent(this.state.data.totalCollateralizationRatio) : '...'}
                 </span>
               </div>
             </div>
@@ -345,10 +260,10 @@ export default class Markets extends React.Component {
                               <span className='token-name'>{item.name}</span>
                               <span className='token-name-short'>{item.symbol}</span>
                             </td>
-                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                            <td>${format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{format_str_to_percent(item.supplyAPR)}</td>
+                            <td>${format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{format_str_to_percent(item.borrowAPR)}</td>
                           </tr>
                         )
                       }
@@ -369,10 +284,10 @@ export default class Markets extends React.Component {
                               <span className='token-name'>{item.name}</span>
                               <span className='token-name-short'>{item.symbol}</span>
                             </td>
-                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                            <td>${format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{format_str_to_percent(item.supplyAPR)}</td>
+                            <td>${format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{format_str_to_percent(item.borrowAPR)}</td>
                           </tr>
                         )
                       }
@@ -391,10 +306,10 @@ export default class Markets extends React.Component {
                               <span className='token-name'>{item.name}</span>
                               <span className='token-name-short'>{item.symbol}</span>
                             </td>
-                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                            <td>${format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{format_str_to_percent(item.supplyAPR)}</td>
+                            <td>${format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{format_str_to_percent(item.borrowAPR)}</td>
                           </tr>
                         )
                       }
@@ -413,10 +328,10 @@ export default class Markets extends React.Component {
                               <span className='token-name'>{item.name}</span>
                               <span className='token-name-short'>{item.symbol}</span>
                             </td>
-                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                            <td>${format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{format_str_to_percent(item.supplyAPR)}</td>
+                            <td>${format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{format_str_to_percent(item.borrowAPR)}</td>
                           </tr>
                         )
                       }
@@ -435,10 +350,10 @@ export default class Markets extends React.Component {
                               <span className='token-name'>{item.name}</span>
                               <span className='token-name-short'>{item.symbol}</span>
                             </td>
-                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                            <td>${format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{format_str_to_percent(item.supplyAPR)}</td>
+                            <td>${format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{format_str_to_percent(item.borrowAPR)}</td>
                           </tr>
                         )
                       }
@@ -457,10 +372,10 @@ export default class Markets extends React.Component {
                               <span className='token-name'>{item.name}</span>
                               <span className='token-name-short'>{item.symbol}</span>
                             </td>
-                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                            <td>${format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{format_str_to_percent(item.supplyAPR)}</td>
+                            <td>${format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{format_str_to_percent(item.borrowAPR)}</td>
                           </tr>
                         )
                       }
@@ -479,10 +394,10 @@ export default class Markets extends React.Component {
                               <span className='token-name'>{item.name}</span>
                               <span className='token-name-short'>{item.symbol}</span>
                             </td>
-                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                            <td>${format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{format_str_to_percent(item.supplyAPR)}</td>
+                            <td>${format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{format_str_to_percent(item.borrowAPR)}</td>
                           </tr>
                         )
                       }
@@ -501,10 +416,10 @@ export default class Markets extends React.Component {
                               <span className='token-name'>{item.name}</span>
                               <span className='token-name-short'>{item.symbol}</span>
                             </td>
-                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                            <td>${format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{format_str_to_percent(item.supplyAPR)}</td>
+                            <td>${format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{format_str_to_percent(item.borrowAPR)}</td>
                           </tr>
                         )
                       }
@@ -523,10 +438,10 @@ export default class Markets extends React.Component {
                               <span className='token-name'>{item.name}</span>
                               <span className='token-name-short'>{item.symbol}</span>
                             </td>
-                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                            <td>${format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{format_str_to_percent(item.supplyAPR)}</td>
+                            <td>${format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{format_str_to_percent(item.borrowAPR)}</td>
                           </tr>
                         )
                       }
@@ -545,10 +460,10 @@ export default class Markets extends React.Component {
                               <span className='token-name'>{item.name}</span>
                               <span className='token-name-short'>{item.symbol}</span>
                             </td>
-                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                            <td>${format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{format_str_to_percent(item.supplyAPR)}</td>
+                            <td>${format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{format_str_to_percent(item.borrowAPR)}</td>
                           </tr>
                         )
                       }
