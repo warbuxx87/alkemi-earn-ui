@@ -16,7 +16,7 @@
   }
 
   .header {
-    width: 1260px;
+    max-width: 1260px;
     border-radius: 6px;
     margin: 0 auto;
     padding-bottom: 10px;
@@ -26,8 +26,11 @@
       .header-item {
         text-align: center;
         background-color: #202123;
-        width: 410px;
+        flex-grow: 1;
+        flex-basis: 0;
         border-radius: 4px;
+        margin-right: 10px;
+
 
         .item-title {
           display: block;
@@ -62,8 +65,13 @@
 
   }
 
+  .no-right-margin {
+    margin-right: 0px !important;
+  }
+
+
   .h3-wrap {
-    width: 1260px;
+    max-width: 1260px;
     margin: 0 auto;
 
     h3 {
@@ -74,9 +82,10 @@
   }
 
   .total-wrap {
-    width: 1260px;
+    max-width: 1260px;
     margin: 0 auto;
     margin-top: 10px;
+    display: flex;
 
     h4 {
       font-size: 16px;
@@ -96,18 +105,21 @@
     .total-wrap-supply,
     .total-wrap-borrow {
       float: left;
-      width: 620px;
+      flex-grow: 1;
+      flex-basis: 0;
       background: #202123;
       border-radius: 4px;
+      margin-right: 10px;
     }
 
     .total-wrap-borrow {
       float: right;
+      margin-right: 0px !important;
     }
   }
 
   .all-markets {
-    width: 1260px;
+    max-width: 1260px;
     margin: 0 auto;
     // background: paleturquoise;
     background: #202123;

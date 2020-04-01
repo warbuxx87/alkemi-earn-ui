@@ -155,7 +155,7 @@ export default class Markets extends React.Component {
                 </div>
               </div>
 
-              <div className='header-item collate-rate'>
+              <div className='header-item collate-rate no-right-margin'>
                 <div className='item-title'>
                   <FormattedMessage id='Total_Collateralization_ratio' />
                 </div>
