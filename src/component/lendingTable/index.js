@@ -7,12 +7,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import dai from '../../images/dai.png';
-import usdc from '../../images/usdc.png';
-import eth from '../../images/eth.png';
-import wbtc from '../../images/wbtc.png';
+import dai from '../../asset/images/dai.png';
+import usdc from '../../asset/images/usdc.png';
+import eth from '../../asset/images/eth.png';
+import wbtc from '../../asset/images/wbtc.png';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -38,10 +38,10 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
 }
 
 const rows = [
-  createData('Ether','ETH',eth, 159, 6.0, 24, 4.0),
-  createData('Maker DAI','DAI',dai, 237, 9.0, 37, 4.3),
-  createData('USD Coin', 'USDC',usdc,262, 16.0, 24, 6.0),
-  createData('Wrapped Btc', 'BTC',wbtc,305, 3.7, 67, 4.3),
+  createData('Ether','ETH',eth, 159, 6.0, '24%', 4.0),
+  createData('Maker DAI','DAI',dai, 237, 9.0, '24%', 4.3),
+  createData('USD Coin', 'USDC',usdc,262, 16.0, '24%', 6.0),
+  createData('Wrapped Btc', 'BTC',wbtc,305, 3.7, '24%', 4.3),
 ];
 
 const useStyles = makeStyles({
@@ -54,7 +54,7 @@ export default function CustomizedTables() {
   const classes = useStyles();
   const columns = [
     { id: '1', label: 'Asset', minWidth: 200,  },
-    { id: '2', label: 'Wallet Balance', minWidth: 100, align: 'center', },
+    { id: '2', label: 'Wallet Balance', minWidth: 120, align: 'center', },
     { id: '3', label: 'Balance', minWidth: 100, align: 'center', },
     {
       id: '4',
@@ -66,14 +66,14 @@ export default function CustomizedTables() {
     {
       id: '5',
       label: 'collateral',
-      minWidth: 120,
+      minWidth: 100,
       align: 'center',
       // format: value => value.toFixed(2),
     },
     {
       id: '6',
       label: '',
-      minWidth: 250,
+      minWidth: 280,
       align: 'center',
       // format: value => value.toFixed(2),
     },
@@ -85,7 +85,7 @@ export default function CustomizedTables() {
         <TableHead>
         <TableRow >
                 {columns.map((column,i) => (
-                  <StyledTableCell key={i} className={[classes.row, classes.lending]}
+                  <StyledTableCell key={i} className={classes.row}
                     key={column.id}
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
@@ -120,7 +120,7 @@ export default function CustomizedTables() {
               </StyledTableCell>
               <StyledTableCell align="center">{row.balance}</StyledTableCell>
               <StyledTableCell align="center">{row.apr}</StyledTableCell>
-              <StyledTableCell align="center">
+              <StyledTableCell align="center"> 
                     <Switch
                      // checked={state.checkedB}
                      // onChange={handleChange}
@@ -128,8 +128,23 @@ export default function CustomizedTables() {
                       color="primary"
                     /></StyledTableCell>
               <StyledTableCell align="center">
-                <Grid className='lastest'>
-                  <Grid className="btnActive">Activate</Grid>
+              <Grid className='lastest' container>
+                  <Grid item md={6} xs container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="center">
+                      {/* <Grid className="btnActive">
+                        Active
+                      </Grid> */}
+                  </Grid>
+                  <Grid item md={6} xs container
+                    direction="row"
+                    justify="center"
+                    alignItems="center">
+                      <Grid className="btnActive">
+                        Active
+                      </Grid>
+                  </Grid>
                 </Grid>
               </StyledTableCell>
             </TableRow>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -22,7 +22,8 @@ import Lending from '../../pages/lending';
 import Borrowing from '../../pages/borrowing';
 import Markets from '../../pages/markets';
 import Liquidate from '../../pages/liquidate/liquidateNoWeb3';
-import Connect from '../../pages/connect';
+//web3
+import Web3 from 'web3';
 
 
 const drawerWidth = 339;
@@ -84,7 +85,7 @@ const useStyles = makeStyles(theme => ({
   wallet:{
     display:'flex',
     justifyContent:'flex-end',
-    paddingLeft:'80px'
+    paddingLeft:'65px'
   },
   status:{
     background: 'green',
@@ -96,7 +97,7 @@ const useStyles = makeStyles(theme => ({
   },
   number:{
     textAlign:'right',
-    width:'170px',
+    width:'160px',
   },
   unit:{
     width:'100px',
@@ -150,14 +151,33 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function PermanentDrawerLeft() {
-//  const [title, setTitle] = useState('Home');
-//  const [drawer, setDrawer] = useState(false);
+const PermanentDrawerLeft = () => {
+  useEffect(()=>{
+    connect();
+  },[])
+
+  const [title, setTitle] = useState('Home');
+  const [drawer, setDrawer] = useState(false);
   const [status, setStatus] = useState(null);
+  const [new_web3, setNew_web3] = useState(null);
+  const [account,setAccount] = useState(null);
   const classes = useStyles();
   const onItemClick = (e) => {
       setStatus(e);
   };
+  
+  const  connect = () => {
+    
+    const web3 =  new Web3(Web3.givenProvider || null);
+    web3.givenProvider.enable().then(res_accounts => {
+      
+      var string =  res_accounts[0].substr(0, 4) + "..." + res_accounts[0].substr(res_accounts[0].length - 4, 4);
+
+      setAccount(string);
+    })
+    
+  }
+  
   return (
       <div className={classes.root}>
         <CssBaseline />
@@ -172,10 +192,11 @@ export default function PermanentDrawerLeft() {
                 <Grid item md={6} className={classes.notification}>
                     <Grid></Grid>
                     <Grid className={classes.notification}>
-                      <Grid className={classes.borderNoti}>
+                      <Grid className={classes.borderNoti} onClick={connect}>
                         <Grid className={classes.statusBadge}></Grid>
-                        <Grid className={classes.price}>
-                          0x121565...6456
+                        <Grid className={classes.price} >
+                          {/* 0x121565...6456 */}
+                          {account ? account  : 'Connect' }
                         </Grid>
                       </Grid>
 
@@ -198,19 +219,19 @@ export default function PermanentDrawerLeft() {
           <Divider className={classes.divider}  />
 
           <List className={classes.menuList}>
-            <ListItem className={ status!= null && status === 1 ? classes.menuItem : '' } button component={Link} to="/" onClick={() => onItemClick(1)}>
+            <ListItem className={ status!= null && status == 1 ? classes.menuItem : '' } button component={Link} to="/" onClick={() => onItemClick(1)}>
               <ListItemText className={classes.menuItemText}>Dashboard</ListItemText>
             </ListItem>
-            <ListItem className={ status!= null && status === 2 ? classes.menuItem : '' } button component={Link} to="/lending" onClick={() => onItemClick(2)}>
+            <ListItem className={ status!= null && status == 2 ? classes.menuItem : '' } button component={Link} to="/lending" onClick={() => onItemClick(2)}>
               <ListItemText className={classes.menuItemText}>Lending</ListItemText>
             </ListItem>
-            <ListItem className={ status!= null && status === 3 ? classes.menuItem : '' } button component={Link} to="/borrowing" onClick={() => onItemClick(3)}>
+            <ListItem className={ status!= null && status == 3 ? classes.menuItem : '' } button component={Link} to="/borrowing" onClick={() => onItemClick(3)}>
               <ListItemText className={classes.menuItemText}>Borrowing</ListItemText>
             </ListItem>
-            <ListItem className={ status!= null && status === 4 ? classes.menuItem : '' } button component={Link} to="/markets" onClick={() => onItemClick(4)}>
+            <ListItem className={ status!= null && status == 4 ? classes.menuItem : '' } button component={Link} to="/markets" onClick={() => onItemClick(4)}>
               <ListItemText className={classes.menuItemText}>Markets</ListItemText>
             </ListItem>
-            <ListItem className={ status!= null && status === 5 ? classes.menuItem : '' } button component={Link} to="/liquidate" onClick={() => onItemClick(5)}>
+            <ListItem className={ status!= null && status == 5 ? classes.menuItem : '' } button component={Link} to="/liquidate" onClick={() => onItemClick(5)}>
               <ListItemText className={classes.menuItemText}>Liquidate</ListItemText>
             </ListItem>
           </List>
@@ -272,7 +293,7 @@ export default function PermanentDrawerLeft() {
 
         <main className={classes.content}>
           {/* <div className={classes.toolbar} /> */}
-          <Route exact path="/" component={Connect} />
+
           <Route path="/lending" component={Lending} />
           <Route path="/borrowing" component={Borrowing} />
           <Route path="/markets" component={Markets} />
@@ -281,3 +302,4 @@ export default function PermanentDrawerLeft() {
       </div>
   );
 }
+export default PermanentDrawerLeft;
