@@ -132,42 +132,47 @@ export default class Markets extends React.Component {
         })
     }
 
- render() {
+  render() {
     return (
       <IntlProvider locale={'en'} messages={this.state.cur_language === '中文' ? zh_CN : en_US} >
 
+          <div className='header'>
+            <div className='header-con'>
+              <div className='header-item supply-balance'>
+                <span className='item-title'>
+                  <FormattedMessage id='Total_Supply_Balance' />
+                </span>
+                <span className='item-num'>$
+                {this.state.data_is_ok ? format_str_to_K(this.state.data.totalSupplyBalanceUSD) : '0.00'}
+                </span>
+              </div>
 
-      <div className='header'>
+              <div className='header-item borrow-balance'>
+                <span className='item-title'>
+                  <FormattedMessage id='Total_Borrow_Balance' />
+                </span>
+                <span className='item-num item-num-borrow'>$
+                {this.state.data_is_ok ? format_str_to_K(this.state.data.totalBorrowBalanceUSD) : '0.00'}
+                </span>
+              </div>
 
-          <div className='header-item supply-balance'>
-            <div className='item-title'>
-              <FormattedMessage id='Total_Supply_Balance' />
-            </div>
-            <div className='item-num'>$
-            {this.state.data_is_ok ? this.format_str_to_K(this.state.data.totalSupplyBalanceUSD) : '0.00'}
+              <div className='header-item collate-rate'>
+                <span className='item-title'>
+                  <FormattedMessage id='Total_Collateralization_ratio' />
+                </span>
+                <span className='item-num item-num-ratio'>
+                  {this.state.data_is_ok ? format_str_to_percent(this.state.data.totalCollateralizationRatio) : '...'}
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className='header-item borrow-balance'>
-            <div className='item-title'>
-              <FormattedMessage id='Total_Borrow_Balance' />
-            </div>
-            <div className='item-num item-num-borrow'>$
-            {this.state.data_is_ok ? this.format_str_to_K(this.state.data.totalBorrowBalanceUSD) : '0.00'}
-            </div>
+
+          <div className='h3-wrap'>
+            <h3>
+              <FormattedMessage id='Market_Overview' />
+            </h3>
           </div>
-
-          <div className='header-item collate-rate'>
-            <div className='item-title'>
-              <FormattedMessage id='Total_Collateralization_ratio' />
-            </div>
-            <div className='item-num item-num-ratio'>
-              {this.state.data_is_ok ? this.format_str_to_persent(this.state.data.totalCollateralizationRatio) : '...'}
-            </div>
-          </div>
-
-      </div>
-
 
 
           <div className='total-wrap'>
