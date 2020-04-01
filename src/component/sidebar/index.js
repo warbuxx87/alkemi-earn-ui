@@ -8,16 +8,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
 import ListItemText from '@material-ui/core/ListItemText';
-// import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
-//import MailIcon from '@material-ui/icons/Mail';
-//import shadows from '@material-ui/core/styles/shadows';
 import { Route, Link } from "react-router-dom";
 //import Routers from "routers/index";
 import Alkemi from '../../images/alkemi.png';
 //import Home from '../../pages/home'
+import Connect from '../../pages/connect';
 import Lending from '../../pages/lending';
 import Borrowing from '../../pages/borrowing';
 import Markets from '../../pages/markets';
@@ -165,19 +161,19 @@ const PermanentDrawerLeft = () => {
   const onItemClick = (e) => {
       setStatus(e);
   };
-  
+
   const  connect = () => {
-    
+
     const web3 =  new Web3(Web3.givenProvider || null);
     web3.givenProvider.enable().then(res_accounts => {
-      
+
       var string =  res_accounts[0].substr(0, 4) + "..." + res_accounts[0].substr(res_accounts[0].length - 4, 4);
 
       setAccount(string);
     })
-    
+
   }
-  
+
   return (
       <div className={classes.root}>
         <CssBaseline />
@@ -293,7 +289,7 @@ const PermanentDrawerLeft = () => {
 
         <main className={classes.content}>
           {/* <div className={classes.toolbar} /> */}
-
+          <Route exact path="/" component={Connect} />
           <Route path="/lending" component={Lending} />
           <Route path="/borrowing" component={Borrowing} />
           <Route path="/markets" component={Markets} />

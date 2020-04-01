@@ -484,9 +484,12 @@ class RimbleTransaction extends React.Component {
         return;
       }
       if (window.ethereum.isConnected()) {
-        const updatedAccount = window.web3.eth.accounts[0];
 
-        if (updatedAccount.toLowerCase() !== account.toLowerCase()) {
+        const updatedAccount = account;
+
+        if (updatedAccount !== account) {
+          console.log("Updated Account: " + updatedAccount);
+          console.log("Original Account: " + account);
           requiresUpdate = true;
         }
 
