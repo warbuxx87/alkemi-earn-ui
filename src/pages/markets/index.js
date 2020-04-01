@@ -110,8 +110,8 @@ export default class Markets extends React.Component {
               var supply_array = _.cloneDeep(this.state.data_markets);
               var borrow_array = _.cloneDeep(this.state.data_markets);
 
-              supply_array.sort(this.compare_supply);
-              borrow_array.sort(this.compare_borrow);
+              supply_array.sort(compare_supply);
+              borrow_array.sort(compare_borrow);
 
               for (var i = 0; i < supply_array.length; i++) {
                 supply_array[i].persentage_supply = Number((supply_array[i].grossSupplyUSD / this.state.data.totalSupplyBalanceUSD * 100)).toFixed(1);
