@@ -16,41 +16,37 @@
   }
 
   .header {
-    width: 820px;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 0px 35px 0px rgba(67, 73, 118, 0.15);
+    width: 1260px;
     border-radius: 6px;
-    padding: 20px 0;
     margin: 0 auto;
-    margin-bottom: 30px;
-    margin-top: 20px;
-
-    .header-con {
-      display: flex;
-      justify-content: space-between;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
 
       .header-item {
-        border-right: 1px solid rgba(221, 221, 232, 0.5);
-        width: 33.3%;
-        padding: 0 20px;
         text-align: center;
+        background-color: #202123;
+        width: 410px;
+        border-radius: 4px;
 
         .item-title {
           display: block;
           font-size: 16px;
           font-weight: 500;
-          color: rgba(164, 167, 190, 1);
-          padding-bottom: 5px;
+          color: #ffffff;
+          padding: 15px 0;
+          border-bottom: 1px solid black;
         }
 
         .item-num {
-          font-size: 22px;
-          font-weight: bold;
-          color: #B542F7;
+          font-size: 30px;
+          font-weight: 500;
+          color: #ffffff;
+          padding: 24px 0;
         }
 
         .item-num-borrow {
-          color: rgba(112, 78, 244, 1);
+          color: #ffffff;
         }
 
         .item-num-ratio {
@@ -70,26 +66,26 @@
   }
 
   .h3-wrap {
-    width: 820px;
+    width: 1260px;
     margin: 0 auto;
 
     h3 {
       font-size: 24px;
       font-weight: bold;
-      color: rgba(67, 73, 118, 1);
+      color: #ffffff;
     }
   }
 
   .total-wrap {
-    width: 820px;
+    width: 1260px;
     margin: 0 auto;
     margin-top: 10px;
 
     h4 {
-      font-size: 18px;
-      font-weight: bold;
-      color: rgba(67, 73, 118, 1);
-      border-bottom: 1px solid #E9ECF0;
+      font-size: 16px;
+      font-weight: 500;
+      color: #ffffff;
+      border-bottom: 1px solid black;
       line-height: 50px;
       padding-left: 15px;
     }
@@ -103,10 +99,9 @@
     .total-wrap-supply,
     .total-wrap-borrow {
       float: left;
-      width: 400px;
-      background: rgba(255, 255, 255, 1);
-      box-shadow: 0px 0px 35px 0px rgba(94, 85, 126, 0.15);
-      border-radius: 6px;
+      width: 620px;
+      background: #202123;
+      border-radius: 4px;
     }
 
     .total-wrap-borrow {
@@ -115,12 +110,11 @@
   }
 
   .all-markets {
-    width: 820px;
+    width: 1260px;
     margin: 0 auto;
     // background: paleturquoise;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 0px 35px 0px rgba(94, 85, 126, 0.15);
-    border-radius: 6px;
+    background: #202123;
+    border-radius: 4px;
     margin-top: 20px;
 
     .body-wrap {
@@ -131,11 +125,11 @@
     }
 
     h5 {
-      font-size: 20px;
-      font-weight: bold;
-      color: rgba(67, 73, 118, 1);
+      font-size: 16px;
+      font-weight: 500;
+      color: #ffffff;
       line-height: 60px;
-      border-bottom: 1px solid #E9ECF0;
+      border-bottom: 1px solid black;
       padding-left: 15px;
       margin-bottom: 0;
     }
@@ -146,11 +140,11 @@
       thead {
         tr {
           th {
-            font-size: 18px;
-            font-weight: 500;
-            color: rgba(164, 167, 190, 1);
-            line-height: 46px;
-            border-bottom: 1px solid #E9ECF0;
+            font-size: 12px;
+            font-weight: 400;
+            color: #ffffff8c;
+            line-height: 36px;
+            border-bottom: 1px solid black;
             text-align: right;
             padding-right: 20px;
           }
@@ -183,7 +177,7 @@
 
       tbody {
         tr {
-          border-bottom: 1px solid #E9ECF0;
+          border-bottom: 1px solid black;
 
           td {
             text-align: right;
@@ -207,51 +201,52 @@
               .token-name {
                 // background: green;
                 position: absolute;
-                font-size: 10px;
+                font-size: 16px;
                 font-weight: 400;
-                color: rgba(67, 73, 118, 1);
+                color: #ffffff;
                 left: 65px;
                 top: 18px;
               }
 
               .token-name-short {
                 position: absolute;
-                font-size: 14px;
+                font-size: 10px;
                 font-weight: 400;
                 // color: rgba(164, 167, 190, 1);
-                color: rgba(67, 73, 118, 1);
+                color: #ffffff;
                 left: 65px;
                 top: 36px;
+                margin-top: 3px;
               }
             }
 
             &:nth-child(2) {
               width: 19%;
               line-height: 70px;
-              font-size: 18px;
+              font-size: 16px;
               font-weight: 400;
-              color: rgba(67, 73, 118, 1);
+              color: #ffffff;
             }
 
             &:nth-child(3) {
               width: 15%;
-              font-size: 18px;
+              font-size: 16px;
               font-weight: 400;
-              color: rgba(67, 73, 118, 1);
+              color: #ffffff;
             }
 
             &:nth-child(4) {
               width: 19%;
-              font-size: 18px;
+              font-size: 16px;
               font-weight: 400;
-              color: rgba(67, 73, 118, 1);
+              color: #ffffff;
             }
 
             &:nth-child(5) {
               width: 19%;
-              font-size: 18px;
+              font-size: 16px;
               font-weight: 400;
-              color: rgba(67, 73, 118, 1);
+              color: #ffffff;
             }
           }
         }
@@ -280,14 +275,14 @@
           display: block;
           font-size: 16px;
           font-weight: 500;
-          color: rgba(67, 73, 118, 1);
+          color: #ffffff;
           margin-bottom: 5px;
         }
 
         .content-new {
           display: block;
           font-weight: 400;
-          color: rgba(67, 73, 118, 1);
+          color: #ffffff;
 
           a {
             margin-right: 30px;
@@ -339,7 +334,7 @@
           position: relative;
           font-size: 16px;
           font-weight: 500;
-          color: rgba(67, 73, 118, 1);
+          color: #ffffff;
           margin-right: 8px;
         }
 
@@ -382,7 +377,7 @@
       }
     }
   }
-}
+
 
 
 
@@ -466,20 +461,19 @@
     h3 {
       font-size: 18px;
       font-weight: bold;
-      color: rgba(67, 73, 118, 1);
+      color: #ffffff;
     }
   }
 
   .total-wrap {
     width: 94%;
     margin: 0 auto;
-    margin-top: 10px;
 
     h4 {
       font-size: 14px;
       font-weight: 400;
-      color: rgba(67, 73, 118, 1);
-      border-bottom: 1px solid #E9ECF0;
+      color: #ffffff;
+      border-bottom: 1px solid black;
       line-height: 40px;
       padding-left: 10px;
     }
@@ -523,9 +517,9 @@
     h5 {
       font-size: 16px;
       font-weight: 500;
-      color: rgba(67, 73, 118, 1);
+      color: #ffffff;
       line-height: 44px;
-      border-bottom: 1px solid #E9ECF0;
+      border-bottom: 1px solid black;
       padding-left: 10px;
       margin-bottom: 0;
     }
@@ -538,7 +532,7 @@
           th {
             font-size: 14px;
             color: rgba(164, 167, 190, 1);
-            border-bottom: 1px solid #E9ECF0;
+            border-bottom: 1px solid black;
             text-align: right;
             padding-left: 5px;
             // line-height: 40px;
@@ -585,13 +579,13 @@
 
       tbody {
         tr {
-          border-bottom: 1px solid #E9ECF0;
+          border-bottom: 1px solid black;
 
           td {
             text-align: right;
             // padding-right: 20px;
             font-size: 12px;
-            color: rgba(67, 73, 118, 1);
+            color: #ffffff;
 
             &:nth-child(1) {
               // background: red;
@@ -681,7 +675,7 @@
           display: block;
           font-size: 14px;
           font-weight: 400;
-          color: rgba(67, 73, 118, 1);
+          color: #ffffff;
           margin-bottom: 5px;
           // margin-top: 15px;
         }
@@ -693,7 +687,7 @@
         .content-new {
           display: block;
           font-weight: 300;
-          color: rgba(67, 73, 118, 1);
+          color: #ffffff;
 
           a {
             margin-right: 30px;
