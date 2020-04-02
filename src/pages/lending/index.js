@@ -1,10 +1,18 @@
-import React from 'react';
-import Lending from '../../component/lending'
+import React, {useEffect} from 'react';
+import LendingInfo from '../../components/lendingInfo';
+import LendingTable from '../../components/lendingTable';
+import ActiveLending from '../../components/activeLending'
 const LendingPage  = (props) => {
 
+  useEffect(() => {
+    document.title = 'Lending'
+  });
+
   return (
-    <div>
-      <Lending></Lending>
+    <div class="lending">
+      <LendingInfo></LendingInfo>
+      <ActiveLending></ActiveLending>
+      <LendingTable></LendingTable>
     </div>
   );
 }

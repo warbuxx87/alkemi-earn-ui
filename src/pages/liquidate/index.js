@@ -9,6 +9,8 @@ import { IntlProvider, FormattedMessage } from 'react-intl';
 import en_US from '../../language/en_US.js';
 import zh_CN from '../../language/zh_CN';
 
+
+// utilities
 import {
     get_balance,
     get_allowance,
@@ -31,17 +33,21 @@ import {
     open_it_onetherscan
 } from './utils';
 
-import logo from '../../images/logo.svg';
-import logo_d from '../../images/logo-d.png';
-import telegram from '../../images/telegram.svg';
-import twitter from '../../images/twitter.svg';
-import lock from '../../images/lock.svg';
-import medium from '../../images/medium.svg';
-import wrong from '../../images/wrong.svg';
-import up from '../../images/up.svg';
-import down from '../../images/down.svg';
-import back from '../../images/back.svg';
 
+// images
+import logo from '../../assets/images/logo.svg';
+import logo_d from '../../assets/images/logo-d.png';
+import telegram from '../../assets/images/telegram.svg';
+import twitter from '../../assets/images/twitter.svg';
+import lock from '../../assets/images/lock.svg';
+import medium from '../../assets/images/medium.svg';
+import wrong from '../../assets/images/wrong.svg';
+import up from '../../assets/images/up.svg';
+import down from '../../assets/images/down.svg';
+import back from '../../assets/images/back.svg';
+
+
+// constants
 let mMarket_abi = require('../../ABIs/moneyMarket.json');
 let WETH_abi = require('../../ABIs/WETH_ABI.json');
 let USDx_abi = require('../../ABIs/USDX_ABI.json');
@@ -49,14 +55,11 @@ let USDT_abi = require('../../ABIs/USDT_ABI.json');
 let Liquidate_ABI = require('../../ABIs/Liquidate_ABI.json');
 let imBTC_ABI = require('../../ABIs/imBTC_ABI.json');
 let DSR_ABI = require('../../ABIs/dsr.json');
-
 let address = require('../../ABIs/address_map.json');
 
-
-
 export default class Liquidate extends React.Component {
-    constructor(porps) {
-        super(porps);
+    constructor(props) {
+        super(props);
 
         this.state = {
             data: [

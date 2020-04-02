@@ -10,7 +10,7 @@ import Web3 from "web3";
 import Markets from "./pages/markets";
 import Liquidate from "./pages/liquidate";
 import Lending from "./pages/lending";
-import Footer from "./component/footer"
+import Footer from "./components/footer"
 
 import SupplyUSDx from "./pages/supply/supply-usdx";
 import SupplyUSDT from "./pages/supply/supply-usdt";

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-// import Header from '../../component/header/header';
+// import Header from '../../components/header/header';
 import RecordBoard from '../../container/recordBoard';
 import { Link } from "react-router-dom";
 import MediaQuery from 'react-responsive';
 import './borrow.scss';
-import Footer from '../../component/footer';
+import Footer from '../../components/footer';
 
 import { Tabs, Input, Button } from 'antd';
 import {
@@ -30,8 +30,8 @@ import en_US from '../../language/en_US.js';
 import zh_CN from '../../language/zh_CN';
 
 import Web3 from 'web3';
-import MyStatus from '../../component/header/my-status';
-import TopStatus from '../../component/header/top-status';
+import MyStatus from '../../components/header/my-status';
+import TopStatus from '../../components/header/top-status';
 
 
 // tokens ABIs

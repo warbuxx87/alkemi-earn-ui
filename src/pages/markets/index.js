@@ -2,25 +2,24 @@ import React from 'react';
 import './markets.scss';
 import _ from 'lodash';
 
-import MyProgress from '../../component/progress';
+import MyProgress from '../../components/progress';
 
-import imBTC from '../../images/imBTC.svg';
-import HUBTC from '../../images/HBTC.svg';
-import HBTC from '../../images/HBTC.svg';
-import USDx from '../../images/USDx.svg';
-import UUDD from '../../images/UUDD.svg';
-import USDT from '../../images/USDT.svg';
-import WETH from '../../images/WETH.svg';
-import UUTT from '../../images/USDT.svg';
-import WBTC from '../../images/WBTC.svg';
-import DAI from '../../images/DAI.svg';
+import imBTC from '../../assets/images/imBTC.svg';
+import HUBTC from '../../assets/images/HBTC.svg';
+import HBTC from '../../assets/images/HBTC.svg';
+import USDx from '../../assets/images/USDx.svg';
+import UUDD from '../../assets/images/UUDD.svg';
+import USDT from '../../assets/images/USDT.svg';
+import WETH from '../../assets/images/WETH.svg';
+import UUTT from '../../assets/images/USDT.svg';
+import WBTC from '../../assets/images/WBTC.svg';
+import DAI from '../../assets/images/DAI.svg';
 // png
-import usdc from '../../images/usdc.png';
-import tusd from '../../images/tusd.png';
-import pax from '../../images/pax.png';
+import usdc from '../../assets/images/usdc.png';
+import tusd from '../../assets/images/tusd.png';
+import pax from '../../assets/images/pax.png';
 
 import {
-  get_markets_data,
   compare_supply,
   compare_borrow,
   format_str_to_kmb,
@@ -114,10 +113,10 @@ export default class Markets extends React.Component {
               borrow_array.sort(compare_borrow);
 
               for (var i = 0; i < supply_array.length; i++) {
-                supply_array[i].persentage_supply = Number((supply_array[i].grossSupplyUSD / this.state.data.totalSupplyBalanceUSD * 100)).toFixed(1);
+                supply_array[i].percentage_supply = Number((supply_array[i].grossSupplyUSD / this.state.data.totalSupplyBalanceUSD * 100)).toFixed(1);
               }
               for (var j = 0; j < borrow_array.length; j++) {
-                borrow_array[j].persentage_borrow = Number((borrow_array[j].totalBorrowUSD / this.state.data.totalBorrowBalanceUSD * 100)).toFixed(1);
+                borrow_array[j].percentage_borrow = Number((borrow_array[j].totalBorrowUSD / this.state.data.totalBorrowBalanceUSD * 100)).toFixed(1);
               }
 
               this.setState({

@@ -23,7 +23,7 @@ import {
   format_Shortfall
 } from "./utils";
 
-import back from "../../images/back.svg";
+import back from "../../assets/images/back.svg";
 
 class LiquidateNoWeb3 extends React.Component {
   constructor(porps) {

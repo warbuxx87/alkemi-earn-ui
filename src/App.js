@@ -1,15 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.scss';
 import Routers from './routers'
-import { ConnectedRouter } from 'connected-react-router';
+import { BrowserRouter} from "react-router-dom";
 
-const App = ({ history }) =>{
-  
+const App = () =>{
+
   return (
-    <ConnectedRouter history={history}>
+    <BrowserRouter>
       <Routers/>
-    </ConnectedRouter>
+    </BrowserRouter>
   );
 }
 

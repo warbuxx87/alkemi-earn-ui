@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -6,16 +5,12 @@ import {
   Route
 } from "react-router-dom";
 import { routes } from './routes';
-import Home from '../pages/home'
-import ScrollToTop from '../ScrollToTop'
+import Home from '../pages/home';
 
 
 const Routers = () => {
-
-  // const isLogin = useSelector(state => state.User.islogin);
     return (
         <Router>
-            <ScrollToTop />
 
             <Switch>
               <Route path={routes.dashboard}>

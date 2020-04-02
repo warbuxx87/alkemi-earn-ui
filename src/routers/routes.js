@@ -1,7 +1,8 @@
 export const routes  = {
-  dashboard: '/',
+  home: '/',
   lending:'/lending',
   borrowing:'/borrowing',
   markets:'/markets',
-  connect:'/connect'
+  connect:'/connect',
+  liquidate: '/liquidate'
 };

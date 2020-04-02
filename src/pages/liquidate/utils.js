@@ -143,7 +143,7 @@ export const get_list_data = (that, num) => {
                     arrList[i].key = i;
                     arrList[i].Supply = Number(arrList[i].totalSupplyUSD).toFixed(2);
                     arrList[i].Borrow = Number(arrList[i].totalBorrowUSD).toFixed(2);
-                    arrList[i].collateralRate = format_persent(arrList[i].collateralRate);
+                    arrList[i].collateralRate = format_percent(arrList[i].collateralRate);
                 }
 
                 // console.log(arrList);
@@ -317,7 +317,7 @@ export const format_Shortfall = (num) => {
     }
 }
 
-export const format_persent = (num) => {
+export const format_percent = (num) => {
     return (num * 100).toFixed(2) + '%';
 }
 
@@ -578,7 +578,7 @@ export const change_page = (that, page, pageSize) => {
                     // arrList[i].Borrow = format_Shortfall(arrList[i].totalBorrowUSD);
                     arrList[i].Supply = Number(arrList[i].totalSupplyUSD).toFixed(2);
                     arrList[i].Borrow = Number(arrList[i].totalBorrowUSD).toFixed(2);
-                    arrList[i].collateralRate = format_persent(arrList[i].collateralRate);
+                    arrList[i].collateralRate = format_percent(arrList[i].collateralRate);
                 }
 
                 console.log(arrList);
@@ -655,7 +655,7 @@ export const get_main_data_timer = (that) => {
                     arrList[i].key = i;
                     arrList[i].Supply = Number(arrList[i].totalSupplyUSD).toFixed(2);
                     arrList[i].Borrow = Number(arrList[i].totalBorrowUSD).toFixed(2);
-                    arrList[i].collateralRate = format_persent(arrList[i].collateralRate);
+                    arrList[i].collateralRate = format_percent(arrList[i].collateralRate);
                 }
                 // console.log(arrList);
                 that.setState({

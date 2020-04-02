@@ -1,18 +1,12 @@
 import React, {useEffect} from 'react';
-import SideBar from '../../component/sidebar';
+import SideBar from '../../components/sidebar';
 const Home  = (props) => {
   useEffect(() => {
-    document.title = 'Dashboard'
+    document.title = 'Home'
   });
   return (
     <div>
       <SideBar></SideBar>
-      {/* <Header breadcrumb={props.breadcrumb}/>
-      <BgHeader/>
-      <MarketData/>
-      <LatestCommentaries/>
-      <GotoSubscribe/>
-      <Footer/> */}
     </div>
   );
 }

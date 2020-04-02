@@ -11,8 +11,8 @@ import { IntlProvider, FormattedMessage } from 'react-intl';
 import en_US from '../../language/en_US.js';
 import zh_CN from '../../language/zh_CN';
 
-import MyStatus from '../../component/header/my-status';
-import Footer from '../../component/footer';
+import MyStatus from '../../components/header/my-status';
+import Footer from '../../components/footer';
 
 
 class OldHome extends Component {

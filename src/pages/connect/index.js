@@ -1,6 +1,10 @@
-import React from 'react';
-import Connect from '../../component/connect'
+import React, {useEffect} from 'react';
+import Connect from '../../components/connect'
 const ConnectPage  = (props) => {
+
+  useEffect(() => {
+    document.title = 'Connect'
+  });
 
   return (
     <div>

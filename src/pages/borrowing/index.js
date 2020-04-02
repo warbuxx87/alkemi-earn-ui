@@ -1,6 +1,10 @@
-import React from 'react';
-import Borrowing from '../../component/borrowing'
+import React, {useEffect} from 'react';
+import Borrowing from '../../components/borrowing'
 const BorrowingPage  = (props) => {
+
+  useEffect(() => {
+    document.title = 'Borrowing'
+  });
 
   return (
     <div>

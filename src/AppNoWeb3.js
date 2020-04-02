@@ -6,7 +6,7 @@ import MediaQuery from "react-responsive";
 import HomeNoWeb3 from './pages/home/homeNoWeb3';
 import Markets from "./pages/markets";
 import LiquidateNoWeb3 from './pages/liquidate/liquidateNoWeb3';
-import Footer from './component/footer';
+import Footer from './components/footer';
 
 class AppNoWeb3 extends Component {
   constructor(props) {
