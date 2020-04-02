@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import RecordBoard from '../../container/recordBoard/recordBoard';
+import RecordBoard from '../../container/recordBoard';
 import { Link } from "react-router-dom";
 import { Tabs, Button, Input } from 'antd';
 import MediaQuery from 'react-responsive';
 import './supply.scss';
 import Web3 from 'web3';
-import MyStatus from '../../component/header/my-status';
-import Footer from '../../component/footer/footer';
+import MyStatus from '../../components/header/my-status';
+import Footer from '../../components/footer';
 
 import {
   get_tokens_decimals,
@@ -37,7 +37,7 @@ import {
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import en_US from '../../language/en_US.js';
 import zh_CN from '../../language/zh_CN';
-import TopStatus from '../../component/header/top-status';
+import TopStatus from '../../components/header/top-status';
 
 
 // tokens ABIs

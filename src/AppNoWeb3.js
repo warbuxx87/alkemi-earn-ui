@@ -4,7 +4,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MediaQuery from "react-responsive";
 
 import HomeNoWeb3 from './pages/home/homeNoWeb3';
-import Markets from "./pages/markets/markets";
+import Markets from "./pages/markets";
+import LiquidateNoWeb3 from './pages/liquidate/liquidateNoWeb3';
+import Footer from './components/footer';
 
 class AppNoWeb3 extends Component {
   constructor(props) {
@@ -112,9 +114,11 @@ class AppNoWeb3 extends Component {
                 <div className="AppNoWeb3">
                   <Route exact path="/" render={() => <HomeNoWeb3 data={this.state} />} />
                   <Route path="/markets" render={() => <Markets />} />
+                  <Route path="/liquidate" render={() => <LiquidateNoWeb3 />} />
                 </div>
               </Switch>
             </BrowserRouter>
+            <Footer />}
           </React.Fragment>
         )}
       </MediaQuery>

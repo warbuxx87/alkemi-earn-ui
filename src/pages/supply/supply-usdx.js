@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Tabs, Button, Input } from 'antd';
-import RecordBoard from '../../container/recordBoard/recordBoard';
-import Footer from '../../component/footer/footer';
+import RecordBoard from '../../container/recordBoard';
+import Footer from '../../components/footer';
 import {
   format_bn,
   get_tokens_decimals,
@@ -26,8 +26,8 @@ import { IntlProvider, FormattedMessage } from 'react-intl';
 import en_US from '../../language/en_US.js';
 import zh_CN from '../../language/zh_CN';
 
-import MyStatus from '../../component/header/my-status';
-import TopStatus from '../../component/header/top-status';
+import MyStatus from '../../components/header/my-status';
+import TopStatus from '../../components/header/top-status';
 
 import Web3 from 'web3';
 // tokens ABIs

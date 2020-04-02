@@ -10,8 +10,6 @@ import { IntlProvider, FormattedMessage } from 'react-intl';
 import en_US from '../../language/en_US.js';
 import zh_CN from '../../language/zh_CN';
 
-import Footer from '../../component/footer/footer';
-
 
 class HomeNoWeb3 extends Component {
   constructor(props) {
@@ -534,7 +532,7 @@ class HomeNoWeb3 extends Component {
           </div>
 
           <div className="clear"></div>
-          <Footer />
+
         </div>
       </IntlProvider>
     );
