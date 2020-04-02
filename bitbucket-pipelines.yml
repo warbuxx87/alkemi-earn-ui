@@ -1,5 +1,8 @@
 image:                                node:10
 
+options:
+  size: 2x  # all steps in this repo get 8GB memory
+
 pipelines:
   default:
     - step:
