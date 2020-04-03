@@ -31,7 +31,7 @@ const theme = createMuiTheme({
         // backgroundColor:'white',
         boxShadow: "none",
         backgroundColor: "#000000",
-        marginTop: "22px"
+        paddingTop: "22px"
     },
     drawer: {
         width: drawerWidth,
@@ -111,7 +111,7 @@ const theme = createMuiTheme({
         justifyContent: "center",
         border: "1px solid #FFFFFF",
         borderRadius: "100px",
-        opacity: "0.7",
+        opacity: "1",
         marginTop: "25px"
     },
     price: {

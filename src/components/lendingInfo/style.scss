@@ -5,9 +5,10 @@
         text-align: center;
         .info_box{
             background-color: #202123;
-            height: 138px;
+
             .title{
-                padding: 16px 0;
+                padding: 15px 0;
+                font-size: 16px;
             }
             .divider{
                 background: #000000!important;
@@ -50,9 +51,19 @@
                     margin: 12px 0;
                 }
             }
-            
+
         }
-        
+
     }
-    
+
+}
+
+
+.MuiGrid-spacing-xs-3 {
+    width: calc(100% + 20px) !important;
+    margin: -10px !important;
+
+   .MuiGrid-item {
+      padding: 10px !important;
+    }
 }
