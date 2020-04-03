@@ -1,24 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Alkemi from '../../assets/images/alkemi.png';
-import Dashboard from '../../pages/dashboard';
-import Connect from '../../pages/connect';
-import Lending from '../../pages/lending';
-import Borrowing from '../../pages/borrowing';
-import Markets from '../../pages/markets';
-import Liquidate from '../../pages/liquidate/liquidateNoWeb3';
-//web3
-import Web3 from 'web3';
 
 
 
@@ -29,14 +19,16 @@ const useStyles = makeStyles(theme => ({
     margin: '10px 10px 10px 10px',
     display: 'flex',
   },
+
   appBar: {
     width: `calc(100% - 400px)`,
     marginLeft: '375px',
     // backgroundColor:'white',
     boxShadow:'none',
     backgroundColor:'#000000',
-    paddingTop:'22px',
+    marginTop:'22px',
   },
+
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -61,52 +53,40 @@ const useStyles = makeStyles(theme => ({
     backgroundColor:'#000000',
   },
   menuList:{
-    padding:'24px 0 24px 0px'
+    padding:'12px 0 0 0px'
   },
   menuItem:{
-    backgroundColor:'#161719',
+    backgroundColor:'#000000',
     borderLeft:'3px solid #FFFFFF',
     opacity: 1,
   },
   menuItemText:{
-    paddingLeft:'4px',
+    paddingLeft:'24px',
     textTransform: 'capitalize',
     opacity: 1,
     //font: Regular 16px/21px Roboto;
     fontFamily:'Regular,Roboto',
     fontSize:'10px'
   },
-
-  walletHeading:{
-    fontSize:'16px',
-    fontWeight:'500',
-  },
-
   wallet:{
     display:'flex',
     justifyContent:'flex-end',
-    marginLeft:'auto',
-    marginRight:'0',
-    paddingRight:'4px',
-    fontSize: '14px',
-    color:'#a7a7a7',
-    alignItems:'center',
+    paddingLeft:'65px'
   },
   status:{
     background: 'green',
     width: '9px',
     height: '9px',
     borderRadius : '5px',
-    marginRight:'8px'
+    marginTop: '7px',
+    marginRight:'5px'
   },
   number:{
     textAlign:'right',
-    width:'50%',
-    fontWeight:'500',
-    paddingRight:'4px',
+    width:'160px',
   },
   unit:{
-    width:'50%',
+    width:'100px',
   },
   overview:{
     letterSpacing: 0,
@@ -129,7 +109,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent:'center',
     border: '1px solid #FFFFFF',
     borderRadius: '100px',
-    opacity: '1',
+    opacity: '0.7',
     marginTop:'25px',
   },
   price:{
@@ -150,8 +130,7 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     marginTop:'100px',
-    marginLeft:'125px',
-    marginRight:'100px',
+    marginLeft:'50px',
     flexGrow: 1,
     padding: theme.spacing(3),
   },
@@ -159,57 +138,15 @@ const useStyles = makeStyles(theme => ({
 
 
 const PermanentDrawerLeft = () => {
-  useEffect(()=>{
-    connect();
-  },[])
 
-  //const [title] = useState(true);
   const [status, setStatus] = useState(null);
-  const [account,setAccount] = useState(null);
   const classes = useStyles();
   const onItemClick = (e) => {
       setStatus(e);
   };
 
-  const  connect = () => {
-
-    const web3 =  new Web3(Web3.givenProvider || null);
-    web3.givenProvider.enable().then(res_accounts => {
-
-      var string =  res_accounts[0].substr(0, 4) + "..." + res_accounts[0].substr(res_accounts[0].length - 4, 4);
-
-      setAccount(string);
-    })
-
-  }
-
   return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
 
-              <Grid container>
-                <Grid item md={6}  className={classes.headerLeft}>
-                    <Grid item md={12} className={classes.overview}>OVERVIEW</Grid>
-                    <Grid item md={12} className={classes.current}></Grid>
-                </Grid>
-                <Grid item md={6} className={classes.notification}>
-                    <Grid></Grid>
-                    <Grid className={classes.notification}>
-                      <Grid className={classes.borderNoti} onClick={connect}>
-                        <Grid className={classes.statusBadge}></Grid>
-                        <Grid className={classes.price} >
-                          {/* 0x121565...6456 */}
-                          {account ? account  : 'Connect' }
-                        </Grid>
-                      </Grid>
-
-                    </Grid>
-                </Grid>
-              </Grid>
-          </Toolbar>
-        </AppBar>
         <Drawer
           className={classes.drawer}
           variant="permanent"
@@ -296,15 +233,8 @@ const PermanentDrawerLeft = () => {
             <Divider className={classes.divider}  />
         </Drawer>
 
-        <main className={classes.content}>
-          {/* <div className={classes.toolbar} /> */}
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/lending" component={Lending} />
-          <Route path="/borrowing" component={Borrowing} />
-          <Route path="/markets" component={Markets} />
-          <Route path="/liquidate" component={Liquidate} />
-        </main>
-      </div>
+
+
   );
 }
 export default PermanentDrawerLeft;
