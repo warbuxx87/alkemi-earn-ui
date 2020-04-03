@@ -182,10 +182,10 @@ const PermanentDrawerLeft = () => {
               <ListItemText className={classes.menuItemText}>Borrow</ListItemText>
             </ListItem>
             <ListItem className={ status!= null && status === 4 ? classes.menuItem : '' } button component={Link} to="/markets" onClick={() => onItemClick(4)}>
-              <ListItemText className={classes.menuItemText}>Stats</ListItemText>
+              <ListItemText className={classes.menuItemText}>Markets</ListItemText>
             </ListItem>
-            <ListItem className={ status!= null && status === 5 ? classes.menuItem : '' } button component={Link} to="/liquidate" onClick={() => onItemClick(5)}>
-              <ListItemText className={classes.menuItemText}>Liquidate</ListItemText>
+            <ListItem className={ status!= null && status === 5 ? classes.menuItem : '' } button component={Link} to="/history" onClick={() => onItemClick(5)}>
+              <ListItemText className={classes.menuItemText}>History</ListItemText>
             </ListItem>
           </List>
           <Divider className={classes.divider}  />

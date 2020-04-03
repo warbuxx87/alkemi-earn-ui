@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import MuiAppBar from "@material-ui/core/AppBar";
 import { withStyles } from "@material-ui/core/styles";
 import Web3 from 'web3';
-
+import Title from './title'
 import Toolbar from '@material-ui/core/Toolbar';
 
 const drawerWidth = 339;

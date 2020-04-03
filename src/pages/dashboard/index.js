@@ -1,5 +1,8 @@
 import React, {useEffect} from 'react';
-import Dashboard from '../../components/connect'
+import DashboardInfo from '../../components/dashboardInfo';
+import DashboardTable from '../../components/dashboardTable';
+
+
 const DashboardPage  = (props) => {
 
   useEffect(() => {
@@ -7,8 +10,10 @@ const DashboardPage  = (props) => {
   });
 
   return (
-    <div>
-      <Dashboard></Dashboard>
+    <div className="lending">
+        <DashboardInfo></DashboardInfo>
+        <DashboardTable></DashboardTable>
+
     </div>
   );
 }

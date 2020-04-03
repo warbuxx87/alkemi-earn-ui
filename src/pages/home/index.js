@@ -13,6 +13,7 @@ import Markets from '../../pages/markets';
 import Liquidate from '../../pages/liquidate/liquidateNoWeb3';
 
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     margin: '10px 10px 10px 10px',
@@ -146,7 +147,7 @@ const Home  = () => {
   return (
     <div className={classes.root}>
         <CssBaseline />
-        <AppBar position="fixed"> </AppBar>
+        <AppBar title="Boo" position="fixed"> </AppBar>
         <SideBar></SideBar>
           <main className={classes.content}>
             {/* <div className={classes.toolbar} /> */}
@@ -154,7 +155,7 @@ const Home  = () => {
             <Route path="/lending" component={Lending}/>
             <Route path="/borrowing" component={Borrowing} />
             <Route path="/markets" component={Markets} />
-            <Route path="/liquidate" component={Liquidate} />
+            <Route path="/history" component={Liquidate} />
           </main>
     </div>
   );
