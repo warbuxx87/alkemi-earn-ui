@@ -162,7 +162,7 @@ const PermanentDrawerLeft = () => {
     connect();
   },[])
 
-  const [title] = useState(true);
+  //const [title] = useState(true);
   const [status, setStatus] = useState(null);
   const [account,setAccount] = useState(null);
   const classes = useStyles();
