@@ -11,6 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { Route, Link } from "react-router-dom";
 import Alkemi from '../../assets/images/alkemi.png';
+import Dashboard from '../../pages/dashboard';
 import Connect from '../../pages/connect';
 import Lending from '../../pages/lending';
 import Borrowing from '../../pages/borrowing';
@@ -227,13 +228,13 @@ const PermanentDrawerLeft = () => {
               <ListItemText className={classes.menuItemText}>Dashboard</ListItemText>
             </ListItem>
             <ListItem className={ status!= null && status === 2 ? classes.menuItem : '' } button component={Link} to="/lending" onClick={() => onItemClick(2)}>
-              <ListItemText className={classes.menuItemText}>Lending</ListItemText>
+              <ListItemText className={classes.menuItemText}>Lend</ListItemText>
             </ListItem>
             <ListItem className={ status!= null && status === 3 ? classes.menuItem : '' } button component={Link} to="/borrowing" onClick={() => onItemClick(3)}>
-              <ListItemText className={classes.menuItemText}>Borrowing</ListItemText>
+              <ListItemText className={classes.menuItemText}>Borrow</ListItemText>
             </ListItem>
             <ListItem className={ status!= null && status === 4 ? classes.menuItem : '' } button component={Link} to="/markets" onClick={() => onItemClick(4)}>
-              <ListItemText className={classes.menuItemText}>Markets</ListItemText>
+              <ListItemText className={classes.menuItemText}>Stats</ListItemText>
             </ListItem>
             <ListItem className={ status!= null && status === 5 ? classes.menuItem : '' } button component={Link} to="/liquidate" onClick={() => onItemClick(5)}>
               <ListItemText className={classes.menuItemText}>Liquidate</ListItemText>
@@ -297,7 +298,7 @@ const PermanentDrawerLeft = () => {
 
         <main className={classes.content}>
           {/* <div className={classes.toolbar} /> */}
-          <Route exact path="/" component={Connect} title="Connect" />
+          <Route exact path="/" component={Dashboard} />
           <Route path="/lending" component={Lending} />
           <Route path="/borrowing" component={Borrowing} />
           <Route path="/markets" component={Markets} />

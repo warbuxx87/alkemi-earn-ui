@@ -357,7 +357,7 @@ class RimbleTransaction extends React.Component {
           console.log(successMessage, signature);
           window.toastProvider.addMessage(successMessage, {
             variant: "success",
-            secondaryMessage: "Welcome to the Rimble Demo App 🎉"
+            secondaryMessage: "Welcome to the Alkemi Debt Facility App 🎉"
           });
 
           this.closeValidationPendingModal();
