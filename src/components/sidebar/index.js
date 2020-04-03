@@ -191,7 +191,7 @@ const PermanentDrawerLeft = () => {
               <Grid container>
                 <Grid item md={6}  className={classes.headerLeft}>
                     <Grid item md={12} className={classes.overview}>OVERVIEW</Grid>
-                    <Grid item md={12} className={classes.current}>{title}</Grid>
+                    <Grid item md={12} className={classes.current}></Grid>
                 </Grid>
                 <Grid item md={6} className={classes.notification}>
                     <Grid></Grid>
