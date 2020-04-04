@@ -1,5 +1,6 @@
 import React from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -8,6 +9,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
+import SupplyModal from "./supplyModal";
+import WithdrawModal from "./withdrawModal";
 
 import eth from "../../assets/images/eth.png";
 // import wbtc from '../../assets/images/wbtc.png';
@@ -96,7 +99,7 @@ export default function CustomizedTables() {
     },
     {
       id: "5",
-      label: "collateral",
+      label: "Collateral",
       minWidth: 100,
       align: "center"
       // format: value => value.toFixed(2),
@@ -116,8 +119,7 @@ export default function CustomizedTables() {
         <Grid item md={6}>
           <Grid className="table_name">Active Lending Reserves</Grid>
         </Grid>
-        <Grid item md={6} className="add">
-        </Grid>
+        <Grid item md={6} className="add"></Grid>
       </Grid>
 
       <TableContainer className="table">
@@ -190,7 +192,7 @@ export default function CustomizedTables() {
                       justify="flex-end"
                       alignItems="center"
                     >
-                      <Grid className="btnActive">Withdraw</Grid>
+                      <WithdrawModal> </WithdrawModal>
                     </Grid>
                     <Grid
                       item
@@ -201,7 +203,7 @@ export default function CustomizedTables() {
                       justify="center"
                       alignItems="center"
                     >
-                      <Grid className="btnActive">Supply</Grid>
+                      <SupplyModal> </SupplyModal>
                     </Grid>
                   </Grid>
                 </StyledTableCell>
