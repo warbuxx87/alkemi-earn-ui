@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import MuiAppBar from "@material-ui/core/AppBar";
 import { withStyles } from "@material-ui/core/styles";
 import Web3 from 'web3';
-import Title from './title'
 import Toolbar from '@material-ui/core/Toolbar';
 
 const drawerWidth = 339;
@@ -23,18 +22,6 @@ const useStyles = makeStyles(theme => ({
     boxShadow:'none',
     backgroundColor:'#000000',
     paddingTop:'22px',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    margin: '22px 0px 0px 35px',
-    background: '#202123',
-    color: 'white',
-
   },
   // necessary for content to be below app bar
   toolbar:{
@@ -62,22 +49,6 @@ const useStyles = makeStyles(theme => ({
     //font: Regular 16px/21px Roboto;
     fontFamily:'Regular,Roboto',
     fontSize:'10px'
-  },
-
-  walletHeading:{
-    fontSize:'16px',
-    fontWeight:'500',
-  },
-
-  wallet:{
-    display:'flex',
-    justifyContent:'flex-end',
-    marginLeft:'auto',
-    marginRight:'0',
-    paddingRight:'4px',
-    fontSize: '14px',
-    color:'#a7a7a7',
-    alignItems:'center',
   },
   status:{
     background: 'green',
@@ -135,23 +106,17 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end',
     paddingRight: '5px',
   },
-  content: {
-    marginTop:'100px',
-    marginLeft:'125px',
-    marginRight:'100px',
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
 }));
 
 
 const AppBar = () => {
   useEffect(()=>{
-    connect();
+    connect()
+    updateTitle();
   },[])
 
 
-
+  const [title, setTitle] = useState(null);
   const [account,setAccount] = useState(null);
   const classes = useStyles();
 
@@ -166,6 +131,37 @@ const AppBar = () => {
     })
 
   }
+
+  const  updateTitle = () => {
+
+    var currentTitle = "Not Set";
+
+    switch (window.location.pathname) {
+      case '/':
+        currentTitle = 'Dashboard';
+        break;
+      case '/lending':
+        currentTitle = 'Lending';
+        break;
+      case '/borrowing':
+        currentTitle = 'Borrowing';
+        break;
+      case '/markets':
+        currentTitle = 'Markets';
+        break;
+      case '/history':
+        currentTitle = 'History';
+        break;
+      case '/connect':
+        currentTitle = 'Connect';
+        break;
+      default:
+        currentTitle = '404 Page Not Found';
+        break;
+      }
+
+      setTitle(currentTitle);
+    }
 
 
 
@@ -182,7 +178,7 @@ const AppBar = () => {
             <Grid container>
               <Grid item md={6}  className={classes.headerLeft}>
                   <Grid item md={12} className={classes.overview}>OVERVIEW</Grid>
-                  <Grid item md={12} className={classes.current}></Grid>
+                  <Grid item md={12} className={classes.current}>{title}</Grid>
               </Grid>
               <Grid item md={6} className={classes.notification}>
                   <Grid></Grid>

@@ -147,10 +147,13 @@ const Home  = () => {
   return (
     <div className={classes.root}>
         <CssBaseline />
-        <AppBar title="Boo" position="fixed"> </AppBar>
+          <Route exact path="/" component={AppBar}/>
+          <Route path="/lending" component={AppBar}/>
+          <Route path="/borrowing" component={AppBar} />
+          <Route path="/markets" component={AppBar} />
+          <Route path="/history" component={AppBar} />
         <SideBar></SideBar>
           <main className={classes.content}>
-            {/* <div className={classes.toolbar} /> */}
             <Route exact path="/" component={Dashboard}/>
             <Route path="/lending" component={Lending}/>
             <Route path="/borrowing" component={Borrowing} />
