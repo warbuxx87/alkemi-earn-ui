@@ -615,7 +615,7 @@ export default class Liquidate extends React.Component {
                                     <div className='liquidate'>
                                         <div className='liquidate-title'>
                                             <span><FormattedMessage id='RequestedAmountClose' /></span>
-                                            <span style={{ color: '#8472FF' }}>
+                                            <span style={{ color: '#00A577' }}>
                                                 {
                                                     this.state.i_want_send ?
                                                         ' (' + this.state.i_want_send + ')' : ''

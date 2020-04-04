@@ -248,7 +248,6 @@ class LiquidateNoWeb3 extends React.Component {
                   </>
                 )}
               </div>
-              <div className="clear"></div>
 
               <div className="main-body-right">
                 <div className="main-body-balance">
@@ -445,13 +444,13 @@ class LiquidateNoWeb3 extends React.Component {
                         <span>
                           <FormattedMessage id="RequestedAmountClose" />
                         </span>
-                        <span style={{ color: "#8472FF" }}>
+                        <span style={{ color: "#00A577" }}>
                           {this.state.i_want_send
                             ? " (" + this.state.i_want_send + ")"
                             : ""}
                         </span>
                       </div>
-                      <div className="liquidate-con">
+                       <div className="liquidate-con">
                         <div className="input-wrap">
                           <Input disabled={true} />
                           <span className="max-tips">MAX</span>
