@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import App from './App';
 import { AppContainer } from 'react-hot-loader';
 import * as serviceWorker from './serviceWorker';
-import './assets/scss/style.scss';
 
 
 ReactDOM.render(

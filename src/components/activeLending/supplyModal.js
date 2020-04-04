@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from "@material-ui/core/Button";
+import SupplyChart from './supplyChart';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -22,11 +23,17 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
     width: 400,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: "#202123",
+    color:   theme.palette.common.white,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  chart: {
+    maxHeight: 150,
+
+
+  }
 }));
 
 export default function SimpleModal() {
@@ -45,11 +52,11 @@ export default function SimpleModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
+      <h2 id="simple-modal-title">Supply *Token*</h2>
 
+        <div id="simple-modal-chart">
+          <SupplyChart> </SupplyChart>
+        </div>
     </div>
   );
 
@@ -63,7 +70,7 @@ Supply
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        aria-describedby="simple-modal-chart"
       >
         {body}
       </Modal>

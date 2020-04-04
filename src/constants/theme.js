@@ -14,7 +14,7 @@ const drawerWidth = 339;
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main: "#4785a5"
+            main: "#00A577"
         },
         secondary: {
             main: "#9575cd"
