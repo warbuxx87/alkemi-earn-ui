@@ -7,107 +7,8 @@ import MuiAppBar from "@material-ui/core/AppBar";
 import { withStyles } from "@material-ui/core/styles";
 import Web3 from 'web3';
 import Toolbar from '@material-ui/core/Toolbar';
-
-const drawerWidth = 339;
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    margin: '10px 10px 10px 10px',
-    display: 'flex',
-  },
-  appBar: {
-    width: `calc(100% - 400px)`,
-    marginLeft: '375px',
-    // backgroundColor:'white',
-    boxShadow:'none',
-    backgroundColor:'#000000',
-    paddingTop:'22px',
-  },
-  // necessary for content to be below app bar
-  toolbar:{
-    padding:'24px 19px',
-  },
-  image:{
-    width:'163px',
-    height:'27px',
-  },
-  divider:{
-    backgroundColor:'#000000',
-  },
-  menuList:{
-    padding:'24px 0 24px 0px'
-  },
-  menuItem:{
-    backgroundColor:'#161719',
-    borderLeft:'3px solid #FFFFFF',
-    opacity: 1,
-  },
-  menuItemText:{
-    paddingLeft:'4px',
-    textTransform: 'capitalize',
-    opacity: 1,
-    //font: Regular 16px/21px Roboto;
-    fontFamily:'Regular,Roboto',
-    fontSize:'10px'
-  },
-  status:{
-    background: 'green',
-    width: '9px',
-    height: '9px',
-    borderRadius : '5px',
-    marginRight:'8px'
-  },
-  number:{
-    textAlign:'right',
-    width:'50%',
-    fontWeight:'500',
-    paddingRight:'4px',
-  },
-  unit:{
-    width:'50%',
-  },
-  overview:{
-    letterSpacing: 0,
-    color: '#6F7278',
-    opacity: 1,
-    fontSize:'14px',
-  },
-  current:{
-    color: '#FFFFFF',
-    fontSize:'26px',
-    fontWeight:'bolder'
-  },
-  headerLeft:{
-    paddingTop:'10px',
-  },
-  borderNoti:{
-    display:'flex',
-    width: '168px',
-    height: '36px',
-    justifyContent:'center',
-    border: '1px solid #FFFFFF',
-    borderRadius: '100px',
-    opacity: '1',
-    marginTop:'25px',
-  },
-  price:{
-    paddingTop:'7px',
-  },
-  statusBadge:{
-    background: 'green',
-    width: '9px',
-    height: '9px',
-    borderRadius : '5px',
-    marginTop: '12px',
-    marginRight:'5px'
-  },
-  notification:{
-    display: 'flex',
-    justifyContent: 'flex-end',
-    paddingRight: '5px',
-  },
-}));
-
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import styles from './styles';
 
 const AppBar = () => {
   useEffect(()=>{
@@ -118,7 +19,7 @@ const AppBar = () => {
 
   const [title, setTitle] = useState(null);
   const [account,setAccount] = useState(null);
-  const classes = useStyles();
+  const classes = styles();
 
   const  connect = () => {
 
@@ -181,7 +82,7 @@ const AppBar = () => {
                   <Grid item md={12} className={classes.current}>{title}</Grid>
               </Grid>
               <Grid item md={6} className={classes.notification}>
-                  <Grid></Grid>
+                  <Grid className={classes.bell}> <NotificationsNoneIcon/></Grid>
                   <Grid className={classes.notification}>
                     <Grid className={classes.borderNoti} onClick={connect}>
                       <Grid className={classes.statusBadge}></Grid>
@@ -200,9 +101,9 @@ const AppBar = () => {
     );
 };
 
-AppBar.propTypes = {
-    classes: PropTypes.object.isRequired,
+// AppBar.propTypes = {
+//     classes: PropTypes.object.isRequired,
 
-};
+// };
 
 export default AppBar;

@@ -12,6 +12,10 @@ import dai from "../../assets/images/dai.png";
 import usdc from "../../assets/images/usdc.png";
 import eth from "../../assets/images/eth.png";
 import wbtc from "../../assets/images/wbtc.png";
+import styles from "./styles";
+import BorrowTables from "./borrowTable";
+import LendTables from "./lendTable";
+import Button from "@material-ui/core/Button";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -41,77 +45,25 @@ const rows = [
   createData("BTC", wbtc, 305, 3.7, "24%", 4.3)
 ];
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700
-  }
-});
 
 export default function CustomizedTables() {
-  const classes = useStyles();
+  const classes = styles();
   const columns = [
-    { id: "1", label: "Asset", minWidth: 200 },
-    { id: "2", label: "Balance", minWidth: 120, align: "center" },
-    { id: "3", label: "Value", minWidth: 100, align: "center" },
-    { id: "4", label: "Lending APR %", minWidth: 100, align: "center" },
-    { id: "5", label: "Earnings", minWidth: 100,  align: "center" }
+    { id: "1", label: "Asset", minWidth: 100, className:"asset_width" },
+    { id: "2", label: "Balance", minWidth: 90, align: "center" },
+    { id: "3", label: "Value", minWidth: 90, align: "center" },
+    { id: "4", label: "Lending APR %", minWidth: 120, align: "center" },
+    { id: "5", label: "Earnings", minWidth: 90,  align: "center" }
   ];
 
   return (
-    <Grid className="tableCurrent">
-      <Grid container className="bg_title">
-        <Grid item md={6}>
-          <Grid className="table_name">Active Deposits</Grid>
-        </Grid>
-        <Grid item md={6} className="add">
-          <Grid className="addAsset">Manage</Grid>
-        </Grid>
+    <Grid container  spacing={3} className={classes.tableCurrent} >
+      <Grid item md={6} xs>
+        <LendTables></LendTables>
       </Grid>
-      <TableContainer className="table">
-        <Table className={classes.table} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column, i) => (
-                <StyledTableCell
-                  key={i}
-                  className={classes.row}
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </StyledTableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.symbol}>
-                <StyledTableCell component="th" scope="row">
-                  <Grid container>
-                    <Grid item md={5}>
-                      <Grid>
-                        <img className="imageSize" src={row.image} alt="{row.symbol}" />
-                      </Grid>
-                    </Grid>
-                    <Grid item md={7}>
-                      <Grid>{row.symbol}</Grid>
-                      <Grid className="unit">{row.unit}</Grid>
-                    </Grid>
-                  </Grid>
-                </StyledTableCell>
-                <StyledTableCell align="center">{row.asset}</StyledTableCell>
-                <StyledTableCell align="center">{row.balance}</StyledTableCell>
-                <StyledTableCell align="center">{row.value}</StyledTableCell>
-                <StyledTableCell align="center">{row.apr}</StyledTableCell>
-                <StyledTableCell align="center" class="lastest">{row.earnings}</StyledTableCell>
-
-
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Grid item md={6} xs>
+        <BorrowTables></BorrowTables>
+      </Grid>
     </Grid>
   );
 }

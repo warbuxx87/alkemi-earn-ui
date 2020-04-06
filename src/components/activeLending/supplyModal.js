@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from "@material-ui/core/Button";
 import SupplyChart from './supplyChart';
-
+import styles from "./styles";
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -19,25 +19,9 @@ function getModalStyle() {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: "#202123",
-    color:   theme.palette.common.white,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-  chart: {
-    maxHeight: 150,
-
-
-  }
-}));
 
 export default function SimpleModal() {
-  const classes = useStyles();
+  const classes = styles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
@@ -62,9 +46,9 @@ export default function SimpleModal() {
 
   return (
     <div>
-    <Button typle="button" className="btnActive" variant="contained" color="primary" onClick={handleOpen}>
-Supply
-</Button>
+    <Button typle="button" className={classes.btnActive} variant="contained" color="primary" onClick={handleOpen}>
+     Supply
+    </Button>
 
       <Modal
         open={open}

@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
 import SupplyModal from "./supplyModal";
 import WithdrawModal from "./withdrawModal";
-
+import styles from "./styles";
 import eth from "../../assets/images/eth.png";
 // import wbtc from '../../assets/images/wbtc.png';
 // import dai from '../../assets/images/dai.png';
@@ -78,14 +78,14 @@ const rows = [
   //   createData('Wrapped Btc', 'BTC',wbtc,305, 3.7, 67, 4.3),
 ];
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700
-  }
-});
+// const useStyles = makeStyles({
+//   table: {
+//     minWidth: 700
+//   }
+// });
 
 export default function CustomizedTables() {
-  const classes = useStyles();
+  const classes = styles();
   const columns = [
     { id: "1", label: "Asset", minWidth: 200 },
     { id: "2", label: "Wallet Balance", minWidth: 120, align: "center" },
@@ -114,15 +114,15 @@ export default function CustomizedTables() {
   ];
 
   return (
-    <Grid className="tableCurrent">
-      <Grid container className="bg_title">
+    <Grid className={classes.tableCurrent}>
+      <Grid container className={classes.bg_title}>
         <Grid item md={6}>
-          <Grid className="table_name">Active Lending Reserves</Grid>
+          <Grid className={classes.table_name}>Active Lending Reserves</Grid>
         </Grid>
-        <Grid item md={6} className="add"></Grid>
+        <Grid item md={6} className={classes.add}></Grid>
       </Grid>
 
-      <TableContainer className="table">
+      <TableContainer className={classes.table}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -146,31 +146,31 @@ export default function CustomizedTables() {
                   <Grid container>
                     <Grid item md={5}>
                       <Grid>
-                        <img className="imageSize" src={row.image} alt="dai" />
+                        <img className={classes.imageSize} src={row.image} alt="dai" />
                       </Grid>
                     </Grid>
                     <Grid item md={7}>
                       <Grid>{row.name}</Grid>
-                      <Grid className="unit">{row.unit}</Grid>
+                      <Grid className={classes.unit}>{row.unit}</Grid>
                     </Grid>
                   </Grid>
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <Grid>
                     <Grid>{row.wallet}</Grid>
-                    <Grid className="unit">{row.wallet_2}</Grid>
+                    <Grid className={classes.unit}>{row.wallet_2}</Grid>
                   </Grid>
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <Grid>
                     <Grid>{row.balance}</Grid>
-                    <Grid className="unit">{row.balance_2}</Grid>
+                    <Grid className={classes.unit}>{row.balance_2}</Grid>
                   </Grid>
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <Grid>
                     <Grid>{row.apr}</Grid>
-                    <Grid className="unit">{row.apr_2}</Grid>
+                    <Grid className={classes.unit}>{row.apr_2}</Grid>
                   </Grid>
                 </StyledTableCell>
                 <StyledTableCell align="center">
@@ -182,7 +182,7 @@ export default function CustomizedTables() {
                   />
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <Grid className="lastest" container>
+                  <Grid className={classes.lastest} container>
                     <Grid
                       item
                       md={6}

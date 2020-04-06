@@ -12,6 +12,7 @@ import dai from '../../assets/images/dai.png';
 import usdc from '../../assets/images/usdc.png';
 import eth from '../../assets/images/eth.png';
 import wbtc from '../../assets/images/wbtc.png';
+import styles from './styles';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -43,14 +44,14 @@ const rows = [
   createData('Wrapped Btc', 'BTC',wbtc,305, 3.7, '24%', 4.3),
 ];
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
+// const useStyles = makeStyles({
+//   table: {
+//     minWidth: 700,
+//   },
+// });
 
 export default function CustomizedTables() {
-  const classes = useStyles();
+  const classes = styles();
   const columns = [
     { id: '1', label: 'Asset', minWidth: 200,  },
     { id: '2', label: 'Wallet Balance', minWidth: 120, align: 'center', },
@@ -79,20 +80,20 @@ export default function CustomizedTables() {
   ];
 
   return (
-    <Grid className="tableCurrent">
-      <Grid container className="bg_title">
+    <Grid className={classes.tableCurrent}>
+      <Grid container className={classes.bg_title}>
         <Grid item md={6}>
-            <Grid className="table_name">
+            <Grid className={classes.table_name}>
              Current Markets
             </Grid>
         </Grid>
-        <Grid item md={6} className="add">
-          <Grid className="addAsset">
+        <Grid item md={6} className={classes.add}>
+          <Grid className={classes.addAsset}>
           Add Asset +
           </Grid>
         </Grid>
       </Grid>
-    <TableContainer  className="table">
+    <TableContainer  className={classes.table}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
         <TableRow >
@@ -114,14 +115,14 @@ export default function CustomizedTables() {
               <Grid container>
                     <Grid item md={5}>
                         <Grid>
-                          <img className="imageSize" src={row.image} alt='dai' />
+                          <img className={classes.imageSize} src={row.image} alt='dai' />
                         </Grid>
                     </Grid>
                     <Grid item md={7}>
                       <Grid>
                       {row.name}
                       </Grid>
-                      <Grid className="unit">
+                      <Grid className={classes.unit}>
                         {row.unit}
                       </Grid>
                     </Grid>
@@ -145,7 +146,7 @@ export default function CustomizedTables() {
                     direction="row"
                     justify="flex-end"
                     alignItems="center">
-                      {/* <Grid className="btnActive">
+                      {/* <Grid className={classesbtnActive">
                         Active
                       </Grid> */}
                   </Grid>
@@ -153,7 +154,7 @@ export default function CustomizedTables() {
                     direction="row"
                     justify="center"
                     alignItems="center">
-                      <Grid className="btnActive">
+                      <Grid className={classes.btnActive}>
                         Activate
                       </Grid>
                   </Grid>
