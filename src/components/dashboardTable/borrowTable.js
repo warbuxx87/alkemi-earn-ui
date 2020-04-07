@@ -19,7 +19,7 @@ import {
     useRouteMatch,
     useHistory
   } from "react-router-dom";
-  
+
 const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: "#202123",
@@ -71,7 +71,7 @@ export default function BorrowTables() {
           </Grid>
           <Grid item md={6} className={classes.add}>
             {/* <Grid className={classes.addAsset}>Manage</Grid> */}
-            <Button typle="button" className={classes.addAsset} variant="contained" onClick={redirect}>
+            <Button type="button" className={classes.addAsset} variant="contained" onClick={redirect}>
             Manage
             </Button>
           </Grid>

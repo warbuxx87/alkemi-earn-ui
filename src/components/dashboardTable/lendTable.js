@@ -71,7 +71,7 @@ export default function LendTables() {
           </Grid>
           <Grid item md={6} className={classes.add}>
             {/* <Grid className={classes.addAsset}>Manage</Grid> */}
-            <Button typle="button" className={classes.addAsset} variant="contained" onClick={redirect} >
+            <Button type="button" className={classes.addAsset} variant="contained" onClick={redirect} >
             Manage
             </Button>
           </Grid>

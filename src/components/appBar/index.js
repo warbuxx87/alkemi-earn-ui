@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import MuiAppBar from "@material-ui/core/AppBar";
 import { withStyles } from "@material-ui/core/styles";
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import styles from './styles';
 import Onboard from 'bnc-onboard'
@@ -13,10 +14,19 @@ import Web3 from 'web3'
 
 let web3;
 
+const wallets = [
+  { walletName: "coinbase", preferred: true },
+  { walletName: "trust", preferred: true },
+  { walletName: "metamask", preferred: true }
+]
+
 const onboard = Onboard({
   dappId: 'b296620b-1b0b-453e-888c-c7d9952c5698',       // [String] The API key created by step one above
   networkId: 4,  // [Integer] The Ethereum network ID your Dapp uses.
   darkMode: true,
+  walletSelect: {
+     wallets: wallets
+  },
   subscriptions: {
     wallet: wallet => {
        web3 = new Web3(wallet.provider)
@@ -106,17 +116,17 @@ const AppBar = () => {
               <Grid item md={6} className={classes.notification}>
                   <Grid className={classes.bell}> <NotificationsNoneIcon/></Grid>
                   <Grid className={classes.notification}>
-                    <Grid className={classes.borderNoti} onClick={connect}>
+                    <Button variant="outlined" color="secondary" className={classes.btnActive} onClick={connect}>
                       <Grid className={classes.statusBadge}></Grid>
                       <Grid className={classes.price} >
                         {/* 0x121565...6456 */}
                         {account ? account  : 'Connect' }
                       </Grid>
+                    </Button>
                     </Grid>
 
                   </Grid>
               </Grid>
-            </Grid>
         </Toolbar>
       </MuiAppBar>
 

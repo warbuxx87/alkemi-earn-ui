@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 import dai from '../../assets/images/dai.png';
 import usdc from '../../assets/images/usdc.png';
@@ -88,9 +89,9 @@ export default function CustomizedTables() {
             </Grid>
         </Grid>
         <Grid item md={6} className={classes.add}>
-          <Grid className={classes.addAsset}>
+          <Button className={classes.addAsset}>
           Add Asset +
-          </Grid>
+        </Button>
         </Grid>
       </Grid>
     <TableContainer  className={classes.table}>
@@ -154,9 +155,9 @@ export default function CustomizedTables() {
                     direction="row"
                     justify="center"
                     alignItems="center">
-                      <Grid className={classes.btnActive}>
+                      <Button variant='contained' color='primary' className={classes.btnActive}>
                         Activate
-                      </Grid>
+                      </Button>
                   </Grid>
                 </Grid>
               </StyledTableCell>
