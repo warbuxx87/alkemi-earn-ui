@@ -5,14 +5,27 @@ import classNames from "classnames";
 import Grid from '@material-ui/core/Grid';
 import MuiAppBar from "@material-ui/core/AppBar";
 import { withStyles } from "@material-ui/core/styles";
-import Web3 from 'web3';
 import Toolbar from '@material-ui/core/Toolbar';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import styles from './styles';
+import Onboard from 'bnc-onboard'
+import Web3 from 'web3'
+
+let web3;
+
+const onboard = Onboard({
+  dappId: 'b296620b-1b0b-453e-888c-c7d9952c5698',       // [String] The API key created by step one above
+  networkId: 4,  // [Integer] The Ethereum network ID your Dapp uses.
+  darkMode: true,
+  subscriptions: {
+    wallet: wallet => {
+       web3 = new Web3(wallet.provider)
+    }
+  }
+});
 
 const AppBar = () => {
   useEffect(()=>{
-    connect()
     updateTitle();
   },[])
 
@@ -21,17 +34,26 @@ const AppBar = () => {
   const [account,setAccount] = useState(null);
   const classes = styles();
 
-  const  connect = () => {
+  const  connect = async() => {
 
-    const web3 =  new Web3(Web3.givenProvider || null);
-    web3.givenProvider.enable().then(res_accounts => {
+    await onboard.walletSelect();
+    //await onboard.walletCheck();
+    }
 
-      var string =  res_accounts[0].substr(0, 4) + "..." + res_accounts[0].substr(res_accounts[0].length - 4, 4);
 
-      setAccount(string);
-    })
 
-  }
+//  const status = async()=> {
+
+  //  await onboard.walletCheck();
+  //  await web3.givenProvider.enable().then(res_accounts => {
+
+  //    var string =  res_accounts[0].substr(0, 4) + "..." + res_accounts[0].substr(res_accounts[0].length - 4, 4);
+
+  //    setAccount(string);
+//  }
+//)
+
+//  }
 
   const  updateTitle = () => {
 
