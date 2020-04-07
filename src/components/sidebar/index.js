@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
@@ -15,40 +14,9 @@ import styles from './styles';
 const PermanentDrawerLeft = () => {
   const classes = styles();
   const [status, setStatus] = useState(null);
-  const  updateTitle = () => {
-    var i = 0;
-
-    switch (window.location.pathname) {
-      case '/':
-        setStatus(1);
-        break;
-      case '/lending':
-        setStatus(2);
-        break;
-      case '/borrowing':
-        setStatus(3);
-        break;
-      case '/markets':
-        setStatus(4);
-        break;
-      case '/history':
-        setStatus(5);
-        break;
-      default:
-        setStatus(1);
-        break;
-      }
-
-      // setTitle(currentTitle);
-    }
   const onItemClick = (e) => {
       setStatus(e);
   };
-  
-  useEffect(()=>{
-    console.log(window.location.pathname);
-    updateTitle();
-  },[window.location])
 
   return (
 

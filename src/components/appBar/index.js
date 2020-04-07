@@ -1,16 +1,13 @@
 import React, {useState, useEffect} from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from "prop-types";
 import classNames from "classnames";
 import Grid from '@material-ui/core/Grid';
 import MuiAppBar from "@material-ui/core/AppBar";
-import { withStyles } from "@material-ui/core/styles";
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import styles from './styles';
-import Onboard from 'bnc-onboard'
-import Web3 from 'web3'
+import Onboard from 'bnc-onboard';
+import Web3 from 'web3';
 
 let web3;
 
@@ -47,7 +44,6 @@ const AppBar = () => {
   const  connect = async() => {
 
     await onboard.walletSelect();
-    //await onboard.walletCheck();
     }
 
 

@@ -1,63 +1,15 @@
 import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import Grid from "@material-ui/core/Grid";
-import Switch from "@material-ui/core/Switch";
-import dai from "../../assets/images/dai.png";
-import usdc from "../../assets/images/usdc.png";
-import eth from "../../assets/images/eth.png";
-import wbtc from "../../assets/images/wbtc.png";
 import styles from "./styles";
 import BorrowTables from "./borrowTable";
 import LendTables from "./lendTable";
-import Button from "@material-ui/core/Button";
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: "#202123",
-    color: theme.palette.common.white,
-    opacity: "1",
-    fontSize: "12px",
-    lineHeight: "1px",
-    letterSpacing: 0,
-    borderBottom: "1px solid #000000"
-  },
-  body: {
-    fontSize: 14,
-    color: theme.palette.common.white,
-    borderBottom: "1px solid #000000"
-  }
-}))(TableCell);
-
-function createData( symbol, image, asset, balance, value, apr) {
-  return { symbol, image, asset, balance, value, apr };
-}
-
-const rows = [
-  createData("ETH", eth, 159, 2344333.7, "8.34%", 52223.3),
-  createData("DAI", dai, 237, 167736.90, "12.34%", 1928.88),
-  createData("USDC", usdc, 262, 16.0, "24%", 6.0),
-  createData("BTC", wbtc, 305, 3.7, "24%", 4.3)
-];
 
 
 export default function CustomizedTables() {
   const classes = styles();
-  const columns = [
-    { id: "1", label: "Asset", minWidth: 100, className:"asset_width" },
-    { id: "2", label: "Balance", minWidth: 90, align: "center" },
-    { id: "3", label: "Value", minWidth: 90, align: "center" },
-    { id: "4", label: "Lending APR %", minWidth: 120, align: "center" },
-    { id: "5", label: "Earnings", minWidth: 90,  align: "center" }
-  ];
 
   return (
-    <Grid container  spacing={3} className={classes.tableCurrent} >
+    <Grid container  spacing={3} className={classes.tableDashboard} >
       <Grid item md={6} xs>
         <LendTables></LendTables>
       </Grid>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,7 +14,7 @@ import eth from '../../assets/images/eth.png';
 import wbtc from '../../assets/images/wbtc.png';
 import styles from './styles';
 
-const StyledTableCell = withStyles((theme) => ({
+const LendingTableCell = withStyles((theme) => ({
   head: {
     backgroundColor:'#202123',
     color: theme.palette.common.white,
@@ -37,7 +37,7 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
   return { name,unit,image, wallet, balance, apr, collateral };
 }
 
-const rows = [
+const lRows = [
   createData('Ether','ETH',eth, 159, 6.0, '24%', 4.0),
   createData('Maker DAI','DAI',dai, 237, 9.0, '24%', 4.3),
   createData('USD Coin', 'USDC',usdc,262, 16.0, '24%', 6.0),
@@ -52,7 +52,7 @@ const rows = [
 
 export default function CustomizedTables() {
   const classes = styles();
-  const columns = [
+  const lColumns = [
     { id: '1', label: 'Asset', minWidth: 200,  },
     { id: '2', label: 'Wallet Balance', minWidth: 120, align: 'center', },
     { id: '3', label: 'Balance', minWidth: 100, align: 'center', },
@@ -80,7 +80,7 @@ export default function CustomizedTables() {
   ];
 
   return (
-    <Grid className={classes.tableCurrent}>
+    <Grid className={classes.tableLending}>
       <Grid container className={classes.bg_title}>
         <Grid item md={6}>
             <Grid className={classes.table_name}>
@@ -97,50 +97,50 @@ export default function CustomizedTables() {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
         <TableRow >
-                {columns.map((column,i) => (
-                  <StyledTableCell key={i} className={classes.row}
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                {lColumns.map((lColumn,i) => (
+                  <LendingTableCell key={i} className={classes.lRow}
+                    key={lColumn.id}
+                    align={lColumn.align}
+                    style={{ minWidth: lColumn.minWidth }}
                   >
-                    {column.label}
-                  </StyledTableCell>
+                    {lColumn.label}
+                  </LendingTableCell>
                 ))}
               </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
+          {lRows.map((lRow) => (
+            <TableRow key={lRow.name}>
+              <LendingTableCell component="th" scope="lRow">
               <Grid container>
                     <Grid item md={5}>
                         <Grid>
-                          <img className={classes.imageSize} src={row.image} alt='dai' />
+                          <img className={classes.imageSize} src={lRow.image} alt='dai' />
                         </Grid>
                     </Grid>
                     <Grid item md={7}>
                       <Grid>
-                      {row.name}
+                      {lRow.name}
                       </Grid>
                       <Grid className={classes.unit}>
-                        {row.unit}
+                        {lRow.unit}
                       </Grid>
                     </Grid>
                </Grid>
-              </StyledTableCell>
-              <StyledTableCell align="center">
-               {row.wallet}
-              </StyledTableCell>
-              <StyledTableCell align="center">{row.balance}</StyledTableCell>
-              <StyledTableCell align="center">{row.apr}</StyledTableCell>
-              <StyledTableCell align="center">
+              </LendingTableCell>
+              <LendingTableCell align="center">
+               {lRow.wallet}
+              </LendingTableCell>
+              <LendingTableCell align="center">{lRow.balance}</LendingTableCell>
+              <LendingTableCell align="center">{lRow.apr}</LendingTableCell>
+              <LendingTableCell align="center">
                     <Switch
                      // checked={state.checkedB}
                      // onChange={handleChange}
                       name="checkedB"
                       color="primary"
-                    /></StyledTableCell>
-              <StyledTableCell align="center">
+                    /></LendingTableCell>
+              <LendingTableCell align="center">
               <Grid className='lastest' container>
                   <Grid item md={6} xs container
                     direction="row"
@@ -159,7 +159,7 @@ export default function CustomizedTables() {
                       </Grid>
                   </Grid>
                 </Grid>
-              </StyledTableCell>
+              </LendingTableCell>
             </TableRow>
           ))}
         </TableBody>

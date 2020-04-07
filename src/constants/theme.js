@@ -1,12 +1,4 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Grid from "@material-ui/core/Grid";
-import ListItemText from "@material-ui/core/ListItemText";
 import red from "@material-ui/core//colors/red";
 
 const drawerWidth = 339;

@@ -2,7 +2,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const styles = makeStyles((theme) =>
   createStyles({
-    tableCurrent:{
+    tableALending:{
         color: 'white',
         paddingTop: '30px',
     },

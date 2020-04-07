@@ -2,7 +2,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const styles = makeStyles((theme) =>
   createStyles({
-    tableCurrent:{
+    tableBorrowing:{
         color: 'white',
         paddingTop: '30px',
     },
@@ -32,7 +32,7 @@ const styles = makeStyles((theme) =>
         paddingLeft: '20px!important',
         margin: '12px 0!important',
         color: 'white!important',
-    },  
+    },
     table:{
         color:'white!important',
         backgroundColor:'#202123',
@@ -80,7 +80,7 @@ const styles = makeStyles((theme) =>
       chart: {
         maxHeight: 150,
       }
-     
+
 
 }));
 export default styles;

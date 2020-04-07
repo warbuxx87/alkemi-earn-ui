@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -81,7 +81,7 @@ export default function CustomizedTables() {
   ];
 
   return (
-    <Grid className={classes.tableCurrent}>
+    <Grid className={classes.tableBorrowing}>
       <Grid container className={classes.bg_title}>
         <Grid item md={6}>
             <Grid className={classes.table_name}>

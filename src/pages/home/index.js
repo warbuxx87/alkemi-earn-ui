@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '../../components/appBar';
@@ -6,7 +6,6 @@ import SideBar from '../../components/sidebar';
 import { Route } from "react-router-dom";
 
 import Dashboard from '../../pages/dashboard';
-import Connect from '../../pages/connect';
 import Lending from '../../pages/lending';
 import Borrowing from '../../pages/borrowing';
 import Markets from '../../pages/markets';

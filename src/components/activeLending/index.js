@@ -1,6 +1,5 @@
 import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -13,9 +12,6 @@ import SupplyModal from "./supplyModal";
 import WithdrawModal from "./withdrawModal";
 import styles from "./styles";
 import eth from "../../assets/images/eth.png";
-// import wbtc from '../../assets/images/wbtc.png';
-// import dai from '../../assets/images/dai.png';
-// import usdc from '../../assets/images/usdc.png';
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -39,11 +35,8 @@ function createData(
   unit,
   image,
   wallet,
-  wallet_2,
   balance,
-  balance_2,
   apr,
-  apr_2,
   collateral
 ) {
   return {
@@ -51,29 +44,15 @@ function createData(
     unit,
     image,
     wallet,
-    wallet_2,
     balance,
-    balance_2,
     apr,
-    apr_2,
     collateral
   };
 }
 
 const rows = [
-  createData(
-    "Ether",
-    "ETH",
-    eth,
-    11234.88,
-    "$11234.88",
-    11345.88,
-    "$11345.88",
-    "24%",
-    "0.00 DAI",
-    4.0
-  )
-  //   createData('Maker DAI','DAI',dai, 237, 9.0, 37, 4.3),
+
+  createData('Ether','ETH', eth, 237.1234, 9.0, 0.37, 4.3),
   //   createData('USD Coin', 'USDC',usdc,262, 16.0, 24, 6.0),
   //   createData('Wrapped Btc', 'BTC',wbtc,305, 3.7, 67, 4.3),
 ];
@@ -94,27 +73,28 @@ export default function CustomizedTables() {
       id: "4",
       label: "APR %",
       minWidth: 100,
-      align: "center"
-      //format: value => value.toLocaleString(),
+      align: "center",
+      style: "percent",
+      format: value => value.toFixed(2),
     },
     {
       id: "5",
       label: "Collateral",
       minWidth: 100,
-      align: "center"
-      // format: value => value.toFixed(2),
+      align: "center",
+      format: value => value.toFixed(2),
     },
     {
       id: "6",
       label: "",
       minWidth: 280,
-      align: "center"
-      // format: value => value.toFixed(2),
+      align: "center",
+      format: value => value.toFixed(2),
     }
   ];
 
   return (
-    <Grid className={classes.tableCurrent}>
+    <Grid className={classes.tableALending}>
       <Grid container className={classes.bg_title}>
         <Grid item md={6}>
           <Grid className={classes.table_name}>Active Lending Reserves</Grid>
