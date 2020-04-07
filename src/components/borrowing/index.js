@@ -18,16 +18,16 @@ export default function PermanentDrawerLeft() {
         </Grid>
         <Grid className={classes.box} item xs>
           <Grid className={classes.info_box}>
-              <Grid className={classes.title}>Aggregated USD Value</Grid>
+              <Grid className={classes.title}>Interest Paid</Grid>
               <Divider className={classes.divider}  />
               <Grid className={classes.valuable}>$0.00</Grid>
           </Grid>
         </Grid>
         <Grid className={classes.box} item xs>
           <Grid className={classes.info_box}>
-            <Grid className={classes.title}>Aggregated USD Value</Grid>
+            <Grid className={classes.title}>Average Interest APR</Grid>
             <Divider className={classes.divider}  />
-            <Grid className={classes.valuable}>$0.00</Grid>
+            <Grid className={classes.valuable}>0.00%</Grid>
           </Grid>
         </Grid>
       </Grid>
