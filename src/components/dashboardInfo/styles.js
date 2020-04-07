@@ -4,9 +4,12 @@ const styles = makeStyles((theme) =>
   createStyles({
     lending:{
         color: 'white',
-    },    
+    },
+    box_portfolio:{
+        borderBottom:'2px solid orange' 
+    },
     box_loans:{
-        borderBottom:'2px solid #F90055' 
+        borderBottom:'2px solid #F90055'
     },
     box_deposits:{
         borderBottom:'2px solid lightgreen'
@@ -51,7 +54,7 @@ const styles = makeStyles((theme) =>
         opacity:'0.6',
         textAlign:'right',
         padding: '4px 19px 4px 0px',
-        
+
     },
     tableCurrent:{
         color: 'white',
@@ -84,7 +87,7 @@ const styles = makeStyles((theme) =>
         paddingLeft: '20px',
         margin: '12px 0',
     }
-    
+
   })
 );
 export default styles;

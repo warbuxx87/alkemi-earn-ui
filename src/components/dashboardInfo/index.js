@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import styles from './styles';
 
 export default function DashboardInfo() {
-  const classes = styles(); 
+  const classes = styles();
   return (
        <Grid container spacing={3}>
         <Grid className={classes.box} item xs>
@@ -15,13 +15,13 @@ export default function DashboardInfo() {
                 <Grid item md={6} xs>
                   <Grid className={classes.nameValueable}>Portfolio Value</Grid>
                   <Grid  className={classes.valuable}>
-                    $233,422.23
+                    0
                   </Grid>
                 </Grid>
                 <Grid item md={6} xs>
                   <Grid className={classes.nameChange}>24 hr Change</Grid>
                   <Grid  className={classes.change}>
-                    $2663.00
+                    0
                   </Grid>
                 </Grid>
               </Grid>
@@ -35,13 +35,13 @@ export default function DashboardInfo() {
                 <Grid item md={6} xs>
                   <Grid className={classes.nameValueable}>Total Lent</Grid>
                   <Grid  className={classes.valuable}>
-                    $233,422.23
+                    0
                   </Grid>
                 </Grid>
                 <Grid item md={6} xs>
                   <Grid className={classes.nameChange}>Total Interest Earnt</Grid>
                   <Grid  className={classes.change}>
-                    $2663.00
+                    0
                   </Grid>
                 </Grid>
               </Grid>
@@ -55,13 +55,13 @@ export default function DashboardInfo() {
                 <Grid item md={6} xs>
                   <Grid className={classes.nameValueable}>Total Debt</Grid>
                   <Grid  className={classes.valuable}>
-                    $233,422.23
+                    0
                   </Grid>
                 </Grid>
                 <Grid item md={6} xs>
                   <Grid className={classes.nameChange}>Borrowing Power</Grid>
                   <Grid  className={classes.change}>
-                    $2663.00
+                    0
                   </Grid>
                 </Grid>
               </Grid>

@@ -39,10 +39,10 @@ function createData( symbol, image, asset, balance, value, apr) {
 }
 
 const rows = [
-  createData("ETH", eth, 159, 2344333.7, "8.34%", 52223.3),
-  createData("DAI", dai, 237, 167736.90, "12.34%", 1928.88),
-  createData("USDC", usdc, 262, 16.0, "24%", 6.0),
-  createData("BTC", wbtc, 305, 3.7, "24%", 4.3)
+  createData("ETH", eth, 0, 0, 0, 52223.3),
+  createData("DAI", dai, 0, 0, 0, 1928.88),
+  createData("USDC", usdc, 0, 0, 0, 6.0),
+  createData("BTC", wbtc, 0, 0, 0, 4.3)
 ];
 
 

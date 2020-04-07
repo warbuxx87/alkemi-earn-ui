@@ -39,10 +39,10 @@ function createData( symbol, image, asset, balance, value, apr) {
 }
 
 const rows = [
-  createData("ETH", eth, 159, 2344333.7, "8.34%", 52223.3),
-  createData("DAI", dai, 237, 167736.90, "12.34%", 1928.88),
-  createData("USDC", usdc, 262, 16.0, "24%", 6.0),
-  createData("BTC", wbtc, 305, 3.7, "24%", 4.3)
+  createData("ETH", eth, 0, 0, 0, 0),
+  createData("DAI", dai, 0, 0, 0, 0),
+  createData("USDC", usdc, 0, 0, 0, 0),
+  createData("BTC", wbtc, 0, 0, 0, 0)
 ];
 
 
@@ -56,7 +56,7 @@ export default function BorrowTables() {
     { id: "1", label: "Asset", minWidth: 100, className:"asset_width" },
     { id: "2", label: "Borrowed", minWidth: 90, align: "center" },
     { id: "3", label: "Value", minWidth: 90, align: "center" },
-    { id: "4", label: "Borrow APR", minWidth: 120, align: "center" },
+    { id: "4", label: "Borrow APR %", minWidth: 120, align: "center" },
     { id: "5", label: "Earnings", minWidth: 90,  align: "center" }
   ];
 
@@ -64,7 +64,7 @@ export default function BorrowTables() {
       <Grid >
         <Grid container className={classes.bg_title}>
           <Grid item md={6}>
-            <Grid className={classes.table_name}>Active Deposits</Grid>
+            <Grid className={classes.table_name}>Active Loans</Grid>
           </Grid>
           <Grid item md={6} className={classes.add}>
             {/* <Grid className={classes.addAsset}>Manage</Grid> */}
