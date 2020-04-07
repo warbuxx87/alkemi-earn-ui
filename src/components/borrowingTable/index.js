@@ -39,10 +39,10 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
 }
 
 const rows = [
-  createData('Ether','ETH',eth, 159, 6.0, '24%', 4.0),
-  createData('Maker DAI','DAI',dai, 237, 9.0, '24%', 4.3),
-  createData('USD Coin', 'USDC',usdc,262, 16.0, '24%', 6.0),
-  createData('Wrapped Btc', 'BTC',wbtc,305, 3.7, '24%', 4.3),
+  createData('Ether','ETH',eth, 0, 0, 0, 0),
+  createData('Maker DAI','DAI',dai, 0, 0, 0, 0),
+  createData('USD Coin', 'USDC',usdc, 0, 0, 0, 0),
+  createData('Wrapped BTC', 'BTC', wbtc, 0, 0, 0, 0),
 ];
 
 // const useStyles = makeStyles({
@@ -66,7 +66,7 @@ export default function CustomizedTables() {
     },
     {
       id: '5',
-      label: 'collateral',
+      label: 'Collateral',
       minWidth: 100,
       align: 'center',
       // format: value => value.toFixed(2),
