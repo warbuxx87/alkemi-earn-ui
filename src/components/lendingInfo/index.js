@@ -16,7 +16,7 @@ export default function LendingInfo() {
         </Grid>
         <Grid className={classes.box} item xs>
           <Grid className={classes.info_box}>
-              <Grid className={classes.title}>Interest Earnt</Grid>
+              <Grid className={classes.title}>Interest Earned</Grid>
               <Divider className={classes.divider} />
               <Grid className={classes.valuable}>$0.00</Grid>
           </Grid>
@@ -25,7 +25,7 @@ export default function LendingInfo() {
           <Grid className={classes.info_box}>
             <Grid className={classes.title}>Earning APR</Grid>
             <Divider className={classes.divider} />
-            <Grid className={classes.valuable}>$0.00</Grid>
+            <Grid className={classes.valuable}>0.00%</Grid>
           </Grid>
         </Grid>
       </Grid>

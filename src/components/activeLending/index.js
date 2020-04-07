@@ -52,7 +52,7 @@ function createData(
 
 const rows = [
 
-  createData('Ether','ETH', eth, 237.1234, 9.0, 0.37, 4.3),
+  createData('Ether','ETH', eth, 0, 0, 0, 0),
   //   createData('USD Coin', 'USDC',usdc,262, 16.0, 24, 6.0),
   //   createData('Wrapped Btc', 'BTC',wbtc,305, 3.7, 67, 4.3),
 ];

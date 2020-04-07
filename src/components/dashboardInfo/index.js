@@ -39,7 +39,7 @@ export default function DashboardInfo() {
                   </Grid>
                 </Grid>
                 <Grid item md={6} xs>
-                  <Grid className={classes.nameChange}>Total Interest Earnt</Grid>
+                  <Grid className={classes.nameChange}>Total Earned</Grid>
                   <Grid  className={classes.change}>
                     0
                   </Grid>
