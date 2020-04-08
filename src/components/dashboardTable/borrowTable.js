@@ -7,10 +7,16 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Grid from "@material-ui/core/Grid";
-import dai from "../../assets/images/dai.png";
-import usdc from "../../assets/images/usdc.png";
-import eth from "../../assets/images/eth.png";
-import wbtc from "../../assets/images/wbtc.png";
+import dai from "../../assets/images/DAI.svg";
+import usdc from "../../assets/images/USDC.svg";
+import eth from "../../assets/images/WETH.svg";
+import wbtc from "../../assets/images/WBTC.svg";
+import usdx from "../../assets/images/USDx.svg";
+import imbtc from "../../assets/images/imBTC.svg";
+import usdt from "../../assets/images/USDT.svg";
+import hbtc from "../../assets/images/HBTC.svg";
+import pax from "../../assets/images/pax.png";
+import tusd from "../../assets/images/tusd.png";
 import styles from "./styles";
 import Button from "@material-ui/core/Button";
 import {
@@ -43,7 +49,13 @@ const rows = [
   createData("ETH", eth, 0, 0, 0, 0),
   createData("DAI", dai, 0, 0, 0, 0),
   createData("USDC", usdc, 0, 0, 0, 0),
-  createData("BTC", wbtc, 0, 0, 0, 0)
+  createData("USDT", usdt, 0, 0, 0, 0),
+  createData("USDx", usdx, 0, 0, 0, 0),
+  createData("PAX", pax, 0, 0, 0, 0),
+  createData("TUSD", tusd, 0, 0, 0, 0),
+  createData("wBTC", wbtc, 0, 0, 0, 0),
+  createData("imBTC", imbtc, 0, 0, 0, 0),
+  createData("HBTC", hbtc, 0, 0, 0, 0)
 ];
 
 
