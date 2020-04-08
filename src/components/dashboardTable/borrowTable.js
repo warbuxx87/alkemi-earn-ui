@@ -20,9 +20,10 @@ import {
 const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: "#202123",
-    color: theme.palette.common.white,
+    color: "#a7a7a7",
     opacity: "1",
     fontSize: "12px",
+    fontColor: "#a7a7a7",
     lineHeight: "1px",
     letterSpacing: 0,
     borderBottom: "1px solid #000000"

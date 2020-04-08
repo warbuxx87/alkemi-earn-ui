@@ -6,7 +6,7 @@ const styles = makeStyles((theme) =>
         color: 'white',
     },
     box_portfolio:{
-        borderBottom:'2px solid orange' 
+        borderBottom:'2px solid orange'
     },
     box_loans:{
         borderBottom:'2px solid #F90055'
@@ -21,6 +21,7 @@ const styles = makeStyles((theme) =>
         padding: '15px 0 15px 18px',
         fontSize: '16px',
         color:'white',
+        fontWeight: '500',
     },
     divider:{
         background: '#000000!important',

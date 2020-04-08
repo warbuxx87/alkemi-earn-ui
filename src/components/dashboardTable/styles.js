@@ -16,6 +16,7 @@ const styles = makeStyles((theme) =>
         color: '#FFFFFF',
         fontSize: '16px',
         padding: '15px 20px',
+        fontWeight: '500'
     },
     add:{
         display: 'flex',
@@ -23,15 +24,18 @@ const styles = makeStyles((theme) =>
         paddingRight: '19px',
     },
     addAsset:{
-        background: '#000000 0% 0% no-repeat padding-box!important',
+        background: '#161719 0% 0% no-repeat padding-box!important',
         borderRadius: '100px!important',
-        opacity: '0.3',
+        opacity: '1',
         width: '94px',
         height: '28px',
         paddingTop: '3px!important',
         paddingLeft: '20px!important',
         margin: '12px 0!important',
         color: 'white!important',
+        textTransform: 'capitalize',
+        fontSize: '14px',
+        fontWeight: '400',
     },
     table:{
         color:'white!important',

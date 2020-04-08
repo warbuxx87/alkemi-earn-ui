@@ -81,11 +81,9 @@ const styles = makeStyles(() =>
     opacity: '1',
     marginTop:'25px',
   },
-  price:{
-    paddingTop:'7px',
-  },
+
   bell:{
-    paddingTop: '30px',
+    paddingTop: '32px',
     paddingRight: '15px',
   },
   statusBadge:{
@@ -93,9 +91,21 @@ const styles = makeStyles(() =>
     width: '9px',
     height: '9px',
     borderRadius : '5px',
-    marginTop: '12px',
-    marginRight:'5px'
+    marginRight:'12px'
   },
+
+  btnActiveOutline:{
+    display:'flex',
+    width: '150px',
+    height: '36px',
+    justifyContent:'center',
+    border: '1px solid #FFFFFF',
+    borderRadius: '100px',
+    opacity: '1',
+    marginTop:'25px',
+    color: 'white',
+  },
+
   notification:{
     display: 'flex',
     justifyContent: 'flex-end',

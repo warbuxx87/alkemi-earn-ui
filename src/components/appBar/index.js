@@ -5,7 +5,7 @@ import MuiAppBar from "@material-ui/core/AppBar";
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
-import styles from './styles';
+import styles from "./styles";
 import Onboard from 'bnc-onboard';
 import Web3 from 'web3';
 
@@ -111,8 +111,8 @@ const AppBar = () => {
               </Grid>
               <Grid item md={6} className={classes.notification}>
                   <Grid className={classes.bell}> <NotificationsNoneIcon/></Grid>
-                  <Grid className={classes.notification}>
-                    <Button variant="outlined" color="secondary" className={classes.btnActive} onClick={connect}>
+                  <Grid>
+                    <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary.dark" onClick={connect}>
                       <Grid className={classes.statusBadge}></Grid>
                       <Grid className={classes.price} >
                         {/* 0x121565...6456 */}
