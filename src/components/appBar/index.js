@@ -5,21 +5,42 @@ import MuiAppBar from "@material-ui/core/AppBar";
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
-import styles from "./styles";
+import styles from './styles';
 import Onboard from 'bnc-onboard';
 import Web3 from 'web3';
 
 let web3;
 
+const DAPP_ID = 'b296620b-1b0b-453e-888c-c7d9952c5698'
+const FORTMATIC_KEY = '***REMOVED***'
+const PORTIS_KEY = '***REMOVED***'
+const SQUARELINK_KEY = 'Your Squarelink key here'
+const INFURA_KEY = 'Your Infura key here'
+const APP_URL = 'Your app url here'
+const CONTACT_EMAIL = 'hello@alkemi.ai'
+const RPC_URL = 'https://<network>.infura.io/v3/<INFURA_KEY>';
+
+
 const wallets = [
   { walletName: "coinbase", preferred: true },
   { walletName: "trust", preferred: true },
-  { walletName: "metamask", preferred: true }
+  { walletName: "metamask", preferred: true },
+  {
+  walletName: "portis",
+  apiKey: PORTIS_KEY,
+  preferred: true,
+  label: 'Login with Email'
+},
+{
+  walletName: "fortmatic",
+  apiKey: FORTMATIC_KEY,
+  preferred: true
+}
 ]
 
 const onboard = Onboard({
-  dappId: 'b296620b-1b0b-453e-888c-c7d9952c5698',       // [String] The API key created by step one above
-  networkId: 4,  // [Integer] The Ethereum network ID your Dapp uses.
+  dappId: DAPP_ID,       // [String] The API key created by step one above
+  networkId: 1,  // [Integer] The Ethereum network ID your Dapp uses.
   darkMode: true,
   walletSelect: {
      wallets: wallets
@@ -44,9 +65,10 @@ const AppBar = () => {
   const  connect = async() => {
 
     await onboard.walletSelect();
+
     }
 
-
+// await onboard.walletCheck();
 
 //  const status = async()=> {
 
@@ -111,8 +133,8 @@ const AppBar = () => {
               </Grid>
               <Grid item md={6} className={classes.notification}>
                   <Grid className={classes.bell}> <NotificationsNoneIcon/></Grid>
-                  <Grid>
-                    <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary.dark" onClick={connect}>
+                  <Grid className={classes.notification}>
+                    <Button variant="outlined" color="secondary" className={classes.btnActive} onClick={connect}>
                       <Grid className={classes.statusBadge}></Grid>
                       <Grid className={classes.price} >
                         {/* 0x121565...6456 */}
