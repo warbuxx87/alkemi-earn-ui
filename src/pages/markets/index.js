@@ -14,7 +14,7 @@ import UUTT from '../../assets/images/USDT.svg';
 import WBTC from '../../assets/images/WBTC.svg';
 import DAI from '../../assets/images/DAI.svg';
 // png
-import usdc from '../../assets/images/usdc.png';
+import usdc from '../../assets/images/USDC.svg';
 import tusd from '../../assets/images/tusd.png';
 import pax from '../../assets/images/pax.png';
 
