@@ -6,7 +6,7 @@ import styles from './styles';
 export default function LendingInfo() {
   const classes = styles();
   return (
-       <Grid container spacing={2}>
+       <Grid container spacing={3}>
         <Grid className={classes.box} item xs>
           <Grid className={classes.info_box}>
               <Grid className={classes.title}>Aggregated USD Value</Grid>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
+import Button from "@material-ui/core/Button";
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -8,10 +9,16 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
-import dai from '../../assets/images/dai.png';
-import usdc from '../../assets/images/usdc.png';
-import eth from '../../assets/images/eth.png';
-import wbtc from '../../assets/images/wbtc.png';
+import dai from "../../assets/images/DAI.svg";
+import usdc from "../../assets/images/USDC.svg";
+import eth from "../../assets/images/WETH.svg";
+import wbtc from "../../assets/images/WBTC.svg";
+import usdx from "../../assets/images/USDx.svg";
+import imbtc from "../../assets/images/imBTC.svg";
+import usdt from "../../assets/images/USDT.svg";
+import hbtc from "../../assets/images/HBTC.svg";
+import pax from "../../assets/images/pax.png";
+import tusd from "../../assets/images/tusd.png";
 import styles from './styles';
 
 const LendingTableCell = withStyles((theme) => ({
@@ -38,10 +45,11 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
 }
 
 const lRows = [
-  createData('Ether','ETH',eth, 0, 0, 0, 0),
   createData('Maker DAI','DAI',dai, 0, 0, 0, 0),
+  createData('Tether','USDT',usdt, 0, 0, 0, 0),
   createData('USD Coin', 'USDC', usdc, 0, 0, 0, 0),
   createData('Wrapped BTC', 'BTC', wbtc, 0, 0, 0, 0),
+  createData('Paxos','PAX', pax, 0, 0, 0, 0),
 ];
 
 // const useStyles = makeStyles({
@@ -154,9 +162,9 @@ export default function CustomizedTables() {
                     direction="row"
                     justify="center"
                     alignItems="center">
-                      <Grid className={classes.btnActive}>
+                    <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary.dark">
                         Activate
-                      </Grid>
+                    </Button>
                   </Grid>
                 </Grid>
               </LendingTableCell>

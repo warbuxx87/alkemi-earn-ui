@@ -3,7 +3,6 @@ import Modal from '@material-ui/core/Modal';
 import Button from "@material-ui/core/Button";
 import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
-
 import SupplyChart from './supplyChart';
 import styles from "./styles";
 import CloseIcon from '@material-ui/icons/Close';

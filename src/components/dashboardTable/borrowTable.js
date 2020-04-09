@@ -17,7 +17,6 @@ import usdt from "../../assets/images/USDT.svg";
 import hbtc from "../../assets/images/HBTC.svg";
 import pax from "../../assets/images/pax.png";
 import tusd from "../../assets/images/tusd.png";
-import tbtc from "../../assets/images/TBTC.svg";
 import styles from "./styles";
 import Button from "@material-ui/core/Button";
 import {
@@ -55,7 +54,6 @@ const rows = [
   createData("PAX", pax, 0, 0, 0, 0),
   createData("TUSD", tusd, 0, 0, 0, 0),
   createData("wBTC", wbtc, 0, 0, 0, 0),
-  createData("tBTC", tbtc, 0, 0, 0, 0),
   createData("imBTC", imbtc, 0, 0, 0, 0),
   createData("HBTC", hbtc, 0, 0, 0, 0)
 ];

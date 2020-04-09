@@ -11,7 +11,7 @@ import Switch from "@material-ui/core/Switch";
 import SupplyModal from "./supplyModal";
 import WithdrawModal from "./withdrawModal";
 import styles from "./styles";
-import eth from "../../assets/images/eth.png";
+import eth from "../../assets/images/WETH.svg";
 
 const StyledTableCell = withStyles(theme => ({
   head: {

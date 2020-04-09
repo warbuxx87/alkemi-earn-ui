@@ -62,6 +62,18 @@ const styles = makeStyles((theme) =>
         opacity: '1',
         paddingTop:'5px',
     },
+    
+    btnActiveOutline:{
+        width: '122px',
+        height: '32px',
+        borderRadius: '23px',
+        opacity: '1',
+        color:'white',
+        border:'1px solid white',
+        textTransform: 'capitalize',
+        paddingTop: '4px'
+    },
+
     tableCurrent: {
         paddingTop: '20px !important',
     },
