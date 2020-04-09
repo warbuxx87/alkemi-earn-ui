@@ -49,7 +49,7 @@ const PermanentDrawerLeft = () => {
             <ListItem className={ status!= null && status === 5 ? classes.menuItem : '' } button component={Link} to="/history" onClick={() => onItemClick(5)}>
               <ListItemText className={classes.menuItemText}>History</ListItemText>
             </ListItem>
-            <ListItem className={ status!= null && status === 5 ? classes.menuItem : '' } button component={Link} to="/liquidate" onClick={() => onItemClick(6)}>
+            <ListItem className={ status!= null && status === 6 ? classes.menuItem : '' } button component={Link} to="/liquidate" onClick={() => onItemClick(6)}>
               <ListItemText className={classes.menuItemText}>Liquidate</ListItemText>
             </ListItem>
           </List>
