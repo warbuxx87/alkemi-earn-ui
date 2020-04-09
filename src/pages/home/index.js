@@ -10,6 +10,7 @@ import Lending from '../../pages/lending';
 import Borrowing from '../../pages/borrowing';
 import Markets from '../../pages/markets';
 import History from '../../pages/history';
+import Liquidate from '../../pages/liquidate';
 
 
 
@@ -43,10 +44,11 @@ const Home  = () => {
     <div className={classes.root}>
         <CssBaseline />
           <Route exact path="/" component={AppBar}/>
-          <Route path="/lending" component={AppBar}/>
-          <Route path="/borrowing" component={AppBar} />
-          <Route path="/markets" component={AppBar} />
-          <Route path="/history" component={AppBar} />
+          <Route exact path="/lending" component={AppBar}/>
+          <Route exact path="/borrowing" component={AppBar} />
+          <Route exact path="/markets" component={AppBar} />
+          <Route exact path="/history" component={AppBar} />
+          <Route exact path="/liquidate" component={AppBar} />
         <SideBar></SideBar>
           <main className={classes.content}>
             <Route exact path="/" component={Dashboard}/>
@@ -54,6 +56,8 @@ const Home  = () => {
             <Route path="/borrowing" component={Borrowing} />
             <Route path="/markets" component={Markets} />
             <Route path="/history" component={History} />
+            <Route path="/liquidate" component={Liquidate} />
+
           </main>
     </div>
   );

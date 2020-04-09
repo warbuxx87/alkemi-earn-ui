@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { Link } from "react-router-dom";
-import Alkemi from '../../assets/images/alkemi.png';
+import logo from '../../assets/images/alkemi.png';
 import styles from './styles';
 
 
@@ -29,7 +29,7 @@ const PermanentDrawerLeft = () => {
           anchor="left"
         >
           <div className={classes.toolbar} >
-             <img className={classes.image} src={Alkemi} alt={'Alkemi'} />
+             <img className={classes.image} src={logo} alt={'Alkemi Logo'} />
           </div>
           <Divider className={classes.divider}  />
 
@@ -48,6 +48,9 @@ const PermanentDrawerLeft = () => {
             </ListItem>
             <ListItem className={ status!= null && status === 5 ? classes.menuItem : '' } button component={Link} to="/history" onClick={() => onItemClick(5)}>
               <ListItemText className={classes.menuItemText}>History</ListItemText>
+            </ListItem>
+            <ListItem className={ status!= null && status === 5 ? classes.menuItem : '' } button component={Link} to="/liquidate" onClick={() => onItemClick(6)}>
+              <ListItemText className={classes.menuItemText}>Liquidate</ListItemText>
             </ListItem>
           </List>
           <Divider className={classes.divider}  />

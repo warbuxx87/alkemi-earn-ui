@@ -103,6 +103,9 @@ const AppBar = () => {
       case '/history':
         currentTitle = 'History';
         break;
+      case '/liquidate':
+        currentTitle = 'Liquidate';
+        break;
       case '/connect':
         currentTitle = 'Connect';
         break;

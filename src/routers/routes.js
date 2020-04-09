@@ -4,5 +4,6 @@ export const routes  = {
   borrowing:'/borrowing',
   markets:'/markets',
   connect:'/connect',
+  history: '/history',
   liquidate: '/liquidate'
 };
