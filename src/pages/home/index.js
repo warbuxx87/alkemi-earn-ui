@@ -9,7 +9,7 @@ import Dashboard from '../../pages/dashboard';
 import Lending from '../../pages/lending';
 import Borrowing from '../../pages/borrowing';
 import Markets from '../../pages/markets';
-import Liquidate from '../../pages/liquidate/liquidateNoWeb3';
+import History from '../../pages/history';
 
 
 
@@ -53,7 +53,7 @@ const Home  = () => {
             <Route path="/lending" component={Lending}/>
             <Route path="/borrowing" component={Borrowing} />
             <Route path="/markets" component={Markets} />
-            <Route path="/history" component={Liquidate} />
+            <Route path="/history" component={History} />
           </main>
     </div>
   );

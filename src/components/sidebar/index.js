@@ -68,7 +68,7 @@ const PermanentDrawerLeft = () => {
                 <Grid container>
                   <Grid  className={classes.unit}>ETH</Grid>
                   <Grid className={classes.number}>
-                    343.4885
+                    0
                   </Grid>
                 </Grid>
               </ListItemText>
@@ -78,7 +78,7 @@ const PermanentDrawerLeft = () => {
                 <Grid container>
                   <Grid  className={classes.unit}>DAI</Grid>
                   <Grid className={classes.number}>
-                    11234.88
+                    0
                   </Grid>
                 </Grid>
               </ListItemText>
@@ -88,7 +88,7 @@ const PermanentDrawerLeft = () => {
                 <Grid container>
                   <Grid  className={classes.unit}>USDC</Grid>
                   <Grid className={classes.number}>
-                    8744.47
+                   0
                   </Grid>
                 </Grid>
               </ListItemText>
@@ -98,7 +98,7 @@ const PermanentDrawerLeft = () => {
                 <Grid container>
                   <Grid  className={classes.unit}>WBTC</Grid>
                   <Grid className={classes.number}>
-                    0.38495
+                    0
                   </Grid>
                 </Grid>
               </ListItemText>

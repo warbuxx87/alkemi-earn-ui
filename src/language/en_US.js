@@ -8,7 +8,7 @@ const en_US = {
     borrow_balance: "Borrow Balance",
     borrowing_balance: "Borrowing Balance",
 
-    collateralization_ratio: "Collateralization ratio",
+    collateralization_ratio: "Collateralization Ratio",
     connect: "Connect",
 
     market_size: "Total Supply",
@@ -83,7 +83,7 @@ const en_US = {
     //markets
     Total_Supply_Balance: 'Total Supply Balance',
     Total_Borrow_Balance: 'Total Borrow Balance',
-    Total_Collateralization_ratio: 'Total Collateralization ratio',
+    Total_Collateralization_ratio: 'Total Collateralization Ratio',
     Market_Overview: 'Market Overview',
     Total_Supply: 'Top Supplies',
     Total_Borrow: 'Top Borrows',
@@ -100,7 +100,7 @@ const en_US = {
     Account: 'Account',
     Supply_Balance: 'Supply Balance',
     Borrow_Balance: 'Borrow Balance',
-    Collateralization_ratio: 'Collateralization ratio',
+    Collateralization_ratio: 'Collateralization Ratio',
     Asset: 'Asset',
     Balance: 'Balance',
     Supply: 'Supply',
