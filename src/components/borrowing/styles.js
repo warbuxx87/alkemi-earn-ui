@@ -4,7 +4,7 @@ const styles = makeStyles((theme) =>
   createStyles({
     borrowing:{
         color: 'white',
-    },    
+    },
     box:{
         textAlign: 'center',
     },
@@ -15,6 +15,7 @@ const styles = makeStyles((theme) =>
         padding: '15px 0',
         fontSize: '16px',
         color:'white',
+        fontWeight: '500',
     },
     divider:{
         background: '#000000!important',
@@ -34,6 +35,7 @@ const styles = makeStyles((theme) =>
         backgroundColor: '#202123',
         height: '55px',
         borderBottom: '1px solid #000000',
+        fontWeight: '500',
     },
     table_name:{
         letterSpacing: '0',
@@ -57,7 +59,7 @@ const styles = makeStyles((theme) =>
         paddingLeft: '20px',
         margin: '12px 0',
     }
-    
+
   })
 );
 export default styles;

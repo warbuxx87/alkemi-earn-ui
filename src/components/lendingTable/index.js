@@ -24,7 +24,7 @@ import styles from './styles';
 const LendingTableCell = withStyles((theme) => ({
   head: {
     backgroundColor:'#202123',
-    color: theme.palette.common.white,
+    color: '#a7a7a7',
     opacity:'1',
     fontSize:'12px',
     lineHeight:'1px',
@@ -96,9 +96,9 @@ export default function CustomizedTables() {
             </Grid>
         </Grid>
         <Grid item md={6} className={classes.add}>
-          <Grid className={classes.addAsset}>
+          <Button className={classes.addAsset}>
           Add Asset +
-          </Grid>
+        </Button>
         </Grid>
       </Grid>
     <TableContainer  className={classes.table}>

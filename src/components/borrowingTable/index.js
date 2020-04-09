@@ -24,7 +24,7 @@ import styles from './styles';
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor:'#202123',
-    color: theme.palette.common.white,
+    color: '#a7a7a7',
     opacity:'1',
     fontSize:'12px',
     lineHeight:'1px',

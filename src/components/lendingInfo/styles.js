@@ -16,6 +16,7 @@ const styles = makeStyles((theme) =>
         padding: '15px 0',
         fontSize: '16px',
         color:'white',
+        fontWeight: '500',
     },
     divider:{
         background: '#000000!important',

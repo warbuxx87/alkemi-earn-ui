@@ -16,6 +16,7 @@ const styles = makeStyles((theme) =>
         color: '#FFFFFF',
         fontSize: '16px',
         padding: '15px 20px',
+        fontWeight: '500',
     },
     add:{
         display: 'flex',
@@ -23,15 +24,19 @@ const styles = makeStyles((theme) =>
         paddingRight: '19px',
     },
     addAsset:{
-        background: '#000000 0% 0% no-repeat padding-box!important',
+        background: '#161719 0% 0% no-repeat padding-box!important',
         borderRadius: '100px!important',
-        opacity: '0.3',
+        opacity: '1',
         width: '122px',
-        height: '32px',
-        paddingTop: '6px!important',
-        paddingLeft: '20px!important',
+        height: '28px',
+        paddingTop: '3px!important',
+        paddingLeft: '12px',
+        paddingRight: '12px',
         margin: '12px 0!important',
-        color: 'white!important',
+        color: 'white',
+        textTransform: 'capitalize',
+        fontSize: '14px',
+        fontWeight: '400',
     },
     table:{
         color:'white!important',
@@ -62,7 +67,7 @@ const styles = makeStyles((theme) =>
         opacity: '1',
         paddingTop:'5px',
     },
-    
+
     btnActiveOutline:{
         width: '122px',
         height: '32px',
