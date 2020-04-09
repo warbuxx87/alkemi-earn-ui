@@ -6,7 +6,8 @@ import { Pagination } from "antd";
 
 // add i18n.
 import { IntlProvider, FormattedMessage } from "react-intl";
-import en_US from "../../language/en_US.js";
+import en_US from "../../language/en_US";
+import fr_FR from "../../language/fr_FR";
 import zh_CN from "../../language/zh_CN";
 
 import {
@@ -89,7 +90,7 @@ class History extends React.Component {
                         <thead>
                           <tr>
                             <th>
-                              <FormattedMessage id="Shortfall" /> (WETH)
+                              <FormattedMessage id="Shortfall" /> (ETH)
                             </th>
                             <th>
                               <FormattedMessage id="Account" />

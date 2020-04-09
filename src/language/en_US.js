@@ -96,7 +96,7 @@ const en_US = {
 
     //liquidate
     Connect: 'Connect',
-    Shortfall: 'Shortfall',
+    Shortfall: 'Deficit',
     Account: 'Account',
     Supply_Balance: 'Supply Balance',
     Borrow_Balance: 'Borrow Balance',
