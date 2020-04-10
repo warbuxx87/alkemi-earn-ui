@@ -14,22 +14,28 @@ let web3;
 const DAPP_ID = 'b296620b-1b0b-453e-888c-c7d9952c5698'
 const FORTMATIC_KEY = '***REMOVED***'
 const PORTIS_KEY = '***REMOVED***'
-const SQUARELINK_KEY = 'Your Squarelink key here'
-const INFURA_KEY = 'Your Infura key here'
+const SQUARELINK_KEY = '46cdb359da95fcc537dcf6a60b6da3'
+const INFURA_KEY = '***REMOVED***'
 const APP_URL = 'Your app url here'
 const CONTACT_EMAIL = 'hello@alkemi.ai'
-const RPC_URL = 'https://<network>.infura.io/v3/<INFURA_KEY>';
+const RPC_URL = 'https://main.infura.io/v3/<INFURA_KEY>';
 
 
 const wallets = [
   { walletName: "coinbase", preferred: true },
-  { walletName: "trust", preferred: true },
+  { walletName: "trust", preferred: true, rpcUrl: RPC_URL },
   { walletName: "metamask", preferred: true },
   {
   walletName: "portis",
   apiKey: PORTIS_KEY,
   preferred: true,
-  label: 'Login with Email'
+  label: 'Portis'
+},
+{
+walletName: "squarelink",
+apiKey: SQUARELINK_KEY,
+preferred: true,
+label: 'SquareLink'
 },
 {
   walletName: "fortmatic",
