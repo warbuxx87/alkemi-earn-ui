@@ -9,7 +9,7 @@ const LendingPage  = (props) => {
   });
 
   return (
-    <div class="lending">
+    <div className="lending">
       <LendingInfo></LendingInfo>
       <ActiveLending></ActiveLending>
       <LendingTable></LendingTable>

@@ -1,12 +1,4 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Grid from "@material-ui/core/Grid";
-import ListItemText from "@material-ui/core/ListItemText";
 import red from "@material-ui/core//colors/red";
 
 const drawerWidth = 339;
@@ -14,13 +6,15 @@ const drawerWidth = 339;
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main: "#4785a5"
+            main: "#00A577",
         },
         secondary: {
-            main: "#9575cd"
+            main: '#9575cd',
+            dark: '#0044ff',
         },
         error: red
     },
+
     root: {
         margin: "10px 10px 10px 10px",
         display: "flex"
@@ -31,7 +25,7 @@ const theme = createMuiTheme({
         // backgroundColor:'white',
         boxShadow: "none",
         backgroundColor: "#000000",
-        marginTop: "22px"
+        paddingTop: "22px"
     },
     drawer: {
         width: drawerWidth,
@@ -111,7 +105,7 @@ const theme = createMuiTheme({
         justifyContent: "center",
         border: "1px solid #FFFFFF",
         borderRadius: "100px",
-        opacity: "0.7",
+        opacity: "1",
         marginTop: "25px"
     },
     price: {

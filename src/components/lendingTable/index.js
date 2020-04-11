@@ -1,6 +1,7 @@
 import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
+import Button from "@material-ui/core/Button";
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -8,15 +9,22 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
-import dai from '../../assets/images/dai.png';
-import usdc from '../../assets/images/usdc.png';
-import eth from '../../assets/images/eth.png';
-import wbtc from '../../assets/images/wbtc.png';
+import dai from "../../assets/images/DAI.svg";
+import usdc from "../../assets/images/USDC.svg";
+// import eth from "../../assets/images/WETH.svg";
+import wbtc from "../../assets/images/WBTC.svg";
+// import usdx from "../../assets/images/USDx.svg";
+// import imbtc from "../../assets/images/imBTC.svg";
+import usdt from "../../assets/images/USDT.svg";
+// import hbtc from "../../assets/images/HBTC.svg";
+import pax from "../../assets/images/pax.png";
+// import tusd from "../../assets/images/tusd.png";
+import styles from './styles';
 
-const StyledTableCell = withStyles((theme) => ({
+const LendingTableCell = withStyles((theme) => ({
   head: {
     backgroundColor:'#202123',
-    color: theme.palette.common.white,
+    color: '#a7a7a7',
     opacity:'1',
     fontSize:'12px',
     lineHeight:'1px',
@@ -36,22 +44,23 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
   return { name,unit,image, wallet, balance, apr, collateral };
 }
 
-const rows = [
-  createData('Ether','ETH',eth, 159, 6.0, '24%', 4.0),
-  createData('Maker DAI','DAI',dai, 237, 9.0, '24%', 4.3),
-  createData('USD Coin', 'USDC',usdc,262, 16.0, '24%', 6.0),
-  createData('Wrapped Btc', 'BTC',wbtc,305, 3.7, '24%', 4.3),
+const lRows = [
+  createData('Maker DAI','DAI',dai, 0, 0, 0, 0),
+  createData('Tether','USDT',usdt, 0, 0, 0, 0),
+  createData('USD Coin', 'USDC', usdc, 0, 0, 0, 0),
+  createData('Wrapped BTC', 'BTC', wbtc, 0, 0, 0, 0),
+  createData('Paxos','PAX', pax, 0, 0, 0, 0),
 ];
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
+// const useStyles = makeStyles({
+//   table: {
+//     minWidth: 700,
+//   },
+// });
 
 export default function CustomizedTables() {
-  const classes = useStyles();
-  const columns = [
+  const classes = styles();
+  const lColumns = [
     { id: '1', label: 'Asset', minWidth: 200,  },
     { id: '2', label: 'Wallet Balance', minWidth: 120, align: 'center', },
     { id: '3', label: 'Balance', minWidth: 100, align: 'center', },
@@ -64,7 +73,7 @@ export default function CustomizedTables() {
     },
     {
       id: '5',
-      label: 'collateral',
+      label: 'Collateral',
       minWidth: 100,
       align: 'center',
       // format: value => value.toFixed(2),
@@ -79,73 +88,73 @@ export default function CustomizedTables() {
   ];
 
   return (
-    <Grid className="tableCurrent">
-      <Grid container className="bg_title">
+    <Grid className={classes.tableLending}>
+      <Grid container className={classes.bg_title}>
         <Grid item md={6}>
-            <Grid className="table_name">
+            <Grid className={classes.table_name}>
              Current Markets
             </Grid>
         </Grid>
-        <Grid item md={6} className="add">
-          <Grid className="addAsset">
+        <Grid item md={6} className={classes.add}>
+          <Button className={classes.addAsset}>
           Add Asset +
-          </Grid>
+        </Button>
         </Grid>
       </Grid>
-    <TableContainer  className="table">
+    <TableContainer  className={classes.table}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
         <TableRow >
-                {columns.map((column,i) => (
-                  <StyledTableCell key={i} className={classes.row}
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                {lColumns.map((lColumn,i) => (
+                  <LendingTableCell className={classes.lRow}
+                    key={lColumn.id}
+                    align={lColumn.align}
+                    style={{ minWidth: lColumn.minWidth }}
                   >
-                    {column.label}
-                  </StyledTableCell>
+                    {lColumn.label}
+                  </LendingTableCell>
                 ))}
               </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
+          {lRows.map((lRow) => (
+            <TableRow key={lRow.name}>
+              <LendingTableCell component="th" scope="lRow">
               <Grid container>
                     <Grid item md={5}>
                         <Grid>
-                          <img className="imageSize" src={row.image} alt='dai' />
+                          <img className={classes.imageSize} src={lRow.image} alt='dai' />
                         </Grid>
                     </Grid>
                     <Grid item md={7}>
                       <Grid>
-                      {row.name}
+                      {lRow.name}
                       </Grid>
-                      <Grid className="unit">
-                        {row.unit}
+                      <Grid className={classes.unit}>
+                        {lRow.unit}
                       </Grid>
                     </Grid>
                </Grid>
-              </StyledTableCell>
-              <StyledTableCell align="center">
-               {row.wallet}
-              </StyledTableCell>
-              <StyledTableCell align="center">{row.balance}</StyledTableCell>
-              <StyledTableCell align="center">{row.apr}</StyledTableCell>
-              <StyledTableCell align="center">
+              </LendingTableCell>
+              <LendingTableCell align="center">
+               {lRow.wallet}
+              </LendingTableCell>
+              <LendingTableCell align="center">{lRow.balance}</LendingTableCell>
+              <LendingTableCell align="center">{lRow.apr}</LendingTableCell>
+              <LendingTableCell align="center">
                     <Switch
                      // checked={state.checkedB}
                      // onChange={handleChange}
                       name="checkedB"
                       color="primary"
-                    /></StyledTableCell>
-              <StyledTableCell align="center">
+                    /></LendingTableCell>
+              <LendingTableCell align="center">
               <Grid className='lastest' container>
                   <Grid item md={6} xs container
                     direction="row"
                     justify="flex-end"
                     alignItems="center">
-                      {/* <Grid className="btnActive">
+                      {/* <Grid className={classesbtnActive">
                         Active
                       </Grid> */}
                   </Grid>
@@ -153,12 +162,12 @@ export default function CustomizedTables() {
                     direction="row"
                     justify="center"
                     alignItems="center">
-                      <Grid className="btnActive">
+                    <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary.dark">
                         Activate
-                      </Grid>
+                    </Button>
                   </Grid>
                 </Grid>
-              </StyledTableCell>
+              </LendingTableCell>
             </TableRow>
           ))}
         </TableBody>

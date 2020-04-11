@@ -1,12 +1,64 @@
 import React, {useEffect} from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '../../components/appBar';
 import SideBar from '../../components/sidebar';
-const Home  = (props) => {
+import { Route } from "react-router-dom";
+
+import Dashboard from '../../pages/dashboard';
+import Lending from '../../pages/lending';
+import Borrowing from '../../pages/borrowing';
+import Markets from '../../pages/markets';
+import History from '../../pages/history';
+import Liquidate from '../../pages/liquidate';
+
+
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    margin: '10px 10px 10px 10px',
+    display: 'flex',
+  },
+  content: {
+    marginTop:'100px',
+    marginLeft:'125px',
+    marginRight:'100px',
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    '@media (max-width: 1380px)': {
+      marginLeft:'50px!important',
+      marginRight:'5px!important',
+    }
+  },
+}));
+
+
+const Home  = () => {
   useEffect(() => {
-    document.title = 'Home'
+    document.title = 'Home';
   });
+
+  const classes = useStyles();
+
   return (
-    <div>
-      <SideBar></SideBar>
+    <div className={classes.root}>
+        <CssBaseline />
+          <Route exact path="/" component={AppBar}/>
+          <Route exact path="/lending" component={AppBar}/>
+          <Route exact path="/borrowing" component={AppBar} />
+          <Route exact path="/markets" component={AppBar} />
+          <Route exact path="/history" component={AppBar} />
+          <Route exact path="/liquidate" component={AppBar} />
+        <SideBar></SideBar>
+          <main className={classes.content}>
+            <Route exact path="/" component={Dashboard}/>
+            <Route path="/lending" component={Lending}/>
+            <Route path="/borrowing" component={Borrowing} />
+            <Route path="/markets" component={Markets} />
+            <Route path="/history" component={History} />
+            <Route path="/liquidate" component={Liquidate} />
+
+          </main>
     </div>
   );
 }

@@ -16,10 +16,8 @@
   }
 
   .header {
-    max-width: 1260px;
-    border-radius: 6px;
+    border-radius: 0px;
     margin: 0 auto;
-    padding-bottom: 10px;
     display: flex;
     justify-content: space-between;
 
@@ -28,8 +26,8 @@
         background-color: #202123;
         flex-grow: 1;
         flex-basis: 0;
-        border-radius: 4px;
-        margin-right: 10px;
+        border-radius: 0px;
+        margin-right: 24px;
 
 
         .item-title {
@@ -71,7 +69,6 @@
 
 
   .h3-wrap {
-    max-width: 1260px;
     margin: 0 auto;
 
     h3 {
@@ -82,9 +79,8 @@
   }
 
   .total-wrap {
-    max-width: 1260px;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 30px;
     display: flex;
 
     h4 {
@@ -108,8 +104,8 @@
       flex-grow: 1;
       flex-basis: 0;
       background: #202123;
-      border-radius: 4px;
-      margin-right: 10px;
+      border-radius: 0px;
+      margin-right: 20px;
     }
 
     .total-wrap-borrow {
@@ -119,12 +115,11 @@
   }
 
   .all-markets {
-    max-width: 1260px;
     margin: 0 auto;
     // background: paleturquoise;
     background: #202123;
-    border-radius: 4px;
-    margin-top: 20px;
+    border-radius: 0px;
+    margin-top: 30px;
 
     .body-wrap {
       width: 100%;

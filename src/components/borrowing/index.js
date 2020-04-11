@@ -1,49 +1,37 @@
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
-import BorrowingTable from '../borrowingTable'
-export default function PermanentDrawerLeft() {
+import BorrowingTable from '../borrowingTable';
+import styles from './styles';
 
+export default function PermanentDrawerLeft() {
+  const classes = styles();
   return (
-   <div className="borrowing">
+   <div className={classes.borrowing}>
        <Grid container spacing={3}>
-        <Grid className="box" item xs>
-          <Grid className="info_box">
-              <Grid className="title">Aggregated USD Value</Grid>
-              <Divider className="divider"  />
-              <Grid className="valuable">$0.00</Grid>
+        <Grid className={classes.box} item xs>
+          <Grid className={classes.info_box}>
+              <Grid className={classes.title}>Aggregated USD Value</Grid>
+              <Divider className={classes.divider}  />
+              <Grid className={classes.valuable}>$0.00</Grid>
           </Grid>
         </Grid>
-        <Grid className="box" item xs>
-          <Grid className="info_box">
-              <Grid className="title">Aggregated USD Value</Grid>
-              <Divider className="divider"  />
-              <Grid className="valuable">$0.00</Grid>
+        <Grid className={classes.box} item xs>
+          <Grid className={classes.info_box}>
+              <Grid className={classes.title}>Interest Paid</Grid>
+              <Divider className={classes.divider}  />
+              <Grid className={classes.valuable}>$0.00</Grid>
           </Grid>
         </Grid>
-        <Grid className="box" item xs>
-          <Grid className="info_box">
-            <Grid className="title">Aggregated USD Value</Grid>
-            <Divider className="divider"  />
-            <Grid className="valuable">$0.00</Grid>
+        <Grid className={classes.box} item xs>
+          <Grid className={classes.info_box}>
+            <Grid className={classes.title}>Average Interest APR</Grid>
+            <Divider className={classes.divider}  />
+            <Grid className={classes.valuable}>0.00%</Grid>
           </Grid>
         </Grid>
       </Grid>
-      <Grid className="tableCurrent">
-        <Grid container className="bg_title">
-          <Grid item md={6}>
-              <Grid className="table_name">
-               Current Markets
-              </Grid>
-          </Grid>
-          <Grid item md={6} className="add">
-            <Grid className="addAsset">
-            Add Asset +
-            </Grid>
-          </Grid>
-        </Grid>
-        <BorrowingTable></BorrowingTable>
-      </Grid>
+     <BorrowingTable></BorrowingTable>
    </div>
   );
 }
