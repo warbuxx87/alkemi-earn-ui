@@ -92,7 +92,6 @@ export default function BorrowTables() {
               <TableRow>
                 {columns.map((column, i) => (
                   <StyledTableCell
-                    key={i}
                     className={ column ? column.className : classes.row}
                     key={column.id}
                     align={column.align}

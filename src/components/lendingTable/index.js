@@ -11,14 +11,14 @@ import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import dai from "../../assets/images/DAI.svg";
 import usdc from "../../assets/images/USDC.svg";
-import eth from "../../assets/images/WETH.svg";
+// import eth from "../../assets/images/WETH.svg";
 import wbtc from "../../assets/images/WBTC.svg";
-import usdx from "../../assets/images/USDx.svg";
-import imbtc from "../../assets/images/imBTC.svg";
+// import usdx from "../../assets/images/USDx.svg";
+// import imbtc from "../../assets/images/imBTC.svg";
 import usdt from "../../assets/images/USDT.svg";
-import hbtc from "../../assets/images/HBTC.svg";
+// import hbtc from "../../assets/images/HBTC.svg";
 import pax from "../../assets/images/pax.png";
-import tusd from "../../assets/images/tusd.png";
+// import tusd from "../../assets/images/tusd.png";
 import styles from './styles';
 
 const LendingTableCell = withStyles((theme) => ({
@@ -106,7 +106,7 @@ export default function CustomizedTables() {
         <TableHead>
         <TableRow >
                 {lColumns.map((lColumn,i) => (
-                  <LendingTableCell key={i} className={classes.lRow}
+                  <LendingTableCell className={classes.lRow}
                     key={lColumn.id}
                     align={lColumn.align}
                     style={{ minWidth: lColumn.minWidth }}

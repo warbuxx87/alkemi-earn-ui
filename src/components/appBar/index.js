@@ -10,14 +10,15 @@ import Onboard from 'bnc-onboard';
 import Web3 from 'web3';
 
 let web3;
+console.log(web3);
 
 const DAPP_ID = 'b296620b-1b0b-453e-888c-c7d9952c5698'
 const FORTMATIC_KEY = '***REMOVED***'
 const PORTIS_KEY = '***REMOVED***'
 const SQUARELINK_KEY = '46cdb359da95fcc537dcf6a60b6da3'
-const INFURA_KEY = '***REMOVED***'
-const APP_URL = 'Your app url here'
-const CONTACT_EMAIL = 'hello@alkemi.ai'
+// const INFURA_KEY = '***REMOVED***'
+// const APP_URL = 'Your app url here'
+// const CONTACT_EMAIL = 'hello@alkemi.ai'
 const RPC_URL = 'https://main.infura.io/v3/<INFURA_KEY>';
 
 
@@ -65,13 +66,15 @@ const AppBar = () => {
 
 
   const [title, setTitle] = useState(null);
-  const [account,setAccount] = useState(null);
+  const [account, setAccount] = useState(null);
   const classes = styles();
 
   const  connect = async() => {
 
     await onboard.walletSelect();
 
+    var string = 'connecting';
+    setAccount(string);
     }
 
 // await onboard.walletCheck();

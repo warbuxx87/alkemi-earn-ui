@@ -1,30 +1,24 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./history.scss";
-import { Button, Input } from "antd";
+// import { Button, Input } from "antd";
 import { Pagination } from "antd";
 
 // add i18n.
 import { IntlProvider, FormattedMessage } from "react-intl";
 import en_US from "../../language/en_US";
-import fr_FR from "../../language/fr_FR";
+// import fr_FR from "../../language/fr_FR";
 import zh_CN from "../../language/zh_CN";
 
 import {
-  open_it_onetherscan,
-  to_ethscan_with_account,
-  i_want_received_token,
-  i_want_send_token,
   change_page,
   get_main_data_timer,
   format_num_K,
   get_history,
-  change_page_history,
   handle_list_click,
   format_Shortfall
 } from "./utils";
 
-import back from "../../assets/images/back.svg";
 
 class History extends React.Component {
   constructor(porps) {

@@ -108,7 +108,6 @@ export default function CustomizedTables() {
             <TableRow>
               {columns.map((column, i) => (
                 <StyledTableCell
-                  key={i}
                   className={classes.row}
                   key={column.id}
                   align={column.align}

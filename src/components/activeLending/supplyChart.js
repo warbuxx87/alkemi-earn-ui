@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Paper from '@material-ui/core/Paper';
 import {
   Chart,
   LineSeries
@@ -23,10 +22,10 @@ export default class SupplyChart extends React.PureComponent {
       data: generateData(2.5, 1000, 33),
     };
   }
-  
+
   render() {
     const { data: chartData } = this.state;
-    
+
     return (
         <Chart height={81} width={455} style={{padding:0}}
           data={chartData}

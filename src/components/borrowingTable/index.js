@@ -11,14 +11,14 @@ import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 import dai from "../../assets/images/DAI.svg";
 import usdc from "../../assets/images/USDC.svg";
-import eth from "../../assets/images/WETH.svg";
+// import eth from "../../assets/images/WETH.svg";
 import wbtc from "../../assets/images/WBTC.svg";
-import usdx from "../../assets/images/USDx.svg";
-import imbtc from "../../assets/images/imBTC.svg";
+// import usdx from "../../assets/images/USDx.svg";
+// import imbtc from "../../assets/images/imBTC.svg";
 import usdt from "../../assets/images/USDT.svg";
-import hbtc from "../../assets/images/HBTC.svg";
+// import hbtc from "../../assets/images/HBTC.svg";
 import pax from "../../assets/images/pax.png";
-import tusd from "../../assets/images/tusd.png";
+// import tusd from "../../assets/images/tusd.png";
 import styles from './styles';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -106,7 +106,7 @@ export default function CustomizedTables() {
         <TableHead>
         <TableRow >
                 {columns.map((column,i) => (
-                  <StyledTableCell key={i} className={classes.row}
+                  <StyledTableCell className={classes.row}
                     key={column.id}
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
