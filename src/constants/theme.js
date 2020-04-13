@@ -14,29 +14,10 @@ const theme = createMuiTheme({
         },
         error: red
     },
-
     root: {
-        margin: "10px 10px 10px 10px",
-        display: "flex"
+        display: "flex",
     },
-    appBar: {
-        width: `calc(100% - 400px)`,
-        marginLeft: "375px",
-        // backgroundColor:'white',
-        boxShadow: "none",
-        backgroundColor: "#000000",
-        paddingTop: "22px"
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0
-    },
-    drawerPaper: {
-        width: drawerWidth,
-        margin: "22px 0px 0px 35px",
-        background: "#202123",
-        color: "white"
-    },
+
     // necessary for content to be below app bar
     toolbar: {
         padding: "24px 19px"
