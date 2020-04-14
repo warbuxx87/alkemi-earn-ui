@@ -15,10 +15,14 @@ import Liquidate from '../../pages/liquidate';
 
 
 const useStyles = makeStyles(theme => ({
-  root: theme.root,
+  root: {
+    margin: '10px 10px 10px 10px',
+    display: 'flex',
+  },
   content: {
     marginTop:'100px',
-    marginRight: 40,
+    marginLeft:'125px',
+    marginRight:'100px',
     flexGrow: 1,
     padding: theme.spacing(3),
     '@media (max-width: 1380px)': {
@@ -39,7 +43,12 @@ const Home  = () => {
   return (
     <div className={classes.root}>
         <CssBaseline />
-          <Route path="/" component={AppBar}/>
+          <Route exact path="/" component={AppBar}/>
+          <Route exact path="/lending" component={AppBar}/>
+          <Route exact path="/borrowing" component={AppBar} />
+          <Route exact path="/markets" component={AppBar} />
+          <Route exact path="/history" component={AppBar} />
+          <Route exact path="/liquidate" component={AppBar} />
         <SideBar></SideBar>
           <main className={classes.content}>
             <Route exact path="/" component={Dashboard}/>
