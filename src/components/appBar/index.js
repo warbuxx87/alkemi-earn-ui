@@ -8,6 +8,7 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import styles from './styles';
 import Onboard from 'bnc-onboard';
 import Web3 from 'web3';
+import { useLocation } from 'react-router-dom';
 
 let web3;
 console.log(web3);
@@ -60,10 +61,10 @@ const onboard = Onboard({
 });
 
 const AppBar = () => {
-  useEffect(()=>{
+  let location = useLocation();
+  useEffect(() => {
     updateTitle();
-  },[])
-
+  }, [location]);
 
   const [title, setTitle] = useState(null);
   const [account, setAccount] = useState(null);

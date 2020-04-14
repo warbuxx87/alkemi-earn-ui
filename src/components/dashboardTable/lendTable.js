@@ -65,11 +65,11 @@ export default function LendTables() {
         history.push('/lending');
     }
     const columns = [
-        { id: "1", label: "Asset", minWidth: 100, className:"asset_width" },
-        { id: "2", label: "Balance", minWidth: 90, align: "center" },
-        { id: "3", label: "Value", minWidth: 90, align: "center" },
-        { id: "4", label: "Lending APR %", minWidth: 120, align: "center" },
-        { id: "5", label: "Earnings", minWidth: 90,  align: "center" }
+      { id: "1", label: "Asset", align: 'left' },
+      { id: "2", label: "Balance",align: "left" },
+      { id: "3", label: "Value", align: "left" },
+      { id: "4", label: "Lending APR %", align: "right" },
+      { id: "5", label: "Earnings", align: "right" }
     ];
 
   return (
@@ -94,7 +94,7 @@ export default function LendTables() {
                     className={ column ? column.className : classes.row}
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    style={{}}
                   >
                     {column.label}
                   </StyledTableCell>
@@ -117,13 +117,11 @@ export default function LendTables() {
                       </Grid>
                     </Grid>
                   </StyledTableCell>
-                  <StyledTableCell align="center">{row.asset}</StyledTableCell>
-                  <StyledTableCell align="center">{row.balance}</StyledTableCell>
-                  <StyledTableCell align="center">{row.value}</StyledTableCell>
-                  <StyledTableCell align="center">{row.apr}</StyledTableCell>
-                  <StyledTableCell align="center" class="lastest">{row.earnings}</StyledTableCell>
-
-
+                  <StyledTableCell align="left">{row.asset}</StyledTableCell>
+                  <StyledTableCell align="left">{row.balance}</StyledTableCell>
+                  <StyledTableCell align="right">{row.value}</StyledTableCell>
+                  <StyledTableCell align="right">{row.apr}</StyledTableCell>
+                  <StyledTableCell align="right" class="lastest">{row.earnings}</StyledTableCell>
                 </TableRow>
               ))}
             </TableBody>
