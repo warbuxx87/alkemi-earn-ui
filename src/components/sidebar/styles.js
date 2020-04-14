@@ -1,7 +1,7 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 339;
-const styles = makeStyles((theme) =>
+const styles = makeStyles(() =>
   createStyles({
     root: {
         margin: '10px 10px 10px 10px',
@@ -18,52 +18,22 @@ const styles = makeStyles((theme) =>
       drawer: {
         width: drawerWidth,
         flexShrink: 0,
+    
       },
-      drawerOpen: {
-        width: drawerWidth,
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      },
-      drawerClose: {
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        overflowX: 'hidden',
-        width: 70,
-        [theme.breakpoints.up('sm')]: {
-          width: 70,
-        },
-        '&:hover': {
-          width: drawerWidth,
-          transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-        },
-      },    
       drawerPaper: {
-        // width: drawerWidth,
+        width: drawerWidth,
         margin: '22px 0px 0px 35px',
         background: '#202123',
         color: 'white',
+    
       },
       // necessary for content to be below app bar
       toolbar:{
-        margin:'24px 20px',
-        overflow: 'hidden',
-        display: 'flex',
-        alignItems:'center',
-        justifyContent:'space-between',
+        padding:'24px 19px',
       },
       image:{
         width:'163px',
         height:'27px',
-      },
-      activeMenuIcon: {
-        background: '#151617'
       },
       divider:{
         backgroundColor:'#000000',
@@ -71,18 +41,13 @@ const styles = makeStyles((theme) =>
       menuList:{
         padding:'24px 0 24px 0px'
       },
-      menuItem: {
-        paddingLeft: 25,
-        paddingRight: 25,
-      },
-      activeMenuItem:{
-        paddingLeft: 25,
-        paddingRight: 25,
+      menuItem:{
         backgroundColor:'#161719',
         borderLeft:'3px solid #FFFFFF',
         opacity: 1,
       },
       menuItemText:{
+        paddingLeft:'4px',
         textTransform: 'capitalize',
         opacity: 1,
         //font: Regular 16px/21px Roboto;
