@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
   root: theme.root,
   content: {
     marginTop:'100px',
+    marginRight: 40,
     flexGrow: 1,
     padding: theme.spacing(3),
     '@media (max-width: 1380px)': {
