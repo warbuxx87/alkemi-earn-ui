@@ -62,27 +62,27 @@ export default function CustomizedTables() {
   const classes = styles();
   const lColumns = [
     { id: '1', label: 'Asset', minWidth: 200,  },
-    { id: '2', label: 'Wallet Balance', minWidth: 120, align: 'right', },
-    { id: '3', label: 'Balance', minWidth: 100, align: 'right', },
+    { id: '2', label: 'Wallet Balance', minWidth: 120, align: 'center', },
+    { id: '3', label: 'Balance', minWidth: 100, align: 'center', },
     {
       id: '4',
       label: 'APR %',
       minWidth: 100,
-      align: 'right',
+      align: 'center',
       //format: value => value.toLocaleString(),
     },
     {
       id: '5',
       label: 'Collateral',
       minWidth: 100,
-      align: 'right',
+      align: 'center',
       // format: value => value.toFixed(2),
     },
     {
       id: '6',
       label: '',
       minWidth: 280,
-      align: 'right',
+      align: 'center',
       // format: value => value.toFixed(2),
     },
   ];
@@ -119,36 +119,37 @@ export default function CustomizedTables() {
         <TableBody>
           {lRows.map((lRow) => (
             <TableRow key={lRow.name}>
-              <LendingTableCell component="th" scope="lRow" align='left'>
-                <Grid container>
-                  <Grid item md={5}>
+              <LendingTableCell component="th" scope="lRow">
+              <Grid container>
+                    <Grid item md={5}>
+                        <Grid>
+                          <img className={classes.imageSize} src={lRow.image} alt='dai' />
+                        </Grid>
+                    </Grid>
+                    <Grid item md={7}>
                       <Grid>
-                        <img className={classes.imageSize} src={lRow.image} alt='dai' />
+                      {lRow.name}
                       </Grid>
-                  </Grid>
-                  <Grid item md={7}>
-                    <Grid>
-                    {lRow.name}
+                      <Grid className={classes.unit}>
+                        {lRow.unit}
+                      </Grid>
                     </Grid>
-                    <Grid className={classes.unit}>
-                      {lRow.unit}
-                    </Grid>
-                  </Grid>
-                </Grid>
+               </Grid>
               </LendingTableCell>
-              <LendingTableCell align='right'>{lRow.wallet}</LendingTableCell>
-              <LendingTableCell align='right'>{lRow.balance}</LendingTableCell>
-              <LendingTableCell align='right'>{lRow.apr}</LendingTableCell>
-              <LendingTableCell align='right'>
-                <Switch
-                  // checked={state.checkedB}
-                  // onChange={handleChange}
-                  name="checkedB"
-                  color="primary"
-                />
+              <LendingTableCell align="center">
+               {lRow.wallet}
               </LendingTableCell>
-              <LendingTableCell align='right'>
-                <Grid className='lastest' container>
+              <LendingTableCell align="center">{lRow.balance}</LendingTableCell>
+              <LendingTableCell align="center">{lRow.apr}</LendingTableCell>
+              <LendingTableCell align="center">
+                    <Switch
+                     // checked={state.checkedB}
+                     // onChange={handleChange}
+                      name="checkedB"
+                      color="primary"
+                    /></LendingTableCell>
+              <LendingTableCell align="center">
+              <Grid className='lastest' container>
                   <Grid item md={6} xs container
                     direction="row"
                     justify="flex-end"

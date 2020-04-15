@@ -66,11 +66,11 @@ export default function BorrowTables() {
       history.push('/borrowing');
   }
   const columns = [
-    { id: "1", label: "Asset", minWidth: 100, align: "left"},
-    { id: "2", label: "Borrowed", minWidth: 90, align: "left" },
-    { id: "3", label: "Value", minWidth: 90, align: "left" },
-    { id: "4", label: "Borrow APR %", minWidth: 120, align: "right" },
-    { id: "5", label: "Earnings", minWidth: 90,  align: "right" }
+    { id: "1", label: "Asset", minWidth: 100, className:"asset_width" },
+    { id: "2", label: "Borrowed", minWidth: 90, align: "center" },
+    { id: "3", label: "Value", minWidth: 90, align: "center" },
+    { id: "4", label: "Borrow APR %", minWidth: 120, align: "center" },
+    { id: "5", label: "Earnings", minWidth: 90,  align: "center" }
   ];
 
   return (
@@ -105,7 +105,7 @@ export default function BorrowTables() {
             <TableBody>
               {rows.map(row => (
                 <TableRow key={row.symbol}>
-                  <StyledTableCell component="th" scope="row" align="left">
+                  <StyledTableCell component="th" scope="row">
                     <Grid container>
                       <Grid item md={4}>
                         <Grid>
@@ -118,11 +118,11 @@ export default function BorrowTables() {
                       </Grid>
                     </Grid>
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.asset}</StyledTableCell>
-                  <StyledTableCell align="left">{row.balance}</StyledTableCell>
-                  <StyledTableCell align="right">{row.value}</StyledTableCell>
-                  <StyledTableCell align="right">{row.apr}</StyledTableCell>
-                  <StyledTableCell align="right" class="lastest">{row.earnings}</StyledTableCell>
+                  <StyledTableCell align="center">{row.asset}</StyledTableCell>
+                  <StyledTableCell align="center">{row.balance}</StyledTableCell>
+                  <StyledTableCell align="center">{row.value}</StyledTableCell>
+                  <StyledTableCell align="center">{row.apr}</StyledTableCell>
+                  <StyledTableCell align="center" class="lastest">{row.earnings}</StyledTableCell>
 
 
                 </TableRow>
