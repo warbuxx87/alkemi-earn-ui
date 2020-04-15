@@ -1,26 +1,16 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import theme from "../../constants/theme";
 
 const drawerWidth = 339;
-const styles = makeStyles(() =>
+const styles = makeStyles((theme) =>
   createStyles({
     root: {
         margin: '10px 10px 10px 10px',
         display: 'flex',
       },
-      appBar: {
-        width: `calc(100% - 400px)`,
-        marginLeft: '375px',
-        // backgroundColor:'white',
-        boxShadow:'none',
-        backgroundColor:'#000000',
-        paddingTop:'22px',
-      },
       drawer: {
         width: drawerWidth,
         marginLeft: 35,
         flexShrink: 0,
-
       },
       drawerOpen: {
         width: drawerWidth,
@@ -46,13 +36,12 @@ const styles = makeStyles(() =>
             duration: theme.transitions.duration.enteringScreen,
           }),
         },
-      },
+      },    
       drawerPaper: {
-        width: drawerWidth,
+        // width: drawerWidth,
         margin: '22px 0px 0px 35px',
         background: '#202123',
         color: 'white',
-
       },
       // necessary for content to be below app bar
       toolbar:{
@@ -93,12 +82,12 @@ const styles = makeStyles(() =>
         fontFamily:'Regular,Roboto',
         fontSize:'10px'
       },
-
+    
       walletHeading:{
         fontSize:'16px',
         fontWeight:'500',
       },
-
+    
       wallet:{
         display:'flex',
         justifyContent:'flex-end',

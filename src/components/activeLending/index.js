@@ -67,13 +67,13 @@ export default function CustomizedTables() {
   const classes = styles();
   const columns = [
     { id: "1", label: "Asset", minWidth: 200 },
-    { id: "2", label: "Wallet Balance", minWidth: 120, align: "center" },
-    { id: "3", label: "Balance", minWidth: 100, align: "center" },
+    { id: "2", label: "Wallet Balance", minWidth: 120, align: "right" },
+    { id: "3", label: "Balance", minWidth: 100, align: "right" },
     {
       id: "4",
       label: "APR %",
       minWidth: 100,
-      align: "center",
+      align: "right",
       style: "percent",
       format: value => value.toFixed(2),
     },
@@ -81,14 +81,14 @@ export default function CustomizedTables() {
       id: "5",
       label: "Collateral",
       minWidth: 100,
-      align: "center",
+      align: "right",
       format: value => value.toFixed(2),
     },
     {
       id: "6",
       label: "",
       minWidth: 280,
-      align: "center",
+      align: "right",
       format: value => value.toFixed(2),
     }
   ];
@@ -134,25 +134,25 @@ export default function CustomizedTables() {
                     </Grid>
                   </Grid>
                 </StyledTableCell>
-                <StyledTableCell align="center">
+                <StyledTableCell align="right">
                   <Grid>
                     <Grid>{row.wallet}</Grid>
                     <Grid className={classes.unit}>{row.wallet_2}</Grid>
                   </Grid>
                 </StyledTableCell>
-                <StyledTableCell align="center">
+                <StyledTableCell align="right">
                   <Grid>
                     <Grid>{row.balance}</Grid>
                     <Grid className={classes.unit}>{row.balance_2}</Grid>
                   </Grid>
                 </StyledTableCell>
-                <StyledTableCell align="center">
+                <StyledTableCell align="right">
                   <Grid>
                     <Grid>{row.apr}</Grid>
                     <Grid className={classes.unit}>{row.apr_2}</Grid>
                   </Grid>
                 </StyledTableCell>
-                <StyledTableCell align="center">
+                <StyledTableCell align="right">
                   <Switch
                     // checked={state.checkedB}
                     // onChange={handleChange}
