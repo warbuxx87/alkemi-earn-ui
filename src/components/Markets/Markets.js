@@ -124,8 +124,8 @@ export default class Markets extends React.Component {
                 borrow_array: borrow_array,
                 array_is_ok: true
               })
-              // console.log(supply_array);
-              // console.log(borrow_array);
+              console.log(supply_array);
+              console.log(borrow_array);
             })
           }
         })

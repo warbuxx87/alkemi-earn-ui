@@ -1,6 +1,3 @@
-
-
-
 export const compare_supply = (val1, val2) => {
   return val2.grossSupplyUSD - val1.grossSupplyUSD;
 };

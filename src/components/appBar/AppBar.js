@@ -143,7 +143,7 @@ const AppBar = () => {
               <Grid item md={6} className={classes.notification}>
                   <Grid className={classes.bell}> <NotificationsNoneIcon/></Grid>
                     <Grid>
-                      <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary.dark" onClick={connect}>
+                      <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary" onClick={connect}>
                       <Grid className={classes.statusBadge}></Grid>
                       <Grid className={classes.price} >
                         {/* 0x121565...6456 */}
