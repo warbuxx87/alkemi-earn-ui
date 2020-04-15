@@ -63,7 +63,7 @@ export default function BorrowTables() {
   const classes = styles();
   let history = useHistory();
   const redirect = () => {
-      history.push('/borrowing');
+      history.push('/borrow');
   }
   const columns = [
     { id: "1", label: "Asset", minWidth: 100, className:"asset_width" },

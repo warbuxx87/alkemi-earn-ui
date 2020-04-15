@@ -62,7 +62,7 @@ export default function LendTables() {
     const classes = styles();
     let history = useHistory();
     const redirect = () => {
-        history.push('/lending');
+        history.push('/lend');
     }
     const columns = [
         { id: "1", label: "Asset", minWidth: 100, className:"asset_width" },
