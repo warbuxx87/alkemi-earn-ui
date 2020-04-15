@@ -3,20 +3,20 @@ import './markets.scss';
 import _ from 'lodash';
 
 import MyProgress from './Progress';
-import imBTC from '../../assets/images/imBTC.svg';
-import HUBTC from '../../assets/images/HBTC.svg';
-import HBTC from '../../assets/images/HBTC.svg';
-import USDx from '../../assets/images/USDx.svg';
-import UUDD from '../../assets/images/UUDD.svg';
-import USDT from '../../assets/images/USDT.svg';
-import WETH from '../../assets/images/WETH.svg';
-import UUTT from '../../assets/images/USDT.svg';
-import WBTC from '../../assets/images/WBTC.svg';
-import DAI from '../../assets/images/DAI.svg';
+import imBTC from 'assets/images/imBTC.svg';
+import HUBTC from 'assets/images/HBTC.svg';
+import HBTC from 'assets/images/HBTC.svg';
+import USDx from 'assets/images/USDx.svg';
+import UUDD from 'assets/images/UUDD.svg';
+import USDT from 'assets/images/USDT.svg';
+import WETH from 'assets/images/WETH.svg';
+import UUTT from 'assets/images/USDT.svg';
+import WBTC from 'assets/images/WBTC.svg';
+import DAI from 'assets/images/DAI.svg';
 // png
-import usdc from '../../assets/images/USDC.svg';
-import tusd from '../../assets/images/tusd.png';
-import pax from '../../assets/images/pax.png';
+import usdc from 'assets/images/USDC.svg';
+import tusd from 'assets/images/tusd.png';
+import pax from 'assets/images/pax.png';
 
 import {
   compare_supply,
@@ -28,8 +28,8 @@ import {
 
 // add i18n.
 import { IntlProvider, FormattedMessage } from 'react-intl';
-import en_US from '../../language/en_US.js';
-import zh_CN from '../../language/zh_CN';
+import en_US from 'language/en_US';
+import zh_CN from 'language/zh_CN';
 
 
 export default class Markets extends React.Component {

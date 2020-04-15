@@ -24,7 +24,7 @@ const styles = theme => ({
     }
 });
 
-const Lend = ({ classes }) => (
+const Liquidate = ({ classes }) => (
     <div className={classes.home}>
         <div className={classes.homeHeader}>
             <img src={logo} className={classes.homeLogo} alt="logo" />
@@ -36,8 +36,8 @@ const Lend = ({ classes }) => (
     </div>
 );
 
-Lend.propTypes = {
+Liquidate.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Lend);
+export default withStyles(styles)(Liquidate);
