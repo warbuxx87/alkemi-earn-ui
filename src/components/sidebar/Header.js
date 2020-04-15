@@ -10,8 +10,7 @@ const styles = theme => ({
     drawerHeader: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "flex-end",
-        padding: "0 " + theme.spacing.unit + "px",
+        padding: "0 20px",
         ...theme.mixins.toolbar
     },
     image:{

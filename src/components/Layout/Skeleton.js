@@ -22,9 +22,8 @@ const styles = theme => ({
         // backgroundColor: theme.palette.background.default,
         minHeight: "calc(100% - 56px)",
         //marginTop: 56,
-        marginTop:'100px',
-        marginLeft:'125px',
-        marginRight:'100px',
+        marginLeft: 80,
+        marginRight: 80,
         [theme.breakpoints.up("sm")]: {
             minHeight: "calc(100% - 64px)",
             marginTop: 64
@@ -54,9 +53,9 @@ const styles = theme => ({
 
 const LayoutSkeleton = ({ classes }) => (
     <div className={classes.frame}>
-        <AppBar />
         <Sidebar />
         <div className={classes.content}>
+            <AppBar />
             <LayoutContent />
         </div>
     </div>

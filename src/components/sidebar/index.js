@@ -19,7 +19,6 @@ const PermanentDrawerLeft = () => {
   };
 
   return (
-
         <Drawer
           className={classes.drawer}
           variant="permanent"
