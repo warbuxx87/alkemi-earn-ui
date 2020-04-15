@@ -1,18 +1,16 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
+const drawerWidth = 339 + 35 * 2;
+
 const styles = makeStyles(() =>
   createStyles({
-  root: {
-    margin: '10px 10px 10px 10px',
-    display: 'flex',
-  },
   appBar: {
-    width: `calc(100% - 400px)`,
-    marginLeft: '375px',
+    width: `calc(100% - ${drawerWidth}px)`,
     // backgroundColor:'white',
     boxShadow:'none',
     backgroundColor:'#000000',
     paddingTop:'22px',
+    paddingRight: 40
   },
   // necessary for content to be below app bar
   toolbar:{
