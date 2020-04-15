@@ -3,20 +3,20 @@ import { Progress } from 'antd';
 import 'antd/dist/antd.css';
 import './progress.scss';
 
-//import BTC from '../../assets/images/BTC.svg';
-import imBTC from '../../assets/images/imBTC.svg';
-import HBTC from '../../assets/images/HBTC.svg';
-import USDx from '../../assets/images/USDx.svg';
-import UUDD from '../../assets/images/UUDD.svg';
-import USDT from '../../assets/images/USDT.svg';
-import WETH from '../../assets/images/WETH.svg';
-import UUTT from '../../assets/images/USDT.svg';
-import WBTC from '../../assets/images/WBTC.svg';
-import DAI from '../../assets/images/DAI.svg';
+//import BTC from '../../../assets/images/BTC.svg';
+import imBTC from '../../../assets/images/imBTC.svg';
+import HBTC from '../../../assets/images/HBTC.svg';
+import USDx from '../../../assets/images/USDx.svg';
+import UUDD from '../../../assets/images/UUDD.svg';
+import USDT from '../../../assets/images/USDT.svg';
+import WETH from '../../../assets/images/WETH.svg';
+import UUTT from '../../../assets/images/USDT.svg';
+import WBTC from '../../../assets/images/WBTC.svg';
+import DAI from '../../../assets/images/DAI.svg';
 // png
-import usdc from '../../assets/images/usdc.png';
-import tusd from '../../assets/images/tusd.png';
-import pax from '../..//assets/images/pax.png';
+import usdc from '../../../assets/images/usdc.png';
+import tusd from '../../../assets/images/tusd.png';
+import pax from '../../../assets/images/pax.png';
 
 
 export default class MyProgress extends React.Component {
