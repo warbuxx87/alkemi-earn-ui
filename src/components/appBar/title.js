@@ -1,13 +1,19 @@
-import React from 'react';
-import Helmet from 'react-helmet';
+import React from "react";
+import PropTypes from "prop-types";
 
-const TitleComponent = ({ title }) => {
-    var defaultTitle = '⚛️ app';
-    return (
-        <Helmet>
-            <title>{title ? title : defaultTitle}</title>
-        </Helmet>
-    );
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Typography from "@material-ui/core/Typography";
+
+const AppBarTitle = ({ onClick }) => (
+    <ButtonBase onClick={onClick}>
+        <Typography variant="title" color="inherit" noWrap>
+        * Page Title *
+        </Typography>
+    </ButtonBase>
+);
+
+AppBarTitle.propTypes = {
+    onClick: PropTypes.func.isRequired
 };
 
-export default { TitleComponent };
+export default AppBarTitle;

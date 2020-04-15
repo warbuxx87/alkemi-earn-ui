@@ -1,5 +1,6 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
+
 const styles = makeStyles(() =>
   createStyles({
   root: {
@@ -105,7 +106,6 @@ const styles = makeStyles(() =>
     marginTop:'25px',
     color: 'white',
   },
-
   notification:{
     display: 'flex',
     justifyContent: 'flex-end',
