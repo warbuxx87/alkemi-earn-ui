@@ -15,18 +15,17 @@ const styles = theme => ({
         minHeight: "100%"
     },
     content: {
+        position: 'relative',
         width: "100%",
         flexGrow: 1,
         background: '#000000',
         color: '#ffffff',
         // backgroundColor: theme.palette.background.default,
         minHeight: "calc(100% - 56px)",
-        //marginTop: 56,
         marginLeft: 80,
         marginRight: 80,
         [theme.breakpoints.up("sm")]: {
             minHeight: "calc(100% - 64px)",
-            marginTop: 64
         },
     },
     contentShifted: {

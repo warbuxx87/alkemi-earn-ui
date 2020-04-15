@@ -8,16 +8,15 @@ const styles = makeStyles(() =>
     display: 'flex',
   },
   appBar: {
-    width: `calc(100% - 400px)`,
-    marginLeft: '375px',
     // backgroundColor:'white',
     boxShadow:'none',
     backgroundColor:'#000000',
     paddingTop:'22px',
+    paddingBottom: 30,
   },
   // necessary for content to be below app bar
   toolbar:{
-    padding:'24px 19px',
+    padding: 0
   },
   image:{
     width:'163px',

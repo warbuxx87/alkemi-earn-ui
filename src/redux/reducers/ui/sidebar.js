@@ -1,7 +1,7 @@
 import { OPEN_SIDEBAR, CLOSE_SIDEBAR } from "../../actions/ui";
 
 const initialState = {
-    open: false
+    open: true
 };
 
 export default (state = initialState, { type }) => {
