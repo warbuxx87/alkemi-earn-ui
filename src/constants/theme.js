@@ -1,10 +1,9 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import {red, grey, blue} from "@material-ui/core/colors";
 
 const drawerWidth = 339;
 
 const theme = createMuiTheme({
-  // @dev use https://in-your-saas.github.io/material-ui-theme-editor/ 
+  // @dev use https://in-your-saas.github.io/material-ui-theme-editor/
   palette: {
     common: { "black": "#000", "white": "rgba(255, 255, 255, 1)" },
     background: {
