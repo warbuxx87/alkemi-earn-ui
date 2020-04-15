@@ -20,8 +20,8 @@ import pax from '../../../assets/images/pax.png';
 
 
 export default class MyProgress extends React.Component {
-    constructor(porps) {
-        super(porps);
+    constructor(props) {
+        super(props);
 
         this.state = {
             token: {

@@ -44,7 +44,7 @@ export default function SimpleModal() {
 
   return (
     <div>
-    <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary.dark" onClick={handleOpen}>
+    <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary" onClick={handleOpen}>
       Withdraw
     </Button>
 

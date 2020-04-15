@@ -162,7 +162,7 @@ export default function CustomizedTables() {
                     direction="row"
                     justify="center"
                     alignItems="center">
-                      <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary.dark">
+                      <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary">
                         Activate
                       </Button>
                   </Grid>

@@ -14,8 +14,6 @@ import Layout from "./containers/Layout/Layout";
 
 import { hot } from 'react-hot-loader/root';
 
-
-
 class App extends Component {
     render() {
         return (

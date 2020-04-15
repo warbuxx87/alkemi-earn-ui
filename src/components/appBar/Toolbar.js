@@ -77,7 +77,7 @@ const AppBarToolbar = ({ width, shifted }) => (
             <Grid item md={6} className={classes.notification}>
                 <Grid className={classes.bell}> <NotificationsNoneIcon/></Grid>
                   <Grid>
-                    <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary.dark" >
+                    <Button type="button" className={classes.btnActiveOutline} variant="outlined" color="secondary" >
                     <Grid className={classes.statusBadge}></Grid>
                     <Grid className={classes.connect} >
                       0x121565...6456
