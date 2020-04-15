@@ -14,6 +14,7 @@
     "@rimble/network-indicator": "^1.1.4",
     "axios": "^0.19.2",
     "bnc-onboard": "^1.6.0",
+    "clsx": "^1.1.0",
     "connected-react-router": "^6.8.0",
     "eslint-plugin-flowtype": "^4.7.0",
     "lodash": "^4.17.15",
