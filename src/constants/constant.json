@@ -19,5 +19,9 @@
         "USDx": "USDX",
         "DF": "DF",
         "WETH": "WETH"
-    }
+    },
+    "decimal_precision": 2,
+    "gas_limit_coefficient": 1.3,
+    "collateral_rate": "1250000000000000000",
+    "originationFee": "500000000000000"
 }

@@ -31,6 +31,7 @@
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.1.3",
+    "reselect": "^4.0.0",
     "rimble-ui": "^0.9.0",
     "slick-carousel": "^1.8.1",
     "solidoc": "^1.0.5",
@@ -45,7 +46,16 @@
     "reactide-server": "webpack-dev-server --config reactide.config.js --mode development --hot"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "paths": [
+            "src"
+          ]
+        }
+      }
+    }
   },
   "browserslist": [
     ">0.2%",

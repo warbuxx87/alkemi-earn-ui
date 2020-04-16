@@ -27,10 +27,6 @@ const PermanentDrawerLeft = () => {
   };
   const [open, setOpen] = React.useState(true);
 
-  const toggleDrawerStyle = () => {
-    setOpen(!open);
-  };
-
   return (
         <Drawer
           variant="permanent"
@@ -48,8 +44,8 @@ const PermanentDrawerLeft = () => {
         >
           <div className={classes.toolbar}>
              <img className={classes.image} src={logo} alt={'Alkemi Logo'} />
-             <IconButton 
-                aria-label="menu" 
+             <IconButton
+                aria-label="menu"
                 color="secondary"
                 onClick={toggleDrawerStyle}
                 className={clsx({
