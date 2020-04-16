@@ -59,16 +59,16 @@ const History = () => {
                 <TableCell className="px-0 capitalize" align="left">
                   {item.address}
                 </TableCell>
-                <TableCell className="px-0 capitalize">
+                <TableCell className="px-0 capitalize" align="left">
                   {item.symbol}
                 </TableCell>
-                <TableCell className="px-0 capitalize">
+                <TableCell className="px-0 capitalize" align="left">
                   {item.amount}
                 </TableCell>
-                <TableCell className="px-0">
+                <TableCell className="px-0 capitalize" align="left">
                   {item.value}
                 </TableCell>
-                <TableCell className="px-0">
+                <TableCell className="px-0 capitalize" align="left">
                   <IconButton>
                     <Button color="primary" variant="outlined" onClick={() => {
                         open_it_onetherscan(
