@@ -1,30 +1,44 @@
 import React from "react";
 import PropTypes from "prop-types";
+import clsx from 'clsx';
 
 import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import MenuIcon from '@material-ui/icons/Menu';
 import logo from "assets/images/alkemi.png";
 
 const styles = theme => ({
     drawerHeader: {
         display: "flex",
         alignItems: "center",
-        padding: "0 20px",
-        ...theme.mixins.toolbar
+        ...theme.mixins.toolbar,
+        justifyContent: "space-between",
+        width: 'inherit',
+        overflow: 'hidden',
+        marginLeft: 20,
+        marginRight: 20
+
     },
     image:{
       width:"163px",
       height:"27px",
+    },
+    menu: {
+        width: 35,
+        height: 35, 
+        padding: 0
+    },
+    activeMenu: {
+        backgroundColor: '#151617'
     }
 });
 
-const SidebarHeader = ({ classes, onClick }) => {
+const SidebarHeader = ({ classes, open, onOpen, onClose }) => {
     return (
         <div className={classes.drawerHeader}>
             <img className={classes.image} src={logo} alt={"Alkemi Logo"} />
-            <IconButton onClick={onClick}>
-                <ChevronLeftIcon color='secondary'/>
+            <IconButton onClick={open ? onClose : onOpen} className={clsx(classes.menu, { [classes.activeMenu]: open })}>
+                <MenuIcon fontSize="small" />
             </IconButton>
         </div>
     );
@@ -33,7 +47,8 @@ const SidebarHeader = ({ classes, onClick }) => {
 SidebarHeader.propTypes = {
     classes: PropTypes.object.isRequired,
     selected: PropTypes.bool,
-    onClick: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired,
+    onOpen: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SidebarHeader);

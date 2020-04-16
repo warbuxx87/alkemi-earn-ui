@@ -25,7 +25,6 @@ const styles = theme => ({
       flexShrink: 0,
     },
     drawerInner: {
-      marginRight: 20,
       overflowX: 'hidden'
     },
     drawerOpen: {
