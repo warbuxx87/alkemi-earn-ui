@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import clsx from 'clsx';
 
 import { withStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -7,14 +8,18 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 const styles = theme => ({
-    iconSelected: {
-        color: theme.palette.primary.main
+    item: {
+        paddingLeft: 23,
+        paddingRight: 23,
+    },
+    selected: {  
+        backgroundColor: theme.palette.common.black
     }
 });
 
 const ListItem5 = ({ classes, icon, text, onClick, selected, ...props }) => (
-    <ListItem button onClick={onClick} {...props}>
-        <ListItemIcon className={selected ? classes.iconSelected : undefined}>
+    <ListItem button onClick={onClick} {...props} className={clsx(classes.item, {[classes.selected] : selected})}>
+        <ListItemIcon>
             {icon}
         </ListItemIcon>
         <ListItemText primary={text} />

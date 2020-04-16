@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { compose } from "redux";
 import clsx from 'clsx';
 
+import Divider from '@material-ui/core/Divider';
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import withWidth from "@material-ui/core/withWidth";
@@ -25,7 +26,6 @@ const styles = theme => ({
       flexShrink: 0,
     },
     drawerInner: {
-      marginRight: 20,
       overflowX: 'hidden'
     },
     drawerOpen: {
@@ -59,7 +59,9 @@ const styles = theme => ({
       background: '#202123',
       color: 'white',
     },
-
+    divider:{
+      backgroundColor: theme.palette.common.black,
+    },
 });
 
 const Sidebar = ({ classes, width, variant, open }) => {
@@ -80,6 +82,7 @@ const Sidebar = ({ classes, width, variant, open }) => {
         >
             <div className={classes.drawerInner}>
                 <SidebarHeader />
+                <Divider className={classes.divider}  />
                 <List className={classes.list}>
                     <SidebarDashboardItem />
                     <SidebarLendItem />
@@ -88,6 +91,7 @@ const Sidebar = ({ classes, width, variant, open }) => {
                     <SidebarHistoryItem />
                     <SidebarLiquidateItem />
                 </List>
+                <Divider className={classes.divider}  />
             </div>
         </Drawer>
     );
