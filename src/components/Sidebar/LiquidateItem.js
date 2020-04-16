@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import ListItem6 from "../UI/ListItem/6";
+import SvgIcon from '@material-ui/core/SvgIcon';
+import ListItem6 from "../UI/ListItem";
 
 function LiquidateIcon(props) {
   return (

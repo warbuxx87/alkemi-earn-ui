@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import SvgIcon from "@material-ui/core/SvgIcon";
 
-import ListItem2 from "../UI/ListItem/2";
+import ListItem2 from "../UI/ListItem";
 
 function LendIcon(props) {
   return (

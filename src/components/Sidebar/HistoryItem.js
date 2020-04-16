@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import ListItem5 from "../UI/ListItem/5";
+import SvgIcon from '@material-ui/core/SvgIcon';
+import ListItem5 from "../UI/ListItem";
 
 function HistoryIcon(props) {
   return (

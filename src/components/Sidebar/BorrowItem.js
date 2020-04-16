@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import ListItem3 from "../UI/ListItem/3";
+import SvgIcon from '@material-ui/core/SvgIcon';
+import ListItem3 from "../UI/ListItem";
 
 function BorrowIcon(props) {
   return (

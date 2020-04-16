@@ -7,7 +7,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import getClasses from "@material-ui/core/test-utils/getClasses";
 
-import ListItem1 from "../1";
+import ListItem1 from "..";
 import createShallow from "../../../../tests-utils/createShallow";
 
 describe("<ListItem1 />", () => {
