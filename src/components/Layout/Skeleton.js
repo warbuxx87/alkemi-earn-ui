@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
-import LayoutContent from "../../containers/Layout/Content";
-import Sidebar from "../../containers/Sidebar/Sidebar";
-import AppBar from "../../containers/AppBar/AppBar";
+import LayoutContent from "containers/Layout/Content";
+import Sidebar from "containers/Sidebar/Sidebar";
+import AppBar from "containers/AppBar/AppBar";
 
 const styles = theme => ({
     frame: {
