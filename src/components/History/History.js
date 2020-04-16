@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import tx_data from './MOCK_DATA.json';
 import {
   IconButton,
+  Button,
   Table,
   TableHead,
   TableBody,
@@ -11,6 +12,10 @@ import {
   Icon,
   TablePagination
 } from "@material-ui/core";
+
+import {
+  open_it_onetherscan,
+} from "./utils";
 
 const accountsList = tx_data;
 
@@ -32,12 +37,12 @@ const History = () => {
         <TableHead>
           <TableRow>
             <TableCell className="px-0">Date</TableCell>
-            <TableCell className="px-0">TX HASH</TableCell>
+            <TableCell className="px-0">Action</TableCell>
             <TableCell className="px-0">Address</TableCell>
             <TableCell className="px-0">Asset</TableCell>
             <TableCell className="px-0">Amount</TableCell>
             <TableCell className="px-0">Value</TableCell>
-            <TableCell className="px-0">View</TableCell>
+            <TableCell className="px-0">TX</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -49,7 +54,7 @@ const History = () => {
                   {item.date}
                 </TableCell>
                 <TableCell className="px-0 capitalize" align="left">
-                  {item.tx}
+                  {item.action}
                 </TableCell>
                 <TableCell className="px-0 capitalize" align="left">
                   {item.address}
@@ -65,7 +70,12 @@ const History = () => {
                 </TableCell>
                 <TableCell className="px-0">
                   <IconButton>
-                    <Icon color="primary">x</Icon>
+                    <Button color="primary" variant="outlined" onClick={() => {
+                        open_it_onetherscan(
+                          this,
+                          item.tx
+                        );
+                      }}>View</Button>
                   </IconButton>
                 </TableCell>
               </TableRow>
