@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-import tx_data from './MOCK_DATA.json';
+// import PropTypes from "prop-types";
+import tx_data from "./MOCK_DATA.json";
 import {
   Button,
   Table,
@@ -11,9 +11,7 @@ import {
   TablePagination
 } from "@material-ui/core";
 
-import {
-  open_it_onetherscan,
-} from "./utils";
+import { open_it_onetherscan } from "./utils";
 
 const accountsList = tx_data;
 
@@ -67,12 +65,15 @@ const History = () => {
                   {item.value}
                 </TableCell>
                 <TableCell className="px-0 capitalize" align="left">
-                    <Button color="primary" variant="outlined" onClick={() => {
-                        open_it_onetherscan(
-                          this,
-                          item.tx
-                        );
-                      }}>View</Button>
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => {
+                      open_it_onetherscan(this, item.tx);
+                    }}
+                  >
+                    View
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -99,9 +100,8 @@ const History = () => {
   );
 };
 
-
-History.propTypes = {
-    classes: PropTypes.object.isRequired
-};
+// History.propTypes = {
+//     classes: PropTypes.object.isRequired
+// };
 
 export default History;

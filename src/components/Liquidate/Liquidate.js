@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import {
   IconButton,
   Table,
@@ -10,7 +10,6 @@ import {
   Icon,
   TablePagination
 } from "@material-ui/core";
-
 
 const liquidateList = [
   {
@@ -117,9 +116,7 @@ const Liquidate = () => {
                 <TableCell className="px-0 capitalize" align="left">
                   {item.Supply}
                 </TableCell>
-                <TableCell className="px-0 capitalize">
-                  {item.Borrow}
-                </TableCell>
+                <TableCell className="px-0 capitalize">{item.Borrow}</TableCell>
                 <TableCell className="px-0 capitalize">
                   ${item.collateralRate}
                 </TableCell>
@@ -153,9 +150,8 @@ const Liquidate = () => {
   );
 };
 
-
-Liquidate.propTypes = {
-    classes: PropTypes.object.isRequired
-};
+// Liquidate.propTypes = {
+//     classes: PropTypes.object.isRequired
+// };
 
 export default Liquidate;

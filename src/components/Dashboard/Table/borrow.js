@@ -19,9 +19,7 @@ import pax from "../../../assets/images/pax.png";
 import tusd from "../../../assets/images/tusd.png";
 import styles from "./styles";
 import Button from "@material-ui/core/Button";
-import {
-    useHistory
-  } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -41,7 +39,7 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-function createData( symbol, image, asset, balance, value, apr) {
+function createData(symbol, image, asset, balance, value, apr) {
   return { symbol, image, asset, balance, value, apr };
 }
 
@@ -58,78 +56,86 @@ const rows = [
   createData("HBTC", hbtc, 0, 0, 0, 0)
 ];
 
-
 export default function BorrowTables() {
   const classes = styles();
   let history = useHistory();
   const redirect = () => {
-      history.push('/borrow');
-  }
+    history.push("/borrow");
+  };
   const columns = [
-    { id: "1", label: "Asset", minWidth: 100, align: "left"},
+    { id: "1", label: "Asset", minWidth: 100, align: "left" },
     { id: "2", label: "Borrowed", minWidth: 90, align: "left" },
     { id: "3", label: "Value", minWidth: 90, align: "left" },
     { id: "4", label: "Borrow APR %", minWidth: 120, align: "right" },
-    { id: "5", label: "Earnings", minWidth: 90,  align: "right" }
+    { id: "5", label: "Earnings", minWidth: 90, align: "right" }
   ];
 
   return (
-      <Grid >
-        <Grid container className={classes.bg_title}>
-          <Grid item md={6}>
-            <Grid className={classes.table_name}>Active Loans</Grid>
-          </Grid>
-          <Grid item md={6} className={classes.add}>
-            {/* <Grid className={classes.addAsset}>Manage</Grid> */}
-            <Button type="button" className={classes.addAsset} variant="contained" onClick={redirect}>
-            Manage
-            </Button>
-          </Grid>
+    <Grid>
+      <Grid container className={classes.bg_title}>
+        <Grid item md={6}>
+          <Grid className={classes.table_name}>Active Loans</Grid>
         </Grid>
-        <TableContainer className={classes.table}>
-          <Table className={classes.table} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column, i) => (
-                  <StyledTableCell
-                    className={ column ? column.className : classes.row}
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </StyledTableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map(row => (
-                <TableRow key={row.symbol}>
-                  <StyledTableCell component="th" scope="row" align="left">
-                    <Grid container>
-                      <Grid item md={4}>
-                        <Grid>
-                          <img className={classes.imageSize} src={row.image} alt="{row.symbol}" />
-                        </Grid>
-                      </Grid>
-                      <Grid item md={8}>
-                        <Grid>{row.symbol}</Grid>
-                        <Grid className={classes.unit}>{row.unit}</Grid>
+        <Grid item md={6} className={classes.add}>
+          {/* <Grid className={classes.addAsset}>Manage</Grid> */}
+          <Button
+            type="button"
+            className={classes.addAsset}
+            variant="contained"
+            onClick={redirect}
+          >
+            Manage
+          </Button>
+        </Grid>
+      </Grid>
+      <TableContainer className={classes.table}>
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column, i) => (
+                <StyledTableCell
+                  className={column ? column.className : classes.row}
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </StyledTableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map(row => (
+              <TableRow key={row.symbol}>
+                <StyledTableCell component="th" scope="row" align="left">
+                  <Grid container>
+                    <Grid item md={4}>
+                      <Grid>
+                        <img
+                          className={classes.imageSize}
+                          src={row.image}
+                          alt="{row.symbol}"
+                        />
                       </Grid>
                     </Grid>
-                  </StyledTableCell>
-                  <StyledTableCell align="left">{row.asset}</StyledTableCell>
-                  <StyledTableCell align="left">{row.balance}</StyledTableCell>
-                  <StyledTableCell align="right">{row.value}</StyledTableCell>
-                  <StyledTableCell align="right">{row.apr}</StyledTableCell>
-                  <StyledTableCell align="right" class="lastest">{row.earnings}</StyledTableCell>
-
-
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
+                    <Grid item md={8}>
+                      <Grid>{row.symbol}</Grid>
+                      <Grid className={classes.unit}>{row.unit}</Grid>
+                    </Grid>
+                  </Grid>
+                </StyledTableCell>
+                <StyledTableCell align="left">{row.asset}</StyledTableCell>
+                <StyledTableCell align="left">{row.balance}</StyledTableCell>
+                <StyledTableCell align="right">{row.value}</StyledTableCell>
+                <StyledTableCell align="right">{row.apr}</StyledTableCell>
+                <StyledTableCell align="right" className="lastest">
+                  {row.earnings}
+                </StyledTableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Grid>
   );
 }

@@ -11,16 +11,16 @@ import Web3 from "web3";
 import { useLocation } from "react-router-dom";
 
 let web3;
-console.log(web3);
+// console.log(web3);
 
 const DAPP_ID = "b296620b-1b0b-453e-888c-c7d9952c5698";
 const FORTMATIC_KEY = "***REMOVED***";
 const PORTIS_KEY = "***REMOVED***";
 const SQUARELINK_KEY = "***REMOVED***";
-const INFURA_KEY = "***REMOVED***"
+const INFURA_KEY = "***REMOVED***";
 // const APP_URL = "Your app url here"
 // const CONTACT_EMAIL = "hello@alkemi.ai"
-const RPC_URL = "https://main.infura.io/v3/<INFURA_KEY>";
+const RPC_URL = "https://main.infura.io/v3/" + INFURA_KEY;
 
 const walletChecks = [
   { checkName: "derivationPath" },
@@ -111,13 +111,12 @@ const AppBar = () => {
     await onboard.walletSelect();
     await onboard.walletCheck();
     const currentState = onboard.getState();
-      //  console.log(currentState.address);
-      var account =
-        currentState.address.substr(0, 4) +
-        "..." +
-        currentState.address.substr(currentState.address.length - 4, 4);
-      setAccount(account);
-
+    //  console.log(currentState.address);
+    var account =
+      currentState.address.substr(0, 4) +
+      "..." +
+      currentState.address.substr(currentState.address.length - 4, 4);
+    setAccount(account);
   };
 
   return (

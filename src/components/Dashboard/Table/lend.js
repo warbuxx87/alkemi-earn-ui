@@ -19,14 +19,12 @@ import pax from "../../../assets/images/pax.png";
 import tusd from "../../../assets/images/tusd.png";
 import styles from "./styles";
 import Button from "@material-ui/core/Button";
-import {
-    useHistory
-  } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: "#202123",
-    color: '#a7a7a7',
+    color: "#a7a7a7",
     opacity: "1",
     fontSize: "12px",
     lineHeight: "1px",
@@ -40,7 +38,7 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-function createData( symbol, image, asset, balance, value, apr) {
+function createData(symbol, image, asset, balance, value, apr) {
   return { symbol, image, asset, balance, value, apr };
 }
 
@@ -57,76 +55,86 @@ const rows = [
   createData("HBTC", hbtc, 0, 0, 0, 0)
 ];
 
-
 export default function LendTables() {
-    const classes = styles();
-    let history = useHistory();
-    const redirect = () => {
-        history.push('/lend');
-    }
-    const columns = [
-      { id: "1", label: "Asset", align: 'left' },
-      { id: "2", label: "Balance",align: "left" },
-      { id: "3", label: "Value", align: "left" },
-      { id: "4", label: "Lending APR %", align: "right" },
-      { id: "5", label: "Earnings", align: "right" }
-    ];
+  const classes = styles();
+  let history = useHistory();
+  const redirect = () => {
+    history.push("/lend");
+  };
+  const columns = [
+    { id: "1", label: "Asset", align: "left" },
+    { id: "2", label: "Balance", align: "left" },
+    { id: "3", label: "Value", align: "left" },
+    { id: "4", label: "Lending APR %", align: "right" },
+    { id: "5", label: "Earnings", align: "right" }
+  ];
 
   return (
-      <Grid >
-        <Grid container className={classes.bg_title}>
-          <Grid item md={6}>
-            <Grid className={classes.table_name}>Active Deposits</Grid>
-          </Grid>
-          <Grid item md={6} className={classes.add}>
-            {/* <Grid className={classes.addAsset}>Manage</Grid> */}
-            <Button type="button" className={classes.addAsset} variant="contained" onClick={redirect} >
-            Manage
-            </Button>
-          </Grid>
+    <Grid>
+      <Grid container className={classes.bg_title}>
+        <Grid item md={6}>
+          <Grid className={classes.table_name}>Active Deposits</Grid>
         </Grid>
-        <TableContainer className={classes.table}>
-          <Table className={classes.table} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column, i) => (
-                  <StyledTableCell
-                    className={ column ? column.className : classes.row}
-                    key={column.id}
-                    align={column.align}
-                    style={{}}
-                  >
-                    {column.label}
-                  </StyledTableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map(row => (
-                <TableRow key={row.symbol}>
-                  <StyledTableCell component="th" scope="row">
-                    <Grid container>
-                      <Grid item md={4}>
-                        <Grid>
-                          <img className={classes.imageSize} src={row.image} alt="{row.symbol}" />
-                        </Grid>
-                      </Grid>
-                      <Grid item md={8}>
-                        <Grid>{row.symbol}</Grid>
-                        <Grid className={classes.unit}>{row.unit}</Grid>
+        <Grid item md={6} className={classes.add}>
+          {/* <Grid className={classes.addAsset}>Manage</Grid> */}
+          <Button
+            type="button"
+            className={classes.addAsset}
+            variant="contained"
+            onClick={redirect}
+          >
+            Manage
+          </Button>
+        </Grid>
+      </Grid>
+      <TableContainer className={classes.table}>
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column, i) => (
+                <StyledTableCell
+                  className={column ? column.className : classes.row}
+                  key={column.id}
+                  align={column.align}
+                  style={{}}
+                >
+                  {column.label}
+                </StyledTableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map(row => (
+              <TableRow key={row.symbol}>
+                <StyledTableCell component="th" scope="row">
+                  <Grid container>
+                    <Grid item md={4}>
+                      <Grid>
+                        <img
+                          className={classes.imageSize}
+                          src={row.image}
+                          alt="{row.symbol}"
+                        />
                       </Grid>
                     </Grid>
-                  </StyledTableCell>
-                  <StyledTableCell align="left">{row.asset}</StyledTableCell>
-                  <StyledTableCell align="left">{row.balance}</StyledTableCell>
-                  <StyledTableCell align="right">{row.value}</StyledTableCell>
-                  <StyledTableCell align="right">{row.apr}</StyledTableCell>
-                  <StyledTableCell align="right" class="lastest">{row.earnings}</StyledTableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
+                    <Grid item md={8}>
+                      <Grid>{row.symbol}</Grid>
+                      <Grid className={classes.unit}>{row.unit}</Grid>
+                    </Grid>
+                  </Grid>
+                </StyledTableCell>
+                <StyledTableCell align="left">{row.asset}</StyledTableCell>
+                <StyledTableCell align="left">{row.balance}</StyledTableCell>
+                <StyledTableCell align="right">{row.value}</StyledTableCell>
+                <StyledTableCell align="right">{row.apr}</StyledTableCell>
+                <StyledTableCell align="right" className="lastest">
+                  {row.earnings}
+                </StyledTableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Grid>
   );
 }
