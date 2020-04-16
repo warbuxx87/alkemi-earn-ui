@@ -6,10 +6,10 @@ import SidebarDashboardItem from "../../components/Sidebar/DashboardItem";
 // Constants
 import { DASHBOARD } from "../../constants/routes";
 // Selectors
-import { isItemSelected } from "../../redux/selectors/ui";
+import { isDashboardSelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = state => ({
-    selected: isItemSelected(state)
+    selected: isDashboardSelected(state)
 });
 
 const mapDispatchToProps = {

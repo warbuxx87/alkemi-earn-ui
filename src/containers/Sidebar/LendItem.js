@@ -6,10 +6,10 @@ import SidebarLendItem from "../../components/Sidebar/LendItem";
 // Constants
 import { LEND } from "../../constants/routes";
 // Selectors
-import { isItemSelected } from "../../redux/selectors/ui";
+import { isLendSelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = state => ({
-    selected: isItemSelected(state)
+    selected: isLendSelected(state)
 });
 
 const mapDispatchToProps = {

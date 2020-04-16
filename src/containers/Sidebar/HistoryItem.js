@@ -6,10 +6,10 @@ import SidebarHistoryItem from "../../components/Sidebar/HistoryItem";
 // Constants
 import { HISTORY } from "../../constants/routes";
 // Selectors
-import { isItemSelected } from "../../redux/selectors/ui";
+import { isHistorySelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = state => ({
-    selected: isItemSelected(state)
+    selected: isHistorySelected(state)
 });
 
 const mapDispatchToProps = {

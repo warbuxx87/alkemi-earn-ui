@@ -6,10 +6,10 @@ import SidebarLiquidateItem from "../../components/Sidebar/LiquidateItem";
 // Constants
 import { LIQUIDATE } from "../../constants/routes";
 // Selectors
-import { isItemSelected } from "../../redux/selectors/ui";
+import { isLiquidateSelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = state => ({
-    selected: isItemSelected(state)
+    selected: isLiquidateSelected(state)
 });
 
 const mapDispatchToProps = {

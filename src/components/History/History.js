@@ -2,14 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import tx_data from './MOCK_DATA.json';
 import {
-  IconButton,
   Button,
   Table,
   TableHead,
   TableBody,
   TableRow,
   TableCell,
-  Icon,
   TablePagination
 } from "@material-ui/core";
 
@@ -69,14 +67,12 @@ const History = () => {
                   {item.value}
                 </TableCell>
                 <TableCell className="px-0 capitalize" align="left">
-                  <IconButton>
                     <Button color="primary" variant="outlined" onClick={() => {
                         open_it_onetherscan(
                           this,
                           item.tx
                         );
                       }}>View</Button>
-                  </IconButton>
                 </TableCell>
               </TableRow>
             ))}

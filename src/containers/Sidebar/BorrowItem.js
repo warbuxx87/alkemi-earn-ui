@@ -6,10 +6,10 @@ import SidebarBorrowItem from "../../components/Sidebar/BorrowItem";
 // Constants
 import { BORROW } from "../../constants/routes";
 // Selectors
-import { isItemSelected } from "../../redux/selectors/ui";
+import { isBorrowSelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = state => ({
-    selected: isItemSelected(state)
+    selected: isBorrowSelected(state)
 });
 
 const mapDispatchToProps = {

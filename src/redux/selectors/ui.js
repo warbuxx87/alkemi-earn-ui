@@ -7,22 +7,33 @@ import { DASHBOARD, LEND, BORROW, MARKETS, HISTORY, LIQUIDATE } from "../../cons
 
 // Item selection selector
 const getPathName = (state, props) => state.router.location.pathname;
-export const isItemSelected = createSelector(
-    getPathName,
-    pathname => !!matchPath(pathname, { path: DASHBOARD }) ||
 
+export const isDashboardSelected = createSelector(
     getPathName,
-    pathname => !!matchPath(pathname, { path: LEND }) ||
+    pathname => !!matchPath(pathname, { path: DASHBOARD })
+);
 
+export const isLendSelected = createSelector(
     getPathName,
-    pathname => !!matchPath(pathname, { path: BORROW }) ||
+    pathname => !!matchPath(pathname, { path: LEND })
+);
 
+export const isBorrowSelected = createSelector(
     getPathName,
-    pathname => !!matchPath(pathname, { path: MARKETS }) ||
+    pathname => !!matchPath(pathname, { path: BORROW })
+);
 
+export const isMarketsSelected = createSelector(
     getPathName,
-    pathname => !!matchPath(pathname, { path: HISTORY }) ||
+    pathname => !!matchPath(pathname, { path: MARKETS })
+);
 
+export const isHistorySelected = createSelector(
+    getPathName,
+    pathname => !!matchPath(pathname, { path: HISTORY })
+);
+
+export const isLiquidateSelected = createSelector(
     getPathName,
     pathname => !!matchPath(pathname, { path: LIQUIDATE })
 );

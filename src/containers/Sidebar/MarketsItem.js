@@ -6,10 +6,10 @@ import SidebarMarketsItem from "../../components/Sidebar/MarketsItem";
 // Constants
 import { MARKETS } from "../../constants/routes";
 // Selectors
-import { isItemSelected } from "../../redux/selectors/ui";
+import { isMarketsSelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = state => ({
-    selected: isItemSelected(state)
+    selected: isMarketsSelected(state)
 });
 
 const mapDispatchToProps = {
