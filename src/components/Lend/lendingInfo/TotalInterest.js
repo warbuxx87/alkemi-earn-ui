@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 function TotalInterest({ className, ...rest }) {
   const classes = useStyles();
   const data = {
-    value: "0.00",
+    value: (0.0).toFixed(2),
     currency: "$",
     difference: 0
   };

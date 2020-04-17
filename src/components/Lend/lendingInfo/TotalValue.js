@@ -30,14 +30,14 @@ const useStyles = makeStyles(theme => ({
 function TotalValue({ className, ...rest }) {
   const classes = useStyles();
   const data = {
-    value: "0.00",
+    value: (0.0).toFixed(2),
     currency: "$",
     difference: 0
   };
 
   return (
     <Card>
-      <CardHeader title="Aggregated USD Value" className={classes.item} />
+      <CardHeader title="Aggregated Value" className={classes.item} />
       <Divider />
       <CardContent>
         <Box
