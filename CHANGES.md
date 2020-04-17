@@ -9,12 +9,43 @@
 - Sidebar now collapsable to create more screen real-estate
 - History and Liquidate pages / API got revamped
 - Web3 Connect Integrations now working for the following wallet providers:
+
   - MetaMask
   - Portis
   - Coinbase ( Mobile Only )
   - Trust ( Mobile Only )
   - Fortmatic
   - Squarelink
+
+* Fixed alignment/spacing of appbar, content, sidebar
+* Updated render one appbar for all router
+* Fixed dashboard/lending table alignment
+* Updated lending Component Active Lending Reserves table alignment
+* Updated Markets Page
+* Fixed registerServiceWorker
+* Update README add Contributing Guidelines
+* Added feature toggle side bar
+* Updated imports across app to use absolute path
+* Fixed theme import error
+* Updated sidebar styling
+* Fixed app bar
+* Updated MUI Theme palette
+* Removed unnecessary color imports
+* Fixed bad color secondary.dark
+* Updated revamp of history page using MUI
+* Removed unnecessary theme settings
+* Updated to history page, add link to etherscan
+* Fixed table cell alignments on history page
+* Fixed Selected Icon highlighting
+* Added Custom Material SVG icons for sidebar items
+* Fixed Squarelink
+* Fixed css import for build
+* Added menu icon to toggle side bar
+* Fixed sidebar item styling
+* Fixed add side bar divider
+* Updated theme into a themes folder which related styling files. Updated theme js to reflect changes. Made layout edits to lending page and broke down components into cards and grid structure. Other minor styling issues corrected.
+* Fixed values to values instead of strings with 2 place decimal formatting.
+* Updated Changelog
 
 ---
 
