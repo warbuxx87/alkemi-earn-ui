@@ -1,11 +1,11 @@
-image:                                node:10
+image: node:10
 
 pipelines:
   default:
     - step:
         caches:
           - node
-        name:                          "Build and Test"
+        name: "Build and Test"
         script:
           - echo "Build, Test and Upload"
           - apt-get update
@@ -16,9 +16,10 @@ pipelines:
   branches:
     master:
       - step:
+          size: 2x # or configure at step level
           caches:
-          - node
-          name:                        "Build, Test and Upload"
+            - node
+          name: "Build, Test and Upload"
           script:
             # PACKAGE INSTALLATIONS
             - echo "Build, Test and Upload"
@@ -30,15 +31,15 @@ pipelines:
             - declare -x VERSION=$(jq -r '.version' package.json)
             - echo "$VERSION"
             - zip -r application.zip .
-            - pipe:                    atlassian/aws-elasticbeanstalk-deploy:0.5.5
+            - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
               variables:
-                AWS_ACCESS_KEY_ID:     $AWS_ACCESS_KEY_ID
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                AWS_DEFAULT_REGION:    $AWS_DEFAULT_REGION
-                APPLICATION_NAME:      '$APPLICATION_NAME'
-                COMMAND:               'upload-only'
-                ZIP_FILE:              'application.zip'
-                VERSION_LABEL:         '$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER'
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                APPLICATION_NAME: "$APPLICATION_NAME"
+                COMMAND: "upload-only"
+                ZIP_FILE: "application.zip"
+                VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
       - step:
           name: "README to Confluence"
           script:
@@ -48,39 +49,39 @@ pipelines:
             - tar -xzvf markdown2confluence_3.0.2_linux_x86_64.tar.gz -C /usr/local/bin/ markdown2confluence
             - markdown2confluence -u $CONFLUENCE_USER -p $CONFLUENCE_PASSWORD -e $CONFLUENCE_ENDPOINT -s 'ARCH' --parent 'Repositories' -t 'alkemi-debt-ui' -d README.md
       - step:
-          name:                        "Deploy to Staging"
-          deployment:                  staging
+          name: "Deploy to Staging"
+          deployment: staging
           script:
-          - echo "$VERSION Deployment to Staging!"
-          - apt-get update
-          - apt-get install jq -y
-          - declare -x VERSION=$(jq -r '.version' package.json)
-          - pipe:                      atlassian/aws-elasticbeanstalk-deploy:0.5.5
-            variables:
-              AWS_ACCESS_KEY_ID:       $AWS_ACCESS_KEY_ID
-              AWS_SECRET_ACCESS_KEY:   $AWS_SECRET_ACCESS_KEY
-              AWS_DEFAULT_REGION:      $AWS_DEFAULT_REGION
-              APPLICATION_NAME:        '$APPLICATION_NAME'
-              COMMAND:                 'deploy-only'
-              VERSION_LABEL:           '$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER'
-              ENVIRONMENT_NAME:        '$APPLICATION_NAME-dev'
-              WAIT:                    'true'
+            - echo "$VERSION Deployment to Staging!"
+            - apt-get update
+            - apt-get install jq -y
+            - declare -x VERSION=$(jq -r '.version' package.json)
+            - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                APPLICATION_NAME: "$APPLICATION_NAME"
+                COMMAND: "deploy-only"
+                VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
+                ENVIRONMENT_NAME: "$APPLICATION_NAME-dev"
+                WAIT: "true"
       - step:
-          name:                        "Deploy to Production"
-          deployment:                  production
-          trigger:                     manual
+          name: "Deploy to Production"
+          deployment: production
+          trigger: manual
           script:
             - echo "Deployment to Production!"
             - apt-get update
             - apt-get install jq -y
             - declare -x VERSION=$(jq -r '.version' package.json)
-            - pipe:                    atlassian/aws-elasticbeanstalk-deploy:0.5.5
+            - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
               variables:
-                AWS_ACCESS_KEY_ID:     $AWS_ACCESS_KEY_ID
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                AWS_DEFAULT_REGION:    $AWS_DEFAULT_REGION
-                APPLICATION_NAME:      '$APPLICATION_NAME'
-                COMMAND:               'deploy-only'
-                VERSION_LABEL:         '$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER'
-                ENVIRONMENT_NAME:      '$APPLICATION_NAME-production'
-                WAIT:                  'true'
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                APPLICATION_NAME: "$APPLICATION_NAME"
+                COMMAND: "deploy-only"
+                VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
+                ENVIRONMENT_NAME: "$APPLICATION_NAME-production"
+                WAIT: "true"
