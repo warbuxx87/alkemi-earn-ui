@@ -18,14 +18,14 @@ const styles = makeStyles((theme) =>
       drawer: {
         width: drawerWidth,
         flexShrink: 0,
-    
+
       },
       drawerPaper: {
         width: drawerWidth,
         margin: '22px 0px 0px 35px',
         background: '#202123',
         color: 'white',
-    
+
       },
       // necessary for content to be below app bar
       toolbar:{
@@ -54,12 +54,12 @@ const styles = makeStyles((theme) =>
         fontFamily:'Regular,Roboto',
         fontSize:'10px'
       },
-    
+
       walletHeading:{
         fontSize:'16px',
         fontWeight:'500',
       },
-    
+
       wallet:{
         display:'flex',
         justifyContent:'flex-end',
@@ -139,7 +139,7 @@ const styles = makeStyles((theme) =>
           marginLeft:'50px!important',
           marginRight:'25px!important',
         },
-        
+
       },
   })
 );

@@ -2,11 +2,11 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router";
 
 import LayoutSkeleton from "../../components/Layout/Skeleton";
-import { HOME } from "../../constants/routes";
+import { DASHBOARD } from "../../constants/routes";
 
 const Layout = () => (
     <Switch>
-        <Route path="/" exact component={() => <Redirect to={HOME} />} />
+        <Route path="/" exact component={() => <Redirect to={DASHBOARD} />} />
         <Route component={LayoutSkeleton} />
     </Switch>
 );

@@ -1,15 +1,16 @@
 import { connect } from "react-redux";
 
-import { closeSidebar } from "../../redux/actions/ui";
+import { closeSidebar, openSidebar } from "redux/actions/ui";
 
-import Sidebar from "../../components/Sidebar/Sidebar";
+import Sidebar from "components/Sidebar/Sidebar";
 
 const mapStateToProps = (state, ownProps) => ({
-    open: state.ui.sidebar.open
+  open: state.ui.sidebar.open
 });
 
 const mapDispatchToProps = {
-    onClose: closeSidebar
+  onOpen: openSidebar,
+  onClose: closeSidebar
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
