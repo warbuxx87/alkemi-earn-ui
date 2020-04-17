@@ -1,9 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import typography from './typography';
-import overrides from './overrides';
-import { softShadows, strongShadows } from './shadows';
-
-
+import typography from "./typography";
+import overrides from "./overrides";
+// import { softShadows, strongShadows } from './shadows';
 
 const darkTheme = createMuiTheme({
   // @dev use https://in-your-saas.github.io/material-ui-theme-editor/
@@ -11,7 +9,11 @@ const darkTheme = createMuiTheme({
   overrides,
   palette: {
     type: "dark",
-    common: { "black": "#000", "white": "rgba(255, 255, 255, 1)", "darkGrey": "#151617", },
+    common: {
+      black: "#000",
+      white: "rgba(255, 255, 255, 1)",
+      darkGrey: "#151617"
+    },
     background: {
       paper: "#202123",
       dark: "#151617",
@@ -40,11 +42,9 @@ const darkTheme = createMuiTheme({
       success: "#FF0000",
       disabled: "rgba(255, 255, 255, 1)",
       hint: "rgba(184, 233, 134, 1)"
-    },
+    }
   }
 });
-
-
 
 // const lightTheme = createMuiTheme({
 //   // @dev use https://in-your-saas.github.io/material-ui-theme-editor/
