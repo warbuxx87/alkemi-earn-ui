@@ -1,31 +1,29 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import createStore from "./redux/store";
-import { history } from "./redux/enhancers/middlewares/router";
+import createStore from "redux/store";
+import { history } from "redux/enhancers/middlewares/router";
 import { ConnectedRouter } from "connected-react-router";
 
-
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import './assets/scss/style.scss';
-import theme from "./Themes/theme";
+import "assets/scss/style.scss";
+import theme from "themes/theme";
 
+import Layout from "containers/Layout/Layout";
 
-import Layout from "./containers/Layout/Layout";
-
-import { hot } from 'react-hot-loader/root';
+import { hot } from "react-hot-loader/root";
 
 class App extends Component {
-    render() {
-        return (
-            <Provider store={createStore()}>
-                <ConnectedRouter history={history}>
-                    <MuiThemeProvider theme={theme}>
-                        <Layout />
-                    </MuiThemeProvider>
-                </ConnectedRouter>
-            </Provider>
-        );
-    }
+  render() {
+    return (
+      <Provider store={createStore()}>
+        <ConnectedRouter history={history}>
+          <MuiThemeProvider theme={theme}>
+            <Layout />
+          </MuiThemeProvider>
+        </ConnectedRouter>
+      </Provider>
+    );
+  }
 }
 
-export default hot(App)
+export default hot(App);
