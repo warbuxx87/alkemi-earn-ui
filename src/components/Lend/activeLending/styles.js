@@ -4,7 +4,6 @@ const styles = makeStyles((theme) =>
   createStyles({
     tableALending:{
         color: 'white',
-        paddingTop: '30px',
     },
     bg_title:{
         backgroundColor: '#202123',

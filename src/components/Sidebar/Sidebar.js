@@ -52,12 +52,13 @@ const styles = theme => ({
           duration: theme.transitions.duration.enteringScreen,
         }),
       },
-    },    
+    },
     drawerPaper: {
       // width: drawerWidth,
       margin: '22px 0px 0px 35px',
       background: '#202123',
       color: 'white',
+      border: 'none',
     },
     divider:{
       backgroundColor: theme.palette.common.black,
