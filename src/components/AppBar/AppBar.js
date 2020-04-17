@@ -11,7 +11,7 @@ import Web3 from "web3";
 import { useLocation } from "react-router-dom";
 
 let web3;
-// console.log(web3);
+console.log(web3);
 
 const DAPP_ID = "b296620b-1b0b-453e-888c-c7d9952c5698";
 const FORTMATIC_KEY = "***REMOVED***";
