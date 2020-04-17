@@ -16,7 +16,7 @@ import { open_it_onetherscan } from "./utils";
 const accountsList = tx_data;
 
 const History = () => {
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(8);
   const [page, setPage] = React.useState(0);
 
   const handleChangePage = (event, newPage) => {
@@ -82,7 +82,7 @@ const History = () => {
 
       <TablePagination
         className="px-4"
-        rowsPerPageOptions={[5, 10, 25, 50, 100]}
+        rowsPerPageOptions={[8, 25, 50, 100]}
         component="div"
         count={accountsList.length}
         rowsPerPage={rowsPerPage}

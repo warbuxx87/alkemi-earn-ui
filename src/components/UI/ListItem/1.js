@@ -12,8 +12,8 @@ const styles = theme => ({
         paddingLeft: 23,
         paddingRight: 23,
     },
-    selected: {  
-        backgroundColor: theme.palette.common.black
+    selected: {
+        backgroundColor: theme.palette.common.darkGrey
     }
 });
 

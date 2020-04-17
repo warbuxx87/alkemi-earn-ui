@@ -7,7 +7,7 @@ import { ConnectedRouter } from "connected-react-router";
 
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import './assets/scss/style.scss';
-import theme from "./constants/theme";
+import theme from "./Themes/theme";
 
 
 import Layout from "./containers/Layout/Layout";
