@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles } from "@material-ui/core/styles";
-import { Container, Grid, makeStyles } from "@material-ui/core";
+import { withStyles, createStyles } from "@material-ui/core/styles";
+import { Container, Grid } from "@material-ui/core";
 
 import TotalValue from "./lendingInfo/TotalValue";
 import TotalInterest from "./lendingInfo/TotalInterest";
@@ -33,7 +33,7 @@ let mMarket_abi = require('../../ABIs/moneyMarket.json');
 
 const address = require('../../ABIs/address_map.json');
 
-const styles = makeStyles(theme => ({
+const styles = theme => createStyles({
   root: {
     backgroundColor: theme.palette.background.dark,
     minHeight: "100%",
@@ -46,7 +46,7 @@ const styles = makeStyles(theme => ({
       paddingRight: 0
     }
   }
-}));
+});
 
 
 function createData(name, unit, image, wallet, balance, apr, collateral) {
