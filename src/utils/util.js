@@ -14,31 +14,8 @@ export const get_allowance = async (contractInstance, my_account, address_mMarke
 }
 
 
-export const get_tokens_decimals = (USDx, WETH, imBTC, USDT, HBTC, that) => {
-  USDx.methods.decimals().call().then(res_usdx_decimals => {
-    console.log('usdx: ', res_usdx_decimals);
-    that.setState({ USDx_decimals: Number(res_usdx_decimals) })
-  })
-
-  WETH.methods.decimals().call().then(res_weth_decimals => {
-    console.log('weth: ', res_weth_decimals);
-    that.setState({ WETH_decimals: Number(res_weth_decimals) })
-  })
-
-  imBTC.methods.decimals().call().then(res_imBTC_decimals => {
-    console.log('imbtc: ', res_imBTC_decimals);
-    that.setState({ imBTC_decimals: Number(res_imBTC_decimals) })
-  })
-
-  USDT.methods.decimals().call().then(res_usdt_decimals => {
-    console.log('usdt: ', res_usdt_decimals);
-    that.setState({ USDT_decimals: Number(res_usdt_decimals) })
-  })
-
-  HBTC.methods.decimals().call().then(res_hbtc_decimals => {
-    console.log('res_hbtc_decimals: ', res_hbtc_decimals);
-    that.setState({ HBTC_decimals: Number(res_hbtc_decimals) })
-  })
+export const get_tokens_decimals = (...assets) => {
+  return Promise.all(assets.map(asset => asset.methods.decimals().call().then(result => Number(result))))
 }
 
 
@@ -316,6 +293,7 @@ export const handle_withdraw_change = (value, that, decimals, balance) => {
 }
 
 export const handle_approve = ({ tokenContract, marketAddress, myAccount, net_type, token_name }) => new Promise(async (resolve, reject) => {
+  console.log(tokenContract, marketAddress, myAccount, net_type, token_name);
   try {
     const gasLimit = await tokenContract.methods.approve(marketAddress, -1).estimateGas({ from: myAccount })
     const gasPrice = await window.new_web3.eth.getGasPrice()

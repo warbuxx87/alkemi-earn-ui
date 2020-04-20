@@ -7,24 +7,26 @@ import TotalInterest from "./lendingInfo/TotalInterest";
 import TotalApr from "./lendingInfo/TotalApr";
 
 import dai from "assets/images/DAI.svg";
-import usdc from "assets/images/USDC.svg";
-import wbtc from "assets/images/WBTC.svg";
+// import usdc from "assets/images/USDC.svg";
+// import wbtc from "assets/images/WBTC.svg";
 import usdt from "assets/images/USDT.svg";
-import pax from "assets/images/pax.png";
+// import pax from "assets/images/pax.png";
 import eth from "assets/images/WETH.svg";
 
 import Web3 from 'web3';
 
 import {
   handle_approve,
+  get_allowance,
+  // get_tokens_decimals
 } from 'utils/util';
 
 import ActiveLending from './activeLending'
 import LendingTable from './lendingTable'
 // tokens ABIs
-let USDx_abi = require('../../ABIs/USDX_ABI.json');
+// let USDx_abi = require('../../ABIs/USDX_ABI.json');
 let WETH_abi = require('../../ABIs/WETH_ABI.json');
-let imBTC_abi = require('../../ABIs/imBTC_ABI.json');
+// let imBTC_abi = require('../../ABIs/imBTC_ABI.json');
 let USDT_abi = require('../../ABIs/USDT_ABI.json');
 const DAI_abi = require('../../ABIs/DAI_ABI.json')
 let mMarket_abi = require('../../ABIs/moneyMarket.json');
@@ -51,13 +53,13 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
   return { name,unit,image, wallet, balance, apr, collateral };
 }
 
-const lRows = [
-  createData('Ether','ETH', eth, 0, 0, 0, 0),
+const assets = [
+  createData('Ether','WETH', eth, 0, 0, 0, 0),
   createData('Maker DAI','DAI',dai, 0, 0, 0, 0),
   createData('Tether','USDT',usdt, 0, 0, 0, 0),
-  createData('USD Coin', 'USDC', usdc, 0, 0, 0, 0),
-  createData('Wrapped BTC', 'BTC', wbtc, 0, 0, 0, 0),
-  createData('Paxos','PAX', pax, 0, 0, 0, 0),
+  // createData('USD Coin', 'USDC', usdc, 0, 0, 0, 0),
+  // createData('Wrapped BTC', 'BTC', wbtc, 0, 0, 0, 0),
+  // createData('Paxos','PAX', pax, 0, 0, 0, 0),
 ];
 
 class Lend extends React.Component {
@@ -69,38 +71,49 @@ class Lend extends React.Component {
     }
   }
 
-  componentDidMount() {  
+  async componentDidMount() {  
     this.new_web3 = window.new_web3 = new Web3(Web3.givenProvider || null);
-
-    this.new_web3.eth.net.getNetworkType().then(
-      (net_type) => {
-        const USDx = new this.new_web3.eth.Contract(USDx_abi, address[net_type]['address_USDx']);
-        const WETH = new this.new_web3.eth.Contract(WETH_abi, address[net_type]['address_WETH']);
-        const DAI = new this.new_web3.eth.Contract(DAI_abi, address[net_type]['address_WETH']);
-        const imBTC = new this.new_web3.eth.Contract(imBTC_abi, address[net_type]['address_imBTC']);
-        const USDT = new this.new_web3.eth.Contract(USDT_abi, address[net_type]['address_USDT']);
-        const HBTC = new this.new_web3.eth.Contract(imBTC_abi, address[net_type]['address_HBTC']);
-        const mMarket = new this.new_web3.eth.Contract(mMarket_abi, address[net_type]['address_mMarket']);
-        console.log(' *** init contract finished *** ');
-        this.new_web3.givenProvider.enable().then(res_accounts => this.setState({ my_account: res_accounts[0] }))
-        this.setState({
-          net_type: net_type,
-          contract: {
-            USDx: USDx,
-            ETH: WETH,
-            imBTC: imBTC,
-            USDT: USDT,
-            mMarket: mMarket,
-            HBTC: HBTC,
-            DAI
-          }
-        })
-      }
-    )
+    const net_type = await this.new_web3.eth.net.getNetworkType()
+    const contract = {
+      WETH: new this.new_web3.eth.Contract(WETH_abi, address[net_type]['address_WETH']),
+      DAI: new this.new_web3.eth.Contract(DAI_abi, address[net_type]['address_DAI']),
+      USDT: new this.new_web3.eth.Contract(USDT_abi, address[net_type]['address_USDT']),
+      // USDx: new this.new_web3.eth.Contract(USDx_abi, address[net_type]['address_USDx']),
+      // imBTC:  new this.new_web3.eth.Contract(imBTC_abi, address[net_type]['address_imBTC']),
+      // HBTC: new this.new_web3.eth.Contract(imBTC_abi, address[net_type]['address_HBTC']),
+      mMarket: new this.new_web3.eth.Contract(mMarket_abi, address[net_type]['address_mMarket']),
+    }
+    console.log(' *** init contract finished *** ');
+    this.setState({ net_type: net_type, contract: contract })    
+    // const [
+    //   WETH_decimals,
+    //   DAI_decimals,
+    //   USDT_decimals,
+    // ] = await get_tokens_decimals(contract.WETH, contract.DAI, contract.USDT)
+    // this.setState({ WETH_decimals, USDT_decimals, DAI_decimals })
+    const my_account = (await this.new_web3.givenProvider.enable())[0]
+    this.setState({ my_account })
+    console.log('connected: ', my_account)
+    assets.forEach(async (asset) => {
+      let is_approved = await get_allowance(contract[asset.unit], my_account, address[net_type]['address_mMarket'], this.new_web3.utils.toBN);
+      this.setState({ approved: { ...this.state.approved, [asset.unit]: is_approved }})
+      // let timer_Next = setInterval(() => {
+      //   if (!this.state.WETH_decimals) {
+      //     console.log('111111111: not get yet...');
+      //   } else {
+      //     console.log('2222222222: i got it...');
+      //     clearInterval(timer_Next);
+      //     this.setState({ i_am_ready: true })
+      //     to do something...
+      //     get_my_ETH(this);
+      //     get_my_WETH(this);
+      //     get_WETH_supplied__available_to_withdraw(this, address[this.state.net_type]['address_WETH'], address[this.state.net_type]['address_mMarket']);
+      //   }
+      // }, 100)
+    })
   }
 
   onActivate = (unit) => {
-    console.log(unit);
     if (!this.state.contract?.[unit]) return
     if (this.state.loading.unit) return
     console.log('a');
@@ -123,7 +136,7 @@ class Lend extends React.Component {
   getData = () => {
     const inactiveLend = []
     const activeLend = []
-    lRows.forEach((coin) => this.state.approved[coin.unit] ? activeLend.push(coin) : inactiveLend.push(coin))
+    assets.forEach((asset) => this.state.approved[asset.unit] ? activeLend.push(asset) : inactiveLend.push(asset))
     return {inactiveLend, activeLend}
   }
 
