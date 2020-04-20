@@ -55,7 +55,7 @@ const wallets = [
 
 const onboard = Onboard({
   dappId: DAPP_ID, // [String] The API key created by step one above
-  networkId: 1, // [Integer] The Ethereum network ID your Dapp uses.
+  networkId: 4, // [Integer] The Ethereum network ID your Dapp uses.
   darkMode: true,
   walletSelect: {
     wallets: wallets
