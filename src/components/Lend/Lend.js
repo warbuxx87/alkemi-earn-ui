@@ -142,18 +142,23 @@ class Lend extends React.Component {
           <Grid item lg={4} sm={6} xs={12}>
             <TotalApr />
           </Grid>
-          <Grid item lg={12} xs={12}>
-            <ActiveLending
-              data={activeLend}
-            />
-          </Grid>
-          <Grid item lg={12} xs={12}>
-            <LendingTable
-              data={inactiveLend}
-              loading={this.state.loading}
-              onActivate={this.onActivate} />
-          </Grid>
-        </Grid>
+          {
+            !!activeLend.length && 
+            <Grid item lg={12} xs={12}>
+              <ActiveLending
+                data={activeLend}
+              />
+            </Grid>
+          }
+          {
+            !!inactiveLend.length &&
+            <Grid item lg={12} xs={12}>
+              <LendingTable
+                data={inactiveLend}
+                loading={this.state.loading}
+                onActivate={this.onActivate} />
+            </Grid>
+          }        </Grid>
       </Container>
     )
   }
