@@ -1,3 +1,4 @@
+const constant = require('ABIs/constant.json');
 
 export const get_allowance = async (contractInstance, my_account, address_mMarket, bn) => {
   return new Promise((resolve) => {
@@ -314,53 +315,36 @@ export const handle_withdraw_change = (value, that, decimals, balance) => {
   }
 }
 
-
-export const handle_approve = (tokenContract, that, m_address) => {
-  if (that.state.isEnableing) {
-    return false;
-  }
-
-  that.setState({ isEnableing: true });
-
-  tokenContract.methods.approve(m_address, -1).estimateGas({ from: that.state.my_account }, (err, gasLimit) => {
-    that.new_web3.eth.getGasPrice((err, gasPrice) => {
-      console.log('handle_approve_gasLimit: ', gasLimit);
-      console.log('handle_approve_gasPrice: ', gasPrice);
-
-      tokenContract.methods.approve(m_address, -1).send(
-        {
-          from: that.state.my_account,
-          gas: Math.ceil(gasLimit * that.gas_limit_coefficient),
-          gasPrice: gasPrice
-        }, (reject, res_hash) => {
-          if (res_hash) {
-            console.log(res_hash);
-            let timestamp = new Date().getTime();
-            i_got_hash(that.state.my_account, that.state.net_type, that.token_name, 'approve', '-1', res_hash, timestamp, 'pendding', that);
-            let check_approve = setInterval(() => {
-              that.new_web3.eth.getTransactionReceipt(res_hash, (res_fail, res_success) => {
-                if (res_success) {
-                  clearInterval(check_approve);
-                  if (res_success.status === true) {
-                    that.setState({ is_approved: true })
-                  }
-                }
-                if (res_fail) {
-                  console.log(res_fail);
-                  clearInterval(check_approve);
-                }
-              })
-            }, 2000)
-          }
-          if (reject) {
-            that.setState({ isEnableing: false });
-            console.log(reject)
+export const handle_approve = ({ tokenContract, marketAddress, myAccount, net_type, token_name }) => new Promise(async (resolve, reject) => {
+  try {
+    const gasLimit = await tokenContract.methods.approve(marketAddress, -1).estimateGas({ from: myAccount })
+    const gasPrice = await window.new_web3.eth.getGasPrice()
+    const receipt = await tokenContract.methods.approve(myAccount, -1).send({
+      from: myAccount,
+      gas: Math.ceil(gasLimit * constant.gas_limit_coefficient),
+      gasPrice: gasPrice
+    })
+    let timestamp = new Date().getTime();
+    i_got_hash(myAccount, net_type, token_name, 'approve', '-1', receipt.transactionHash, timestamp, 'pendding');
+    let check_approve = setInterval(() => {
+      window.new_web3.eth.getTransactionReceipt(receipt.transactionHash, (res_fail, res_success) => {
+        if (res_success) {
+          clearInterval(check_approve);
+          if (res_success.status === true) {
+            resolve(res_success)
           }
         }
-      )
-    })
-  });
-};
+        if (res_fail) {
+          console.log(res_fail);
+          clearInterval(check_approve);
+          reject(res_fail)
+        }
+      })
+    }, 2000)
+  } catch (error) {
+    reject(error)
+  }
+})
 
 
 export const handle_supply_click = (that, decimals, token_address) => {
@@ -815,7 +799,7 @@ export const format_bn = (numStr, decimals, decimalPlace = decimals) => {
 }
 
 
-export const i_got_hash = (account, net_type, token, action, amount, hash, timestamp, status, that) => {
+export const i_got_hash = (account, net_type, token, action, amount, hash, timestamp, status) => {
   if (window.localStorage) {
     let key = account + '-' + net_type;
     let contractData = JSON.parse(window.localStorage.getItem(key)) || [];
@@ -832,7 +816,7 @@ export const i_got_hash = (account, net_type, token, action, amount, hash, times
     window.localStorage.setItem(key, JSON.stringify(contractData));
     console.log('got hash && setItem.');
 
-    that.setState({ load_new_history: Math.random() });
+    // that.setState({ load_new_history: Math.random() });
   }
 }
 
