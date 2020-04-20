@@ -7,8 +7,8 @@ import TotalInterest from "./lendingInfo/TotalInterest";
 import TotalApr from "./lendingInfo/TotalApr";
 
 import dai from "assets/images/DAI.svg";
-// import usdc from "assets/images/USDC.svg";
-// import wbtc from "assets/images/WBTC.svg";
+import usdc from "assets/images/USDC.svg";
+import imbtc from "assets/images/imBTC.svg";
 import usdt from "assets/images/USDT.svg";
 // import pax from "assets/images/pax.png";
 import eth from "assets/images/WETH.svg";
@@ -24,13 +24,14 @@ import {
 import ActiveLending from "./activeLending";
 import LendingTable from "./lendingTable";
 // tokens ABIs
-// let USDx_abi = require('../../ABIs/USDX_ABI.json');
-let WETH_abi = require("ABIs/WETH_ABI.json");
-// let imBTC_abi = require('../../ABIs/imBTC_ABI.json');
-let USDT_abi = require("ABIs/USDT_ABI.json");
-const DAI_abi = require("ABIs/DAI_ABI.json");
 let mMarket_abi = require("ABIs/moneyMarket.json");
-const address = require("ABIs/address_map.json");
+let WETH_abi = require("ABIs/WETH_ABI.json");
+let DAI_abi = require("ABIs/DAI_ABI.json");
+let USDT_abi = require("ABIs/USDT_ABI.json");
+let USDC_abi = require("ABIs/USDC_ABI.json");
+let imBTC_abi = require("ABIs/imBTC_ABI.json");
+
+const address = require("constants/address_map.json");
 
 const styles = theme =>
   createStyles({
@@ -55,10 +56,10 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
 const assets = [
   createData("Ether", "WETH", eth, 0, 0, 0, 0),
   createData("Maker DAI", "DAI", dai, 0, 0, 0, 0),
-  createData("Tether", "USDT", usdt, 0, 0, 0, 0)
-  // createData('USD Coin', 'USDC', usdc, 0, 0, 0, 0),
-  // createData('Wrapped BTC', 'BTC', wbtc, 0, 0, 0, 0),
-  // createData('Paxos','PAX', pax, 0, 0, 0, 0),
+  createData("Tether", "USDT", usdt, 0, 0, 0, 0),
+  createData("USD Coin", "USDC", usdc, 0, 0, 0, 0),
+  createData("Tokenized BTC", "imBTC", imbtc, 0, 0, 0, 0)
+  //createData('Paxos','PAX', pax, 0, 0, 0, 0),
 ];
 
 class Lend extends React.Component {
@@ -86,8 +87,14 @@ class Lend extends React.Component {
         USDT_abi,
         address[net_type]["address_USDT"]
       ),
-      // USDx: new this.new_web3.eth.Contract(USDx_abi, address[net_type]['address_USDx']),
-      // imBTC:  new this.new_web3.eth.Contract(imBTC_abi, address[net_type]['address_imBTC']),
+      USDC: new this.new_web3.eth.Contract(
+        USDC_abi,
+        address[net_type]["address_USDC"]
+      ),
+      imBTC: new this.new_web3.eth.Contract(
+        imBTC_abi,
+        address[net_type]["address_imBTC"]
+      ),
       // HBTC: new this.new_web3.eth.Contract(imBTC_abi, address[net_type]['address_HBTC']),
       mMarket: new this.new_web3.eth.Contract(
         mMarket_abi,
@@ -103,6 +110,7 @@ class Lend extends React.Component {
     // ] = await get_tokens_decimals(contract.WETH, contract.DAI, contract.USDT)
     // this.setState({ WETH_decimals, USDT_decimals, DAI_decimals })
     const my_account = (await this.new_web3.givenProvider.enable())[0];
+    //this.getState({ my_account });
     this.setState({ my_account });
     console.log("connected: ", my_account);
     assets.forEach(async asset => {
