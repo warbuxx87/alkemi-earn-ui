@@ -11,7 +11,6 @@ import Switch from "@material-ui/core/Switch";
 import SupplyModal from "./supplyModal";
 import WithdrawModal from "./withdrawModal";
 import styles from "./styles";
-import eth from "../../../assets/images/WETH.svg";
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -30,40 +29,7 @@ const StyledTableCell = withStyles(theme => ({
     }
 }))(TableCell);
 
-function createData(
-  name,
-  unit,
-  image,
-  wallet,
-  balance,
-  apr,
-  collateral
-) {
-  return {
-    name,
-    unit,
-    image,
-    wallet,
-    balance,
-    apr,
-    collateral
-  };
-}
-
-const rows = [
-
-  createData('Ether','ETH', eth, 0, 0, 0, 0),
-  //   createData('USD Coin', 'USDC',usdc,262, 16.0, 24, 6.0),
-  //   createData('Wrapped Btc', 'BTC',wbtc,305, 3.7, 67, 4.3),
-];
-
-// const useStyles = makeStyles({
-//   table: {
-//     minWidth: 700
-//   }
-// });
-
-export default function CustomizedTables() {
+export default function CustomizedTables({ data }) {
   const classes = styles();
   const columns = [
     { id: "1", label: "Asset", minWidth: 200 },
@@ -119,7 +85,7 @@ export default function CustomizedTables() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {data.map(row => (
               <TableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">
                   <Grid container>

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import ListItem4 from "../UI/ListItem/4";
+import SvgIcon from '@material-ui/core/SvgIcon';
+import ListItem4 from "../UI/ListItem";
 
 function MarketsIcon(props) {
   return (

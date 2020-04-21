@@ -18,7 +18,7 @@ const FORTMATIC_KEY = "***REMOVED***";
 const PORTIS_KEY = "***REMOVED***";
 const SQUARELINK_KEY = "***REMOVED***";
 const INFURA_KEY = "***REMOVED***";
-// const APP_URL = "Your app url here"
+// const APP_URL = "dapp.alkemi.network"
 // const CONTACT_EMAIL = "hello@alkemi.ai"
 const RPC_URL = "https://main.infura.io/v3/" + INFURA_KEY;
 
@@ -55,7 +55,7 @@ const wallets = [
 
 const onboard = Onboard({
   dappId: DAPP_ID, // [String] The API key created by step one above
-  networkId: 1, // [Integer] The Ethereum network ID your Dapp uses.
+  networkId: 4, // [Integer] The Ethereum network ID your Dapp uses.
   darkMode: true,
   walletSelect: {
     wallets: wallets

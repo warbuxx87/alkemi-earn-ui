@@ -13,11 +13,14 @@ const styles = theme => ({
         paddingRight: 23,
     },
     selected: {
+        borderLeftStyle: 'solid',
+        borderWidth: 4,
+        borderColor: theme.palette.common.white,
         backgroundColor: theme.palette.common.darkGrey
     }
 });
 
-const ListItem6 = ({ classes, icon, text, onClick, selected, ...props }) => (
+const ListItemComponent = ({ classes, icon, text, onClick, selected, ...props }) => (
     <ListItem button onClick={onClick} {...props} className={clsx(classes.item, {[classes.selected] : selected})}>
         <ListItemIcon>
             {icon}
@@ -26,11 +29,11 @@ const ListItem6 = ({ classes, icon, text, onClick, selected, ...props }) => (
     </ListItem>
 );
 
-ListItem6.propTypes = {
+ListItem.propTypes = {
     icon: PropTypes.node.isRequired,
     text: PropTypes.string.isRequired,
     color: PropTypes.string,
     onClick: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(ListItem6);
+export default withStyles(styles)(ListItemComponent);

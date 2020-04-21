@@ -4,7 +4,7 @@ import { shallow } from "enzyme";
 
 import HomeIcon from "@material-ui/icons/Home";
 
-import ListItem1 from "../../UI/ListItem/1";
+import ListItem1 from "../../UI/ListItem";
 import SidebarHomeItem from "../HomeItem";
 
 describe("<SidebarHomeItem />", () => {

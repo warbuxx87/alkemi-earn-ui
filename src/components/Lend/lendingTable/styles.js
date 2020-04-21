@@ -1,6 +1,6 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { createStyles } from '@material-ui/core/styles';
 
-const styles = makeStyles((theme) =>
+const styles = (theme) =>
   createStyles({
     tableLending:{
         color: 'white',
@@ -98,5 +98,5 @@ const styles = makeStyles((theme) =>
       }
 
 
-}));
+});
 export default styles;
