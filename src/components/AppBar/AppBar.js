@@ -13,13 +13,15 @@ import { useLocation } from "react-router-dom";
 let web3;
 console.log(web3);
 
-const DAPP_ID = "b296620b-1b0b-453e-888c-c7d9952c5698";
-const FORTMATIC_KEY = "***REMOVED***";
-const PORTIS_KEY = "***REMOVED***";
-const SQUARELINK_KEY = "***REMOVED***";
-const INFURA_KEY = "***REMOVED***";
-// const APP_URL = "dapp.alkemi.network"
-// const CONTACT_EMAIL = "hello@alkemi.ai"
+const DAPP_ID = process.env.REACT_APP_DAPP_ID;
+const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
+const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
+const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
+const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
+const INFURA_ID = process.env.REACT_APP_INFURA_ID;
+const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
+// const APP_URL = process.env.REACT_APP_APP_URL
+// const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL:
 const RPC_URL = "https://main.infura.io/v3/" + INFURA_KEY;
 
 const walletChecks = [
