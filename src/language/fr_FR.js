@@ -81,7 +81,7 @@ const fr_FR = {
 
 
     //markets
-    Total_Supply_Balance: 'Balance d\'approvisionnement totale',  // Correct way to escape quote?
+    Total_Supply_Balance: 'Balance d\'approvisionnement totale',
     Total_Borrow_Balance: 'Total Solde Borrow',
     Total_Collateralization_ratio: 'Ratio total de collatéralisation',
     Market_Overview: 'Aperçu du marché',
@@ -98,7 +98,7 @@ const fr_FR = {
     Connect: 'Relier',
     Shortfall: 'Manque à gagner',
     Account: 'Compte',
-    Supply_Balance: 'Balance d\'approvisionnement', //here?
+    Supply_Balance: 'Balance d\'approvisionnement',
     Borrow_Balance: 'Emprunter le solde',
     Collateralization_ratio: 'Ratio de collatéralisation',
     Asset: 'Atout',
