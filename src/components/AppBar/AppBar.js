@@ -15,10 +15,10 @@ console.log(web3);
 
 const DAPP_ID = process.env.REACT_APP_DAPP_ID;
 const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
-const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
+//const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
 const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
 const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
-const INFURA_ID = process.env.REACT_APP_INFURA_ID;
+//const INFURA_ID = process.env.REACT_APP_INFURA_ID;
 const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
 // const APP_URL = process.env.REACT_APP_APP_URL
 // const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL:
