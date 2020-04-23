@@ -13,13 +13,12 @@ import usdt from "assets/images/USDT.svg";
 // import pax from "assets/images/pax.png";
 import eth from "assets/images/WETH.svg";
 
-import Web3 from "web3";
-
 import {
   handle_approve,
   get_allowance
   // get_tokens_decimals
 } from "utils/util";
+import drizzleConnect from 'utils/HOC/drizzleConnect'
 
 import ActiveLending from "./activeLending";
 import LendingTable from "./lendingTable";
@@ -72,31 +71,31 @@ class Lend extends React.Component {
   }
 
   async componentDidMount() {
-    this.new_web3 = window.new_web3 = new Web3(Web3.givenProvider || null);
-    const net_type = await this.new_web3.eth.net.getNetworkType();
+    this.web3 = this.props.drizzle.web3
+    const net_type = await this.web3.eth.net.getNetworkType();
     const contract = {
-      WETH: new this.new_web3.eth.Contract(
+      WETH: new this.web3.eth.Contract(
         WETH_abi,
         address[net_type]["address_WETH"]
       ),
-      DAI: new this.new_web3.eth.Contract(
+      DAI: new this.web3.eth.Contract(
         DAI_abi,
         address[net_type]["address_DAI"]
       ),
-      USDT: new this.new_web3.eth.Contract(
+      USDT: new this.web3.eth.Contract(
         USDT_abi,
         address[net_type]["address_USDT"]
       ),
-      USDC: new this.new_web3.eth.Contract(
+      USDC: new this.web3.eth.Contract(
         USDC_abi,
         address[net_type]["address_USDC"]
       ),
-      imBTC: new this.new_web3.eth.Contract(
+      imBTC: new this.web3.eth.Contract(
         imBTC_abi,
         address[net_type]["address_imBTC"]
       ),
-      // HBTC: new this.new_web3.eth.Contract(imBTC_abi, address[net_type]['address_HBTC']),
-      mMarket: new this.new_web3.eth.Contract(
+      // HBTC: new this.web3.eth.Contract(imBTC_abi, address[net_type]['address_HBTC']),
+      mMarket: new this.web3.eth.Contract(
         mMarket_abi,
         address[net_type]["address_mMarket"]
       )
@@ -109,7 +108,7 @@ class Lend extends React.Component {
     //   USDT_decimals,
     // ] = await get_tokens_decimals(contract.WETH, contract.DAI, contract.USDT)
     // this.setState({ WETH_decimals, USDT_decimals, DAI_decimals })
-    const my_account = (await this.new_web3.givenProvider.enable())[0];
+    const my_account = (await this.web3.givenProvider.enable())[0];
     //this.getState({ my_account });
     this.setState({ my_account });
     console.log("connected: ", my_account);
@@ -118,7 +117,7 @@ class Lend extends React.Component {
         contract[asset.unit],
         my_account,
         address[net_type]["address_mMarket"],
-        this.new_web3.utils.toBN
+        this.web3.utils.toBN
       );
       this.setState({
         approved: { ...this.state.approved, [asset.unit]: is_approved }
@@ -176,6 +175,7 @@ class Lend extends React.Component {
   render() {
     const { activeLend, inactiveLend } = this.getData();
     const { classes } = this.props;
+    console.log(this.props);
     return (
       <Container maxWidth={false} className={classes.container}>
         <Grid container spacing={3}>
@@ -208,4 +208,4 @@ class Lend extends React.Component {
   }
 }
 
-export default withStyles(styles)(Lend);
+export default drizzleConnect(withStyles(styles)(Lend));
