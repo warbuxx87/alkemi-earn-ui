@@ -6,7 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import styles from "./styles";
-import withOnboard from 'utils/HOC/withOnBoard'
+import withOnboard from "utils/HOC/withOnBoard";
 import { useLocation } from "react-router-dom";
 
 const AppBar = ({ onboard }) => {
