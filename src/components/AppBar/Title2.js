@@ -5,15 +5,15 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 
 const AppBarTitle = ({ onClick }) => (
-    <ButtonBase onClick={onClick}>
-        <Typography variant="title" color="inherit" noWrap>
-        * Page Title *
-        </Typography>
-    </ButtonBase>
+  <ButtonBase onClick={onClick}>
+    <Typography variant="title" color="inherit" noWrap>
+      * Page Title *
+    </Typography>
+  </ButtonBase>
 );
 
 AppBarTitle.propTypes = {
-    onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export default AppBarTitle;
