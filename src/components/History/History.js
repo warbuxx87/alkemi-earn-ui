@@ -1,5 +1,5 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import tx_data from "./MOCK_DATA.json";
 import {
   Button,
@@ -100,8 +100,8 @@ const History = () => {
   );
 };
 
-// History.propTypes = {
-//     classes: PropTypes.object.isRequired
-// };
+History.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 export default History;
