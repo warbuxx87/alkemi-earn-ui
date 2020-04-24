@@ -22,13 +22,6 @@ import withDrizzle from 'utils/HOC/withDrizzle'
 
 import ActiveLending from "./activeLending";
 import LendingTable from "./lendingTable";
-// tokens ABIs
-let mMarket_abi = require("ABIs/moneyMarket.json");
-let WETH_abi = require("ABIs/WETH_ABI.json");
-let DAI_abi = require("ABIs/DAI_ABI.json");
-let USDT_abi = require("ABIs/USDT_ABI.json");
-let USDC_abi = require("ABIs/USDC_ABI.json");
-let imBTC_abi = require("ABIs/imBTC_ABI.json");
 
 const address = require("constants/address_map.json");
 
@@ -72,34 +65,9 @@ class Lend extends React.Component {
 
   async componentDidMount() {
     this.web3 = this.props.drizzle.web3
+    if (!this.web3.eth) return
     const net_type = await this.web3.eth.net.getNetworkType();
-    const contract = {
-      WETH: new this.web3.eth.Contract(
-        WETH_abi,
-        address[net_type]["address_WETH"]
-      ),
-      DAI: new this.web3.eth.Contract(
-        DAI_abi,
-        address[net_type]["address_DAI"]
-      ),
-      USDT: new this.web3.eth.Contract(
-        USDT_abi,
-        address[net_type]["address_USDT"]
-      ),
-      USDC: new this.web3.eth.Contract(
-        USDC_abi,
-        address[net_type]["address_USDC"]
-      ),
-      imBTC: new this.web3.eth.Contract(
-        imBTC_abi,
-        address[net_type]["address_imBTC"]
-      ),
-      // HBTC: new this.web3.eth.Contract(imBTC_abi, address[net_type]['address_HBTC']),
-      mMarket: new this.web3.eth.Contract(
-        mMarket_abi,
-        address[net_type]["address_mMarket"]
-      )
-    };
+    const contract = this.props.drizzle.contracts;
     console.log(" *** init contract finished *** ");
     this.setState({ net_type: net_type, contract: contract });
     // const [
@@ -144,6 +112,7 @@ class Lend extends React.Component {
     console.log("a");
     this.setState({ loading: { ...this.state.loading, [unit]: true } });
     handle_approve({
+      web3: this.props.drizzle.web3,
       tokenContract: this.state.contract[unit],
       marketAddress: address[this.state.net_type]["address_mMarket"],
       myAccount: this.state.my_account,
@@ -175,7 +144,6 @@ class Lend extends React.Component {
   render() {
     const { activeLend, inactiveLend } = this.getData();
     const { classes } = this.props;
-    console.log(this.props);
     return (
       <Container maxWidth={false} className={classes.container}>
         <Grid container spacing={3}>

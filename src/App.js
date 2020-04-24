@@ -11,11 +11,11 @@ import "assets/scss/style.scss";
 import theme from "themes/theme";
 import onboard from 'utils/onboard'
 import Layout from "containers/Layout/Layout";
+import ContractHandler from 'containers/Handler/ContractHandler.js'
 import Web3 from 'web3';
 import { OnBoardProvider } from 'utils/HOC/withOnBoard'
 import { hot } from "react-hot-loader/root";
 import { EventActions } from 'drizzle'
-import WETH_ABI from 'ABIs/WETH_ABI.json'
 
 const contractEventNotifier = store => next => action => {
  if (action.type === EventActions.EVENT_FIRED) {
@@ -36,12 +36,7 @@ class App extends Component {
   state = {
     options: {
       drizzleOptions: {
-        contracts: [
-          {
-            contractName: 'WETH',
-            web3Contract: new (new Web3()).eth.Contract(WETH_ABI, '0x06a1cd567e61b7edda49c30d3d32e60f607fd646') // An instance of a Web3 contract
-          }
-        ],
+        contracts: [],
         web3: {
           customProvider: Web3.givenProvider
         }
@@ -61,15 +56,11 @@ class App extends Component {
 
   onChooseWallet = wallet => {
     this.web3 = new Web3(wallet.provider);
+
     this.setState({
       options: {
         drizzleOptions: {
-          contracts: [
-            {
-              contractName: 'WETH',
-              web3Contract: new this.web3.eth.Contract(WETH_ABI, '0x06a1cd567e61b7edda49c30d3d32e60f607fd646') // An instance of a Web3 contract
-            }
-          ],
+          contracts: [],
           web3: {
             customProvider: this.web3.givenProvider
           }
@@ -84,19 +75,19 @@ class App extends Component {
   render() {
     const MainApp = withDrizzle(({ store }) => (
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <MuiThemeProvider theme={theme}>
-            <Layout />
-          </MuiThemeProvider>
-        </ConnectedRouter>
+        <OnBoardProvider value={this.onboard}>
+          <ConnectedRouter history={history}>
+            <MuiThemeProvider theme={theme}>
+              <Layout />
+              <ContractHandler />
+            </MuiThemeProvider>
+          </ConnectedRouter>
+        </OnBoardProvider>
       </Provider>
     ))
-
     return (
       <DrizzleProvider options={this.state.options}>
-        <OnBoardProvider value={this.onboard}>
-          <MainApp />
-        </OnBoardProvider>
+        <MainApp />
       </DrizzleProvider>
     );
   }

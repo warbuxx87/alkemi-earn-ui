@@ -11,7 +11,7 @@ export const get_allowance = async (
       .allowance(account, address_mMarket)
       .call((err, res_allowance) => {
         console.log("res_allowance: ", res_allowance);
-        if (bn(res_allowance).gt(bn("0"))) {
+        if (!isNaN(res_allowance) && bn(res_allowance).gt(bn("0"))) {
           resolve(true);
         } else {
           resolve(false);
@@ -381,6 +381,7 @@ export const handle_withdraw_change = (value, that, decimals, balance) => {
 };
 
 export const handle_approve = ({
+  web3,
   tokenContract,
   marketAddress,
   myAccount,
@@ -393,7 +394,7 @@ export const handle_approve = ({
       const gasLimit = await tokenContract.methods
         .approve(marketAddress, -1)
         .estimateGas({ from: myAccount });
-      const gasPrice = await window.new_web3.eth.getGasPrice();
+      const gasPrice = await web3.eth.getGasPrice();
       const receipt = await tokenContract.methods.approve(myAccount, -1).send({
         from: myAccount,
         gas: Math.ceil(gasLimit * constant.gas_limit_coefficient),
@@ -411,7 +412,7 @@ export const handle_approve = ({
         "pendding"
       );
       let check_approve = setInterval(() => {
-        window.new_web3.eth.getTransactionReceipt(
+        web3.eth.getTransactionReceipt(
           receipt.transactionHash,
           (res_fail, res_success) => {
             if (res_success) {
