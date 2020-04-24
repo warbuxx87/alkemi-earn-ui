@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { history } from "redux/enhancers/middlewares/router";
 import { ConnectedRouter } from "connected-react-router";
 
-import drizzleConnect from 'utils/HOC/drizzleConnect'
+import withDrizzle from 'utils/HOC/withDrizzle'
 import appReducers from 'redux/reducers'
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { DrizzleProvider } from '@drizzle/react-plugin'
@@ -82,7 +82,7 @@ class App extends Component {
   }
 
   render() {
-    const MainApp = drizzleConnect(({ store }) => (
+    const MainApp = withDrizzle(({ store }) => (
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <MuiThemeProvider theme={theme}>

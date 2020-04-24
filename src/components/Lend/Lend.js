@@ -18,7 +18,7 @@ import {
   get_allowance
   // get_tokens_decimals
 } from "utils/util";
-import drizzleConnect from 'utils/HOC/drizzleConnect'
+import withDrizzle from 'utils/HOC/withDrizzle'
 
 import ActiveLending from "./activeLending";
 import LendingTable from "./lendingTable";
@@ -208,4 +208,4 @@ class Lend extends React.Component {
   }
 }
 
-export default drizzleConnect(withStyles(styles)(Lend));
+export default withDrizzle(withStyles(styles)(Lend));
