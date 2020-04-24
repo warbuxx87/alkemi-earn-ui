@@ -1,6 +1,6 @@
 // Libs
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { withRouter } from "react-router";
 // Component
 import SidebarBorrowItem from "../../components/Sidebar/BorrowItem";
 // Constants
@@ -8,15 +8,11 @@ import { BORROW } from "../../constants/routes";
 // Selectors
 import { isBorrowSelected } from "../../redux/selectors/ui";
 
-const mapStateToProps = state => ({
-    selected: isBorrowSelected(state)
+const mapStateToProps = (state, props) => ({
+    selected: isBorrowSelected(state),
+    onClick: () => props.history.push(BORROW)
 });
 
-const mapDispatchToProps = {
-    onClick: () => push(BORROW)
-};
-
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
-    mapDispatchToProps
-)(SidebarBorrowItem);
+)(SidebarBorrowItem));

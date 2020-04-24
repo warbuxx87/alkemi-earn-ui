@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import createStore from "redux/store";
 import { history } from "redux/enhancers/middlewares/router";
 import { ConnectedRouter } from "connected-react-router";
 
+import drizzleConnect from 'utils/HOC/drizzleConnect'
+import appReducers from 'redux/reducers'
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { DrizzleProvider } from '@drizzle/react-plugin'
 import "assets/scss/style.scss";
@@ -46,7 +47,7 @@ class App extends Component {
         }
       },
       appMiddlewares,
-      // appReducers,
+      appReducers,
       disableReduxDevTools: false  // enable ReduxDevTools!
     },
   }
@@ -74,27 +75,33 @@ class App extends Component {
           }
         },
         appMiddlewares,
-        // appReducers,
+        appReducers,
         disableReduxDevTools: false  // enable ReduxDevTools!
       },
     })
   }
 
   render() {
-    return (
-      <Provider store={createStore()}>
-        <DrizzleProvider options={this.state.options}>
-          <ConnectedRouter history={history}>
-            <MuiThemeProvider theme={theme}>
-              <OnBoardProvider value={this.onboard}>
-                <Layout />
-              </OnBoardProvider>
-            </MuiThemeProvider>
-          </ConnectedRouter>
-        </DrizzleProvider>
+    const MainApp = drizzleConnect(({ store }) => (
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <MuiThemeProvider theme={theme}>
+            <Layout />
+          </MuiThemeProvider>
+        </ConnectedRouter>
       </Provider>
+    ))
+
+    return (
+      <DrizzleProvider options={this.state.options}>
+        <OnBoardProvider value={this.onboard}>
+          <MainApp />
+        </OnBoardProvider>
+      </DrizzleProvider>
     );
   }
 }
+
+
 
 export default hot(App);
