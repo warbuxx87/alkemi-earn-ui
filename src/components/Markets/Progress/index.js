@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { Progress } from "antd";
 import "antd/dist/antd.css";
 import "./progress.scss";
@@ -37,6 +39,8 @@ export default class MyProgress extends React.Component {
   }
 
   render() {
+    console.log("Percentage_Supply " + this.props.percentage_supply);
+    console.log("Percentage_Borrow " + this.props.percentage_borrow);
     return (
       <div className="percent-wrap">
         <div className="percent-top">
@@ -50,15 +54,19 @@ export default class MyProgress extends React.Component {
           </span>
         </div>
         <div className="percent-bottom">
-          <Progress
-            percent={
-              this.props.type === "supply"
-                ? this.props.percentage_supply
-                : this.props.percentage_borrow
-            }
-            status="active"
-            showInfo={false}
-          />
+          {this.props.type === "supply" ? (
+            <Progress
+              percent={Number(this.props.percentage_supply)}
+              status="active"
+              showInfo={false}
+            />
+          ) : (
+            <Progress
+              percent={Number(this.props.percentage_borrow)}
+              status="active"
+              showInfo={false}
+            />
+          )}
         </div>
       </div>
     );
