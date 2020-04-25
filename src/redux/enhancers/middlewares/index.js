@@ -1,9 +1,11 @@
 import { applyMiddleware } from "redux";
 
 import router from "./router";
+import history from "./history";
 
 const middlewares = [
-    router
-    // other middlewares go here
+  router,
+  history
+  // other middlewares go here
 ];
 export default applyMiddleware(...middlewares);

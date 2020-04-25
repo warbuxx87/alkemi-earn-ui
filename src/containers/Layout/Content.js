@@ -5,7 +5,7 @@ import Dashboard from "components/Dashboard/Dashboard";
 import Lend from "components/Lend/Lend";
 import Borrow from "components/Borrow/Borrow";
 import Markets from "components/Markets/Markets";
-import History from "components/History/History";
+import History from "containers/History/History";
 import Liquidate from "components/Liquidate/Liquidate";
 import NoWhere from "components/NoWhere/NoWhere";
 import {

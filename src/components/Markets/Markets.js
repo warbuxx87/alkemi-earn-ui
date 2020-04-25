@@ -89,14 +89,14 @@ export default class Markets extends React.Component {
       .then(data => {
         if (data) {
           var obj_data = JSON.parse(data);
-          console.log(obj_data);
+          //console.log(obj_data);
 
           var arr_markets = [];
           var key_arr = Object.keys(obj_data.markets);
           for (var i = 0; i < key_arr.length; i++) {
             arr_markets.push(obj_data.markets[key_arr[i]]);
           }
-          console.log(arr_markets);
+          //console.log(arr_markets);
           // return;
 
           this.setState(
@@ -132,8 +132,8 @@ export default class Markets extends React.Component {
                 borrow_array: borrow_array,
                 array_is_ok: true
               });
-              console.log("Supply Array" + supply_array);
-              console.log("Borrow Array" + borrow_array);
+              //console.log("Supply Array" + supply_array);
+              //console.log("Borrow Array" + borrow_array);
             }
           );
         }

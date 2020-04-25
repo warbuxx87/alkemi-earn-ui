@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<BackHomeButton /> matches snapshot 1`] = `
+exports[`<BackDashboardButton /> matches snapshot 1`] = `
 <WithStyles(Button)
-  className="NoWhereHomeButton-button-1"
+  className="NoWhereDashboardButton-button-1"
   color="default"
   onClick={[MockFunction]}
   variant="raised"

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import tx_data from "./MOCK_DATA.json";
+import { compose } from "redux";
+
 import {
   Button,
   Table,
@@ -11,11 +12,11 @@ import {
   TablePagination
 } from "@material-ui/core";
 
-import { open_it_onetherscan } from "./utils";
+import { open_it_onetherscan } from "containers/History/utils";
 
-const accountsList = tx_data;
-
-const History = () => {
+const History = ({ history }) => {
+  const accountsList = { history };
+  console.log(accountsList);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
   const [page, setPage] = React.useState(0);
 
@@ -101,7 +102,8 @@ const History = () => {
 };
 
 History.propTypes = {
-  classes: PropTypes.object.isRequired
+  //classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
-export default History;
+export default compose(History);

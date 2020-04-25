@@ -1,5 +1,8 @@
 import { combineReducers } from "redux";
 
+import history from "./history";
+
 export default combineReducers({
-    // data reducers go here
+  history
+  // other data reducers go here
 });
