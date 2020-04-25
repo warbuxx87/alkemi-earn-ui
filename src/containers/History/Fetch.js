@@ -1,25 +1,22 @@
 import {
-  fetchHistoryPending,
-  fetchHistorySuccess,
-  fetchHistoryError
+  fetchStatsPending,
+  fetchStatsSuccess,
+  fetchStatsError
 } from "redux/actions/data";
 
-function fetchHistory() {
+import tx_data from "./MOCK_DATA.json";
+
+function fetchStats() {
   return dispatch => {
-    dispatch(fetchHistoryPending());
-    fetch("https://api.alkemi.network/info")
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          throw res.error;
-        }
-        dispatch(fetchHistorySuccess(res.transactions));
-        return res.transactions;
-      })
-      .catch(error => {
-        dispatch(fetchHistoryError(error));
-      });
+    dispatch(fetchStatsPending());
+    // fetch("https://api.alkemi.network/info?data=markets")
+    //   .then(res => res.json())
+    //   .then(res => {
+    dispatch(fetchStatsSuccess([tx_data]));
+    //console.log("tx :" + tx);
+    return [tx_data];
+    // });
   };
 }
 
-export default fetchHistory;
+export default fetchStats;

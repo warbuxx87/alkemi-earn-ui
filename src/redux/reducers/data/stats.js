@@ -1,38 +1,37 @@
 // Import action of interest as constants
 import {
-  FETCH_HISTORY_PENDING,
-  FETCH_HISTORY_SUCCESS,
-  FETCH_HISTORY_ERROR
+  FETCH_STATS_PENDING,
+  FETCH_STATS_SUCCESS,
+  FETCH_STATS_ERROR
 } from "redux/actions/data";
 
 // Define initial state
 const initialState = {
   pending: false,
-  tx: [],
+  tx: null,
   error: null
 };
 
 // Implement "reducer" function with initial state as default state
 export default (state = initialState, { type, action }) => {
   switch (type) {
-    case FETCH_HISTORY_PENDING:
+    case FETCH_STATS_PENDING:
       return {
         ...state,
         pending: true
       };
 
-    case FETCH_HISTORY_SUCCESS:
+    case FETCH_STATS_SUCCESS:
       return {
         ...state,
         pending: false,
-        tx: action.payload
+        tx: action
       };
 
-    case FETCH_HISTORY_ERROR:
+    case FETCH_STATS_ERROR:
       return {
         ...state,
         pending: false,
-        tx: [],
         error: action.error
       };
 

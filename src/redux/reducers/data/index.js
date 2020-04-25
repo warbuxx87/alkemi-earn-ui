@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 
-import history from "./history";
+import stats from "./stats";
 
 export default combineReducers({
-  history
+  stats
   // other data reducers go here
 });

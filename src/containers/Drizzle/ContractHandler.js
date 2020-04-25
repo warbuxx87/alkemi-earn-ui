@@ -15,6 +15,7 @@ const ContractHandler = ({ web3Status, drizzle }) => {
   React.useEffect(() => {
     if (web3Status === "initialized") {
       drizzle.web3.eth.net.getNetworkType().then(net_type => {
+        console.log("Network: " + net_type);
         drizzle.addContract({
           contractName: "WETH",
           web3Contract: new drizzle.web3.eth.Contract(

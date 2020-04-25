@@ -13,9 +13,10 @@ import {
 } from "@material-ui/core";
 
 import { open_it_onetherscan } from "containers/History/utils";
+import tx_data from "containers/History/MOCK_DATA";
 
-const History = ({ history }) => {
-  const accountsList = { history };
+const History = fetchStats => {
+  const accountsList = tx_data;
   console.log(accountsList);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
   const [page, setPage] = React.useState(0);
@@ -102,8 +103,8 @@ const History = ({ history }) => {
 };
 
 History.propTypes = {
-  //classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  tx: PropTypes.any.isRequired,
+  fetchStats: PropTypes.any.isRequired
 };
 
 export default compose(History);

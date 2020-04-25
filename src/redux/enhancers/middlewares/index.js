@@ -1,11 +1,11 @@
 import { applyMiddleware } from "redux";
 
 import router from "./router";
-import history from "./history";
+import thunk from "./thunk";
 
 const middlewares = [
   router,
-  history
+  thunk
   // other middlewares go here
 ];
 export default applyMiddleware(...middlewares);

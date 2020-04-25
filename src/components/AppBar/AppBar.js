@@ -13,11 +13,11 @@ import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import { withStyles } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application
-import withOnboard from "utils/HOC/withOnBoard";
+//import withOnboard from "containers/Drizzle/withOnBoard";
 
+// Section 4: Define Styles function taking theme as argument and returning an object
 const styles = theme => ({
   appBar: {
-    // backgroundColor:'white',
     boxShadow: "none",
     backgroundColor: "#000000",
     paddingTop: "22px",
@@ -121,6 +121,7 @@ const styles = theme => ({
   }
 });
 
+// Section 5: Code Component
 const AppBar = ({ onboard, classes }) => {
   let location = useLocation();
   useEffect(() => {
@@ -215,4 +216,5 @@ AppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withOnboard(withStyles(styles)(AppBar));
+//export default withOnboard(withStyles(styles)(AppBar));
+export default withStyles(styles)(AppBar);
