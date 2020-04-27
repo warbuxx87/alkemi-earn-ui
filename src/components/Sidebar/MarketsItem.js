@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import ListItem4 from "../UI/ListItem/4";
+import ListItem from "../UI/ListItem";
 
 function MarketsIcon(props) {
   return (
@@ -30,7 +30,7 @@ function MarketsIcon(props) {
 }
 
 const SidebarMarketsItem = ({ onClick, selected }) => (
-  <ListItem4
+  <ListItem
     icon={<MarketsIcon />}
     text="Markets"
     onClick={onClick}

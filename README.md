@@ -1,11 +1,10 @@
 # Alkemi | Debt Facility User Interface
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Built with React](https://img.shields.io/badge/React-black?style=flat&logo=react)](https://docs.alkemi.network) [![Built on Ethereum](https://img.shields.io/badge/web3.js-blue?style=flat&logo=ethereum)](https://alkemi.atlassian.net/wiki/spaces/ARCH/pages/42139840/Switchboard) [![Twitter: AlkemiOfficial](https://img.shields.io/twitter/follow/AlkemiOfficial.svg?style=social)](https://twitter.com/AlkemiOfficial)
+![Version](https://img.shields.io/badge/version-0.4.0-blue.svg?cacheSeconds=2592000) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Built with React](https://img.shields.io/badge/React-black?style=flat&logo=react)](https://docs.alkemi.network) [![Built on Ethereum](https://img.shields.io/badge/web3.js-blue?style=flat&logo=ethereum)](https://alkemi.atlassian.net/wiki/spaces/ARCH/pages/42139840/Switchboard) [![Twitter: AlkemiOfficial](https://img.shields.io/twitter/follow/AlkemiOfficial.svg?style=social)](https://twitter.com/AlkemiOfficial)
 
 > Web3 interface for Alkemi debt facility
 
 ![Debt Facility UI](https://raw.githubusercontent.com/project-alkemi/alkemi-protocol/master/docs/assets/liquidity-dashboard2.gif)
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -13,20 +12,23 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This application make active usage of
 
--   [create-react-app](https://github.com/facebookincubator/create-react-app) that packs many utilities
--   [redux](https://redux.js.org) for state management
--   [react-router v4](https://reacttraining.com/react-router/) for routing
--   [connected-react-router](https://github.com/supasate/connected-react-router) to connect router to redux state
--   [material-ui v1](https://material-ui.com/) as main visual component library
+- [create-react-app](https://github.com/facebookincubator/create-react-app) that packs many utilities
+- [redux](https://redux.js.org) for state management
+- [react-router v4](https://reacttraining.com/react-router/) for routing
+- [connected-react-router](https://github.com/supasate/connected-react-router) to connect router to redux state
+- [material-ui v1](https://material-ui.com/) as main visual component library
+- [drizzle]() for web3 integration
+- [onboard-bnc](onboard.js)
+- [notify-bnc](Notify)
 
 ## Start application
 
 ### Requirements
 
--   docker>=17.0.0
--   docker-compose>=1.17.0
--   node>=9.0.0
--   yarn>=1.6.0
+- docker>=17.0.0
+- docker-compose>=1.17.0
+- node>=9.0.0
+- yarn>=1.6.0
 
 ### Install application
 
@@ -114,22 +116,21 @@ This section has moved here: [Deployment](https://facebook.github.io/create-reac
 
 This section has moved here: [run build fails to minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
 ## Issues
 
 If you come across an issue with Alkemi Protocol contracts, do a search in the [Issues](https://bitbucket.org/project-alkemi/alkemi-debt-ui/issues?status=new&status=open) tab of this repo to make sure it hasn't been reported before. Follow these steps to help us prevent duplicate issues and unnecessary notifications going to the many people watching this repo:
 
--   If the issue you found has been reported and is still open, and the details match your issue, give a "thumbs up" to the relevant posts in the issue thread to signal that you have the same issue. No further action is required on your part.
--   If the issue you found has been reported and is still open, but the issue is missing some details, you can add a comment to the issue thread describing the additional details.
--   If the issue you found has been reported but has been closed, you can comment on the closed issue thread and ask to have the issue reopened because you are still experiencing the issue. Alternatively, you can open a new issue, reference the closed issue by number or link, and state that you are still experiencing the issue. Provide any additional details in your post so we can better understand the issue and how to fix it.
+- If the issue you found has been reported and is still open, and the details match your issue, give a "thumbs up" to the relevant posts in the issue thread to signal that you have the same issue. No further action is required on your part.
+- If the issue you found has been reported and is still open, but the issue is missing some details, you can add a comment to the issue thread describing the additional details.
+- If the issue you found has been reported but has been closed, you can comment on the closed issue thread and ask to have the issue reopened because you are still experiencing the issue. Alternatively, you can open a new issue, reference the closed issue by number or link, and state that you are still experiencing the issue. Provide any additional details in your post so we can better understand the issue and how to fix it.
 
 ## Author
 
 👤 **Alkemi**
 
--   Website: [alkemi.network](https://alkemi.network)
--   Twitter: [@AlkemiOfficial](https://twitter.com/AlkemiOfficial)
--   Github: [@project-alkemi](https://github.com/project-alkemi)
+- Website: [alkemi.network](https://alkemi.network)
+- Twitter: [@AlkemiOfficial](https://twitter.com/AlkemiOfficial)
+- Github: [@project-alkemi](https://github.com/project-alkemi)
 
 ## 📝 License
 
@@ -158,4 +159,3 @@ This project is [MIT](https://opensource.org/licenses/MIT) licensed.
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
-

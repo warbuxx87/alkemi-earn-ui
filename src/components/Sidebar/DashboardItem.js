@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import ListItem1 from "../UI/ListItem/1";
+import SvgIcon from '@material-ui/core/SvgIcon';
+import ListItem from "../UI/ListItem";
 
 function DashboardIcon(props) {
   return (
@@ -30,12 +30,12 @@ function DashboardIcon(props) {
 }
 
 const SidebarDashboardItem = ({ onClick, selected }) => (
-  <ListItem1
-    icon={<DashboardIcon />}
-    text="Dashboard"
-    onClick={onClick}
-    selected={selected}
-  />
+    <ListItem
+        icon={<DashboardIcon />}
+        text="Dashboard"
+        onClick={onClick}
+        selected={selected}
+    />
 );
 
 SidebarDashboardItem.propTypes = {
