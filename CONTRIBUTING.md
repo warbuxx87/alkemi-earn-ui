@@ -1,10 +1,8 @@
 # Contributing Guidelines
 
-[TOC]
-
 ## Table of Contents
 
-- [Project Structure](#project-structure)
+- [Project Structure](#markdown-header-project-structure)
 - [Contributing](#contributing)
   - [Requirements](#requirements)
   - [Set-up dev environment](#set-up-dev-environment)
