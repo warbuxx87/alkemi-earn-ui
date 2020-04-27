@@ -1,4 +1,6 @@
-// Main Component
+/* Main Component
+// Components (or presentational components) are concerned with how things look
+*/
 
 /*
 *** REQUIREMENTS ***
@@ -34,7 +36,7 @@ import { compose } from "redux";
 
 // Section 2: Material-UI imports
 import MuiComponent from "@material-ui/core/Component";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, withTheme } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application
 import ComponentToolbar from "./Toolbar";
@@ -130,7 +132,11 @@ Component.propTypes = {
 -- There MUST be one unique export
 */
 
-export default withStyles(styles)(Component);
+// Basic Export
+// export default withStyles(styles)(Component);
+
+// Advanced Export w/ Redux
+export default compose(withTheme(), withStyles(styles))(Component);
 
 //
 /* ------------ END CONNECT STYLES & EXPORT ---------- */
