@@ -38,7 +38,7 @@ class HistoryContainer extends Component {
 
     return (
       <div className="history-list-wrapper">
-        <History tx={tx} />
+        <History tx={tx} error={error} pending={pending} />
       </div>
     );
   }

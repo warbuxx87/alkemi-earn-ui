@@ -8,8 +8,8 @@ import {
 // Define initial state
 const initialState = {
   pending: false,
-  active: null,
-  inactive: null,
+  active: [],
+  inactive: [],
   error: null
 };
 
