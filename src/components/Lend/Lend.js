@@ -53,7 +53,6 @@ const Lend = ({ classes, activeLend, inactiveLend, pending, onActivate }) => (
         <Grid item lg={12} xs={12}>
           <LendTable
             data={inactiveLend}
-            loading={pending}
             onActivate={onActivate}
           />
         </Grid>

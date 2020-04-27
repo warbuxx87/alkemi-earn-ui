@@ -156,7 +156,7 @@ const Columns = [
 ];
 
 // Section 5: Code Component
-const LendTable = ({ classes, onboard, data = [], loading={}, onActivate }) => (
+const LendTable = ({ classes, onboard, data = [], onActivate }) => (
   <Grid className={classes.tableLending}>
     <Grid container className={classes.bg_title}>
       <Grid item md={6}>
@@ -242,10 +242,10 @@ const LendTable = ({ classes, onboard, data = [], loading={}, onActivate }) => (
                       className={classes.btnActiveOutline}
                       variant="outlined"
                       color="secondary"
-                      disable={loading[Row.unit]}
+                      disable={Row.pending}
                       onClick={() => onActivate(Row.unit)}
                     >
-                      {loading[Row.unit] ? (
+                      {Row.pending ? (
                         <CircularProgress size={20} color="white" />
                       ) : (
                         "Activate"

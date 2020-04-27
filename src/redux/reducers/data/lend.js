@@ -14,48 +14,54 @@ import eth from "assets/images/WETH.svg";
 // import pax from "assets/images/pax.png";
 
 function createData(name, unit, image, wallet, balance, apr, collateral) {
-  return { name, unit, image, wallet, balance, apr, collateral };
+  return { name, unit, image, wallet, balance, apr, collateral, activated: false, pending: false };
 }
 
-const assets = [
-  createData("Ether", "WETH", eth, 0, 0, 0, 0),
-  createData("Maker DAI", "DAI", dai, 0, 0, 0, 0),
-  createData("Tether", "USDT", usdt, 0, 0, 0, 0),
-  createData("USD Coin", "USDC", usdc, 0, 0, 0, 0),
-  createData("Tokenized BTC", "imBTC", imbtc, 0, 0, 0, 0)
-  //createData('Paxos','PAX', pax, 0, 0, 0, 0),
-];
-
+const assets = {
+  WETH: createData("Ether", "WETH", eth, 0, 0, 0, 0),
+  DAI: createData("Maker DAI", "DAI", dai, 0, 0, 0, 0),
+  USDT: createData("Tether", "USDT", usdt, 0, 0, 0, 0),
+  USDC: createData("USD Coin", "USDC", usdc, 0, 0, 0, 0),
+  imBTC: createData("Tokenized BTC", "imBTC", imbtc, 0, 0, 0, 0)
+  // PAX: createData('Paxos','PAX', pax, 0, 0, 0, 0),
+}
 // Define initial state
 const initialState = {
-  pending: false,
-  active: [],
-  inactive: assets,
+  assets,
   error: null
 };
 
 // Implement "reducer" function with initial state as default state
-export default (state = initialState, { type, active, inactive }) => {
-  switch (type) {
+export default (state = initialState, action) => {
+  switch (action.type) {
     case FETCH_LEND_PENDING:
       return {
         ...state,
-        pending: true
+        assets: {
+          ...state.assets,
+          [action.asset]: {
+            ...state.assets[action.asset],
+            pending: true
+          }
+        }
       };
-
     case FETCH_LEND_SUCCESS:
       return {
         ...state,
-        pending: false,
-        active: active,
-        inactive: inactive
+        assets: {
+          ...state.assets,
+          [action.asset]: {
+            ...state.assets[action.asset],
+            pending: false,
+            activated: true
+          }
+        }
       };
 
     case FETCH_LEND_ERROR:
       return {
         ...state,
-        pending: false,
-        error: active.error
+        error: action.error
       };
 
     default:

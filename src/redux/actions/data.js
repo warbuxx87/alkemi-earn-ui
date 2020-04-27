@@ -31,22 +31,20 @@ export const fetchStatsError = error => ({
 export const FETCH_LEND_PENDING = "FETCH_LEND_PENDING";
 
 // Declare action creator
-export const fetchLendPending = () => ({
+export const fetchLendPending = (asset) => ({
   // Respect FSA standard format (type, payload, meta properties)
-  type: FETCH_LEND_PENDING
+  type: FETCH_LEND_PENDING,
+  asset
 });
 
 // Declare action type as a constant
 export const FETCH_LEND_SUCCESS = "FETCH_LEND_SUCCESS";
 
 // Declare action creator
-export const fetchLendSuccess = (activeLend, inactiveLend) => ({
+export const fetchLendSuccess = (asset) => ({
   // Respect FSA standard format (type, payload, meta properties)
   type: FETCH_LEND_SUCCESS,
-  payload: {
-    activeLend,
-    inactiveLend
-  }
+  asset,
 });
 
 // Declare action type as a constant
