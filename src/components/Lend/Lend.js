@@ -32,7 +32,7 @@ const styles = theme => ({
 });
 
 // Section 5: Code Component
-const Lend = ({ classes, activeLend, inactiveLend }) => (
+const Lend = ({ classes, activeLend, inactiveLend, pending, onActivate }) => (
   <Container maxWidth={false} className={classes.container}>
     <Grid container spacing={3}>
       <Grid item lg={4} sm={6} xs={12}>
@@ -53,8 +53,8 @@ const Lend = ({ classes, activeLend, inactiveLend }) => (
         <Grid item lg={12} xs={12}>
           <LendTable
             data={inactiveLend}
-            // loading={this.state.pending}
-            // onActivate={this.onActivate}
+            loading={pending}
+            onActivate={onActivate}
           />
         </Grid>
       )}{" "}
@@ -65,6 +65,7 @@ const Lend = ({ classes, activeLend, inactiveLend }) => (
 // Section 6: Documentation with PropTypes
 Lend.propTypes = {
   classes: PropTypes.object.isRequired,
+  pending: PropTypes.bool.isRequired,
   activeLend: PropTypes.array.isRequired,
   inactiveLend: PropTypes.array.isRequired
 };

@@ -2,30 +2,30 @@
 
 ## Table of Contents
 
--   [Project Structure](#project-structure)
--   [Contributing](#contributing)
-    -   [Requirements](#requirements)
-    -   [Set-up dev environment](#set-up-dev-environment)
-    -   [Start developing](#start-developing)
-    -   [Install new dependencies](#install-new-dependencies)
-    -   [Release a new version](#release-a-new-version)
--   [Tests](#test)
-    -   [Commands](#commands)
-    -   [Practices](#practices)
-    -   [Test Utilities](#test-utilities)
--   [Code linting](#code-linting)
--   [Files organization & file naming convention](#files-organization-file-naming-convention)
-    -   [Redux related files go into _src/redux_](#redux-related-files-go-into-srcredux)
-    -   [Components go into _src/components_](#components-go-into-srccomponents)
-    -   [Containers go into _src/containers_](#containers-go-into-srccontainers)
--   [Component & Container separation pattern](#component-container-separation-pattern)
-    -   [Motivation for the pattern](#motivation-for-the-pattern)
-    -   [Components are concerned with how things look](#components-or-presentational-components-are-concerned-with-how-things-look)
-    -   [Containers are concerned with how things work](#containers-are-concerned-with-how-things-work)
--   [Others](#others)
-    -   [Material-UI](#material-ui)
-    -   [Audit Application](#audit-application)
--   [Conventions](#conventions)
+- [Project Structure](#markdown-header-project-structure)
+- [Contributing](#contributing)
+  - [Requirements](#requirements)
+  - [Set-up dev environment](#set-up-dev-environment)
+  - [Start developing](#start-developing)
+  - [Install new dependencies](#install-new-dependencies)
+  - [Release a new version](#release-a-new-version)
+- [Tests](#test)
+  - [Commands](#commands)
+  - [Practices](#practices)
+  - [Test Utilities](#test-utilities)
+- [Code linting](#code-linting)
+- [Files organization & file naming convention](#files-organization-file-naming-convention)
+  - [Redux related files go into _src/redux_](#redux-related-files-go-into-srcredux)
+  - [Components go into _src/components_](#components-go-into-srccomponents)
+  - [Containers go into _src/containers_](#containers-go-into-srccontainers)
+- [Component & Container separation pattern](#component-container-separation-pattern)
+  - [Motivation for the pattern](#motivation-for-the-pattern)
+  - [Components are concerned with how things look](#components-or-presentational-components-are-concerned-with-how-things-look)
+  - [Containers are concerned with how things work](#containers-are-concerned-with-how-things-work)
+- [Others](#others)
+  - [Material-UI](#material-ui)
+  - [Audit Application](#audit-application)
+- [Conventions](#conventions)
 
 ## Project Structure
 
@@ -50,12 +50,12 @@
 
 ### Requirements
 
--   docker>=17.0.0
--   docker-compose>=1.17.0
--   node>=9.0.0
--   yarn>=1.6.0
+- docker>=17.0.0
+- docker-compose>=1.17.0
+- node>=9.0.0
+- yarn>=1.6.0
 
-### Set-up dev environement
+### Set-up dev environment
 
 #. If not yet done, clone project locally
 
@@ -83,10 +83,10 @@ You can now access application in dev mode at http://localhost
 
 Requirements
 
--   New branch **MUST** be started from _master_ (which is our dev branch)
--   Feature branch **MUST** be named `feature/[a-zA-Z0-9\-]+`
--   Bug fix branch **MUST** be named `fix/[a-zA-Z0-9\-]+`
--   Branch referring to an open issue **MUST** be named `(fix|feature)/<issue-ID>`
+- New branch **MUST** be started from _master_ (which is our dev branch)
+- Feature branch **MUST** be named `feature/[a-zA-Z0-9\-]+`
+- Bug fix branch **MUST** be named `fix/[a-zA-Z0-9\-]+`
+- Branch referring to an open issue **MUST** be named `(fix|feature)/<issue-ID>`
 
 2. Develop on new branch being careful to write test for every change you proceed to
 
@@ -119,8 +119,8 @@ sudo chown -R $USER:$USER node_modules
 
 2. Bump to version `x.x.x`
 
-    - `package.json`: change version to `x.x.x`
-    - `CHANGES.md`: ensure release section `x.x.x` documentation is exhaustive and set release date
+   - `package.json`: change version to `x.x.x`
+   - `CHANGES.md`: ensure release section `x.x.x` documentation is exhaustive and set release date
 
 3. Commit with message `bump version to x.x.x`
 
@@ -136,8 +136,8 @@ git tag -a x.x.x -m "Version x.x.x"
 
 4. Bump to version `increment(x.x.x)-dev`
 
-    - `package.json`: change version to `increment(x.x.x)-dev`
-    - `CHANGES.md`: create empty `increment(x.x.x)-dev` section with unreleased status
+   - `package.json`: change version to `increment(x.x.x)-dev`
+   - `CHANGES.md`: create empty `increment(x.x.x)-dev` section with unreleased status
 
 5. Push branch and tags
 
@@ -173,9 +173,9 @@ We use [Enzyme Shallow rendering](http://airbnb.io/enzyme/) to test component
 
 **Requirements**
 
--   Tests **MUST** be written in a `**/__tests__` folder located in the same directory as the element tested
--   Tests file for `<filename>.js` **MUST** be named `<filename>.test.js`
--   **SHOULD** use [Jest snapshot testing](https://facebook.github.io/jest/docs/en/snapshot-testing.html)
+- Tests **MUST** be written in a `**/__tests__` folder located in the same directory as the element tested
+- Tests file for `<filename>.js` **MUST** be named `<filename>.test.js`
+- **SHOULD** use [Jest snapshot testing](https://facebook.github.io/jest/docs/en/snapshot-testing.html)
 
 **Folder structure**
 
@@ -207,7 +207,7 @@ Some pre-commit hooks are set-up so whenever you make a commit, _prettier_ will 
 
 **Requirements**
 
--   Code **MUST** respect linting rules defined in `.eslintrc`
+- Code **MUST** respect linting rules defined in `.eslintrc`
 
 ## Files organization & file naming convention
 
@@ -217,9 +217,9 @@ We make active usage of _redux_, if not familiar with _redux_ we recommend going
 
 **Requirements**
 
--   Actions **MUST** go into a into _src/redux/actions_
--   Reducers **MUST** go into a into _src/redux/reducers_
--   Enhancers **MUST** go into a into _src/redux/enhancers_
+- Actions **MUST** go into a into _src/redux/actions_
+- Reducers **MUST** go into a into _src/redux/reducers_
+- Enhancers **MUST** go into a into _src/redux/enhancers_
 
 **Folder structure**
 
@@ -239,13 +239,13 @@ We highly recommend you reading more about [structuring reducer](https://redux.j
 
 **Requirements**
 
--   State structure (or state _shape_) **MUST** be defined in terms of _domain data_ & _app status_, it **MUST NOT** be defined after your _UI_ component tree
--   Root reducer (feeded to _createStore()_) **MUST** combine together specialized reducers:
-    -   _data_ reducers, handling the data application needs to show, use, or modify (typically information retrieved from some APIs)
-    -   _status_ reducers, handling information related to application's behavior (such as "there is a request in progress")
-    -   _ui_ reducer, handling how the UI is currently displayed (such as "Sidebar is open")
--   Global state _shape_ **MUST** reflect _src/redux/reducers/_ folder structure. Keys in global state **MUST** be the same as file names _src/redux/reducers/_
--   Specialized reducer files **MUST** implement a _reducer_ function exported as default
+- State structure (or state _shape_) **MUST** be defined in terms of _domain data_ & _app status_, it **MUST NOT** be defined after your _UI_ component tree
+- Root reducer (feeded to _createStore()_) **MUST** combine together specialized reducers:
+  - _data_ reducers, handling the data application needs to show, use, or modify (typically information retrieved from some APIs)
+  - _status_ reducers, handling information related to application's behavior (such as "there is a request in progress")
+  - _ui_ reducer, handling how the UI is currently displayed (such as "Sidebar is open")
+- Global state _shape_ **MUST** reflect _src/redux/reducers/_ folder structure. Keys in global state **MUST** be the same as file names _src/redux/reducers/_
+- Specialized reducer files **MUST** implement a _reducer_ function exported as default
 
 **Folder structure**
 
@@ -320,19 +320,19 @@ _Actions_ are payloads of information that send data from your application to yo
 
 **Requirements**
 
--   Actions **MUST** be grouped by piece of state they cover (e.g. UI actions are defined into _src/redux/actions/ui.js_)
--   Each action type **MUST** be declared as a constant
--   Each action **SHOULD** come with an action creator function
--   Action types & creator functions **MUST** be implemented in the same file
--   Actions **MUST** be serializable (if you think in passing a function into an action for handling by reducers, it means that you actually need a redux middleware)
--   Actions **MUST** follow [Flux-Standard-Action](FSA)(https://github.com/redux-utilities/flux-standard-action#actions) format
-    -   **MUST** be a plain JavaScript object
-    -   **MUST** have a `type` property
-    -   **MAY** have an `error` property
-    -   **MAY** have an `payload` property
-    -   **MAY** have an `meta` property
-    -   **MUST NOT** include property other than `type`, `error`, `payload` and `meta`
--   There **SHOULD NOT** be a 1-to-1 link between actions and reducers. Typically an action could be reduced by multiple reducers
+- Actions **MUST** be grouped by piece of state they cover (e.g. UI actions are defined into _src/redux/actions/ui.js_)
+- Each action type **MUST** be declared as a constant
+- Each action **SHOULD** come with an action creator function
+- Action types & creator functions **MUST** be implemented in the same file
+- Actions **MUST** be serializable (if you think in passing a function into an action for handling by reducers, it means that you actually need a redux middleware)
+- Actions **MUST** follow [Flux-Standard-Action](FSA)(https://github.com/redux-utilities/flux-standard-action#actions) format
+  - **MUST** be a plain JavaScript object
+  - **MUST** have a `type` property
+  - **MAY** have an `error` property
+  - **MAY** have an `payload` property
+  - **MAY** have an `meta` property
+  - **MUST NOT** include property other than `type`, `error`, `payload` and `meta`
+- There **SHOULD NOT** be a 1-to-1 link between actions and reducers. Typically an action could be reduced by multiple reducers
 
 **Folder structure**
 
@@ -353,14 +353,14 @@ src/
 export const ADD_TODO = "ADD_TODO";
 // Declare action creator
 export const addTodo = (text, category) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: ADD_TODO,
-    payload: {
-        text
-    },
-    meta: {
-        category
-    }
+  // Respect FSA standard format (type, payload, meta properties)
+  type: ADD_TODO,
+  payload: {
+    text
+  },
+  meta: {
+    category
+  }
 });
 ```
 
@@ -373,7 +373,7 @@ We highly recommend you reading more about [middlewares in _redux_](https://redu
 
 **Requirements**
 
--   Middlewares **MUST** go into _src/redux/enhancers/middlewares_
+- Middlewares **MUST** go into _src/redux/enhancers/middlewares_
 
 **Folder structure**
 
@@ -393,22 +393,22 @@ src/
 
 **Requirements**
 
--   All components **MUST** go into _src/components_
--   Components **MUST** have a unique name
+- All components **MUST** go into _src/components_
+- Components **MUST** have a unique name
 
 #### Module specific components go into _src/components/_
 
 **Requirements**
 
--   Component files **MUST** go into a into a folder named after the component in _src/components/_
--   Component code **MUST** be split into as many atomic sub components as necessary
--   Component **MUST** follow naming pattern _path-based-component-naming_, which consists in naming the component accordingly to its relative path from _src/components/_
+- Component files **MUST** go into a into a folder named after the component in _src/components/_
+- Component code **MUST** be split into as many atomic sub components as necessary
+- Component **MUST** follow naming pattern _path-based-component-naming_, which consists in naming the component accordingly to its relative path from _src/components/_
 
 Examples of those components are
 
--   Skeleton elements such as _AppBar_, _Sidebar_
--   View pannels such as _Home_
--   Layout elements such as _Layout_
+- Skeleton elements such as _AppBar_, _Sidebar_
+- View pannels such as _Home_
+- Layout elements such as _Layout_
 
 **Folder structure and file naming**
 
@@ -454,8 +454,8 @@ const AppBarIconButton = () => (
 
 **Requirements**
 
--   Generic UI components **MUST NOT** held business logic specific to the application (they actually could be stored on some external _npm_ library)
--   **MUST** follow naming pattern _path-based-component-naming_, which consists in naming the component accordingly to its relative path from _src/components/UI_
+- Generic UI components **MUST NOT** held business logic specific to the application (they actually could be stored on some external _npm_ library)
+- **MUST** follow naming pattern _path-based-component-naming_, which consists in naming the component accordingly to its relative path from _src/components/UI_
 
 Examples of those components are: _Button_, _Input_, _Checkbox_, _Select_, _Modal_, etc…
 
@@ -481,9 +481,9 @@ src/
 
 **Requirements**
 
--   Container **MUST** go into _src/containers_
--   Container **MUST** follow same relative path from _src/containers_ as the component it wraps from _src/components_
--   Container **MUST** have same name as the component it wraps
+- Container **MUST** go into _src/containers_
+- Container **MUST** follow same relative path from _src/containers_ as the component it wraps from _src/components_
+- Container **MUST** have same name as the component it wraps
 
 **Folder structure**
 
@@ -506,10 +506,10 @@ We respect a separation between presentational components & containers.
 
 ### Motivation for the pattern
 
--   Better separation of concerns makes app understandable and better UI writing components this way.
--   Better reusability. Same presentational component can be used with completely different state sources, and turn those into separate container components that can be further reused.
--   Presentational components are essentially app’s “palette”. It is possible to put them on a single page and let designers tweak all their variations without touching the app’s logic. It is possible to run screenshot regression tests on that page.
--   This forces to extract “layout components” such as Sidebar, AppBar, etc. and use _this.props.children_ instead of duplicating the same markup and layout in several container components.
+- Better separation of concerns makes app understandable and better UI writing components this way.
+- Better reusability. Same presentational component can be used with completely different state sources, and turn those into separate container components that can be further reused.
+- Presentational components are essentially app’s “palette”. It is possible to put them on a single page and let designers tweak all their variations without touching the app’s logic. It is possible to run screenshot regression tests on that page.
+- This forces to extract “layout components” such as Sidebar, AppBar, etc. and use _this.props.children_ instead of duplicating the same markup and layout in several container components.
 
 You can read more about it [here](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
 
@@ -517,15 +517,15 @@ You can read more about it [here](https://medium.com/@dan_abramov/smart-and-dumb
 
 **Requirements**
 
--   **SHOULD** implement some DOM markup and styles of their own
--   **MAY** contain both presentational components and containers
--   **SHOULD** allow containment via this.props.children.
--   **SHOULD NOT** have their own state (when they do, it **MUST** be UI state and **MUST NOT** be data)
--   **SHOULD** be written as functional components unless they need state, lifecycle hooks, or performance optimizations
--   **MUST** receive data and callbacks exclusively via props.
--   **MUST NOT** have dependencies with the rest of the app, such as redux actions or stores
--   **MUST NOT** specify how the data is loaded or mutated (API calls **MUST NOT** be defined in a component)
--   **MUST NOT** define any route
+- **SHOULD** implement some DOM markup and styles of their own
+- **MAY** contain both presentational components and containers
+- **SHOULD** allow containment via this.props.children.
+- **SHOULD NOT** have their own state (when they do, it **MUST** be UI state and **MUST NOT** be data)
+- **SHOULD** be written as functional components unless they need state, lifecycle hooks, or performance optimizations
+- **MUST** receive data and callbacks exclusively via props.
+- **MUST NOT** have dependencies with the rest of the app, such as redux actions or stores
+- **MUST NOT** specify how the data is loaded or mutated (API calls **MUST NOT** be defined in a component)
+- **MUST NOT** define any route
 
 #### Implement a component
 
@@ -533,11 +533,11 @@ You can read more about it [here](https://medium.com/@dan_abramov/smart-and-dumb
 
 **Requirements**
 
--   **MAY** import components from UI libraries typically _Material-UI_
--   **MAY** import components and containers from the rest of the application
--   **SHOULD NOT** import any resources related to _Redux_, except _compose()_ that is sometime convenient to connect multiple marterial-ui wrappers (_withStyles()_, _withTheme()_...)
--   **SHOULD NOT** have any dependencies in the rest of the application, except components or containers
--   **MUST** be organized in 3 ordered sections: 1. low-level React imports / 2. _Material-UI_ imports / 3. intra-application imports
+- **MAY** import components from UI libraries typically _Material-UI_
+- **MAY** import components and containers from the rest of the application
+- **SHOULD NOT** import any resources related to _Redux_, except _compose()_ that is sometime convenient to connect multiple marterial-ui wrappers (_withStyles()_, _withTheme()_...)
+- **SHOULD NOT** have any dependencies in the rest of the application, except components or containers
+- **MUST** be organized in 3 ordered sections: 1. low-level React imports / 2. _Material-UI_ imports / 3. intra-application imports
 
 **Example**
 
@@ -560,32 +560,32 @@ import AppBarToolbar from "./Toolbar";
 
 **Requirements**
 
--   **MUST** be a function taking theme as argument and returning an object
+- **MUST** be a function taking theme as argument and returning an object
 
 **Example**
 
 ```javascript
 const styles = theme => ({
-    appBar: {
-        position: "fixed",
-        top: 0,
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(["width", "margin"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen
-        })
-    },
-    appBarShifted: {
-        marginLeft: 240,
-        width: `calc(100% - ${240}px)`,
-        transition: theme.transitions.create(["width", "margin"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen
-        }),
-        [theme.breakpoints.down("sm")]: {
-            width: "100%"
-        }
+  appBar: {
+    position: "fixed",
+    top: 0,
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
+  },
+  appBarShifted: {
+    marginLeft: 240,
+    width: `calc(100% - ${240}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    }),
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
     }
+  }
 });
 ```
 
@@ -593,31 +593,31 @@ const styles = theme => ({
 
 **Requirements**
 
--   **SHOULD** be a function taking a props object as an argument (except lifecycle, UI state or some optimization are required)
--   **MUST** respect compenent naming convention (see below)
--   **MUST** be atomic
--   **MUST** be agnostic of the rest of the application, this **MUST** include every variable namings. Think it as it should be able to exist on its own
--   **MUST** be documented with PropTypes
+- **SHOULD** be a function taking a props object as an argument (except lifecycle, UI state or some optimization are required)
+- **MUST** respect compenent naming convention (see below)
+- **MUST** be atomic
+- **MUST** be agnostic of the rest of the application, this **MUST** include every variable namings. Think it as it should be able to exist on its own
+- **MUST** be documented with PropTypes
 
 **Example**
 
 ```javascript
 const AppBar = ({
-    classes,
-    shifted // for agnosticity we use variable name "shifted" over "sidebarOpen"
+  classes,
+  shifted // for agnosticity we use variable name "shifted" over "sidebarOpen"
 }) => (
-    <MuiAppBar
-        position="absolute"
-        className={classNames(classes.appBar, shifted && classes.appBarShifted)}
-    >
-        <AppBarToolbar shifted={shifted} />
-    </MuiAppBar>
+  <MuiAppBar
+    position="absolute"
+    className={classNames(classes.appBar, shifted && classes.appBarShifted)}
+  >
+    <AppBarToolbar shifted={shifted} />
+  </MuiAppBar>
 );
 
 // Documentation with PropTypes
 AppBar.propTypes = {
-    classes: PropTypes.object.isRequired,
-    shifted: PropTypes.bool
+  classes: PropTypes.object.isRequired,
+  shifted: PropTypes.bool
 };
 ```
 
@@ -625,8 +625,8 @@ AppBar.propTypes = {
 
 **Requirements**
 
--   **MAY** inject styles information using _withStyle()_, _withTheme()_, _withWidth()_
--   There **MUST** be one unique export
+- **MAY** inject styles information using _withStyle()_, _withTheme()_, _withWidth()_
+- There **MUST** be one unique export
 
 **Example**
 
@@ -646,14 +646,14 @@ export default compose(withTheme(), withStyles(styles))(AppBar);
 
 **Requirements**
 
--   **MAY** contain both presentational components and containers
--   **SHOULD NOT** define DOM markup of their own (except for some wrapping divs)
--   **MUST NOT** have styles
--   **MAY** provide the data and behavior to presentational or other container components.
--   **MAY** organise components/containers using routes
--   **MAY** implement redux related elements _mapStateToProp()_, _mapDispatchToProps()_, _mergeProps()_ and connect it to presentational component using _connect()_
--   **MAY** implement API calls or other side effects
--   **MAY** be stateful, as they tend to serve as data sources
+- **MAY** contain both presentational components and containers
+- **SHOULD NOT** define DOM markup of their own (except for some wrapping divs)
+- **MUST NOT** have styles
+- **MAY** provide the data and behavior to presentational or other container components.
+- **MAY** organise components/containers using routes
+- **MAY** implement redux related elements _mapStateToProp()_, _mapDispatchToProps()_, _mergeProps()_ and connect it to presentational component using _connect()_
+- **MAY** implement API calls or other side effects
+- **MAY** be stateful, as they tend to serve as data sources
 
 #### Implement a container
 
@@ -661,10 +661,10 @@ export default compose(withTheme(), withStyles(styles))(AppBar);
 
 **Requirements**
 
--   **MAY** import elements from state management libraries elements (redux, react-redux)
--   **MAY** import elements from _src/redux_ such as actions or selectors
--   **MAY** import elements from routing library
--   **MAY** import _Material-UI_ utilities such as _isWidthUp()_
+- **MAY** import elements from state management libraries elements (redux, react-redux)
+- **MAY** import elements from _src/redux_ such as actions or selectors
+- **MAY** import elements from routing library
+- **MAY** import _Material-UI_ utilities such as _isWidthUp()_
 
 **Example**
 
@@ -685,10 +685,10 @@ import { HOME } from "../../constants/routes";
 
 **Requirements**
 
--   **SHOULD NOT** define DOM markup of their own (except for some wrapping divs)
--   **MAY** define route
--   **MAY** implement hooks on React lifecycle
--   **MUST** respect
+- **SHOULD NOT** define DOM markup of their own (except for some wrapping divs)
+- **MAY** define route
+- **MAY** implement hooks on React lifecycle
+- **MUST** respect
 
 **Example**
 
@@ -696,13 +696,13 @@ Lifecycle container
 
 ```javascript
 class WithLifecycleHooks extends Component {
-    componentDidMount() {
-        // Could perform some API calls here
-    }
+  componentDidMount() {
+    // Could perform some API calls here
+  }
 
-    render() {
-        // return a presentational component
-    }
+  render() {
+    // return a presentational component
+  }
 }
 ```
 
@@ -710,10 +710,10 @@ Routing container
 
 ```javascript
 const Layout = () => (
-    <Switch>
-        <Route path="/" exact component={() => <Redirect to={HOME} />} />
-        <Route component={LayoutSkeleton} />
-    </Switch>
+  <Switch>
+    <Route path="/" exact component={() => <Redirect to={HOME} />} />
+    <Route component={LayoutSkeleton} />
+  </Switch>
 );
 ```
 
@@ -721,20 +721,20 @@ const Layout = () => (
 
 **Requirements**
 
--   **MAY** implement _mapStateToProps(state, [ownProps])_
--   **MAY** implement _mapDispatchToProps(dispatch, [ownProps])_. If it is only required to map action creators it **MUST** be an object
--   **MAY** implement _mergeProps(stateProps, dispatchProps, ownProps)_
--   Aggregating _props_ **MUST NOT** be performed within container, _ownProps_ and _mergeProps()_ allow to accomplish it properly out of the component (c.f. https://github.com/reduxjs/react-redux/blob/master/docs/api.md)
+- **MAY** implement _mapStateToProps(state, [ownProps])_
+- **MAY** implement _mapDispatchToProps(dispatch, [ownProps])_. If it is only required to map action creators it **MUST** be an object
+- **MAY** implement _mergeProps(stateProps, dispatchProps, ownProps)_
+- Aggregating _props_ **MUST NOT** be performed within container, _ownProps_ and _mergeProps()_ allow to accomplish it properly out of the component (c.f. https://github.com/reduxjs/react-redux/blob/master/docs/api.md)
 
 **Example**
 
 ```javascript
 const mapStateToProps = state => ({
-    shifted: state.ui.sideBarOpen
+  shifted: state.ui.sideBarOpen
 });
 
 const mapDispatchToProps = {
-    onClick: openSidebar
+  onClick: openSidebar
 };
 ```
 
@@ -742,8 +742,8 @@ const mapDispatchToProps = {
 
 **Requirements**
 
--   **MAY** connect redux information to a comp
--   **MUST** be one unique export
+- **MAY** connect redux information to a comp
+- **MUST** be one unique export
 
 **Example**
 
@@ -769,8 +769,8 @@ To make UI fully responsive, you can use [Material-UI breakpoints](https://mater
 
 ### Audit application
 
--   Use [Lighthouse](https://developers.google.com/web/tools/lighthouse/) of Google in order to audit your PWA and see what's missing (icons, https, ...)
--   Follow the guidelines [here](https://developers.google.com/web/fundamentals/) (Google opinionated way of building PWA)
+- Use [Lighthouse](https://developers.google.com/web/tools/lighthouse/) of Google in order to audit your PWA and see what's missing (icons, https, ...)
+- Follow the guidelines [here](https://developers.google.com/web/fundamentals/) (Google opinionated way of building PWA)
 
 ## Conventions
 
