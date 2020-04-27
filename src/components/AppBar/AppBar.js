@@ -218,5 +218,4 @@ AppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-//export default withOnboard(withStyles(styles)(AppBar));
 export default withStyles(styles)(AppBar);
