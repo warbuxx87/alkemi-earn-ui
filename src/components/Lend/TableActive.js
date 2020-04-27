@@ -263,7 +263,7 @@ const columns = [
 ];
 
 // Section 5: Code Component
-const LendTableActive = ({ classes, data, columns }) => (
+const LendTableActive = ({ classes, data = [], columns = [] }) => (
   <Grid className={classes.tableALending}>
     <Grid container className={classes.bg_title}>
       <Grid item md={6}>

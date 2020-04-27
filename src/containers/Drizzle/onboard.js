@@ -42,7 +42,7 @@ const wallets = [
   }
 ];
 
-export default ({ onChooseWallet }) => Onboard({
+export default Onboard({
   dappId: DAPP_ID, // [String] The API key created by step one above
   networkId: 4, // [Integer] The Ethereum network ID your Dapp uses.
   darkMode: true,
@@ -50,7 +50,7 @@ export default ({ onChooseWallet }) => Onboard({
     wallets: wallets
   },
   subscriptions: {
-    wallet: onChooseWallet
+    wallet: (wallet) => console.log('subscriptions', wallet)
   },
   walletCheck: walletChecks
 });

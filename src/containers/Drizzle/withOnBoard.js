@@ -1,13 +1,8 @@
 import React from "react";
+import onboard from "./onboard"
 
-const OnBoardContext = React.createContext();
-
-export const OnBoardProvider = OnBoardContext.Provider
-
-export default function withOnboard(Component) {
-  return (props) => (
-    <OnBoardContext.Consumer>
-      {onboard => <Component onboard={onboard} {...props} />}
-    </OnBoardContext.Consumer>
-  )
+const withOnboard = () => (Component) => {
+  return (props) => (<Component onboard={onboard} {...props} />)
 }
+
+export default withOnboard
