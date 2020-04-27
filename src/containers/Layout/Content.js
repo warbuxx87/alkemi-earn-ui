@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router";
 
 import Dashboard from "components/Dashboard/Dashboard";
-import Lend from "components/Lend/Lend";
+import Lend from "containers/Lend/Lend";
 import Borrow from "components/Borrow/Borrow";
 import Markets from "components/Markets/Markets";
 import History from "containers/History/History";

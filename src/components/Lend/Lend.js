@@ -1,180 +1,73 @@
+// Main Component
+
+// Section 1: React low level imports
 import React from "react";
-import { withStyles, createStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+
+// Section 2: Material-UI imports
+import { withStyles } from "@material-ui/core/styles";
 import { Container, Grid } from "@material-ui/core";
 
-import TotalValue from "./lendingInfo/TotalValue";
-import TotalInterest from "./lendingInfo/TotalInterest";
-import TotalApr from "./lendingInfo/TotalApr";
+// Section 3: Components & Containers import from the application
+import LendTable from "./Table";
+import LendTableActive from "./TableActive";
+import LendCardValue from "./CardValue";
+import LendCardInterest from "./CardInterest";
+import LendCardAPR from "./CardAPR";
 
-import dai from "assets/images/DAI.svg";
-import usdc from "assets/images/USDC.svg";
-import imbtc from "assets/images/imBTC.svg";
-import usdt from "assets/images/USDT.svg";
-// import pax from "assets/images/pax.png";
-import eth from "assets/images/WETH.svg";
-
-import {
-  handle_approve,
-  get_allowance
-  // get_tokens_decimals
-} from "utils/util";
-//import withDrizzle from 'utils/HOC/withDrizzle'
-
-import ActiveLending from "./activeLending";
-import LendingTable from "./lendingTable";
-
-const address = require("constants/address_map.json");
-
-const styles = theme =>
-  createStyles({
-    root: {
-      backgroundColor: theme.palette.background.dark,
-      minHeight: "100%",
-      paddingTop: theme.spacing(3),
-      paddingBottom: theme.spacing(3)
-    },
-    container: {
-      [theme.breakpoints.up("lg")]: {
-        paddingLeft: 0,
-        paddingRight: 0
-      }
+// Section 4: Define Styles function taking theme as argument and returning an object
+const styles = theme => ({
+  root: {
+    backgroundColor: theme.palette.background.dark,
+    minHeight: "100%",
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3)
+  },
+  container: {
+    [theme.breakpoints.up("lg")]: {
+      paddingLeft: 0,
+      paddingRight: 0
     }
-  });
-
-function createData(name, unit, image, wallet, balance, apr, collateral) {
-  return { name, unit, image, wallet, balance, apr, collateral };
-}
-
-const assets = [
-  createData("Ether", "WETH", eth, 0, 0, 0, 0),
-  createData("Maker DAI", "DAI", dai, 0, 0, 0, 0),
-  createData("Tether", "USDT", usdt, 0, 0, 0, 0),
-  createData("USD Coin", "USDC", usdc, 0, 0, 0, 0),
-  createData("Tokenized BTC", "imBTC", imbtc, 0, 0, 0, 0)
-  //createData('Paxos','PAX', pax, 0, 0, 0, 0),
-];
-
-class Lend extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      approved: {},
-      loading: {}
-    };
   }
+});
 
-  // async componentDidMount() {
-  //   this.web3 = this.props.drizzle.web3;
-  //   if (!this.web3.eth) return;
-  //   const net_type = await this.web3.eth.net.getNetworkType();
-  //   const contract = this.props.drizzle.contracts;
-  //   console.log(" *** init contract finished *** ");
-  //   this.setState({ net_type: net_type, contract: contract });
-  //   // const [
-  //   //   WETH_decimals,
-  //   //   DAI_decimals,
-  //   //   USDT_decimals,
-  //   // ] = await get_tokens_decimals(contract.WETH, contract.DAI, contract.USDT)
-  //   // this.setState({ WETH_decimals, USDT_decimals, DAI_decimals })
-  //   const my_account = (await this.web3.givenProvider.enable())[0];
-  //   //this.getState({ my_account });
-  //   this.setState({ my_account });
-  //   console.log("connected: ", my_account);
-  //   assets.forEach(async asset => {
-  //     let is_approved = await get_allowance(
-  //       contract[asset.unit],
-  //       my_account,
-  //       address[net_type]["address_mMarket"],
-  //       this.web3.utils.toBN
-  //     );
-  //     this.setState({
-  //       approved: { ...this.state.approved, [asset.unit]: is_approved }
-  //     });
-  //     // let timer_Next = setInterval(() => {
-  //     //   if (!this.state.WETH_decimals) {
-  //     //     console.log('111111111: not get yet...');
-  //     //   } else {
-  //     //     console.log('2222222222: i got it...');
-  //     //     clearInterval(timer_Next);
-  //     //     this.setState({ i_am_ready: true })
-  //     //     to do something...
-  //     //     get_my_ETH(this);
-  //     //     get_my_WETH(this);
-  //     //     get_WETH_supplied__available_to_withdraw(this, address[this.state.net_type]['address_WETH'], address[this.state.net_type]['address_mMarket']);
-  //     //   }
-  //     // }, 100)
-  //   });
-  // }
-
-  onActivate = unit => {
-    if (!this.state.contract?.[unit]) return;
-    if (this.state.loading.unit) return;
-    console.log("a");
-    this.setState({ loading: { ...this.state.loading, [unit]: true } });
-    handle_approve({
-      web3: this.props.drizzle.web3,
-      tokenContract: this.state.contract[unit],
-      marketAddress: address[this.state.net_type]["address_mMarket"],
-      myAccount: this.state.my_account,
-      net_type: this.state.net_type,
-      token_name: unit
-    })
-      .then(() => {
-        this.setState({ approved: { ...this.state.approved, [unit]: true } });
-      })
-      .catch(error => {
-        console.error(error);
-      })
-      .finally(() => {
-        this.setState({ loading: { ...this.state.loading, [unit]: false } });
-      });
-  };
-
-  getData = () => {
-    const inactiveLend = [];
-    const activeLend = [];
-    assets.forEach(asset =>
-      this.state.approved[asset.unit]
-        ? activeLend.push(asset)
-        : inactiveLend.push(asset)
-    );
-    return { inactiveLend, activeLend };
-  };
-
-  render() {
-    const { activeLend, inactiveLend } = this.getData();
-    const { classes } = this.props;
-    return (
-      <Container maxWidth={false} className={classes.container}>
-        <Grid container spacing={3}>
-          <Grid item lg={4} sm={6} xs={12}>
-            <TotalValue />
-          </Grid>
-          <Grid item lg={4} sm={6} xs={12}>
-            <TotalInterest />
-          </Grid>
-          <Grid item lg={4} sm={6} xs={12}>
-            <TotalApr />
-          </Grid>
-          {!!activeLend.length && (
-            <Grid item lg={12} xs={12}>
-              <ActiveLending data={activeLend} />
-            </Grid>
-          )}
-          {!!inactiveLend.length && (
-            <Grid item lg={12} xs={12}>
-              <LendingTable
-                data={inactiveLend}
-                loading={this.state.loading}
-                onActivate={this.onActivate}
-              />
-            </Grid>
-          )}{" "}
+// Section 5: Code Component
+const Lend = ({ classes, activeLend, inactiveLend }) => (
+  <Container maxWidth={false} className={classes.container}>
+    <Grid container spacing={3}>
+      <Grid item lg={4} sm={6} xs={12}>
+        <LendCardValue />
+      </Grid>
+      <Grid item lg={4} sm={6} xs={12}>
+        <LendCardInterest />
+      </Grid>
+      <Grid item lg={4} sm={6} xs={12}>
+        <LendCardAPR />
+      </Grid>
+      {!!activeLend.length && (
+        <Grid item lg={12} xs={12}>
+          <LendTableActive data={activeLend} />
         </Grid>
-      </Container>
-    );
-  }
-}
+      )}
+      {!!inactiveLend.length && (
+        <Grid item lg={12} xs={12}>
+          <LendTable
+            data={inactiveLend}
+            loading={this.state.pending}
+            onActivate={this.onActivate}
+          />
+        </Grid>
+      )}{" "}
+    </Grid>
+  </Container>
+);
 
-//export default withDrizzle(withStyles(styles)(Lend));
+// Section 6: Documentation with PropTypes
+Lend.propTypes = {
+  classes: PropTypes.object.isRequired,
+  activeLend: PropTypes.array.isRequired,
+  inactiveLend: PropTypes.array.isRequired
+};
+
+// Section 7:  Connect styles and export
 export default withStyles(styles)(Lend);

@@ -9,7 +9,7 @@ import {
   Typography,
   makeStyles
 } from "@material-ui/core";
-import Label from "../../../components/UI/Label";
+import Label from "components/UI/Label";
 
 const useStyles = makeStyles(theme => ({
   root: {
