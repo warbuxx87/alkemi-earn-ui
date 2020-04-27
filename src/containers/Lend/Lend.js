@@ -8,12 +8,6 @@ import { bindActionCreators } from "redux";
 // Section 2: internal imports
 import onLendActivate from "containers/History/Fetch";
 import Lend from "components/Lend/Lend";
-import dai from "assets/images/DAI.svg";
-import usdc from "assets/images/USDC.svg";
-import imbtc from "assets/images/imBTC.svg";
-import usdt from "assets/images/USDT.svg";
-import eth from "assets/images/WETH.svg";
-// import pax from "assets/images/pax.png";
 
 import {
   handle_approve,
@@ -22,19 +16,6 @@ import {
 } from "containers/Drizzle/util";
 
 const address = require("constants/address_map.json");
-
-function createData(name, unit, image, wallet, balance, apr, collateral) {
-  return { name, unit, image, wallet, balance, apr, collateral };
-}
-
-const assets = [
-  createData("Ether", "WETH", eth, 0, 0, 0, 0),
-  createData("Maker DAI", "DAI", dai, 0, 0, 0, 0),
-  createData("Tether", "USDT", usdt, 0, 0, 0, 0),
-  createData("USD Coin", "USDC", usdc, 0, 0, 0, 0),
-  createData("Tokenized BTC", "imBTC", imbtc, 0, 0, 0, 0)
-  //createData('Paxos','PAX', pax, 0, 0, 0, 0),
-];
 
 class withLend extends Component {
   async componentDidMount() {
@@ -109,26 +90,21 @@ class withLend extends Component {
       });
   };
 
-  getData = () => {
-    const inactiveLend = [];
-    const activeLend = [];
-    assets.forEach(asset =>
-      this.state?.approved?.[asset.unit]
-        ? activeLend.push(asset)
-        : inactiveLend.push(asset)
-    );
-    return { inactiveLend, activeLend };
-  };
+  // getData = () => {
+  //   const inactiveLend = [];
+  //   const activeLend = [];
+  //   assets.forEach(asset =>
+  //     this.state?.approved?.[asset.unit]
+  //       ? activeLend.push(asset)
+  //       : inactiveLend.push(asset)
+  //   );
+  //   return { inactiveLend, activeLend };
+  // };
 
   render() {
     // return a presentational component
-    const { inactiveLend, activeLend } = this.getData();
-    return (
-      <Lend
-        inactiveLend={inactiveLend}
-        activeLend={activeLend}
-      />
-    );
+    const { inactiveLend, activeLend } = this.props;
+    return <Lend inactiveLend={inactiveLend} activeLend={activeLend} />;
   }
 }
 

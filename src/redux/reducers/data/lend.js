@@ -5,11 +5,32 @@ import {
   FETCH_LEND_ERROR
 } from "redux/actions/data";
 
+// import internal assets
+import dai from "assets/images/DAI.svg";
+import usdc from "assets/images/USDC.svg";
+import imbtc from "assets/images/imBTC.svg";
+import usdt from "assets/images/USDT.svg";
+import eth from "assets/images/WETH.svg";
+// import pax from "assets/images/pax.png";
+
+function createData(name, unit, image, wallet, balance, apr, collateral) {
+  return { name, unit, image, wallet, balance, apr, collateral };
+}
+
+const assets = [
+  createData("Ether", "WETH", eth, 0, 0, 0, 0),
+  createData("Maker DAI", "DAI", dai, 0, 0, 0, 0),
+  createData("Tether", "USDT", usdt, 0, 0, 0, 0),
+  createData("USD Coin", "USDC", usdc, 0, 0, 0, 0),
+  createData("Tokenized BTC", "imBTC", imbtc, 0, 0, 0, 0)
+  //createData('Paxos','PAX', pax, 0, 0, 0, 0),
+];
+
 // Define initial state
 const initialState = {
   pending: false,
   active: [],
-  inactive: [],
+  inactive: assets,
   error: null
 };
 
