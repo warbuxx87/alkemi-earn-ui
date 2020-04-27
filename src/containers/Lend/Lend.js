@@ -9,9 +9,17 @@ import { bindActionCreators } from "redux";
 import onLendActivate from "containers/History/Fetch";
 import Lend from "components/Lend/Lend";
 
+// Section 3: Selectors
 import {
-  handle_approve,
-  get_allowance
+  getLendError,
+  getLendActive,
+  getLendInactive,
+  getLendPending
+} from "redux/selectors/data";
+
+import {
+  handle_approve
+  //  get_allowance
   //get_tokens_decimals
 } from "containers/Drizzle/util";
 
@@ -109,9 +117,10 @@ class withLend extends Component {
 }
 
 const mapStateToProps = state => ({
-  pending: state.data.lend.pending,
-  inactiveLend: state.data.lend.inactive,
-  activeLend: state.data.lend.active
+  pending: getLendPending(state),
+  error: getLendError(state),
+  inactiveLend: getLendInactive(state),
+  activeLend: getLendActive(state)
 });
 
 const mapDispatchToProps = dispatch =>

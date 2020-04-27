@@ -58,3 +58,15 @@ export const fetchLendError = error => ({
   type: FETCH_LEND_ERROR,
   error: error
 });
+
+// Declare action type as a constant
+export const ACTIVATE_LEND_ASSET = "ACTIVATE_LEND_ASSET";
+
+// Declare action creator
+export const activateLendAsset = asset => ({
+  // Respect FSA standard format (type, payload, meta properties)
+  type: ACTIVATE_LEND_ASSET,
+  payload: {
+    asset
+  }
+});
