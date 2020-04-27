@@ -1,4 +1,4 @@
-const constant = require("ABIs/constant.json");
+import constant from 'constants/constant.json';
 
 export const get_allowance = async (
   contractInstance,
