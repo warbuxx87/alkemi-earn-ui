@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SvgIcon from '@material-ui/core/SvgIcon';
-import ListItem6 from "../UI/ListItem";
+import SvgIcon from "@material-ui/core/SvgIcon";
+import ListItem from "../UI/ListItem";
 
 function LiquidateIcon(props) {
   return (
@@ -16,7 +16,7 @@ function LiquidateIcon(props) {
 }
 
 const SidebarLiquidateItem = ({ onClick, selected }) => (
-  <ListItem6
+  <ListItem
     icon={<LiquidateIcon />}
     text="Liquidate"
     onClick={onClick}

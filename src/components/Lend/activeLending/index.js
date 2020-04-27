@@ -13,20 +13,20 @@ import WithdrawModal from "./withdrawModal";
 import styles from "./styles";
 
 const StyledTableCell = withStyles(theme => ({
-    head: {
-      backgroundColor: "#202123",
-      color: '#a7a7a7',
-      opacity: "1",
-      fontSize: "12px",
-      lineHeight: "1px",
-      letterSpacing: 0,
-      borderBottom: "1px solid #000000"
-    },
-    body: {
-      fontSize: 14,
-      color: theme.palette.common.white,
-      borderBottom: "1px solid #000000"
-    }
+  head: {
+    backgroundColor: "#202123",
+    color: "#a7a7a7",
+    opacity: "1",
+    fontSize: "12px",
+    lineHeight: "1px",
+    letterSpacing: 0,
+    borderBottom: "1px solid #000000"
+  },
+  body: {
+    fontSize: 14,
+    color: theme.palette.common.white,
+    borderBottom: "1px solid #000000"
+  }
 }))(TableCell);
 
 export default function CustomizedTables({ data }) {
@@ -41,21 +41,21 @@ export default function CustomizedTables({ data }) {
       minWidth: 100,
       align: "right",
       style: "percent",
-      format: value => value.toFixed(2),
+      format: value => value.toFixed(2)
     },
     {
       id: "5",
       label: "Collateral",
       minWidth: 100,
       align: "right",
-      format: value => value.toFixed(2),
+      format: value => value.toFixed(2)
     },
     {
       id: "6",
       label: "",
       minWidth: 280,
       align: "right",
-      format: value => value.toFixed(2),
+      format: value => value.toFixed(2)
     }
   ];
 
@@ -91,7 +91,11 @@ export default function CustomizedTables({ data }) {
                   <Grid container>
                     <Grid item md={5}>
                       <Grid>
-                        <img className={classes.imageSize} src={row.image} alt="dai" />
+                        <img
+                          className={classes.imageSize}
+                          src={row.image}
+                          alt="dai"
+                        />
                       </Grid>
                     </Grid>
                     <Grid item md={7}>

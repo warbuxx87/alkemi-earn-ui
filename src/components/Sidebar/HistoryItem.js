@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SvgIcon from '@material-ui/core/SvgIcon';
-import ListItem5 from "../UI/ListItem";
+import SvgIcon from "@material-ui/core/SvgIcon";
+import ListItem from "../UI/ListItem";
 
 function HistoryIcon(props) {
   return (
@@ -15,7 +15,7 @@ function HistoryIcon(props) {
 }
 
 const SidebarHistoryItem = ({ onClick, selected }) => (
-  <ListItem5
+  <ListItem
     icon={<HistoryIcon />}
     text="History"
     onClick={onClick}

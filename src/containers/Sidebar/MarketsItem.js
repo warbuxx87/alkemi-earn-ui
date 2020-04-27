@@ -1,6 +1,6 @@
 // Libs
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { withRouter } from "react-router";
 // Component
 import SidebarMarketsItem from "../../components/Sidebar/MarketsItem";
 // Constants
@@ -8,15 +8,11 @@ import { MARKETS } from "../../constants/routes";
 // Selectors
 import { isMarketsSelected } from "../../redux/selectors/ui";
 
-const mapStateToProps = state => ({
-    selected: isMarketsSelected(state)
+const mapStateToProps = (state, props) => ({
+    selected: isMarketsSelected(state),
+    onClick: () => props.history.push(MARKETS)
 });
 
-const mapDispatchToProps = {
-    onClick: () => push(MARKETS)
-};
-
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
-    mapDispatchToProps
-)(SidebarMarketsItem);
+)(SidebarMarketsItem));

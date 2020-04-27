@@ -1,6 +1,6 @@
 // Libs
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { withRouter } from "react-router";
 // Component
 import SidebarDashboardItem from "../../components/Sidebar/DashboardItem";
 // Constants
@@ -8,15 +8,11 @@ import { DASHBOARD } from "../../constants/routes";
 // Selectors
 import { isDashboardSelected } from "../../redux/selectors/ui";
 
-const mapStateToProps = state => ({
-    selected: isDashboardSelected(state)
+const mapStateToProps = (state, props) => ({
+    selected: isDashboardSelected(state),
+    onClick: () => props.history.push(DASHBOARD)
 });
 
-const mapDispatchToProps = {
-    onClick: () => push(DASHBOARD)
-};
-
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
-    mapDispatchToProps
-)(SidebarDashboardItem);
+)(SidebarDashboardItem));

@@ -1,20 +1,20 @@
 import React from "react";
+
 import { Progress } from "antd";
 import "antd/dist/antd.css";
 import "./progress.scss";
 
-//import BTC from '../../../assets/images/BTC.svg';
-import imBTC from "../../../assets/images/imBTC.svg";
-import HBTC from "../../../assets/images/HBTC.svg";
-import USDx from "../../../assets/images/USDx.svg";
-import USDT from "../../../assets/images/USDT.svg";
-import WETH from "../../../assets/images/WETH.svg";
-import WBTC from "../../../assets/images/WBTC.svg";
-import DAI from "../../../assets/images/DAI.svg";
+import imBTC from "assets/images/imBTC.svg";
+import HBTC from "assets/images/HBTC.svg";
+import USDx from "assets/images/USDx.svg";
+import USDT from "assets/images/USDT.svg";
+import WETH from "assets/images/WETH.svg";
+import WBTC from "assets/images/WBTC.svg";
+import DAI from "assets/images/DAI.svg";
 // png
-import usdc from "../../../assets/images/usdc.png";
-import tusd from "../../../assets/images/tusd.png";
-import pax from "../../../assets/images/pax.png";
+import usdc from "assets/images/usdc.png";
+import tusd from "assets/images/tusd.png";
+import pax from "assets/images/pax.png";
 
 export default class MyProgress extends React.Component {
   constructor(props) {
@@ -40,7 +40,10 @@ export default class MyProgress extends React.Component {
     return (
       <div className="percent-wrap">
         <div className="percent-top">
-          <img src={this.state.token[this.props.symbol]} alt="" />
+          <img
+            src={this.state.token[this.props.symbol]}
+            alt={this.props.name}
+          />
           <span className="token">{this.props.symbol}</span>
           <span className="percent-num">
             {this.props.type === "supply"
@@ -50,15 +53,19 @@ export default class MyProgress extends React.Component {
           </span>
         </div>
         <div className="percent-bottom">
-          <Progress
-            percent={
-              this.props.type === "supply"
-                ? this.props.percentage_supply
-                : this.props.percentage_borrow
-            }
-            status="active"
-            showInfo={false}
-          />
+          {this.props.type === "supply" ? (
+            <Progress
+              percent={Number(this.props.percentage_supply)}
+              status="active"
+              showInfo={false}
+            />
+          ) : (
+            <Progress
+              percent={Number(this.props.percentage_borrow)}
+              status="active"
+              showInfo={false}
+            />
+          )}
         </div>
       </div>
     );
