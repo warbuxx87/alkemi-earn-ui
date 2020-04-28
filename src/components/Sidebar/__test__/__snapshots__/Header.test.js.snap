@@ -4,10 +4,17 @@ exports[`<SidebarHeader /> matches snapshot 1`] = `
 <div
   className="SidebarHeader-drawerHeader-1"
 >
-  <WithStyles(IconButton)
-    onClick={[MockFunction]}
+  <img
+    alt="Alkemi Logo"
+    className="SidebarHeader-image-2"
+    src="alkemi.png"
+  />
+  <WithStyles(ForwardRef(IconButton))
+    className="SidebarHeader-menu-3"
   >
-    <pure(ChevronLeftIcon) />
-  </WithStyles(IconButton)>
+    <MenuIcon
+      fontSize="small"
+    />
+  </WithStyles(ForwardRef(IconButton))>
 </div>
 `;

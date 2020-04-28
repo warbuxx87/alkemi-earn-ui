@@ -14,12 +14,12 @@ Object {
 
 exports[`sidebarReducer On default state matches snapshot 1`] = `
 Object {
-  "open": false,
+  "open": true,
 }
 `;
 
 exports[`sidebarReducer default state match 1`] = `
 Object {
-  "open": false,
+  "open": true,
 }
 `;

@@ -1,5 +1,5 @@
 import React from "react";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 import DashboardInfo from "components/Dashboard/Info";
 import DashboardTable from "components/Dashboard/Table";
@@ -12,14 +12,14 @@ import DashboardTable from "components/Dashboard/Table";
 // });
 
 const Dashboard = () => (
-  <div className="dashboard">
-    <DashboardInfo></DashboardInfo>
-    <DashboardTable></DashboardTable>
-  </div>
+    <div className="dashboard">
+        <DashboardInfo></DashboardInfo>
+        <DashboardTable></DashboardTable>
+    </div>
 );
 
-// Dashboard.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
+Dashboard.propTypes = {
+    classes: PropTypes.object.isRequired
+};
 
 export default Dashboard;

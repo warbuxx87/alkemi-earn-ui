@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 import SidebarHeader from "../Header";
-import createShallow from "../../../tests-utils/createShallow";
+import createShallow from "tests-utils/createShallow";
 
 describe("<SidebarHeader />", () => {
     let shallow;

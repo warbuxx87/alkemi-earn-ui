@@ -5,9 +5,9 @@ import Drawer from "@material-ui/core/Drawer";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import Sidebar from "../Sidebar";
-import SidebarHomeItem from "../../../containers/Sidebar/HomeItem";
-import SidebarHeader from "../../../containers/Sidebar/Header";
-import createShallow from "../../../tests-utils/createShallow";
+import SidebarDashboardItem from "containers/Sidebar/DashboardItem";
+import SidebarHeader from "containers/Sidebar/Header";
+import createShallow from "tests-utils/createShallow";
 
 describe("<Sidebar />", () => {
     let shallow;
@@ -30,8 +30,8 @@ describe("<Sidebar />", () => {
         expect(wrapper.find(SidebarHeader).length).toEqual(1);
     });
 
-    it("renders 1 <SidebarHomeItem /> components", () => {
-        expect(wrapper.find(SidebarHomeItem).length).toEqual(1);
+    it("renders 1 <SidebarDashboardItem /> components", () => {
+        expect(wrapper.find(SidebarDashboardItem).length).toEqual(1);
     });
 
     it("button is functional", () => {

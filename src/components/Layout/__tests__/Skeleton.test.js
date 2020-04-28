@@ -2,10 +2,10 @@ import React from "react";
 import toJson from "enzyme-to-json";
 
 import LayoutSkeleton from "../Skeleton";
-import LayoutContent from "../../../containers/Layout/Content";
-import AppBar from "../../../containers/AppBar/AppBar";
-import Sidebar from "../../../containers/Sidebar/Sidebar";
-import createShallow from "../../../tests-utils/createShallow";
+import LayoutContent from "containers/Layout/Content";
+import AppBar from "containers/AppBar/AppBar";
+import Sidebar from "containers/Sidebar/Sidebar";
+import createShallow from "tests-utils/createShallow";
 
 describe("<LayoutSkeleton />", () => {
     let shallow;
