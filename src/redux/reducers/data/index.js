@@ -5,8 +5,8 @@ import lend from "./lend";
 import borrow from "./borrow";
 
 export default combineReducers({
-  stats,
-  lend,
-  borrow,
-  // other data reducers go here
+    stats,
+    lend,
+    borrow
+    // other data reducers go here
 });

@@ -1,9 +1,9 @@
 // Import action of interest as constants
 import {
-  FETCH_BORROW_PENDING,
-  FETCH_BORROW_SUCCESS,
-  FETCH_BORROW_ERROR
-} from "redux/actions/borrow-action";
+    FETCH_BORROW_PENDING,
+    FETCH_BORROW_SUCCESS,
+    FETCH_BORROW_ERROR
+} from "redux/actions/data";
 
 // import internal assets
 import dai from "assets/images/DAI.svg";
@@ -14,57 +14,67 @@ import eth from "assets/images/WETH.svg";
 // import pax from "assets/images/pax.png";
 
 function createData(name, unit, image, wallet, balance, apr, collateral) {
-  return { name, unit, image, wallet, balance, apr, collateral, activated: false, pending: false };
+    return {
+        name,
+        unit,
+        image,
+        wallet,
+        balance,
+        apr,
+        collateral,
+        activated: false,
+        pending: false
+    };
 }
 
 const assets = {
-  WETH: createData("Ether", "WETH", eth, 0, 0, 0, 0),
-  DAI: createData("Maker DAI", "DAI", dai, 0, 0, 0, 0),
-  USDT: createData("Tether", "USDT", usdt, 0, 0, 0, 0),
-  USDC: createData("USD Coin", "USDC", usdc, 0, 0, 0, 0),
-  imBTC: createData("Tokenized BTC", "imBTC", imbtc, 0, 0, 0, 0)
-  // PAX: createData('Paxos','PAX', pax, 0, 0, 0, 0),
-}
+    WETH: createData("Ether", "WETH", eth, 0, 0, 0, 0),
+    DAI: createData("Maker DAI", "DAI", dai, 0, 0, 0, 0),
+    USDT: createData("Tether", "USDT", usdt, 0, 0, 0, 0),
+    USDC: createData("USD Coin", "USDC", usdc, 0, 0, 0, 0),
+    imBTC: createData("Tokenized BTC", "imBTC", imbtc, 0, 0, 0, 0)
+    // PAX: createData('Paxos','PAX', pax, 0, 0, 0, 0),
+};
 // Define initial state
 const initialState = {
-  assets,
-  error: null
+    assets,
+    error: null
 };
 
 // Implement "reducer" function with initial state as default state
 export default (state = initialState, action) => {
-  switch (action.type) {
-    case FETCH_BORROW_PENDING:
-      return {
-        ...state,
-        assets: {
-          ...state.assets,
-          [action.asset]: {
-            ...state.assets[action.asset],
-            pending: true
-          }
-        }
-      };
-    case FETCH_BORROW_SUCCESS:
-      return {
-        ...state,
-        assets: {
-          ...state.assets,
-          [action.asset]: {
-            ...state.assets[action.asset],
-            pending: false,
-            activated: true
-          }
-        }
-      };
+    switch (action.type) {
+        case FETCH_BORROW_PENDING:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.asset]: {
+                        ...state.assets[action.asset],
+                        pending: true
+                    }
+                }
+            };
+        case FETCH_BORROW_SUCCESS:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.asset]: {
+                        ...state.assets[action.asset],
+                        pending: false,
+                        activated: true
+                    }
+                }
+            };
 
-    case FETCH_BORROW_ERROR:
-      return {
-        ...state,
-        error: action.error
-      };
+        case FETCH_BORROW_ERROR:
+            return {
+                ...state,
+                error: action.error
+            };
 
-    default:
-      return state;
-  }
+        default:
+            return state;
+    }
 };
