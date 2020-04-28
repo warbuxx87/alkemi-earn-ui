@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<Sidebar /> when width is smDown matches snapshot 1`] = `undefined`;
-
-exports[`<Sidebar /> when width is smUp matches snapshot 1`] = `undefined`;
