@@ -12,14 +12,10 @@ import {
     CardHeader,
     CircularProgress,
     Divider,
-    Grid,
-    makeStyles,
     Paper,
     Switch,
     Table,
     TableBody,
-    TableContainer,
-    TableCell,
     TableHead,
     TableRow,
     Typography,
@@ -29,7 +25,7 @@ import {
 // Section 3: Components & Containers import from the application
 import LendModalSupply from "./ModalSupply";
 import LendModalWithdraw from "./ModalWithdraw";
-import LendTableCell from "./TableCell";
+import LendTableCell from "components/UI/TableCell";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = theme => ({
@@ -194,8 +190,7 @@ const LendTableActive = ({ classes, data = [], columns = [] }) => (
 // Section 6: Documentation with PropTypes
 LendTableActive.propTypes = {
     classes: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
-    columns: PropTypes.array.isRequired
+    data: PropTypes.object.isRequired
 };
 
 // Section 7:  Connect styles and export

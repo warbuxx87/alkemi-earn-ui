@@ -10,14 +10,10 @@ import {
     CardHeader,
     CircularProgress,
     Divider,
-    Grid,
-    makeStyles,
     Paper,
     Switch,
     Table,
     TableBody,
-    TableContainer,
-    TableCell,
     TableHead,
     TableRow,
     Typography,
@@ -25,7 +21,7 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import LendTableCell from "./TableCell";
+import LendTableCell from "components/UI/TableCell";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = theme => ({
