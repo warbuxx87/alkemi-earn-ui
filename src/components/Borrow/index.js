@@ -2,9 +2,11 @@ import React from "react";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import BorrowingTable from "./Table";
+// TODO: temporary use Lend Active Table here, will replace on borrow feature
+import LendTableActive from "components/Lend/TableActive";
 import styles from "./styles";
 
-export default function PermanentDrawerLeft() {
+export default function Borrow({ inactiveBorrow, activeLend, onActivate }) {
   const classes = styles();
   return (
     <div className={classes.borrowing}>
@@ -31,7 +33,12 @@ export default function PermanentDrawerLeft() {
           </Grid>
         </Grid>
       </Grid>
-      <BorrowingTable></BorrowingTable>
+      {!!activeLend.length && (
+        <LendTableActive data={activeLend} />
+      )}
+      {!!inactiveBorrow.length && (
+        <BorrowingTable inactiveBorrow={inactiveBorrow} onActivate={onActivate} />
+      )}
     </div>
   );
 }

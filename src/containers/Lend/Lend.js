@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import web3 from 'web3'
 // Section 2: internal imports
-import onLendActivate from "containers/History/Fetch";
+import onLendActivate from "redux/actions/lend-action";
 import Lend from "components/Lend/Lend";
 
 // Section 3: Selectors
@@ -112,12 +112,12 @@ class withLend extends Component {
 
   render() {
     // return a presentational component
-    const { inactiveLend, activeLend } = this.props;
+    const { inactiveLend, activeLend, onActivate } = this.props;
     return (
       <Lend
         inactiveLend={inactiveLend}
         activeLend={activeLend}
-        onActivate={this.props.onActivate}
+        onActivate={onActivate}
       />
     );
   }

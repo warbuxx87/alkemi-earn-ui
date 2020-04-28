@@ -3,7 +3,7 @@ import {
   FETCH_LEND_PENDING,
   FETCH_LEND_SUCCESS,
   FETCH_LEND_ERROR
-} from "redux/actions/data";
+} from "redux/actions/lend-action";
 
 // import internal assets
 import dai from "assets/images/DAI.svg";

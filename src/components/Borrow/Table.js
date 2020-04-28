@@ -1,4 +1,5 @@
 import React from "react";
+
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,16 +10,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
-import dai from "assets/images/DAI.svg";
-import usdc from "assets/images/USDC.svg";
-// import eth from "assets/images/WETH.svg";
-import wbtc from "assets/images/WBTC.svg";
-// import usdx from "assets/images/USDx.svg";
-// import imbtc from "assets/images/imBTC.svg";
-import usdt from "assets/images/USDT.svg";
-// import hbtc from "assets/images/HBTC.svg";
-import pax from "assets/images/pax.png";
-// import tusd from "assets/images/tusd.png";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import styles from "./table_styles";
 
 const StyledTableCell = withStyles(theme => ({
@@ -38,25 +31,13 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-function createData(name, unit, image, wallet, balance, apr, collateral) {
-  return { name, unit, image, wallet, balance, apr, collateral };
-}
-
-const rows = [
-  createData("Maker DAI", "DAI", dai, 0, 0, 0, 0),
-  createData("Tether", "USDT", usdt, 0, 0, 0, 0),
-  createData("USD Coin", "USDC", usdc, 0, 0, 0, 0),
-  createData("Wrapped BTC", "BTC", wbtc, 0, 0, 0, 0),
-  createData("Paxos", "PAX", pax, 0, 0, 0, 0)
-];
-
 // const useStyles = makeStyles({
 //   table: {
 //     minWidth: 700,
 //   },
 // });
 
-export default function CustomizedTables() {
+export default function CustomizedTables({ inactiveBorrow, onActivate }) {
   const classes = styles();
   const columns = [
     { id: "1", label: "Asset", minWidth: 200 },
@@ -112,7 +93,7 @@ export default function CustomizedTables() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {inactiveBorrow.map(row => (
               <TableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">
                   <Grid container>
@@ -171,8 +152,14 @@ export default function CustomizedTables() {
                         className={classes.btnActiveOutline}
                         variant="outlined"
                         color="secondary"
+                        disable={row.pending}
+                        onClick={() => onActivate(row.unit)}
                       >
-                        Activate
+                        {row.pending ? (
+                          <CircularProgress size={20} color="white" />
+                        ) : (
+                          "Activate"
+                        )}
                       </Button>
                     </Grid>
                   </Grid>

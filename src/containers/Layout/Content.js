@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router";
 
 import Dashboard from "components/Dashboard/Dashboard";
 import Lend from "containers/Lend/Lend";
-import Borrow from "components/Borrow/Borrow";
+import Borrow from "containers/Borrow/Borrow";
 import Markets from "components/Markets/Markets";
 import History from "containers/History/History";
 import Liquidate from "components/Liquidate/Liquidate";

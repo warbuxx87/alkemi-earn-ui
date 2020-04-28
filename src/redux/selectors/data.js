@@ -10,3 +10,8 @@ export const getStatsError = state => state.data.stats.error;
 export const getLendActive = state => Object.values(state.data.lend.assets).filter(asset => (asset.activated));
 export const getLendInactive = state => Object.values(state.data.lend.assets).filter(asset => (!asset.activated));
 export const getLendError = state => state.data.lend.error;
+
+// Borrow selectors
+export const getBorrowActive = state => Object.values(state.data.borrow.assets).filter(asset => (asset.activated));
+export const getBorrowInactive = state => Object.values(state.data.borrow.assets).filter(asset => (!asset.activated));
+export const getBorrowError = state => state.data.borrow.error;
