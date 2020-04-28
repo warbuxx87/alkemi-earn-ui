@@ -1,11 +1,20 @@
+// Sub Component
+
+// Section 1: React low level imports
 import React from "react";
+
+// Section 2: Material-UI imports
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import Grid from "@material-ui/core/Grid";
-import WithdrawChart from "./withdrawChart";
-import styles from "./styles";
 import CloseIcon from "@material-ui/icons/Close";
+
+// Section 3: Components & Containers import from the application
+import LendChartWithdraw from "./ChartWithdraw";
+
+// Section 4: Define Styles function taking theme as argument and returning an object
+const styles = theme => ({});
 
 function getModalStyle() {
   const top = 5;
@@ -50,7 +59,7 @@ export default function SimpleModal() {
       <Grid className={classes.withdrawChart}>
         <div className={classes.withdrawPercent}>2.34% APR</div>
         <div id="simple-modal-chart" className={classes.simpleModalChart}>
-          <WithdrawChart> </WithdrawChart>
+          <LendChartWithdraw> </LendChartWithdraw>
         </div>
       </Grid>
       <div className={classes.withdrawCon}>

@@ -4,13 +4,15 @@ import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
 import { withStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Grid from "@material-ui/core/Grid";
-import Switch from "@material-ui/core/Switch";
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Grid,
+  Switch
+} from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import LendModalSupply from "./ModalSupply";
