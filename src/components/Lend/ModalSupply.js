@@ -1,4 +1,4 @@
-// sub-component
+// Sub Component
 
 // Section 1: React low level imports
 import React from "react";
@@ -13,15 +13,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application
 import LendChartSupply from "./ChartSupply";
-import styles from "./styles";
+import styles from "components/UI/Modal";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles({
-    btnWithdraw: {
-        minWidth: 300,
-        textTransform: "capitalize"
-    }
-});
 
 function getModalStyle() {
     const top = 5;

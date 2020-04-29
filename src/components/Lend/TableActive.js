@@ -1,4 +1,4 @@
-//Sub Component
+// Sub Component
 
 // Section 1: React low level imports
 import React from "react";
@@ -30,8 +30,8 @@ import LendTableCell from "components/UI/TableCell";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
     imageSize: {
-        width: "35px",
-        height: "35px"
+        width: "36px",
+        height: "36px"
     }
 });
 

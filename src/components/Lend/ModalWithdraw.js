@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application
 import LendChartWithdraw from "./ChartWithdraw";
-import styles from "./styles";
+import styles from "components/UI/Modal";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({

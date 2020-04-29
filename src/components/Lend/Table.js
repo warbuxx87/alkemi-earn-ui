@@ -1,3 +1,5 @@
+// Sub Component
+
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
@@ -26,8 +28,13 @@ import LendTableCell from "components/UI/TableCell";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
     imageSize: {
-        width: "35px",
-        height: "35px"
+        width: "36px",
+        height: "36px"
+    },
+    btnActiveOutline: {
+        minWidth: 100,
+        minHeight: 36,
+        textTransform: "capitalize"
     }
 });
 

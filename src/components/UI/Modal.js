@@ -1,6 +1,6 @@
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-const styles = makeStyles(theme =>
+const modal = makeStyles(theme =>
     createStyles({
         MuiTableHeadroot: {
             backgroundColor: "#ffffff"
@@ -137,4 +137,4 @@ const styles = makeStyles(theme =>
         }
     })
 );
-export default styles;
+export default modal;
