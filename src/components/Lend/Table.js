@@ -26,8 +26,8 @@ import LendTableCell from "components/UI/TableCell";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
     imageSize: {
-        width: "39px",
-        height: "39px"
+        width: "35px",
+        height: "35px"
     }
 });
 
@@ -56,133 +56,129 @@ const Columns = [
 ];
 
 // Section 5: Code Component
-
-const LendTable = ({
-    classes,
-    onboard,
-    data = [],
-    loading = {},
-    onActivate
-}) => (
-    <Card>
-        <CardHeader title="Available Markets" />
-        <Divider />
-        <Paper>
-            <Table className={classes.table}>
-                <TableHead>
-                    <TableRow>
-                        {Columns.map((Column, i) => (
-                            <LendTableCell
-                                className={classes.Row}
-                                key={Column.id}
-                                align={Column.align}
-                            >
-                                {Column.label}
-                            </LendTableCell>
-                        ))}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map(Row => (
-                        <TableRow key={Row.name}>
-                            <LendTableCell
-                                component="th"
-                                scope="Row"
-                                style={{ width: "16%" }}
-                            >
-                                <Box
-                                    minWidth={150}
-                                    display="flex"
-                                    alignItems="center"
+const LendTable = ({ onboard, data = [], loading = {}, onActivate }) => {
+    const classes = useStyles();
+    return (
+        <Card>
+            <CardHeader title="Available Markets" />
+            <Divider />
+            <Paper>
+                <Table className={classes.table}>
+                    <TableHead>
+                        <TableRow>
+                            {Columns.map((Column, i) => (
+                                <LendTableCell
+                                    className={classes.Row}
+                                    key={Column.id}
+                                    align={Column.align}
                                 >
-                                    <img
-                                        className={classes.imageSize}
-                                        src={Row.image}
-                                        alt="dai"
-                                    />
-                                    <Box ml={2}>
-                                        <Typography
-                                            variant="h6"
-                                            color="textPrimary"
-                                        >
-                                            {Row.name}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            color="textSecondary"
-                                        >
-                                            {Row.unit}
-                                        </Typography>
+                                    {Column.label}
+                                </LendTableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.map(Row => (
+                            <TableRow key={Row.name}>
+                                <LendTableCell
+                                    component="th"
+                                    scope="Row"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Box
+                                        minWidth={150}
+                                        display="flex"
+                                        alignItems="center"
+                                    >
+                                        <img
+                                            className={classes.imageSize}
+                                            src={Row.image}
+                                            alt="dai"
+                                        />
+                                        <Box ml={2}>
+                                            <Typography
+                                                variant="h6"
+                                                color="textPrimary"
+                                            >
+                                                {Row.name}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2"
+                                                color="textSecondary"
+                                            >
+                                                {Row.unit}
+                                            </Typography>
+                                        </Box>
                                     </Box>
-                                </Box>
-                            </LendTableCell>
-                            <LendTableCell
-                                align="center"
-                                style={{ width: "16%" }}
-                            >
-                                {Row.wallet}
-                            </LendTableCell>
-                            <LendTableCell
-                                align="center"
-                                style={{ width: "16%" }}
-                            >
-                                {Row.balance}
-                            </LendTableCell>
-                            <LendTableCell
-                                align="center"
-                                style={{ width: "16%" }}
-                            >
-                                {Row.apr}
-                            </LendTableCell>
-                            <LendTableCell
-                                align="center"
-                                style={{ width: "16%" }}
-                            >
-                                <Switch
-                                    // checked={state.checkedB}
-                                    // onChange={handleChange}
-                                    name="checkedB"
-                                    color="primary"
-                                />
-                            </LendTableCell>
-                            <LendTableCell align="right">
-                                <Box
-                                    minWidth={208}
-                                    display="flex"
-                                    alignItems="center"
-                                    justifyContent="flex-end"
+                                </LendTableCell>
+                                <LendTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
                                 >
-                                    <Box mr={2}>
-                                        {/* <Grid className={classesbtnActive">
+                                    {Row.wallet}
+                                </LendTableCell>
+                                <LendTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    {Row.balance}
+                                </LendTableCell>
+                                <LendTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    {Row.apr}
+                                </LendTableCell>
+                                <LendTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Switch
+                                        // checked={state.checkedB}
+                                        // onChange={handleChange}
+                                        name="checkedB"
+                                        color="primary"
+                                    />
+                                </LendTableCell>
+                                <LendTableCell align="right">
+                                    <Box
+                                        minWidth={208}
+                                        display="flex"
+                                        alignItems="center"
+                                        justifyContent="flex-end"
+                                    >
+                                        <Box mr={2}>
+                                            {/* <Grid className={classesbtnActive">
                           Active
                         </Grid> */}
+                                        </Box>
+                                        <Button
+                                            type="button"
+                                            className={classes.btnActiveOutline}
+                                            variant="outlined"
+                                            color="secondary"
+                                            disable={Row.pending}
+                                            onClick={() => onActivate(Row.unit)}
+                                        >
+                                            {Row.pending ? (
+                                                <CircularProgress
+                                                    size={20}
+                                                    color="white"
+                                                />
+                                            ) : (
+                                                "Activate"
+                                            )}
+                                        </Button>
                                     </Box>
-                                    <Button
-                                        type="button"
-                                        className={classes.btnActiveOutline}
-                                        variant="outlined"
-                                        color="secondary"
-                                        disable={Row.pending}
-                                        onClick={() => onActivate(Row.unit)}
-                                    >
-                                        {Row.pending ? (
-                                            <CircularProgress
-                                                size={20}
-                                                color="white"
-                                            />
-                                        ) : (
-                                            "Activate"
-                                        )}
-                                    </Button>
-                                </Box>
-                            </LendTableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </Paper>
-    </Card>
-);
+                                </LendTableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </Paper>
+        </Card>
+    );
+};
 
 // Documentation with PropTypes
 LendTable.propTypes = {

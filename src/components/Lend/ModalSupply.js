@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import LendChartSupply from "./ChartSupply";
 import styles from "./styles";
 
+// Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
     btnWithdraw: {
         minWidth: 300,
@@ -49,7 +50,7 @@ export default function SimpleModal() {
     const handleClose = () => {
         setOpen(false);
     };
-
+    // Section 5: Code Component
     const body = (
         <div style={modalStyle} className={classes.paper}>
             <Grid container className={classes.titleSupply}>

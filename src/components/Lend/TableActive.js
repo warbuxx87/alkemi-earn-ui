@@ -19,7 +19,7 @@ import {
     TableHead,
     TableRow,
     Typography,
-    withStyles
+    makeStyles
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -28,13 +28,10 @@ import LendModalWithdraw from "./ModalWithdraw";
 import LendTableCell from "components/UI/TableCell";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const styles = theme => ({
+const useStyles = makeStyles({
     imageSize: {
         width: "35px",
         height: "35px"
-    },
-    btnActiveOutline: {
-        minWidth: 100
     }
 });
 
@@ -64,132 +61,146 @@ const columns = [
 ];
 
 // Section 5: Code Component
-const LendTableActive = ({ classes, data = [] }) => (
-    <Card>
-        <CardHeader title="Active Lending Reserves" />
-        <Divider />
-        <Paper>
-            <Table className={classes.table}>
-                <TableHead>
-                    <TableRow>
-                        {columns.map((columns, i) => (
-                            <LendTableCell
-                                className={classes.row}
-                                key={columns.id}
-                                align={columns.align}
-                            >
-                                {columns.label}
-                            </LendTableCell>
-                        ))}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map(row => (
-                        <TableRow key={row.name}>
-                            <LendTableCell
-                                component="th"
-                                scope="row"
-                                style={{ width: "16%" }}
-                            >
-                                <Box
-                                    minWidth={150}
-                                    display="flex"
-                                    alignItems="center"
+const LendTableActive = ({ data = [] }) => {
+    const classes = useStyles();
+    return (
+        <Card>
+            <CardHeader title="Active Lending Reserves" />
+            <Divider />
+            <Paper>
+                <Table className={classes.table}>
+                    <TableHead>
+                        <TableRow>
+                            {columns.map((columns, i) => (
+                                <LendTableCell
+                                    className={classes.row}
+                                    key={columns.id}
+                                    align={columns.align}
                                 >
-                                    <img
-                                        className={classes.imageSize}
-                                        src={row.image}
-                                        alt="dai"
-                                    />
-                                    <Box ml={2}>
-                                        <Typography
-                                            variant="h6"
-                                            color="textPrimary"
-                                        >
-                                            {row.name}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            color="textSecondary"
-                                        >
-                                            {row.unit}
-                                        </Typography>
-                                    </Box>
-                                </Box>
-                            </LendTableCell>
-                            <LendTableCell
-                                align="center"
-                                style={{ width: "16%" }}
-                            >
-                                <Typography variant="h6" color="textPrimary">
-                                    {row.wallet}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                >
-                                    {row.wallet_2}
-                                </Typography>
-                            </LendTableCell>
-                            <LendTableCell
-                                align="center"
-                                style={{ width: "16%" }}
-                            >
-                                <Typography variant="h6" color="textPrimary">
-                                    {row.balance}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                >
-                                    {row.balance_2}
-                                </Typography>
-                            </LendTableCell>
-                            <LendTableCell
-                                align="center"
-                                style={{ width: "16%" }}
-                            >
-                                <Typography variant="h6" color="textPrimary">
-                                    {row.apr}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                >
-                                    {row.apr_2}
-                                </Typography>
-                            </LendTableCell>
-                            <LendTableCell
-                                align="center"
-                                style={{ width: "16%" }}
-                            >
-                                <Switch
-                                    // checked={state.checkedB}
-                                    // onChange={handleChange}
-                                    name="checkedB"
-                                    color="primary"
-                                />
-                            </LendTableCell>
-                            <LendTableCell align="center">
-                                <Box
-                                    minWidth={208}
-                                    display="flex"
-                                    alignItems="center"
-                                    justifyContent="flex-end"
-                                >
-                                    <Box mr={1}>
-                                        <LendModalWithdraw> </LendModalWithdraw>
-                                    </Box>
-                                    <LendModalSupply> </LendModalSupply>
-                                </Box>
-                            </LendTableCell>
+                                    {columns.label}
+                                </LendTableCell>
+                            ))}
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </Paper>
-    </Card>
-);
+                    </TableHead>
+                    <TableBody>
+                        {data.map(row => (
+                            <TableRow key={row.name}>
+                                <LendTableCell
+                                    component="th"
+                                    scope="row"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Box
+                                        minWidth={150}
+                                        display="flex"
+                                        alignItems="center"
+                                    >
+                                        <img
+                                            className={classes.imageSize}
+                                            src={row.image}
+                                            alt="dai"
+                                        />
+                                        <Box ml={2}>
+                                            <Typography
+                                                variant="h6"
+                                                color="textPrimary"
+                                            >
+                                                {row.name}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2"
+                                                color="textSecondary"
+                                            >
+                                                {row.unit}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                </LendTableCell>
+                                <LendTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Typography
+                                        variant="h6"
+                                        color="textPrimary"
+                                    >
+                                        {row.wallet}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        {row.wallet_2}
+                                    </Typography>
+                                </LendTableCell>
+                                <LendTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Typography
+                                        variant="h6"
+                                        color="textPrimary"
+                                    >
+                                        {row.balance}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        {row.balance_2}
+                                    </Typography>
+                                </LendTableCell>
+                                <LendTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Typography
+                                        variant="h6"
+                                        color="textPrimary"
+                                    >
+                                        {row.apr}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        {row.apr_2}
+                                    </Typography>
+                                </LendTableCell>
+                                <LendTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Switch
+                                        // checked={state.checkedB}
+                                        // onChange={handleChange}
+                                        name="checkedB"
+                                        color="primary"
+                                    />
+                                </LendTableCell>
+                                <LendTableCell align="center">
+                                    <Box
+                                        minWidth={208}
+                                        display="flex"
+                                        alignItems="center"
+                                        justifyContent="flex-end"
+                                    >
+                                        <Box mr={1}>
+                                            <LendModalWithdraw>
+                                                {" "}
+                                            </LendModalWithdraw>
+                                        </Box>
+                                        <LendModalSupply> </LendModalSupply>
+                                    </Box>
+                                </LendTableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </Paper>
+        </Card>
+    );
+};
 
 // Section 6: Documentation with PropTypes
 LendTableActive.propTypes = {
@@ -198,4 +209,4 @@ LendTableActive.propTypes = {
 };
 
 // Section 7:  Connect styles and export
-export default withStyles(styles)(LendTableActive);
+export default LendTableActive;

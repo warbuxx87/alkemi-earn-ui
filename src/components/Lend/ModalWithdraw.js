@@ -39,6 +39,7 @@ function getModalStyle() {
 
 export default function SimpleModal() {
     const classes = styles();
+
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
@@ -51,6 +52,7 @@ export default function SimpleModal() {
         setOpen(false);
     };
 
+    // Section 5: Code Component
     const body = (
         <div style={modalStyle} className={classes.paper}>
             <Grid container className={classes.titleWithdraw}>
