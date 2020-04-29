@@ -17,37 +17,34 @@ import {
     TableHead,
     TableRow,
     Typography,
-    withStyles
+    makeStyles
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const styles = theme => ({
+const useStyles = makeStyles({
     imageSize: {
-        width: "35px",
-        height: "35px"
-    },
-    btnActiveOutline: {
-        minWidth: 100
+        width: "39px",
+        height: "39px"
     }
 });
 
 const Columns = [
     { id: "1", label: "Asset" },
-    { id: "2", label: "Wallet Balance", align: "right" },
-    { id: "3", label: "Balance", align: "right" },
+    { id: "2", label: "Wallet Balance", align: "center" },
+    { id: "3", label: "Balance", align: "center" },
     {
         id: "4",
         label: "APR %",
-        align: "right"
+        align: "center"
         //format: value => value.toLocaleString(),
     },
     {
         id: "5",
         label: "Collateral",
-        align: "right"
+        align: "center"
         // format: value => value.toFixed(2),
     },
     {
@@ -59,6 +56,7 @@ const Columns = [
 ];
 
 // Section 5: Code Component
+
 const LendTable = ({
     classes,
     onboard,
@@ -90,7 +88,7 @@ const LendTable = ({
                             <LendTableCell
                                 component="th"
                                 scope="Row"
-                                style={{ width: "10%" }}
+                                style={{ width: "16%" }}
                             >
                                 <Box
                                     minWidth={150}
@@ -119,26 +117,26 @@ const LendTable = ({
                                 </Box>
                             </LendTableCell>
                             <LendTableCell
-                                align="right"
-                                style={{ width: "15%" }}
+                                align="center"
+                                style={{ width: "16%" }}
                             >
                                 {Row.wallet}
                             </LendTableCell>
                             <LendTableCell
-                                align="right"
-                                style={{ width: "15%" }}
+                                align="center"
+                                style={{ width: "16%" }}
                             >
                                 {Row.balance}
                             </LendTableCell>
                             <LendTableCell
-                                align="right"
-                                style={{ width: "15%" }}
+                                align="center"
+                                style={{ width: "16%" }}
                             >
                                 {Row.apr}
                             </LendTableCell>
                             <LendTableCell
-                                align="right"
-                                style={{ width: "15%" }}
+                                align="center"
+                                style={{ width: "16%" }}
                             >
                                 <Switch
                                     // checked={state.checkedB}
@@ -192,4 +190,4 @@ LendTable.propTypes = {
     onboard: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(LendTable);
+export default LendTable;

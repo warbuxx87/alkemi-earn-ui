@@ -40,13 +40,13 @@ const styles = theme => ({
 
 const columns = [
     { id: "1", label: "Asset" },
-    { id: "2", label: "Available", align: "right" },
-    { id: "3", label: "Supplied", align: "right" },
+    { id: "2", label: "Available", align: "center" },
+    { id: "3", label: "Supplied", align: "center" },
     {
         id: "4",
         label: "APR %",
 
-        align: "right",
+        align: "center",
         style: "percent",
         format: value => value.toFixed(2)
     },
@@ -54,7 +54,7 @@ const columns = [
         id: "5",
         label: "Collateral",
 
-        align: "right",
+        align: "center",
         format: value => value.toFixed(2)
     },
     {
@@ -64,7 +64,7 @@ const columns = [
 ];
 
 // Section 5: Code Component
-const LendTableActive = ({ classes, data = [], columns = [] }) => (
+const LendTableActive = ({ classes, data = [] }) => (
     <Card>
         <CardHeader title="Active Lending Reserves" />
         <Divider />
@@ -72,13 +72,13 @@ const LendTableActive = ({ classes, data = [], columns = [] }) => (
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
-                        {columns.map((column, i) => (
+                        {columns.map((columns, i) => (
                             <LendTableCell
                                 className={classes.row}
-                                key={column.id}
-                                align={column.align}
+                                key={columns.id}
+                                align={columns.align}
                             >
-                                {column.label}
+                                {columns.label}
                             </LendTableCell>
                         ))}
                     </TableRow>
@@ -86,7 +86,11 @@ const LendTableActive = ({ classes, data = [], columns = [] }) => (
                 <TableBody>
                     {data.map(row => (
                         <TableRow key={row.name}>
-                            <LendTableCell component="th" scope="row">
+                            <LendTableCell
+                                component="th"
+                                scope="row"
+                                style={{ width: "16%" }}
+                            >
                                 <Box
                                     minWidth={150}
                                     display="flex"
@@ -114,8 +118,8 @@ const LendTableActive = ({ classes, data = [], columns = [] }) => (
                                 </Box>
                             </LendTableCell>
                             <LendTableCell
-                                align="right"
-                                style={{ width: "15%" }}
+                                align="center"
+                                style={{ width: "16%" }}
                             >
                                 <Typography variant="h6" color="textPrimary">
                                     {row.wallet}
@@ -128,8 +132,8 @@ const LendTableActive = ({ classes, data = [], columns = [] }) => (
                                 </Typography>
                             </LendTableCell>
                             <LendTableCell
-                                align="right"
-                                style={{ width: "15%" }}
+                                align="center"
+                                style={{ width: "16%" }}
                             >
                                 <Typography variant="h6" color="textPrimary">
                                     {row.balance}
@@ -142,8 +146,8 @@ const LendTableActive = ({ classes, data = [], columns = [] }) => (
                                 </Typography>
                             </LendTableCell>
                             <LendTableCell
-                                align="right"
-                                style={{ width: "15%" }}
+                                align="center"
+                                style={{ width: "16%" }}
                             >
                                 <Typography variant="h6" color="textPrimary">
                                     {row.apr}
@@ -156,8 +160,8 @@ const LendTableActive = ({ classes, data = [], columns = [] }) => (
                                 </Typography>
                             </LendTableCell>
                             <LendTableCell
-                                align="right"
-                                style={{ width: "15%" }}
+                                align="center"
+                                style={{ width: "16%" }}
                             >
                                 <Switch
                                     // checked={state.checkedB}
