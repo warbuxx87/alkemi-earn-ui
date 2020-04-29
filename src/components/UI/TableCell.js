@@ -1,5 +1,3 @@
-// sub component
-
 // Section 1: React low level imports
 
 // Section 2: Material-UI imports

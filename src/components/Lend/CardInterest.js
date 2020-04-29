@@ -1,4 +1,4 @@
-//Sub Component
+// Sub Component
 
 // Section 1: React low level imports
 import React from "react";
