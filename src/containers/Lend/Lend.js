@@ -58,10 +58,6 @@ class withLend extends Component {
                 imBTC_abi,
                 address[net_type]["address_imBTC"]
             ),
-            mMarket: new this.web3.eth.Contract(
-                mMarket_abi,
-                address[net_type]["address_mMarket"]
-            )
         };
         console.log(" *** init contract finished *** ");
         this.setState({ net_type: net_type, contract: contract });
