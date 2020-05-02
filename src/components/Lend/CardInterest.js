@@ -35,7 +35,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-// Section 4: Define Styles function taking theme as argument and returning an object
 function CardValue({ className, ...rest }) {
     const classes = useStyles();
     const data = {

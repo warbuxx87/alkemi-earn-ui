@@ -9,20 +9,12 @@ import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import Grid from "@material-ui/core/Grid";
 import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application
 import LendChartWithdraw from "./ChartWithdraw";
 import styles from "components/UI/Modal";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles({
-    btnWithdraw: {
-        minWidth: 300,
-        textTransform: "capitalize",
-    },
-});
-
 function getModalStyle() {
     const top = 5;
     const left = 50;
@@ -33,7 +25,7 @@ function getModalStyle() {
         // transform: `translate(-${top}%, -${left}%)`,
         transform: `translateX(-${left}%)`,
         width: `459px`,
-        padding: `0`,
+        padding: `0`
     };
 }
 

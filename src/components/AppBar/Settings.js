@@ -5,9 +5,7 @@ import React, { useState, useRef } from "react";
 
 // Section 2: Material-UI imports
 import {
-    Badge,
     Box,
-    Button,
     FormControlLabel,
     IconButton,
     Popover,
@@ -79,10 +77,6 @@ function Settings() {
             ...values,
             [field]: value
         });
-    };
-
-    const handleSave = () => {
-        setOpen(false);
     };
 
     // Section 5: Code Component
