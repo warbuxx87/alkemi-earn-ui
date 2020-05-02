@@ -14,3 +14,8 @@ export const getLendInactive = state =>
 export const getLendPending = state =>
     Object.values(state.data.lend.assets).filter(asset => asset.pending);
 export const getLendError = state => state.data.lend.error;
+
+// Borrow selectors
+export const getBorrowActive = state => Object.values(state.data.borrow.assets).filter(asset => (asset.activated));
+export const getBorrowInactive = state => Object.values(state.data.borrow.assets).filter(asset => (!asset.activated));
+export const getBorrowError = state => state.data.borrow.error;

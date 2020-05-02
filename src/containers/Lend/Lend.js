@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import web3 from "web3";
 // Section 2: internal imports
-import onLendActivate from "containers/History/Fetch";
+import onLendActivate from "./Activate";
 import Lend from "components/Lend/Lend";
 
 // Section 3: Selectors
@@ -14,7 +14,7 @@ import {
     // getLendError,
     getLendActive,
     getLendInactive,
-    getLendPending
+    getLendPending,
 } from "redux/selectors/data";
 
 const address = require("constants/address_map.json");
@@ -55,7 +55,7 @@ class withLend extends Component {
             mMarket: new this.web3.eth.Contract(
                 mMarket_abi,
                 address[net_type]["address_mMarket"]
-            )
+            ),
         };
         console.log(" *** init contract finished *** ");
         this.setState({ net_type: net_type, contract: contract });
@@ -79,16 +79,16 @@ class withLend extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     inactiveLend: getLendInactive(state),
     activeLend: getLendActive(state),
-    pending: getLendPending(state)
+    pending: getLendPending(state),
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            onActivate: onLendActivate
+            onActivate: onLendActivate,
         },
         dispatch
     );

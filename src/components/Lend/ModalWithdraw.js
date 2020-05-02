@@ -19,8 +19,8 @@ import styles from "components/UI/Modal";
 const useStyles = makeStyles({
     btnWithdraw: {
         minWidth: 300,
-        textTransform: "capitalize"
-    }
+        textTransform: "capitalize",
+    },
 });
 
 function getModalStyle() {
@@ -33,7 +33,7 @@ function getModalStyle() {
         // transform: `translate(-${top}%, -${left}%)`,
         transform: `translateX(-${left}%)`,
         width: `459px`,
-        padding: `0`
+        padding: `0`,
     };
 }
 
