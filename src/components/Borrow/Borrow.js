@@ -33,10 +33,12 @@ const Borrow = ({ activeBorrow, inactiveBorrow, pending, onActivate }) => (
 
             {!!activeBorrow.length && <BorrowTableActive data={activeBorrow} />}
             {!!inactiveBorrow.length && (
-                <BorrowingTable
-                    inactiveBorrow={inactiveBorrow}
-                    onActivate={onActivate}
-                />
+                <Grid item lg={12} xs={12}>
+                    <BorrowingTable
+                        inactiveBorrow={inactiveBorrow}
+                        onActivate={onActivate}
+                    />
+                </Grid>
             )}
         </Grid>
     </Container>

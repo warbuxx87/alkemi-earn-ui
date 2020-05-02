@@ -64,13 +64,6 @@ function TotalApr({ className, ...rest }) {
                         {data.value}
                         {data.percentage}
                     </Typography>
-                    <Label
-                        className={classes.label}
-                        color={data.difference > 0 ? "success" : "error"}
-                    >
-                        {data.difference > 0 ? "+" : ""}
-                        {data.difference}%
-                    </Label>
                 </Box>
             </CardContent>
         </Card>
