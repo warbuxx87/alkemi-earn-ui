@@ -11,17 +11,11 @@ import Lend from "components/Lend/Lend";
 
 // Section 3: Selectors
 import {
-    getLendError,
+    // getLendError,
     getLendActive,
     getLendInactive,
-    getLendPending
+    getLendPending,
 } from "redux/selectors/data";
-
-import {
-    handle_approve
-    //  get_allowance
-    //get_tokens_decimals
-} from "containers/Drizzle/util";
 
 const address = require("constants/address_map.json");
 const mMarket_abi = require("contracts/moneyMarket.json");
@@ -58,94 +52,43 @@ class withLend extends Component {
                 imBTC_abi,
                 address[net_type]["address_imBTC"]
             ),
+            mMarket: new this.web3.eth.Contract(
+                mMarket_abi,
+                address[net_type]["address_mMarket"]
+            ),
         };
         console.log(" *** init contract finished *** ");
         this.setState({ net_type: net_type, contract: contract });
-        // const [
-        //   WETH_decimals,
-        //   DAI_decimals,
-        //   USDT_decimals,
-        // ] = await get_tokens_decimals(contract.WETH, contract.DAI, contract.USDT)
-        // this.setState({ WETH_decimals, USDT_decimals, DAI_decimals })
+
         const my_account = (await this.web3.givenProvider.enable())[0];
         this.setState({ my_account });
         console.log("connected: ", my_account);
-        // assets.forEach(async asset => {
-        //   let is_approved = await get_allowance(
-        //     contract[asset.unit],
-        //     my_account,
-        //     address[net_type]["address_mMarket"],
-        //     this.web3.utils.toBN
-        //   );
-        //   this.setState({
-        //     approved: { ...this.state.approved, [asset.unit]: is_approved }
-        //   });
-        // let timer_Next = setInterval(() => {
-        //   if (!this.state.WETH_decimals) {
-        //     console.log('111111111: not get yet...');
-        //   } else {
-        //     console.log('2222222222: i got it...');
-        //     clearInterval(timer_Next);
-        //     this.setState({ i_am_ready: true })
-        //     to do something...
-        //     get_my_ETH(this);
-        //     get_my_WETH(this);
-        //     get_WETH_supplied__available_to_withdraw(this, address[this.state.net_type]['address_WETH'], address[this.state.net_type]['address_mMarket']);
-        //   }
-        // }, 100)
-        //};
     }
-
-    // onActivate = unit => {
-    //   if (!this.state.contract?.[unit]) return;
-    //   if (this.state.loading.unit) return;
-    //   console.log("a");
-    //   this.setState({ loading: { ...this.state.loading, [unit]: true } });
-    //   handle_approve({
-    //     web3: this.web3,
-    //     tokenContract: this.state.contract[unit],
-    //     marketAddress: address[this.state.net_type]["address_mMarket"],
-    //     myAccount: this.state.my_account,
-    //     net_type: this.state.net_type,
-    //     token_name: unit
-    //   })
-    //     .then(() => {
-    //       this.setState({
-    //         approved: { ...this.state.data.lend.activeLend, [unit]: true }
-    //       });
-    //     })
-    //     .catch(error => {
-    //       console.error(error);
-    //     })
-    //     .finally(() => {
-    //       this.setState({
-    //         pending: { ...this.state.data.lend.pending, [unit]: false }
-    //       });
-    //     });
-    // };
 
     render() {
         // return a presentational component
-        const { inactiveLend, activeLend, onActivate } = this.props;
+        const { inactiveLend, activeLend, onActivate, pending } = this.props;
         return (
             <Lend
                 inactiveLend={inactiveLend}
                 activeLend={activeLend}
                 onActivate={onActivate}
+                pending={pending}
             />
         );
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     inactiveLend: getLendInactive(state),
-    activeLend: getLendActive(state)
+    activeLend: getLendActive(state),
+    pending: getLendPending(state),
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            onActivate: onLendActivate
+            onActivate: onLendActivate,
         },
         dispatch
     );

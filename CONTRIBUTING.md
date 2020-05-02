@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [Project Structure](#markdown-header-project-structure)
+- [Project Structure](#project-structure)
 - [Contributing](#contributing)
   - [Requirements](#requirements)
   - [Set-up dev environment](#set-up-dev-environment)
@@ -31,19 +31,18 @@
 
 ```
 .
-├── nginx/                 # Nginx server configuration for production
-├── public/                # Static files
-├── src/                   # Single page application source script
-├── .dockerignore          # .dockerignore
-├── .eslintrc              # Eslint configuration
-├── .gitignore             # .gitignore
-├── .travis.yml         # CI/CD script
-├── CONTRIBUTING.md        # Contributing guidelines
-├── docker-compose.yml     # Docker compose script to set dev environment
-├── Dockerfile             # Docker file
-├── package.json           # package.json
-├── README.md              # README
-└── yarn.lock              # yarn.lock
+├── nginx.conf                # Nginx server configuration
+├── public/                   # Static files
+├── src/                      # Single page application source script
+├── .dockerignore             # .dockerignore
+├── .eslintrc                 # Eslint configuration
+├── .gitignore                # .gitignore
+├── .bitbucket-pipelines.yml  # CI/CD script
+├── CONTRIBUTING.md           # Contributing guidelines
+├── docker-compose.yml        # Docker compose script to set dev environment
+├── Dockerfile                # Docker file
+├── package.json              # package.json
+├── README.md                 # README
 ```
 
 ## Contributing
@@ -53,7 +52,6 @@
 - docker>=17.0.0
 - docker-compose>=1.17.0
 - node>=9.0.0
-- yarn>=1.6.0
 
 ### Set-up dev environment
 
@@ -83,7 +81,7 @@ You can now access application in dev mode at http://localhost
 
 Requirements
 
-- New branch **MUST** be started from _master_ (which is our dev branch)
+- New branch **MUST** be started from _development_ (which is our dev branch)
 - Feature branch **MUST** be named `feature/[a-zA-Z0-9\-]+`
 - Bug fix branch **MUST** be named `fix/[a-zA-Z0-9\-]+`
 - Branch referring to an open issue **MUST** be named `(fix|feature)/<issue-ID>`
@@ -103,7 +101,7 @@ Pushing will trigger a CI pipeline (see section CI/CD)
 ### Install new dependencies
 
 ```bash
-yarn add <package> # install package, and update package.json & yarn.lock
+npm insall <package> # install package, and update package.json & package-lock.json
 ```
 
 Command above can sometime error with `EACCES` code, this means that _docker_ wrote some files (usually cache) in your local `node_modules` folder.
@@ -154,13 +152,13 @@ git push origin -u release/x.x.x --follow-tags
 Run test
 
 ```bash
-yarn test
+npm test
 ```
 
 Run coverage
 
 ```bash
-yarn test -- --coverage
+npm test -- --coverage
 ```
 
 ### Practices
@@ -259,7 +257,7 @@ src/
 │   │   │   ├── domain1.js        # Reducer responsible to handle state slice related to domain 1 data
 │   │   │   └── domain2.js        # Reducer responsible to handle state slice related to domain 2 data
 │   │   ├── status/
-│   │   │   └── bahavior1.js      # Reducer responsible to handle state slice related to application status behavior 1
+│   │   │   └── bahaviour1.js      # Reducer responsible to handle state slice related to application status behavior 1
 │   │   └── ui/
 │   │       └── element1.js       # Reducer responsible to handle state slice related to UI element 1
 :   :
@@ -286,7 +284,7 @@ Corresponding state _shape_ would be
 
 ```javascript
 // Import action of interest as constants
-import { OPEN_SIDEBAR, CLOSE_SIDEBAR } from "../actions/ui";
+import { OPEN_SIDEBAR, CLOSE_SIDEBAR } from "actions/ui";
 
 // Define initial state
 const initialState = {
@@ -340,7 +338,8 @@ _Actions_ are payloads of information that send data from your application to yo
 src/
 :
 ├── redux/
-│   ├── actions/              # Component file goes into a folder named after the component
+│   ├── actions/              #
+│   │   ├── data.js           # Action related to domain Data
 │   │   ├── ui.js             # Action related to UI modification
 │   │   └── status.js         # Actions related to status information
 :
@@ -407,7 +406,7 @@ src/
 Examples of those components are
 
 - Skeleton elements such as _AppBar_, _Sidebar_
-- View pannels such as _Home_
+- View panels such as _Home_
 - Layout elements such as _Layout_
 
 **Folder structure and file naming**
@@ -535,7 +534,7 @@ You can read more about it [here](https://medium.com/@dan_abramov/smart-and-dumb
 
 - **MAY** import components from UI libraries typically _Material-UI_
 - **MAY** import components and containers from the rest of the application
-- **SHOULD NOT** import any resources related to _Redux_, except _compose()_ that is sometime convenient to connect multiple marterial-ui wrappers (_withStyles()_, _withTheme()_...)
+- **SHOULD NOT** import any resources related to _Redux_, except _compose()_ that is sometime convenient to connect multiple material-ui wrappers (_withStyles()_, _withTheme()_...)
 - **SHOULD NOT** have any dependencies in the rest of the application, except components or containers
 - **MUST** be organized in 3 ordered sections: 1. low-level React imports / 2. _Material-UI_ imports / 3. intra-application imports
 
@@ -594,8 +593,8 @@ const styles = theme => ({
 **Requirements**
 
 - **SHOULD** be a function taking a props object as an argument (except lifecycle, UI state or some optimization are required)
-- **MUST** respect compenent naming convention (see below)
-- **MUST** be atomic
+- **MUST** respect component naming convention (see below)
+- **MUST** be [atomic](<[https://blog.bitsrc.io/atomic-design-and-ui-components-theory-to-practice-f200db337c24](https://blog.bitsrc.io/atomic-design-and-ui-components-theory-to-practice-f200db337c24)>)
 - **MUST** be agnostic of the rest of the application, this **MUST** include every variable namings. Think it as it should be able to exist on its own
 - **MUST** be documented with PropTypes
 
@@ -625,7 +624,7 @@ AppBar.propTypes = {
 
 **Requirements**
 
-- **MAY** inject styles information using _withStyle()_, _withTheme()_, _withWidth()_
+- **MAY** inject styles information using _withStyle()_, _makeStyle(), \_withTheme()_, _withWidth()_
 - There **MUST** be one unique export
 
 **Example**
@@ -699,6 +698,9 @@ class WithLifecycleHooks extends Component {
   componentDidMount() {
     // Could perform some API calls here
   }
+  componentWillUnmount() {
+    // What to do when lifecycle ends
+  }
 
   render() {
     // return a presentational component
@@ -757,7 +759,7 @@ export default connect(mapStateToProps)(AppBar);
 
 #### Theme
 
-[Material UI theme](https://material-ui.com/customization/themes/) is declared in _./src/constants/theme.js_
+[Material UI theme](https://material-ui.com/customization/themes/) is declared in _./src/themes/theme.js_
 
 #### CSS classes
 
@@ -791,7 +793,7 @@ To make UI fully responsive, you can use [Material-UI breakpoints](https://mater
    there may exist valid reasons in particular circumstances when the
    particular behavior is acceptable or even useful, but the full
    implications should be understood and the case carefully weighed
-   before implementing any behavior described with this label.
+   before implementing any behaviour described with this label.
 
 5) **MAY** This word, or the adjective "OPTIONAL", mean that an item is
    truly optional. One vendor may choose to include the item because a

@@ -10,24 +10,24 @@ import Liquidate from "components/Liquidate/Liquidate";
 import NoWhere from "components/NoWhere/NoWhere";
 
 import {
-  DASHBOARD,
-  LEND,
-  BORROW,
-  MARKETS,
-  HISTORY,
-  LIQUIDATE
+    DASHBOARD,
+    LEND,
+    BORROW,
+    MARKETS,
+    HISTORY,
+    LIQUIDATE
 } from "constants/routes";
 
 const LayoutContent = () => (
-  <Switch>
-    <Route path={DASHBOARD} exact component={Dashboard} />
-    <Route path={LEND} exact component={Lend} />
-    <Route path={BORROW} exact component={Borrow} />
-    <Route path={MARKETS} exact component={Markets} />
-    <Route path={HISTORY} exact component={History} />
-    <Route path={LIQUIDATE} exact component={Liquidate} />
-    <Route component={NoWhere} />
-  </Switch>
+    <Switch>
+        <Route path={DASHBOARD} exact component={Dashboard} />
+        <Route path={LEND} exact component={Lend} />
+        <Route path={BORROW} exact component={Borrow} />
+        <Route path={MARKETS} exact component={Markets} />
+        <Route path={HISTORY} exact component={History} />
+        <Route path={LIQUIDATE} exact component={Liquidate} />
+        <Route component={NoWhere} />
+    </Switch>
 );
 
 export default LayoutContent;

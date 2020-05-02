@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<SidebarHomeItem /> matches snapshot 1`] = `
-<WithStyles(ListItem1)
-  icon={<pure(HomeIcon) />}
-  onClick={[MockFunction]}
-  text="Home"
-/>
-`;
