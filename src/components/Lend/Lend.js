@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 // Section 5: Code Component
 const Lend = ({ activeLend, inactiveLend, pending, onActivate }) => (
-    <Container maxWidth={false} disableGutters="true">
+    <Container maxWidth={false} disableGutters={true}>
         <Grid container spacing={3}>
             <Grid item lg={4} sm={6} xs={12}>
                 <LendCardValue />
@@ -57,9 +57,10 @@ const Lend = ({ activeLend, inactiveLend, pending, onActivate }) => (
 
 // Section 6: Documentation with PropTypes
 Lend.propTypes = {
-    pending: PropTypes.bool.isRequired,
+    pending: PropTypes.array.isRequired,
     activeLend: PropTypes.array.isRequired,
-    inactiveLend: PropTypes.array.isRequired
+    inactiveLend: PropTypes.array.isRequired,
+    onActivate: PropTypes.func.isRequired
 };
 
 // Section 7:  Connect styles and export

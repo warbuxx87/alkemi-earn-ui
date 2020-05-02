@@ -7,10 +7,8 @@ import PropTypes from "prop-types";
 // Section 2: Material-UI imports
 import {
     Box,
-    Button,
     Card,
     CardHeader,
-    CircularProgress,
     Divider,
     Paper,
     Switch,
@@ -204,8 +202,7 @@ const LendTableActive = ({ data = [] }) => {
 
 // Section 6: Documentation with PropTypes
 LendTableActive.propTypes = {
-    classes: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired
+    data: PropTypes.array.isRequired
 };
 
 // Section 7:  Connect styles and export

@@ -2,7 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
 import {
@@ -63,7 +63,7 @@ const Columns = [
 ];
 
 // Section 5: Code Component
-const LendTable = ({ onboard, data = [], loading = {}, onActivate }) => {
+const LendTable = ({ data = [], loading = {}, onActivate }) => {
     const classes = useStyles();
     return (
         <Card>
@@ -164,13 +164,13 @@ const LendTable = ({ onboard, data = [], loading = {}, onActivate }) => {
                                             className={classes.btnActiveOutline}
                                             variant="outlined"
                                             color="secondary"
-                                            disable={Row.pending}
+                                            disable={Row.pending.toString()}
                                             onClick={() => onActivate(Row.unit)}
                                         >
                                             {Row.pending ? (
                                                 <CircularProgress
                                                     size={20}
-                                                    color="white"
+                                                    color="inherit"
                                                 />
                                             ) : (
                                                 "Activate"
@@ -189,8 +189,7 @@ const LendTable = ({ onboard, data = [], loading = {}, onActivate }) => {
 
 // Documentation with PropTypes
 LendTable.propTypes = {
-    classes: PropTypes.object.isRequired,
-    onboard: PropTypes.object.isRequired
+    //onboard: PropTypes.object.isRequired
 };
 
 export default LendTable;

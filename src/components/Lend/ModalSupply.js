@@ -4,16 +4,12 @@
 import React from "react";
 
 // Section 2: Material-UI imports
-import Modal from "@material-ui/core/Modal";
-import Button from "@material-ui/core/Button";
-import Input from "@material-ui/core/Input";
-import Grid from "@material-ui/core/Grid";
+import { Modal, Button, Input, Grid } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application
 import LendChartSupply from "./ChartSupply";
-import styles from "components/UI/Modal";
+import LendModal from "components/UI/Modal";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -32,7 +28,7 @@ function getModalStyle() {
 }
 
 export default function SimpleModal() {
-    const classes = styles();
+    const classes = LendModal();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
@@ -92,8 +88,8 @@ export default function SimpleModal() {
                 </Grid>
                 <div className={classes.inputWrap}>
                     <Input
-                        autoFocus="true"
-                        disableUnderline="true"
+                        autoFocus={true}
+                        disableUnderline={true}
                         className={classes.input}
                         placeholder="0.00"
                         type="value"

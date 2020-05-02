@@ -90,7 +90,7 @@ const AppBar = ({ onboard }) => {
 
     return (
         <MuiAppBar color="transparent" position="relative">
-            <Toolbar disableGutters="true">
+            <Toolbar disableGutters={true}>
                 <Grid
                     container
                     alignItems="center"
@@ -140,7 +140,7 @@ const AppBar = ({ onboard }) => {
 
 // Section 6: Documentation with PropTypes
 AppBar.propTypes = {
-    classes: PropTypes.object.isRequired
+    //classes: PropTypes.object.isRequired
 };
 
 // Section 7:  Connect styles and export
