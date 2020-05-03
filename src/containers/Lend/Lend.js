@@ -18,7 +18,7 @@ import {
 } from "redux/selectors/data";
 
 const address = require("constants/address_map.json");
-const mMarket_abi = require("contracts/moneyMarket.json");
+// const mMarket_abi = require("contracts/moneyMarket.json");
 const WETH_abi = require("contracts/WETH_ABI.json");
 const DAI_abi = require("contracts/DAI_ABI.json");
 const USDT_abi = require("contracts/USDT_ABI.json");
@@ -52,6 +52,10 @@ class withLend extends Component {
                 imBTC_abi,
                 address[net_type]["address_imBTC"]
             )
+            //  mMarket: new this.web3.eth.Contract(
+            //   mMarket_abi,
+            //   address[net_type]["address_mMarket"]
+            //),
         };
         console.log(" *** init contract finished *** ");
         this.setState({ net_type: net_type, contract: contract });

@@ -50,6 +50,6 @@ export default {
         fontWeight: 400,
         fontSize: 12,
         letterSpacing: "-0.05px",
-        lineHeight: 1.2
+        lineHeight: 1.3
     }
 };

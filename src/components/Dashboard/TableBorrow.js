@@ -105,6 +105,7 @@ export default function BorrowTables() {
                                         <img
                                             className={classes.imageSize}
                                             src={row.image}
+                                            alt={row.symbol}
                                         />
                                         <Box ml={2}>
                                             <Typography
