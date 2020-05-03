@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
     item: {
         textAlign: "left",
         justifyContent: "center"
+    },
+    contentCard: {
+        borderBottom: `1px solid ${theme.palette.error.main}`
     }
 }));
 
@@ -50,7 +53,7 @@ function BorrowBalance({ className, ...rest }) {
         <Card>
             <CardHeader title="Borrow Balance" className={classes.item} />
             <Divider />
-            <CardContent>
+            <CardContent className={classes.contentCard}>
                 <Box
                     className={classes.item}
                     display="flex"

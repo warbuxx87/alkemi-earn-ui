@@ -45,8 +45,8 @@ const useStyles = makeStyles({
     }
 });
 
-function createData(symbol, image, asset, balance, value, apr) {
-    return { symbol, image, asset, balance, value, apr };
+function createData(symbol, image, balance, value, apr, earnings) {
+    return { symbol, image, balance, value, apr, earnings };
 }
 
 const rows = [
@@ -67,11 +67,11 @@ export default function BorrowTables() {
     //  let history = useHistory();
 
     const columns = [
-        { id: "1", label: "Asset", align: "left" },
+        { id: "1", label: "Asset" },
         { id: "2", label: "Borrowed", align: "left" },
         { id: "3", label: "Value", align: "left" },
         { id: "4", label: "Borrow APR %", align: "right" },
-        { id: "5", label: "Earnings", align: "right" }
+        { id: "5", label: "Paid", align: "right" }
     ];
 
     // Section 5: Code Component
@@ -80,14 +80,11 @@ export default function BorrowTables() {
             <CardHeader title="Available Markets" />
             <Divider />
             <Paper>
-                <Table className={classes.table} aria-label="customized table">
+                <Table>
                     <TableHead>
                         <TableRow>
                             {columns.map((column, i) => (
                                 <BorrowTableCell
-                                    className={
-                                        column ? column.className : classes.row
-                                    }
                                     key={column.id}
                                     align={column.align}
                                 >
@@ -99,11 +96,7 @@ export default function BorrowTables() {
                     <TableBody>
                         {rows.map(row => (
                             <TableRow key={row.symbol}>
-                                <BorrowTableCell
-                                    component="th"
-                                    scope="row"
-                                    align="left"
-                                >
+                                <BorrowTableCell component="th" scope="Row">
                                     <Box
                                         minWidth={100}
                                         display="flex"
@@ -112,7 +105,6 @@ export default function BorrowTables() {
                                         <img
                                             className={classes.imageSize}
                                             src={row.image}
-                                            alt="{row.symbol}"
                                         />
                                         <Box ml={2}>
                                             <Typography
@@ -120,27 +112,20 @@ export default function BorrowTables() {
                                                 color="textPrimary"
                                             >
                                                 {row.symbol}
-                                                {row.unit}
                                             </Typography>
                                         </Box>
                                     </Box>
                                 </BorrowTableCell>
                                 <BorrowTableCell align="left">
-                                    {row.asset}
-                                </BorrowTableCell>
-                                <BorrowTableCell align="left">
                                     {row.balance}
                                 </BorrowTableCell>
-                                <BorrowTableCell align="right">
+                                <BorrowTableCell align="left">
                                     {row.value}
                                 </BorrowTableCell>
                                 <BorrowTableCell align="right">
                                     {row.apr}
                                 </BorrowTableCell>
-                                <BorrowTableCell
-                                    align="right"
-                                    className="lastest"
-                                >
+                                <BorrowTableCell align="right">
                                     {row.earnings}
                                 </BorrowTableCell>
                             </TableRow>

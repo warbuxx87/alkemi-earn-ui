@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3),
         display: "flex",
-        alignItems: "center",
+        alignItems: "right",
         justifyContent: "space-between"
     },
     label: {
@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
     item: {
         textAlign: "left",
         justifyContent: "center"
+    },
+    contentCard: {
+        borderBottom: `1px solid ${theme.palette.common.white}`
     }
 }));
 
@@ -47,9 +50,9 @@ function Balance({ className, ...rest }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Aggregated Balance" className={classes.item} />
+            <CardHeader title="Aggregated Balance" className={classes.header} />
             <Divider />
-            <CardContent>
+            <CardContent className={classes.contentCard}>
                 <Box
                     className={classes.item}
                     display="flex"

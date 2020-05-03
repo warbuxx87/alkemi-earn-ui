@@ -69,12 +69,11 @@ const LendTable = ({ data = [], loading = {}, onActivate }) => {
             <CardHeader title="Available Markets" />
             <Divider />
             <Paper>
-                <Table className={classes.table}>
+                <Table>
                     <TableHead>
                         <TableRow>
                             {Columns.map((Column, i) => (
                                 <LendTableCell
-                                    className={classes.Row}
                                     key={Column.id}
                                     align={Column.align}
                                 >

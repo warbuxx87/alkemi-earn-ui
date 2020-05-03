@@ -69,12 +69,11 @@ const BorrowTable = ({ inactiveBorrow, onActivate }) => {
             <CardHeader title="Available Markets" />
             <Divider />
             <Paper>
-                <Table className={classes.table}>
+                <Table>
                     <TableHead>
                         <TableRow>
                             {Columns.map((Column, i) => (
                                 <BorrowTableCell
-                                    className={classes.Row}
                                     key={Column.id}
                                     align={Column.align}
                                 >

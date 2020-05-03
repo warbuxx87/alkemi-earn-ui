@@ -45,8 +45,8 @@ const useStyles = makeStyles({
     }
 });
 
-function createData(symbol, image, asset, balance, value, apr) {
-    return { symbol, image, asset, balance, value, apr };
+function createData(symbol, image, balance, value, apr, earnings) {
+    return { symbol, image, balance, value, apr, earnings };
 }
 
 const rows = [
@@ -68,7 +68,7 @@ export default function SupplyTables() {
 
     const columns = [
         { id: "1", label: "Asset", align: "left" },
-        { id: "2", label: "Supplyed", align: "left" },
+        { id: "2", label: "Supplied", align: "left" },
         { id: "3", label: "Value", align: "left" },
         { id: "4", label: "Supply APR %", align: "right" },
         { id: "5", label: "Earnings", align: "right" }
@@ -80,18 +80,15 @@ export default function SupplyTables() {
             <CardHeader title="Available Markets" />
             <Divider />
             <Paper>
-                <Table className={classes.table} aria-label="customized table">
+                <Table>
                     <TableHead>
                         <TableRow>
-                            {columns.map((column, i) => (
+                            {columns.map((Column, i) => (
                                 <SupplyTableCell
-                                    className={
-                                        column ? column.className : classes.row
-                                    }
-                                    key={column.id}
-                                    align={column.align}
+                                    key={Column.id}
+                                    align={Column.align}
                                 >
-                                    {column.label}
+                                    {Column.label}
                                 </SupplyTableCell>
                             ))}
                         </TableRow>
@@ -99,11 +96,7 @@ export default function SupplyTables() {
                     <TableBody>
                         {rows.map(row => (
                             <TableRow key={row.symbol}>
-                                <SupplyTableCell
-                                    component="th"
-                                    scope="row"
-                                    align="left"
-                                >
+                                <SupplyTableCell component="th" scope="row">
                                     <Box
                                         minWidth={100}
                                         display="flex"
@@ -112,7 +105,7 @@ export default function SupplyTables() {
                                         <img
                                             className={classes.imageSize}
                                             src={row.image}
-                                            alt="{row.symbol}"
+                                            alt={row.symbol}
                                         />
                                         <Box ml={2}>
                                             <Typography
@@ -126,21 +119,15 @@ export default function SupplyTables() {
                                     </Box>
                                 </SupplyTableCell>
                                 <SupplyTableCell align="left">
-                                    {row.asset}
-                                </SupplyTableCell>
-                                <SupplyTableCell align="left">
                                     {row.balance}
                                 </SupplyTableCell>
-                                <SupplyTableCell align="right">
+                                <SupplyTableCell align="left">
                                     {row.value}
                                 </SupplyTableCell>
                                 <SupplyTableCell align="right">
                                     {row.apr}
                                 </SupplyTableCell>
-                                <SupplyTableCell
-                                    align="right"
-                                    className="lastest"
-                                >
+                                <SupplyTableCell align="right">
                                     {row.earnings}
                                 </SupplyTableCell>
                             </TableRow>

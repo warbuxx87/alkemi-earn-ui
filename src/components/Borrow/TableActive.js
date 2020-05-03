@@ -66,12 +66,11 @@ const BorrowTableActive = ({ data = [] }) => {
             <CardHeader title="Active Borrowing Reserves" />
             <Divider />
             <Paper>
-                <Table className={classes.table}>
+                <Table>
                     <TableHead>
                         <TableRow>
                             {columns.map((columns, i) => (
                                 <BorrowTableCell
-                                    className={classes.row}
                                     key={columns.id}
                                     align={columns.align}
                                 >

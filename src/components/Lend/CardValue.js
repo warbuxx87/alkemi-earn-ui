@@ -46,7 +46,7 @@ function TotalValue({ className, ...rest }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Aggregated Value" className={classes.item} />
+            <CardHeader title="Supply Balance" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box

@@ -46,7 +46,7 @@ function CardValue({ className, ...rest }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Aggregated Value" className={classes.item} />
+            <CardHeader title="Interest Earned" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box
