@@ -109,7 +109,7 @@ export default function SupplyTables() {
                                         />
                                         <Box ml={2}>
                                             <Typography
-                                                variant="body"
+                                                variant="h6"
                                                 color="textPrimary"
                                             >
                                                 {row.symbol}
