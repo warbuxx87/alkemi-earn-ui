@@ -2,7 +2,6 @@
 
 // Section 1: React low level imports
 import React from "react";
-// import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
 import {
@@ -70,12 +69,11 @@ const LendTable = ({ data = [], loading = {}, onActivate }) => {
             <CardHeader title="Available Markets" />
             <Divider />
             <Paper>
-                <Table className={classes.table}>
+                <Table>
                     <TableHead>
                         <TableRow>
                             {Columns.map((Column, i) => (
                                 <LendTableCell
-                                    className={classes.Row}
                                     key={Column.id}
                                     align={Column.align}
                                 >

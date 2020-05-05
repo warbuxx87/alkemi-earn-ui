@@ -35,7 +35,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-// Section 4: Define Styles function taking theme as argument and returning an object
 function CardValue({ className, ...rest }) {
     const classes = useStyles();
     const data = {
@@ -47,7 +46,7 @@ function CardValue({ className, ...rest }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Aggregated Value" className={classes.item} />
+            <CardHeader title="Interest Earned" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box

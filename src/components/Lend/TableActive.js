@@ -17,7 +17,7 @@ import {
     TableHead,
     TableRow,
     Typography,
-    makeStyles,
+    makeStyles
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -29,8 +29,8 @@ import LendTableCell from "components/UI/TableCell";
 const useStyles = makeStyles({
     imageSize: {
         width: "36px",
-        height: "36px",
-    },
+        height: "36px"
+    }
 });
 
 const columns = [
@@ -43,19 +43,19 @@ const columns = [
 
         align: "center",
         style: "percent",
-        format: (value) => value.toFixed(2),
+        format: value => value.toFixed(2)
     },
     {
         id: "5",
         label: "Collateral",
 
         align: "center",
-        format: (value) => value.toFixed(2),
+        format: value => value.toFixed(2)
     },
     {
         id: "6",
-        label: "",
-    },
+        label: ""
+    }
 ];
 
 // Section 5: Code Component
@@ -66,12 +66,11 @@ const LendTableActive = ({ data = [] }) => {
             <CardHeader title="Active Lending Reserves" />
             <Divider />
             <Paper>
-                <Table className={classes.table}>
+                <Table>
                     <TableHead>
                         <TableRow>
                             {columns.map((columns, i) => (
                                 <LendTableCell
-                                    className={classes.row}
                                     key={columns.id}
                                     align={columns.align}
                                 >
@@ -81,7 +80,7 @@ const LendTableActive = ({ data = [] }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((row) => (
+                        {data.map(row => (
                             <TableRow key={row.name}>
                                 <LendTableCell
                                     component="th"
@@ -202,7 +201,7 @@ const LendTableActive = ({ data = [] }) => {
 
 // Section 6: Documentation with PropTypes
 LendTableActive.propTypes = {
-    data: PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired
 };
 
 // Section 7:  Connect styles and export

@@ -2,8 +2,6 @@
 
 // Section 1: React low level imports
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
 import { useLocation } from "react-router-dom";
 
 // Section 2: Material-UI imports

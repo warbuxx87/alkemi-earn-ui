@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Container, Grid, makeStyles } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import LendTable from "./Table";
@@ -15,14 +15,6 @@ import LendCardInterest from "./CardInterest";
 import LendCardAPR from "./CardAPR";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
-    root: {
-        backgroundColor: theme.palette.background.dark,
-        minHeight: "100%",
-        paddingTop: theme.spacing(3),
-        paddingBottom: theme.spacing(3)
-    }
-}));
 
 // Section 5: Code Component
 const Lend = ({ activeLend, inactiveLend, pending, onActivate }) => (

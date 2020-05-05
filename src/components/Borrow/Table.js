@@ -1,174 +1,193 @@
+// Sub Component
+
+// Section 1: React low level imports
 import React from "react";
 
-import { withStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Switch from "@material-ui/core/Switch";
-import CircularProgress from "@material-ui/core/CircularProgress";
+// Section 2: Material-UI imports
+import {
+    Box,
+    Button,
+    Card,
+    CardHeader,
+    CircularProgress,
+    Divider,
+    Paper,
+    Switch,
+    Table,
+    TableBody,
+    TableHead,
+    TableRow,
+    Typography,
+    makeStyles
+} from "@material-ui/core";
 
-import styles from "./table_styles";
+// Section 3: Components & Containers import from the application
+import BorrowTableCell from "components/UI/TableCell";
 
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: "#202123",
-    color: "#a7a7a7",
-    opacity: "1",
-    fontSize: "12px",
-    lineHeight: "1px",
-    letterSpacing: 0,
-    borderBottom: "1px solid #000000"
-  },
-  body: {
-    fontSize: 14,
-    color: theme.palette.common.white,
-    borderBottom: "1px solid #000000"
-  }
-}))(TableCell);
-
-// const useStyles = makeStyles({
-//   table: {
-//     minWidth: 700,
-//   },
-// });
-
-export default function CustomizedTables({ inactiveBorrow, onActivate }) {
-  const classes = styles();
-  const columns = [
-    { id: "1", label: "Asset", minWidth: 200 },
-    { id: "2", label: "Wallet Balance", minWidth: 120, align: "center" },
-    { id: "3", label: "Balance", minWidth: 100, align: "center" },
-    {
-      id: "4",
-      label: "APR %",
-      minWidth: 100,
-      align: "center"
-      //format: value => value.toLocaleString(),
+// Section 4: Define Styles function taking theme as argument and returning an object
+const useStyles = makeStyles({
+    imageSize: {
+        width: "36px",
+        height: "36px"
     },
-    {
-      id: "5",
-      label: "Collateral",
-      minWidth: 100,
-      align: "center"
-      // format: value => value.toFixed(2),
-    },
-    {
-      id: "6",
-      label: "",
-      minWidth: 280,
-      align: "center"
-      // format: value => value.toFixed(2),
+    btnActiveOutline: {
+        minWidth: 100,
+        minHeight: 36,
+        textTransform: "capitalize"
     }
-  ];
+});
 
-  return (
-    <Grid className={classes.tableBorrowing}>
-      <Grid container className={classes.bg_title}>
-        <Grid item md={6}>
-          <Grid className={classes.table_name}>Current Markets</Grid>
-        </Grid>
-        <Grid item md={6} className={classes.add}>
-          <Button className={classes.addAsset}>Add Asset +</Button>
-        </Grid>
-      </Grid>
-      <TableContainer className={classes.table}>
-        <Table className={classes.table} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column, i) => (
-                <StyledTableCell
-                  className={classes.row}
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </StyledTableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {inactiveBorrow.map(row => (
-              <TableRow key={row.name}>
-                <StyledTableCell component="th" scope="row">
-                  <Grid container>
-                    <Grid item md={5}>
-                      <Grid>
-                        <img
-                          className={classes.imageSize}
-                          src={row.image}
-                          alt="dai"
-                        />
-                      </Grid>
-                    </Grid>
-                    <Grid item md={7}>
-                      <Grid>{row.name}</Grid>
-                      <Grid className={classes.unit}>{row.unit}</Grid>
-                    </Grid>
-                  </Grid>
-                </StyledTableCell>
-                <StyledTableCell align="center">{row.wallet}</StyledTableCell>
-                <StyledTableCell align="center">{row.balance}</StyledTableCell>
-                <StyledTableCell align="center">{row.apr}</StyledTableCell>
-                <StyledTableCell align="center">
-                  <Switch
-                    // checked={state.checkedB}
-                    // onChange={handleChange}
-                    name="checkedB"
-                    color="primary"
-                  />
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  <Grid className="lastest" container>
-                    <Grid
-                      item
-                      md={6}
-                      xs
-                      container
-                      direction="row"
-                      justify="flex-end"
-                      alignItems="center"
-                    >
-                      {/* <Grid className={classesbtnActive">
-                        Active
-                      </Grid> */}
-                    </Grid>
-                    <Grid
-                      item
-                      md={6}
-                      xs
-                      container
-                      direction="row"
-                      justify="center"
-                      alignItems="center"
-                    >
-                      <Button
-                        type="button"
-                        className={classes.btnActiveOutline}
-                        variant="outlined"
-                        color="secondary"
-                        disable={row.pending}
-                        onClick={() => onActivate(row.unit)}
-                      >
-                        {row.pending ? (
-                          <CircularProgress size={20} color="white" />
-                        ) : (
-                          "Activate"
-                        )}
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </StyledTableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Grid>
-  );
-}
+const Columns = [
+    { id: "1", label: "Asset" },
+    { id: "2", label: "Wallet Balance", align: "center" },
+    { id: "3", label: "Balance", align: "center" },
+    {
+        id: "4",
+        label: "APR %",
+        align: "center"
+        //format: value => value.toLocaleString(),
+    },
+    {
+        id: "5",
+        label: "Collateral",
+        align: "center"
+        // format: value => value.toFixed(2),
+    },
+    {
+        id: "6",
+        label: "",
+        align: "right"
+        // format: value => value.toFixed(2),
+    }
+];
+
+// Section 5: Code Component
+const BorrowTable = ({ inactiveBorrow, onActivate }) => {
+    const classes = useStyles();
+    return (
+        <Card>
+            <CardHeader title="Available Markets" />
+            <Divider />
+            <Paper>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            {Columns.map((Column, i) => (
+                                <BorrowTableCell
+                                    key={Column.id}
+                                    align={Column.align}
+                                >
+                                    {Column.label}
+                                </BorrowTableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {inactiveBorrow.map(Row => (
+                            <TableRow key={Row.name}>
+                                <BorrowTableCell
+                                    component="th"
+                                    scope="Row"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Box
+                                        minWidth={150}
+                                        display="flex"
+                                        alignItems="center"
+                                    >
+                                        <img
+                                            className={classes.imageSize}
+                                            src={Row.image}
+                                            alt="dai"
+                                        />
+                                        <Box ml={2}>
+                                            <Typography
+                                                variant="h6"
+                                                color="textPrimary"
+                                            >
+                                                {Row.name}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2"
+                                                color="textSecondary"
+                                            >
+                                                {Row.unit}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                </BorrowTableCell>
+                                <BorrowTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    {Row.wallet}
+                                </BorrowTableCell>
+                                <BorrowTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    {Row.balance}
+                                </BorrowTableCell>
+                                <BorrowTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    {Row.apr}
+                                </BorrowTableCell>
+                                <BorrowTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Switch
+                                        // checked={state.checkedB}
+                                        // onChange={handleChange}
+                                        name="checkedB"
+                                        color="primary"
+                                    />
+                                </BorrowTableCell>
+                                <BorrowTableCell align="right">
+                                    <Box
+                                        minWidth={208}
+                                        display="flex"
+                                        alignItems="center"
+                                        justifyContent="flex-end"
+                                    >
+                                        <Box mr={2}>
+                                            {/* <Grid className={classesbtnActive">
+                          Active
+                        </Grid> */}
+                                        </Box>
+                                        <Button
+                                            type="button"
+                                            className={classes.btnActiveOutline}
+                                            variant="outlined"
+                                            color="secondary"
+                                            disable={Row.pending.toString()}
+                                            onClick={() => onActivate(Row.unit)}
+                                        >
+                                            {Row.pending ? (
+                                                <CircularProgress
+                                                    size={20}
+                                                    color="inherit"
+                                                />
+                                            ) : (
+                                                "Activate"
+                                            )}
+                                        </Button>
+                                    </Box>
+                                </BorrowTableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </Paper>
+        </Card>
+    );
+};
+
+// Documentation with PropTypes
+BorrowTable.propTypes = {
+    //onboard: PropTypes.object.isRequired
+};
+
+export default BorrowTable;

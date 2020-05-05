@@ -31,16 +31,19 @@ const darkTheme = createMuiTheme({
         },
 
         error: {
-            light: "#e57373",
-            main: "rgba(208, 2, 27, 1)",
-            dark: "#d32f2f",
+            main: "#f50057", //red
+            contrastText: "#fff"
+        },
+
+        success: {
+            main: "#21DEAB", //green
             contrastText: "#fff"
         },
 
         text: {
             primary: "#ffffff", // White
             secondary: "#a7a7a7", // Light Grey
-            success: "21DEAB", //Green
+            success: "#21DEAB", //Green
             disabled: "rgba(255, 255, 255, 1)",
             hint: "rgba(184, 233, 134, 1)"
         }
