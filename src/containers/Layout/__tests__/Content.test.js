@@ -6,7 +6,7 @@ import { Route, Switch } from "react-router";
 import LayoutContent from "../Content";
 import Dashboard from "components/Dashboard/Dashboard";
 import Lend from "containers/Lend/Lend";
-import Borrow from "components/Borrow/Borrow";
+import Borrow from "containers/Borrow/Borrow";
 import Markets from "components/Markets/Markets";
 import History from "containers/History/History";
 import Liquidate from "components/Liquidate/Liquidate";
@@ -65,7 +65,7 @@ describe("<LayoutContent />", () => {
         ).toEqual(Lend);
     });
 
-    it("route 3 renders a <Borrow /> component", () => {
+    it("route 3 renders a <Borrow /> container", () => {
         expect(
             wrapper
                 .find(Route)

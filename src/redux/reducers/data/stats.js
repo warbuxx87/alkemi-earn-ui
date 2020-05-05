@@ -23,9 +23,13 @@ export default (state = initialState, { type, action }) => {
 
         case FETCH_STATS_SUCCESS:
             return {
-                ...state,
-                pending: false,
-                tx: action
+                tx: {
+                    ...state.tx,
+                    [action.tx]: {
+                        ...state.tx[action.tx],
+                        pending: false
+                    }
+                }
             };
 
         case FETCH_STATS_ERROR:
