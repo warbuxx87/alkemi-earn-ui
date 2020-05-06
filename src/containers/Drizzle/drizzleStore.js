@@ -1,5 +1,7 @@
 import Web3 from "web3";
 import { EventActions } from "drizzle";
+import thunk from "redux-thunk";
+
 import { generateStore } from "@drizzle/store";
 
 import appReducers from "redux/reducers";
@@ -17,7 +19,7 @@ const contractEventNotifier = store => next => action => {
     return next(action);
 };
 
-const appMiddlewares = [contractEventNotifier];
+const appMiddlewares = [thunk, contractEventNotifier];
 
 export const drizzleOptions = {
     drizzleOptions: {
