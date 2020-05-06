@@ -30,8 +30,11 @@ const Borrow = ({ activeBorrow, inactiveBorrow, pending, onActivate }) => (
             <Grid item lg={4} sm={6} xs={12}>
                 <BorrowCardAPR />
             </Grid>
-
-            {!!activeBorrow.length && <BorrowTableActive data={activeBorrow} />}
+            {!!activeBorrow.length && (
+                <Grid item lg={12} xs={12}>
+                    <BorrowTableActive data={activeBorrow} />
+                </Grid>
+            )}
             {!!inactiveBorrow.length && (
                 <Grid item lg={12} xs={12}>
                     <BorrowingTable
