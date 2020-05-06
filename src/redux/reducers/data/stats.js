@@ -5,10 +5,12 @@ import {
     FETCH_STATS_ERROR
 } from "redux/actions/data";
 
+import tx from "containers/History/MOCK_DATA.json";
+
 // Define initial state
 const initialState = {
     pending: false,
-    tx: null,
+    tx: tx,
     error: null
 };
 
@@ -25,7 +27,7 @@ export default (state = initialState, { type, action }) => {
             return {
                 tx: {
                     ...state.tx,
-                    [action.tx]: {
+                    [action]: {
                         ...state.tx[action.tx],
                         pending: false
                     }

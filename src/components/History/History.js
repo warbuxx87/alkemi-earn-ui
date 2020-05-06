@@ -1,7 +1,11 @@
+// Main Component
+
+// Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
 import { compose } from "redux";
 
+// Section 2: Material-UI imports
 import {
     Button,
     Table,
@@ -12,9 +16,13 @@ import {
     TablePagination
 } from "@material-ui/core";
 
+// Section 3: Components & Containers import from the application
 import { open_it_onetherscan } from "containers/History/utils";
 // import tx_data from "containers/History/MOCK_DATA";
 
+// Section 4: Define Styles function taking theme as argument and returning an object
+
+// Section 5: Code Component
 const History = ({ fetchStats, tx, pending, error }) => {
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
     const [page, setPage] = React.useState(0);
@@ -124,9 +132,10 @@ const History = ({ fetchStats, tx, pending, error }) => {
     );
 };
 
+// Section 6: Documentation with PropTypes
 History.propTypes = {
-    tx: PropTypes.array.isRequired,
-    fetchStats: PropTypes.func.isRequired
+    tx: PropTypes.array.isRequired
 };
 
+// Section 7:  Connect styles and export
 export default compose(History);

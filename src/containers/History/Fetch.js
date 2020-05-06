@@ -1,22 +1,17 @@
 import {
-  fetchStatsPending,
-  fetchStatsSuccess,
-  // fetchStatsError
+    fetchStatsPending,
+    fetchStatsSuccess
+    // fetchStatsError
 } from "redux/actions/data";
 
-import tx_data from "./MOCK_DATA.json";
+// import tx from "./MOCK_DATA.json";
 
-function fetchStats() {
-  return dispatch => {
-    dispatch(fetchStatsPending());
-    // fetch("https://api.alkemi.network/info?data=markets")
-    //   .then(res => res.json())
-    //   .then(res => {
-    dispatch(fetchStatsSuccess([tx_data]));
-    //console.log("tx :" + tx);
-    return [tx_data];
-    // });
-  };
-}
+const fetchStatsAction = tx => async dispatch => {
+    dispatch(fetchStatsPending(tx));
+    setTimeout(() => {
+        // mock delay, will remove
+        dispatch(fetchStatsSuccess(tx));
+    }, 3000);
+};
 
-export default fetchStats;
+export default fetchStatsAction;

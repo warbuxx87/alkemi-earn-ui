@@ -14,11 +14,16 @@ import History from "components/History/History";
 class withHistory extends Component {
     render() {
         // return a presentational component
-        const { tx, error, pending } = this.props;
+        const { tx, error, pending, fetchStats } = this.props;
 
         return (
             <div className="history-list-wrapper">
-                <History tx={tx} error={error} pending={pending} />
+                <History
+                    tx={tx}
+                    error={error}
+                    pending={pending}
+                    fethStats={fetchStats}
+                />
             </div>
         );
     }
