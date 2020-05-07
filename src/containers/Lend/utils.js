@@ -35,15 +35,15 @@ export const handle_approve = ({ drizzle, asset, myAccount }) =>
         const web3 = drizzle.web3;
         const drizzleStore = drizzle.store.getState();
         const network = constants.network_type[drizzleStore.web3.networkId];
-        const address_liquidator = address[network].address_liquidator;
+        const address_mMarket = address[network].address_mMarket;
         const tokenContract = getDrizzleContract({ drizzle, asset, network });
         try {
             const gasLimit = await tokenContract.methods
-                .approve(address[network].address_liquidator, -1)
+                .approve(address[network].address_mMarket, -1)
                 .estimateGas({ from: myAccount });
             const gasPrice = await web3.eth.getGasPrice();
             const receipt = await tokenContract.methods
-                .approve(address_liquidator, -1)
+                .approve(address_mMarket, -1)
                 .send({
                     from: myAccount,
                     gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
