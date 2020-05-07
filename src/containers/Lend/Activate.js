@@ -5,13 +5,13 @@ import {
 } from "redux/actions/data";
 import { handle_approve } from "./utils";
 
-const activateLendAction = ({ drizzle, asset, netType }) => async (
+const activateLendAction = ({ drizzle, asset }) => async (
     dispatch,
     getState
 ) => {
     dispatch(fetchLendPending(asset));
     const myAccount = getState().accounts[0];
-    handle_approve({ drizzle, asset, netType, myAccount })
+    handle_approve({ drizzle, asset, myAccount })
         .then(() => dispatch(fetchLendSuccess(asset)))
         .catch(error => dispatch(fetchLendError(asset, error.message)));
 };
