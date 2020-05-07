@@ -5,7 +5,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import web3 from "web3";
 // Section 2: internal imports
 import onLendActivate from "./Activate";
 import Lend from "components/Lend/Lend";

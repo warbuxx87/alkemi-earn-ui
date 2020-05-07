@@ -1,15 +1,14 @@
 import WETH_ABI from "contracts/WETH_ABI.json";
 import address from "contracts/address_map.json";
-import constants from "contracts/constants.json";
-import networkId from "contracts/Network_id.json";
+import constants from "contracts/constant.json";
 
-const getDrizzleContract = ({ drizzle, asset, netType }) => {
+const getDrizzleContract = ({ drizzle, asset, network }) => {
     if (drizzle.contracts[asset]) {
         return drizzle.contracts[asset];
     }
     const tokenContract = new drizzle.web3.eth.Contract(
         WETH_ABI,
-        address[netType][`address_${asset}`]
+        address[network][`address_${asset}`]
     );
     drizzle.addContract({
         contractName: "WETH",
@@ -22,7 +21,7 @@ export const handle_approve = ({ drizzle, asset, myAccount }) =>
     new Promise(async (resolve, reject) => {
         const web3 = drizzle.web3;
         const drizzleStore = drizzle.store.getState();
-        const network = networkId[drizzleStore.web3.networkId];
+        const network = constants.network_type[drizzleStore.web3.networkId];
         const address_liquidator = address[network].address_liquidator;
         const tokenContract = getDrizzleContract({ drizzle, asset, network });
         try {
