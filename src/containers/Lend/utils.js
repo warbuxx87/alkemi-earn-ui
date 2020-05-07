@@ -1,17 +1,30 @@
-import WETH_ABI from "contracts/WETH_ABI.json";
 import address from "contracts/address_map.json";
 import constants from "contracts/constant.json";
+
+import WETH_ABI from "contracts/WETH_ABI.json";
+import DAI_ABI from "contracts/DAI_ABI.json";
+import USDT_ABI from "contracts/USDT_ABI.json";
+import USDC_ABI from "contracts/USDC_ABI.json";
+import imBTC_ABI from "contracts/imBTC_ABI.json";
+
+const ABIs = {
+    WETH: WETH_ABI,
+    DAI: DAI_ABI,
+    USDT: USDT_ABI,
+    USDC: USDC_ABI,
+    imBTC: imBTC_ABI
+};
 
 const getDrizzleContract = ({ drizzle, asset, network }) => {
     if (drizzle.contracts[asset]) {
         return drizzle.contracts[asset];
     }
     const tokenContract = new drizzle.web3.eth.Contract(
-        WETH_ABI,
+        ABIs[asset],
         address[network][`address_${asset}`]
     );
     drizzle.addContract({
-        contractName: "WETH",
+        contractName: asset,
         web3Contract: tokenContract
     });
     return tokenContract;
