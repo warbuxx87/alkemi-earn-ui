@@ -1,15 +1,19 @@
 import {
     fetchLendPending,
-    fetchLendSuccess
-    // fetchLendError
+    fetchLendSuccess,
+    fetchLendError
 } from "redux/actions/data";
+import { handle_approve } from "./utils";
 
-const activateLendAction = asset => async dispatch => {
+const activateLendAction = ({ drizzle, asset, netType }) => async (
+    dispatch,
+    getState
+) => {
     dispatch(fetchLendPending(asset));
-    setTimeout(() => {
-        // mock delay, will remove
-        dispatch(fetchLendSuccess(asset));
-    }, 3000);
+    const myAccount = getState().accounts[0];
+    handle_approve({ drizzle, asset, netType, myAccount })
+        .then(() => dispatch(fetchLendSuccess(asset)))
+        .catch(error => dispatch(fetchLendError(error.message)));
 };
 
 export default activateLendAction;
