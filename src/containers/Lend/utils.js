@@ -1,5 +1,7 @@
 import WETH_ABI from "contracts/WETH_ABI.json";
 import address from "contracts/address_map.json";
+import constants from "contracts/constants.json";
+import networkId from "contracts/Network_id.json";
 
 const getDrizzleContract = ({ drizzle, asset, netType }) => {
     if (drizzle.contracts[asset]) {
@@ -16,21 +18,23 @@ const getDrizzleContract = ({ drizzle, asset, netType }) => {
     return tokenContract;
 };
 
-export const handle_approve = ({ drizzle, asset, netType, myAccount }) =>
+export const handle_approve = ({ drizzle, asset, myAccount }) =>
     new Promise(async (resolve, reject) => {
         const web3 = drizzle.web3;
-        const address_liquidator = address[netType].address_liquidator;
-        const tokenContract = getDrizzleContract({ drizzle, asset, netType });
+        const drizzleStore = drizzle.store.getState();
+        const network = networkId[drizzleStore.web3.networkId];
+        const address_liquidator = address[network].address_liquidator;
+        const tokenContract = getDrizzleContract({ drizzle, asset, network });
         try {
             const gasLimit = await tokenContract.methods
-                .approve(address[netType].address_liquidator, -1)
+                .approve(address[network].address_liquidator, -1)
                 .estimateGas({ from: myAccount });
             const gasPrice = await web3.eth.getGasPrice();
             const receipt = await tokenContract.methods
                 .approve(address_liquidator, -1)
                 .send({
                     from: myAccount,
-                    gas: Math.ceil(gasLimit * 1.3),
+                    gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
                     gasPrice: gasPrice
                 });
             let check_approve = setInterval(() => {
