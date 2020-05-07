@@ -13,7 +13,7 @@ const activateLendAction = ({ drizzle, asset, netType }) => async (
     const myAccount = getState().accounts[0];
     handle_approve({ drizzle, asset, netType, myAccount })
         .then(() => dispatch(fetchLendSuccess(asset)))
-        .catch(error => dispatch(fetchLendError(error.message)));
+        .catch(error => dispatch(fetchLendError(asset, error.message)));
 };
 
 export default activateLendAction;

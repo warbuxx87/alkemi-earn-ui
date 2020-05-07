@@ -95,9 +95,11 @@ export const fetchLendSuccess = asset => ({
 export const FETCH_LEND_ERROR = "FETCH_LEND_ERROR";
 
 // Declare action creator
-export const fetchLendError = error => ({
+export const fetchLendError = (asset, error) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_LEND_ERROR,
-    payload: new Error(),
-    error: true
+    payload: {
+        error,
+        asset
+    }
 });

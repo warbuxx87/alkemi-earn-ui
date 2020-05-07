@@ -37,8 +37,7 @@ const assets = {
 };
 // Define initial state
 const initialState = {
-    assets,
-    error: null
+    assets
 };
 
 // Implement "reducer" function with initial state as default state
@@ -71,9 +70,15 @@ export default (state = initialState, action) => {
         case FETCH_LEND_ERROR:
             return {
                 ...state,
-                error: action.error
+                assets: {
+                    ...state.assets,
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
+                        pending: false,
+                        error: action.payload.error
+                    }
+                }
             };
-
         default:
             return state;
     }
