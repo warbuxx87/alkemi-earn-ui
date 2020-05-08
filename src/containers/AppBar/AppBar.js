@@ -20,7 +20,7 @@ const locationToTitles = {
 const AppBarContainer = props => {
     let location = useLocation();
     // update Appbar title whenever location change
-    const [title, setTitle] = useState(null);
+    const [title, setTitle] = useState("Not Set");
     useEffect(() => {
         var currentTitle =
             locationToTitles[location.pathname] || "404 Page Not Found";
