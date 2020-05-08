@@ -42,7 +42,7 @@ const wallets = [
     }
 ];
 
-export default Onboard({
+const onboard = Onboard({
     dappId: DAPP_ID, // [String] The API key created by step one above
     networkId: 4, // [Integer] The Ethereum network ID your Dapp uses.
     darkMode: true,
@@ -56,3 +56,15 @@ export default Onboard({
     },
     walletCheck: walletChecks
 });
+
+export const readyToTransaction = async () => {
+    if (!window.ethereum) {
+        const walletSelected = await onboard.walletSelect();
+        if (!walletSelected) return false;
+    }
+
+    const ready = await onboard.walletCheck();
+    return ready;
+};
+
+export default onboard;

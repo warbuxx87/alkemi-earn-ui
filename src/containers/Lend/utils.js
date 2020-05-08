@@ -1,3 +1,4 @@
+import { readyToTransaction } from "containers/AppBar/onboard";
 import address from "contracts/address_map.json";
 import constants from "contracts/constant.json";
 
@@ -32,6 +33,7 @@ const getDrizzleContract = ({ drizzle, asset, network }) => {
 
 export const handle_approve = ({ drizzle, asset, myAccount }) =>
     new Promise(async (resolve, reject) => {
+        !(await readyToTransaction()) && reject("not ready to transaction");
         const web3 = drizzle.web3;
         const drizzleStore = drizzle.store.getState();
         const network = constants.network_type[drizzleStore.web3.networkId];
