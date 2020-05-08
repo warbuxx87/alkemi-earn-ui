@@ -2,8 +2,7 @@
 // Main Component
 
 // Section 1: React low level imports
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 
 // Section 2: Material-UI imports
 import MuiAppBar from "@material-ui/core/AppBar";
@@ -18,7 +17,6 @@ import {
 // Section 3: Components & Containers import from the application
 import Settings from "./Settings";
 import Notifications from "./Notifications";
-//import withOnboard from "containers/Drizzle/withOnBoard";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
@@ -35,42 +33,9 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const locationToTitles = {
-    "/dashboard": "Dashboard",
-    "/lend": "Lending",
-    "/borrow": "Borrowing",
-    "/markets": "Markets",
-    "/history": "History",
-    "/liquidate": "Liquidate",
-    "/connect": "Connect"
-};
-
 // Section 5: Code Component
-const AppBar = ({ onboard, accountAddress }) => {
+const AppBar = ({ title, onConnect, accountAddress }) => {
     const classes = useStyles();
-    let location = useLocation();
-    // update Appbar title whenever location change
-    const [title, setTitle] = useState(null);
-    useEffect(() => {
-        var currentTitle =
-            locationToTitles[location.pathname] || "404 Page Not Found";
-        setTitle(currentTitle);
-    }, [location]);
-
-    // get previous selected wallet
-    useEffect(() => {
-        const previouslySelectedWallet = window.localStorage.getItem(
-            "selectedWallet"
-        );
-        if (previouslySelectedWallet && onboard) {
-            onboard.walletSelect(previouslySelectedWallet);
-        }
-    }, []);
-
-    const connect = async () => {
-        const isSelectWallet = await onboard.walletSelect();
-        isSelectWallet && onboard.walletCheck();
-    };
 
     const addressParser = address =>
         `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
@@ -109,7 +74,7 @@ const AppBar = ({ onboard, accountAddress }) => {
                                 type="button"
                                 variant="outlined"
                                 color="secondary"
-                                onClick={connect}
+                                onClick={onConnect}
                             >
                                 <Grid className={classes.statusBadge}></Grid>
                                 <Grid className={classes.price}>
