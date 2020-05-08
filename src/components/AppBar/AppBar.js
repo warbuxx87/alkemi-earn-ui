@@ -35,44 +35,37 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const locationToTitles = {
+    "/dashboard": "Dashboard",
+    "/lend": "Lending",
+    "/borrow": "Borrowing",
+    "/markets": "Markets",
+    "/history": "History",
+    "/liquidate": "Liquidate",
+    "/connect": "Connect"
+};
+
 // Section 5: Code Component
 const AppBar = ({ onboard, accountAddress }) => {
     const classes = useStyles();
     let location = useLocation();
+    // update Appbar title whenever location change
+    const [title, setTitle] = useState(null);
     useEffect(() => {
-        var currentTitle = "Not Set";
-
-        switch (location.pathname) {
-            case "/dashboard":
-                currentTitle = "Dashboard";
-                break;
-            case "/lend":
-                currentTitle = "Lending";
-                break;
-            case "/borrow":
-                currentTitle = "Borrowing";
-                break;
-            case "/markets":
-                currentTitle = "Markets";
-                break;
-            case "/history":
-                currentTitle = "History";
-                break;
-            case "/liquidate":
-                currentTitle = "Liquidate";
-                break;
-            case "/connect":
-                currentTitle = "Connect";
-                break;
-            default:
-                currentTitle = "404 Page Not Found";
-                break;
-        }
-
+        var currentTitle =
+            locationToTitles[location.pathname] || "404 Page Not Found";
         setTitle(currentTitle);
     }, [location]);
 
-    const [title, setTitle] = useState(null);
+    // get previous selected wallet
+    useEffect(() => {
+        const previouslySelectedWallet = window.localStorage.getItem(
+            "selectedWallet"
+        );
+        if (previouslySelectedWallet && onboard) {
+            onboard.walletSelect(previouslySelectedWallet);
+        }
+    }, []);
 
     const connect = async () => {
         const isSelectWallet = await onboard.walletSelect();
