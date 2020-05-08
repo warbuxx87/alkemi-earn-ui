@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Main Component
 
 // Section 1: React low level imports
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 // Section 5: Code Component
-const AppBar = ({ onboard }) => {
+const AppBar = ({ onboard, accountAddress }) => {
     const classes = useStyles();
     let location = useLocation();
     useEffect(() => {
@@ -72,19 +73,14 @@ const AppBar = ({ onboard }) => {
     }, [location]);
 
     const [title, setTitle] = useState(null);
-    const [account, setAccount] = useState(null);
 
     const connect = async () => {
-        await onboard.walletSelect();
-        await onboard.walletCheck();
-        const currentState = onboard.getState();
-        //  console.log(currentState.address);
-        var account =
-            currentState.address.substr(0, 4) +
-            "..." +
-            currentState.address.substr(currentState.address.length - 4, 4);
-        setAccount(account);
+        const isSelectWallet = await onboard.walletSelect();
+        isSelectWallet && onboard.walletCheck();
     };
+
+    const addressParser = address =>
+        `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
 
     return (
         <MuiAppBar color="transparent" position="relative">
@@ -125,7 +121,9 @@ const AppBar = ({ onboard }) => {
                                 <Grid className={classes.statusBadge}></Grid>
                                 <Grid className={classes.price}>
                                     {/* 0x121565...6456 */}
-                                    {account ? account : "Connect"}
+                                    {accountAddress
+                                        ? addressParser(accountAddress)
+                                        : "Connect"}
                                 </Grid>
                             </Button>
                         </Grid>
