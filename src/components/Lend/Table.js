@@ -23,6 +23,7 @@ import {
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
+import LendModalSupply from "./ModalSupply";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -157,23 +158,31 @@ const LendTable = ({ data = [], loading = {}, onActivate }) => {
                           Active
                         </Grid> */}
                                         </Box>
-                                        <Button
-                                            type="button"
-                                            className={classes.btnActiveOutline}
-                                            variant="outlined"
-                                            color="secondary"
-                                            disable={Row.pending.toString()}
-                                            onClick={() => onActivate(Row.unit)}
-                                        >
-                                            {Row.pending ? (
-                                                <CircularProgress
-                                                    size={20}
-                                                    color="inherit"
-                                                />
-                                            ) : (
-                                                "Activate"
-                                            )}
-                                        </Button>
+                                        {Row.activated ? (
+                                            <LendModalSupply />
+                                        ) : (
+                                            <Button
+                                                type="button"
+                                                className={
+                                                    classes.btnActiveOutline
+                                                }
+                                                variant="outlined"
+                                                color="secondary"
+                                                disable={Row.pending}
+                                                onClick={() =>
+                                                    onActivate(Row.unit)
+                                                }
+                                            >
+                                                {Row.pending ? (
+                                                    <CircularProgress
+                                                        size={20}
+                                                        color="inherit"
+                                                    />
+                                                ) : (
+                                                    "Activate"
+                                                )}
+                                            </Button>
+                                        )}
                                     </Box>
                                 </LendTableCell>
                             </TableRow>
