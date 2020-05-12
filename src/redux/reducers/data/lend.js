@@ -79,6 +79,19 @@ export default (state = initialState, action) => {
                     }
                 }
             };
+        case "GOT_CONTRACT_VAR":
+            console.log(action);
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.name]: {
+                        ...state.assets[action.name],
+                        pending: false,
+                        balance: action.value
+                    }
+                }
+            };
         default:
             return state;
     }

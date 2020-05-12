@@ -28,50 +28,56 @@ const getDrizzleContract = ({ drizzle, asset, network }) => {
         contractName: asset,
         web3Contract: tokenContract
     });
-    return tokenContract;
+    return drizzle.contracts[asset];
 };
 
 export const handle_approve = ({ drizzle, asset, myAccount }) =>
     new Promise(async (resolve, reject) => {
         !(await readyToTransaction()) && reject("not ready to transaction");
-        const web3 = drizzle.web3;
+        // const web3 = drizzle.web3;
         const drizzleStore = drizzle.store.getState();
         const network = constants.network_type[drizzleStore.web3.networkId];
-        const address_mMarket = address[network].address_mMarket;
+        // const address_mMarket = address[network].address_mMarket;
         const tokenContract = getDrizzleContract({ drizzle, asset, network });
-        try {
-            const gasLimit = await tokenContract.methods
-                .approve(address[network].address_mMarket, -1)
-                .estimateGas({ from: myAccount });
-            const gasPrice = await web3.eth.getGasPrice();
-            const receipt = await tokenContract.methods
-                .approve(address_mMarket, -1)
-                .send({
-                    from: myAccount,
-                    gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
-                    gasPrice: gasPrice
-                });
-            let check_approve = setInterval(() => {
-                web3.eth.getTransactionReceipt(
-                    receipt.transactionHash,
-                    (res_fail, res_success) => {
-                        if (res_success) {
-                            clearInterval(check_approve);
-                            if (res_success.status === true) {
-                                resolve(res_success);
-                            }
-                        }
-                        if (res_fail) {
-                            console.log(res_fail);
-                            clearInterval(check_approve);
-                            reject(res_fail);
-                        }
-                    }
-                );
-            }, 2000);
-        } catch (error) {
-            reject(error);
-        }
+        const accountAddress = drizzleStore.accounts[0];
+        const hash = tokenContract.methods.balanceOf.cacheCall(
+            drizzleStore.accounts[0]
+        );
+        console.log({ hash, accountAddress });
+        reject(1);
+        // try {
+        //     const gasLimit = await tokenContract.methods
+        //         .approve(address[network].address_mMarket, -1)
+        //         .estimateGas({ from: myAccount });
+        //     const gasPrice = await web3.eth.getGasPrice();
+        //     const receipt = await tokenContract.methods
+        //         .approve(address_mMarket, -1)
+        //         .send({
+        //             from: myAccount,
+        //             gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
+        //             gasPrice: gasPrice
+        //         });
+        //     let check_approve = setInterval(() => {
+        //         web3.eth.getTransactionReceipt(
+        //             receipt.transactionHash,
+        //             (res_fail, res_success) => {
+        //                 if (res_success) {
+        //                     clearInterval(check_approve);
+        //                     if (res_success.status === true) {
+        //                         resolve(res_success);
+        //                     }
+        //                 }
+        //                 if (res_fail) {
+        //                     console.log(res_fail);
+        //                     clearInterval(check_approve);
+        //                     reject(res_fail);
+        //                 }
+        //             }
+        //         );
+        //     }, 2000);
+        // } catch (error) {
+        //     reject(error);
+        // }
     });
 
 // let url_map = require("constants/url_map.json");
