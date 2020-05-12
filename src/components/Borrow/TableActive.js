@@ -21,8 +21,8 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import BorrowModalSupply from "./ModalSupply";
-import BorrowModalWithdraw from "./ModalWithdraw";
+import BorrowModalSupply from "./ModalBorrow";
+import BorrowModalWithdraw from "./ModalRepay";
 import BorrowTableCell from "components/UI/TableCell";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
