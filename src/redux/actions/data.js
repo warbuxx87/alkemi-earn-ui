@@ -28,7 +28,8 @@ export const FETCH_STATS_ERROR = "FETCH_STATS_ERROR";
 export const fetchStatsError = error => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_STATS_ERROR,
-    error: error
+    payload: new Error(),
+    error: true
 });
 
 //                                      //
@@ -52,7 +53,7 @@ export const FETCH_BORROW_SUCCESS = "FETCH_BORROW_SUCCESS";
 export const fetchBorrowSuccess = asset => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_SUCCESS,
-    payload: asset
+    asset
 });
 
 // Declare action type as a constant
@@ -62,7 +63,8 @@ export const FETCH_BORROW_ERROR = "FETCH_BORROW_ERROR";
 export const fetchBorrowError = error => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_ERROR,
-    error: error
+    payload: new Error(),
+    error: true
 });
 
 //                                      //
@@ -76,7 +78,7 @@ export const FETCH_LEND_PENDING = "FETCH_LEND_PENDING";
 export const fetchLendPending = asset => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_LEND_PENDING,
-    payload: asset
+    asset
 });
 
 // Declare action type as a constant
@@ -86,7 +88,7 @@ export const FETCH_LEND_SUCCESS = "FETCH_LEND_SUCCESS";
 export const fetchLendSuccess = asset => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_LEND_SUCCESS,
-    payload: asset
+    asset
 });
 
 // Declare action type as a constant
@@ -96,5 +98,6 @@ export const FETCH_LEND_ERROR = "FETCH_LEND_ERROR";
 export const fetchLendError = error => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_LEND_ERROR,
-    error: error
+    payload: new Error(),
+    error: true
 });
