@@ -4,7 +4,6 @@ import {
     FETCH_LEND_SUCCESS,
     FETCH_LEND_ERROR
 } from "redux/actions/data";
-
 // import internal assets
 import dai from "assets/images/DAI.svg";
 import usdc from "assets/images/USDC.svg";
@@ -13,7 +12,16 @@ import usdt from "assets/images/USDT.svg";
 import eth from "assets/images/WETH.svg";
 // import pax from "assets/images/pax.png";
 
-function createData(name, unit, image, wallet, balance, apr, collateral) {
+function createData(
+    name,
+    unit,
+    image,
+    wallet,
+    balance,
+    apr,
+    collateral,
+    decimals
+) {
     return {
         name,
         unit,
@@ -23,7 +31,8 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
         apr,
         collateral,
         activated: false,
-        pending: false
+        pending: false,
+        decimals: null
     };
 }
 
@@ -80,18 +89,32 @@ export default (state = initialState, action) => {
                 }
             };
         case "GOT_CONTRACT_VAR":
-            console.log(action);
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.name]: {
-                        ...state.assets[action.name],
-                        pending: false,
-                        balance: action.value
-                    }
-                }
-            };
+            switch (action.variable) {
+                case "balanceOf":
+                    return {
+                        ...state,
+                        assets: {
+                            ...state.assets,
+                            [action.name]: {
+                                ...state.assets[action.name],
+                                balance: action.value
+                            }
+                        }
+                    };
+                case "decimals":
+                    return {
+                        ...state,
+                        assets: {
+                            ...state.assets,
+                            [action.name]: {
+                                ...state.assets[action.name],
+                                decimals: action.value
+                            }
+                        }
+                    };
+                default:
+                    return state;
+            }
         default:
             return state;
     }

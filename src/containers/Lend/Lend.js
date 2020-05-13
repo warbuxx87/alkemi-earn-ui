@@ -18,7 +18,23 @@ import {
     getLendPending
 } from "redux/selectors/data";
 
+import { getAccountAddress } from "redux/selectors/drizzleStore";
+
 class withLend extends Component {
+    componentDidMount() {
+        const { drizzle, accountAddress } = this.props;
+        // fetch balance every 10 seconds
+        this.fetchBalance = setInterval(() => {
+            Object.values(drizzle.contracts).forEach(contract => {
+                contract.methods.balanceOf.cacheCall(accountAddress);
+            });
+        }, 10000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.fetchBalance);
+    }
+
     render() {
         // return a presentational component
         const {
@@ -42,7 +58,8 @@ class withLend extends Component {
 const mapStateToProps = state => ({
     inactiveLend: getLendInactive(state),
     activeLend: getLendActive(state),
-    pending: getLendPending(state)
+    pending: getLendPending(state),
+    accountAddress: getAccountAddress(state)
 });
 
 const mapDispatchToProps = dispatch =>

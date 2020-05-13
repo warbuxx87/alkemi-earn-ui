@@ -62,6 +62,12 @@ const Columns = [
     }
 ];
 
+const formatNumber = (value, decimals) => {
+    return new Intl.NumberFormat("en-IN", {
+        maximumSignificantDigits: 3
+    }).format(Number(value) / 10 ** Number(decimals));
+};
+
 // Section 5: Code Component
 const LendTable = ({ data = [], loading = {}, onActivate }) => {
     const classes = useStyles();
@@ -127,7 +133,7 @@ const LendTable = ({ data = [], loading = {}, onActivate }) => {
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    {Row.balance}
+                                    {formatNumber(Row.balance, Row.decimals)}
                                 </LendTableCell>
                                 <LendTableCell
                                     align="center"
