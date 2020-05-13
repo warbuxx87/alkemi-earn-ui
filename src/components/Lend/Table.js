@@ -24,6 +24,7 @@ import {
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
 import LendModalSupply from "./ModalSupply";
+import { formatNumber } from "./utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -61,13 +62,6 @@ const Columns = [
         // format: value => value.toFixed(2),
     }
 ];
-
-const formatNumber = (value, decimals) => {
-    if (!value || !decimals) return 0;
-    return new Intl.NumberFormat("en-es").format(
-        Number(value) / 10 ** Number(decimals)
-    );
-};
 
 // Section 5: Code Component
 const LendTable = ({ data = [], loading = {}, onActivate }) => {
@@ -166,7 +160,7 @@ const LendTable = ({ data = [], loading = {}, onActivate }) => {
                         </Grid> */}
                                         </Box>
                                         {Row.activated ? (
-                                            <LendModalSupply />
+                                            <LendModalSupply asset={Row} />
                                         ) : (
                                             <Button
                                                 type="button"

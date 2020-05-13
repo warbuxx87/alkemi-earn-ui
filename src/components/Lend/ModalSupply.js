@@ -6,11 +6,10 @@ import React from "react";
 // Section 2: Material-UI imports
 import { Modal, Button, Input, Grid } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-
 // Section 3: Components & Containers import from the application
 import LendChartSupply from "./ChartSupply";
 import LendModal from "components/UI/Modal";
-
+import { formatNumber, fromWei } from "./utils";
 // Section 4: Define Styles function taking theme as argument and returning an object
 
 function getModalStyle() {
@@ -27,7 +26,7 @@ function getModalStyle() {
     };
 }
 
-export default function SimpleModal() {
+export default function SimpleModal({ asset }) {
     const classes = LendModal();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
@@ -40,6 +39,9 @@ export default function SimpleModal() {
     const handleClose = () => {
         setOpen(false);
     };
+    const [amountSupply, setAmountSupply] = React.useState(0);
+    const onSetMax = () =>
+        setAmountSupply(fromWei(asset.balance, asset.decimals));
     // Section 5: Code Component
     const body = (
         <div style={modalStyle} className={classes.paper}>
@@ -83,7 +85,7 @@ export default function SimpleModal() {
                         justify="flex-end"
                         className={classes.walletBalance}
                     >
-                        Wallet: 11234.88
+                        Wallet: {formatNumber(asset.balance, asset.decimals)}
                     </Grid>
                 </Grid>
                 <div className={classes.inputWrap}>
@@ -93,10 +95,12 @@ export default function SimpleModal() {
                         className={classes.input}
                         placeholder="0.00"
                         type="value"
-                        // onChange={(e) => { input_chang(this, e.target.value) }}
-                        // value={this.state.amount_to_dupply}
+                        onChange={e => setAmountSupply(this, e.target.value)}
+                        value={amountSupply}
                     />
-                    <span className={classes.maxTips}>MAX</span>
+                    <span className={classes.maxTips} onClick={onSetMax}>
+                        MAX
+                    </span>
                     {/* onClick={() => { click_max(this) }} */}
                 </div>
                 <Grid className={classes.rateInfo}>
