@@ -63,9 +63,10 @@ const Columns = [
 ];
 
 const formatNumber = (value, decimals) => {
-    return new Intl.NumberFormat("en-IN", {
-        maximumSignificantDigits: 3
-    }).format(Number(value) / 10 ** Number(decimals));
+    if (!value || !decimals) return 0;
+    return new Intl.NumberFormat("en-es").format(
+        Number(value) / 10 ** Number(decimals)
+    );
 };
 
 // Section 5: Code Component
