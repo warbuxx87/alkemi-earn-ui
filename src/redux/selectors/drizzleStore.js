@@ -1,5 +1,6 @@
 // Libs
 // import { createSelector } from "reselect";
+import _ from "lodash";
 
 // Stats Selectors
-export const getAccountAddress = state => state.accounts[0];
+export const getAccountAddress = state => _.get(state, "accounts[0]");

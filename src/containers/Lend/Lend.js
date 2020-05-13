@@ -22,9 +22,9 @@ import { getAccountAddress } from "redux/selectors/drizzleStore";
 
 class withLend extends Component {
     componentDidMount() {
-        const { drizzle, accountAddress } = this.props;
         // fetch balance every 10 seconds
         this.fetchBalance = setInterval(() => {
+            const { drizzle, accountAddress } = this.props;
             Object.values(drizzle.contracts).forEach(contract => {
                 contract.methods.balanceOf.cacheCall(accountAddress);
             });
