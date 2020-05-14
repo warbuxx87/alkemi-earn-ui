@@ -134,6 +134,7 @@ export default function SupplyModal({ asset, onSupply }) {
                         className={classes.btnModal}
                         variant="contained"
                         onClick={() => onSupply({ asset, amount })}
+                        disable={asset.supplying}
                     >
                         {asset.supplying ? (
                             <CircularProgress size={20} color="inherit" />
