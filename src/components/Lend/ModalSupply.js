@@ -4,7 +4,13 @@
 import React from "react";
 
 // Section 2: Material-UI imports
-import { Modal, Button, Input, Grid } from "@material-ui/core";
+import {
+    Modal,
+    Button,
+    Input,
+    Grid,
+    CircularProgress
+} from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 // Section 3: Components & Containers import from the application
 import LendChartSupply from "./ChartSupply";
@@ -26,23 +32,16 @@ function getModalStyle() {
     };
 }
 
-export default function SimpleModal({ asset }) {
+export default function SupplyModal({ asset, onSupply }) {
     const classes = LendModal();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const [amountSupply, setAmountSupply] = React.useState(0);
-    const onSetMax = () =>
-        setAmountSupply(fromWei(asset.balance, asset.decimals));
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     // Section 5: Code Component
+    const [amount, setAmount] = React.useState(null);
+    const onSetMax = () => setAmount(fromWei(asset.balance, asset.decimals));
     const body = (
         <div style={modalStyle} className={classes.paper}>
             <Grid container className={classes.titleSupply}>
@@ -95,8 +94,8 @@ export default function SimpleModal({ asset }) {
                         className={classes.input}
                         placeholder="0.00"
                         type="value"
-                        onChange={e => setAmountSupply(this, e.target.value)}
-                        value={amountSupply}
+                        onChange={e => setAmount(e.target.value)}
+                        value={amount}
                     />
                     <span className={classes.maxTips} onClick={onSetMax}>
                         MAX
@@ -134,9 +133,13 @@ export default function SimpleModal({ asset }) {
                         type="button"
                         className={classes.btnModal}
                         variant="contained"
-                        onClick={handleOpen}
+                        onClick={() => onSupply({ asset, amount })}
                     >
-                        Supply
+                        {asset.supplying ? (
+                            <CircularProgress size={20} color="inherit" />
+                        ) : (
+                            "Supply"
+                        )}
                     </Button>
                 </div>
             </div>
@@ -151,7 +154,11 @@ export default function SimpleModal({ asset }) {
                 variant="contained"
                 onClick={handleOpen}
             >
-                Supply
+                {asset.supplying ? (
+                    <CircularProgress size={20} color="inherit" />
+                ) : (
+                    "Supply"
+                )}
             </Button>
 
             <Modal

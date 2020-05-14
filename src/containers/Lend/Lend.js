@@ -37,19 +37,12 @@ class withLend extends Component {
 
     render() {
         // return a presentational component
-        const {
-            inactiveLend,
-            activeLend,
-            onActivate,
-            pending,
-            drizzle
-        } = this.props;
+        const { inactiveLend, activeLend, onActivate, drizzle } = this.props;
         return (
             <Lend
                 inactiveLend={inactiveLend}
                 activeLend={activeLend}
                 onActivate={asset => onActivate({ drizzle, asset })}
-                pending={pending}
             />
         );
     }

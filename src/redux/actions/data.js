@@ -103,3 +103,28 @@ export const fetchLendError = (asset, error) => ({
         asset
     }
 });
+
+//                                      //
+// ------------ SUPPLY ACTIONS --------   //
+//                                      //
+
+export const SUPPLY_PENDING = "SUPPLY_PENDING";
+export const supplyPending = asset => ({
+    type: SUPPLY_PENDING,
+    payload: asset
+});
+
+export const SUPPLY_SUCCESS = "SUPPLY_SUCCESS";
+export const supplySuccess = asset => ({
+    type: SUPPLY_SUCCESS,
+    payload: asset
+});
+
+export const SUPPLY_ERROR = "SUPPLY_ERROR";
+export const supplyError = (asset, error) => ({
+    type: SUPPLY_ERROR,
+    payload: {
+        error,
+        asset
+    }
+});

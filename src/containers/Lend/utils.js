@@ -1,4 +1,5 @@
 import { readyToTransaction } from "containers/AppBar/onboard";
+import { toWei } from "components/Lend/utils";
 import address from "contracts/address_map.json";
 import constants from "contracts/constant.json";
 
@@ -7,6 +8,7 @@ import DAI_ABI from "contracts/DAI_ABI.json";
 import USDT_ABI from "contracts/USDT_ABI.json";
 import USDC_ABI from "contracts/USDC_ABI.json";
 import imBTC_ABI from "contracts/imBTC_ABI.json";
+import market_ABI from "contracts/moneyMarket.json";
 
 const ABIs = {
     WETH: WETH_ABI,
@@ -15,6 +17,25 @@ const ABIs = {
     USDC: USDC_ABI,
     imBTC: imBTC_ABI
 };
+
+const getTransactionReceipt = (web3, hash) =>
+    new Promise((resolve, reject) => {
+        let check_approve = setInterval(() => {
+            web3.eth.getTransactionReceipt(hash, (res_fail, res_success) => {
+                if (res_success) {
+                    clearInterval(check_approve);
+                    if (res_success.status === true) {
+                        resolve(res_success);
+                    }
+                }
+                if (res_fail) {
+                    console.log(res_fail);
+                    clearInterval(check_approve);
+                    reject(res_fail);
+                }
+            });
+        }, 2000);
+    });
 
 const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
     if (drizzle.contracts[asset]) {
@@ -33,53 +54,59 @@ const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
     return drizzle.contracts[asset];
 };
 
-export const handle_approve = ({ drizzle, asset, myAccount }) =>
-    new Promise(async (resolve, reject) => {
-        !(await readyToTransaction()) && reject("not ready to transaction");
-        const web3 = drizzle.web3;
-        const drizzleStore = drizzle.store.getState();
-        const network = constants.network_type[drizzleStore.web3.networkId];
-        const address_mMarket = address[network].address_mMarket;
-        const tokenContract = getDrizzleContract({
-            drizzle,
-            asset,
-            network,
-            myAccount
-        });
-        try {
-            const gasLimit = await tokenContract.methods
-                .approve(address[network].address_mMarket, -1)
-                .estimateGas({ from: myAccount });
-            const gasPrice = await web3.eth.getGasPrice();
-            const receipt = await tokenContract.methods
-                .approve(address_mMarket, -1)
-                .send({
-                    from: myAccount,
-                    gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
-                    gasPrice: gasPrice
-                });
-            let check_approve = setInterval(() => {
-                web3.eth.getTransactionReceipt(
-                    receipt.transactionHash,
-                    (res_fail, res_success) => {
-                        if (res_success) {
-                            clearInterval(check_approve);
-                            if (res_success.status === true) {
-                                resolve(res_success);
-                            }
-                        }
-                        if (res_fail) {
-                            console.log(res_fail);
-                            clearInterval(check_approve);
-                            reject(res_fail);
-                        }
-                    }
-                );
-            }, 2000);
-        } catch (error) {
-            reject(error);
-        }
+export const handle_approve = async ({ drizzle, asset, myAccount }) => {
+    if (!(await readyToTransaction()))
+        throw new Error("not ready to transaction");
+    const web3 = drizzle.web3;
+    const drizzleStore = drizzle.store.getState();
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    const address_mMarket = address[network].address_mMarket;
+    const tokenContract = getDrizzleContract({
+        drizzle,
+        asset,
+        network,
+        myAccount
     });
+    const gasLimit = await tokenContract.methods
+        .approve(address[network].address_mMarket, -1)
+        .estimateGas({ from: myAccount });
+    const gasPrice = await web3.eth.getGasPrice();
+    const receipt = await tokenContract.methods
+        .approve(address_mMarket, -1)
+        .send({
+            from: myAccount,
+            gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
+            gasPrice: gasPrice
+        });
+    const result = await getTransactionReceipt(web3, receipt.transactionHash);
+    return result;
+};
+
+export const handle_supply_click = async ({ drizzle, amount, asset }) => {
+    if (!(await readyToTransaction()))
+        throw new Error("not ready to transaction");
+    const web3 = drizzle.web3;
+    const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzleStore.accounts[0];
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    const address_mMarket = address[network].address_mMarket;
+    const mMarketContract = new web3.eth.Contract(market_ABI, address_mMarket);
+    const token_address = address[network][`address_${asset.unit}`];
+    const weiAmount = toWei(amount, asset.decimals);
+    const gasLimit = await mMarketContract.methods
+        .supply(token_address, weiAmount)
+        .estimateGas({ from: myAccount });
+    const gasPrice = await web3.eth.getGasPrice();
+    const receipt = await mMarketContract.methods
+        .supply(token_address, weiAmount)
+        .send({
+            from: myAccount,
+            gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
+            gasPrice: gasPrice
+        });
+    const result = await getTransactionReceipt(web3, receipt.transactionHash);
+    return result;
+};
 
 // let url_map = require("constants/url_map.json");
 

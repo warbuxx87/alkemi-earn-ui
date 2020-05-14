@@ -2,7 +2,10 @@
 import {
     FETCH_LEND_PENDING,
     FETCH_LEND_SUCCESS,
-    FETCH_LEND_ERROR
+    FETCH_LEND_ERROR,
+    SUPPLY_PENDING,
+    SUPPLY_SUCCESS,
+    SUPPLY_ERROR
 } from "redux/actions/data";
 // import internal assets
 import dai from "assets/images/DAI.svg";
@@ -32,6 +35,7 @@ function createData(
         collateral,
         activated: false,
         pending: false,
+        supplying: false,
         decimals: null
     };
 }
@@ -115,6 +119,42 @@ export default (state = initialState, action) => {
                 default:
                     return state;
             }
+        case SUPPLY_PENDING:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        supplying: true
+                    }
+                }
+            };
+        case SUPPLY_SUCCESS:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        supplying: false,
+                        activated: true
+                    }
+                }
+            };
+
+        case SUPPLY_ERROR:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
+                        supplying: false,
+                        error: action.payload.error
+                    }
+                }
+            };
         default:
             return state;
     }

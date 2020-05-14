@@ -17,7 +17,7 @@ import LendCardAPR from "./CardAPR";
 // Section 4: Define Styles function taking theme as argument and returning an object
 
 // Section 5: Code Component
-const Lend = ({ activeLend, inactiveLend, pending, onActivate }) => (
+const Lend = ({ activeLend, inactiveLend, onActivate }) => (
     <Container maxWidth={false} disableGutters={true}>
         <Grid container spacing={3}>
             <Grid item lg={4} sm={6} xs={12}>
@@ -36,11 +36,7 @@ const Lend = ({ activeLend, inactiveLend, pending, onActivate }) => (
             )}
             {!!inactiveLend.length && (
                 <Grid item lg={12} xs={12}>
-                    <LendTable
-                        data={inactiveLend}
-                        loading={pending}
-                        onActivate={onActivate}
-                    />
+                    <LendTable data={inactiveLend} onActivate={onActivate} />
                 </Grid>
             )}{" "}
         </Grid>

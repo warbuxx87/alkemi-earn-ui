@@ -11,6 +11,9 @@ const decimalsToUnit = {
 export const fromWei = (value, decimals) =>
     web3.utils.fromWei(value, decimalsToUnit[decimals]);
 
+export const toWei = (value, decimals) =>
+    web3.utils.toWei(value, decimalsToUnit[decimals]);
+
 export const formatNumber = (value, decimals) => {
     if (!value || !decimals) return 0;
     const wei = fromWei(value, decimals);
