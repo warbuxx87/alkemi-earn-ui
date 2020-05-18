@@ -8,6 +8,15 @@ const decimalsToUnit = {
     18: "ether"
 };
 
+// decimals is constant, default will be 12
+const unitToDecimals = {
+    WETH: 18,
+    DAI: 18,
+    USDT: 18,
+    USDC: 6,
+    imBTC: 8
+};
+
 export const fromWei = (value, decimals) =>
     web3.utils.fromWei(value, decimalsToUnit[decimals]);
 
@@ -16,7 +25,7 @@ export const toWei = (value, decimals) =>
 
 export const formatNumber = (value, unit) => {
     if (!value) return 0;
-    const decimals = unit === "USDC" ? 6 : 12; // USDC 's decimals is 6, others is 12
+    const decimals = unitToDecimals[unit] || 18;
     const wei = fromWei(value, decimals);
     return new Intl.NumberFormat("en-es").format(wei);
 };
