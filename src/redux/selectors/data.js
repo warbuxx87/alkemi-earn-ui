@@ -10,8 +10,8 @@ export const getStatsPending = state => state.data.stats.pending;
 export const getStatsError = state => state.data.stats.error;
 
 // Lend Selectors
-const lendAssetSelector = state => state.data.lend.assets;
 const networkSelector = state => constants.network_type[state.web3.networkId];
+const lendAssetSelector = state => state.data.lend.assets;
 const allBalanceSelector = state => {
     const supplyBalance = {};
     Object.values(
@@ -19,14 +19,13 @@ const allBalanceSelector = state => {
     ).forEach(balance => (supplyBalance[balance.args[1]] = balance.value));
     return supplyBalance;
 };
-
-export const getLendActive = () => [];
-export const getLendInactive = createSelector(
+const getLendAsset = createSelector(
     lendAssetSelector,
     networkSelector,
     allBalanceSelector,
     (assets, network, allBalances) =>
         Object.values(assets).map(asset => {
+            // TODO: get suppy wallet
             let wallet = 0;
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
@@ -38,6 +37,15 @@ export const getLendInactive = createSelector(
             };
         })
 );
+
+export const getLendActive = createSelector(getLendAsset, assets =>
+    assets.filter(asset => asset.wallet !== "0")
+);
+
+export const getLendInactive = createSelector(getLendAsset, assets =>
+    assets.filter(asset => asset.wallet === "0")
+);
+
 export const getLendPending = state =>
     Object.values(state.data.lend.assets).filter(asset => asset.pending);
 export const getLendError = state => state.data.lend.error;

@@ -45,7 +45,6 @@ const Lend = ({ activeLend, inactiveLend, onActivate }) => (
 
 // Section 6: Documentation with PropTypes
 Lend.propTypes = {
-    pending: PropTypes.array.isRequired,
     activeLend: PropTypes.array.isRequired,
     inactiveLend: PropTypes.array.isRequired,
     onActivate: PropTypes.func.isRequired

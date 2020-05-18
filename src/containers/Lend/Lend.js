@@ -21,16 +21,20 @@ import {
 class withLend extends Component {
     componentDidMount() {
         // fetch balance every 10 seconds
-        this.fetchBalance = setInterval(() => {
-            const { drizzle } = this.props;
-            getWalletBalance({ drizzle });
-            getSupplyBalance({ drizzle });
+        this.interval = setInterval(() => {
+            this.fetchBalance();
         }, 10000);
     }
 
     componentWillUnmount() {
-        clearInterval(this.fetchBalance);
+        clearInterval(this.interval);
     }
+
+    fetchBalance = () => {
+        const { drizzle } = this.props;
+        getWalletBalance({ drizzle });
+        getSupplyBalance({ drizzle });
+    };
 
     render() {
         // return a presentational component

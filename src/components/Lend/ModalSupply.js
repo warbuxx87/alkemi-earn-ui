@@ -84,7 +84,7 @@ export default function SupplyModal({ asset, onSupply }) {
                         justify="flex-end"
                         className={classes.walletBalance}
                     >
-                        Wallet: {formatNumber(asset.balance, asset.decimals)}
+                        Wallet: {formatNumber(asset.balance, asset.unit)}
                     </Grid>
                 </Grid>
                 <div className={classes.inputWrap}>

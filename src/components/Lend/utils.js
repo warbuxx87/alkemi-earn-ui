@@ -14,8 +14,9 @@ export const fromWei = (value, decimals) =>
 export const toWei = (value, decimals) =>
     web3.utils.toWei(value, decimalsToUnit[decimals]);
 
-export const formatNumber = (value, decimals) => {
-    if (!value || !decimals) return 0;
+export const formatNumber = (value, unit) => {
+    if (!value) return 0;
+    const decimals = unit === "USDC" ? 6 : 12; // USDC 's decimals is 6, others is 12
     const wei = fromWei(value, decimals);
     return new Intl.NumberFormat("en-es").format(wei);
 };

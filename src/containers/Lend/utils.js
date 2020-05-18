@@ -77,6 +77,7 @@ export const getSupplyBalance = ({ drizzle }) => {
     const drizzleStore = drizzle.store.getState();
     const myAddress = drizzleStore.accounts[0];
     const network = constants.network_type[drizzleStore.web3.networkId];
+    if (!network) return; // drizzle not fetched
     const address_mMarket = address[network].address_mMarket;
     const mMarketContract = getMarketContract({ drizzle, address_mMarket });
     const assets = ["WETH", "DAI", "USDT", "USDC", "imBTC"];
