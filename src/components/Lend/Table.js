@@ -122,7 +122,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    {Row.wallet}
+                                    {formatNumber(Row.wallet, Row.decimals)}
                                 </LendTableCell>
                                 <LendTableCell
                                     align="center"

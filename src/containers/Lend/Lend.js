@@ -7,6 +7,7 @@ import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
 import onLendActivate from "./Activate";
+import { getSupplyBalance, getWalletBalance } from "./utils";
 import Lend from "components/Lend/Lend";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
@@ -14,20 +15,16 @@ import withDrizzle from "containers/Drizzle/withDrizzle";
 import {
     // getLendError,
     getLendActive,
-    getLendInactive,
-    getLendPending
+    getLendInactive
 } from "redux/selectors/data";
-
-import { getAccountAddress } from "redux/selectors/drizzleStore";
 
 class withLend extends Component {
     componentDidMount() {
         // fetch balance every 10 seconds
         this.fetchBalance = setInterval(() => {
-            const { drizzle, accountAddress } = this.props;
-            Object.values(drizzle.contracts).forEach(contract => {
-                contract.methods.balanceOf.cacheCall(accountAddress);
-            });
+            const { drizzle } = this.props;
+            getWalletBalance({ drizzle });
+            getSupplyBalance({ drizzle });
         }, 10000);
     }
 
@@ -50,9 +47,7 @@ class withLend extends Component {
 
 const mapStateToProps = state => ({
     inactiveLend: getLendInactive(state),
-    activeLend: getLendActive(state),
-    pending: getLendPending(state),
-    accountAddress: getAccountAddress(state)
+    activeLend: getLendActive(state)
 });
 
 const mapDispatchToProps = dispatch =>
