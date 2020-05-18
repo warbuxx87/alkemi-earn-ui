@@ -15,16 +15,7 @@ import usdt from "assets/images/USDT.svg";
 import eth from "assets/images/WETH.svg";
 // import pax from "assets/images/pax.png";
 
-function createData(
-    name,
-    unit,
-    image,
-    wallet,
-    balance,
-    apr,
-    collateral,
-    decimals
-) {
+function createData(name, unit, image, wallet, balance, apr, collateral) {
     return {
         name,
         unit,
@@ -35,8 +26,7 @@ function createData(
         collateral,
         activated: false,
         pending: false,
-        supplying: false,
-        decimals: null
+        supplying: false
     };
 }
 
@@ -102,17 +92,6 @@ export default (state = initialState, action) => {
                             [action.name]: {
                                 ...state.assets[action.name],
                                 balance: action.value
-                            }
-                        }
-                    };
-                case "decimals":
-                    return {
-                        ...state,
-                        assets: {
-                            ...state.assets,
-                            [action.name]: {
-                                ...state.assets[action.name],
-                                decimals: action.value
                             }
                         }
                     };

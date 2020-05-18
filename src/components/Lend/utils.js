@@ -9,7 +9,7 @@ const decimalsToUnit = {
 };
 
 // decimals is constant, default will be 12
-const unitToDecimals = {
+const assetToDecimals = {
     WETH: 18,
     DAI: 18,
     USDT: 18,
@@ -17,15 +17,14 @@ const unitToDecimals = {
     imBTC: 8
 };
 
-export const fromWei = (value, decimals) =>
-    web3.utils.fromWei(value, decimalsToUnit[decimals]);
+export const fromWei = (value, unit) =>
+    web3.utils.fromWei(value, decimalsToUnit[assetToDecimals[unit] || 18]);
 
-export const toWei = (value, decimals) =>
-    web3.utils.toWei(value, decimalsToUnit[decimals]);
+export const toWei = (value, unit) =>
+    web3.utils.toWei(value, decimalsToUnit[assetToDecimals[unit] || 18]);
 
 export const formatNumber = (value, unit) => {
     if (!value) return 0;
-    const decimals = unitToDecimals[unit] || 18;
-    const wei = fromWei(value, decimals);
+    const wei = fromWei(value, unit);
     return new Intl.NumberFormat("en-es").format(wei);
 };

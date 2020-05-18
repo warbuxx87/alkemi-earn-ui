@@ -41,7 +41,7 @@ export default function SupplyModal({ asset, onSupply }) {
     const handleClose = () => setOpen(false);
     // Section 5: Code Component
     const [amount, setAmount] = React.useState(null);
-    const onSetMax = () => setAmount(fromWei(asset.balance, asset.decimals));
+    const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
     const body = (
         <div style={modalStyle} className={classes.paper}>
             <Grid container className={classes.titleSupply}>

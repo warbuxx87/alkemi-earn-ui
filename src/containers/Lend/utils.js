@@ -137,7 +137,7 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     const address_mMarket = address[network].address_mMarket;
     const mMarketContract = getMarketContract({ drizzle, address_mMarket });
     const token_address = address[network][`address_${asset.unit}`];
-    const weiAmount = toWei(amount, asset.decimals);
+    const weiAmount = toWei(amount, asset.unit);
     const gasLimit = await mMarketContract.methods
         .supply(token_address, weiAmount)
         .estimateGas({ from: myAccount });
