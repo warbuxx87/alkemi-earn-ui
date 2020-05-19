@@ -49,14 +49,8 @@ const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
         contractName: asset,
         web3Contract: tokenContract
     });
+    // get balance
     drizzle.contracts[asset].methods.balanceOf.cacheCall(myAccount);
-    drizzle.contracts[asset].methods.decimals.cacheCall();
-    if (drizzle.contracts.mMarketContract) {
-        drizzle.contracts.mMarketContract.methods.getSupplyBalance.cacheCall(
-            myAccount,
-            address[network][`address_${asset}`]
-        );
-    }
     return drizzle.contracts[asset];
 };
 
@@ -97,6 +91,18 @@ export const getWalletBalance = ({ drizzle }) => {
             contract.methods.balanceOf.cacheCall(myAddress);
         }
     });
+};
+
+export const createActiveContract = ({ drizzle, assets }) => {
+    assets
+        .map(asset => asset.unit)
+        .forEach(asset => {
+            if (drizzle.contracts[asset]) return;
+            const drizzleStore = drizzle.store.getState();
+            const network = constants.network_type[drizzleStore.web3.networkId];
+            const myAccount = drizzleStore.accounts[0];
+            getDrizzleContract({ drizzle, asset, network, myAccount });
+        });
 };
 
 export const handle_approve = async ({ drizzle, asset, myAccount }) => {

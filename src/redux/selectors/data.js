@@ -30,7 +30,7 @@ const getLendAsset = createSelector(
     (assets, network, allBalances) =>
         Object.values(assets).map(asset => {
             // TODO: get suppy wallet
-            let wallet = 0;
+            let wallet = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 wallet = allBalances[token_address] || "0";

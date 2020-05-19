@@ -31,11 +31,11 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
 }
 
 const assets = {
-    WETH: createData("Ether", "WETH", eth, 0, 0, 0, 0),
-    DAI: createData("Maker DAI", "DAI", dai, 0, 0, 0, 0),
-    USDT: createData("Tether", "USDT", usdt, 0, 0, 0, 0),
-    USDC: createData("USD Coin", "USDC", usdc, 0, 0, 0, 0),
-    imBTC: createData("Tokenized BTC", "imBTC", imbtc, 0, 0, 0, 0)
+    WETH: createData("Ether", "WETH", eth, "0", "0", 0, 0),
+    DAI: createData("Maker DAI", "DAI", dai, "0", "0", 0, 0),
+    USDT: createData("Tether", "USDT", usdt, "0", "0", 0, 0),
+    USDC: createData("USD Coin", "USDC", usdc, "0", "0", 0, 0),
+    imBTC: createData("Tokenized BTC", "imBTC", imbtc, "0", "0", 0, 0)
     // PAX: createData('Paxos','PAX', pax, 0, 0, 0, 0),
 };
 // Define initial state

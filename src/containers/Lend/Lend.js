@@ -1,13 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Main Container
 
 // Section 1: React/Reduxd low level imports
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
 import onLendActivate from "./Activate";
-import { getSupplyBalance, getWalletBalance } from "./utils";
+import {
+    getSupplyBalance,
+    getWalletBalance,
+    createActiveContract
+} from "./utils";
 import Lend from "components/Lend/Lend";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
@@ -27,14 +32,13 @@ const LendContainer = ({
     isDrizzleInitialized
 }) => {
     const fetchBalance = React.useCallback(() => {
-        console.log("fetch");
         getWalletBalance({ drizzle });
         getSupplyBalance({ drizzle });
     }, [drizzle]);
 
     React.useEffect(() => {
         // fetch balance every 10 seconds
-        const interval = setInterval(() => fetchBalance(), 10000);
+        let interval = setInterval(() => fetchBalance(), 3000);
         return () => clearInterval(interval);
     }, [fetchBalance]);
 
@@ -43,6 +47,11 @@ const LendContainer = ({
             fetchBalance();
         }
     }, [fetchBalance, isDrizzleInitialized]);
+
+    React.useEffect(() => {
+        // create missing contracts for active asset
+        createActiveContract({ drizzle, assets: activeLend });
+    }, [activeLend.length]);
 
     return (
         <Lend
