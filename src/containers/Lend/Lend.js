@@ -15,43 +15,48 @@ import withDrizzle from "containers/Drizzle/withDrizzle";
 import {
     // getLendError,
     getLendActive,
-    getLendInactive
+    getLendInactive,
+    isDrizzleInitialized
 } from "redux/selectors/data";
 
-class withLend extends Component {
-    componentDidMount() {
-        // fetch balance every 10 seconds
-        this.interval = setInterval(() => {
-            this.fetchBalance();
-        }, 10000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
-
-    fetchBalance = () => {
-        const { drizzle } = this.props;
+const LendContainer = ({
+    inactiveLend,
+    activeLend,
+    onActivate,
+    drizzle,
+    isDrizzleInitialized
+}) => {
+    const fetchBalance = React.useCallback(() => {
+        console.log("fetch");
         getWalletBalance({ drizzle });
         getSupplyBalance({ drizzle });
-    };
+    }, [drizzle]);
 
-    render() {
-        // return a presentational component
-        const { inactiveLend, activeLend, onActivate, drizzle } = this.props;
-        return (
-            <Lend
-                inactiveLend={inactiveLend}
-                activeLend={activeLend}
-                onActivate={asset => onActivate({ drizzle, asset })}
-            />
-        );
-    }
-}
+    React.useEffect(() => {
+        // fetch balance every 10 seconds
+        const interval = setInterval(() => fetchBalance(), 10000);
+        return () => clearInterval(interval);
+    }, [fetchBalance]);
+
+    React.useEffect(() => {
+        if (isDrizzleInitialized) {
+            fetchBalance();
+        }
+    }, [fetchBalance, isDrizzleInitialized]);
+
+    return (
+        <Lend
+            inactiveLend={inactiveLend}
+            activeLend={activeLend}
+            onActivate={asset => onActivate({ drizzle, asset })}
+        />
+    );
+};
 
 const mapStateToProps = state => ({
     inactiveLend: getLendInactive(state),
-    activeLend: getLendActive(state)
+    activeLend: getLendActive(state),
+    isDrizzleInitialized: isDrizzleInitialized(state)
 });
 
 const mapDispatchToProps = dispatch =>
@@ -65,4 +70,4 @@ const mapDispatchToProps = dispatch =>
 export default compose(
     withDrizzle(),
     connect(mapStateToProps, mapDispatchToProps)
-)(withLend);
+)(LendContainer);

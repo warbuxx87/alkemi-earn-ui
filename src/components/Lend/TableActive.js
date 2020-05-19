@@ -138,7 +138,7 @@ const LendTableActive = ({ data = [] }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {row.balance}
+                                        {formatNumber(row.balance, row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
