@@ -53,13 +53,13 @@
         "address_DSR": "0x8a5C1BD4D75e168a4f65eB902c289400B90FD980",
         "rate_DSR": "0x63b920386b3b4021d36EcFaB90F3F5b74Bc8b902",
 
-        "address_HBTC": "0xcf07906CbCF9824D0caE475E8F958d48AcF1014C",
+        "address_HBTC": "0xcf07906cbcf9824d0cae475e8f958d48acf1014c",
         "rate_HBTC": "0x0Ecc207Eb5E1d9476543D7e32D61A75e6bf767d3",
 
         "address_HUSD": "0x0D518472330FF1D943881BBBDda03b221A7F9F74",
         "rate_HUSD": "0x63b920386b3b4021d36EcFaB90F3F5b74Bc8b902",
 
-        "address_imBTC": "0x5Dc95A046020880b93F15902540Dbfe86489FddA",
+        "address_imBTC": "0x7b054ebe1d7e003afda8e717daeab05d56d5836a",
         "rate_imBTC": "0xe7cF47e58829Dc4eD4FDB9638eC309A00a96D13a",
 
         "address_PAX": "0x722E6238335d89393A42e2cA316A5fb1b8B2EB55",
@@ -71,10 +71,10 @@
         "address_USDC": "0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b",
         "rate_USDC": "0x63b920386b3b4021d36EcFaB90F3F5b74Bc8b902",
 
-        "address_USDT": "0x1a37dd375096820a5fde14342720102c07100f26",
+        "address_USDT": "0xA1e525F7d24D7cCB78A070BBd12C0BF21Fb4a848",
         "rate_USDT": "0x63b920386b3b4021d36EcFaB90F3F5b74Bc8b902",
 
-        "address_USDx": "0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E",
+        "address_USDx": "0xaf21bb8ae7b7a5eec37964e478583cd486fd12e2",
         "rate_USDx": "0xe302E676E1Add419cc87e75fb5B73DAB24Ad1534",
 
         "address_WBTC": "0x7B65B937A0f3764a7a5e29fD696C391233218E91",
