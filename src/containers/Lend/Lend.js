@@ -38,7 +38,7 @@ const LendContainer = ({
 
     React.useEffect(() => {
         // fetch balance every 10 seconds
-        let interval = setInterval(() => fetchBalance(), 3000);
+        let interval = setInterval(() => fetchBalance(), 5000);
         return () => clearInterval(interval);
     }, [fetchBalance]);
 
