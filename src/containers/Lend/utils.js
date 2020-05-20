@@ -38,9 +38,7 @@ const getTransactionReceipt = (web3, hash) =>
     });
 
 const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
-    if (drizzle.contracts[asset]) {
-        return drizzle.contracts[asset];
-    }
+    if (drizzle.contracts[asset]) return drizzle.contracts[asset];
     const tokenContract = new drizzle.web3.eth.Contract(
         ABIs[asset],
         address[network][`address_${asset}`]
@@ -72,6 +70,7 @@ export const getSupplyBalance = ({ drizzle }) => {
     const myAddress = drizzleStore.accounts[0];
     const network = constants.network_type[drizzleStore.web3.networkId];
     if (!network) return; // drizzle not fetched
+    if (!drizzle.web3.eth) return;
     const address_mMarket = address[network].address_mMarket;
     const mMarketContract = getMarketContract({ drizzle, address_mMarket });
     const assets = ["WETH", "DAI", "USDT", "USDC", "imBTC"];
@@ -93,17 +92,17 @@ export const getWalletBalance = ({ drizzle }) => {
     });
 };
 
-export const createActiveContract = ({ drizzle, assets }) => {
+export const createActiveAssetContract = ({ drizzle, assets }) =>
     assets
         .map(asset => asset.unit)
-        .forEach(asset => {
-            if (drizzle.contracts[asset]) return;
+        .map(asset => {
+            if (drizzle.contracts[asset]) return drizzle.contracts[asset];
+            if (!drizzle.web3.eth) return null;
             const drizzleStore = drizzle.store.getState();
             const network = constants.network_type[drizzleStore.web3.networkId];
             const myAccount = drizzleStore.accounts[0];
-            getDrizzleContract({ drizzle, asset, network, myAccount });
+            return getDrizzleContract({ drizzle, asset, network, myAccount });
         });
-};
 
 export const handle_approve = async ({ drizzle, asset, myAccount }) => {
     if (!(await readyToTransaction()))

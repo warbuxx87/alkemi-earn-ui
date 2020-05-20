@@ -11,7 +11,7 @@ import onLendActivate from "./Activate";
 import {
     getSupplyBalance,
     getWalletBalance,
-    createActiveContract
+    createActiveAssetContract
 } from "./utils";
 import Lend from "components/Lend/Lend";
 import withDrizzle from "containers/Drizzle/withDrizzle";
@@ -50,7 +50,7 @@ const LendContainer = ({
 
     React.useEffect(() => {
         // create missing contracts for active asset
-        createActiveContract({ drizzle, assets: activeLend });
+        createActiveAssetContract({ drizzle, assets: activeLend });
     }, [activeLend.length]);
 
     return (
