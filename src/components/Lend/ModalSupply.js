@@ -50,7 +50,7 @@ export default function SupplyModal({ asset, onSupply }) {
                         className={classes.textSupply}
                         id="simple-modal-title"
                     >
-                        Supply ETH
+                        Supply {asset.unit}
                     </Grid>
                 </Grid>
                 <Grid
