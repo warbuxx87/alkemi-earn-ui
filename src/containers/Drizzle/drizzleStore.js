@@ -28,6 +28,7 @@ export const drizzleOptions = {
             customProvider: Web3.givenProvider
         }
     },
+    syncAlways: true,
     appMiddlewares,
     appReducers,
     disableReduxDevTools: false // enable ReduxDevTools!
