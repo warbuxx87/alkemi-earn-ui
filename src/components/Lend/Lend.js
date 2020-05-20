@@ -10,7 +10,7 @@ import { Container, Grid } from "@material-ui/core";
 // Section 3: Components & Containers import from the application
 import LendTable from "./Table";
 import LendTableActive from "./TableActive";
-import LendCardValue from "./CardValue";
+import LendCardValue from "containers/Lend/CardValue";
 import LendCardInterest from "./CardInterest";
 import LendCardAPR from "./CardAPR";
 

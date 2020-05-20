@@ -3,7 +3,7 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "contracts/address_map.json";
 import constants from "contracts/constant.json";
-
+import web3 from "web3";
 // Stats Selectors
 export const getStats = state => state.data.stats.tx;
 export const getStatsPending = state => state.data.stats.pending;
@@ -48,6 +48,38 @@ export const getLendActive = createSelector(getLendAsset, assets =>
 
 export const getLendInactive = createSelector(getLendAsset, assets =>
     assets.filter(asset => asset.wallet === "0")
+);
+
+const getAccountValue = state => {
+    const calculateAccountValues = Object.values(
+        _.get(state, "contracts.mMarket.calculateAccountValues", {})
+    );
+    if (calculateAccountValues[0]) {
+        return _.get(calculateAccountValues, "[0].value[1]");
+    }
+    return null;
+};
+
+const getUSDxPrice = state => {
+    const calculateAccountValues = Object.values(
+        _.get(state, "contracts.mMarket.assetPrices", {})
+    );
+    if (calculateAccountValues[0]) {
+        return _.get(calculateAccountValues, "[0].value");
+    }
+    return null;
+};
+
+export const getTotalSupply = createSelector(
+    getAccountValue,
+    getUSDxPrice,
+    (accountValue, USDxPrice) =>
+        accountValue && USDxPrice
+            ? web3.utils
+                  .toBN(accountValue)
+                  .div(web3.utils.toBN(USDxPrice))
+                  .toString()
+            : "0"
 );
 
 export const getLendPending = state =>

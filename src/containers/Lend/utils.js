@@ -62,6 +62,13 @@ const getMarketContract = ({ drizzle, address_mMarket }) => {
         contractName: "mMarket",
         web3Contract: mMarketContract
     });
+    const drizzleStore = drizzle.store.getState();
+    const myAddress = drizzleStore.accounts[0];
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    mMarketContract.methods.calculateAccountValues.cacheCall(myAddress);
+    mMarketContract.methods.assetPrices.cacheCall(
+        address[network]["address_USDx"]
+    );
     return drizzle.contracts.mMarket;
 };
 

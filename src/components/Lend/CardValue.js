@@ -14,7 +14,7 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-
+import { formatNumber } from "./utils";
 // Section 3: Components & Containers import from the application
 import Label from "components/UI/Label";
 
@@ -35,13 +35,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function TotalValue({ className, ...rest }) {
+function TotalValue({ className, totalSupply, currency, difference, ...rest }) {
     const classes = useStyles();
-    const data = {
-        value: (0.0).toFixed(2),
-        currency: "$",
-        difference: 0
-    };
 
     // Section 5: Code Component
     return (
@@ -58,15 +53,15 @@ function TotalValue({ className, ...rest }) {
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {data.currency}
-                        {data.value}
+                        {currency}
+                        {formatNumber(totalSupply, "USDx")}
                     </Typography>
                     <Label
                         className={classes.label}
-                        color={data.difference > 0 ? "success" : "error"}
+                        color={difference > 0 ? "success" : "error"}
                     >
-                        {data.difference > 0 ? "+" : ""}
-                        {data.difference}%
+                        {difference > 0 ? "+" : ""}
+                        {difference}%
                     </Label>
                 </Box>
             </CardContent>
