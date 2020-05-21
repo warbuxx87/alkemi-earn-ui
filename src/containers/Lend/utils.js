@@ -2,6 +2,7 @@ import { readyToTransaction } from "containers/AppBar/onboard";
 import { toWei } from "components/Lend/utils";
 import address from "contracts/address_map.json";
 import constants from "contracts/constant.json";
+import notify from "containers/AppBar/notify";
 
 import WETH_ABI from "contracts/WETH_ABI.json";
 import DAI_ABI from "contracts/DAI_ABI.json";
@@ -116,11 +117,14 @@ export const handle_approve = async ({ drizzle, asset, myAccount }) => {
     const gasPrice = await web3.eth.getGasPrice();
     const receipt = await tokenContract.methods
         .approve(address_mMarket, -1)
-        .send({
-            from: myAccount,
-            gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
-            gasPrice: gasPrice
-        });
+        .send(
+            {
+                from: myAccount,
+                gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
+                gasPrice: gasPrice
+            },
+            (reject, hash) => hash && notify.hash(hash)
+        );
     const result = await getTransactionReceipt(web3, receipt.transactionHash);
     return result;
 };
@@ -141,11 +145,14 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     const gasPrice = await web3.eth.getGasPrice();
     const receipt = await mMarketContract.methods
         .supply(token_address, weiAmount)
-        .send({
-            from: myAccount,
-            gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
-            gasPrice: gasPrice
-        });
+        .send(
+            {
+                from: myAccount,
+                gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
+                gasPrice: gasPrice
+            },
+            (reject, hash) => hash && notify.hash(hash)
+        );
     const result = await getTransactionReceipt(web3, receipt.transactionHash);
     return result;
 };
