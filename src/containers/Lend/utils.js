@@ -142,19 +142,28 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     const gasLimit = await mMarketContract.methods
         .supply(token_address, weiAmount)
         .estimateGas({ from: myAccount });
-    const gasPrice = await web3.eth.getGasPrice();
-    const receipt = await mMarketContract.methods
-        .supply(token_address, weiAmount)
-        .send(
-            {
-                from: myAccount,
-                gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
-                gasPrice: gasPrice
-            },
-            (reject, hash) => hash && notify.hash(hash)
-        );
-    const result = await getTransactionReceipt(web3, receipt.transactionHash);
-    return result;
+    const balance = Object.values(drizzleStore.accountBalances)[0];
+    const { emitter } = notify.transaction({
+        estimateGas: () => Promise.resolve(gasLimit.toString()),
+        gasPrice: web3.eth.getGasPrice,
+        balance,
+        txDetails: {
+            to: token_address,
+            value: weiAmount
+        },
+        sendTransaction: () =>
+            new Promise((resolve, reject) =>
+                mMarketContract.methods
+                    .supply(token_address, weiAmount)
+                    .send({ from: myAccount }, (error, hash) =>
+                        error ? reject(error) : resolve(hash)
+                    )
+            )
+    });
+    emitter.on("all", transaction => {
+        console.log({ transaction });
+        // called on every event that doesn't have a listener defined on this transaction
+    });
 };
 
 // let url_map = require("constants/url_map.json");
