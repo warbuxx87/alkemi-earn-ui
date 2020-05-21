@@ -48,12 +48,18 @@ const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
         web3Contract: tokenContract
     });
     // get balance
-    drizzle.contracts[asset].methods.balanceOf.cacheCall(myAccount);
+    tokenContract.methods.balanceOf.cacheCall(myAccount);
     return drizzle.contracts[asset];
 };
 
-const getMarketContract = ({ drizzle, address_mMarket }) => {
+export const getMarketContract = ({ drizzle }) => {
     if (drizzle.contracts.mMarket) return drizzle.contracts.mMarket;
+    const drizzleStore = drizzle.store.getState();
+    const myAddress = drizzleStore.accounts[0];
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    const address_mMarket = address[network].address_mMarket;
+    if (!network) return; // drizzle not fetched
+    if (!drizzle.web3.eth) return;
     const mMarketContract = new drizzle.web3.eth.Contract(
         market_ABI,
         address_mMarket
@@ -62,24 +68,7 @@ const getMarketContract = ({ drizzle, address_mMarket }) => {
         contractName: "mMarket",
         web3Contract: mMarketContract
     });
-    const drizzleStore = drizzle.store.getState();
-    const myAddress = drizzleStore.accounts[0];
-    const network = constants.network_type[drizzleStore.web3.networkId];
-    mMarketContract.methods.calculateAccountValues.cacheCall(myAddress);
-    mMarketContract.methods.assetPrices.cacheCall(
-        address[network]["address_USDx"]
-    );
-    return drizzle.contracts.mMarket;
-};
-
-export const getSupplyBalance = ({ drizzle }) => {
-    const drizzleStore = drizzle.store.getState();
-    const myAddress = drizzleStore.accounts[0];
-    const network = constants.network_type[drizzleStore.web3.networkId];
-    if (!network) return; // drizzle not fetched
-    if (!drizzle.web3.eth) return;
-    const address_mMarket = address[network].address_mMarket;
-    const mMarketContract = getMarketContract({ drizzle, address_mMarket });
+    // get each asset Supply Balance
     const assets = ["WETH", "DAI", "USDT", "USDC", "imBTC"];
     assets.forEach(asset => {
         mMarketContract.methods.getSupplyBalance.cacheCall(
@@ -87,16 +76,13 @@ export const getSupplyBalance = ({ drizzle }) => {
             address[network][`address_${asset}`]
         );
     });
-};
-
-export const getWalletBalance = ({ drizzle }) => {
-    const drizzleStore = drizzle.store.getState();
-    const myAddress = drizzleStore.accounts[0];
-    Object.values(drizzle.contracts).forEach(contract => {
-        if (contract.contractName !== "mMarket") {
-            contract.methods.balanceOf.cacheCall(myAddress);
-        }
-    });
+    // get account balance
+    mMarketContract.methods.calculateAccountValues.cacheCall(myAddress);
+    // get USDx prices
+    mMarketContract.methods.assetPrices.cacheCall(
+        address[network]["address_USDx"]
+    );
+    return drizzle.contracts.mMarket;
 };
 
 export const createActiveAssetContract = ({ drizzle, assets }) =>
@@ -146,8 +132,7 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     const drizzleStore = drizzle.store.getState();
     const myAccount = drizzleStore.accounts[0];
     const network = constants.network_type[drizzleStore.web3.networkId];
-    const address_mMarket = address[network].address_mMarket;
-    const mMarketContract = getMarketContract({ drizzle, address_mMarket });
+    const mMarketContract = getMarketContract({ drizzle });
     const token_address = address[network][`address_${asset.unit}`];
     const weiAmount = toWei(amount, asset.unit);
     const gasLimit = await mMarketContract.methods

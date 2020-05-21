@@ -8,11 +8,7 @@ import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
 import onLendActivate from "./Activate";
-import {
-    getSupplyBalance,
-    getWalletBalance,
-    createActiveAssetContract
-} from "./utils";
+import { getMarketContract, createActiveAssetContract } from "./utils";
 import Lend from "components/Lend/Lend";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
@@ -31,22 +27,11 @@ const LendContainer = ({
     drizzle,
     isDrizzleInitialized
 }) => {
-    const fetchBalance = React.useCallback(() => {
-        getWalletBalance({ drizzle });
-        getSupplyBalance({ drizzle });
-    }, [drizzle]);
-
-    React.useEffect(() => {
-        // fetch balance every 10 seconds
-        let interval = setInterval(() => fetchBalance(), 5000);
-        return () => clearInterval(interval);
-    }, [fetchBalance]);
-
     React.useEffect(() => {
         if (isDrizzleInitialized) {
-            fetchBalance();
+            getMarketContract({ drizzle });
         }
-    }, [fetchBalance, isDrizzleInitialized]);
+    }, [isDrizzleInitialized]);
 
     React.useEffect(() => {
         // create missing contracts for active asset
