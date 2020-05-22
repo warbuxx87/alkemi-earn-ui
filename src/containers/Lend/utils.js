@@ -2,7 +2,7 @@ import { readyToTransaction } from "containers/AppBar/onboard";
 import { toWei } from "components/Lend/utils";
 import address from "contracts/address_map.json";
 import constants from "contracts/constant.json";
-import notify from "containers/AppBar/notify";
+import notify, { notifyTransaction } from "containers/AppBar/notify";
 
 import WETH_ABI from "contracts/WETH_ABI.json";
 import DAI_ABI from "contracts/DAI_ABI.json";
@@ -139,18 +139,16 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     const mMarketContract = getMarketContract({ drizzle });
     const token_address = address[network][`address_${asset.unit}`];
     const weiAmount = toWei(amount, asset.unit);
-    const gasLimit = await mMarketContract.methods
-        .supply(token_address, weiAmount)
-        .estimateGas({ from: myAccount });
     const balance = Object.values(drizzleStore.accountBalances)[0];
-    const { emitter } = notify.transaction({
-        estimateGas: () => Promise.resolve(gasLimit.toString()),
+    const result = await notifyTransaction({
+        estimateGas: () =>
+            mMarketContract.methods
+                .supply(token_address, weiAmount)
+                .estimateGas({ from: myAccount })
+                .then(result => result.toString()),
         gasPrice: web3.eth.getGasPrice,
         balance,
-        txDetails: {
-            to: token_address,
-            value: weiAmount
-        },
+        network,
         sendTransaction: () =>
             new Promise((resolve, reject) =>
                 mMarketContract.methods
@@ -158,12 +156,20 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
                     .send({ from: myAccount }, (error, hash) =>
                         error ? reject(error) : resolve(hash)
                     )
-            )
+            ),
+        events: {
+            txRequest: {
+                message: "Please confirm your transaction"
+            },
+            txPool: {
+                message: `Supplying ${amount} ${asset.unit} to the reserve`
+            },
+            txConfirmed: {
+                message: `You successfully supplied ${amount} ${asset.unit} to the reserve.`
+            }
+        }
     });
-    emitter.on("all", transaction => {
-        console.log({ transaction });
-        // called on every event that doesn't have a listener defined on this transaction
-    });
+    return result;
 };
 
 // let url_map = require("constants/url_map.json");
