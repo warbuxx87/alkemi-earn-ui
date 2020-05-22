@@ -28,6 +28,9 @@ export const drizzleOptions = {
             customProvider: Web3.givenProvider
         }
     },
+    polls: {
+        blocks: 6000
+    },
     syncAlways: true,
     appMiddlewares,
     appReducers,

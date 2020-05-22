@@ -2,7 +2,7 @@ import { readyToTransaction } from "containers/AppBar/onboard";
 import { toWei } from "components/Lend/utils";
 import address from "contracts/address_map.json";
 import constants from "contracts/constant.json";
-import notify, { notifyTransaction } from "containers/AppBar/notify";
+import { notifyTransaction } from "containers/AppBar/notify";
 
 import WETH_ABI from "contracts/WETH_ABI.json";
 import DAI_ABI from "contracts/DAI_ABI.json";
@@ -18,25 +18,6 @@ const ABIs = {
     USDC: USDC_ABI,
     imBTC: imBTC_ABI
 };
-
-const getTransactionReceipt = (web3, hash) =>
-    new Promise((resolve, reject) => {
-        let check_approve = setInterval(() => {
-            web3.eth.getTransactionReceipt(hash, (res_fail, res_success) => {
-                if (res_success) {
-                    clearInterval(check_approve);
-                    if (res_success.status === true) {
-                        resolve(res_success);
-                    }
-                }
-                if (res_fail) {
-                    console.log(res_fail);
-                    clearInterval(check_approve);
-                    reject(res_fail);
-                }
-            });
-        }, 2000);
-    });
 
 const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
     if (drizzle.contracts[asset]) return drizzle.contracts[asset];
@@ -111,22 +92,36 @@ export const handle_approve = async ({ drizzle, asset, myAccount }) => {
         network,
         myAccount
     });
-    const gasLimit = await tokenContract.methods
-        .approve(address[network].address_mMarket, -1)
-        .estimateGas({ from: myAccount });
-    const gasPrice = await web3.eth.getGasPrice();
-    const receipt = await tokenContract.methods
-        .approve(address_mMarket, -1)
-        .send(
-            {
-                from: myAccount,
-                gas: Math.ceil(gasLimit * constants.gas_limit_coefficient),
-                gasPrice: gasPrice
+    const balance = Object.values(drizzleStore.accountBalances)[0];
+    return await notifyTransaction({
+        estimateGas: () =>
+            tokenContract.methods
+                .approve(address[network].address_mMarket, -1)
+                .estimateGas({ from: myAccount })
+                .then(result => result.toString()),
+        gasPrice: web3.eth.getGasPrice,
+        balance,
+        network,
+        sendTransaction: () =>
+            new Promise((resolve, reject) =>
+                tokenContract.methods
+                    .approve(address_mMarket, -1)
+                    .send({ from: myAccount }, (error, hash) =>
+                        error ? reject(error) : resolve(hash)
+                    )
+            ),
+        events: {
+            txRequest: {
+                message: "Please confirm your transaction"
             },
-            (reject, hash) => hash && notify.hash(hash)
-        );
-    const result = await getTransactionReceipt(web3, receipt.transactionHash);
-    return result;
+            txPool: {
+                message: `Activating ${asset} reserve`
+            },
+            txConfirmed: {
+                message: `${asset} reserve successfully activated`
+            }
+        }
+    });
 };
 
 export const handle_supply_click = async ({ drizzle, amount, asset }) => {
