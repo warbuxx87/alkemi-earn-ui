@@ -2,7 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
-
+import web3 from "web3";
 // Section 2: Material-UI imports
 import {
     Modal,
@@ -15,7 +15,7 @@ import CloseIcon from "@material-ui/icons/Close";
 // Section 3: Components & Containers import from the application
 import LendChartSupply from "./ChartSupply";
 import LendModal from "components/UI/Modal";
-import { formatNumber, fromWei } from "./utils";
+import { formatNumber, fromWei, toWei } from "./utils";
 // Section 4: Define Styles function taking theme as argument and returning an object
 
 function getModalStyle() {
@@ -42,6 +42,16 @@ export default function SupplyModal({ asset, onSupply }) {
     // Section 5: Code Component
     const [amount, setAmount] = React.useState(null);
     const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
+
+    const [enableSupply, setEnableSupply] = React.useState(false);
+    React.useEffect(() => {
+        if (amount) {
+            const isAmountLTBalance = web3.utils
+                .toBN(toWei(amount, asset.unit))
+                .lte(web3.utils.toBN(asset.balance));
+            setEnableSupply(isAmountLTBalance);
+        }
+    }, [amount, asset.balance, asset.unit]);
     const body = (
         <div style={modalStyle} className={classes.paper}>
             <Grid container className={classes.titleSupply}>
@@ -134,7 +144,7 @@ export default function SupplyModal({ asset, onSupply }) {
                         className={classes.btnModal}
                         variant="contained"
                         onClick={() => onSupply({ asset, amount })}
-                        disable={asset.supplying}
+                        disabled={!enableSupply || asset.supplying}
                     >
                         {asset.supplying ? (
                             <CircularProgress size={20} color="inherit" />
