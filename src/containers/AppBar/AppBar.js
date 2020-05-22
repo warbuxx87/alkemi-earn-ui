@@ -6,7 +6,6 @@ import { getAddress } from "redux/selectors/account";
 import { useLocation } from "react-router-dom";
 
 import onboard from "./onboard";
-import notify from "./notify";
 
 const locationToTitles = {
     "/dashboard": "Dashboard",
@@ -27,10 +26,6 @@ const AppBarContainer = props => {
             locationToTitles[location.pathname] || "404 Page Not Found";
         setTitle(currentTitle);
     }, [location]);
-
-    useEffect(() => {
-        props.accountAddress && notify.account(props.accountAddress);
-    }, [props.accountAddress]);
 
     // get previous selected wallet
     useEffect(() => {
