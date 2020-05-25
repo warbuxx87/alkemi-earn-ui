@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Dashboard() {
+function Dashboard({ activeReserves }) {
     const classes = useStyles();
 
     // Section 5: Code Component
@@ -46,7 +46,7 @@ function Dashboard() {
                     <DashCardBorrow />
                 </Grid>
                 <Grid item lg={6} sm={6} xs={12}>
-                    <TableSupply />
+                    <TableSupply activeReserves={activeReserves} />
                 </Grid>
                 <Grid item lg={6} sm={6} xs={12}>
                     <TableBorrow />
