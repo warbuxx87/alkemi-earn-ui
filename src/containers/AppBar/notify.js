@@ -34,6 +34,11 @@ export const notifyTransaction = ({
 
         emitter.on("txPool", () => events.txPool);
 
+        emitter.on("txSendFail", () => {
+            reject(new Error("The user rejected the transaction"));
+            return false;
+        });
+
         emitter.on("txConfirmed", transaction => {
             resolve(transaction);
             return events && events.txConfirmed && events.txConfirmed.message
@@ -58,10 +63,6 @@ export const notifyTransaction = ({
                 case "txError":
                     return reject(
                         new Error("An error has occurred with the transaction")
-                    );
-                case "txSendFail":
-                    return reject(
-                        new Error("The user rejected the transaction")
                     );
                 case "txUnderpriced":
                     return reject(
