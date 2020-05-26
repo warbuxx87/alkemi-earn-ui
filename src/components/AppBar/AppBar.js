@@ -1,8 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Main Component
 
 // Section 1: React low level imports
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 
 // Section 2: Material-UI imports
 import MuiAppBar from "@material-ui/core/AppBar";
@@ -17,7 +17,6 @@ import {
 // Section 3: Components & Containers import from the application
 import Settings from "./Settings";
 import Notifications from "./Notifications";
-//import withOnboard from "containers/Drizzle/withOnBoard";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
@@ -35,56 +34,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 // Section 5: Code Component
-const AppBar = ({ onboard }) => {
+const AppBar = ({ title, onConnect, accountAddress }) => {
     const classes = useStyles();
-    let location = useLocation();
-    useEffect(() => {
-        var currentTitle = "Not Set";
 
-        switch (location.pathname) {
-            case "/dashboard":
-                currentTitle = "Dashboard";
-                break;
-            case "/lend":
-                currentTitle = "Lending";
-                break;
-            case "/borrow":
-                currentTitle = "Borrowing";
-                break;
-            case "/markets":
-                currentTitle = "Markets";
-                break;
-            case "/history":
-                currentTitle = "History";
-                break;
-            case "/liquidate":
-                currentTitle = "Liquidate";
-                break;
-            case "/connect":
-                currentTitle = "Connect";
-                break;
-            default:
-                currentTitle = "404 Page Not Found";
-                break;
-        }
-
-        setTitle(currentTitle);
-    }, [location]);
-
-    const [title, setTitle] = useState(null);
-    const [account, setAccount] = useState(null);
-
-    const connect = async () => {
-        await onboard.walletSelect();
-        await onboard.walletCheck();
-        const currentState = onboard.getState();
-        //  console.log(currentState.address);
-        var account =
-            currentState.address.substr(0, 4) +
-            "..." +
-            currentState.address.substr(currentState.address.length - 4, 4);
-        setAccount(account);
-    };
+    const addressParser = address =>
+        `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
 
     return (
         <MuiAppBar color="transparent" position="relative">
@@ -120,12 +74,14 @@ const AppBar = ({ onboard }) => {
                                 type="button"
                                 variant="outlined"
                                 color="secondary"
-                                onClick={connect}
+                                onClick={onConnect}
                             >
                                 <Grid className={classes.statusBadge}></Grid>
                                 <Grid className={classes.price}>
                                     {/* 0x121565...6456 */}
-                                    {account ? account : "Connect"}
+                                    {accountAddress
+                                        ? addressParser(accountAddress)
+                                        : "Connect"}
                                 </Grid>
                             </Button>
                         </Grid>

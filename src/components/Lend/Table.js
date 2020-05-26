@@ -23,6 +23,8 @@ import {
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
+import LendModalSupply from "containers/Lend/ModalSupply";
+import { formatNumber } from "./utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -62,7 +64,7 @@ const Columns = [
 ];
 
 // Section 5: Code Component
-const LendTable = ({ data = [], loading = {}, onActivate }) => {
+const LendTable = ({ data = [], onActivate }) => {
     const classes = useStyles();
     return (
         <Card>
@@ -120,13 +122,13 @@ const LendTable = ({ data = [], loading = {}, onActivate }) => {
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    {Row.wallet}
+                                    {formatNumber(Row.wallet, Row.unit)}
                                 </LendTableCell>
                                 <LendTableCell
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    {Row.balance}
+                                    {formatNumber(Row.balance, Row.unit)}
                                 </LendTableCell>
                                 <LendTableCell
                                     align="center"
@@ -157,23 +159,31 @@ const LendTable = ({ data = [], loading = {}, onActivate }) => {
                           Active
                         </Grid> */}
                                         </Box>
-                                        <Button
-                                            type="button"
-                                            className={classes.btnActiveOutline}
-                                            variant="outlined"
-                                            color="secondary"
-                                            disable={Row.pending.toString()}
-                                            onClick={() => onActivate(Row.unit)}
-                                        >
-                                            {Row.pending ? (
-                                                <CircularProgress
-                                                    size={20}
-                                                    color="inherit"
-                                                />
-                                            ) : (
-                                                "Activate"
-                                            )}
-                                        </Button>
+                                        {Row.activated ? (
+                                            <LendModalSupply asset={Row} />
+                                        ) : (
+                                            <Button
+                                                type="button"
+                                                className={
+                                                    classes.btnActiveOutline
+                                                }
+                                                variant="outlined"
+                                                color="secondary"
+                                                disable={Row.pending}
+                                                onClick={() =>
+                                                    onActivate(Row.unit)
+                                                }
+                                            >
+                                                {Row.pending ? (
+                                                    <CircularProgress
+                                                        size={20}
+                                                        color="inherit"
+                                                    />
+                                                ) : (
+                                                    "Activate"
+                                                )}
+                                            </Button>
+                                        )}
                                     </Box>
                                 </LendTableCell>
                             </TableRow>

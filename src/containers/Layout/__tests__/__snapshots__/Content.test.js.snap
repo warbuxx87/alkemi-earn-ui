@@ -8,15 +8,7 @@ exports[`<LayoutContent /> matches snapshot 1`] = `
     path="/dashboard"
   />
   <Route
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(withLend)",
-        "type": [Function],
-      }
-    }
+    component={[Function]}
     exact={true}
     path="/lend"
   />

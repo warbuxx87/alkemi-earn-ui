@@ -21,10 +21,10 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import LendModalSupply from "./ModalSupply";
+import LendModalSupply from "containers/Lend/ModalSupply";
 import LendModalWithdraw from "./ModalWithdraw";
 import LendTableCell from "components/UI/TableCell";
-
+import { formatNumber } from "./utils";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
     imageSize: {
@@ -121,7 +121,7 @@ const LendTableActive = ({ data = [] }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {row.wallet}
+                                        {formatNumber(row.balance, row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -138,7 +138,7 @@ const LendTableActive = ({ data = [] }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {row.balance}
+                                        {formatNumber(row.wallet, row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -187,7 +187,7 @@ const LendTableActive = ({ data = [] }) => {
                                                 {" "}
                                             </LendModalWithdraw>
                                         </Box>
-                                        <LendModalSupply> </LendModalSupply>
+                                        <LendModalSupply asset={row} />
                                     </Box>
                                 </LendTableCell>
                             </TableRow>

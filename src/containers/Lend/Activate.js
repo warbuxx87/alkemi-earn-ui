@@ -1,15 +1,28 @@
 import {
     fetchLendPending,
-    fetchLendSuccess
-    // fetchLendError
+    fetchLendSuccess,
+    fetchLendError
 } from "redux/actions/data";
+import { handle_approve } from "./utils";
+import notify from "containers/AppBar/notify";
 
-const activateLendAction = asset => async dispatch => {
+const activateLendAction = ({ drizzle, asset }) => async (
+    dispatch,
+    getState
+) => {
     dispatch(fetchLendPending(asset));
-    setTimeout(() => {
-        // mock delay, will remove
-        dispatch(fetchLendSuccess(asset));
-    }, 3000);
+    const myAccount = getState().accounts[0];
+    handle_approve({ drizzle, asset, myAccount })
+        .then(() => dispatch(fetchLendSuccess(asset)))
+        .catch(error => {
+            notify.notification({
+                eventCode: "suuplyError",
+                type: "error",
+                message: error.message,
+                autoDismiss: 5000
+            });
+            dispatch(fetchLendError(asset, error.message));
+        });
 };
 
 export default activateLendAction;
