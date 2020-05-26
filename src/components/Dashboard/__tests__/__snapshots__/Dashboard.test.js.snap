@@ -27,7 +27,7 @@ exports[`<Dashboard /> matches snapshot 1`] = `
       sm={6}
       xs={12}
     >
-      <Balance />
+      <Connect(CardValueContainer) />
     </WithStyles(ForwardRef(Grid))>
     <WithStyles(ForwardRef(Grid))
       item={true}
@@ -35,7 +35,7 @@ exports[`<Dashboard /> matches snapshot 1`] = `
       sm={6}
       xs={12}
     >
-      <SupplyBalance />
+      <Connect(CardSupplyContainer) />
     </WithStyles(ForwardRef(Grid))>
     <WithStyles(ForwardRef(Grid))
       item={true}
@@ -43,7 +43,7 @@ exports[`<Dashboard /> matches snapshot 1`] = `
       sm={6}
       xs={12}
     >
-      <BorrowBalance />
+      <Connect(CardValueContainer) />
     </WithStyles(ForwardRef(Grid))>
     <WithStyles(ForwardRef(Grid))
       item={true}
@@ -51,7 +51,7 @@ exports[`<Dashboard /> matches snapshot 1`] = `
       sm={6}
       xs={12}
     >
-      <SupplyTables />
+      <DrizzledComponent />
     </WithStyles(ForwardRef(Grid))>
     <WithStyles(ForwardRef(Grid))
       item={true}
