@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import SupplyModal from "components/Lend/ModalSupply";
+import DrawerSupply from "components/UI/DrawerSupply";
 import onSupplyAction from "./Supply";
 
-const SupplyModalContainer = ({ asset, drizzle, onSupplyAction }) => {
+const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
     return (
-        <SupplyModal
+        <DrawerSupply
             asset={asset}
             onSupply={({ asset, amount }) =>
                 onSupplyAction({ drizzle, asset, amount })
@@ -25,4 +25,4 @@ const mapDispatchToProps = dispatch =>
 export default compose(
     withDrizzle(),
     connect(mapStateToProps, mapDispatchToProps)
-)(SupplyModalContainer);
+)(SupplyDrawerContainer);

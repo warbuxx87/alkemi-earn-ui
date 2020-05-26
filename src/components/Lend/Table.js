@@ -23,7 +23,7 @@ import {
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
-import LendModalSupply from "containers/Lend/ModalSupply";
+import LendModalSupply from "containers/Lend/DrawerSupply";
 import { formatNumber } from "./utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
