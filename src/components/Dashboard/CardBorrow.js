@@ -17,6 +17,7 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
+import { formatNumber } from "components/Lend/utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
@@ -38,15 +39,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function BorrowBalance({ className, ...rest }) {
+function BorrowBalance({
+    totalBorrow,
+    currency,
+    apr = (0.0).toFixed(2),
+    percentage = "%"
+}) {
     const classes = useStyles();
-    const data = {
-        value: (0.0).toFixed(2),
-        apr: (0.0).toFixed(2),
-        currency: "$",
-        percentage: "%",
-        difference: 0
-    };
 
     // Section 5: Code Component
     return (
@@ -79,8 +78,8 @@ function BorrowBalance({ className, ...rest }) {
                                 color="textPrimary"
                                 align="left"
                             >
-                                {data.currency}
-                                {data.value}
+                                {currency}
+                                {formatNumber(totalBorrow)}
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -96,8 +95,8 @@ function BorrowBalance({ className, ...rest }) {
                                 color="textPrimary"
                                 align="right"
                             >
-                                {data.apr}
-                                {data.percentage}
+                                {apr}
+                                {percentage}
                             </Typography>
                         </Grid>
                     </Grid>

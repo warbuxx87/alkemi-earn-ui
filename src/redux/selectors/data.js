@@ -50,7 +50,7 @@ export const getLendInactive = createSelector(getLendAsset, assets =>
     assets.filter(asset => asset.wallet === "0")
 );
 
-const getAccountValue = state => {
+const getSupplyAccountValue = state => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.mMarket.calculateAccountValues", {})
     );
@@ -71,12 +71,34 @@ const getUSDxPrice = state => {
 };
 
 export const getTotalSupply = createSelector(
-    getAccountValue,
+    getSupplyAccountValue,
     getUSDxPrice,
-    (accountValue, USDxPrice) =>
-        accountValue && USDxPrice
+    (supplyValue, USDxPrice) =>
+        supplyValue && USDxPrice
             ? web3.utils
-                  .toBN(accountValue)
+                  .toBN(supplyValue)
+                  .div(web3.utils.toBN(USDxPrice))
+                  .toString()
+            : "0"
+);
+
+const getBorrowAccountValue = state => {
+    const calculateAccountValues = Object.values(
+        _.get(state, "contracts.mMarket.calculateAccountValues", {})
+    );
+    if (calculateAccountValues[0]) {
+        return _.get(calculateAccountValues, "[0].value[2]");
+    }
+    return null;
+};
+
+export const getTotalBorrow = createSelector(
+    getBorrowAccountValue,
+    getUSDxPrice,
+    (borrowValue, USDxPrice) =>
+        borrowValue && USDxPrice
+            ? web3.utils
+                  .toBN(borrowValue)
                   .div(web3.utils.toBN(USDxPrice))
                   .toString()
             : "0"
