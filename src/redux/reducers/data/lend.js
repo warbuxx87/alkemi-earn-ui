@@ -51,8 +51,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.asset]: {
+                        ...state.assets[action.asset],
                         pending: true
                     }
                 }
