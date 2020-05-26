@@ -3,7 +3,7 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "contracts/address_map.json";
 import constants from "contracts/constant.json";
-import web3 from "web3";
+
 // Stats Selectors
 export const getStats = state => state.data.stats.tx;
 export const getStatsPending = state => state.data.stats.pending;
