@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import CardSupply from "components/Dashboard/CardSupply";
-import { getTotalSupply } from "redux/selectors/data";
+import { getTotalSupply } from "redux/selectors/totalBalance";
 
 const CardSupplyContainer = ({ totalSupply }) => {
     return <CardSupply totalSupply={totalSupply} currency="$" difference={0} />;

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import CardValue from "components/Dashboard/CardValue";
-import { getAggregatedBalance } from "redux/selectors/data";
+import { getAggregatedBalance } from "redux/selectors/totalBalance";
 
 const CardValueContainer = ({ aggregatedBalance }) => {
     return (
