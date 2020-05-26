@@ -8,9 +8,9 @@ import { Container, Grid, makeStyles } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import DashCardValue from "./CardValue";
-import DashCardSupply from "./CardSupply";
+import DashCardSupply from "containers/Dashboard/CardSupply";
 import DashCardBorrow from "./CardBorrow";
-import TableSupply from "./TableSupply";
+import TableSupply from "containers/Dashboard/TableSupply";
 import TableBorrow from "./TableBorrow";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Dashboard({ activeReserves }) {
+function Dashboard() {
     const classes = useStyles();
 
     // Section 5: Code Component
@@ -46,7 +46,7 @@ function Dashboard({ activeReserves }) {
                     <DashCardBorrow />
                 </Grid>
                 <Grid item lg={6} sm={6} xs={12}>
-                    <TableSupply activeReserves={activeReserves} />
+                    <TableSupply />
                 </Grid>
                 <Grid item lg={6} sm={6} xs={12}>
                     <TableBorrow />
