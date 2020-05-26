@@ -7,7 +7,7 @@ import React from "react";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import DashCardValue from "./CardValue";
+import DashCardValue from "containers/Dashboard/CardValue";
 import DashCardSupply from "containers/Dashboard/CardSupply";
 import DashCardBorrow from "containers/Dashboard/CardBorrow";
 import TableSupply from "containers/Dashboard/TableSupply";

@@ -104,6 +104,20 @@ export const getTotalBorrow = createSelector(
             : "0"
 );
 
+export const getAggregatedBalance = createSelector(
+    getSupplyAccountValue,
+    getBorrowAccountValue,
+    getUSDxPrice,
+    (supplyValue, borrowValue, USDxPrice) =>
+        supplyValue && borrowValue && USDxPrice
+            ? web3.utils
+                  .toBN(supplyValue)
+                  .sub(web3.utils.toBN(borrowValue))
+                  .div(web3.utils.toBN(USDxPrice))
+                  .toString()
+            : "0"
+);
+
 export const getLendPending = state =>
     Object.values(state.data.lend.assets).filter(asset => asset.pending);
 export const getLendError = state => state.data.lend.error;
