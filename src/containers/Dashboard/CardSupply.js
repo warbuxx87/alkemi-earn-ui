@@ -5,7 +5,9 @@ import CardSupply from "components/Dashboard/CardSupply";
 import { getTotalSupply } from "redux/selectors/totalBalance";
 
 const CardSupplyContainer = ({ totalSupply }) => {
-    return <CardSupply totalSupply={totalSupply} currency="$" difference={0} />;
+    return (
+        <CardSupply totalSupply={totalSupply} currency="USD" difference={0} />
+    );
 };
 
 const mapStateToProps = state => ({

@@ -26,5 +26,16 @@ export const toWei = (value, unit) =>
 export const formatNumber = (value, unit) => {
     if (!value) return 0;
     const wei = fromWei(value, unit);
-    return new Intl.NumberFormat("en-es").format(wei);
+    return new Intl.NumberFormat("en-es", { maximumFractionDigits: 2 }).format(
+        wei
+    );
+};
+
+// value in USDx
+export const formatMoney = (value, currency) => {
+    const wei = fromWei(value);
+    return new Intl.NumberFormat("en-es", {
+        style: "currency",
+        currency
+    }).format(wei);
 };

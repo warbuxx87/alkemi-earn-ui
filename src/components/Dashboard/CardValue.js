@@ -15,7 +15,7 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import { formatNumber } from "components/Lend/utils";
+import { formatMoney } from "components/Lend/utils";
 
 // Section 3: Components & Containers import from the application
 
@@ -72,8 +72,7 @@ function Balance({ aggregatedBalance, currency, dayChange }) {
                                 color="textPrimary"
                                 align="left"
                             >
-                                {currency}
-                                {formatNumber(aggregatedBalance)}
+                                {formatMoney(aggregatedBalance, currency)}
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -89,8 +88,7 @@ function Balance({ aggregatedBalance, currency, dayChange }) {
                                 color="textPrimary"
                                 align="right"
                             >
-                                {currency}
-                                {formatNumber(dayChange)}
+                                {formatMoney(dayChange, currency)}
                             </Typography>
                         </Grid>
                     </Grid>

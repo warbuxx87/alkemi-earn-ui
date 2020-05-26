@@ -5,7 +5,9 @@ import CardValue from "components/Lend/CardValue";
 import { getTotalSupply } from "redux/selectors/totalBalance";
 
 const CardValueContainer = ({ totalSupply }) => {
-    return <CardValue totalSupply={totalSupply} currency="$" difference={0} />;
+    return (
+        <CardValue totalSupply={totalSupply} currency="USD" difference={0} />
+    );
 };
 
 const mapStateToProps = state => ({

@@ -14,7 +14,7 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import { formatNumber } from "./utils";
+import { formatMoney } from "./utils";
 // Section 3: Components & Containers import from the application
 import Label from "components/UI/Label";
 
@@ -53,8 +53,7 @@ function TotalValue({ className, totalSupply, currency, difference, ...rest }) {
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {currency}
-                        {formatNumber(totalSupply, "USDx")}
+                        {formatMoney(totalSupply, currency)}
                     </Typography>
                     <Label
                         className={classes.label}

@@ -9,7 +9,7 @@ const CardValueContainer = ({ aggregatedBalance }) => {
         <CardValue
             aggregatedBalance={aggregatedBalance}
             dayChange="0"
-            currency="$"
+            currency="USD"
             difference={0}
         />
     );
