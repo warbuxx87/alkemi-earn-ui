@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import CardValue from "components/Lend/CardValue";
-import { getTotalSupply } from "redux/selectors/data";
+import { getTotalSupply } from "redux/selectors/totalBalance";
 
 const CardValueContainer = ({ totalSupply }) => {
     return <CardValue totalSupply={totalSupply} currency="$" difference={0} />;

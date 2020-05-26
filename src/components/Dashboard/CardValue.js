@@ -15,6 +15,7 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
+import { formatNumber } from "components/Lend/utils";
 
 // Section 3: Components & Containers import from the application
 
@@ -38,15 +39,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Balance({ className, ...rest }) {
+function Balance({ aggregatedBalance, currency, dayChange }) {
     const classes = useStyles();
-    const data = {
-        value: (0.0).toFixed(2),
-        change: (0.0).toFixed(2),
-        currency: "$",
-        difference: 0
-    };
-
     // Section 5: Code Component
     return (
         <Card>
@@ -78,8 +72,8 @@ function Balance({ className, ...rest }) {
                                 color="textPrimary"
                                 align="left"
                             >
-                                {data.currency}
-                                {data.value}
+                                {currency}
+                                {formatNumber(aggregatedBalance)}
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -95,8 +89,8 @@ function Balance({ className, ...rest }) {
                                 color="textPrimary"
                                 align="right"
                             >
-                                {data.currency}
-                                {data.value}
+                                {currency}
+                                {formatNumber(dayChange)}
                             </Typography>
                         </Grid>
                     </Grid>

@@ -4,7 +4,7 @@ import toJson from "enzyme-to-json";
 import { Route, Switch } from "react-router";
 
 import LayoutContent from "../Content";
-import Dashboard from "components/Dashboard/Dashboard";
+import Dashboard from "containers/Dashboard/Dashboard";
 import Lend from "containers/Lend/Lend";
 import Borrow from "containers/Borrow/Borrow";
 import Markets from "components/Markets/Markets";

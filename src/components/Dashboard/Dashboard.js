@@ -7,10 +7,10 @@ import React from "react";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import DashCardValue from "./CardValue";
-import DashCardSupply from "./CardSupply";
-import DashCardBorrow from "./CardBorrow";
-import TableSupply from "./TableSupply";
+import DashCardValue from "containers/Dashboard/CardValue";
+import DashCardSupply from "containers/Dashboard/CardSupply";
+import DashCardBorrow from "containers/Dashboard/CardBorrow";
+import TableSupply from "containers/Dashboard/TableSupply";
 import TableBorrow from "./TableBorrow";
 
 // Section 4: Define Styles function taking theme as argument and returning an object

@@ -15,10 +15,8 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
+import { formatNumber } from "components/Lend/utils";
 
-// Section 3: Components & Containers import from the application
-
-// Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3),
@@ -38,15 +36,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function SupplyBalance({ className, ...rest }) {
+function SupplyBalance({
+    totalSupply,
+    currency,
+    apr = (0.0).toFixed(2),
+    percentage = "%"
+}) {
     const classes = useStyles();
-    const data = {
-        value: (0.0).toFixed(2),
-        apr: (0.0).toFixed(2),
-        currency: "$",
-        percentage: "%",
-        difference: 0
-    };
 
     // Section 5: Code Component
     return (
@@ -79,8 +75,8 @@ function SupplyBalance({ className, ...rest }) {
                                 color="textPrimary"
                                 align="left"
                             >
-                                {data.currency}
-                                {data.value}
+                                {currency}
+                                {formatNumber(totalSupply)}
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -96,8 +92,8 @@ function SupplyBalance({ className, ...rest }) {
                                 color="textPrimary"
                                 align="right"
                             >
-                                {data.apr}
-                                {data.percentage}
+                                {apr}
+                                {percentage}
                             </Typography>
                         </Grid>
                     </Grid>
