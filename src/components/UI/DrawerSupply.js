@@ -18,9 +18,8 @@ import {
     Typography
 } from "@material-ui/core";
 
-import { XCircle as XIcon } from "react-feather";
-
 // Section 3: Components & Containers import from the application
+import { XCircle as XIcon } from "react-feather";
 import LendChartSupply from "./ChartSupply";
 import LendModal from "./Drawer";
 import { formatNumber, fromWei, toWei } from "components/Lend/utils";
@@ -58,6 +57,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                 type="button"
                 className={classes.btnModal}
                 variant="contained"
+                size="small"
                 onClick={handleOpen}
             >
                 {asset.supplying ? (
@@ -192,7 +192,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                                         color="inherit"
                                     />
                                 ) : (
-                                    "Supply"
+                                    "SUPPLY"
                                 )}
                             </Button>
                         </div>

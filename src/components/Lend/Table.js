@@ -34,7 +34,7 @@ const useStyles = makeStyles({
     },
     btnActiveOutline: {
         minWidth: 100,
-        minHeight: 36,
+        minHeight: 32,
         textTransform: "capitalize"
     }
 });
@@ -168,6 +168,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                                     classes.btnActiveOutline
                                                 }
                                                 variant="outlined"
+                                                size="small"
                                                 color="secondary"
                                                 disable={Row.pending}
                                                 onClick={() =>

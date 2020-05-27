@@ -150,6 +150,7 @@ export default function SimpleModal() {
                 className={classes.btnModal}
                 variant="outlined"
                 onClick={handleOpen}
+                size="small"
             >
                 Withdraw
             </Button>

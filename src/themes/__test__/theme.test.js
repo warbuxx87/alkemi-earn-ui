@@ -1,5 +1,5 @@
-//import theme from "../theme";
+import theme from "../theme";
 
-//test("materialUiTheme should match snapshot", () => {
-//    expect(theme).toMatchSnapshot();
-//});
+test("materialUiTheme should match snapshot", () => {
+    expect(theme).toMatchSnapshot();
+});

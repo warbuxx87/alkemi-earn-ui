@@ -48,7 +48,9 @@ const modal = makeStyles(theme =>
         },
         btnModal: {
             minWidth: 100,
-            textTransform: "capitalize"
+            textTransform: "capitalize",
+            fontWeight: 500,
+            minHeight: 32
         },
 
         divSupply: {
