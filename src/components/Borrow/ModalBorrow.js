@@ -9,7 +9,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 // Section 3: Components & Containers import from the application
 import BorrowChartSupply from "./ChartBorrow";
-import BorrowModal from "components/UI/Modal";
+import BorrowModal from "components/UI/Drawer";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 

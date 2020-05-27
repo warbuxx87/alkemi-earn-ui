@@ -5,30 +5,11 @@ const modal = makeStyles(theme =>
         MuiTableHeadroot: {
             backgroundColor: "#ffffff"
         },
-        paper: {
-            position: "absolute",
-            width: 800,
-            backgroundColor: "#202123",
-            color: "white",
-            border: "2px solid #000",
-            boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3)
-        },
         chart: {
             maxHeight: 150
         },
         borderChart: {
             padding: 0
-        },
-        scroll: {
-            overflowY: "scroll"
-        },
-        titleSupply: {
-            color: "white",
-            fontSize: "18px",
-            fontWeight: "500",
-            padding: "18px 20px 14px 20px",
-            textAlign: "center"
         },
         supplyChart: {
             backgroundColor: "#1B1B1B"
@@ -54,6 +35,7 @@ const modal = makeStyles(theme =>
             width: "100%",
             color: "green !important"
         },
+
         buttonWrap: {
             // width: 90px;
             // width: '100%',
@@ -68,23 +50,11 @@ const modal = makeStyles(theme =>
             minWidth: 100,
             textTransform: "capitalize"
         },
+
         divSupply: {
             paddingTop: "40px",
             paddingBottom: "30px"
         },
-
-        // &:hover {
-        //     background-color: rgba(#8472FF, 0.85) !important;
-        //     border-color: rgba(#8472FF, 0.85) !important;
-        //     color: #FFFFFF !important;
-        // }
-
-        // &.disable-button {
-        //     background-color: #00A577 !important;
-        //     border-color: #00A577 !important;
-        //     color: #f7f7f7 !important;
-        // }
-
         inputWrap: {
             position: "relative"
         },

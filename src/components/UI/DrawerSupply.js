@@ -22,7 +22,7 @@ import { XCircle as XIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 import LendChartSupply from "./ChartSupply";
-import LendModal from "./Modal";
+import LendModal from "./Drawer";
 import { formatNumber, fromWei, toWei } from "components/Lend/utils";
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -38,6 +38,7 @@ export default function DrawerSupply({ asset, onSupply }) {
     const handleClose = () => {
         setOpen(false);
     };
+
     // Section 5: Code Component
     const [amount, setAmount] = React.useState(null);
     const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
@@ -118,7 +119,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                                 disableUnderline={true}
                                 className={classes.input}
                                 placeholder="0.00"
-                                type="value"
+                                type="number"
                                 onChange={e => setAmount(e.target.value)}
                                 value={amount}
                             />
