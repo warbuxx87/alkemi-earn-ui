@@ -8,7 +8,6 @@ import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
 import onLendActivate from "./Activate";
-import { getMarketContract, createActiveAssetContract } from "./utils";
 import Lend from "components/Lend/Lend";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
@@ -16,28 +15,10 @@ import withDrizzle from "containers/Drizzle/withDrizzle";
 import {
     // getLendError,
     getLendActive,
-    getLendInactive,
-    isDrizzleInitialized
+    getLendInactive
 } from "redux/selectors/data";
 
-const LendContainer = ({
-    inactiveLend,
-    activeLend,
-    onActivate,
-    drizzle,
-    isDrizzleInitialized
-}) => {
-    React.useEffect(() => {
-        if (isDrizzleInitialized) {
-            getMarketContract({ drizzle });
-        }
-    }, [isDrizzleInitialized]);
-
-    React.useEffect(() => {
-        // create missing contracts for active asset
-        createActiveAssetContract({ drizzle, assets: activeLend });
-    }, [activeLend.length]);
-
+const LendContainer = ({ inactiveLend, activeLend, onActivate, drizzle }) => {
     return (
         <Lend
             inactiveLend={inactiveLend}
@@ -49,8 +30,7 @@ const LendContainer = ({
 
 const mapStateToProps = state => ({
     inactiveLend: getLendInactive(state),
-    activeLend: getLendActive(state),
-    isDrizzleInitialized: isDrizzleInitialized(state)
+    activeLend: getLendActive(state)
 });
 
 const mapDispatchToProps = dispatch =>

@@ -2,17 +2,11 @@
 import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "contracts/address_map.json";
-import constants from "contracts/constant.json";
-
+import { networkSelector } from "./drizzle";
 // Stats Selectors
 export const getStats = state => state.data.stats.tx;
 export const getStatsPending = state => state.data.stats.pending;
 export const getStatsError = state => state.data.stats.error;
-
-// Drizzle state selector
-export const isDrizzleInitialized = state => state.drizzleStatus.initialized;
-export const networkSelector = state =>
-    constants.network_type[state.web3.networkId];
 
 // Lend Selectors
 const lendAssetSelector = state => state.data.lend.assets;
