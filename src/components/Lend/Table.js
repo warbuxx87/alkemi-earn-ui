@@ -41,8 +41,8 @@ const useStyles = makeStyles({
 
 const Columns = [
     { id: "1", label: "Asset" },
-    { id: "2", label: "Wallet Balance", align: "center" },
-    { id: "3", label: "Balance", align: "center" },
+    { id: "2", label: "Available", align: "center" },
+    { id: "3", label: "Supplied", align: "center" },
     {
         id: "4",
         label: "APR %",

@@ -49,7 +49,7 @@ export default function SupplyTables({ activeReserves }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Available Markets" />
+            <CardHeader title="Active Supplied" />
             <Divider />
             <Paper>
                 <Table>

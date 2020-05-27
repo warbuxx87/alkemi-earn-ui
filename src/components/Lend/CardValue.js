@@ -56,13 +56,6 @@ function TotalValue({ className, totalSupply, currency, difference, ...rest }) {
                         {currency}
                         {formatNumber(totalSupply, "USDx")}
                     </Typography>
-                    <Label
-                        className={classes.label}
-                        color={difference > 0 ? "success" : "error"}
-                    >
-                        {difference > 0 ? "+" : ""}
-                        {difference}%
-                    </Label>
                 </Box>
             </CardContent>
         </Card>
