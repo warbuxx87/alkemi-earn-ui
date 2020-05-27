@@ -17,13 +17,23 @@ const allBalanceSelector = state => {
     ).forEach(balance => (supplyBalance[balance.args[1]] = balance.value));
     return supplyBalance;
 };
+const getAllowances = state => {
+    const allowances = {};
+    Object.keys(state.contracts).forEach(asset => {
+        if (asset !== "mMarket") {
+            const allowance = Object.values(state.contracts[asset].allowance);
+            allowances[asset] = _.get(allowance, "[0].value", "0") !== "0";
+        }
+    });
+    return allowances;
+};
 const getLendAsset = createSelector(
     lendAssetSelector,
     networkSelector,
     allBalanceSelector,
     (assets, network, allBalances) =>
         Object.values(assets).map(asset => {
-            // TODO: get suppy wallet
+            // supply wallet
             let wallet = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
@@ -40,8 +50,16 @@ export const getLendActive = createSelector(getLendAsset, assets =>
     assets.filter(asset => asset.wallet !== "0")
 );
 
-export const getLendInactive = createSelector(getLendAsset, assets =>
-    assets.filter(asset => asset.wallet === "0")
+export const getLendInactive = createSelector(
+    getLendAsset,
+    getAllowances,
+    (assets, allowances) =>
+        assets
+            .filter(asset => asset.wallet === "0")
+            .map(asset => {
+                asset.activated = allowances[asset.unit] || false;
+                return asset;
+            })
 );
 
 export const getLendPending = state =>

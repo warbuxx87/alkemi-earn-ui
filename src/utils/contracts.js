@@ -28,6 +28,7 @@ export const initAssetContract = ({ drizzle, asset }) => {
     const drizzleStore = drizzle.store.getState();
     const myAddress = drizzleStore.accounts[0];
     const network = constants.network_type[drizzleStore.web3.networkId];
+    if (!drizzle.web3.eth) return;
     const tokenContract = new drizzle.web3.eth.Contract(
         ABIs[asset],
         address[network][`address_${asset}`]
@@ -36,6 +37,11 @@ export const initAssetContract = ({ drizzle, asset }) => {
         contractName: asset,
         web3Contract: tokenContract
     });
+    // get allowance
+    tokenContract.methods.allowance.cacheCall(
+        myAddress,
+        address[network].address_mMarket
+    );
     // get balance
     tokenContract.methods.balanceOf.cacheCall(myAddress);
     return drizzle.contracts[asset];
