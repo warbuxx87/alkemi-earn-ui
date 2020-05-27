@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import Label from "components/UI/Label";
+
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({

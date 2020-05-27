@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import AppBar from "components/AppBar/AppBar";
-import { getAddress } from "redux/selectors/account";
+import { networkSelector, getAccountAddress } from "redux/selectors/drizzle";
 import { useLocation } from "react-router-dom";
 
 import onboard from "./onboard";
+import { initContracts } from "utils/contracts";
+import withDrizzle from "containers/Drizzle/withDrizzle";
 
 const locationToTitles = {
     "/dashboard": "Dashboard",
@@ -17,7 +19,7 @@ const locationToTitles = {
     "/connect": "Connect"
 };
 
-const AppBarContainer = props => {
+const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
     let location = useLocation();
     // update Appbar title whenever location change
     const [title, setTitle] = useState("Not Set");
@@ -37,6 +39,13 @@ const AppBarContainer = props => {
         }
     }, []);
 
+    useEffect(() => {
+        if (networkId && accountAddress) {
+            // account connected
+            initContracts(drizzle);
+        }
+    }, [networkId, accountAddress, drizzle]);
+
     const onConnect = async () => {
         const isSelectWallet = await onboard.walletSelect();
         if (isSelectWallet) {
@@ -47,12 +56,21 @@ const AppBarContainer = props => {
         }
     };
 
-    return <AppBar title={title} onConnect={onConnect} {...props} />;
+    return (
+        <AppBar
+            title={title}
+            onConnect={onConnect}
+            accountAddress={accountAddress}
+        />
+    );
 };
 
 const mapStateToProps = state => ({
-    shifted: state.ui.sidebar.open,
-    accountAddress: getAddress(state)
+    networkId: networkSelector(state),
+    accountAddress: getAccountAddress(state)
 });
 
-export default compose(connect(mapStateToProps))(AppBarContainer);
+export default compose(
+    connect(mapStateToProps),
+    withDrizzle()
+)(AppBarContainer);
