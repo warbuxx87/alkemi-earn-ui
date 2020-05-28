@@ -8,7 +8,7 @@ import WETH_ABI from "contracts/WETH_ABI.json";
 import DAI_ABI from "contracts/DAI_ABI.json";
 import USDT_ABI from "contracts/USDT_ABI.json";
 import USDC_ABI from "contracts/USDC_ABI.json";
-import imBTC_ABI from "contracts/imBTC_ABI.json";
+import WBTC_ABI from "contracts/WBTC_ABI.json";
 import market_ABI from "contracts/moneyMarket.json";
 
 const ABIs = {
@@ -16,7 +16,7 @@ const ABIs = {
     DAI: DAI_ABI,
     USDT: USDT_ABI,
     USDC: USDC_ABI,
-    imBTC: imBTC_ABI
+    WBTC: WBTC_ABI
 };
 
 const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
@@ -50,20 +50,30 @@ export const getMarketContract = ({ drizzle }) => {
         contractName: "mMarket",
         web3Contract: mMarketContract
     });
+
+    const assets = ["USDx", "DAI", "USDT", "USDC", "WBTC", "WETH"];
+
     // get each asset Supply Balance
-    const assets = ["WETH", "DAI", "USDT", "USDC", "imBTC"];
     assets.forEach(asset => {
         mMarketContract.methods.getSupplyBalance.cacheCall(
             myAddress,
             address[network][`address_${asset}`]
         );
+        // get each asset Price
+        mMarketContract.methods.assetPrices.cacheCall(
+            address[network][`address_${asset}`]
+        );
+        // get each market data
+        mMarketContract.methods.markets.cacheCall(
+            address[network][`address_${asset}`]
+        );
     });
+
+    mMarketContract.methods.getAccountLiquidity.cacheCall(myAddress);
+
     // get account balance
     mMarketContract.methods.calculateAccountValues.cacheCall(myAddress);
-    // get USDx prices
-    mMarketContract.methods.assetPrices.cacheCall(
-        address[network]["address_USDx"]
-    );
+
     return drizzle.contracts.mMarket;
 };
 
@@ -125,8 +135,7 @@ export const handle_approve = async ({ drizzle, asset, myAccount }) => {
 };
 
 export const handle_supply_click = async ({ drizzle, amount, asset }) => {
-    if (!(await readyToTransaction()))
-        throw new Error("not ready to transaction");
+    if (!(await readyToTransaction())) throw new Error("not ready to transact");
     const web3 = drizzle.web3;
     const drizzleStore = drizzle.store.getState();
     const myAccount = drizzleStore.accounts[0];
@@ -166,6 +175,29 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     });
     return result;
 };
+
+// export const calculateInterest = async { drizzle, asset} =>    {
+//   if (!(await readyToTransaction()))
+//           throw new Error("not ready to transact");
+//           const web3 = drizzle.web3;
+//           const drizzleStore = drizzle.store.getState();
+//           const network = constants.network_type[drizzleStore.web3.networkId];
+//           const mMarketContract = getMarketContract({ drizzle });
+//           const token_address = address[network][`address_${asset}`];
+//           const supplyMantissa = mMarketContract.`${token_address}`.supplyRateMantissa}`];
+//           const borrowMantissa= address[network][`address_${asset.borrowRateMantissa}`];
+//
+//
+//
+//           const total_blocks_per_year = 3600 * 24 * 365 / 15;
+//
+//           let supplyAPR = supplyMantissa * total_blocks_per_year / 1e18;
+//           let borrowAPR = borrowMantissa * total_blocks_per_year / 1e18;
+//
+//           let interestRates = {};
+//
+//           return interestRates
+// }
 
 // let url_map = require("constants/url_map.json");
 

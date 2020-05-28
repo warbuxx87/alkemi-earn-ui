@@ -10,7 +10,7 @@ import {
 // import internal assets
 import dai from "assets/images/DAI.svg";
 import usdc from "assets/images/USDC.svg";
-import imbtc from "assets/images/imBTC.svg";
+import wbtc from "assets/images/WBTC.svg";
 import usdt from "assets/images/USDT.svg";
 import eth from "assets/images/WETH.svg";
 // import pax from "assets/images/pax.png";
@@ -35,7 +35,7 @@ const assets = {
     DAI: createData("Maker DAI", "DAI", dai, "0", "0", 0, 0),
     USDT: createData("Tether", "USDT", usdt, "0", "0", 0, 0),
     USDC: createData("USD Coin", "USDC", usdc, "0", "0", 0, 0),
-    imBTC: createData("Tokenized BTC", "imBTC", imbtc, "0", "0", 0, 0)
+    WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0", "0", 0, 0)
     // PAX: createData('Paxos','PAX', pax, 0, 0, 0, 0),
 };
 // Define initial state

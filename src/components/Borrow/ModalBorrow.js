@@ -50,7 +50,7 @@ export default function SimpleModal() {
                         className={classes.textSupply}
                         id="simple-modal-title"
                     >
-                        Supply ETH
+                        Borrow ETH
                     </Grid>
                 </Grid>
                 <Grid
@@ -133,7 +133,7 @@ export default function SimpleModal() {
                         variant="contained"
                         onClick={handleOpen}
                     >
-                        Supply
+                        Borrow
                     </Button>
                 </div>
             </div>
@@ -148,7 +148,7 @@ export default function SimpleModal() {
                 variant="contained"
                 onClick={handleOpen}
             >
-                Supply
+                Borrow
             </Button>
 
             <Modal

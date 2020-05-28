@@ -10,15 +10,24 @@ const decimalsToUnit = {
 
 // decimals is constant, default will be 12
 const assetToDecimals = {
+    USDx: 18,
     WETH: 18,
     DAI: 18,
-    USDT: 18,
+    USDT: 6,
     USDC: 6,
-    imBTC: 8
+    WBTC: 8
 };
 
-export const fromWei = (value, unit) =>
-    web3.utils.fromWei(value, decimalsToUnit[assetToDecimals[unit] || 18]);
+export const fromWei = (value, unit) => {
+    if (unit === "WBTC") {
+        return web3.utils.fromWei(value, "lovelace") * 100;
+    } else {
+        return web3.utils.fromWei(
+            value,
+            decimalsToUnit[assetToDecimals[unit] || 18]
+        );
+    }
+};
 
 export const toWei = (value, unit) =>
     web3.utils.toWei(value, decimalsToUnit[assetToDecimals[unit] || 18]);

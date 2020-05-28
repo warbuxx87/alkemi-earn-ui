@@ -21,8 +21,8 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import BorrowModalSupply from "./ModalBorrow";
-import BorrowModalWithdraw from "./ModalRepay";
+import BorrowModalBorrow from "./ModalBorrow";
+import BorrowModalRepay from "./ModalRepay";
 import BorrowTableCell from "components/UI/TableCell";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -183,11 +183,11 @@ const BorrowTableActive = ({ data = [] }) => {
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={1}>
-                                            <BorrowModalWithdraw>
+                                            <BorrowModalRepay>
                                                 {" "}
-                                            </BorrowModalWithdraw>
+                                            </BorrowModalRepay>
                                         </Box>
-                                        <BorrowModalSupply> </BorrowModalSupply>
+                                        <BorrowModalBorrow> </BorrowModalBorrow>
                                     </Box>
                                 </BorrowTableCell>
                             </TableRow>
