@@ -21,9 +21,8 @@ const darkTheme = createMuiTheme({
         },
 
         primary: {
-            main: "#21DEAB", //Green
-            dark: "#000000", //Black
-            contrastText: "#fff"
+            main: "#14BB7F", //Green
+            contrastText: "#000"
         },
         secondary: {
             main: "#ffffff", //White

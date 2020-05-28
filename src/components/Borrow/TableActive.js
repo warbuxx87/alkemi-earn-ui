@@ -21,7 +21,7 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import BorrowModalSupply from "./ModalBorrow";
+import DrawerBorrow from "components/UI/DrawerBorrow";
 import BorrowModalWithdraw from "./ModalRepay";
 import BorrowTableCell from "components/UI/TableCell";
 
@@ -187,7 +187,7 @@ const BorrowTableActive = ({ data = [] }) => {
                                                 {" "}
                                             </BorrowModalWithdraw>
                                         </Box>
-                                        <BorrowModalSupply> </BorrowModalSupply>
+                                        <DrawerBorrow> </DrawerBorrow>
                                     </Box>
                                 </BorrowTableCell>
                             </TableRow>

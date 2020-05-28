@@ -117,10 +117,10 @@ Object {
       "main": "#2196f3",
     },
     "primary": Object {
-      "contrastText": "#fff",
-      "dark": "#000000",
-      "light": "rgb(77, 228, 187)",
-      "main": "#21DEAB",
+      "contrastText": "#000",
+      "dark": "rgb(14, 130, 88)",
+      "light": "rgb(67, 200, 152)",
+      "main": "#14BB7F",
     },
     "secondary": Object {
       "contrastText": "#000",

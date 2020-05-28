@@ -12,7 +12,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 // Section 3: Components & Containers import from the application
 import LendChartRepay from "./ChartRepay";
-import styles from "components/UI/Modal";
+import styles from "components/UI/Drawer";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 function getModalStyle() {
