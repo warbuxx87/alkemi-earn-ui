@@ -20,7 +20,12 @@ import {
 
 //import { useHistory } from "react-router-dom";
 import SupplyTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent } from "components/Lend/utils";
+import {
+    formatNumber,
+    formatPercent,
+    formatMoney,
+    calculateEarnings
+} from "components/Lend/utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -43,7 +48,7 @@ const columns = [
     { id: "5", label: "Earnings", align: "right" }
 ];
 
-export default function SupplyTables({ activeReserves }) {
+export default function SupplyTables({ activeReserves, currency }) {
     const classes = useStyles();
     //  let history = useHistory();
     // Section 5: Code Component
@@ -100,7 +105,10 @@ export default function SupplyTables({ activeReserves }) {
                                     {formatPercent(row.apr)}
                                 </SupplyTableCell>
                                 <SupplyTableCell align="right">
-                                    0
+                                    {calculateEarnings(
+                                        row.principal,
+                                        row.wallet
+                                    )}
                                 </SupplyTableCell>
                             </TableRow>
                         ))}

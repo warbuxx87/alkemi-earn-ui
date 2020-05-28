@@ -53,12 +53,19 @@ export const getMarketContract = ({ drizzle }) => {
 
     const assets = ["USDx", "DAI", "USDT", "USDC", "WBTC", "WETH"];
 
-    // get each asset Supply Balance
+    // get each asset Supply Balance (current )
     assets.forEach(asset => {
         mMarketContract.methods.getSupplyBalance.cacheCall(
             myAddress,
             address[network][`address_${asset}`]
         );
+
+        // get each supplyBalances ( principle )
+        mMarketContract.methods.supplyBalances.cacheCall(
+            myAddress,
+            address[network][`address_${asset}`]
+        );
+
         // get each asset Price
         mMarketContract.methods.assetPrices.cacheCall(
             address[network][`address_${asset}`]

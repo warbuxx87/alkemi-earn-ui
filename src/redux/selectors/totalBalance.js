@@ -22,7 +22,7 @@ const getAccountLiquidity = state => {
     return null;
 };
 
-const getUSDxPrice = state => {
+export const getUSDxPrice = state => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.mMarket.assetPrices", {})
     );

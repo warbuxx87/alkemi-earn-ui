@@ -26,7 +26,7 @@ const TableSupplyContainer = ({
         createActiveAssetContract({ drizzle, assets: activeReserves });
     }, [activeReserves.length]);
 
-    return <TableSupply activeReserves={activeReserves} />;
+    return <TableSupply activeReserves={activeReserves} currency="USD" />;
 };
 
 const mapStateToProps = state => ({

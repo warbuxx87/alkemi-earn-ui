@@ -34,6 +34,15 @@ const lendAPRSelector = state => {
     return supplyAPR;
 };
 
+const lendPrincipalSelector = state => {
+    const supplyPrincipal = {};
+
+    Object.values(_.get(state, "contracts.mMarket.supplyBalances", {})).forEach(
+        deposit => (supplyPrincipal[deposit.args[1]] = deposit.value.principal)
+    );
+    return supplyPrincipal;
+};
+
 function calculateInterest(rateMantissa) {
     const total_blocks_per_year = (3600 * 24 * 365) / 15;
     let rateAPR = (rateMantissa * total_blocks_per_year) / 1e18;
@@ -45,20 +54,24 @@ const getLendAsset = createSelector(
     networkSelector,
     allBalanceSelector,
     lendAPRSelector,
-    (assets, network, allBalances, allAPR) =>
+    lendPrincipalSelector,
+    (assets, network, allBalances, allAPR, allPrincipal) =>
         Object.values(assets).map(asset => {
             // TODO: get suppy wallet
             let wallet = "0";
             let apr = "0";
+            let principal = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 wallet = allBalances[token_address] || "0";
                 apr = allAPR[token_address] || "0";
+                principal = allPrincipal[token_address] || "0";
             }
             return {
                 ...asset,
                 wallet,
-                apr
+                apr,
+                principal
             };
         })
 );

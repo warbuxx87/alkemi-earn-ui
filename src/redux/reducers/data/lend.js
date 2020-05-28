@@ -15,7 +15,16 @@ import usdt from "assets/images/USDT.svg";
 import eth from "assets/images/WETH.svg";
 // import pax from "assets/images/pax.png";
 
-function createData(name, unit, image, wallet, balance, apr, collateral) {
+function createData(
+    name,
+    unit,
+    image,
+    wallet,
+    balance,
+    apr,
+    principal,
+    collateral
+) {
     return {
         name,
         unit,
@@ -23,6 +32,7 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
         wallet,
         balance,
         apr,
+        principal,
         collateral,
         activated: false,
         pending: false,

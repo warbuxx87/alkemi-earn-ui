@@ -13,14 +13,14 @@ const assetToDecimals = {
     USDx: 18,
     WETH: 18,
     DAI: 18,
-    USDT: 6,
+    USDT: 18,
     USDC: 6,
     WBTC: 8
 };
 
 export const fromWei = (value, unit) => {
     if (unit === "WBTC") {
-        return web3.utils.fromWei(value, "lovelace") * 100;
+        return web3.utils.fromWei(value, "mwei") * 100;
     } else {
         return web3.utils.fromWei(
             value,
@@ -53,3 +53,8 @@ export const formatMoney = (value, currency) => {
 export const formatPercent = num => {
     return (num * 100).toFixed(2) + "%";
 };
+
+export function calculateEarnings(deposit, balance) {
+    let earnings = balance - deposit;
+    return earnings;
+}
