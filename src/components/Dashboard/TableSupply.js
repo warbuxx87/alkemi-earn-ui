@@ -20,7 +20,7 @@ import {
 
 //import { useHistory } from "react-router-dom";
 import SupplyTableCell from "components/UI/TableCell";
-import { formatNumber } from "components/Lend/utils";
+import { formatNumber, formatPercent } from "components/Lend/utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -37,9 +37,9 @@ const useStyles = makeStyles({
 
 const columns = [
     { id: "1", label: "Asset", align: "left" },
-    { id: "2", label: "Supplied", align: "left" },
-    { id: "3", label: "Value", align: "left" },
-    { id: "4", label: "Supply APR %", align: "right" },
+    { id: "2", label: "Wallet", align: "left" },
+    { id: "3", label: "Supplied", align: "left" },
+    { id: "4", label: "APR %", align: "right" },
     { id: "5", label: "Earnings", align: "right" }
 ];
 
@@ -97,7 +97,7 @@ export default function SupplyTables({ activeReserves }) {
                                     {formatNumber(row.wallet, row.unit)}
                                 </SupplyTableCell>
                                 <SupplyTableCell align="right">
-                                    {row.apr}
+                                    {formatPercent(row.apr)}
                                 </SupplyTableCell>
                                 <SupplyTableCell align="right">
                                     0

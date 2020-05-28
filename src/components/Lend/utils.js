@@ -48,3 +48,8 @@ export const formatMoney = (value, currency) => {
         currency
     }).format(wei);
 };
+
+// value in Percent
+export const formatPercent = num => {
+    return (num * 100).toFixed(2) + "%";
+};

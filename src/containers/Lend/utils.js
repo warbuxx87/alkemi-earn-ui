@@ -588,10 +588,6 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
 //   }
 // };
 
-// export const format_percent = num => {
-//   return (num * 100).toFixed(2) + "%";
-// };
-
 // export const input_chang = (that, value) => {
 //   console.log(value);
 
