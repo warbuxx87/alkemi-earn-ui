@@ -59,7 +59,7 @@ exports[`<Dashboard /> matches snapshot 1`] = `
       sm={6}
       xs={12}
     >
-      <BorrowTables />
+      <DrizzledComponent />
     </WithStyles(ForwardRef(Grid))>
   </WithStyles(ForwardRef(Grid))>
 </ForwardRef(Container)>
