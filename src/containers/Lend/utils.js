@@ -31,6 +31,11 @@ const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
     });
     // get balance
     tokenContract.methods.balanceOf.cacheCall(myAccount);
+    // get allowance
+    tokenContract.methods.allowance.cacheCall(
+        myAccount,
+        address[network].address_mMarket
+    );
     return drizzle.contracts[asset];
 };
 
