@@ -10,6 +10,7 @@ import DAI_ABI from "contracts/DAI_ABI.json";
 import USDT_ABI from "contracts/USDT_ABI.json";
 import USDC_ABI from "contracts/USDC_ABI.json";
 import WBTC_ABI from "contracts/WBTC_ABI.json";
+import PAX_ABI from "contracts/PAX_ABI.json";
 import market_ABI from "contracts/moneyMarket.json";
 
 const ABIs = {
@@ -17,7 +18,8 @@ const ABIs = {
     DAI: DAI_ABI,
     USDT: USDT_ABI,
     USDC: USDC_ABI,
-    WBTC: WBTC_ABI
+    WBTC: WBTC_ABI,
+    PAX: PAX_ABI
 };
 
 const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
@@ -57,7 +59,7 @@ export const getMarketContract = ({ drizzle }) => {
         web3Contract: mMarketContract
     });
 
-    const assets = ["USDx", "DAI", "USDT", "USDC", "WBTC", "WETH"];
+    const assets = ["USDx", "DAI", "USDT", "USDC", "WBTC", "WETH", "PAX"];
 
     assets.forEach(asset => {
         // get each asset Supply Balance (current )

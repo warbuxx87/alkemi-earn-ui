@@ -14,7 +14,8 @@ const assetToDecimals = {
     USDx: 18,
     WETH: 18,
     DAI: 18,
-    USDT: 18,
+    PAX: 18,
+    USDT: 6,
     USDC: 6,
     WBTC: 8
 };
