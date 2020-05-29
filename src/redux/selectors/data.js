@@ -57,18 +57,18 @@ const getLendAsset = createSelector(
     (assets, network, lendBalances, allAPR, allPrincipal) =>
         Object.values(assets).map(asset => {
             // supply wallet
-            let wallet = "0";
+            let balance = "0";
             let apr = "0";
             let principal = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
-                wallet = lendBalances[token_address] || "0";
+                balance = lendBalances[token_address] || "0";
                 apr = allAPR[token_address] || "0";
                 principal = allPrincipal[token_address] || "0";
             }
             return {
                 ...asset,
-                wallet,
+                balance,
                 apr,
                 principal
             };
@@ -78,7 +78,7 @@ const getLendAsset = createSelector(
 // LEND Create Selectors
 
 export const getLendActive = createSelector(getLendAsset, assets =>
-    assets.filter(asset => asset.wallet !== "0")
+    assets.filter(asset => asset.balance !== "0")
 );
 
 export const getLendInactive = createSelector(
@@ -86,7 +86,7 @@ export const getLendInactive = createSelector(
     getAllowances,
     (assets, allowances) =>
         assets
-            .filter(asset => asset.wallet === "0")
+            .filter(asset => asset.balance === "0")
             .map(asset => {
                 asset.activated = allowances[asset.unit] || false;
                 return asset;
@@ -168,8 +168,16 @@ export const getBorrowActive = createSelector(getBorrowAsset, assets =>
     assets.filter(asset => asset.balance !== "0")
 );
 
-export const getBorrowInactive = createSelector(getBorrowAsset, assets =>
-    assets.filter(asset => asset.balance === "0")
+export const getBorrowInactive = createSelector(
+    getBorrowAsset,
+    getAllowances,
+    (assets, allowances) =>
+        assets
+            .filter(asset => asset.balance === "0")
+            .map(asset => {
+                asset.activated = allowances[asset.unit] || false;
+                return asset;
+            })
 );
 
 export const getBorrowError = state => state.data.borrow.error;

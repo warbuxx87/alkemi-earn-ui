@@ -102,7 +102,7 @@ export default (state = initialState, action) => {
                             ...state.assets,
                             [action.name]: {
                                 ...state.assets[action.name],
-                                balance: action.value
+                                wallet: action.value
                             }
                         }
                     };

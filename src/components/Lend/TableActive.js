@@ -121,7 +121,7 @@ const LendTableActive = ({ data = [] }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(row.balance, row.unit)}
+                                        {formatNumber(row.wallet, row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -138,7 +138,7 @@ const LendTableActive = ({ data = [] }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(row.wallet, row.unit)}
+                                        {formatNumber(row.balance, row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
