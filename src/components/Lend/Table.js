@@ -23,8 +23,8 @@ import {
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
-import LendModalSupply from "containers/Lend/DrawerSupply";
-import { formatNumber } from "./utils";
+import LendDrawerSupply from "containers/Lend/DrawerSupply";
+import { formatNumber, formatPercent } from "./utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -134,7 +134,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    {Row.apr}
+                                    {formatPercent(Row.apr)}
                                 </LendTableCell>
                                 <LendTableCell
                                     align="center"
@@ -160,7 +160,7 @@ const LendTable = ({ data = [], onActivate }) => {
                         </Grid> */}
                                         </Box>
                                         {Row.activated ? (
-                                            <LendModalSupply asset={Row} />
+                                            <LendDrawerSupply asset={Row} />
                                         ) : (
                                             <Button
                                                 type="button"

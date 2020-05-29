@@ -4,7 +4,7 @@ import { bindActionCreators, compose } from "redux";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import DrawerSupply from "components/UI/DrawerSupply";
-import onSupplyAction from "./Supply";
+import onSupplyAction from "./SupplyAction";
 
 const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
     return (

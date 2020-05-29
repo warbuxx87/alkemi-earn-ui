@@ -15,7 +15,7 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import { formatNumber } from "components/Lend/utils";
+import { formatMoney } from "components/Lend/utils";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -47,7 +47,7 @@ function SupplyBalance({
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Supply Balance" className={classes.item} />
+            <CardHeader title="Current Deposit" className={classes.item} />
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
@@ -75,8 +75,7 @@ function SupplyBalance({
                                 color="textPrimary"
                                 align="left"
                             >
-                                {currency}
-                                {formatNumber(totalSupply)}
+                                {formatMoney(totalSupply, currency)}
                             </Typography>
                         </Grid>
                         <Grid item>

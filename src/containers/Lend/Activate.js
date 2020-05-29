@@ -16,7 +16,7 @@ const activateLendAction = ({ drizzle, asset }) => async (
         .then(() => dispatch(fetchLendSuccess(asset)))
         .catch(error => {
             notify.notification({
-                eventCode: "suuplyError",
+                eventCode: "supplyError",
                 type: "error",
                 message: error.message,
                 autoDismiss: 5000

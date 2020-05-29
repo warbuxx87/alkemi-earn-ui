@@ -17,7 +17,6 @@ import {
 
 // Section 3: Components & Containers import from the application
 
-
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
     root: {
@@ -46,7 +45,7 @@ function CardAPR({ className, ...rest }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Earning APR" className={classes.item} />
+            <CardHeader title="Earning APR%" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box

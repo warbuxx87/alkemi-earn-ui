@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-// import Label from "components/UI/Label";
+import Label from "components/UI/Label";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function TotalApr({ className, ...rest }) {
+function CardAPR({ className, ...rest }) {
     const classes = useStyles();
     const data = {
         value: (0.0).toFixed(2),
@@ -46,10 +46,7 @@ function TotalApr({ className, ...rest }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader
-                title="Avgerage Interest APR"
-                className={classes.item}
-            />
+            <CardHeader title="Loan APR%" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box
@@ -64,6 +61,13 @@ function TotalApr({ className, ...rest }) {
                         {data.value}
                         {data.percentage}
                     </Typography>
+                    <Label
+                        className={classes.label}
+                        color={data.difference > 0 ? "success" : "error"}
+                    >
+                        {data.difference > 0 ? "+" : ""}
+                        {data.difference}%
+                    </Label>
                 </Box>
             </CardContent>
         </Card>
@@ -71,9 +75,9 @@ function TotalApr({ className, ...rest }) {
 }
 
 // Section 6: Documentation with PropTypes
-TotalApr.propTypes = {
+CardAPR.propTypes = {
     className: PropTypes.string
 };
 
 // Section 7:  Connect styles and export
-export default TotalApr;
+export default CardAPR;

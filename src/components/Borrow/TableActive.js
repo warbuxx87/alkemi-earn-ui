@@ -21,9 +21,11 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
+
 import DrawerBorrow from "components/UI/DrawerBorrow";
-import BorrowModalWithdraw from "./ModalRepay";
+import BorrowModalRepay from "./ModalRepay";
 import BorrowTableCell from "components/UI/TableCell";
+import { formatNumber, formatPercent } from "components/Lend/utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -36,7 +38,7 @@ const useStyles = makeStyles({
 const columns = [
     { id: "1", label: "Asset" },
     { id: "2", label: "Available", align: "center" },
-    { id: "3", label: "Supplied", align: "center" },
+    { id: "3", label: "Borrowed", align: "center" },
     {
         id: "4",
         label: "APR %",
@@ -121,7 +123,7 @@ const BorrowTableActive = ({ data = [] }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {row.wallet}
+                                        {formatNumber(row.wallet, row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -138,7 +140,7 @@ const BorrowTableActive = ({ data = [] }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {row.balance}
+                                        {formatNumber(row.balance, row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -155,7 +157,7 @@ const BorrowTableActive = ({ data = [] }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {row.apr}
+                                        {formatPercent(row.apr)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -183,11 +185,11 @@ const BorrowTableActive = ({ data = [] }) => {
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={1}>
-                                            <BorrowModalWithdraw>
+                                            <BorrowModalRepay>
                                                 {" "}
-                                            </BorrowModalWithdraw>
+                                            </BorrowModalRepay>
                                         </Box>
-                                        <DrawerBorrow> </DrawerBorrow>
+                                        <DrawerBorrow asset={row} />
                                     </Box>
                                 </BorrowTableCell>
                             </TableRow>

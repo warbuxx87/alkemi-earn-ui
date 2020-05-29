@@ -24,7 +24,7 @@ import {
 import LendDrawerSupply from "containers/Lend/DrawerSupply";
 import LendModalWithdraw from "./ModalWithdraw";
 import LendTableCell from "components/UI/TableCell";
-import { formatNumber } from "./utils";
+import { formatNumber, formatPercent } from "./utils";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
     imageSize: {
@@ -155,7 +155,7 @@ const LendTableActive = ({ data = [] }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {row.apr}
+                                        {formatPercent(row.apr)}
                                     </Typography>
                                     <Typography
                                         variant="body2"

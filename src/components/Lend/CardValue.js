@@ -14,9 +14,9 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import { formatNumber } from "./utils";
-// Section 3: Components & Containers import from the application
+import { formatMoney } from "./utils";
 
+// Section 3: Components & Containers import from the application
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
@@ -53,8 +53,7 @@ function TotalValue({ className, totalSupply, currency, difference, ...rest }) {
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {currency}
-                        {formatNumber(totalSupply, "USDx")}
+                        {formatMoney(totalSupply, currency)}
                     </Typography>
                 </Box>
             </CardContent>

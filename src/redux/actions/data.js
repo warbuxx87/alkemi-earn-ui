@@ -33,36 +33,36 @@ export const fetchStatsError = error => ({
 });
 
 //                                      //
-// ------------ BORROW ACTIONS -------- //
+// ------------ BORROWING ACTIONS -------- //
 //                                      //
 
 // Declare action type as a constant
-export const FETCH_BORROW_PENDING = "FETCH_BORROW_PENDING";
+export const FETCH_BORROWING_PENDING = "FETCH_BORROWING_PENDING";
 
 // Declare action creator
-export const fetchBorrowPending = asset => ({
+export const fetchBorrowingPending = asset => ({
     // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROW_PENDING,
+    type: FETCH_BORROWING_PENDING,
     asset
 });
 
 // Declare action type as a constant
-export const FETCH_BORROW_SUCCESS = "FETCH_BORROW_SUCCESS";
+export const FETCH_BORROWING_SUCCESS = "FETCH_BORROWING_SUCCESS";
 
 // Declare action creator
-export const fetchBorrowSuccess = asset => ({
+export const fetchBorrowingSuccess = asset => ({
     // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROW_SUCCESS,
+    type: FETCH_BORROWING_SUCCESS,
     asset
 });
 
 // Declare action type as a constant
-export const FETCH_BORROW_ERROR = "FETCH_BORROW_ERROR";
+export const FETCH_BORROWING_ERROR = "FETCH_BORROWING_ERROR";
 
 // Declare action creator
-export const fetchBorrowError = error => ({
+export const fetchBorrowingError = error => ({
     // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROW_ERROR,
+    type: FETCH_BORROWING_ERROR,
     payload: new Error(),
     error: true
 });
@@ -105,7 +105,7 @@ export const fetchLendError = (asset, error) => ({
 });
 
 //                                      //
-// ------------ SUPPLY ACTIONS --------   //
+// ------------ SUPPLY METHOD ACTIONS --------   //
 //                                      //
 
 export const SUPPLY_PENDING = "SUPPLY_PENDING";
@@ -123,6 +123,31 @@ export const supplySuccess = asset => ({
 export const SUPPLY_ERROR = "SUPPLY_ERROR";
 export const supplyError = (asset, error) => ({
     type: SUPPLY_ERROR,
+    payload: {
+        error,
+        asset
+    }
+});
+
+//                                               //
+// ------------ BORROW METHOD ACTIONS --------   //
+//                                               //
+
+export const BORROW_PENDING = "BORROW_PENDING";
+export const borrowPending = asset => ({
+    type: BORROW_PENDING,
+    payload: asset
+});
+
+export const BORROW_SUCCESS = "BORROW_SUCCESS";
+export const borrowSuccess = asset => ({
+    type: BORROW_SUCCESS,
+    payload: asset
+});
+
+export const BORROW_ERROR = "BORROW_ERROR";
+export const borrowError = (asset, error) => ({
+    type: BORROW_ERROR,
     payload: {
         error,
         asset

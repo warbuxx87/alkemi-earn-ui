@@ -2,20 +2,22 @@ import WETH_ABI from "contracts/WETH_ABI.json";
 import DAI_ABI from "contracts/DAI_ABI.json";
 import USDT_ABI from "contracts/USDT_ABI.json";
 import USDC_ABI from "contracts/USDC_ABI.json";
-import imBTC_ABI from "contracts/imBTC_ABI.json";
+import WBTC_ABI from "contracts/WBTC_ABI.json";
+import PAX_ABI from "contracts/PAX_ABI.json";
 import market_ABI from "contracts/moneyMarket.json";
 
 import address from "contracts/address_map.json";
 import constants from "contracts/constant.json";
 
-const assets = ["WETH", "DAI", "USDT", "USDC", "imBTC"];
+const assets = ["PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
 
 const ABIs = {
+    PAX: PAX_ABI,
     WETH: WETH_ABI,
     DAI: DAI_ABI,
     USDT: USDT_ABI,
     USDC: USDC_ABI,
-    imBTC: imBTC_ABI
+    WBTC: WBTC_ABI
 };
 
 export const initContracts = drizzle => {
@@ -63,18 +65,49 @@ export const initMarketContract = ({ drizzle }) => {
         contractName: "mMarket",
         web3Contract: mMarketContract
     });
-    // get each asset Supply Balance
+
+    const assets = ["USDx", "DAI", "USDT", "USDC", "WBTC", "WETH"];
+
     assets.forEach(asset => {
+        // get each asset Supply Balance (current )
         mMarketContract.methods.getSupplyBalance.cacheCall(
             myAddress,
             address[network][`address_${asset}`]
         );
+
+        // get each asset Borrow Balance (current )
+        mMarketContract.methods.getBorrowBalance.cacheCall(
+            myAddress,
+            address[network][`address_${asset}`]
+        );
+
+        // get each supplyBalances ( principle )
+        mMarketContract.methods.supplyBalances.cacheCall(
+            myAddress,
+            address[network][`address_${asset}`]
+        );
+
+        // get each borrowBalances ( principle )
+        mMarketContract.methods.borrowBalances.cacheCall(
+            myAddress,
+            address[network][`address_${asset}`]
+        );
+
+        // get each asset Price
+        mMarketContract.methods.assetPrices.cacheCall(
+            address[network][`address_${asset}`]
+        );
+        // get each market data
+        mMarketContract.methods.markets.cacheCall(
+            address[network][`address_${asset}`]
+        );
     });
+
+    // get account liquidity
+    mMarketContract.methods.getAccountLiquidity.cacheCall(myAddress);
+
     // get account balance
     mMarketContract.methods.calculateAccountValues.cacheCall(myAddress);
-    // get USDx prices
-    mMarketContract.methods.assetPrices.cacheCall(
-        address[network]["address_USDx"]
-    );
+
     return drizzle.contracts.mMarket;
 };

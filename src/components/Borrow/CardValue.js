@@ -14,9 +14,10 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
+import { formatMoney } from "components/Lend/utils";
 
 // Section 3: Components & Containers import from the application
-// import Label from "components/UI/Label";
+import Label from "components/UI/Label";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
@@ -35,18 +36,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function TotalValue({ className, ...rest }) {
+function TotalValue({ className, totalBorrow, currency, difference, ...rest }) {
     const classes = useStyles();
-    const data = {
-        value: (0.0).toFixed(2),
-        currency: "$",
-        difference: 0
-    };
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Aggregated Value" className={classes.item} />
+            <CardHeader title="Borrow Balance" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box
@@ -58,9 +54,15 @@ function TotalValue({ className, ...rest }) {
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {data.currency}
-                        {data.value}
+                        {formatMoney(totalBorrow, currency)}
                     </Typography>
+                    <Label
+                        className={classes.label}
+                        color={difference > 0 ? "success" : "error"}
+                    >
+                        {difference > 0 ? "+" : ""}
+                        {difference}%
+                    </Label>
                 </Box>
             </CardContent>
         </Card>
@@ -69,7 +71,8 @@ function TotalValue({ className, ...rest }) {
 
 // Section 6: Documentation with PropTypes
 TotalValue.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
+    totalBorrow: PropTypes.string
 };
 
 // Section 7:  Connect styles and export

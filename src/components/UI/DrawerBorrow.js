@@ -21,13 +21,13 @@ import {
 import { XCircle as XIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
-import LendChartSupply from "./ChartSupply";
-import LendModal from "./Drawer";
+import BorrowChartBorrow from "./ChartBorrow";
+import BorrowModal from "./Drawer";
 import { formatNumber, fromWei, toWei } from "components/Lend/utils";
 // Section 4: Define Styles function taking theme as argument and returning an object
 
-export default function DrawerSupply({ asset, onSupply }) {
-    const classes = LendModal();
+export default function DrawerBorrow({ asset, onBorrow }) {
+    const classes = BorrowModal();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [isOpen, setOpen] = React.useState(false);
 
@@ -43,13 +43,13 @@ export default function DrawerSupply({ asset, onSupply }) {
     const [amount, setAmount] = React.useState(null);
     const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
-    const [enableSupply, setEnableSupply] = React.useState(false);
+    const [enableBorrow, setEnableBorrow] = React.useState(false);
     React.useEffect(() => {
         if (amount) {
             const isAmountLTBalance = web3.utils
                 .toBN(toWei(amount, asset.unit))
                 .lte(web3.utils.toBN(asset.balance));
-            setEnableSupply(isAmountLTBalance);
+            setEnableBorrow(isAmountLTBalance);
         }
     }, [amount, asset.balance, asset.unit]);
     return (
@@ -63,7 +63,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                 {asset.supplying ? (
                     <CircularProgress size={20} color="inherit" />
                 ) : (
-                    "Supply"
+                    "Borrow"
                 )}
             </Button>
             <Drawer
@@ -82,7 +82,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                         p={2}
                     >
                         <Typography variant="h4" color="textPrimary">
-                            Supply {asset.unit}
+                            Borrow {asset.unit}
                         </Typography>
                         <IconButton onClick={handleClose}>
                             <SvgIcon fontSize="small">
@@ -94,7 +94,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                     <Box color="primary.contrastText" p={2}>
                         <div className={classes.supplyPercent}>2.34% APR</div>
 
-                        <LendChartSupply> </LendChartSupply>
+                        <BorrowChartBorrow> </BorrowChartBorrow>
                     </Box>
                     <Box p={2} mt={3}>
                         <Grid container className={classes.amount}>
@@ -175,14 +175,14 @@ export default function DrawerSupply({ asset, onSupply }) {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <div className={classes.divSupply}>
+                        <div className={classes.divBorrow}>
                             <Button
                                 type="button"
                                 className={classes.btnModal}
                                 variant="contained"
                                 color="primary"
-                                onClick={() => onSupply({ asset, amount })}
-                                disabled={!enableSupply || asset.supplying}
+                                onClick={() => onBorrow({ asset, amount })}
+                                disabled={!enableBorrow || asset.supplying}
                                 size="large"
                                 fullWidth={true}
                             >
@@ -192,7 +192,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                                         color="inherit"
                                     />
                                 ) : (
-                                    "Supply"
+                                    "Borrow"
                                 )}
                             </Button>
                         </div>

@@ -1,42 +1,48 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Main Container
 
 // Section 1: React/Reduxd low level imports
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
 import onBorrowActivate from "./Activate";
 import Borrow from "components/Borrow/Borrow";
+import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 3: Selectors
 import {
-  getBorrowActive,
-  getBorrowInactive
-  // getBorrowError,
-  // getBorrowPending
+    getBorrowActive,
+    getBorrowInactive
+    //  getBorrowError,
+    //  getBorrowPending
 } from "redux/selectors/data";
 
-class BorrowContainer extends Component {
-  render() {
-    // return a presentational component
-    const { inactiveBorrow, activeBorrow, onActivate } = this.props;
+const BorrowContainer = ({
+    inactiveBorrow,
+    activeBorrow,
+    onActivate,
+    drizzle
+}) => {
     return (
-      <Borrow
-        inactiveBorrow={inactiveBorrow}
-        activeBorrow={activeBorrow}
-        onActivate={onActivate}
-      />
+        <Borrow
+            inactiveBorrow={inactiveBorrow}
+            activeBorrow={activeBorrow}
+            onActivate={asset => onActivate({ drizzle, asset })}
+        />
     );
-  }
-}
+};
 
 const mapStateToProps = state => ({
-  inactiveBorrow: getBorrowInactive(state),
-  activeBorrow: getBorrowActive(state)
+    inactiveBorrow: getBorrowInactive(state),
+    activeBorrow: getBorrowActive(state)
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ onActivate: onBorrowActivate }, dispatch);
+    bindActionCreators({ onActivate: onBorrowActivate }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(BorrowContainer);
+export default compose(
+    withDrizzle(),
+    connect(mapStateToProps, mapDispatchToProps)
+)(BorrowContainer);

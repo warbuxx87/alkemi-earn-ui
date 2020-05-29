@@ -11,7 +11,7 @@ import DashCardValue from "containers/Dashboard/CardValue";
 import DashCardSupply from "containers/Dashboard/CardSupply";
 import DashCardBorrow from "containers/Dashboard/CardBorrow";
 import TableSupply from "containers/Dashboard/TableSupply";
-import TableBorrow from "./TableBorrow";
+import TableBorrow from "containers/Dashboard/TableBorrow";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
