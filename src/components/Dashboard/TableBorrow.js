@@ -77,7 +77,7 @@ export default function BorrowTables() {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Available Markets" />
+            <CardHeader title="Active Loans" />
             <Divider />
             <Paper>
                 <Table>

@@ -1,4 +1,5 @@
 import web3 from "web3";
+import _ from "lodash";
 
 const decimalsToUnit = {
     6: "mwei",
@@ -16,6 +17,16 @@ const assetToDecimals = {
     USDT: 18,
     USDC: 6,
     WBTC: 8
+};
+
+const USDxPrice = state => {
+    const calculateAccountValues = Object.values(
+        _.get(state, "contracts.mMarket.assetPrices", {})
+    );
+    if (calculateAccountValues[0]) {
+        return _.get(calculateAccountValues, "[0].value");
+    }
+    return null;
 };
 
 export const fromWei = (value, unit) => {
@@ -54,7 +65,10 @@ export const formatPercent = num => {
     return (num * 100).toFixed(2) + "%";
 };
 
-export function calculateEarnings(deposit, balance) {
+export function calculateEarnings(deposit, balance, unit) {
     let earnings = balance - deposit;
+
+    earnings = fromWei(earnings.toString(), unit);
+
     return earnings;
 }

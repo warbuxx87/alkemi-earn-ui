@@ -16,6 +16,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import LendChartSupply from "./ChartSupply";
 import LendModal from "components/UI/Modal";
 import { formatNumber, fromWei, toWei } from "./utils";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 
 function getModalStyle() {

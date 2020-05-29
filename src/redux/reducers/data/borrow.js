@@ -1,8 +1,11 @@
 // Import action of interest as constants
 import {
-    FETCH_BORROW_PENDING,
-    FETCH_BORROW_SUCCESS,
-    FETCH_BORROW_ERROR
+    FETCH_BORROWING_PENDING,
+    FETCH_BORROWING_SUCCESS,
+    FETCH_BORROWING_ERROR,
+    BORROW_PENDING,
+    BORROW_SUCCESS,
+    BORROW_ERROR
 } from "redux/actions/data";
 
 // import internal assets
@@ -13,7 +16,16 @@ import usdt from "assets/images/USDT.svg";
 import eth from "assets/images/WETH.svg";
 // import pax from "assets/images/pax.png";
 
-function createData(name, unit, image, wallet, balance, apr, collateral) {
+function createData(
+    name,
+    unit,
+    image,
+    wallet,
+    balance,
+    apr,
+    principal,
+    collateral
+) {
     return {
         name,
         unit,
@@ -21,9 +33,11 @@ function createData(name, unit, image, wallet, balance, apr, collateral) {
         wallet,
         balance,
         apr,
+        principal,
         collateral,
         activated: false,
-        pending: false
+        pending: false,
+        borrowing: false
     };
 }
 
@@ -44,7 +58,7 @@ const initialState = {
 // Implement "reducer" function with initial state as default state
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_BORROW_PENDING:
+        case FETCH_BORROWING_PENDING:
             return {
                 ...state,
                 assets: {
@@ -55,7 +69,7 @@ export default (state = initialState, action) => {
                     }
                 }
             };
-        case FETCH_BORROW_SUCCESS:
+        case FETCH_BORROWING_SUCCESS:
             return {
                 ...state,
                 assets: {
@@ -68,10 +82,64 @@ export default (state = initialState, action) => {
                 }
             };
 
-        case FETCH_BORROW_ERROR:
+        case FETCH_BORROWING_ERROR:
             return {
                 ...state,
                 error: action.error
+            };
+
+        case "GOT_CONTRACT_VAR":
+            switch (action.variable) {
+                case "balanceOf":
+                    return {
+                        ...state,
+                        assets: {
+                            ...state.assets,
+                            [action.name]: {
+                                ...state.assets[action.name],
+                                balance: action.value
+                            }
+                        }
+                    };
+                default:
+                    return state;
+            }
+
+        case BORROW_PENDING:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        borrowing: true
+                    }
+                }
+            };
+        case BORROW_SUCCESS:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        borrowing: false,
+                        activated: true
+                    }
+                }
+            };
+
+        case BORROW_ERROR:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
+                        borrowing: false,
+                        error: action.payload.error
+                    }
+                }
             };
 
         default:

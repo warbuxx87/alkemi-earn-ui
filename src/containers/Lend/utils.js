@@ -53,15 +53,27 @@ export const getMarketContract = ({ drizzle }) => {
 
     const assets = ["USDx", "DAI", "USDT", "USDC", "WBTC", "WETH"];
 
-    // get each asset Supply Balance (current )
     assets.forEach(asset => {
+        // get each asset Supply Balance (current )
         mMarketContract.methods.getSupplyBalance.cacheCall(
+            myAddress,
+            address[network][`address_${asset}`]
+        );
+
+        // get each asset Borrow Balance (current )
+        mMarketContract.methods.getBorrowBalance.cacheCall(
             myAddress,
             address[network][`address_${asset}`]
         );
 
         // get each supplyBalances ( principle )
         mMarketContract.methods.supplyBalances.cacheCall(
+            myAddress,
+            address[network][`address_${asset}`]
+        );
+
+        // get each borrowBalances ( principle )
+        mMarketContract.methods.borrowBalances.cacheCall(
             myAddress,
             address[network][`address_${asset}`]
         );
@@ -177,6 +189,48 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
             },
             txConfirmed: {
                 message: `You successfully supplied ${amount} ${asset.unit} to the reserve.`
+            }
+        }
+    });
+    return result;
+};
+
+export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
+    if (!(await readyToTransaction())) throw new Error("not ready to transact");
+    const web3 = drizzle.web3;
+    const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzleStore.accounts[0];
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    const mMarketContract = getMarketContract({ drizzle });
+    const token_address = address[network][`address_${asset.unit}`];
+    const weiAmount = toWei(amount, asset.unit);
+    const balance = Object.values(drizzleStore.accountBalances)[0];
+    const result = await notifyTransaction({
+        estimateGas: () =>
+            mMarketContract.methods
+                .borrow(token_address, weiAmount)
+                .estimateGas({ from: myAccount })
+                .then(result => result.toString()),
+        gasPrice: web3.eth.getGasPrice,
+        balance,
+        network,
+        sendTransaction: () =>
+            new Promise((resolve, reject) =>
+                mMarketContract.methods
+                    .borrow(token_address, weiAmount)
+                    .send({ from: myAccount }, (error, hash) =>
+                        error ? reject(error) : resolve(hash)
+                    )
+            ),
+        events: {
+            txRequest: {
+                message: "Please confirm your transaction"
+            },
+            txPool: {
+                message: `Borrowing ${amount} ${asset.unit} from the pool`
+            },
+            txConfirmed: {
+                message: `You successfully borrowed ${amount} ${asset.unit} from the pool.`
             }
         }
     });

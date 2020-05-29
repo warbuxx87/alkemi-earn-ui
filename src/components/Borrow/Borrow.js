@@ -8,9 +8,9 @@ import PropTypes from "prop-types";
 import { Container, Grid } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import BorrowingTable from "./Table";
+import BorrowTable from "./Table";
 import BorrowTableActive from "./TableActive";
-import BorrowCardValue from "./CardValue";
+import BorrowCardValue from "containers/Borrow/CardValue";
 import BorrowCardInterest from "./CardInterest";
 import BorrowCardAPR from "./CardAPR";
 
@@ -18,7 +18,7 @@ import BorrowCardAPR from "./CardAPR";
 
 // Section 5: Code Component
 
-const Borrow = ({ activeBorrow, inactiveBorrow, pending, onActivate }) => (
+const Borrow = ({ activeBorrow, inactiveBorrow, onActivate }) => (
     <Container maxWidth={false} disableGutters={true}>
         <Grid container spacing={3}>
             <Grid item lg={4} sm={6} xs={12}>
@@ -37,8 +37,8 @@ const Borrow = ({ activeBorrow, inactiveBorrow, pending, onActivate }) => (
             )}
             {!!inactiveBorrow.length && (
                 <Grid item lg={12} xs={12}>
-                    <BorrowingTable
-                        inactiveBorrow={inactiveBorrow}
+                    <BorrowTable
+                        data={inactiveBorrow}
                         onActivate={onActivate}
                     />
                 </Grid>

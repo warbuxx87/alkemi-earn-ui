@@ -54,7 +54,7 @@ export default function SupplyTables({ activeReserves, currency }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Available Markets" />
+            <CardHeader title="Active Deposits" />
             <Divider />
             <Paper>
                 <Table>
@@ -107,7 +107,8 @@ export default function SupplyTables({ activeReserves, currency }) {
                                 <SupplyTableCell align="right">
                                     {calculateEarnings(
                                         row.principal,
-                                        row.wallet
+                                        row.wallet,
+                                        row.unit
                                     )}
                                 </SupplyTableCell>
                             </TableRow>

@@ -23,6 +23,8 @@ import {
 
 // Section 3: Components & Containers import from the application
 import BorrowTableCell from "components/UI/TableCell";
+import BorrowModal from "containers/Borrow/ModalBorrow";
+import { formatNumber, formatPercent } from "components/Lend/utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -62,7 +64,7 @@ const Columns = [
 ];
 
 // Section 5: Code Component
-const BorrowTable = ({ inactiveBorrow, onActivate }) => {
+const BorrowTable = ({ data = [], onActivate }) => {
     const classes = useStyles();
     return (
         <Card>
@@ -83,7 +85,7 @@ const BorrowTable = ({ inactiveBorrow, onActivate }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {inactiveBorrow.map(Row => (
+                        {data.map(Row => (
                             <TableRow key={Row.name}>
                                 <BorrowTableCell
                                     component="th"
@@ -120,19 +122,19 @@ const BorrowTable = ({ inactiveBorrow, onActivate }) => {
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    {Row.wallet}
+                                    {formatNumber(Row.wallet, Row.unit)}
                                 </BorrowTableCell>
                                 <BorrowTableCell
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    {Row.balance}
+                                    {formatNumber(Row.balance, Row.unit)}
                                 </BorrowTableCell>
                                 <BorrowTableCell
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    {Row.apr}
+                                    {formatPercent(Row.apr)}
                                 </BorrowTableCell>
                                 <BorrowTableCell
                                     align="center"
@@ -157,23 +159,31 @@ const BorrowTable = ({ inactiveBorrow, onActivate }) => {
                           Active
                         </Grid> */}
                                         </Box>
-                                        <Button
-                                            type="button"
-                                            className={classes.btnActiveOutline}
-                                            variant="outlined"
-                                            color="secondary"
-                                            disable={Row.pending.toString()}
-                                            onClick={() => onActivate(Row.unit)}
-                                        >
-                                            {Row.pending ? (
-                                                <CircularProgress
-                                                    size={20}
-                                                    color="inherit"
-                                                />
-                                            ) : (
-                                                "Activate"
-                                            )}
-                                        </Button>
+                                        {Row.activated ? (
+                                            <BorrowModal asset={Row} />
+                                        ) : (
+                                            <Button
+                                                type="button"
+                                                className={
+                                                    classes.btnActiveOutline
+                                                }
+                                                variant="outlined"
+                                                color="secondary"
+                                                disable={Row.pending.toString()}
+                                                onClick={() =>
+                                                    onActivate(Row.unit)
+                                                }
+                                            >
+                                                {Row.pending ? (
+                                                    <CircularProgress
+                                                        size={20}
+                                                        color="inherit"
+                                                    />
+                                                ) : (
+                                                    "Activate"
+                                                )}
+                                            </Button>
+                                        )}
                                     </Box>
                                 </BorrowTableCell>
                             </TableRow>

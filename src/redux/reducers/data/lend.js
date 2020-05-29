@@ -50,7 +50,8 @@ const assets = {
 };
 // Define initial state
 const initialState = {
-    assets
+    assets,
+    error: null
 };
 
 // Implement "reducer" function with initial state as default state
