@@ -13,15 +13,7 @@ exports[`<LayoutContent /> matches snapshot 1`] = `
     path="/lend"
   />
   <Route
-    component={
-      Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(BorrowContainer)",
-        "type": [Function],
-      }
-    }
+    component={[Function]}
     exact={true}
     path="/borrow"
   />
