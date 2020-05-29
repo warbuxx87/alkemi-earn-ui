@@ -1,32 +1,33 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 
-import Dashboard from "components/Dashboard/Dashboard";
-import Lend from "components/Lend/Lend";
-import Borrow from "components/Borrow/Borrow";
+import Dashboard from "containers/Dashboard/Dashboard";
+import Lend from "containers/Lend/Lend";
+import Borrow from "containers/Borrow/Borrow";
 import Markets from "components/Markets/Markets";
-import History from "components/History/History";
+import History from "containers/History/History";
 import Liquidate from "components/Liquidate/Liquidate";
 import NoWhere from "components/NoWhere/NoWhere";
+
 import {
-  DASHBOARD,
-  LEND,
-  BORROW,
-  MARKETS,
-  HISTORY,
-  LIQUIDATE
+    DASHBOARD,
+    LEND,
+    BORROW,
+    MARKETS,
+    HISTORY,
+    LIQUIDATE
 } from "constants/routes";
 
 const LayoutContent = () => (
-  <Switch>
-    <Route path={DASHBOARD} exact component={Dashboard} />
-    <Route path={LEND} exact component={Lend} />
-    <Route path={BORROW} exact component={Borrow} />
-    <Route path={MARKETS} exact component={Markets} />
-    <Route path={HISTORY} exact component={History} />
-    <Route path={LIQUIDATE} exact component={Liquidate} />
-    <Route component={NoWhere} />
-  </Switch>
+    <Switch>
+        <Route path={DASHBOARD} exact component={Dashboard} />
+        <Route path={LEND} exact component={Lend} />
+        <Route path={BORROW} exact component={Borrow} />
+        <Route path={MARKETS} exact component={Markets} />
+        <Route path={HISTORY} exact component={History} />
+        <Route path={LIQUIDATE} exact component={Liquidate} />
+        <Route component={NoWhere} />
+    </Switch>
 );
 
 export default LayoutContent;

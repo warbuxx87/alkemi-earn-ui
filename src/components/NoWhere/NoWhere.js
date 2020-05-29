@@ -5,14 +5,14 @@ import ReportIcon from "@material-ui/icons/Report";
 import { withStyles } from "@material-ui/core/styles";
 import { grey } from "@material-ui/core/colors";
 
-import NoWhereHomeButton from "../../containers/NoWhere/DashboardButton";
+import NoWhereDashboardButton from "../../containers/NoWhere/DashboardButton";
 
 const styles = theme => ({
     nowhere: {
         textAlign: "center"
     },
     nowhereHeader: {
-        padding: theme.spacing.unit * 3
+        padding: theme.spacing(3)
     },
     nowhereTitle: {
         fontSize: "1.5em",
@@ -33,7 +33,7 @@ const NoWhere = ({ classes }) => (
                 Oops... It seems that you are lost!
             </h1>
         </div>
-        <NoWhereHomeButton />
+        <NoWhereDashboardButton />
     </div>
 );
 

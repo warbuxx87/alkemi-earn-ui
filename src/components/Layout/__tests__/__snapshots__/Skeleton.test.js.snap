@@ -4,11 +4,11 @@ exports[`<LayoutSkeleton /> matches snapshot 1`] = `
 <div
   className="LayoutSkeleton-frame-1"
 >
-  <Connect(WithStyles(AppBar)) />
-  <Connect(WithTheme(WithWidth(WithStyles(Sidebar)))) />
+  <Connect(WithWidth(WithStyles(Sidebar))) />
   <div
     className="LayoutSkeleton-content-2"
   >
+    <Connect(DrizzledComponent) />
     <LayoutContent />
   </div>
 </div>

@@ -1,10 +1,10 @@
 import React from "react";
 import toJson from "enzyme-to-json";
 
-import Home from "../Home";
-import createShallow from "../../../tests-utils/createShallow";
+import Dashboard from "components/Dashboard/Dashboard";
+import createShallow from "tests-utils/createShallow";
 
-describe("<Home />", () => {
+describe("<Dashboard />", () => {
     let shallow;
     let wrapper;
 
@@ -12,7 +12,7 @@ describe("<Home />", () => {
         shallow = createShallow({ dive: 1 });
     });
     beforeEach(() => {
-        wrapper = shallow(<Home />);
+        wrapper = shallow(<Dashboard />);
     });
 
     it("matches snapshot", () => {

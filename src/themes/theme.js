@@ -4,46 +4,49 @@ import overrides from "./overrides";
 // import { softShadows, strongShadows } from './shadows';
 
 const darkTheme = createMuiTheme({
-  // @dev use https://in-your-saas.github.io/material-ui-theme-editor/
-  typography,
-  overrides,
-  palette: {
-    type: "dark",
-    common: {
-      black: "#000",
-      white: "rgba(255, 255, 255, 1)",
-      darkGrey: "#151617"
-    },
-    background: {
-      paper: "#202123",
-      dark: "#151617",
-      default: "#000000"
-    },
-    primary: {
-      main: "rgba(0, 165, 119, 1)",
-      light: "#ffffff",
-      contrastText: "#fff"
-    },
-    secondary: {
-      light: "rgba(170, 144, 215, 1)",
-      main: "rgba(149, 117, 205, 1)",
-      dark: "rgba(104, 81, 143, 1)",
-      contrastText: "#fff"
-    },
-    error: {
-      light: "#e57373",
-      main: "rgba(208, 2, 27, 1)",
-      dark: "#d32f2f",
-      contrastText: "#fff"
-    },
-    text: {
-      primary: "rgba(255, 255, 255, 1)",
-      secondary: "#FF0000",
-      success: "#FF0000",
-      disabled: "rgba(255, 255, 255, 1)",
-      hint: "rgba(184, 233, 134, 1)"
+    // @dev use https://in-your-saas.github.io/material-ui-theme-editor/
+    typography,
+    overrides,
+    palette: {
+        type: "dark",
+        common: {
+            black: "#000",
+            white: "rgba(255, 255, 255, 1)",
+            darkGrey: "#151617"
+        },
+        background: {
+            default: "#000000", //Black
+            dark: "#1B1B1B", // Dark Grey
+            paper: "#202123" // Light Grey
+        },
+
+        primary: {
+            main: "#14BB7F", //Green
+            contrastText: "#000"
+        },
+        secondary: {
+            main: "#ffffff", //White
+            contrastText: "#000"
+        },
+
+        error: {
+            main: "#f50057", //red
+            contrastText: "#fff"
+        },
+
+        success: {
+            main: "#21DEAB", //green
+            contrastText: "#fff"
+        },
+
+        text: {
+            primary: "#ffffff", // White
+            secondary: "#a7a7a7", // Light Grey
+            success: "#21DEAB", //Green
+            disabled: "rgba(255, 255, 255, 1)",
+            hint: "rgba(184, 233, 134, 1)"
+        }
     }
-  }
 });
 
 // const lightTheme = createMuiTheme({

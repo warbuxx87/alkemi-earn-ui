@@ -1,6 +1,6 @@
 // Libs
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { withRouter } from "react-router";
 // Component
 import SidebarLendItem from "../../components/Sidebar/LendItem";
 // Constants
@@ -8,15 +8,11 @@ import { LEND } from "../../constants/routes";
 // Selectors
 import { isLendSelected } from "../../redux/selectors/ui";
 
-const mapStateToProps = state => ({
-    selected: isLendSelected(state)
-});
+const mapStateToProps = (state, props) => ({
+  selected: isLendSelected(state),
+  onClick: () => props.history.push(LEND)
+})
 
-const mapDispatchToProps = {
-    onClick: () => push(LEND)
-};
-
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
-    mapDispatchToProps
-)(SidebarLendItem);
+)(SidebarLendItem));

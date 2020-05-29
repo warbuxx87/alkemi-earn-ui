@@ -1,20 +1,58 @@
+// Main Component
+
+// Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
 
-import Borrowing from "../../components/Borrow";
+// Section 2: Material-UI imports
+import { Container, Grid } from "@material-ui/core";
 
-import { withStyles } from "@material-ui/core/styles";
+// Section 3: Components & Containers import from the application
+import BorrowTable from "./Table";
+import BorrowTableActive from "./TableActive";
+import BorrowCardValue from "containers/Borrow/CardValue";
+import BorrowCardInterest from "./CardInterest";
+import BorrowCardAPR from "./CardAPR";
 
-const styles = theme => ({});
+// Section 4: Define Styles function taking theme as argument and returning an object
 
-const Borrow = ({ classes }) => (
-  <div className={classes.borrow}>
-    <Borrowing></Borrowing>
-  </div>
+// Section 5: Code Component
+
+const Borrow = ({ activeBorrow, inactiveBorrow, onActivate }) => (
+    <Container maxWidth={false} disableGutters={true}>
+        <Grid container spacing={3}>
+            <Grid item lg={4} sm={6} xs={12}>
+                <BorrowCardValue />
+            </Grid>
+            <Grid item lg={4} sm={6} xs={12}>
+                <BorrowCardInterest />
+            </Grid>
+            <Grid item lg={4} sm={6} xs={12}>
+                <BorrowCardAPR />
+            </Grid>
+            {!!activeBorrow.length && (
+                <Grid item lg={12} xs={12}>
+                    <BorrowTableActive data={activeBorrow} />
+                </Grid>
+            )}
+            {!!inactiveBorrow.length && (
+                <Grid item lg={12} xs={12}>
+                    <BorrowTable
+                        data={inactiveBorrow}
+                        onActivate={onActivate}
+                    />
+                </Grid>
+            )}
+        </Grid>
+    </Container>
 );
 
+// Section 6: Documentation with PropTypes
 Borrow.propTypes = {
-  classes: PropTypes.object.isRequired
+    activeBorrow: PropTypes.array.isRequired,
+    inactiveBorrow: PropTypes.array.isRequired,
+    onActivate: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(Borrow);
+// Section 7:  Connect styles and export
+export default Borrow;

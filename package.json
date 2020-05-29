@@ -1,86 +1,113 @@
 {
-  "name": "alkemi-debt-ui",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@devexpress/dx-react-chart": "^2.6.0",
-    "@devexpress/dx-react-chart-material-ui": "^2.6.0",
-    "@devexpress/dx-react-core": "^2.6.0",
-    "@material-ui/core": "^4.9.9",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.48",
-    "@portis/web3": "^2.0.0-beta.54",
-    "@rimble/connection-banner": "^1.1.4",
-    "@rimble/network-indicator": "^1.1.4",
-    "axios": "^0.19.2",
-    "bnc-onboard": "^1.6.0",
-    "clsx": "^1.1.0",
-    "connected-react-router": "^6.8.0",
-    "eslint-plugin-flowtype": "^4.7.0",
-    "lodash": "^4.17.15",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-helmet": "^5.2.1",
-    "react-hot-loader": "^4.8.3",
-    "react-intl": "^3.4.0",
-    "react-redux": "^7.2.0",
-    "react-responsive": "^7.0.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.1",
-    "react-select": "^3.1.0",
-    "redux": "^4.0.5",
-    "redux-logger": "^3.0.6",
-    "redux-saga": "^1.1.3",
-    "reselect": "^4.0.0",
-    "rimble-ui": "^0.9.0",
-    "slick-carousel": "^1.8.1",
-    "solidoc": "^1.0.5",
-    "styled-components": "^4.2.0",
-    "web3": "1.0.0-beta.55"
-  },
-  "scripts": {
-    "start": "PORT=3000 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "reactide-server": "webpack-dev-server --config reactide.config.js --mode development --hot"
-  },
-  "eslintConfig": {
-    "extends": "react-app",
-    "settings": {
-      "import/resolver": {
-        "node": {
-          "paths": [
-            "src"
-          ]
+    "name": "alkemi-debt-ui",
+    "version": "0.4.0",
+    "private": true,
+    "dependencies": {
+        "@devexpress/dx-react-chart": "^2.6.2",
+        "@devexpress/dx-react-chart-material-ui": "^2.6.2",
+        "@devexpress/dx-react-core": "^2.6.2",
+        "@drizzle/react-plugin": "^1.5.1",
+        "@drizzle/store": "^1.5.1",
+        "@material-ui/core": "^4.9.12",
+        "@material-ui/icons": "^4.9.1",
+        "bnc-notify": "^1.2.1",
+        "bnc-onboard": "^1.7.7",
+        "clsx": "^1.1.0",
+        "connected-react-router": "^6.8.0",
+        "drizzle": "^1.4.0",
+        "eslint-plugin-flowtype": "^4.7.0",
+        "lodash": "^4.17.15",
+        "node-sass": "^4.14.0",
+        "react": "^16.8.6",
+        "react-dom": "npm:@hot-loader/react-dom@^16.13.0",
+        "react-feather": "^2.0.3",
+        "react-hot-loader": "^4.8.3",
+        "react-intl": "^3.4.0",
+        "react-redux": "^7.2.0",
+        "react-responsive": "^7.0.0",
+        "react-router-dom": "^5.1.2",
+        "react-scripts": "^3.4.1",
+        "redux": "^4.0.5",
+        "redux-saga": "^1.1.3",
+        "redux-thunk": "^2.3.0",
+        "reselect": "^4.0.0",
+        "styled-components": "^4.2.0",
+        "web3": "^1.2.7"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject"
+    },
+    "lint-staged": {
+        "src/**/*.{js,jsx,json,css}": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "jest": {
+        "snapshotSerializers": [
+            "enzyme-to-json/serializer"
+        ],
+        "collectCoverageFrom": [
+            "src/**/*.{js,jsx}",
+            "!**/src/index.js",
+            "!**/src/registerServiceWorker.js"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
         }
-      }
+    },
+    "eslintConfig": {
+        "extends": "react-app",
+        "settings": {
+            "import/resolver": {
+                "node": {
+                    "paths": [
+                        "src"
+                    ]
+                }
+            }
+        }
+    },
+    "prettier": {
+        "useTabs": false,
+        "tabWidth": 4
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ],
+    "devDependencies": {
+        "@babel/cli": "^7.0.0-beta.40",
+        "@babel/core": "^7.9.0",
+        "@babel/plugin-proposal-class-properties": "^7.4.4",
+        "@babel/plugin-transform-runtime": "^7.9.0",
+        "@babel/preset-env": "^7.9.5",
+        "@babel/preset-react": "^7.9.4",
+        "@truffle/hdwallet-provider": "^1.0.34",
+        "antd": "^3.26.15",
+        "babel-loader": "^8.1.0",
+        "css-loader": "^2.1.1",
+        "file-loader": "^4.0.0",
+        "html-webpack-plugin": "^3.2.0",
+        "sass-loader": "^7.1.0",
+        "style-loader": "^0.23.1",
+        "url-loader": "^2.0.0",
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.10.3",
+        "enzyme": "^3.7.0",
+        "enzyme-adapter-react-16": "^1.6.0",
+        "enzyme-to-json": "^3.3.0",
+        "husky": "^1.1.0",
+        "lint-staged": "^10.0.8",
+        "prettier": "^1.10.2",
+        "redux-test-utils": "^0.3.0"
     }
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.40",
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/plugin-transform-runtime": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-react": "^7.9.4",
-    "antd": "^3.26.15",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^2.1.1",
-    "file-loader": "^4.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "url-loader": "^2.0.0",
-    "webpack": "^4.33.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
-  }
 }
