@@ -12,22 +12,20 @@ import { withStyles } from "@material-ui/core/styles";
 import SidebarDashboardItem from "containers/Sidebar/DashboardItem";
 import SidebarLendItem from "containers/Sidebar/LendItem";
 import SidebarBorrowItem from "containers/Sidebar/BorrowItem";
-import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
-import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
+// import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
+// import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
 // import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
 import SidebarHeader from "containers/Sidebar/Header";
 
 const styles = theme => ({
     drawer: {
         width: 280,
-        "@media (min-width:1550px)": {
-            width: 340
-        },
         marginLeft: 24,
+        flexShrink: 0,
         "@media (min-width:1550px)": {
-            marginLeft: 35
-        },
-        flexShrink: 0
+            marginLeft: 35,
+            width: 340
+        }
     },
     drawerInner: {
         overflowX: "hidden"
@@ -101,8 +99,6 @@ const Sidebar = ({ classes, width, variant, open }) => {
                     <SidebarDashboardItem />
                     <SidebarLendItem />
                     <SidebarBorrowItem />
-                    <SidebarMarketsItem />
-                    <SidebarHistoryItem />
                 </List>
                 <Divider className={classes.divider} />
             </div>

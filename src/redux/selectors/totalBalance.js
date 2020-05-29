@@ -12,15 +12,15 @@ const getSupplyAccountValue = state => {
     return null;
 };
 
-const getAccountLiquidity = state => {
-    const getAccountLiquidity = Object.values(
-        _.get(state, "contracts.mMarket.getAccountLiquidity", {})
-    );
-    if (getAccountLiquidity[0]) {
-        return _.get(getAccountLiquidity, "[0].value");
-    }
-    return null;
-};
+// const getAccountLiquidity = state => {
+//     const getAccountLiquidity = Object.values(
+//         _.get(state, "contracts.mMarket.getAccountLiquidity", {})
+//     );
+//     if (getAccountLiquidity[0]) {
+//         return _.get(getAccountLiquidity, "[0].value");
+//     }
+//     return null;
+// };
 
 export const getCollateralRatio = state => {
     const calculateAccountValues = Object.values(

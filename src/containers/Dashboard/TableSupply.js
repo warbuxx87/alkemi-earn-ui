@@ -3,10 +3,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
-import {
-    getMarketContract,
-    createActiveAssetContract
-} from "containers/Lend/utils";
+// import {
+//     getMarketContract,
+//     createActiveAssetContract
+// } from "containers/Lend/utils";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 

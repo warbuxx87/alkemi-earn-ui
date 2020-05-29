@@ -170,7 +170,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                                 variant="outlined"
                                                 size="small"
                                                 color="secondary"
-                                                disable={Row.pending}
+                                                disable={Row.pending.toString()}
                                                 onClick={() =>
                                                     onActivate(Row.unit)
                                                 }

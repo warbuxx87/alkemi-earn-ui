@@ -2,9 +2,9 @@
 
 // Section 1: React low level imports
 import React from "react";
-import PropTypes from "prop-types";
-import web3 from "web3";
-import withDrizzle from "containers/Drizzle/withDrizzle";
+// import PropTypes from "prop-types";
+// import web3 from "web3";
+// import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 2: Material-UI imports
 import {
@@ -27,8 +27,8 @@ import BorrowDrawer from "./Drawer";
 // import { onBorrow } from "containers/Borrow/BorrowAction";
 import {
     formatNumber,
-    fromWei,
-    toWei,
+    // fromWei,
+    // toWei,
     formatPercent
 } from "components/Lend/utils";
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -48,14 +48,14 @@ export default function DrawerBorrow({ asset, onBorrow }) {
 
     // Section 5: Code Component
     const [amount, setAmount] = React.useState(null);
-    const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
+    // const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
     const [enableBorrow, setEnableBorrow] = React.useState(false);
     React.useEffect(() => {
         if (amount) {
-            const isAmountLTBalance = web3.utils
-                .toBN(toWei(amount, asset.unit))
-                .lte(web3.utils.toBN(asset.balance));
+            // const isAmountLTBalance = web3.utils
+            //     .toBN(toWei(amount, asset.unit))
+            //     .lte(web3.utils.toBN(asset.balance));
             setEnableBorrow(true);
         }
     }, [amount, asset.balance, asset.unit]);

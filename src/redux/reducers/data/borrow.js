@@ -47,7 +47,7 @@ const assets = {
     USDT: createData("Tether", "USDT", usdt, "0", "0", 0, 0),
     USDC: createData("USD Coin", "USDC", usdc, "0", "0", 0, 0),
     WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0", "0", 0, 0),
-    PAX: createData("Paxos", "PAX", pax, 0, 0, 0, 0)
+    PAX: createData("Paxos", "PAX", pax, "0", "0", 0, 0)
 };
 // Define initial state
 const initialState = {
