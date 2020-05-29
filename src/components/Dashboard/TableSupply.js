@@ -105,11 +105,7 @@ export default function SupplyTables({ activeReserves, currency }) {
                                     {formatPercent(row.apr)}
                                 </SupplyTableCell>
                                 <SupplyTableCell align="right">
-                                    {calculateEarnings(
-                                        row.principal,
-                                        row.wallet,
-                                        row.unit
-                                    )}
+                                    0
                                 </SupplyTableCell>
                             </TableRow>
                         ))}

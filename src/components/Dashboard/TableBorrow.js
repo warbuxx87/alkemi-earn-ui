@@ -108,11 +108,7 @@ export default function BorrowTables({ activeReserves, currency }) {
                                     {formatPercent(row.apr)}
                                 </BorrowTableCell>
                                 <BorrowTableCell align="right">
-                                    {calculateEarnings(
-                                        row.balance,
-                                        row.principal,
-                                        row.unit
-                                    )}
+                                    0
                                 </BorrowTableCell>
                             </TableRow>
                         ))}
