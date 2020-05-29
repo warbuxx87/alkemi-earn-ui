@@ -109,8 +109,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                 justify="flex-end"
                                 className={classes.walletBalance}
                             >
-                                Wallet:{" "}
-                                {formatNumber(asset.balance, asset.unit)}
+                                Wallet: {formatNumber(asset.wallet, asset.unit)}
                             </Grid>
                         </Grid>
                         <div className={classes.inputWrap}>

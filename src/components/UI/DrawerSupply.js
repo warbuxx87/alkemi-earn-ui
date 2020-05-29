@@ -40,17 +40,17 @@ export default function DrawerSupply({ asset, onSupply }) {
 
     // Section 5: Code Component
     const [amount, setAmount] = React.useState(null);
-    const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
+    const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
 
     const [enableSupply, setEnableSupply] = React.useState(false);
     React.useEffect(() => {
         if (amount) {
             const isAmountLTBalance = web3.utils
                 .toBN(toWei(amount, asset.unit))
-                .lte(web3.utils.toBN(asset.balance));
+                .lte(web3.utils.toBN(asset.wallet));
             setEnableSupply(isAmountLTBalance);
         }
-    }, [amount, asset.balance, asset.unit]);
+    }, [amount, asset.wallet, asset.unit]);
     return (
         <>
             <Button
@@ -109,8 +109,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                                 justify="flex-end"
                                 className={classes.walletBalance}
                             >
-                                Wallet:{" "}
-                                {formatNumber(asset.balance, asset.unit)}
+                                Wallet: {formatNumber(asset.wallet, asset.unit)}
                             </Grid>
                         </Grid>
                         <div className={classes.inputWrap}>
