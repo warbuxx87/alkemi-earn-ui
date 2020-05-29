@@ -31,7 +31,9 @@ const USDxPrice = state => {
 
 export const fromWei = (value, unit) => {
     if (unit === "WBTC") {
-        return web3.utils.fromWei(value, "mwei") * 100;
+        let amount = web3.utils.fromWei(value, "lovelace");
+        amount = amount / 100;
+        return amount.toString();
     } else {
         return web3.utils.fromWei(
             value,

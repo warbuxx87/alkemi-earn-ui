@@ -99,10 +99,10 @@ export default function BorrowTables({ activeReserves, currency }) {
                                     </Box>
                                 </BorrowTableCell>
                                 <BorrowTableCell align="left">
-                                    {formatNumber(row.balance, row.unit)}
+                                    {formatNumber(row.wallet, row.unit)}
                                 </BorrowTableCell>
                                 <BorrowTableCell align="left">
-                                    {formatNumber(row.wallet, row.unit)}
+                                    {formatNumber(row.balance, row.unit)}
                                 </BorrowTableCell>
                                 <BorrowTableCell align="right">
                                     {formatPercent(row.apr)}
