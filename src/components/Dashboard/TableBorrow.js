@@ -19,18 +19,15 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import dai from "../../assets/images/DAI.svg";
-import usdc from "../../assets/images/USDC.svg";
-import eth from "../../assets/images/WETH.svg";
-import wbtc from "../../assets/images/WBTC.svg";
-import usdx from "../../assets/images/USDx.svg";
-import imbtc from "../../assets/images/imBTC.svg";
-import usdt from "../../assets/images/USDT.svg";
-import hbtc from "../../assets/images/HBTC.svg";
-import pax from "../../assets/images/pax.png";
-import tusd from "../../assets/images/tusd.png";
+
 //import { useHistory } from "react-router-dom";
 import BorrowTableCell from "components/UI/TableCell";
+import {
+    formatNumber,
+    formatPercent,
+    formatMoney,
+    calculateEarnings
+} from "components/Lend/utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -45,34 +42,17 @@ const useStyles = makeStyles({
     }
 });
 
-function createData(symbol, image, balance, value, apr, earnings) {
-    return { symbol, image, balance, value, apr, earnings };
-}
-
-const rows = [
-    createData("ETH", eth, 0, 0, 0, 0),
-    createData("DAI", dai, 0, 0, 0, 0),
-    createData("USDC", usdc, 0, 0, 0, 0),
-    createData("USDT", usdt, 0, 0, 0, 0),
-    createData("USDx", usdx, 0, 0, 0, 0),
-    createData("PAX", pax, 0, 0, 0, 0),
-    createData("TUSD", tusd, 0, 0, 0, 0),
-    createData("wBTC", wbtc, 0, 0, 0, 0),
-    createData("imBTC", imbtc, 0, 0, 0, 0),
-    createData("HBTC", hbtc, 0, 0, 0, 0)
+const columns = [
+    { id: "1", label: "Asset", align: "left" },
+    { id: "2", label: "Wallet", align: "left" },
+    { id: "3", label: "Borrowed", align: "left" },
+    { id: "4", label: "APR %", align: "right" },
+    { id: "5", label: "Paid", align: "right" }
 ];
 
-export default function BorrowTables() {
+export default function BorrowTables({ activeReserves, currency }) {
     const classes = useStyles();
     //  let history = useHistory();
-
-    const columns = [
-        { id: "1", label: "Asset" },
-        { id: "2", label: "Borrowed", align: "left" },
-        { id: "3", label: "Value", align: "left" },
-        { id: "4", label: "Borrow APR %", align: "right" },
-        { id: "5", label: "Paid", align: "right" }
-    ];
 
     // Section 5: Code Component
     return (
@@ -94,7 +74,7 @@ export default function BorrowTables() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map(row => (
+                        {activeReserves.map(row => (
                             <TableRow key={row.symbol}>
                                 <BorrowTableCell component="th" scope="Row">
                                     <Box
@@ -113,21 +93,26 @@ export default function BorrowTables() {
                                                 color="textPrimary"
                                             >
                                                 {row.symbol}
+                                                {row.unit}
                                             </Typography>
                                         </Box>
                                     </Box>
                                 </BorrowTableCell>
                                 <BorrowTableCell align="left">
-                                    {row.balance}
+                                    {formatNumber(row.balance, row.unit)}
                                 </BorrowTableCell>
                                 <BorrowTableCell align="left">
-                                    {row.value}
+                                    {formatNumber(row.wallet, row.unit)}
                                 </BorrowTableCell>
                                 <BorrowTableCell align="right">
-                                    {row.apr}
+                                    {formatPercent(row.apr)}
                                 </BorrowTableCell>
                                 <BorrowTableCell align="right">
-                                    {row.earnings}
+                                    {calculateEarnings(
+                                        row.balance,
+                                        row.principal,
+                                        row.unit
+                                    )}
                                 </BorrowTableCell>
                             </TableRow>
                         ))}
