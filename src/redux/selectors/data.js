@@ -2,17 +2,11 @@
 import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "contracts/address_map.json";
-import constants from "contracts/constant.json";
-
+import { networkSelector } from "./drizzle";
 // Stats Selectors
 export const getStats = state => state.data.stats.tx;
 export const getStatsPending = state => state.data.stats.pending;
 export const getStatsError = state => state.data.stats.error;
-
-// Drizzle state selector
-export const isDrizzleInitialized = state => state.drizzleStatus.initialized;
-export const networkSelector = state =>
-    constants.network_type[state.web3.networkId];
 
 // Lend Selectors
 const lendAssetSelector = state => state.data.lend.assets;
@@ -43,6 +37,17 @@ const lendPrincipalSelector = state => {
     return supplyPrincipal;
 };
 
+const getAllowances = state => {
+    const allowances = {};
+    Object.keys(state.contracts).forEach(asset => {
+        if (asset !== "mMarket") {
+            const allowance = Object.values(state.contracts[asset].allowance);
+            allowances[asset] = _.get(allowance, "[0].value", "0") !== "0";
+        }
+    });
+    return allowances;
+};
+
 const getLendAsset = createSelector(
     lendAssetSelector,
     networkSelector,
@@ -51,7 +56,7 @@ const getLendAsset = createSelector(
     lendPrincipalSelector,
     (assets, network, lendBalances, allAPR, allPrincipal) =>
         Object.values(assets).map(asset => {
-            // TODO: get suppy wallet
+            // supply wallet
             let wallet = "0";
             let apr = "0";
             let principal = "0";
@@ -76,8 +81,16 @@ export const getLendActive = createSelector(getLendAsset, assets =>
     assets.filter(asset => asset.wallet !== "0")
 );
 
-export const getLendInactive = createSelector(getLendAsset, assets =>
-    assets.filter(asset => asset.wallet === "0")
+export const getLendInactive = createSelector(
+    getLendAsset,
+    getAllowances,
+    (assets, allowances) =>
+        assets
+            .filter(asset => asset.wallet === "0")
+            .map(asset => {
+                asset.activated = allowances[asset.unit] || false;
+                return asset;
+            })
 );
 
 export const getLendPending = state =>

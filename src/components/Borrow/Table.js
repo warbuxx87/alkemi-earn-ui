@@ -23,7 +23,7 @@ import {
 
 // Section 3: Components & Containers import from the application
 import BorrowTableCell from "components/UI/TableCell";
-import BorrowModal from "containers/Borrow/ModalBorrow";
+import BorrowDrawerBorrow from "containers/Borrow/DrawerBorrow";
 import { formatNumber, formatPercent } from "components/Lend/utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -160,7 +160,7 @@ const BorrowTable = ({ data = [], onActivate }) => {
                         </Grid> */}
                                         </Box>
                                         {Row.activated ? (
-                                            <BorrowModal asset={Row} />
+                                            <BorrowDrawerBorrow asset={Row} />
                                         ) : (
                                             <Button
                                                 type="button"

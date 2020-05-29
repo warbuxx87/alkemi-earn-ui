@@ -8,41 +8,23 @@ import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
 import onBorrowActivate from "./Activate";
-import {
-    getMarketContract,
-    createActiveAssetContract
-} from "containers/Lend/utils";
 import Borrow from "components/Borrow/Borrow";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 3: Selectors
 import {
     getBorrowActive,
-    getBorrowInactive,
-    getBorrowError,
-    isDrizzleInitialized
-
-    // getBorrowPending
+    getBorrowInactive
+    //  getBorrowError,
+    //  getBorrowPending
 } from "redux/selectors/data";
 
 const BorrowContainer = ({
     inactiveBorrow,
     activeBorrow,
     onActivate,
-    drizzle,
-    isDrizzleInitialized
+    drizzle
 }) => {
-    React.useEffect(() => {
-        if (isDrizzleInitialized) {
-            getMarketContract({ drizzle });
-        }
-    }, [drizzle, isDrizzleInitialized]);
-
-    React.useEffect(() => {
-        // create missing contracts for active asset
-        createActiveAssetContract({ drizzle, assets: activeBorrow });
-    }, [activeBorrow.length]);
-
     return (
         <Borrow
             inactiveBorrow={inactiveBorrow}
@@ -54,8 +36,7 @@ const BorrowContainer = ({
 
 const mapStateToProps = state => ({
     inactiveBorrow: getBorrowInactive(state),
-    activeBorrow: getBorrowActive(state),
-    isDrizzleInitialized: isDrizzleInitialized(state)
+    activeBorrow: getBorrowActive(state)
 });
 
 const mapDispatchToProps = dispatch =>

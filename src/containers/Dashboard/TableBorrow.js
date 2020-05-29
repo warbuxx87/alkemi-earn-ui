@@ -2,6 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { isDrizzleInitialized } from "redux/selectors/drizzle";
 
 import {
     getMarketContract,
@@ -11,7 +12,7 @@ import withDrizzle from "containers/Drizzle/withDrizzle";
 
 import TableBorrow from "components/Dashboard/TableBorrow";
 
-import { getBorrowActive, isDrizzleInitialized } from "redux/selectors/data";
+import { getBorrowActive } from "redux/selectors/data";
 
 const TableBorrowContainer = ({
     activeReserves,

@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import BorrowModal from "components/Borrow/ModalBorrow";
+import DrawerBorrow from "components/UI/DrawerBorrow";
 import onBorrowAction from "./BorrowAction";
 
-const BorrowModalContainer = ({ asset, drizzle, onBorrowAction }) => {
+const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
     return (
-        <BorrowModal
+        <DrawerBorrow
             asset={asset}
             onBorrow={({ asset, amount }) =>
                 onBorrowAction({ drizzle, asset, amount })
@@ -25,4 +25,4 @@ const mapDispatchToProps = dispatch =>
 export default compose(
     withDrizzle(),
     connect(mapStateToProps, mapDispatchToProps)
-)(BorrowModalContainer);
+)(BorrowDrawerContainer);

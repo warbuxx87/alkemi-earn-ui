@@ -21,7 +21,7 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import LendModalSupply from "containers/Lend/ModalSupply";
+import LendDrawerSupply from "containers/Lend/DrawerSupply";
 import LendModalWithdraw from "./ModalWithdraw";
 import LendTableCell from "components/UI/TableCell";
 import { formatNumber, formatPercent } from "./utils";
@@ -187,7 +187,7 @@ const LendTableActive = ({ data = [] }) => {
                                                 {" "}
                                             </LendModalWithdraw>
                                         </Box>
-                                        <LendModalSupply asset={row} />
+                                        <LendDrawerSupply asset={row} />
                                     </Box>
                                 </LendTableCell>
                             </TableRow>

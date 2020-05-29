@@ -96,10 +96,10 @@ export default function SupplyTables({ activeReserves, currency }) {
                                     </Box>
                                 </SupplyTableCell>
                                 <SupplyTableCell align="left">
-                                    {formatNumber(row.balance, row.unit)}
+                                    {formatNumber(row.wallet, row.unit)}
                                 </SupplyTableCell>
                                 <SupplyTableCell align="left">
-                                    {formatNumber(row.wallet, row.unit)}
+                                    0
                                 </SupplyTableCell>
                                 <SupplyTableCell align="right">
                                     {formatPercent(row.apr)}

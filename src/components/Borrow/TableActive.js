@@ -21,7 +21,8 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import BorrowModalBorrow from "containers/Borrow/ModalBorrow";
+
+import DrawerBorrow from "components/UI/DrawerBorrow";
 import BorrowModalRepay from "./ModalRepay";
 import BorrowTableCell from "components/UI/TableCell";
 import { formatNumber, formatPercent } from "components/Lend/utils";
@@ -188,7 +189,7 @@ const BorrowTableActive = ({ data = [] }) => {
                                                 {" "}
                                             </BorrowModalRepay>
                                         </Box>
-                                        <BorrowModalBorrow asset={row} />
+                                        <DrawerBorrow asset={row} />
                                     </Box>
                                 </BorrowTableCell>
                             </TableRow>

@@ -3,6 +3,7 @@ import { toWei } from "components/Lend/utils";
 import address from "contracts/address_map.json";
 import constants from "contracts/constant.json";
 import { notifyTransaction } from "containers/AppBar/notify";
+import { initMarketContract, initAssetContract } from "utils/contracts";
 
 import WETH_ABI from "contracts/WETH_ABI.json";
 import DAI_ABI from "contracts/DAI_ABI.json";
@@ -120,12 +121,7 @@ export const handle_approve = async ({ drizzle, asset, myAccount }) => {
     const drizzleStore = drizzle.store.getState();
     const network = constants.network_type[drizzleStore.web3.networkId];
     const address_mMarket = address[network].address_mMarket;
-    const tokenContract = getDrizzleContract({
-        drizzle,
-        asset,
-        network,
-        myAccount
-    });
+    const tokenContract = initAssetContract({ drizzle, asset });
     const balance = Object.values(drizzleStore.accountBalances)[0];
     return await notifyTransaction({
         estimateGas: () =>
@@ -164,7 +160,7 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     const drizzleStore = drizzle.store.getState();
     const myAccount = drizzleStore.accounts[0];
     const network = constants.network_type[drizzleStore.web3.networkId];
-    const mMarketContract = getMarketContract({ drizzle });
+    const mMarketContract = initMarketContract({ drizzle });
     const token_address = address[network][`address_${asset.unit}`];
     const weiAmount = toWei(amount, asset.unit);
     const balance = Object.values(drizzleStore.accountBalances)[0];

@@ -23,7 +23,7 @@ import {
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
-import LendModalSupply from "containers/Lend/ModalSupply";
+import LendDrawerSupply from "containers/Lend/DrawerSupply";
 import { formatNumber, formatPercent } from "./utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
     },
     btnActiveOutline: {
         minWidth: 100,
-        minHeight: 36,
+        minHeight: 32,
         textTransform: "capitalize"
     }
 });
@@ -122,13 +122,13 @@ const LendTable = ({ data = [], onActivate }) => {
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    {formatNumber(Row.wallet, Row.unit)}
+                                    {formatNumber(Row.balance, Row.unit)}
                                 </LendTableCell>
                                 <LendTableCell
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    {formatNumber(Row.balance, Row.unit)}
+                                    {formatNumber(Row.wallet, Row.unit)}
                                 </LendTableCell>
                                 <LendTableCell
                                     align="center"
@@ -160,7 +160,7 @@ const LendTable = ({ data = [], onActivate }) => {
                         </Grid> */}
                                         </Box>
                                         {Row.activated ? (
-                                            <LendModalSupply asset={Row} />
+                                            <LendDrawerSupply asset={Row} />
                                         ) : (
                                             <Button
                                                 type="button"
@@ -168,6 +168,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                                     classes.btnActiveOutline
                                                 }
                                                 variant="outlined"
+                                                size="small"
                                                 color="secondary"
                                                 disable={Row.pending}
                                                 onClick={() =>
