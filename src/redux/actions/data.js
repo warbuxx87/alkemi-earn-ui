@@ -33,36 +33,36 @@ export const fetchStatsError = error => ({
 });
 
 //                                      //
-// ------------ BORROWING ACTIONS -------- //
+// ------------ BORROW ACTIONS -------- //
 //                                      //
 
 // Declare action type as a constant
-export const FETCH_BORROWING_PENDING = "FETCH_BORROWING_PENDING";
+export const FETCH_BORROW_PENDING = "FETCH_BORROW_PENDING";
 
 // Declare action creator
 export const fetchBorrowingPending = asset => ({
     // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROWING_PENDING,
+    type: FETCH_BORROW_PENDING,
     asset
 });
 
 // Declare action type as a constant
-export const FETCH_BORROWING_SUCCESS = "FETCH_BORROWING_SUCCESS";
+export const FETCH_BORROW_SUCCESS = "FETCH_BORROW_SUCCESS";
 
 // Declare action creator
 export const fetchBorrowingSuccess = asset => ({
     // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROWING_SUCCESS,
+    type: FETCH_BORROW_SUCCESS,
     asset
 });
 
 // Declare action type as a constant
-export const FETCH_BORROWING_ERROR = "FETCH_BORROWING_ERROR";
+export const FETCH_BORROW_ERROR = "FETCH_BORROW_ERROR";
 
 // Declare action creator
 export const fetchBorrowingError = error => ({
     // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROWING_ERROR,
+    type: FETCH_BORROW_ERROR,
     payload: new Error(),
     error: true
 });

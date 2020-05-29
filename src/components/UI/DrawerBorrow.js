@@ -2,7 +2,9 @@
 
 // Section 1: React low level imports
 import React from "react";
+import PropTypes from "prop-types";
 import web3 from "web3";
+import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 2: Material-UI imports
 import {
@@ -18,16 +20,21 @@ import {
     Typography
 } from "@material-ui/core";
 
-import { XCircle as XIcon } from "react-feather";
-
 // Section 3: Components & Containers import from the application
+import { XCircle as XIcon } from "react-feather";
 import BorrowChartBorrow from "./ChartBorrow";
-import BorrowModal from "./Drawer";
-import { formatNumber, fromWei, toWei } from "components/Lend/utils";
+import BorrowDrawer from "./Drawer";
+// import { onBorrow } from "containers/Borrow/BorrowAction";
+import {
+    formatNumber,
+    fromWei,
+    toWei,
+    formatPercent
+} from "components/Lend/utils";
 // Section 4: Define Styles function taking theme as argument and returning an object
 
 export default function DrawerBorrow({ asset, onBorrow }) {
-    const classes = BorrowModal();
+    const classes = BorrowDrawer();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [isOpen, setOpen] = React.useState(false);
 
@@ -49,7 +56,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
             const isAmountLTBalance = web3.utils
                 .toBN(toWei(amount, asset.unit))
                 .lte(web3.utils.toBN(asset.balance));
-            setEnableBorrow(isAmountLTBalance);
+            setEnableBorrow(true);
         }
     }, [amount, asset.balance, asset.unit]);
     return (
@@ -58,9 +65,10 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                 type="button"
                 className={classes.btnModal}
                 variant="contained"
+                size="small"
                 onClick={handleOpen}
             >
-                {asset.supplying ? (
+                {asset.borrowing ? (
                     <CircularProgress size={20} color="inherit" />
                 ) : (
                     "Borrow"
@@ -92,7 +100,9 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                     </Box>
                     <Divider />
                     <Box color="primary.contrastText" p={2}>
-                        <div className={classes.supplyPercent}>2.34% APR</div>
+                        <div className={classes.supplyPercent}>
+                            {formatPercent(asset.apr)} APR
+                        </div>
 
                         <BorrowChartBorrow> </BorrowChartBorrow>
                     </Box>
@@ -124,7 +134,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                             />
                             <span
                                 className={classes.maxTips}
-                                onClick={onSetMax}
+                                // onClick={onSetMax}
                             >
                                 MAX
                             </span>
@@ -161,7 +171,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                             </Grid>
                             <Grid container className={classes.rateRow}>
                                 <Grid item md={6} xs>
-                                    Dai Balance
+                                    Balance
                                 </Grid>
                                 <Grid
                                     item
@@ -181,11 +191,11 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                 variant="contained"
                                 color="primary"
                                 onClick={() => onBorrow({ asset, amount })}
-                                disabled={!enableBorrow || asset.supplying}
+                                disabled={!enableBorrow || asset.borrowing}
                                 size="large"
                                 fullWidth={true}
                             >
-                                {asset.supplying ? (
+                                {asset.borrowing ? (
                                     <CircularProgress
                                         size={20}
                                         color="inherit"
@@ -201,3 +211,11 @@ export default function DrawerBorrow({ asset, onBorrow }) {
         </>
     );
 }
+
+// // Section 6: Documentation with PropTypes
+// DrawerBorrow.propTypes = {
+//     asset: PropTypes.array.isRequired,
+//     onBorrow: PropTypes.func.isRequired
+// };
+
+// Section 7:  Connect styles and export

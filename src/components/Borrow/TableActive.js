@@ -22,7 +22,8 @@ import {
 
 // Section 3: Components & Containers import from the application
 
-import DrawerBorrow from "components/UI/DrawerBorrow";
+//import DrawerBorrow from "components/UI/DrawerBorrow";
+import BorrowDrawerContainer from "containers/Borrow/DrawerBorrow";
 import BorrowModalRepay from "./ModalRepay";
 import BorrowTableCell from "components/UI/TableCell";
 import { formatNumber, formatPercent } from "components/Lend/utils";
@@ -189,7 +190,7 @@ const BorrowTableActive = ({ data = [] }) => {
                                                 {" "}
                                             </BorrowModalRepay>
                                         </Box>
-                                        <DrawerBorrow asset={row} />
+                                        <BorrowDrawerContainer asset={row} />
                                     </Box>
                                 </BorrowTableCell>
                             </TableRow>

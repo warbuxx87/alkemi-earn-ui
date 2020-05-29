@@ -16,7 +16,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 // Section 3: Components & Containers import from the application
 import BorrowChartBorrow from "./ChartBorrow";
-import BorrowingModal from "components/UI/Drawer";
+import BorrowingModal from "components/UI/Modal";
 import { formatNumber, fromWei, toWei } from "components/Lend/utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object

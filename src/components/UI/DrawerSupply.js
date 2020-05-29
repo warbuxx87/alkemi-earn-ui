@@ -22,7 +22,12 @@ import {
 import { XCircle as XIcon } from "react-feather";
 import LendChartSupply from "./ChartSupply";
 import LendModal from "./Drawer";
-import { formatNumber, fromWei, toWei } from "components/Lend/utils";
+import {
+    formatNumber,
+    fromWei,
+    toWei,
+    formatPercent
+} from "components/Lend/utils";
 // Section 4: Define Styles function taking theme as argument and returning an object
 
 export default function DrawerSupply({ asset, onSupply }) {
@@ -92,7 +97,9 @@ export default function DrawerSupply({ asset, onSupply }) {
                     </Box>
                     <Divider />
                     <Box color="primary.contrastText" p={2}>
-                        <div className={classes.supplyPercent}>2.34% APR</div>
+                        <div className={classes.supplyPercent}>
+                            {formatPercent(asset.apr)} APR
+                        </div>
 
                         <LendChartSupply> </LendChartSupply>
                     </Box>
@@ -161,7 +168,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                             </Grid>
                             <Grid container className={classes.rateRow}>
                                 <Grid item md={6} xs>
-                                    Dai Balance
+                                    Balance
                                 </Grid>
                                 <Grid
                                     item

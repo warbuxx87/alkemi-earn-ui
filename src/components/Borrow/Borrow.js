@@ -49,9 +49,9 @@ const Borrow = ({ activeBorrow, inactiveBorrow, onActivate }) => (
 
 // Section 6: Documentation with PropTypes
 Borrow.propTypes = {
-    onActivate: PropTypes.func.isRequired,
     activeBorrow: PropTypes.array.isRequired,
-    inactiveBorrow: PropTypes.array.isRequired
+    inactiveBorrow: PropTypes.array.isRequired,
+    onActivate: PropTypes.func.isRequired
 };
 
 // Section 7:  Connect styles and export
