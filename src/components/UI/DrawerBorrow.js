@@ -99,7 +99,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                         </IconButton>
                     </Box>
                     <Divider />
-                    <Box color="primary.contrastText" p={2}>
+                    <Box bgcolor="background.dark" p={2}>
                         <div className={classes.supplyPercent}>
                             {formatPercent(asset.apr)} APR
                         </div>
