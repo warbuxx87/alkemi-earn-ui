@@ -60,12 +60,12 @@ export default function SupplyTables({ activeReserves, currency }) {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            {columns.map((Column, i) => (
+                            {columns.map((column, i) => (
                                 <SupplyTableCell
-                                    key={Column.id}
-                                    align={Column.align}
+                                    key={column.id}
+                                    align={column.align}
                                 >
-                                    {Column.label}
+                                    {column.label}
                                 </SupplyTableCell>
                             ))}
                         </TableRow>

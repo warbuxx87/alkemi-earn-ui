@@ -47,7 +47,7 @@ function SupplyBalance({
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Supply Balance" className={classes.item} />
+            <CardHeader title="Current Deposit" className={classes.item} />
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box

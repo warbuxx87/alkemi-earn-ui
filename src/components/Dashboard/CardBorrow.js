@@ -45,7 +45,7 @@ function BorrowBalance({
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Borrow Balance" className={classes.item} />
+            <CardHeader title="Current Debts" className={classes.item} />
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box

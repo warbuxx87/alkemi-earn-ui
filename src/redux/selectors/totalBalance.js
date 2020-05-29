@@ -22,6 +22,18 @@ const getAccountLiquidity = state => {
     return null;
 };
 
+export const getCollateralRatio = state => {
+    const calculateAccountValues = Object.values(
+        _.get(state, "contracts.mMarket.calculateAccountValues", {})
+    );
+    if (calculateAccountValues[0]) {
+        let totalSupplied = _.get(calculateAccountValues, "[0].value[1]");
+        let totalBorrowed = _.get(calculateAccountValues, "[0].value[2]");
+        let collateralRatio = totalSupplied / totalBorrowed;
+        return collateralRatio;
+    }
+};
+
 export const getUSDxPrice = state => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.mMarket.assetPrices", {})

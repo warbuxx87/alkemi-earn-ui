@@ -15,7 +15,7 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import { formatMoney } from "components/Lend/utils";
+import { formatMoney, formatPercent } from "components/Lend/utils";
 
 // Section 3: Components & Containers import from the application
 
@@ -39,12 +39,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Balance({ aggregatedBalance, currency, dayChange }) {
+function Balance({ aggregatedBalance, currency, collateralRatio }) {
     const classes = useStyles();
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Aggregated Balance" className={classes.header} />
+            <CardHeader title="Account Liquidity" className={classes.header} />
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
@@ -81,14 +81,14 @@ function Balance({ aggregatedBalance, currency, dayChange }) {
                                 color="textSecondary"
                                 align="right"
                             >
-                                24 Hr Change
+                                Collateral Ratio
                             </Typography>
                             <Typography
                                 variant="h3"
                                 color="textPrimary"
                                 align="right"
                             >
-                                {formatMoney(dayChange, currency)}
+                                {formatPercent(collateralRatio)}
                             </Typography>
                         </Grid>
                     </Grid>
