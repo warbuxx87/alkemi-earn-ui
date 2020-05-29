@@ -25,7 +25,7 @@ export default class LendChartSupply extends React.PureComponent {
         return (
             <Chart
                 height={81}
-                width={355}
+                width={380}
                 style={{ padding: 0 }}
                 data={chartData}
             >

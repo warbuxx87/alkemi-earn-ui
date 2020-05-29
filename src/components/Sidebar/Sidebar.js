@@ -17,19 +17,26 @@ import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
 // import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
 import SidebarHeader from "containers/Sidebar/Header";
 
-const drawerWidth = 339;
-
 const styles = theme => ({
     drawer: {
-        width: drawerWidth,
-        marginLeft: 35,
+        width: 280,
+        "@media (min-width:1550px)": {
+            width: 340
+        },
+        marginLeft: 24,
+        "@media (min-width:1550px)": {
+            marginLeft: 35
+        },
         flexShrink: 0
     },
     drawerInner: {
         overflowX: "hidden"
     },
     drawerOpen: {
-        width: drawerWidth,
+        width: 280,
+        "@media (min-width:1550px)": {
+            width: 340
+        },
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen
@@ -46,7 +53,10 @@ const styles = theme => ({
             width: 70
         },
         "&:hover": {
-            width: drawerWidth,
+            width: 280,
+            "@media (min-width:1550px)": {
+                width: 340
+            },
             transition: theme.transitions.create("width", {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.enteringScreen
@@ -55,7 +65,10 @@ const styles = theme => ({
     },
     drawerPaper: {
         // width: drawerWidth,
-        margin: "22px 0px 0px 35px",
+        margin: "22px 0px 0px 24px",
+        "@media (min-width:1550px)": {
+            margin: "22px 0px 0px 35px"
+        },
         background: "#202123",
         color: "white",
         border: "none"

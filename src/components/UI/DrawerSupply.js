@@ -96,7 +96,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                         </IconButton>
                     </Box>
                     <Divider />
-                    <Box color="primary.contrastText" p={2}>
+                    <Box p={2} bgcolor="background.dark">
                         <div className={classes.supplyPercent}>
                             {formatPercent(asset.apr)} APR
                         </div>
