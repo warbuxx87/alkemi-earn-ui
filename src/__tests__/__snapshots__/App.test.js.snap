@@ -101,7 +101,7 @@ exports[`<App /> matches snapshot 1`] = `
             },
             "augmentColor": [Function],
             "background": Object {
-              "dark": "#151617",
+              "dark": "#1B1B1B",
               "default": "#000000",
               "paper": "#202123",
             },
@@ -278,8 +278,11 @@ exports[`<App /> matches snapshot 1`] = `
               "lineHeight": 1.2,
             },
             "h3": Object {
+              "@media (min-width:1550px)": Object {
+                "fontSize": 26,
+              },
               "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-              "fontSize": 26,
+              "fontSize": 22,
               "fontWeight": 400,
               "letterSpacing": "0em",
               "lineHeight": 1.167,
