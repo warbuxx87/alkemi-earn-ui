@@ -23,7 +23,7 @@ import {
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
-import LendDrawerSupply from "containers/Lend/DrawerSupply";
+import LendDrawerContainer from "containers/Lend/DrawerSupply";
 import { formatNumber, formatPercent } from "./utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -160,7 +160,7 @@ const LendTable = ({ data = [], onActivate }) => {
                         </Grid> */}
                                         </Box>
                                         {Row.activated ? (
-                                            <LendDrawerSupply asset={Row} />
+                                            <LendDrawerContainer asset={Row} />
                                         ) : (
                                             <Button
                                                 type="button"

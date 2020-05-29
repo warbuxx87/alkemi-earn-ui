@@ -8,7 +8,7 @@ const onSupplyAction = ({ drizzle, amount, asset }) => async dispatch => {
         .then(() => dispatch(supplySuccess(asset.unit)))
         .catch(error => {
             notify.notification({
-                eventCode: "suuplyError",
+                eventCode: "supplyError",
                 type: "error",
                 message: error.message,
                 autoDismiss: 5000

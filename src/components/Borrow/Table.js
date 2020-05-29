@@ -23,7 +23,7 @@ import {
 
 // Section 3: Components & Containers import from the application
 import BorrowTableCell from "components/UI/TableCell";
-import BorrowDrawerBorrow from "containers/Borrow/DrawerBorrow";
+import BorrowDrawerContainer from "containers/Borrow/DrawerBorrow";
 import { formatNumber, formatPercent } from "components/Lend/utils";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -160,7 +160,9 @@ const BorrowTable = ({ data = [], onActivate }) => {
                         </Grid> */}
                                         </Box>
                                         {Row.activated ? (
-                                            <BorrowDrawerBorrow asset={Row} />
+                                            <BorrowDrawerContainer
+                                                asset={Row}
+                                            />
                                         ) : (
                                             <Button
                                                 type="button"
@@ -169,7 +171,7 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                                 }
                                                 variant="outlined"
                                                 color="secondary"
-                                                disable={Row.pending.toString()}
+                                                disable={Row.pending}
                                                 onClick={() =>
                                                     onActivate(Row.unit)
                                                 }
