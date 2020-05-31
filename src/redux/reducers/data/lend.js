@@ -3,6 +3,12 @@ import {
     FETCH_LEND_PENDING,
     FETCH_LEND_SUCCESS,
     FETCH_LEND_ERROR,
+    ALLOCATE_PENDING,
+    ALLOCATE_SUCCESS,
+    ALLOCATE_ERROR,
+    APPROVE_PENDING,
+    APPROVE_SUCCESS,
+    APPROVE_ERROR,
     SUPPLY_PENDING,
     SUPPLY_SUCCESS,
     SUPPLY_ERROR,
@@ -42,7 +48,9 @@ function createData(
         activated: false,
         pending: false,
         supplying: false,
-        redeeming: false
+        redeeming: false,
+        approving: false,
+        allocating: false
     };
 }
 
@@ -80,7 +88,8 @@ export default (state = initialState, action) => {
                     ...state.assets,
                     [action.asset]: {
                         ...state.assets[action.asset],
-                        pending: true
+                        pending: true,
+                        activated: false
                     }
                 }
             };
@@ -105,6 +114,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         pending: false,
+                        activated: false,
                         error: action.payload.error
                     }
                 }
@@ -194,6 +204,81 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         redeeming: false,
+                        error: action.payload.error
+                    }
+                }
+            };
+        case APPROVE_PENDING:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        approving: true
+                    }
+                }
+            };
+        case APPROVE_SUCCESS:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        approving: false,
+                        activated: true
+                    }
+                }
+            };
+
+        case APPROVE_ERROR:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
+                        approving: false,
+                        error: action.payload.error
+                    }
+                }
+            };
+        case ALLOCATE_PENDING:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        allocating: true,
+                        pending: true
+                    }
+                }
+            };
+        case ALLOCATE_SUCCESS:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        allocating: false,
+                        pending: false,
+                        activated: false
+                    }
+                }
+            };
+
+        case ALLOCATE_ERROR:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
+                        allocating: false,
+                        pending: false,
                         error: action.payload.error
                     }
                 }

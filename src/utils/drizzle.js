@@ -156,6 +156,49 @@ export const handle_approve = async ({ drizzle, asset, myAccount }) => {
     });
 };
 
+export const handle_faucet_allocateTo = async ({ drizzle, asset, amount }) => {
+    console.log(asset.unit);
+    if (!(await readyToTransaction()))
+        throw new Error("not ready to transaction");
+    const web3 = drizzle.web3;
+    const drizzleStore = drizzle.store.getState();
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    const myAccount = drizzleStore.accounts[0];
+    const unit = asset.unit;
+    const tokenContract = drizzle.contracts[unit];
+    const weiAmount = toWei(amount, unit);
+    const balance = Object.values(drizzleStore.accountBalances)[0];
+    return await notifyTransaction({
+        estimateGas: () =>
+            tokenContract.methods
+                .allocateTo(myAccount, weiAmount)
+                .estimateGas({ from: myAccount })
+                .then(result => result.toString()),
+        gasPrice: web3.eth.getGasPrice,
+        balance,
+        network,
+        sendTransaction: () =>
+            new Promise((resolve, reject) =>
+                tokenContract.methods
+                    .allocateTo(myAccount, weiAmount)
+                    .send({ from: myAccount }, (error, hash) =>
+                        error ? reject(error) : resolve(hash)
+                    )
+            ),
+        events: {
+            txRequest: {
+                message: "Please confirm your transaction"
+            },
+            txPool: {
+                message: `Allocating ${amount} ${asset.unit} to Owner`
+            },
+            txConfirmed: {
+                message: `${amount} ${asset.unit} successfully allocated`
+            }
+        }
+    });
+};
+
 export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransaction())) throw new Error("not ready to transact");
     const web3 = drizzle.web3;

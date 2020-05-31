@@ -13,24 +13,32 @@ import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 3: Selectors
 import {
-    // getLendError,
+    getLendError,
     getLendActive,
     getLendInactive
 } from "redux/selectors/data";
 
-const LendContainer = ({ inactiveLend, activeLend, onActivate, drizzle }) => {
+const LendContainer = ({
+    inactiveLend,
+    activeLend,
+    onActivate,
+    drizzle,
+    errorLend
+}) => {
     return (
         <Lend
             inactiveLend={inactiveLend}
             activeLend={activeLend}
             onActivate={asset => onActivate({ drizzle, asset })}
+            errorLend={errorLend}
         />
     );
 };
 
 const mapStateToProps = state => ({
     inactiveLend: getLendInactive(state),
-    activeLend: getLendActive(state)
+    activeLend: getLendActive(state),
+    errorLend: getLendError(state)
 });
 
 const mapDispatchToProps = dispatch =>

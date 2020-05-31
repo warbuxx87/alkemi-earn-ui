@@ -203,3 +203,53 @@ export const redeemError = (asset, error) => ({
         asset
     }
 });
+
+//                                               //
+// ------------ APPROVE METHOD ACTIONS --------   //
+//                                               //
+
+export const APPROVE_PENDING = "APPROVE_PENDING";
+export const approvePending = asset => ({
+    type: APPROVE_PENDING,
+    payload: asset
+});
+
+export const APPROVE_SUCCESS = "APPROVE_SUCCESS";
+export const approveSuccess = asset => ({
+    type: APPROVE_SUCCESS,
+    payload: asset
+});
+
+export const APPROVE_ERROR = "APPROVE_ERROR";
+export const approveError = (asset, error) => ({
+    type: APPROVE_ERROR,
+    payload: {
+        error,
+        asset
+    }
+});
+
+//                                               //
+// ------------ ALLOCATE METHOD ACTIONS --------   //
+//                                               //
+
+export const ALLOCATE_PENDING = "ALLOCATE_PENDING";
+export const allocatePending = asset => ({
+    type: ALLOCATE_PENDING,
+    payload: asset
+});
+
+export const ALLOCATE_SUCCESS = "ALLOCATE_SUCCESS";
+export const allocateSuccess = asset => ({
+    type: ALLOCATE_SUCCESS,
+    payload: asset
+});
+
+export const ALLOCATE_ERROR = "ALLOCATE_ERROR";
+export const allocateError = (asset, error) => ({
+    type: ALLOCATE_ERROR,
+    payload: {
+        error,
+        asset
+    }
+});

@@ -46,6 +46,7 @@ export const initAssetContract = ({ drizzle, asset }) => {
         myAddress,
         address[network].address_mMarket
     );
+
     // get balance
     tokenContract.methods.balanceOf.cacheCall(myAddress);
     return drizzle.contracts[asset];
@@ -68,7 +69,7 @@ export const initMarketContract = ({ drizzle }) => {
         web3Contract: mMarketContract
     });
 
-    const assets = ["USDx", "DAI", "USDT", "USDC", "WBTC", "WETH"];
+    const assets = ["USDx", "DAI", "USDT", "USDC", "WBTC", "WETH", "PAX"];
 
     assets.forEach(asset => {
         // get each asset Supply Balance (current )
