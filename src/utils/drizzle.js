@@ -207,7 +207,8 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     const network = constants.network_type[drizzleStore.web3.networkId];
     const mMarketContract = initMarketContract({ drizzle });
     const token_address = address[network][`address_${asset.unit}`];
-    const weiAmount = toWei(amount, asset.unit);
+    const unit = asset.unit;
+    const weiAmount = toWei(amount, unit);
     const balance = Object.values(drizzleStore.accountBalances)[0];
     const result = await notifyTransaction({
         estimateGas: () =>
@@ -231,10 +232,10 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
                 message: "Please confirm your transaction"
             },
             txPool: {
-                message: `Supplying ${amount} ${asset.unit} to the reserve`
+                message: `Supplying ${amount} ${asset.unit} to the pool`
             },
             txConfirmed: {
-                message: `You successfully supplied ${amount} ${asset.unit} to the reserve.`
+                message: `You successfully supplied ${amount} ${asset.unit} to the pool.`
             }
         }
     });
