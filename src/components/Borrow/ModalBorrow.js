@@ -15,9 +15,9 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 
 // Section 3: Components & Containers import from the application
-import BorrowChartBorrow from "./ChartBorrow";
-import BorrowingModal from "components/UI/Modal";
-import { formatNumber, fromWei, toWei } from "components/Lend/utils";
+import BorrowChart from "./ChartBorrow";
+import ModalBorrow from "components/UI/Modal";
+import { formatNumber, fromWei, toWei } from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -36,7 +36,7 @@ function getModalStyle() {
 }
 
 export default function BorrowModal({ asset, onBorrow }) {
-    const classes = BorrowingModal();
+    const classes = ModalBorrow();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
@@ -81,7 +81,7 @@ export default function BorrowModal({ asset, onBorrow }) {
                     id="simple-modal-chart"
                     className={classes.simpleModalChart}
                 >
-                    <BorrowChartBorrow> </BorrowChartBorrow>
+                    <BorrowChart> </BorrowChart>
                 </div>
             </Grid>
             <div className={classes.borrowCon}>

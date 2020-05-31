@@ -1,5 +1,5 @@
 import { supplyPending, supplySuccess, supplyError } from "redux/actions/data";
-import { handle_supply_click } from "./utils";
+import { handle_supply_click } from "utils/drizzle";
 import notify from "containers/AppBar/notify";
 
 const onSupplyAction = ({ drizzle, amount, asset }) => async dispatch => {

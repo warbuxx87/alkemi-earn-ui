@@ -6,7 +6,7 @@ import { compose } from "redux";
 // import {
 //     getMarketContract,
 //     createActiveAssetContract
-// } from "containers/Lend/utils";
+// } from "utils/drizzle";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 

@@ -15,7 +15,7 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import { formatMoney, formatPercent } from "components/Lend/utils";
+import { formatMoney, formatPercent } from "utils/front-end";
 
 // Section 3: Components & Containers import from the application
 

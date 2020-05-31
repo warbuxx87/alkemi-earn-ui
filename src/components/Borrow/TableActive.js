@@ -23,10 +23,10 @@ import {
 // Section 3: Components & Containers import from the application
 
 //import DrawerBorrow from "components/UI/DrawerBorrow";
-import BorrowDrawerContainer from "containers/Borrow/DrawerBorrow";
-import BorrowModalRepay from "./ModalRepay";
+import BorrowDrawerBorrow from "containers/Borrow/DrawerBorrow";
+import BorrowDrawerRepay from "containers/Borrow/DrawerRepay";
 import BorrowTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent } from "components/Lend/utils";
+import { formatNumber, formatPercent } from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -186,11 +186,9 @@ const BorrowTableActive = ({ data = [] }) => {
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={1}>
-                                            <BorrowModalRepay>
-                                                {" "}
-                                            </BorrowModalRepay>
+                                            <BorrowDrawerRepay asset={row} />
                                         </Box>
-                                        <BorrowDrawerContainer asset={row} />
+                                        <BorrowDrawerBorrow asset={row} />
                                     </Box>
                                 </BorrowTableCell>
                             </TableRow>

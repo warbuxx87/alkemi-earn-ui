@@ -23,8 +23,9 @@ import {
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
-import LendDrawerContainer from "containers/Lend/DrawerSupply";
-import { formatNumber, formatPercent } from "./utils";
+import SupplyButton from "containers/Lend/DrawerSupply";
+import FaucetButton from "containers/Lend/DrawerFaucet";
+import { formatNumber, formatPercent } from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -155,12 +156,10 @@ const LendTable = ({ data = [], onActivate }) => {
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={2}>
-                                            {/* <Grid className={classesbtnActive">
-                          Active
-                        </Grid> */}
+                                            <FaucetButton asset={Row} />
                                         </Box>
                                         {Row.activated ? (
-                                            <LendDrawerContainer asset={Row} />
+                                            <SupplyButton asset={Row} />
                                         ) : (
                                             <Button
                                                 type="button"

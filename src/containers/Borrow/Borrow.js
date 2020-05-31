@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
-import onBorrowActivate from "./Activate";
+import onBorrowActivate from "containers/Borrow/ApproveMethod";
 import Borrow from "components/Borrow/Borrow";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 

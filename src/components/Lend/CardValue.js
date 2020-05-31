@@ -14,7 +14,7 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import { formatMoney } from "./utils";
+import { formatMoney } from "utils/front-end";
 
 // Section 3: Components & Containers import from the application
 

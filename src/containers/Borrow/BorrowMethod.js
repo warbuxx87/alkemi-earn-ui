@@ -1,5 +1,5 @@
 import { borrowPending, borrowSuccess, borrowError } from "redux/actions/data";
-import { handle_borrow_click } from "containers/Lend/utils";
+import { handle_borrow_click } from "utils/drizzle";
 import notify from "containers/AppBar/notify";
 
 const onBorrowAction = ({ drizzle, amount, asset }) => async dispatch => {

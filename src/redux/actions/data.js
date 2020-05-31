@@ -40,7 +40,7 @@ export const fetchStatsError = error => ({
 export const FETCH_BORROW_PENDING = "FETCH_BORROW_PENDING";
 
 // Declare action creator
-export const fetchBorrowingPending = asset => ({
+export const fetchBorrowPending = asset => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_PENDING,
     asset
@@ -50,7 +50,7 @@ export const fetchBorrowingPending = asset => ({
 export const FETCH_BORROW_SUCCESS = "FETCH_BORROW_SUCCESS";
 
 // Declare action creator
-export const fetchBorrowingSuccess = asset => ({
+export const fetchBorrowSuccess = asset => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_SUCCESS,
     asset
@@ -60,7 +60,7 @@ export const fetchBorrowingSuccess = asset => ({
 export const FETCH_BORROW_ERROR = "FETCH_BORROW_ERROR";
 
 // Declare action creator
-export const fetchBorrowingError = error => ({
+export const fetchBorrowError = error => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_ERROR,
     payload: new Error(),
@@ -148,6 +148,106 @@ export const borrowSuccess = asset => ({
 export const BORROW_ERROR = "BORROW_ERROR";
 export const borrowError = (asset, error) => ({
     type: BORROW_ERROR,
+    payload: {
+        error,
+        asset
+    }
+});
+
+//                                               //
+// ------------ REPAY METHOD ACTIONS --------   //
+//                                               //
+
+export const REPAY_PENDING = "REPAY_PENDING";
+export const repayPending = asset => ({
+    type: REPAY_PENDING,
+    payload: asset
+});
+
+export const REPAY_SUCCESS = "REPAY_SUCCESS";
+export const repaySuccess = asset => ({
+    type: REPAY_SUCCESS,
+    payload: asset
+});
+
+export const REPAY_ERROR = "REPAY_ERROR";
+export const repayError = (asset, error) => ({
+    type: REPAY_ERROR,
+    payload: {
+        error,
+        asset
+    }
+});
+
+//                                               //
+// ------------ REDEEM METHOD ACTIONS --------   //
+//                                               //
+
+export const REDEEM_PENDING = "REDEEM_PENDING";
+export const redeemPending = asset => ({
+    type: REDEEM_PENDING,
+    payload: asset
+});
+
+export const REDEEM_SUCCESS = "REDEEM_SUCCESS";
+export const redeemSuccess = asset => ({
+    type: REDEEM_SUCCESS,
+    payload: asset
+});
+
+export const REDEEM_ERROR = "REDEEM_ERROR";
+export const redeemError = (asset, error) => ({
+    type: REDEEM_ERROR,
+    payload: {
+        error,
+        asset
+    }
+});
+
+//                                               //
+// ------------ APPROVE METHOD ACTIONS --------   //
+//                                               //
+
+export const APPROVE_PENDING = "APPROVE_PENDING";
+export const approvePending = asset => ({
+    type: APPROVE_PENDING,
+    payload: asset
+});
+
+export const APPROVE_SUCCESS = "APPROVE_SUCCESS";
+export const approveSuccess = asset => ({
+    type: APPROVE_SUCCESS,
+    payload: asset
+});
+
+export const APPROVE_ERROR = "APPROVE_ERROR";
+export const approveError = (asset, error) => ({
+    type: APPROVE_ERROR,
+    payload: {
+        error,
+        asset
+    }
+});
+
+//                                               //
+// ------------ ALLOCATE METHOD ACTIONS --------   //
+//                                               //
+
+export const ALLOCATE_PENDING = "ALLOCATE_PENDING";
+export const allocatePending = asset => ({
+    type: ALLOCATE_PENDING,
+    payload: asset
+});
+
+export const ALLOCATE_SUCCESS = "ALLOCATE_SUCCESS";
+export const allocateSuccess = asset => ({
+    type: ALLOCATE_SUCCESS,
+    payload: asset
+});
+
+export const ALLOCATE_ERROR = "ALLOCATE_ERROR";
+export const allocateError = (asset, error) => ({
+    type: ALLOCATE_ERROR,
     payload: {
         error,
         asset

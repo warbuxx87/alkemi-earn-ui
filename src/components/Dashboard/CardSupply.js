@@ -15,7 +15,7 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import { formatMoney } from "components/Lend/utils";
+import { formatMoney } from "utils/front-end";
 
 const useStyles = makeStyles(theme => ({
     root: {

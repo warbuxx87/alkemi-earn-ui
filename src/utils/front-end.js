@@ -43,8 +43,18 @@ export const fromWei = (value, unit) => {
     }
 };
 
-export const toWei = (value, unit) =>
-    web3.utils.toWei(value, decimalsToUnit[assetToDecimals[unit] || 18]);
+export const toWei = (value, unit) => {
+    if (unit === "WBTC") {
+        let amount = web3.utils.toWei(value, "lovelace");
+        amount = amount * 100;
+        return amount.toString();
+    } else {
+        return web3.utils.toWei(
+            value,
+            decimalsToUnit[assetToDecimals[unit] || 18]
+        );
+    }
+};
 
 export const formatNumber = (value, unit) => {
     if (!value) return 0;
