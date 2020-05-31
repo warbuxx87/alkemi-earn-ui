@@ -28,7 +28,8 @@ function createData(
     apr,
     principal,
     collateral,
-    price
+    price,
+    utilization
 ) {
     return {
         name,
@@ -40,6 +41,7 @@ function createData(
         principal,
         collateral,
         price,
+        utilization,
         activated: false,
         pending: false,
         borrowing: false,
@@ -48,10 +50,21 @@ function createData(
 }
 
 const assets = {
-    WETH: createData("Ether", "WETH", eth, "0", "0", "0", "0", "0", "0"),
-    DAI: createData("Maker DAI", "DAI", dai, "0", "0", "0", "0", "0", "0"),
-    USDT: createData("Tether", "USDT", usdt, "0", "0", "0", "0", "0", "0"),
-    USDC: createData("USD Coin", "USDC", usdc, "0", "0", "0", "0", "0", "0"),
+    WETH: createData("Ether", "WETH", eth, "0", "0", "0", "0", "0", "0", "0"),
+    DAI: createData("Maker DAI", "DAI", dai, "0", "0", "0", "0", "0", "0", "0"),
+    USDT: createData("Tether", "USDT", usdt, "0", "0", "0", "0", "0", "0", "0"),
+    USDC: createData(
+        "USD Coin",
+        "USDC",
+        usdc,
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+    ),
     WBTC: createData(
         "Wrapped Bitcoin",
         "WBTC",
@@ -61,10 +74,12 @@ const assets = {
         "0",
         "0",
         "0",
+        "0",
         "0"
     ),
-    PAX: createData("Paxos", "PAX", pax, "0", "0", "0", "0", "0", "0")
+    PAX: createData("Paxos", "PAX", pax, "0", "0", "0", "0", "0", "0", "0")
 };
+
 // Define initial state
 const initialState = {
     assets,

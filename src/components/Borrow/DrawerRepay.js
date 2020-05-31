@@ -146,7 +146,7 @@ export default function DrawerRepay({ asset, onRepay }) {
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
                                 <Grid item md={6} xs>
-                                    Utilization rate
+                                    Market Utilization
                                 </Grid>
                                 <Grid
                                     item
@@ -155,7 +155,7 @@ export default function DrawerRepay({ asset, onRepay }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    72.80%
+                                    {formatPercent(asset.utilization)}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
