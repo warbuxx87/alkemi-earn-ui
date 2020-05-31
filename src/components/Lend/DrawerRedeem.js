@@ -2,9 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
-// import PropTypes from "prop-types";
-// import web3 from "web3";
-// import withDrizzle from "containers/Drizzle/withDrizzle";
+import web3 from "web3";
 
 // Section 2: Material-UI imports
 import {
@@ -22,19 +20,14 @@ import {
 
 // Section 3: Components & Containers import from the application
 import { XCircle as XIcon } from "react-feather";
-import BorrowChartBorrow from "./ChartBorrow";
-import BorrowDrawer from "./Drawer";
-// import { onBorrow } from "containers/Borrow/BorrowAction";
-import {
-    formatNumber,
-    // fromWei,
-    // toWei,
-    formatPercent
-} from "components/Lend/utils";
+import LendChart from "./ChartLend";
+import LendDrawer from "components/UI/Drawer";
+import { formatNumber, fromWei, toWei, formatPercent } from "utils/front-end";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 
-export default function DrawerBorrow({ asset, onBorrow }) {
-    const classes = BorrowDrawer();
+export default function DrawerRedeem({ asset, onRedeem }) {
+    const classes = LendDrawer();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [isOpen, setOpen] = React.useState(false);
 
@@ -48,30 +41,31 @@ export default function DrawerBorrow({ asset, onBorrow }) {
 
     // Section 5: Code Component
     const [amount, setAmount] = React.useState(null);
-    // const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
+    const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
-    const [enableBorrow, setEnableBorrow] = React.useState(false);
+    const [enableRedeem, setEnableRedeem] = React.useState(false);
     React.useEffect(() => {
         if (amount) {
-            // const isAmountLTBalance = web3.utils
-            //     .toBN(toWei(amount, asset.unit))
-            //     .lte(web3.utils.toBN(asset.balance));
-            setEnableBorrow(true);
+            const isAmountLTBalance = web3.utils
+                .toBN(toWei(amount, asset.unit))
+                .lte(web3.utils.toBN(asset.balance));
+            setEnableRedeem(isAmountLTBalance);
         }
     }, [amount, asset.balance, asset.unit]);
     return (
         <>
             <Button
                 type="button"
-                className={classes.btnModal}
-                variant="contained"
+                className={classes.btnActiveOutline}
+                variant="outlined"
+                color="secondary"
                 size="small"
                 onClick={handleOpen}
             >
-                {asset.borrowing ? (
+                {asset.redeeming ? (
                     <CircularProgress size={20} color="inherit" />
                 ) : (
-                    "Borrow"
+                    "Redeem"
                 )}
             </Button>
             <Drawer
@@ -90,7 +84,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                         p={2}
                     >
                         <Typography variant="h4" color="textPrimary">
-                            Borrow {asset.unit}
+                            Redeem {asset.unit}
                         </Typography>
                         <IconButton onClick={handleClose}>
                             <SvgIcon fontSize="small">
@@ -99,12 +93,11 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                         </IconButton>
                     </Box>
                     <Divider />
-                    <Box bgcolor="background.dark" p={2}>
+                    <Box p={2} bgcolor="background.dark">
                         <div className={classes.supplyPercent}>
                             {formatPercent(asset.apr)} APR
                         </div>
-
-                        <BorrowChartBorrow> </BorrowChartBorrow>
+                        <LendChart> </LendChart>
                     </Box>
                     <Box p={2} mt={3}>
                         <Grid container className={classes.amount}>
@@ -119,7 +112,8 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                 justify="flex-end"
                                 className={classes.walletBalance}
                             >
-                                Wallet: {formatNumber(asset.wallet, asset.unit)}
+                                {"Supplied: "}
+                                {formatNumber(asset.balance, asset.unit)}
                             </Grid>
                         </Grid>
                         <div className={classes.inputWrap}>
@@ -134,7 +128,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                             />
                             <span
                                 className={classes.maxTips}
-                                // onClick={onSetMax}
+                                onClick={onSetMax}
                             >
                                 MAX
                             </span>
@@ -166,7 +160,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    $1.00
+                                    {formatNumber(asset.price, asset.unit)}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -180,28 +174,28 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    0.00
+                                    {formatNumber(asset.balance, asset.unit)}
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <div className={classes.divBorrow}>
+                        <div className={classes.divRedeem}>
                             <Button
                                 type="button"
                                 className={classes.btnModal}
                                 variant="contained"
                                 color="primary"
-                                onClick={() => onBorrow({ asset, amount })}
-                                disabled={!enableBorrow || asset.borrowing}
+                                onClick={() => onRedeem({ asset, amount })}
+                                disabled={!enableRedeem || asset.redeeming}
                                 size="large"
                                 fullWidth={true}
                             >
-                                {asset.borrowing ? (
+                                {asset.redeeming ? (
                                     <CircularProgress
                                         size={20}
                                         color="inherit"
                                     />
                                 ) : (
-                                    "Borrow"
+                                    "REDEEM"
                                 )}
                             </Button>
                         </div>
@@ -211,11 +205,3 @@ export default function DrawerBorrow({ asset, onBorrow }) {
         </>
     );
 }
-
-// // Section 6: Documentation with PropTypes
-// DrawerBorrow.propTypes = {
-//     asset: PropTypes.array.isRequired,
-//     onBorrow: PropTypes.func.isRequired
-// };
-
-// Section 7:  Connect styles and export

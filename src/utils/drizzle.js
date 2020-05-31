@@ -1,7 +1,7 @@
 import { readyToTransaction } from "containers/AppBar/onboard";
-import { toWei } from "components/Lend/utils";
-import address from "contracts/address_map.json";
-import constants from "contracts/constant.json";
+import { toWei } from "utils/front-end";
+import address from "constants/address_map.json";
+import constants from "constants/constant.json";
 import { notifyTransaction } from "containers/AppBar/notify";
 import { initMarketContract, initAssetContract } from "utils/contracts";
 
@@ -234,6 +234,90 @@ export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
             },
             txConfirmed: {
                 message: `You successfully borrowed ${amount} ${asset.unit} from the pool.`
+            }
+        }
+    });
+    return result;
+};
+
+export const handle_repay_click = async ({ drizzle, amount, asset }) => {
+    if (!(await readyToTransaction())) throw new Error("not ready to transact");
+    const web3 = drizzle.web3;
+    const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzleStore.accounts[0];
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    const mMarketContract = getMarketContract({ drizzle });
+    const token_address = address[network][`address_${asset.unit}`];
+    const weiAmount = toWei(amount, asset.unit);
+    const balance = Object.values(drizzleStore.accountBalances)[0];
+    const result = await notifyTransaction({
+        estimateGas: () =>
+            mMarketContract.methods
+                .repayBorrow(token_address, weiAmount)
+                .estimateGas({ from: myAccount })
+                .then(result => result.toString()),
+        gasPrice: web3.eth.getGasPrice,
+        balance,
+        network,
+        sendTransaction: () =>
+            new Promise((resolve, reject) =>
+                mMarketContract.methods
+                    .repayBorrow(token_address, weiAmount)
+                    .send({ from: myAccount }, (error, hash) =>
+                        error ? reject(error) : resolve(hash)
+                    )
+            ),
+        events: {
+            txRequest: {
+                message: "Please confirm your transaction"
+            },
+            txPool: {
+                message: `Repaying ${amount} ${asset.unit} to the pool`
+            },
+            txConfirmed: {
+                message: `You successfully repaid ${amount} ${asset.unit} to the pool.`
+            }
+        }
+    });
+    return result;
+};
+
+export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
+    if (!(await readyToTransaction())) throw new Error("not ready to transact");
+    const web3 = drizzle.web3;
+    const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzleStore.accounts[0];
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    const mMarketContract = getMarketContract({ drizzle });
+    const token_address = address[network][`address_${asset.unit}`];
+    const weiAmount = toWei(amount, asset.unit);
+    const balance = Object.values(drizzleStore.accountBalances)[0];
+    const result = await notifyTransaction({
+        estimateGas: () =>
+            mMarketContract.methods
+                .withdraw(token_address, weiAmount)
+                .estimateGas({ from: myAccount })
+                .then(result => result.toString()),
+        gasPrice: web3.eth.getGasPrice,
+        balance,
+        network,
+        sendTransaction: () =>
+            new Promise((resolve, reject) =>
+                mMarketContract.methods
+                    .withdraw(token_address, weiAmount)
+                    .send({ from: myAccount }, (error, hash) =>
+                        error ? reject(error) : resolve(hash)
+                    )
+            ),
+        events: {
+            txRequest: {
+                message: "Please confirm your transaction"
+            },
+            txPool: {
+                message: `Withdrawing ${amount} ${asset.unit} from the pool`
+            },
+            txConfirmed: {
+                message: `You successfully withdrawn ${amount} ${asset.unit} from the pool.`
             }
         }
     });

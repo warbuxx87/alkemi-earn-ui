@@ -1,7 +1,7 @@
 // Libs
 // import { createSelector } from "reselect";
 import _ from "lodash";
-import constants from "contracts/constant.json";
+import constants from "constants/constant.json";
 
 // Drizzle state selector
 export const isDrizzleInitialized = state => state.drizzleStatus.initialized;

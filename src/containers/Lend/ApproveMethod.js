@@ -3,7 +3,7 @@ import {
     fetchLendSuccess,
     fetchLendError
 } from "redux/actions/data";
-import { handle_approve } from "./utils";
+import { handle_approve } from "utils/drizzle";
 import notify from "containers/AppBar/notify";
 
 const activateLendAction = ({ drizzle, asset }) => async (

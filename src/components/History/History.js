@@ -17,7 +17,7 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import { open_it_onetherscan } from "containers/History/utils";
+import { open_it_onetherscan } from "utils/history";
 // import tx_data from "containers/History/MOCK_DATA";
 
 // Section 4: Define Styles function taking theme as argument and returning an object

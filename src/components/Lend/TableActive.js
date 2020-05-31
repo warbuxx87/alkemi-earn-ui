@@ -21,10 +21,10 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import LendDrawerSupply from "containers/Lend/DrawerSupply";
-import LendModalWithdraw from "./ModalWithdraw";
+import SupplyButton from "containers/Lend/DrawerSupply";
+import RedeemButton from "containers/Lend/DrawerRedeem";
 import LendTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent } from "./utils";
+import { formatNumber, formatPercent } from "utils/front-end";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
     imageSize: {
@@ -183,11 +183,9 @@ const LendTableActive = ({ data = [] }) => {
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={1}>
-                                            <LendModalWithdraw>
-                                                {" "}
-                                            </LendModalWithdraw>
+                                            <RedeemButton asset={row} />
                                         </Box>
-                                        <LendDrawerSupply asset={row} />
+                                        <SupplyButton asset={row} />
                                     </Box>
                                 </LendTableCell>
                             </TableRow>

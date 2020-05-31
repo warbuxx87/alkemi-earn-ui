@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import DrawerSupply from "components/UI/DrawerSupply";
-import onSupplyAction from "./SupplyAction";
+import DrawerSupply from "components/Lend/DrawerSupply";
+import onSupplyAction from "containers/Lend/SupplyMethod";
 
 const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
     return (

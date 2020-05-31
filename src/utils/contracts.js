@@ -4,10 +4,11 @@ import USDT_ABI from "contracts/USDT_ABI.json";
 import USDC_ABI from "contracts/USDC_ABI.json";
 import WBTC_ABI from "contracts/WBTC_ABI.json";
 import PAX_ABI from "contracts/PAX_ABI.json";
+import USDX_ABI from "contracts/USDX_ABI.json";
 import market_ABI from "contracts/moneyMarket.json";
 
-import address from "contracts/address_map.json";
-import constants from "contracts/constant.json";
+import address from "constants/address_map.json";
+import constants from "constants/constant.json";
 
 const assets = ["PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
 
@@ -17,7 +18,8 @@ const ABIs = {
     DAI: DAI_ABI,
     USDT: USDT_ABI,
     USDC: USDC_ABI,
-    WBTC: WBTC_ABI
+    WBTC: WBTC_ABI,
+    USDx: USDX_ABI
 };
 
 export const initContracts = drizzle => {

@@ -5,7 +5,10 @@ import {
     FETCH_LEND_ERROR,
     SUPPLY_PENDING,
     SUPPLY_SUCCESS,
-    SUPPLY_ERROR
+    SUPPLY_ERROR,
+    REDEEM_PENDING,
+    REDEEM_SUCCESS,
+    REDEEM_ERROR
 } from "redux/actions/data";
 // import internal assets
 import dai from "assets/images/DAI.svg";
@@ -23,7 +26,8 @@ function createData(
     balance,
     apr,
     principal,
-    collateral
+    collateral,
+    price
 ) {
     return {
         name,
@@ -34,19 +38,31 @@ function createData(
         apr,
         principal,
         collateral,
+        price,
         activated: false,
         pending: false,
-        supplying: false
+        supplying: false,
+        redeeming: false
     };
 }
 
 const assets = {
-    WETH: createData("Ether", "WETH", eth, "0", "0", 0, 0),
-    DAI: createData("Maker DAI", "DAI", dai, "0", "0", 0, 0),
-    USDT: createData("Tether", "USDT", usdt, "0", "0", 0, 0),
-    USDC: createData("USD Coin", "USDC", usdc, "0", "0", 0, 0),
-    WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0", "0", 0, 0),
-    PAX: createData("Paxos", "PAX", pax, "0", "0", 0, 0)
+    WETH: createData("Ether", "WETH", eth, "0", "0", "0", "0", "0", "0"),
+    DAI: createData("Maker DAI", "DAI", dai, "0", "0", "0", "0", "0", "0"),
+    USDT: createData("Tether", "USDT", usdt, "0", "0", "0", "0", "0", "0"),
+    USDC: createData("USD Coin", "USDC", usdc, "0", "0", "0", "0", "0", "0"),
+    WBTC: createData(
+        "Wrapped Bitcoin",
+        "WBTC",
+        wbtc,
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+    ),
+    PAX: createData("Paxos", "PAX", pax, "0", "0", "0", "0", "0", "0")
 };
 // Define initial state
 const initialState = {
@@ -141,6 +157,43 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         supplying: false,
+                        error: action.payload.error
+                    }
+                }
+            };
+
+        case REDEEM_PENDING:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        redeeming: true
+                    }
+                }
+            };
+        case REDEEM_SUCCESS:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        redeeming: false,
+                        activated: true
+                    }
+                }
+            };
+
+        case REDEEM_ERROR:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
+                        redeeming: false,
                         error: action.payload.error
                     }
                 }
