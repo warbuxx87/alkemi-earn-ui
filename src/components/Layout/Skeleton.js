@@ -26,8 +26,12 @@ const styles = theme => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         minHeight: "calc(100% - 56px)",
-        marginLeft: 80,
-        marginRight: 80,
+        marginLeft: 32,
+        marginRight: 32,
+        "@media (min-width:1550px)": {
+            marginLeft: 80,
+            marginRight: 80
+        },
         [theme.breakpoints.up("sm")]: {
             minHeight: "calc(100% - 64px)"
         }
@@ -45,7 +49,7 @@ const styles = theme => ({
             minHeight: "calc(100% - 64px)",
             marginTop: 100
         },
-        "@media (min-width: 1379px)": {
+        "@media (min-width: 1550px)": {
             marginLeft: "50px!important",
             marginRight: "25px!important"
         }

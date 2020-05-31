@@ -12,7 +12,7 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import { formatMoney } from "components/Lend/utils";
+import { formatMoney } from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({

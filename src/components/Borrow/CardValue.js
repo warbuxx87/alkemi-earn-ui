@@ -14,10 +14,9 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import { formatMoney } from "components/Lend/utils";
+import { formatMoney } from "utils/front-end";
 
 // Section 3: Components & Containers import from the application
-import Label from "components/UI/Label";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
@@ -56,13 +55,6 @@ function TotalValue({ className, totalBorrow, currency, difference, ...rest }) {
                     <Typography variant="h3" color="textPrimary">
                         {formatMoney(totalBorrow, currency)}
                     </Typography>
-                    <Label
-                        className={classes.label}
-                        color={difference > 0 ? "success" : "error"}
-                    >
-                        {difference > 0 ? "+" : ""}
-                        {difference}%
-                    </Label>
                 </Box>
             </CardContent>
         </Card>

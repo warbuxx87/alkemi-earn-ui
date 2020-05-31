@@ -10,7 +10,7 @@ const generateData = (start, end, step) => {
     return data;
 };
 
-export default class LendChartSupply extends React.PureComponent {
+export default class BorrowChart extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -25,7 +25,7 @@ export default class LendChartSupply extends React.PureComponent {
         return (
             <Chart
                 height={81}
-                width={455}
+                width={355}
                 style={{ padding: 0 }}
                 data={chartData}
             >

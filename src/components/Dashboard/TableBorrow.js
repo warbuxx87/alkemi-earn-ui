@@ -24,10 +24,10 @@ import {
 import BorrowTableCell from "components/UI/TableCell";
 import {
     formatNumber,
-    formatPercent,
-    formatMoney,
-    calculateEarnings
-} from "components/Lend/utils";
+    formatPercent
+    // formatMoney,
+    // calculateEarnings
+} from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -75,7 +75,7 @@ export default function BorrowTables({ activeReserves, currency }) {
                     </TableHead>
                     <TableBody>
                         {activeReserves.map(row => (
-                            <TableRow key={row.symbol}>
+                            <TableRow key={row.unit}>
                                 <BorrowTableCell component="th" scope="Row">
                                     <Box
                                         minWidth={100}

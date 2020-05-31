@@ -4,10 +4,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { isDrizzleInitialized } from "redux/selectors/drizzle";
 
-import {
-    getMarketContract,
-    createActiveAssetContract
-} from "containers/Lend/utils";
+import { getMarketContract, createActiveAssetContract } from "utils/drizzle";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
 import TableBorrow from "components/Dashboard/TableBorrow";

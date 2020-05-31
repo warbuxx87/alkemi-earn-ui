@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import CloseIcon from "@material-ui/icons/Close";
 
 // Section 3: Components & Containers import from the application
-import LendChartRepay from "./ChartRepay";
+import BorrowChart from "./ChartBorrow";
 import styles from "components/UI/Drawer";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -68,7 +68,7 @@ export default function SimpleModal() {
                     id="simple-modal-chart"
                     className={classes.simpleModalChart}
                 >
-                    <LendChartRepay> </LendChartRepay>
+                    <BorrowChart> </BorrowChart>
                 </div>
             </Grid>
             <div className={classes.RepayCon}>

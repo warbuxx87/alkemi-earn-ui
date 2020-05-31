@@ -21,7 +21,10 @@ export default {
     },
     h3: {
         fontWeight: 400,
-        fontSize: 26
+        fontSize: 22,
+        "@media (min-width:1550px)": {
+            fontSize: 26
+        }
     },
     h4: {
         fontWeight: 400,

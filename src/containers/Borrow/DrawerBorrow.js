@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import DrawerBorrow from "components/UI/DrawerBorrow";
-import onBorrowAction from "./BorrowAction";
+import DrawerBorrow from "components/Borrow/DrawerBorrow";
+import onBorrowAction from "containers/Borrow/BorrowMethod";
 
 const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
     return (

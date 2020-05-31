@@ -22,10 +22,10 @@ import {
 import SupplyTableCell from "components/UI/TableCell";
 import {
     formatNumber,
-    formatPercent,
-    formatMoney,
-    calculateEarnings
-} from "components/Lend/utils";
+    formatPercent
+    //    formatMoney,
+    //  calculateEarnings
+} from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -72,7 +72,7 @@ export default function SupplyTables({ activeReserves, currency }) {
                     </TableHead>
                     <TableBody>
                         {activeReserves.map(row => (
-                            <TableRow key={row.symbol}>
+                            <TableRow key={row.unit}>
                                 <SupplyTableCell component="th" scope="row">
                                     <Box
                                         minWidth={100}

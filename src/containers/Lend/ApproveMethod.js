@@ -3,10 +3,10 @@ import {
     fetchLendSuccess,
     fetchLendError
 } from "redux/actions/data";
-import { handle_approve } from "./utils";
+import { handle_approve } from "utils/drizzle";
 import notify from "containers/AppBar/notify";
 
-const activateLendAction = ({ drizzle, asset }) => async (
+const approveLendAction = ({ drizzle, asset }) => async (
     dispatch,
     getState
 ) => {
@@ -16,7 +16,7 @@ const activateLendAction = ({ drizzle, asset }) => async (
         .then(() => dispatch(fetchLendSuccess(asset)))
         .catch(error => {
             notify.notification({
-                eventCode: "supplyError",
+                eventCode: "fetchLendError",
                 type: "error",
                 message: error.message,
                 autoDismiss: 5000
@@ -25,4 +25,4 @@ const activateLendAction = ({ drizzle, asset }) => async (
         });
 };
 
-export default activateLendAction;
+export default approveLendAction;

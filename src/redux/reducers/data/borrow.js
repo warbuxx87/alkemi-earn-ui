@@ -5,7 +5,10 @@ import {
     FETCH_BORROW_ERROR,
     BORROW_PENDING,
     BORROW_SUCCESS,
-    BORROW_ERROR
+    BORROW_ERROR,
+    REPAY_PENDING,
+    REPAY_SUCCESS,
+    REPAY_ERROR
 } from "redux/actions/data";
 
 // import internal assets
@@ -24,7 +27,8 @@ function createData(
     balance,
     apr,
     principal,
-    collateral
+    collateral,
+    price
 ) {
     return {
         name,
@@ -35,19 +39,31 @@ function createData(
         apr,
         principal,
         collateral,
+        price,
         activated: false,
         pending: false,
-        borrowing: false
+        borrowing: false,
+        repaying: false
     };
 }
 
 const assets = {
-    WETH: createData("Ether", "WETH", eth, "0", "0", 0, 0),
-    DAI: createData("Maker DAI", "DAI", dai, "0", "0", 0, 0),
-    USDT: createData("Tether", "USDT", usdt, "0", "0", 0, 0),
-    USDC: createData("USD Coin", "USDC", usdc, "0", "0", 0, 0),
-    WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0", "0", 0, 0),
-    PAX: createData("Paxos", "PAX", pax, 0, 0, 0, 0)
+    WETH: createData("Ether", "WETH", eth, "0", "0", "0", "0", "0", "0"),
+    DAI: createData("Maker DAI", "DAI", dai, "0", "0", "0", "0", "0", "0"),
+    USDT: createData("Tether", "USDT", usdt, "0", "0", "0", "0", "0", "0"),
+    USDC: createData("USD Coin", "USDC", usdc, "0", "0", "0", "0", "0", "0"),
+    WBTC: createData(
+        "Wrapped Bitcoin",
+        "WBTC",
+        wbtc,
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+    ),
+    PAX: createData("Paxos", "PAX", pax, "0", "0", "0", "0", "0", "0")
 };
 // Define initial state
 const initialState = {
@@ -137,6 +153,43 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         borrowing: false,
+                        error: action.payload.error
+                    }
+                }
+            };
+
+        case REPAY_PENDING:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        repaying: true
+                    }
+                }
+            };
+        case REPAY_SUCCESS:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload]: {
+                        ...state.assets[action.payload],
+                        repaying: false,
+                        activated: true
+                    }
+                }
+            };
+
+        case REPAY_ERROR:
+            return {
+                ...state,
+                assets: {
+                    ...state.assets,
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
+                        repaying: false,
                         error: action.payload.error
                     }
                 }

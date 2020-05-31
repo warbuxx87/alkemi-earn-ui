@@ -1,7 +1,7 @@
 // Libs
 import { createSelector } from "reselect";
 import _ from "lodash";
-import address from "contracts/address_map.json";
+import address from "constants/address_map.json";
 import { networkSelector } from "./drizzle";
 // Stats Selectors
 export const getStats = state => state.data.stats.tx;

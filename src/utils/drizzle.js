@@ -1,7 +1,7 @@
 import { readyToTransaction } from "containers/AppBar/onboard";
-import { toWei } from "components/Lend/utils";
-import address from "contracts/address_map.json";
-import constants from "contracts/constant.json";
+import { toWei } from "utils/front-end";
+import address from "constants/address_map.json";
+import constants from "constants/constant.json";
 import { notifyTransaction } from "containers/AppBar/notify";
 import { initMarketContract, initAssetContract } from "utils/contracts";
 
@@ -156,6 +156,49 @@ export const handle_approve = async ({ drizzle, asset, myAccount }) => {
     });
 };
 
+export const handle_faucet_allocateTo = async ({ drizzle, asset, amount }) => {
+    console.log(asset.unit);
+    if (!(await readyToTransaction()))
+        throw new Error("not ready to transaction");
+    const web3 = drizzle.web3;
+    const drizzleStore = drizzle.store.getState();
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    const myAccount = drizzleStore.accounts[0];
+    const unit = asset.unit;
+    const tokenContract = drizzle.contracts[unit];
+    const weiAmount = toWei(amount, unit);
+    const balance = Object.values(drizzleStore.accountBalances)[0];
+    return await notifyTransaction({
+        estimateGas: () =>
+            tokenContract.methods
+                .allocateTo(myAccount, weiAmount)
+                .estimateGas({ from: myAccount })
+                .then(result => result.toString()),
+        gasPrice: web3.eth.getGasPrice,
+        balance,
+        network,
+        sendTransaction: () =>
+            new Promise((resolve, reject) =>
+                tokenContract.methods
+                    .allocateTo(myAccount, weiAmount)
+                    .send({ from: myAccount }, (error, hash) =>
+                        error ? reject(error) : resolve(hash)
+                    )
+            ),
+        events: {
+            txRequest: {
+                message: "Please confirm your transaction"
+            },
+            txPool: {
+                message: `Allocating ${amount} ${asset.unit} to Owner`
+            },
+            txConfirmed: {
+                message: `${amount} ${asset.unit} successfully allocated`
+            }
+        }
+    });
+};
+
 export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransaction())) throw new Error("not ready to transact");
     const web3 = drizzle.web3;
@@ -164,7 +207,8 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     const network = constants.network_type[drizzleStore.web3.networkId];
     const mMarketContract = initMarketContract({ drizzle });
     const token_address = address[network][`address_${asset.unit}`];
-    const weiAmount = toWei(amount, asset.unit);
+    const unit = asset.unit;
+    const weiAmount = toWei(amount, unit);
     const balance = Object.values(drizzleStore.accountBalances)[0];
     const result = await notifyTransaction({
         estimateGas: () =>
@@ -188,10 +232,10 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
                 message: "Please confirm your transaction"
             },
             txPool: {
-                message: `Supplying ${amount} ${asset.unit} to the reserve`
+                message: `Supplying ${amount} ${asset.unit} to the pool`
             },
             txConfirmed: {
-                message: `You successfully supplied ${amount} ${asset.unit} to the reserve.`
+                message: `You successfully supplied ${amount} ${asset.unit} to the pool.`
             }
         }
     });
@@ -234,6 +278,90 @@ export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
             },
             txConfirmed: {
                 message: `You successfully borrowed ${amount} ${asset.unit} from the pool.`
+            }
+        }
+    });
+    return result;
+};
+
+export const handle_repay_click = async ({ drizzle, amount, asset }) => {
+    if (!(await readyToTransaction())) throw new Error("not ready to transact");
+    const web3 = drizzle.web3;
+    const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzleStore.accounts[0];
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    const mMarketContract = getMarketContract({ drizzle });
+    const token_address = address[network][`address_${asset.unit}`];
+    const weiAmount = toWei(amount, asset.unit);
+    const balance = Object.values(drizzleStore.accountBalances)[0];
+    const result = await notifyTransaction({
+        estimateGas: () =>
+            mMarketContract.methods
+                .repayBorrow(token_address, weiAmount)
+                .estimateGas({ from: myAccount })
+                .then(result => result.toString()),
+        gasPrice: web3.eth.getGasPrice,
+        balance,
+        network,
+        sendTransaction: () =>
+            new Promise((resolve, reject) =>
+                mMarketContract.methods
+                    .repayBorrow(token_address, weiAmount)
+                    .send({ from: myAccount }, (error, hash) =>
+                        error ? reject(error) : resolve(hash)
+                    )
+            ),
+        events: {
+            txRequest: {
+                message: "Please confirm your transaction"
+            },
+            txPool: {
+                message: `Repaying ${amount} ${asset.unit} to the pool`
+            },
+            txConfirmed: {
+                message: `You successfully repaid ${amount} ${asset.unit} to the pool.`
+            }
+        }
+    });
+    return result;
+};
+
+export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
+    if (!(await readyToTransaction())) throw new Error("not ready to transact");
+    const web3 = drizzle.web3;
+    const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzleStore.accounts[0];
+    const network = constants.network_type[drizzleStore.web3.networkId];
+    const mMarketContract = getMarketContract({ drizzle });
+    const token_address = address[network][`address_${asset.unit}`];
+    const weiAmount = toWei(amount, asset.unit);
+    const balance = Object.values(drizzleStore.accountBalances)[0];
+    const result = await notifyTransaction({
+        estimateGas: () =>
+            mMarketContract.methods
+                .withdraw(token_address, weiAmount)
+                .estimateGas({ from: myAccount })
+                .then(result => result.toString()),
+        gasPrice: web3.eth.getGasPrice,
+        balance,
+        network,
+        sendTransaction: () =>
+            new Promise((resolve, reject) =>
+                mMarketContract.methods
+                    .withdraw(token_address, weiAmount)
+                    .send({ from: myAccount }, (error, hash) =>
+                        error ? reject(error) : resolve(hash)
+                    )
+            ),
+        events: {
+            txRequest: {
+                message: "Please confirm your transaction"
+            },
+            txPool: {
+                message: `Withdrawing ${amount} ${asset.unit} from the pool`
+            },
+            txConfirmed: {
+                message: `You successfully withdrawn ${amount} ${asset.unit} from the pool.`
             }
         }
     });

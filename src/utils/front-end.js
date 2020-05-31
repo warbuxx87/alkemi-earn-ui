@@ -1,5 +1,5 @@
 import web3 from "web3";
-import _ from "lodash";
+// import _ from "lodash";
 
 const decimalsToUnit = {
     6: "mwei",
@@ -20,15 +20,15 @@ const assetToDecimals = {
     WBTC: 8
 };
 
-const USDxPrice = state => {
-    const calculateAccountValues = Object.values(
-        _.get(state, "contracts.mMarket.assetPrices", {})
-    );
-    if (calculateAccountValues[0]) {
-        return _.get(calculateAccountValues, "[0].value");
-    }
-    return null;
-};
+// const USDxPrice = state => {
+//     const calculateAccountValues = Object.values(
+//         _.get(state, "contracts.mMarket.assetPrices", {})
+//     );
+//     if (calculateAccountValues[0]) {
+//         return _.get(calculateAccountValues, "[0].value");
+//     }
+//     return null;
+// };
 
 export const fromWei = (value, unit) => {
     if (unit === "WBTC") {
@@ -43,8 +43,18 @@ export const fromWei = (value, unit) => {
     }
 };
 
-export const toWei = (value, unit) =>
-    web3.utils.toWei(value, decimalsToUnit[assetToDecimals[unit] || 18]);
+export const toWei = (value, unit) => {
+    if (unit === "WBTC") {
+        let amount = web3.utils.toWei(value, "lovelace");
+        amount = amount * 100;
+        return amount.toString();
+    } else {
+        return web3.utils.toWei(
+            value,
+            decimalsToUnit[assetToDecimals[unit] || 18]
+        );
+    }
+};
 
 export const formatNumber = (value, unit) => {
     if (!value) return 0;

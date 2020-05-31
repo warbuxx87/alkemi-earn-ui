@@ -28,12 +28,9 @@ const modal = makeStyles(theme =>
             // backgroundColor:'#1B1B1B',
             paddingBottom: "30px"
         },
-        supplyCon: {
-            paddingTop: "20px",
-            paddingLeft: "22px",
-            paddingRight: "22px",
-            width: "100%",
-            color: "green !important"
+
+        chartBox: {
+            backgroundColor: "#000000"
         },
 
         buttonWrap: {
@@ -57,6 +54,12 @@ const modal = makeStyles(theme =>
             paddingTop: "40px",
             paddingBottom: "30px"
         },
+
+        divBorrow: {
+            paddingTop: "40px",
+            paddingBottom: "30px"
+        },
+
         inputWrap: {
             position: "relative"
         },

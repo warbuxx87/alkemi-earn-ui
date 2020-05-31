@@ -2,7 +2,9 @@
 
 // Section 1: React low level imports
 import React from "react";
-import web3 from "web3";
+// import PropTypes from "prop-types";
+// import web3 from "web3";
+// import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 2: Material-UI imports
 import {
@@ -20,18 +22,20 @@ import {
 
 // Section 3: Components & Containers import from the application
 import { XCircle as XIcon } from "react-feather";
-import LendChartSupply from "./ChartSupply";
-import LendModal from "./Drawer";
+import BorrowChart from "./ChartBorrow";
+import RepayDrawer from "components/UI/Drawer";
+
 import {
     formatNumber,
-    fromWei,
-    toWei,
+    // fromWei,
+    // toWei,
     formatPercent
-} from "components/Lend/utils";
+} from "utils/front-end";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 
-export default function DrawerSupply({ asset, onSupply }) {
-    const classes = LendModal();
+export default function DrawerRepay({ asset, onRepay }) {
+    const classes = RepayDrawer();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [isOpen, setOpen] = React.useState(false);
 
@@ -45,30 +49,31 @@ export default function DrawerSupply({ asset, onSupply }) {
 
     // Section 5: Code Component
     const [amount, setAmount] = React.useState(null);
-    const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
+    // const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
-    const [enableSupply, setEnableSupply] = React.useState(false);
+    const [enableRepay, setEnableRepay] = React.useState(false);
     React.useEffect(() => {
         if (amount) {
-            const isAmountLTBalance = web3.utils
-                .toBN(toWei(amount, asset.unit))
-                .lte(web3.utils.toBN(asset.wallet));
-            setEnableSupply(isAmountLTBalance);
+            // const isAmountLTBalance = web3.utils
+            //     .toBN(toWei(amount, asset.unit))
+            //     .lte(web3.utils.toBN(asset.balance));
+            setEnableRepay(true);
         }
-    }, [amount, asset.wallet, asset.unit]);
+    }, [amount, asset.balance, asset.unit]);
     return (
         <>
             <Button
                 type="button"
-                className={classes.btnModal}
-                variant="contained"
+                className={classes.btnActiveOutline}
+                variant="outlined"
+                color="secondary"
                 size="small"
                 onClick={handleOpen}
             >
-                {asset.supplying ? (
+                {asset.repaying ? (
                     <CircularProgress size={20} color="inherit" />
                 ) : (
-                    "Supply"
+                    "Repay"
                 )}
             </Button>
             <Drawer
@@ -87,7 +92,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                         p={2}
                     >
                         <Typography variant="h4" color="textPrimary">
-                            Supply {asset.unit}
+                            Repay {asset.unit}
                         </Typography>
                         <IconButton onClick={handleClose}>
                             <SvgIcon fontSize="small">
@@ -96,12 +101,12 @@ export default function DrawerSupply({ asset, onSupply }) {
                         </IconButton>
                     </Box>
                     <Divider />
-                    <Box color="primary.contrastText" p={2}>
+                    <Box bgcolor="background.dark" p={2}>
                         <div className={classes.supplyPercent}>
                             {formatPercent(asset.apr)} APR
                         </div>
 
-                        <LendChartSupply> </LendChartSupply>
+                        <BorrowChart> </BorrowChart>
                     </Box>
                     <Box p={2} mt={3}>
                         <Grid container className={classes.amount}>
@@ -116,7 +121,8 @@ export default function DrawerSupply({ asset, onSupply }) {
                                 justify="flex-end"
                                 className={classes.walletBalance}
                             >
-                                Wallet: {formatNumber(asset.wallet, asset.unit)}
+                                Borrowed:{" "}
+                                {formatNumber(asset.balance, asset.unit)}
                             </Grid>
                         </Grid>
                         <div className={classes.inputWrap}>
@@ -131,7 +137,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                             />
                             <span
                                 className={classes.maxTips}
-                                onClick={onSetMax}
+                                // onClick={onSetMax}
                             >
                                 MAX
                             </span>
@@ -181,24 +187,24 @@ export default function DrawerSupply({ asset, onSupply }) {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <div className={classes.divSupply}>
+                        <div className={classes.divRepay}>
                             <Button
                                 type="button"
                                 className={classes.btnModal}
                                 variant="contained"
                                 color="primary"
-                                onClick={() => onSupply({ asset, amount })}
-                                disabled={!enableSupply || asset.supplying}
+                                onClick={() => onRepay({ asset, amount })}
+                                disabled={!enableRepay || asset.repaying}
                                 size="large"
                                 fullWidth={true}
                             >
-                                {asset.supplying ? (
+                                {asset.repaying ? (
                                     <CircularProgress
                                         size={20}
                                         color="inherit"
                                     />
                                 ) : (
-                                    "SUPPLY"
+                                    "REPAY"
                                 )}
                             </Button>
                         </div>
@@ -208,3 +214,11 @@ export default function DrawerSupply({ asset, onSupply }) {
         </>
     );
 }
+
+// // Section 6: Documentation with PropTypes
+// DrawerRepay.propTypes = {
+//     asset: PropTypes.array.isRequired,
+//     onRepay: PropTypes.func.isRequired
+// };
+
+// Section 7:  Connect styles and export
