@@ -14,7 +14,6 @@
         "bnc-onboard": "^1.7.7",
         "clsx": "^1.1.0",
         "connected-react-router": "^6.8.0",
-        "drizzle": "^1.4.0",
         "eslint-plugin-flowtype": "^4.7.0",
         "lodash": "^4.17.15",
         "node-sass": "^4.14.0",
