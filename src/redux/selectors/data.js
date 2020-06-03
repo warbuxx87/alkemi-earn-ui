@@ -3,6 +3,7 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "constants/address_map.json";
 import { networkSelector } from "./drizzle";
+
 // Stats Selectors
 export const getStats = state => state.data.stats.tx;
 export const getStatsPending = state => state.data.stats.pending;
@@ -48,29 +49,51 @@ const getAllowances = state => {
     return allowances;
 };
 
+function calculateUtilization(totalBorrow, totalSupply) {
+    const utilization = totalBorrow / totalSupply;
+
+    return utilization;
+}
+
+const getUtilizationValues = state => {
+    const utilizationRates = {};
+    Object.values(_.get(state, "contracts.mMarket.markets", {})).forEach(
+        market =>
+            (utilizationRates[market.args[0]] = calculateUtilization(
+                market.value[6],
+                market.value[3]
+            ))
+    );
+    return utilizationRates;
+};
+
 const getLendAsset = createSelector(
     lendAssetSelector,
     networkSelector,
     lendBalanceSelector,
     lendAPRSelector,
     lendPrincipalSelector,
-    (assets, network, lendBalances, allAPR, allPrincipal) =>
+    getUtilizationValues,
+    (assets, network, lendBalances, allAPR, allPrincipal, allUtilization) =>
         Object.values(assets).map(asset => {
             // supply wallet
             let balance = "0";
             let apr = "0";
             let principal = "0";
+            let utilization = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = lendBalances[token_address] || "0";
                 apr = allAPR[token_address] || "0";
                 principal = allPrincipal[token_address] || "0";
+                utilization = allUtilization[token_address] || "0";
             }
             return {
                 ...asset,
                 balance,
                 apr,
-                principal
+                principal,
+                utilization
             };
         })
 );
@@ -143,23 +166,34 @@ const getBorrowAsset = createSelector(
     borrowBalanceSelector,
     borrowAPRSelector,
     borrowPrincipalSelector,
-    (assets, network, borrowBalances, borrowAPR, borrowPrincipal) =>
+    getUtilizationValues,
+    (
+        assets,
+        network,
+        borrowBalances,
+        borrowAPR,
+        borrowPrincipal,
+        marketUtilization
+    ) =>
         Object.values(assets).map(asset => {
-            // TODO: get suppy wallet
+            // TODO: get supply wallet
             let balance = "0";
             let apr = "0";
             let principal = "0";
+            let utilization = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
                 apr = borrowAPR[token_address] || "0";
                 principal = borrowPrincipal[token_address] || "0";
+                utilization = marketUtilization[token_address] || "0";
             }
             return {
                 ...asset,
                 balance,
                 apr,
-                principal
+                principal,
+                utilization
             };
         })
 );
