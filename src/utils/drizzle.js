@@ -292,12 +292,11 @@ export const handle_repay_click = async ({ drizzle, amount, asset }) => {
     const network = constants.network_type[drizzleStore.web3.networkId];
     const mMarketContract = getMarketContract({ drizzle });
     const token_address = address[network][`address_${asset.unit}`];
-    console.log("amount", amount);
+
     let weiAmount = toWei(amount, asset.unit);
-    if (amount === "-1") {
+    if (weiAmount === asset.balance) {
         weiAmount = -1;
     }
-    console.log("weiAmount", weiAmount);
     const balance = Object.values(drizzleStore.accountBalances)[0];
     const result = await notifyTransaction({
         estimateGas: () =>
@@ -339,12 +338,10 @@ export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
     const network = constants.network_type[drizzleStore.web3.networkId];
     const mMarketContract = getMarketContract({ drizzle });
     const token_address = address[network][`address_${asset.unit}`];
-    console.log("amount", amount);
     let weiAmount = toWei(amount, asset.unit);
-    if (amount === "-1") {
+    if (weiAmount === asset.balance) {
         weiAmount = -1;
     }
-    console.log("weiAmount", weiAmount);
     const balance = Object.values(drizzleStore.accountBalances)[0];
     const result = await notifyTransaction({
         estimateGas: () =>
