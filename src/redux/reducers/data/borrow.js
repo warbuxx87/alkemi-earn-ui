@@ -8,7 +8,7 @@ import {
     BORROW_ERROR,
     REPAY_PENDING,
     REPAY_SUCCESS,
-    REPAY_ERROR
+    REPAY_ERROR,
 } from "redux/actions/data";
 
 // import internal assets
@@ -37,53 +37,26 @@ function createData(
         image,
         wallet,
         balance,
-        apr,
-        principal,
-        collateral,
-        price,
-        utilization,
         activated: false,
         pending: false,
         borrowing: false,
-        repaying: false
+        repaying: false,
     };
 }
 
 const assets = {
-    WETH: createData("Ether", "WETH", eth, "0", "0", "0", "0", "0", "0", "0"),
-    DAI: createData("Maker DAI", "DAI", dai, "0", "0", "0", "0", "0", "0", "0"),
-    USDT: createData("Tether", "USDT", usdt, "0", "0", "0", "0", "0", "0", "0"),
-    USDC: createData(
-        "USD Coin",
-        "USDC",
-        usdc,
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-    ),
-    WBTC: createData(
-        "Wrapped Bitcoin",
-        "WBTC",
-        wbtc,
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-    ),
-    PAX: createData("Paxos", "PAX", pax, "0", "0", "0", "0", "0", "0", "0")
+    WETH: createData("Ether", "WETH", eth, "0", "0"),
+    DAI: createData("Maker DAI", "DAI", dai, "0", "0"),
+    USDT: createData("Tether", "USDT", usdt, "0", "0"),
+    USDC: createData("USD Coin", "USDC", usdc, "0", "0"),
+    WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0", "0"),
+    PAX: createData("Paxos", "PAX", pax, "0", "0"),
 };
 
 // Define initial state
 const initialState = {
     assets,
-    error: null
+    error: null,
 };
 
 // Implement "reducer" function with initial state as default state
@@ -96,9 +69,9 @@ export default (state = initialState, action) => {
                     ...state.assets,
                     [action.asset]: {
                         ...state.assets[action.asset],
-                        pending: true
-                    }
-                }
+                        pending: true,
+                    },
+                },
             };
         case FETCH_BORROW_SUCCESS:
             return {
@@ -108,15 +81,15 @@ export default (state = initialState, action) => {
                     [action.asset]: {
                         ...state.assets[action.asset],
                         pending: false,
-                        activated: true
-                    }
-                }
+                        activated: true,
+                    },
+                },
             };
 
         case FETCH_BORROW_ERROR:
             return {
                 ...state,
-                error: action.error
+                error: action.error,
             };
 
         case "GOT_CONTRACT_VAR":
@@ -128,9 +101,9 @@ export default (state = initialState, action) => {
                             ...state.assets,
                             [action.name]: {
                                 ...state.assets[action.name],
-                                wallet: action.value
-                            }
-                        }
+                                wallet: action.value,
+                            },
+                        },
                     };
                 default:
                     return state;
@@ -143,9 +116,9 @@ export default (state = initialState, action) => {
                     ...state.assets,
                     [action.payload]: {
                         ...state.assets[action.payload],
-                        borrowing: true
-                    }
-                }
+                        borrowing: true,
+                    },
+                },
             };
         case BORROW_SUCCESS:
             return {
@@ -155,9 +128,9 @@ export default (state = initialState, action) => {
                     [action.payload]: {
                         ...state.assets[action.payload],
                         borrowing: false,
-                        activated: true
-                    }
-                }
+                        activated: true,
+                    },
+                },
             };
 
         case BORROW_ERROR:
@@ -168,9 +141,9 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         borrowing: false,
-                        error: action.payload.error
-                    }
-                }
+                        error: action.payload.error,
+                    },
+                },
             };
 
         case REPAY_PENDING:
@@ -180,9 +153,9 @@ export default (state = initialState, action) => {
                     ...state.assets,
                     [action.payload]: {
                         ...state.assets[action.payload],
-                        repaying: true
-                    }
-                }
+                        repaying: true,
+                    },
+                },
             };
         case REPAY_SUCCESS:
             return {
@@ -192,9 +165,9 @@ export default (state = initialState, action) => {
                     [action.payload]: {
                         ...state.assets[action.payload],
                         repaying: false,
-                        activated: true
-                    }
-                }
+                        activated: true,
+                    },
+                },
             };
 
         case REPAY_ERROR:
@@ -205,9 +178,9 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         repaying: false,
-                        error: action.payload.error
-                    }
-                }
+                        error: action.payload.error,
+                    },
+                },
             };
 
         default:

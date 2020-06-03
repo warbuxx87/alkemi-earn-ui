@@ -14,7 +14,7 @@ import {
     SUPPLY_ERROR,
     REDEEM_PENDING,
     REDEEM_SUCCESS,
-    REDEEM_ERROR
+    REDEEM_ERROR,
 } from "redux/actions/data";
 // import internal assets
 import dai from "assets/images/DAI.svg";
@@ -24,72 +24,34 @@ import usdt from "assets/images/USDT.svg";
 import eth from "assets/images/WETH.svg";
 import pax from "assets/images/pax.png";
 
-function createData(
-    name,
-    unit,
-    image,
-    wallet,
-    balance,
-    apr,
-    principal,
-    collateral,
-    price,
-    utilization
-) {
+function createData(name, unit, image, wallet, balance) {
     return {
         name,
         unit,
         image,
         wallet,
         balance,
-        apr,
-        principal,
-        collateral,
-        price,
-        utilization,
         activated: false,
         pending: false,
         supplying: false,
         redeeming: false,
         approving: false,
-        allocating: false
+        allocating: false,
     };
 }
 
 const assets = {
-    WETH: createData("Ether", "WETH", eth, "0", "0", "0", "0", "0", "0", "0"),
-    DAI: createData("Maker DAI", "DAI", dai, "0", "0", "0", "0", "0", "0", "0"),
-    USDT: createData("Tether", "USDT", usdt, "0", "0", "0", "0", "0", "0", "0"),
-    USDC: createData(
-        "USD Coin",
-        "USDC",
-        usdc,
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-    ),
-    WBTC: createData(
-        "Wrapped Bitcoin",
-        "WBTC",
-        wbtc,
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-    ),
-    PAX: createData("Paxos", "PAX", pax, "0", "0", "0", "0", "0", "0", "0")
+    WETH: createData("Ether", "WETH", eth, "0", "0"),
+    DAI: createData("Maker DAI", "DAI", dai, "0", "0"),
+    USDT: createData("Tether", "USDT", usdt, "0", "0"),
+    USDC: createData("USD Coin", "USDC", usdc, "0", "0"),
+    WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0", "0"),
+    PAX: createData("Paxos", "PAX", pax, "0", "0"),
 };
 // Define initial state
 const initialState = {
     assets,
-    error: null
+    error: null,
 };
 
 // Implement "reducer" function with initial state as default state
@@ -103,9 +65,9 @@ export default (state = initialState, action) => {
                     [action.asset]: {
                         ...state.assets[action.asset],
                         pending: true,
-                        activated: false
-                    }
-                }
+                        activated: false,
+                    },
+                },
             };
         case FETCH_LEND_SUCCESS:
             return {
@@ -115,9 +77,9 @@ export default (state = initialState, action) => {
                     [action.asset]: {
                         ...state.assets[action.asset],
                         pending: false,
-                        activated: true
-                    }
-                }
+                        activated: true,
+                    },
+                },
             };
 
         case FETCH_LEND_ERROR:
@@ -129,9 +91,9 @@ export default (state = initialState, action) => {
                         ...state.assets[action.payload.asset],
                         pending: false,
                         activated: false,
-                        error: action.payload.error
-                    }
-                }
+                        error: action.payload.error,
+                    },
+                },
             };
         case "GOT_CONTRACT_VAR":
             switch (action.variable) {
@@ -142,9 +104,9 @@ export default (state = initialState, action) => {
                             ...state.assets,
                             [action.name]: {
                                 ...state.assets[action.name],
-                                wallet: action.value
-                            }
-                        }
+                                wallet: action.value,
+                            },
+                        },
                     };
                 default:
                     return state;
@@ -156,9 +118,9 @@ export default (state = initialState, action) => {
                     ...state.assets,
                     [action.payload]: {
                         ...state.assets[action.payload],
-                        supplying: true
-                    }
-                }
+                        supplying: true,
+                    },
+                },
             };
         case SUPPLY_SUCCESS:
             return {
@@ -168,9 +130,9 @@ export default (state = initialState, action) => {
                     [action.payload]: {
                         ...state.assets[action.payload],
                         supplying: false,
-                        activated: true
-                    }
-                }
+                        activated: true,
+                    },
+                },
             };
 
         case SUPPLY_ERROR:
@@ -181,9 +143,9 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         supplying: false,
-                        error: action.payload.error
-                    }
-                }
+                        error: action.payload.error,
+                    },
+                },
             };
 
         case REDEEM_PENDING:
@@ -193,9 +155,9 @@ export default (state = initialState, action) => {
                     ...state.assets,
                     [action.payload]: {
                         ...state.assets[action.payload],
-                        redeeming: true
-                    }
-                }
+                        redeeming: true,
+                    },
+                },
             };
         case REDEEM_SUCCESS:
             return {
@@ -205,9 +167,9 @@ export default (state = initialState, action) => {
                     [action.payload]: {
                         ...state.assets[action.payload],
                         redeeming: false,
-                        activated: true
-                    }
-                }
+                        activated: true,
+                    },
+                },
             };
 
         case REDEEM_ERROR:
@@ -218,9 +180,9 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         redeeming: false,
-                        error: action.payload.error
-                    }
-                }
+                        error: action.payload.error,
+                    },
+                },
             };
         case APPROVE_PENDING:
             return {
@@ -229,9 +191,9 @@ export default (state = initialState, action) => {
                     ...state.assets,
                     [action.payload]: {
                         ...state.assets[action.payload],
-                        approving: true
-                    }
-                }
+                        approving: true,
+                    },
+                },
             };
         case APPROVE_SUCCESS:
             return {
@@ -241,9 +203,9 @@ export default (state = initialState, action) => {
                     [action.payload]: {
                         ...state.assets[action.payload],
                         approving: false,
-                        activated: true
-                    }
-                }
+                        activated: true,
+                    },
+                },
             };
 
         case APPROVE_ERROR:
@@ -254,9 +216,9 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         approving: false,
-                        error: action.payload.error
-                    }
-                }
+                        error: action.payload.error,
+                    },
+                },
             };
         case ALLOCATE_PENDING:
             return {
@@ -266,9 +228,8 @@ export default (state = initialState, action) => {
                     [action.payload]: {
                         ...state.assets[action.payload],
                         allocating: true,
-                        pending: true
-                    }
-                }
+                    },
+                },
             };
         case ALLOCATE_SUCCESS:
             return {
@@ -278,10 +239,9 @@ export default (state = initialState, action) => {
                     [action.payload]: {
                         ...state.assets[action.payload],
                         allocating: false,
-                        pending: false,
-                        activated: false
-                    }
-                }
+                        activated: false,
+                    },
+                },
             };
 
         case ALLOCATE_ERROR:
@@ -292,10 +252,9 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         allocating: false,
-                        pending: false,
-                        error: action.payload.error
-                    }
-                }
+                        error: action.payload.error,
+                    },
+                },
             };
         default:
             return state;
