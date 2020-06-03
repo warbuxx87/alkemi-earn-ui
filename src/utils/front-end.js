@@ -1,4 +1,5 @@
 import web3 from "web3";
+import { getUSDxPrice } from "redux/selectors/totalBalance";
 // import _ from "lodash";
 
 const decimalsToUnit = {
@@ -6,7 +7,7 @@ const decimalsToUnit = {
     9: "gwei",
     12: "micro",
     15: "milli",
-    18: "ether"
+    18: "ether",
 };
 
 // decimals is constant, default will be 12
@@ -17,18 +18,8 @@ const assetToDecimals = {
     PAX: 18,
     USDT: 6,
     USDC: 6,
-    WBTC: 8
+    WBTC: 8,
 };
-
-// const USDxPrice = state => {
-//     const calculateAccountValues = Object.values(
-//         _.get(state, "contracts.mMarket.assetPrices", {})
-//     );
-//     if (calculateAccountValues[0]) {
-//         return _.get(calculateAccountValues, "[0].value");
-//     }
-//     return null;
-// };
 
 export const fromWei = (value, unit) => {
     if (unit === "WBTC") {
@@ -69,12 +60,49 @@ export const formatMoney = (value, currency) => {
     const wei = fromWei(value);
     return new Intl.NumberFormat("en-es", {
         style: "currency",
-        currency
+        currency,
     }).format(wei);
 };
 
+// value in USD
+export const formatETHMoney = (value, currency, unit) => {
+    let usdPrice = getUSDxPrice();
+    console.log("value: ", value);
+
+    console.log("pre USDPrice: ", usdPrice);
+
+    if (usdPrice === null) {
+        usdPrice = "4131207138725935";
+    }
+    console.log("USDPrice: ", usdPrice);
+
+    let calculation = web3.utils
+        .toBN(value)
+        .div(web3.utils.toBN(usdPrice))
+        .toString();
+
+    console.log("calculation:", calculation);
+
+    if (unit === "WBTC") {
+        calculation = calculation / 1e10;
+    }
+
+    if (unit === "USDC") {
+        calculation = calculation / 1e12;
+    }
+
+    if (unit === "USDT") {
+        calculation = calculation / 1e12;
+    }
+
+    return new Intl.NumberFormat("en-es", {
+        style: "currency",
+        currency,
+    }).format(calculation);
+};
+
 // value in Percent
-export const formatPercent = num => {
+export const formatPercent = (num) => {
     return (num * 100).toFixed(2) + "%";
 };
 

@@ -14,14 +14,19 @@ import {
     Input,
     Grid,
     SvgIcon,
-    Typography
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import { XCircle as XIcon } from "react-feather";
 import LendChart from "./ChartLend";
 import FaucetDrawer from "components/UI/Drawer";
-import { formatNumber, fromWei, formatPercent } from "utils/front-end";
+import {
+    formatNumber,
+    formatETHMoney,
+    fromWei,
+    formatPercent,
+} from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -119,7 +124,7 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                                 className={classes.input}
                                 placeholder="0.00"
                                 type="number"
-                                onChange={e => setAmount(e.target.value)}
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
                             />
                             <span
@@ -156,7 +161,11 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    $1.00
+                                    {formatETHMoney(
+                                        asset.price,
+                                        "USD",
+                                        asset.unit
+                                    )}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>

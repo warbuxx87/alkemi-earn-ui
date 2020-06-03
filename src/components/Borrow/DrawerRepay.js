@@ -17,7 +17,7 @@ import {
     Input,
     Grid,
     SvgIcon,
-    Typography
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -27,9 +27,10 @@ import RepayDrawer from "components/UI/Drawer";
 
 import {
     formatNumber,
+    formatETHMoney,
     // fromWei,
     // toWei,
-    formatPercent
+    formatPercent,
 } from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -132,7 +133,7 @@ export default function DrawerRepay({ asset, onRepay }) {
                                 className={classes.input}
                                 placeholder="0.00"
                                 type="number"
-                                onChange={e => setAmount(e.target.value)}
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
                             />
                             <span
@@ -169,7 +170,11 @@ export default function DrawerRepay({ asset, onRepay }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    $1.00
+                                    {formatETHMoney(
+                                        asset.price,
+                                        "USD",
+                                        asset.unit
+                                    )}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -183,7 +188,7 @@ export default function DrawerRepay({ asset, onRepay }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    0.00
+                                    {formatNumber(asset.balance, asset.unit)}
                                 </Grid>
                             </Grid>
                         </Grid>

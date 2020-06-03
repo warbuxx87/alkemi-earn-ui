@@ -15,14 +15,20 @@ import {
     Input,
     Grid,
     SvgIcon,
-    Typography
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import { XCircle as XIcon } from "react-feather";
 import LendChart from "./ChartLend";
 import LendDrawer from "components/UI/Drawer";
-import { formatNumber, fromWei, toWei, formatPercent } from "utils/front-end";
+import {
+    formatETHMoney,
+    formatNumber,
+    fromWei,
+    toWei,
+    formatPercent,
+} from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -122,7 +128,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                                 className={classes.input}
                                 placeholder="0.00"
                                 type="number"
-                                onChange={e => setAmount(e.target.value)}
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
                             />
                             <span
@@ -159,7 +165,11 @@ export default function DrawerSupply({ asset, onSupply }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    $1.00
+                                    {formatETHMoney(
+                                        asset.price,
+                                        "USD",
+                                        asset.unit
+                                    )}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -173,7 +183,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    0.00
+                                    {formatNumber(asset.balance, asset.unit)}
                                 </Grid>
                             </Grid>
                         </Grid>

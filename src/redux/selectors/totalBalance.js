@@ -1,7 +1,6 @@
 import { createSelector } from "reselect";
 import _ from "lodash";
 import web3 from "web3";
-// import address from "constants/address_map.json";
 
 const getSupplyAccountValue = (state) => {
     const calculateAccountValues = Object.values(
@@ -50,6 +49,8 @@ export const getUSDxPrice = (state) => {
     }
     return null;
 };
+
+export const getUSDprice = createSelector(getUSDxPrice, (price) => price);
 
 export const getTotalSupply = createSelector(
     getSupplyAccountValue,
