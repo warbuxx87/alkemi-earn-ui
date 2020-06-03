@@ -2,6 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
+import { useSelector } from "react-redux";
 
 // Section 2: Material-UI imports
 import {
@@ -28,10 +29,14 @@ import {
     formatPercent,
 } from "utils/front-end";
 
+// Wild redux selector import
+import { getUSDxPrice } from "redux/selectors/totalBalance";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 
 export default function DrawerFaucet({ asset, onAllocate }) {
     const classes = FaucetDrawer();
+
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [isOpen, setOpen] = React.useState(false);
 
@@ -44,10 +49,13 @@ export default function DrawerFaucet({ asset, onAllocate }) {
     };
 
     // Section 5: Code Component
+    const usdPrice = useSelector((state) => getUSDxPrice(state));
+
     const [amount, setAmount] = React.useState(null);
     const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
 
     const [enableAllocate, setEnableAllocate] = React.useState(false);
+
     React.useEffect(() => {
         if (amount) {
             setEnableAllocate(true);
@@ -164,7 +172,8 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                                     {formatETHMoney(
                                         asset.price,
                                         "USD",
-                                        asset.unit
+                                        asset.unit,
+                                        usdPrice
                                     )}
                                 </Grid>
                             </Grid>

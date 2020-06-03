@@ -1,5 +1,4 @@
 import web3 from "web3";
-import { getUSDxPrice } from "redux/selectors/totalBalance";
 // import _ from "lodash";
 
 const decimalsToUnit = {
@@ -65,34 +64,26 @@ export const formatMoney = (value, currency) => {
 };
 
 // value in USD
-export const formatETHMoney = (value, currency, unit) => {
-    let usdPrice = getUSDxPrice();
-    console.log("value: ", value);
-
-    console.log("pre USDPrice: ", usdPrice);
-
+export const formatETHMoney = (value, currency, unit, usdPrice) => {
     if (usdPrice === null) {
         usdPrice = "4131207138725935";
     }
-    console.log("USDPrice: ", usdPrice);
 
     let calculation = web3.utils
         .toBN(value)
         .div(web3.utils.toBN(usdPrice))
         .toString();
 
-    console.log("calculation:", calculation);
-
-    if (unit === "WBTC") {
-        calculation = calculation / 1e10;
-    }
-
-    if (unit === "USDC") {
-        calculation = calculation / 1e12;
-    }
-
-    if (unit === "USDT") {
-        calculation = calculation / 1e12;
+    switch (unit) {
+        case "WBTC":
+            calculation = calculation / 1e10;
+            break;
+        case "USDC":
+        case "USDT":
+            calculation = calculation / 1e12;
+            break;
+        default:
+        // code block
     }
 
     return new Intl.NumberFormat("en-es", {

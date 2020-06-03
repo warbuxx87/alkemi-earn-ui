@@ -47,6 +47,7 @@ export const getUSDxPrice = (state) => {
     if (USDxPrice[0]) {
         return USDxPrice[0].value;
     }
+
     return null;
 };
 
