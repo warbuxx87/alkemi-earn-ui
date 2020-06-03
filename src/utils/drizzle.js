@@ -19,7 +19,7 @@ const ABIs = {
     USDT: USDT_ABI,
     USDC: USDC_ABI,
     WBTC: WBTC_ABI,
-    PAX: PAX_ABI
+    PAX: PAX_ABI,
 };
 
 const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
@@ -30,7 +30,7 @@ const getDrizzleContract = ({ drizzle, asset, network, myAccount }) => {
     );
     drizzle.addContract({
         contractName: asset,
-        web3Contract: tokenContract
+        web3Contract: tokenContract,
     });
     // get balance
     tokenContract.methods.balanceOf.cacheCall(myAccount);
@@ -56,12 +56,12 @@ export const getMarketContract = ({ drizzle }) => {
     );
     drizzle.addContract({
         contractName: "mMarket",
-        web3Contract: mMarketContract
+        web3Contract: mMarketContract,
     });
 
     const assets = ["USDx", "DAI", "USDT", "USDC", "WBTC", "WETH", "PAX"];
 
-    assets.forEach(asset => {
+    assets.forEach((asset) => {
         // get each asset Supply Balance (current )
         mMarketContract.methods.getSupplyBalance.cacheCall(
             myAddress,
@@ -106,8 +106,8 @@ export const getMarketContract = ({ drizzle }) => {
 
 export const createActiveAssetContract = ({ drizzle, assets }) =>
     assets
-        .map(asset => asset.unit)
-        .map(asset => {
+        .map((asset) => asset.unit)
+        .map((asset) => {
             if (drizzle.contracts[asset]) return drizzle.contracts[asset];
             if (!drizzle.web3.eth) return null;
             const drizzleStore = drizzle.store.getState();
@@ -130,7 +130,7 @@ export const handle_approve = async ({ drizzle, asset, myAccount }) => {
             tokenContract.methods
                 .approve(address[network].address_mMarket, -1)
                 .estimateGas({ from: myAccount })
-                .then(result => result.toString()),
+                .then((result) => result.toString()),
         gasPrice: web3.eth.getGasPrice,
         balance,
         network,
@@ -144,15 +144,15 @@ export const handle_approve = async ({ drizzle, asset, myAccount }) => {
             ),
         events: {
             txRequest: {
-                message: "Please confirm your transaction"
+                message: "Please confirm your transaction",
             },
             txPool: {
-                message: `Activating ${asset} reserve`
+                message: `Activating ${asset} reserve`,
             },
             txConfirmed: {
-                message: `${asset} reserve successfully activated`
-            }
-        }
+                message: `${asset} reserve successfully activated`,
+            },
+        },
     });
 };
 
@@ -173,7 +173,7 @@ export const handle_faucet_allocateTo = async ({ drizzle, asset, amount }) => {
             tokenContract.methods
                 .allocateTo(myAccount, weiAmount)
                 .estimateGas({ from: myAccount })
-                .then(result => result.toString()),
+                .then((result) => result.toString()),
         gasPrice: web3.eth.getGasPrice,
         balance,
         network,
@@ -187,15 +187,15 @@ export const handle_faucet_allocateTo = async ({ drizzle, asset, amount }) => {
             ),
         events: {
             txRequest: {
-                message: "Please confirm your transaction"
+                message: "Please confirm your transaction",
             },
             txPool: {
-                message: `Allocating ${amount} ${asset.unit} to Owner`
+                message: `Allocating ${amount} ${asset.unit} to Owner`,
             },
             txConfirmed: {
-                message: `${amount} ${asset.unit} successfully allocated`
-            }
-        }
+                message: `${amount} ${asset.unit} successfully allocated`,
+            },
+        },
     });
 };
 
@@ -215,7 +215,7 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
             mMarketContract.methods
                 .supply(token_address, weiAmount)
                 .estimateGas({ from: myAccount })
-                .then(result => result.toString()),
+                .then((result) => result.toString()),
         gasPrice: web3.eth.getGasPrice,
         balance,
         network,
@@ -229,15 +229,15 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
             ),
         events: {
             txRequest: {
-                message: "Please confirm your transaction"
+                message: "Please confirm your transaction",
             },
             txPool: {
-                message: `Supplying ${amount} ${asset.unit} to the pool`
+                message: `Supplying ${amount} ${asset.unit} to the pool`,
             },
             txConfirmed: {
-                message: `You successfully supplied ${amount} ${asset.unit} to the pool.`
-            }
-        }
+                message: `You successfully supplied ${amount} ${asset.unit} to the pool.`,
+            },
+        },
     });
     return result;
 };
@@ -257,7 +257,7 @@ export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
             mMarketContract.methods
                 .borrow(token_address, weiAmount)
                 .estimateGas({ from: myAccount })
-                .then(result => result.toString()),
+                .then((result) => result.toString()),
         gasPrice: web3.eth.getGasPrice,
         balance,
         network,
@@ -271,15 +271,15 @@ export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
             ),
         events: {
             txRequest: {
-                message: "Please confirm your transaction"
+                message: "Please confirm your transaction",
             },
             txPool: {
-                message: `Borrowing ${amount} ${asset.unit} from the pool`
+                message: `Borrowing ${amount} ${asset.unit} from the pool`,
             },
             txConfirmed: {
-                message: `You successfully borrowed ${amount} ${asset.unit} from the pool.`
-            }
-        }
+                message: `You successfully borrowed ${amount} ${asset.unit} from the pool.`,
+            },
+        },
     });
     return result;
 };
@@ -292,14 +292,19 @@ export const handle_repay_click = async ({ drizzle, amount, asset }) => {
     const network = constants.network_type[drizzleStore.web3.networkId];
     const mMarketContract = getMarketContract({ drizzle });
     const token_address = address[network][`address_${asset.unit}`];
-    const weiAmount = toWei(amount, asset.unit);
+    console.log("amount", amount);
+    let weiAmount = toWei(amount, asset.unit);
+    if (amount === "-1") {
+        weiAmount = -1;
+    }
+    console.log("weiAmount", weiAmount);
     const balance = Object.values(drizzleStore.accountBalances)[0];
     const result = await notifyTransaction({
         estimateGas: () =>
             mMarketContract.methods
                 .repayBorrow(token_address, weiAmount)
                 .estimateGas({ from: myAccount })
-                .then(result => result.toString()),
+                .then((result) => result.toString()),
         gasPrice: web3.eth.getGasPrice,
         balance,
         network,
@@ -313,15 +318,15 @@ export const handle_repay_click = async ({ drizzle, amount, asset }) => {
             ),
         events: {
             txRequest: {
-                message: "Please confirm your transaction"
+                message: "Please confirm your transaction",
             },
             txPool: {
-                message: `Repaying ${amount} ${asset.unit} to the pool`
+                message: `Repaying ${amount} ${asset.unit} to the pool`,
             },
             txConfirmed: {
-                message: `You successfully repaid ${amount} ${asset.unit} to the pool.`
-            }
-        }
+                message: `You successfully repaid ${amount} ${asset.unit} to the pool.`,
+            },
+        },
     });
     return result;
 };
@@ -334,14 +339,19 @@ export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
     const network = constants.network_type[drizzleStore.web3.networkId];
     const mMarketContract = getMarketContract({ drizzle });
     const token_address = address[network][`address_${asset.unit}`];
-    const weiAmount = toWei(amount, asset.unit);
+    console.log("amount", amount);
+    let weiAmount = toWei(amount, asset.unit);
+    if (amount === "-1") {
+        weiAmount = -1;
+    }
+    console.log("weiAmount", weiAmount);
     const balance = Object.values(drizzleStore.accountBalances)[0];
     const result = await notifyTransaction({
         estimateGas: () =>
             mMarketContract.methods
                 .withdraw(token_address, weiAmount)
                 .estimateGas({ from: myAccount })
-                .then(result => result.toString()),
+                .then((result) => result.toString()),
         gasPrice: web3.eth.getGasPrice,
         balance,
         network,
@@ -355,15 +365,15 @@ export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
             ),
         events: {
             txRequest: {
-                message: "Please confirm your transaction"
+                message: "Please confirm your transaction",
             },
             txPool: {
-                message: `Withdrawing ${amount} ${asset.unit} from the pool`
+                message: `Withdrawing ${amount} ${asset.unit} from the pool`,
             },
             txConfirmed: {
-                message: `You successfully withdrawn ${amount} ${asset.unit} from the pool.`
-            }
-        }
+                message: `You successfully withdrawn ${amount} ${asset.unit} from the pool.`,
+            },
+        },
     });
     return result;
 };
