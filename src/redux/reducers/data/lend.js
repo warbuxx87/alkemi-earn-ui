@@ -24,30 +24,29 @@ import usdt from "assets/images/USDT.svg";
 import eth from "assets/images/WETH.svg";
 import pax from "assets/images/pax.png";
 
-function createData(name, unit, image, wallet, balance) {
+function createData(name, unit, image, wallet) {
     return {
         name,
         unit,
         image,
         wallet,
-        balance,
         activated: false,
         pending: false,
-        supplying: false,
+        borrowing: false,
+        repaying: false,
         redeeming: false,
-        approving: false,
-        allocating: false,
     };
 }
 
 const assets = {
-    WETH: createData("Ether", "WETH", eth, "0", "0"),
-    DAI: createData("Maker DAI", "DAI", dai, "0", "0"),
-    USDT: createData("Tether", "USDT", usdt, "0", "0"),
-    USDC: createData("USD Coin", "USDC", usdc, "0", "0"),
-    WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0", "0"),
-    PAX: createData("Paxos", "PAX", pax, "0", "0"),
+    WETH: createData("Ether", "WETH", eth, "0"),
+    DAI: createData("Maker DAI", "DAI", dai, "0"),
+    USDT: createData("Tether", "USDT", usdt, "0"),
+    USDC: createData("USD Coin", "USDC", usdc, "0"),
+    WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0"),
+    PAX: createData("Paxos", "PAX", pax, "0"),
 };
+
 // Define initial state
 const initialState = {
     assets,

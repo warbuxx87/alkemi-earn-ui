@@ -2,7 +2,7 @@ import React from "react";
 import toJson from "enzyme-to-json";
 
 import Dashboard from "components/Dashboard/Dashboard";
-import createShallow from "tests-utils/createShallow";
+import createShallow from "utils/tests-utils/createShallow";
 
 describe("<Dashboard />", () => {
     let shallow;
