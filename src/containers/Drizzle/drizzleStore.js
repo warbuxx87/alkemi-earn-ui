@@ -1,5 +1,5 @@
 import Web3 from "web3";
-import { EventActions } from "drizzle";
+import { EventActions } from "@drizzle/store";
 import thunk from "redux-thunk";
 
 import { generateStore } from "@drizzle/store";
