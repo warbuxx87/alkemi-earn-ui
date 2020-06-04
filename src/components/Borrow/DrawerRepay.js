@@ -3,7 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 // import PropTypes from "prop-types";
-// import web3 from "web3";
+import web3 from "web3";
 // import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 2: Material-UI imports
@@ -28,8 +28,8 @@ import RepayDrawer from "components/UI/Drawer";
 import {
     formatNumber,
     formatETHMoney,
-    // fromWei,
-    // toWei,
+    fromWei,
+    toWei,
     formatPercent,
 } from "utils/front-end";
 
@@ -50,15 +50,15 @@ export default function DrawerRepay({ asset, onRepay }) {
 
     // Section 5: Code Component
     const [amount, setAmount] = React.useState(null);
-    // const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
+    const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
     const [enableRepay, setEnableRepay] = React.useState(false);
     React.useEffect(() => {
         if (amount) {
-            // const isAmountLTBalance = web3.utils
-            //     .toBN(toWei(amount, asset.unit))
-            //     .lte(web3.utils.toBN(asset.balance));
-            setEnableRepay(true);
+            const isAmountLTBalance = web3.utils
+                .toBN(toWei(amount, asset.unit))
+                .lte(web3.utils.toBN(asset.balance));
+            setEnableRepay(isAmountLTBalance);
         }
     }, [amount, asset.balance, asset.unit]);
     return (
@@ -138,7 +138,7 @@ export default function DrawerRepay({ asset, onRepay }) {
                             />
                             <span
                                 className={classes.maxTips}
-                                // onClick={onSetMax}
+                                onClick={onSetMax}
                             >
                                 MAX
                             </span>
