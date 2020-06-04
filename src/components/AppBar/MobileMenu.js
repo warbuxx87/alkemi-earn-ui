@@ -61,7 +61,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                         display="flex"
                         justifyContent="space-between"
                         alignItems="center"
-                        p={2}
+                        p={1}
                     >
                         <SidebarHeader />
                         <IconButton onClick={handleClose}>
@@ -70,11 +70,14 @@ export default function DrawerSupply({ asset, onSupply }) {
                             </SvgIcon>
                         </IconButton>
                     </Box>
-                    <List className={classes.list} onClick={handleClose}>
-                        <SidebarDashboardItem />
-                        <SidebarLendItem />
-                        <SidebarBorrowItem />
-                    </List>
+                    <Divider className={classes.divider} />
+                    <Box pt={1}>
+                        <List className={classes.list} onClick={handleClose}>
+                            <SidebarDashboardItem />
+                            <SidebarLendItem />
+                            <SidebarBorrowItem />
+                        </List>
+                    </Box>
                 </Box>
             </Drawer>
         </>

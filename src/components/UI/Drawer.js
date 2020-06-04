@@ -49,7 +49,7 @@ const modal = makeStyles(theme =>
             marginBottom: "23px"
             // paddingTop:'10px'
         },
-        btnModal: {
+        btnDrawer: {
             minWidth: 100,
             textTransform: "capitalize",
             fontWeight: 500,

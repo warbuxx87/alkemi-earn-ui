@@ -64,7 +64,7 @@ const LendTableActive = ({ data = [] }) => {
     const classes = useStyles();
     return (
         <Card>
-            <CardHeader title="Active Lending Reserves" />
+            <CardHeader title="Active Lending" />
             <Divider />
             <Paper>
                 <PerfectScrollbar>

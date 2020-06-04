@@ -63,7 +63,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
         <>
             <Button
                 type="button"
-                className={classes.btnModal}
+                className={classes.btnDrawer}
                 variant="contained"
                 size="small"
                 onClick={handleOpen}
@@ -103,7 +103,6 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                         <div className={classes.supplyPercent}>
                             {formatPercent(asset.apr)} APR
                         </div>
-
                         <BorrowChartBorrow> </BorrowChartBorrow>
                     </Box>
                     <Box p={2} mt={3}>

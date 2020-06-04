@@ -67,7 +67,7 @@ const BorrowTableActive = ({ data = [] }) => {
     const classes = useStyles();
     return (
         <Card>
-            <CardHeader title="Active Borrowing Reserves" />
+            <CardHeader title="Active Borrowing" />
             <Divider />
             <Paper>
                 <PerfectScrollbar>

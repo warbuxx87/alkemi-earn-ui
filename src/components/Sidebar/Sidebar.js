@@ -8,6 +8,7 @@ import clsx from "clsx";
 
 // Section 2: Material-UI imports
 import {
+    Box,
     Divider,
     Drawer,
     Hidden,
@@ -88,11 +89,13 @@ function Sidebar({ classes, width, variant, open }) {
         <div className={classes.drawerInner}>
             <SidebarHeader />
             <Divider className={classes.divider} />
-            <List className={classes.list}>
-                <SidebarDashboardItem />
-                <SidebarLendItem />
-                <SidebarBorrowItem />
-            </List>
+            <Box pt={1} pb={1}>
+                <List className={classes.list}>
+                    <SidebarDashboardItem />
+                    <SidebarLendItem />
+                    <SidebarBorrowItem />
+                </List>
+            </Box>
             <Divider className={classes.divider} />
         </div>
     );

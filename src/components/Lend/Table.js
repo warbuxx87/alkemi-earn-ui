@@ -157,7 +157,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                             alignItems="center"
                                             justifyContent="flex-end"
                                         >
-                                            <Box mr={2}>
+                                            <Box mr={1}>
                                                 <FaucetButton asset={Row} />
                                             </Box>
                                             {Row.activated ? (
