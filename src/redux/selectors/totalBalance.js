@@ -34,6 +34,7 @@ export const getCollateralRatio = (state) => {
     }
 };
 
+// Getting USDxPrice from drizzle, TODO remove if useless after integration of API call directly from server
 export const getUSDxPrice = (state) => {
     const assetPrices = Object.values(
         _.get(state, "contracts.mMarket.assetPrices", {})

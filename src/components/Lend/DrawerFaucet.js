@@ -29,8 +29,11 @@ import {
     formatPercent,
 } from "utils/front-end";
 
-// Wild redux selector import
-import { getUSDxPrice } from "redux/selectors/totalBalance";
+// wild selector
+import { networkSelector } from "redux/selectors/drizzle";
+
+// wild url_map
+let url_map = require("constants/url_map.json");
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -38,6 +41,8 @@ export default function DrawerFaucet({ asset, onAllocate }) {
     const classes = FaucetDrawer();
 
     // getModalStyle is not a pure function, we roll the style only on the first render
+    const currentNetworkName = useSelector(networkSelector);
+
     const [isOpen, setOpen] = React.useState(false);
 
     const handleOpen = () => {
@@ -49,7 +54,7 @@ export default function DrawerFaucet({ asset, onAllocate }) {
     };
 
     // Section 5: Code Component
-    const usdPrice = useSelector((state) => getUSDxPrice(state));
+    const [usdPrice, setUsdPrice] = React.useState(null);
 
     const [amount, setAmount] = React.useState(null);
     const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
@@ -61,6 +66,34 @@ export default function DrawerFaucet({ asset, onAllocate }) {
             setEnableAllocate(true);
         }
     }, [amount, asset.wallet, asset.unit]);
+
+    React.useEffect(() => {
+        // TODO extract new code with the rest from component in DF-170, consider also extracting this API call if need to be reused
+        const getUSDxPrice = () => {
+            if (!url_map[currentNetworkName].markets_url) return; // TODO markets_url for rinkeby is gotten from main for now, consider replacing with proper url
+
+            fetch(url_map[currentNetworkName].markets_url)
+                .then((res) => {
+                    return res.text();
+                })
+                .then((data) => {
+                    if (data) {
+                        const obj_data = JSON.parse(data);
+
+                        // TODO replace 0xeb269732ab75A6fD61Ea60b06fE994cD32a83549 with address_map[currentNetworkName].address_USDx
+                        const USDxPrice =
+                            obj_data.markets[
+                                "0xeb269732ab75A6fD61Ea60b06fE994cD32a83549"
+                            ]; // should be 0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E from last code
+
+                        setUsdPrice(USDxPrice.oraclePrice);
+                    }
+                });
+        };
+
+        if (currentNetworkName !== undefined) getUSDxPrice();
+    }, [currentNetworkName]);
+
     return (
         <>
             <Button
