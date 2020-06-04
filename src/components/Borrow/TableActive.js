@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Section 2: Material-UI imports
 import {
@@ -69,132 +70,139 @@ const BorrowTableActive = ({ data = [] }) => {
             <CardHeader title="Active Borrowing Reserves" />
             <Divider />
             <Paper>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((columns, i) => (
-                                <BorrowTableCell
-                                    key={columns.id}
-                                    align={columns.align}
-                                >
-                                    {columns.label}
-                                </BorrowTableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.map(row => (
-                            <TableRow key={row.name}>
-                                <BorrowTableCell
-                                    component="th"
-                                    scope="row"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Box
-                                        minWidth={150}
-                                        display="flex"
-                                        alignItems="center"
+                <PerfectScrollbar>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((columns, i) => (
+                                    <BorrowTableCell
+                                        key={columns.id}
+                                        align={columns.align}
                                     >
-                                        <img
-                                            className={classes.imageSize}
-                                            src={row.image}
-                                            alt="dai"
-                                        />
-                                        <Box ml={2}>
-                                            <Typography
-                                                variant="h6"
-                                                color="textPrimary"
-                                            >
-                                                {row.name}
-                                            </Typography>
-                                            <Typography
-                                                variant="body2"
-                                                color="textSecondary"
-                                            >
-                                                {row.unit}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                </BorrowTableCell>
-                                <BorrowTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Typography
-                                        variant="h6"
-                                        color="textPrimary"
-                                    >
-                                        {formatNumber(row.wallet, row.unit)}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                    >
-                                        {row.wallet_2}
-                                    </Typography>
-                                </BorrowTableCell>
-                                <BorrowTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Typography
-                                        variant="h6"
-                                        color="textPrimary"
-                                    >
-                                        {formatNumber(row.balance, row.unit)}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                    >
-                                        {row.balance_2}
-                                    </Typography>
-                                </BorrowTableCell>
-                                <BorrowTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Typography
-                                        variant="h6"
-                                        color="textPrimary"
-                                    >
-                                        {formatPercent(row.apr)}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                    >
-                                        {row.apr_2}
-                                    </Typography>
-                                </BorrowTableCell>
-                                <BorrowTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Switch
-                                        // checked={state.checkedB}
-                                        // onChange={handleChange}
-                                        name="checkedB"
-                                        color="primary"
-                                    />
-                                </BorrowTableCell>
-                                <BorrowTableCell align="center">
-                                    <Box
-                                        minWidth={208}
-                                        display="flex"
-                                        alignItems="center"
-                                        justifyContent="flex-end"
-                                    >
-                                        <Box mr={1}>
-                                            <BorrowDrawerRepay asset={row} />
-                                        </Box>
-                                        <BorrowDrawerBorrow asset={row} />
-                                    </Box>
-                                </BorrowTableCell>
+                                        {columns.label}
+                                    </BorrowTableCell>
+                                ))}
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHead>
+                        <TableBody>
+                            {data.map(row => (
+                                <TableRow key={row.name}>
+                                    <BorrowTableCell
+                                        component="th"
+                                        scope="row"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Box
+                                            minWidth={150}
+                                            display="flex"
+                                            alignItems="center"
+                                        >
+                                            <img
+                                                className={classes.imageSize}
+                                                src={row.image}
+                                                alt="dai"
+                                            />
+                                            <Box ml={2}>
+                                                <Typography
+                                                    variant="h6"
+                                                    color="textPrimary"
+                                                >
+                                                    {row.name}
+                                                </Typography>
+                                                <Typography
+                                                    variant="body2"
+                                                    color="textSecondary"
+                                                >
+                                                    {row.unit}
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </BorrowTableCell>
+                                    <BorrowTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Typography
+                                            variant="h6"
+                                            color="textPrimary"
+                                        >
+                                            {formatNumber(row.wallet, row.unit)}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                        >
+                                            {row.wallet_2}
+                                        </Typography>
+                                    </BorrowTableCell>
+                                    <BorrowTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Typography
+                                            variant="h6"
+                                            color="textPrimary"
+                                        >
+                                            {formatNumber(
+                                                row.balance,
+                                                row.unit
+                                            )}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                        >
+                                            {row.balance_2}
+                                        </Typography>
+                                    </BorrowTableCell>
+                                    <BorrowTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Typography
+                                            variant="h6"
+                                            color="textPrimary"
+                                        >
+                                            {formatPercent(row.apr)}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                        >
+                                            {row.apr_2}
+                                        </Typography>
+                                    </BorrowTableCell>
+                                    <BorrowTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Switch
+                                            // checked={state.checkedB}
+                                            // onChange={handleChange}
+                                            name="checkedB"
+                                            color="primary"
+                                        />
+                                    </BorrowTableCell>
+                                    <BorrowTableCell align="center">
+                                        <Box
+                                            minWidth={208}
+                                            display="flex"
+                                            alignItems="center"
+                                            justifyContent="flex-end"
+                                        >
+                                            <Box mr={1}>
+                                                <BorrowDrawerRepay
+                                                    asset={row}
+                                                />
+                                            </Box>
+                                            <BorrowDrawerBorrow asset={row} />
+                                        </Box>
+                                    </BorrowTableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </PerfectScrollbar>
             </Paper>
         </Card>
     );

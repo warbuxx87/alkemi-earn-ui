@@ -96,8 +96,6 @@ export default function DrawerSupply({ asset, onSupply }) {
                         <div className={classes.supplyPercent}>
                             {formatPercent(asset.apr)} APR
                         </div>
-
-                        <LendChart> </LendChart>
                     </Box>
                     <Box p={2} mt={3}>
                         <Grid container className={classes.amount}>
@@ -124,6 +122,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                                 type="number"
                                 onChange={e => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}

@@ -131,6 +131,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                 type="number"
                                 onChange={e => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}

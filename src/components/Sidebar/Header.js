@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 
 // Section 2: Material-UI imports
-import { withStyles } from "@material-ui/core/styles";
+import { Hidden, withStyles } from "@material-ui/core/";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -44,12 +44,16 @@ const SidebarHeader = ({ classes, open, onOpen, onClose }) => {
     return (
         <div className={classes.drawerHeader}>
             <img className={classes.image} src={logo} alt={"Alkemi Logo"} />
-            <IconButton
-                onClick={open ? onClose : onOpen}
-                className={clsx(classes.menu, { [classes.activeMenu]: open })}
-            >
-                <MenuIcon fontSize="small" />
-            </IconButton>
+            <Hidden mdDown>
+                <IconButton
+                    onClick={open ? onClose : onOpen}
+                    className={clsx(classes.menu, {
+                        [classes.activeMenu]: open
+                    })}
+                >
+                    <MenuIcon fontSize="small" />
+                </IconButton>
+            </Hidden>
         </div>
     );
 };

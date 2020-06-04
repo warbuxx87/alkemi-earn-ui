@@ -10,6 +10,7 @@ import clsx from "clsx";
 import {
     Divider,
     Drawer,
+    Hidden,
     List,
     withWidth,
     withStyles
@@ -82,35 +83,43 @@ const styles = theme => ({
 });
 
 // Section 5: Code Component
-const Sidebar = ({ classes, width, variant, open }) => {
-    return (
-        <Drawer
-            variant="permanent"
-            className={clsx(classes.drawer, {
-                [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open
-            })}
-            classes={{
-                paper: clsx(classes.drawerPaper, {
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open
-                })
-            }}
-            anchor="left"
-        >
-            <div className={classes.drawerInner}>
-                <SidebarHeader />
-                <Divider className={classes.divider} />
-                <List className={classes.list}>
-                    <SidebarDashboardItem />
-                    <SidebarLendItem />
-                    <SidebarBorrowItem />
-                </List>
-                <Divider className={classes.divider} />
-            </div>
-        </Drawer>
+function Sidebar({ classes, width, variant, open }) {
+    const content = (
+        <div className={classes.drawerInner}>
+            <SidebarHeader />
+            <Divider className={classes.divider} />
+            <List className={classes.list}>
+                <SidebarDashboardItem />
+                <SidebarLendItem />
+                <SidebarBorrowItem />
+            </List>
+            <Divider className={classes.divider} />
+        </div>
     );
-};
+
+    return (
+        <>
+            <Hidden mdDown>
+                <Drawer
+                    variant="permanent"
+                    className={clsx(classes.drawer, {
+                        [classes.drawerOpen]: open,
+                        [classes.drawerClose]: !open
+                    })}
+                    classes={{
+                        paper: clsx(classes.drawerPaper, {
+                            [classes.drawerOpen]: open,
+                            [classes.drawerClose]: !open
+                        })
+                    }}
+                    anchor="left"
+                >
+                    {content}
+                </Drawer>
+            </Hidden>
+        </>
+    );
+}
 
 // Section 6: Documentation with PropTypes
 Sidebar.propTypes = {

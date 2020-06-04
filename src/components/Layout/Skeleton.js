@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application
 import LayoutContent from "containers/Layout/Content";
@@ -13,7 +13,7 @@ import Sidebar from "containers/Sidebar/Sidebar";
 import AppBar from "containers/AppBar/AppBar";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
     frame: {
         position: "relative",
         display: "flex",
@@ -31,6 +31,10 @@ const styles = theme => ({
         "@media (min-width:1550px)": {
             marginLeft: 80,
             marginRight: 80
+        },
+        "@media (max-width:1024px)": {
+            marginLeft: 0,
+            marginRight: 0
         },
         [theme.breakpoints.up("sm")]: {
             minHeight: "calc(100% - 64px)"
@@ -54,18 +58,21 @@ const styles = theme => ({
             marginRight: "25px!important"
         }
     }
-});
+}));
 
 // Section 5: Code Component
-const LayoutSkeleton = ({ classes }) => (
-    <div className={classes.frame}>
-        <Sidebar />
-        <div className={classes.content}>
-            <AppBar />
-            <LayoutContent />
+function LayoutSkeleton({ children }) {
+    const classes = useStyles();
+    return (
+        <div className={classes.frame}>
+            <Sidebar />
+            <div className={classes.content}>
+                <AppBar />
+                <LayoutContent />
+            </div>
         </div>
-    </div>
-);
+    );
+}
 
 // Section 6: Documentation with PropTypes
 LayoutSkeleton.propTypes = {
@@ -73,4 +80,4 @@ LayoutSkeleton.propTypes = {
 };
 
 // Section 7:  Connect styles and export
-export default withStyles(styles)(LayoutSkeleton);
+export default LayoutSkeleton;

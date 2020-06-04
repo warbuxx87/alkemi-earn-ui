@@ -2,6 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Section 2: Material-UI imports
 import {
@@ -71,126 +72,128 @@ const LendTable = ({ data = [], onActivate }) => {
         <Card>
             <CardHeader title="Available Markets" />
             <Divider />
-            <Paper>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            {Columns.map((Column, i) => (
-                                <LendTableCell
-                                    key={Column.id}
-                                    align={Column.align}
-                                >
-                                    {Column.label}
-                                </LendTableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.map(Row => (
-                            <TableRow key={Row.name}>
-                                <LendTableCell
-                                    component="th"
-                                    scope="Row"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Box
-                                        minWidth={150}
-                                        display="flex"
-                                        alignItems="center"
+            <PerfectScrollbar>
+                <Paper>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                {Columns.map((Column, i) => (
+                                    <LendTableCell
+                                        key={Column.id}
+                                        align={Column.align}
                                     >
-                                        <img
-                                            className={classes.imageSize}
-                                            src={Row.image}
-                                            alt="dai"
-                                        />
-                                        <Box ml={2}>
-                                            <Typography
-                                                variant="h6"
-                                                color="textPrimary"
-                                            >
-                                                {Row.name}
-                                            </Typography>
-                                            <Typography
-                                                variant="body2"
-                                                color="textSecondary"
-                                            >
-                                                {Row.unit}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                </LendTableCell>
-                                <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    {formatNumber(Row.wallet, Row.unit)}
-                                </LendTableCell>
-                                <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    {formatNumber(Row.balance, Row.unit)}
-                                </LendTableCell>
-                                <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    {formatPercent(Row.apr)}
-                                </LendTableCell>
-                                <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Switch
-                                        // checked={state.checkedB}
-                                        // onChange={handleChange}
-                                        name="checkedB"
-                                        color="primary"
-                                    />
-                                </LendTableCell>
-                                <LendTableCell align="right">
-                                    <Box
-                                        minWidth={208}
-                                        display="flex"
-                                        alignItems="center"
-                                        justifyContent="flex-end"
-                                    >
-                                        <Box mr={2}>
-                                            <FaucetButton asset={Row} />
-                                        </Box>
-                                        {Row.activated ? (
-                                            <SupplyButton asset={Row} />
-                                        ) : (
-                                            <Button
-                                                type="button"
-                                                className={
-                                                    classes.btnActiveOutline
-                                                }
-                                                variant="outlined"
-                                                size="small"
-                                                color="secondary"
-                                                disable={Row.pending.toString()}
-                                                onClick={() =>
-                                                    onActivate(Row.unit)
-                                                }
-                                            >
-                                                {Row.pending ? (
-                                                    <CircularProgress
-                                                        size={20}
-                                                        color="inherit"
-                                                    />
-                                                ) : (
-                                                    "Activate"
-                                                )}
-                                            </Button>
-                                        )}
-                                    </Box>
-                                </LendTableCell>
+                                        {Column.label}
+                                    </LendTableCell>
+                                ))}
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Paper>
+                        </TableHead>
+                        <TableBody>
+                            {data.map(Row => (
+                                <TableRow key={Row.name}>
+                                    <LendTableCell
+                                        component="th"
+                                        scope="Row"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Box
+                                            minWidth={150}
+                                            display="flex"
+                                            alignItems="center"
+                                        >
+                                            <img
+                                                className={classes.imageSize}
+                                                src={Row.image}
+                                                alt="dai"
+                                            />
+                                            <Box ml={2}>
+                                                <Typography
+                                                    variant="h6"
+                                                    color="textPrimary"
+                                                >
+                                                    {Row.name}
+                                                </Typography>
+                                                <Typography
+                                                    variant="body2"
+                                                    color="textSecondary"
+                                                >
+                                                    {Row.unit}
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </LendTableCell>
+                                    <LendTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        {formatNumber(Row.wallet, Row.unit)}
+                                    </LendTableCell>
+                                    <LendTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        {formatNumber(Row.balance, Row.unit)}
+                                    </LendTableCell>
+                                    <LendTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        {formatPercent(Row.apr)}
+                                    </LendTableCell>
+                                    <LendTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Switch
+                                            // checked={state.checkedB}
+                                            // onChange={handleChange}
+                                            name="checkedB"
+                                            color="primary"
+                                        />
+                                    </LendTableCell>
+                                    <LendTableCell align="right">
+                                        <Box
+                                            minWidth={208}
+                                            display="flex"
+                                            alignItems="center"
+                                            justifyContent="flex-end"
+                                        >
+                                            <Box mr={2}>
+                                                <FaucetButton asset={Row} />
+                                            </Box>
+                                            {Row.activated ? (
+                                                <SupplyButton asset={Row} />
+                                            ) : (
+                                                <Button
+                                                    type="button"
+                                                    className={
+                                                        classes.btnActiveOutline
+                                                    }
+                                                    variant="outlined"
+                                                    size="small"
+                                                    color="secondary"
+                                                    disable={Row.pending.toString()}
+                                                    onClick={() =>
+                                                        onActivate(Row.unit)
+                                                    }
+                                                >
+                                                    {Row.pending ? (
+                                                        <CircularProgress
+                                                            size={20}
+                                                            color="inherit"
+                                                        />
+                                                    ) : (
+                                                        "Activate"
+                                                    )}
+                                                </Button>
+                                            )}
+                                        </Box>
+                                    </LendTableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Paper>
+            </PerfectScrollbar>
         </Card>
     );
 };
