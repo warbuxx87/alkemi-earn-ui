@@ -33,7 +33,8 @@ import {
 import { networkSelector } from "redux/selectors/drizzle";
 
 // wild url_map
-let url_map = require("constants/url_map.json");
+const url_map = require("constants/url_map.json");
+const address_map = require("constants/address_map.json");
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -69,7 +70,7 @@ export default function DrawerFaucet({ asset, onAllocate }) {
 
     React.useEffect(() => {
         // TODO extract new code with the rest from component in DF-170, consider also extracting this API call if need to be reused
-        const getUSDxPrice = () => {
+        const getUSDCPrice = () => {
             if (!url_map[currentNetworkName].markets_url) return; // TODO markets_url for rinkeby is gotten from main for now, consider replacing with proper url
 
             fetch(url_map[currentNetworkName].markets_url)
@@ -80,18 +81,25 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                     if (data) {
                         const obj_data = JSON.parse(data);
 
-                        // TODO replace 0xeb269732ab75A6fD61Ea60b06fE994cD32a83549 with address_map[currentNetworkName].address_USDx
-                        const USDxPrice =
-                            obj_data.markets[
-                                "0xeb269732ab75A6fD61Ea60b06fE994cD32a83549"
-                            ]; // should be 0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E from last code
+                        const USDCPrice = obj_data.find((market) =>
+                            Object.prototype.hasOwnProperty.call(
+                                market,
+                                address_map[currentNetworkName].address_USDC
+                            )
+                        );
 
-                        setUsdPrice(USDxPrice.oraclePrice);
+                        setUsdPrice(
+                            `${
+                                USDCPrice[
+                                    address_map[currentNetworkName].address_USDC
+                                ].oraclePrice
+                            }`
+                        ); // TODO remove trailing 0s
                     }
                 });
         };
 
-        if (currentNetworkName !== undefined) getUSDxPrice();
+        if (currentNetworkName !== undefined) getUSDCPrice(); // TODO make call recurrent
     }, [currentNetworkName]);
 
     return (
