@@ -24,7 +24,7 @@ import LendChart from "./ChartLend";
 import FaucetDrawer from "components/UI/Drawer";
 import {
     formatNumber,
-    formatETHMoney,
+    formatPriceWithCurrency,
     fromWei,
     formatPercent,
 } from "utils/front-end";
@@ -70,9 +70,10 @@ export default function DrawerFaucet({ asset, onAllocate }) {
 
     React.useEffect(() => {
         // TODO extract new code with the rest from component in DF-170, consider also extracting this API call if need to be reused
-        const getUSDCPrice = () => {
+        const getPrices = () => {
             if (!url_map[currentNetworkName].markets_url) return; // TODO markets_url for rinkeby is gotten from main for now, consider replacing with proper url
 
+            // Would benefit from making this call only once
             fetch(url_map[currentNetworkName].markets_url)
                 .then((res) => {
                     return res.text();
@@ -81,26 +82,30 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                     if (data) {
                         const obj_data = JSON.parse(data);
 
-                        const USDCPrice = obj_data.find((market) =>
+                        const marketsData = obj_data.find((market) =>
                             Object.prototype.hasOwnProperty.call(
                                 market,
-                                address_map[currentNetworkName].address_USDC
+                                address_map[currentNetworkName][
+                                    `address_${asset.unit}`
+                                ]
                             )
                         );
 
                         setUsdPrice(
                             `${
-                                USDCPrice[
-                                    address_map[currentNetworkName].address_USDC
-                                ].oraclePrice
+                                marketsData[
+                                    address_map[currentNetworkName][
+                                        `address_${asset.unit}`
+                                    ]
+                                ].price
                             }`
-                        ); // TODO remove trailing 0s
+                        );
                     }
                 });
         };
 
-        if (currentNetworkName !== undefined) getUSDCPrice(); // TODO make call recurrent
-    }, [currentNetworkName]);
+        if (currentNetworkName !== undefined) getPrices(); // TODO make call recurrent
+    }, [currentNetworkName, asset.unit]);
 
     return (
         <>
@@ -210,12 +215,7 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    {formatETHMoney(
-                                        asset.price,
-                                        "USD",
-                                        asset.unit,
-                                        usdPrice
-                                    )}
+                                    {formatPriceWithCurrency(usdPrice, "USD")}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>

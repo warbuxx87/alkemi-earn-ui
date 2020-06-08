@@ -65,7 +65,7 @@ export const formatMoney = (value, currency) => {
 
 // value in USD
 export const formatETHMoney = (value, currency, unit, usdPrice) => {
-    if (usdPrice === null) {
+    if (usdPrice === null || usdPrice === undefined) {
         usdPrice = "4131207138725935";
     }
 
@@ -90,6 +90,13 @@ export const formatETHMoney = (value, currency, unit, usdPrice) => {
         style: "currency",
         currency,
     }).format(calculation);
+};
+
+export const formatPriceWithCurrency = (price, currency) => {
+    return new Intl.NumberFormat("en-es", {
+        style: "currency",
+        currency,
+    }).format(price);
 };
 
 // value in Percent
