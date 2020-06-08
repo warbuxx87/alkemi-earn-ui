@@ -92,6 +92,7 @@ export const formatETHMoney = (value, currency, unit, usdPrice) => {
     }).format(calculation);
 };
 
+// Format a price number with proper symbol (ex: $1.01)
 export const formatPriceWithCurrency = (price, currency) => {
     return new Intl.NumberFormat("en-es", {
         style: "currency",

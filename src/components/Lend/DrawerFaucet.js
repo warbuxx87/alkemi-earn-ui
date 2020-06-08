@@ -69,11 +69,13 @@ export default function DrawerFaucet({ asset, onAllocate }) {
     }, [amount, asset.wallet, asset.unit]);
 
     React.useEffect(() => {
+        let timer;
         // TODO extract new code with the rest from component in DF-170, consider also extracting this API call if need to be reused
         const getPrices = () => {
             if (!url_map[currentNetworkName].markets_url) return; // TODO markets_url for rinkeby is gotten from main for now, consider replacing with proper url
 
-            // Would benefit from making this call only once
+            // This call is made for each coin in the table, would benefit from making this call only once,
+            // TODO decide later (after refactor tasks) if it should be called at a higher order and dispatched to redux and/or throttled directly
             fetch(url_map[currentNetworkName].markets_url)
                 .then((res) => {
                     return res.text();
@@ -101,10 +103,16 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                             }`
                         );
                     }
+
+                    timer = setTimeout(getPrices, 15 * 1000);
                 });
         };
 
-        if (currentNetworkName !== undefined) getPrices(); // TODO make call recurrent
+        if (currentNetworkName !== undefined) getPrices();
+
+        return () => {
+            if (timer) clearTimeout(timer);
+        };
     }, [currentNetworkName, asset.unit]);
 
     return (
