@@ -41,9 +41,9 @@ const address_map = require("constants/address_map.json");
 export default function DrawerFaucet({ asset, onAllocate }) {
     const classes = FaucetDrawer();
 
-    // getModalStyle is not a pure function, we roll the style only on the first render
     const currentNetworkName = useSelector(networkSelector);
 
+    // getModalStyle is not a pure function, we roll the style only on the first render
     const [isOpen, setOpen] = React.useState(false);
 
     const handleOpen = () => {
