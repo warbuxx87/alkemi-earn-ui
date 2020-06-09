@@ -5,7 +5,7 @@ import LayoutSkeleton from "../Skeleton";
 import LayoutContent from "containers/Layout/Content";
 import AppBar from "containers/AppBar/AppBar";
 import Sidebar from "containers/Sidebar/Sidebar";
-import createShallow from "tests-utils/createShallow";
+import createShallow from "utils/tests-utils/createShallow";
 
 describe("<LayoutSkeleton />", () => {
     let shallow;

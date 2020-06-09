@@ -14,7 +14,7 @@ import {
     Input,
     Grid,
     SvgIcon,
-    Typography
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -119,7 +119,7 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                                 className={classes.input}
                                 placeholder="0.00"
                                 type="number"
-                                onChange={e => setAmount(e.target.value)}
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
                                 fullWidth={true}
                             />
@@ -134,7 +134,7 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
                                 <Grid item md={6} xs>
-                                    Utilization rate
+                                    Market Utilization
                                 </Grid>
                                 <Grid
                                     item
@@ -143,7 +143,7 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    72.80%
+                                    {formatPercent(asset.utilization)}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>

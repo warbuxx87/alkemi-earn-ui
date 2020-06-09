@@ -1,8 +1,9 @@
 import { createSelector } from "reselect";
 import _ from "lodash";
 import web3 from "web3";
+// import address from "constants/address_map.json";
 
-const getSupplyAccountValue = state => {
+const getSupplyAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.mMarket.calculateAccountValues", {})
     );
@@ -22,7 +23,7 @@ const getSupplyAccountValue = state => {
 //     return null;
 // };
 
-export const getCollateralRatio = state => {
+export const getCollateralRatio = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.mMarket.calculateAccountValues", {})
     );
@@ -34,12 +35,18 @@ export const getCollateralRatio = state => {
     }
 };
 
-export const getUSDxPrice = state => {
-    const calculateAccountValues = Object.values(
+export const getUSDxPrice = (state) => {
+    const assetPrices = Object.values(
         _.get(state, "contracts.mMarket.assetPrices", {})
     );
-    if (calculateAccountValues[0]) {
-        return _.get(calculateAccountValues, "[0].value");
+
+    // TODO, this address filter should be pulled from constants address_map with proper web3 connected Network
+    let USDxPrice = assetPrices.filter(function (asset) {
+        return asset.args[0] === "0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"; // rinkeby address for USDx
+    });
+
+    if (USDxPrice[0]) {
+        return USDxPrice[0].value;
     }
     return null;
 };
@@ -56,7 +63,7 @@ export const getTotalSupply = createSelector(
             : "0"
 );
 
-const getBorrowAccountValue = state => {
+const getBorrowAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.mMarket.calculateAccountValues", {})
     );

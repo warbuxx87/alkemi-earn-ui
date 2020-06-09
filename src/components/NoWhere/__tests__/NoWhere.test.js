@@ -5,7 +5,7 @@ import ReportIcon from "@material-ui/icons/Report";
 
 import NoWhere from "../NoWhere";
 import NoWhereDashboardButton from "containers/NoWhere/DashboardButton";
-import createShallow from "tests-utils/createShallow";
+import createShallow from "utils/tests-utils/createShallow";
 
 describe("<NoWhere />", () => {
     let shallow;
