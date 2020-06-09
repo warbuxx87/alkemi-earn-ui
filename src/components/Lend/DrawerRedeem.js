@@ -15,7 +15,7 @@ import {
     Input,
     Grid,
     SvgIcon,
-    Typography
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -56,7 +56,7 @@ export default function DrawerRedeem({ asset, onRedeem }) {
         <>
             <Button
                 type="button"
-                className={classes.btnActiveOutline}
+                className={classes.btnDrawer}
                 variant="outlined"
                 color="secondary"
                 size="small"
@@ -123,8 +123,9 @@ export default function DrawerRedeem({ asset, onRedeem }) {
                                 className={classes.input}
                                 placeholder="0.00"
                                 type="number"
-                                onChange={e => setAmount(e.target.value)}
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}
@@ -137,7 +138,7 @@ export default function DrawerRedeem({ asset, onRedeem }) {
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
                                 <Grid item md={6} xs>
-                                    Utilization rate
+                                    Market Utilization
                                 </Grid>
                                 <Grid
                                     item
@@ -146,7 +147,7 @@ export default function DrawerRedeem({ asset, onRedeem }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    72.80%
+                                    {formatPercent(asset.utilization)}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>

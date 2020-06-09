@@ -17,7 +17,7 @@ import {
     Input,
     Grid,
     SvgIcon,
-    Typography
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -29,7 +29,7 @@ import {
     formatNumber,
     // fromWei,
     // toWei,
-    formatPercent
+    formatPercent,
 } from "utils/front-end";
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -63,7 +63,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
         <>
             <Button
                 type="button"
-                className={classes.btnModal}
+                className={classes.btnDrawer}
                 variant="contained"
                 size="small"
                 onClick={handleOpen}
@@ -103,7 +103,6 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                         <div className={classes.supplyPercent}>
                             {formatPercent(asset.apr)} APR
                         </div>
-
                         <BorrowChartBorrow> </BorrowChartBorrow>
                     </Box>
                     <Box p={2} mt={3}>
@@ -129,8 +128,9 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                 className={classes.input}
                                 placeholder="0.00"
                                 type="number"
-                                onChange={e => setAmount(e.target.value)}
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}
@@ -143,7 +143,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
                                 <Grid item md={6} xs>
-                                    Utilization rate
+                                    Market Utilization
                                 </Grid>
                                 <Grid
                                     item
@@ -152,7 +152,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    72.80%
+                                    {formatPercent(asset.utilization)}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>

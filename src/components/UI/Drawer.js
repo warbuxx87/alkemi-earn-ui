@@ -32,6 +32,12 @@ const modal = makeStyles(theme =>
         chartBox: {
             backgroundColor: "#000000"
         },
+        drawer: {
+            width: "100%",
+            "@media (min-width: 780px)": {
+                width: 380
+            }
+        },
 
         buttonWrap: {
             // width: 90px;
@@ -43,7 +49,7 @@ const modal = makeStyles(theme =>
             marginBottom: "23px"
             // paddingTop:'10px'
         },
-        btnModal: {
+        btnDrawer: {
             minWidth: 100,
             textTransform: "capitalize",
             fontWeight: 500,
@@ -80,7 +86,6 @@ const modal = makeStyles(theme =>
             background: "#1B1B1B 0% 0% no-repeat padding-box",
             border: "1px solid #000000",
             opacity: 1,
-            width: "412px",
             height: "54px",
             paddingLeft: "10px",
             color: "white",

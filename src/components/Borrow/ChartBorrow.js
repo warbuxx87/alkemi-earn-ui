@@ -23,12 +23,7 @@ export default class BorrowChart extends React.PureComponent {
         const { data: chartData } = this.state;
 
         return (
-            <Chart
-                height={81}
-                width={355}
-                style={{ padding: 0 }}
-                data={chartData}
-            >
+            <Chart height={81} style={{ padding: 0 }} data={chartData}>
                 <LineSeries
                     valueField="lineValue"
                     argumentField="argument"

@@ -3,7 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 // import PropTypes from "prop-types";
-// import web3 from "web3";
+import web3 from "web3";
 // import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 2: Material-UI imports
@@ -17,7 +17,7 @@ import {
     Input,
     Grid,
     SvgIcon,
-    Typography
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -25,12 +25,7 @@ import { XCircle as XIcon } from "react-feather";
 import BorrowChart from "./ChartBorrow";
 import RepayDrawer from "components/UI/Drawer";
 
-import {
-    formatNumber,
-    // fromWei,
-    // toWei,
-    formatPercent
-} from "utils/front-end";
+import { formatNumber, fromWei, toWei, formatPercent } from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -49,22 +44,22 @@ export default function DrawerRepay({ asset, onRepay }) {
 
     // Section 5: Code Component
     const [amount, setAmount] = React.useState(null);
-    // const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
+    const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
     const [enableRepay, setEnableRepay] = React.useState(false);
     React.useEffect(() => {
         if (amount) {
-            // const isAmountLTBalance = web3.utils
-            //     .toBN(toWei(amount, asset.unit))
-            //     .lte(web3.utils.toBN(asset.balance));
-            setEnableRepay(true);
+            const isAmountLTBalance = web3.utils
+                .toBN(toWei(amount, asset.unit))
+                .lte(web3.utils.toBN(asset.balance));
+            setEnableRepay(isAmountLTBalance);
         }
     }, [amount, asset.balance, asset.unit]);
     return (
         <>
             <Button
                 type="button"
-                className={classes.btnActiveOutline}
+                className={classes.btnDrawer}
                 variant="outlined"
                 color="secondary"
                 size="small"
@@ -132,12 +127,13 @@ export default function DrawerRepay({ asset, onRepay }) {
                                 className={classes.input}
                                 placeholder="0.00"
                                 type="number"
-                                onChange={e => setAmount(e.target.value)}
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}
-                                // onClick={onSetMax}
+                                onClick={onSetMax}
                             >
                                 MAX
                             </span>
@@ -146,7 +142,7 @@ export default function DrawerRepay({ asset, onRepay }) {
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
                                 <Grid item md={6} xs>
-                                    Utilization rate
+                                    Market Utilization
                                 </Grid>
                                 <Grid
                                     item
@@ -155,7 +151,7 @@ export default function DrawerRepay({ asset, onRepay }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    72.80%
+                                    {formatPercent(asset.utilization)}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>

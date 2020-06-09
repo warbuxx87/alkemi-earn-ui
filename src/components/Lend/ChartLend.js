@@ -23,12 +23,7 @@ export default class LendChart extends React.PureComponent {
         const { data: chartData } = this.state;
 
         return (
-            <Chart
-                height={81}
-                width={380}
-                style={{ padding: 0 }}
-                data={chartData}
-            >
+            <Chart height={81} style={{ padding: 0 }} data={chartData}>
                 <LineSeries
                     valueField="lineValue"
                     argumentField="argument"

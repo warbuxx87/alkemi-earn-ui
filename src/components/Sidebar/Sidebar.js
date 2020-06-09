@@ -1,22 +1,29 @@
+// Main Component
+
+// Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
 import { compose } from "redux";
 import clsx from "clsx";
 
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import withWidth from "@material-ui/core/withWidth";
-import { withStyles } from "@material-ui/core/styles";
+// Section 2: Material-UI imports
+import {
+    Box,
+    Divider,
+    Drawer,
+    Hidden,
+    List,
+    withWidth,
+    withStyles
+} from "@material-ui/core";
 
+// Section 3: Components & Containers import from the application
 import SidebarDashboardItem from "containers/Sidebar/DashboardItem";
 import SidebarLendItem from "containers/Sidebar/LendItem";
 import SidebarBorrowItem from "containers/Sidebar/BorrowItem";
-// import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
-// import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
-// import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
 import SidebarHeader from "containers/Sidebar/Header";
 
+// Section 4: Define Styles function taking theme as argument and returning an object
 const styles = theme => ({
     drawer: {
         width: 280,
@@ -76,36 +83,48 @@ const styles = theme => ({
     }
 });
 
-const Sidebar = ({ classes, width, variant, open }) => {
-    return (
-        <Drawer
-            variant="permanent"
-            className={clsx(classes.drawer, {
-                [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open
-            })}
-            classes={{
-                paper: clsx(classes.drawerPaper, {
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open
-                })
-            }}
-            anchor="left"
-        >
-            <div className={classes.drawerInner}>
-                <SidebarHeader />
-                <Divider className={classes.divider} />
+// Section 5: Code Component
+function Sidebar({ classes, width, variant, open }) {
+    const content = (
+        <div className={classes.drawerInner}>
+            <SidebarHeader />
+            <Divider className={classes.divider} />
+            <Box pt={1} pb={1}>
                 <List className={classes.list}>
                     <SidebarDashboardItem />
                     <SidebarLendItem />
                     <SidebarBorrowItem />
                 </List>
-                <Divider className={classes.divider} />
-            </div>
-        </Drawer>
+            </Box>
+            <Divider className={classes.divider} />
+        </div>
     );
-};
 
+    return (
+        <>
+            <Hidden mdDown>
+                <Drawer
+                    variant="permanent"
+                    className={clsx(classes.drawer, {
+                        [classes.drawerOpen]: open,
+                        [classes.drawerClose]: !open
+                    })}
+                    classes={{
+                        paper: clsx(classes.drawerPaper, {
+                            [classes.drawerOpen]: open,
+                            [classes.drawerClose]: !open
+                        })
+                    }}
+                    anchor="left"
+                >
+                    {content}
+                </Drawer>
+            </Hidden>
+        </>
+    );
+}
+
+// Section 6: Documentation with PropTypes
 Sidebar.propTypes = {
     classes: PropTypes.object.isRequired,
     width: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
@@ -113,4 +132,5 @@ Sidebar.propTypes = {
     open: PropTypes.bool
 };
 
+// Section 7:  Connect styles and export
 export default compose(withWidth(), withStyles(styles))(Sidebar);
