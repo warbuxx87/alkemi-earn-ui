@@ -122,7 +122,7 @@ export default function DrawerRedeem({ asset, onRedeem }) {
         <>
             <Button
                 type="button"
-                className={classes.btnActiveOutline}
+                className={classes.btnDrawer}
                 variant="outlined"
                 color="secondary"
                 size="small"
@@ -191,6 +191,7 @@ export default function DrawerRedeem({ asset, onRedeem }) {
                                 type="number"
                                 onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}

@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Section 2: Material-UI imports
 import {
@@ -17,7 +18,7 @@ import {
     TableHead,
     TableRow,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -29,8 +30,8 @@ import { formatNumber, formatPercent } from "utils/front-end";
 const useStyles = makeStyles({
     imageSize: {
         width: "36px",
-        height: "36px"
-    }
+        height: "36px",
+    },
 });
 
 const columns = [
@@ -43,19 +44,19 @@ const columns = [
 
         align: "center",
         style: "percent",
-        format: value => value.toFixed(2)
+        format: (value) => value.toFixed(2),
     },
     {
         id: "5",
         label: "Collateral",
 
         align: "center",
-        format: value => value.toFixed(2)
+        format: (value) => value.toFixed(2),
     },
     {
         id: "6",
-        label: ""
-    }
+        label: "",
+    },
 ];
 
 // Section 5: Code Component
@@ -63,135 +64,140 @@ const LendTableActive = ({ data = [] }) => {
     const classes = useStyles();
     return (
         <Card>
-            <CardHeader title="Active Lending Reserves" />
+            <CardHeader title="Active Lending" />
             <Divider />
             <Paper>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((columns, i) => (
-                                <LendTableCell
-                                    key={columns.id}
-                                    align={columns.align}
-                                >
-                                    {columns.label}
-                                </LendTableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.map(row => (
-                            <TableRow key={row.name}>
-                                <LendTableCell
-                                    component="th"
-                                    scope="row"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Box
-                                        minWidth={150}
-                                        display="flex"
-                                        alignItems="center"
+                <PerfectScrollbar>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((columns, i) => (
+                                    <LendTableCell
+                                        key={columns.id}
+                                        align={columns.align}
                                     >
-                                        <img
-                                            className={classes.imageSize}
-                                            src={row.image}
-                                            alt="dai"
-                                        />
-                                        <Box ml={2}>
-                                            <Typography
-                                                variant="h6"
-                                                color="textPrimary"
-                                            >
-                                                {row.name}
-                                            </Typography>
-                                            <Typography
-                                                variant="body2"
-                                                color="textSecondary"
-                                            >
-                                                {row.unit}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                </LendTableCell>
-                                <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Typography
-                                        variant="h6"
-                                        color="textPrimary"
-                                    >
-                                        {formatNumber(row.wallet, row.unit)}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                    >
-                                        {row.wallet_2}
-                                    </Typography>
-                                </LendTableCell>
-                                <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Typography
-                                        variant="h6"
-                                        color="textPrimary"
-                                    >
-                                        {formatNumber(row.balance, row.unit)}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                    >
-                                        {row.balance_2}
-                                    </Typography>
-                                </LendTableCell>
-                                <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Typography
-                                        variant="h6"
-                                        color="textPrimary"
-                                    >
-                                        {formatPercent(row.apr)}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                    >
-                                        {row.apr_2}
-                                    </Typography>
-                                </LendTableCell>
-                                <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
-                                >
-                                    <Switch
-                                        // checked={state.checkedB}
-                                        // onChange={handleChange}
-                                        name="checkedB"
-                                        color="primary"
-                                    />
-                                </LendTableCell>
-                                <LendTableCell align="center">
-                                    <Box
-                                        minWidth={208}
-                                        display="flex"
-                                        alignItems="center"
-                                        justifyContent="flex-end"
-                                    >
-                                        <Box mr={1}>
-                                            <RedeemButton asset={row} />
-                                        </Box>
-                                        <SupplyButton asset={row} />
-                                    </Box>
-                                </LendTableCell>
+                                        {columns.label}
+                                    </LendTableCell>
+                                ))}
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHead>
+                        <TableBody>
+                            {data.map((row) => (
+                                <TableRow key={row.name}>
+                                    <LendTableCell
+                                        component="th"
+                                        scope="row"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Box
+                                            minWidth={150}
+                                            display="flex"
+                                            alignItems="center"
+                                        >
+                                            <img
+                                                className={classes.imageSize}
+                                                src={row.image}
+                                                alt="dai"
+                                            />
+                                            <Box ml={2}>
+                                                <Typography
+                                                    variant="h6"
+                                                    color="textPrimary"
+                                                >
+                                                    {row.name}
+                                                </Typography>
+                                                <Typography
+                                                    variant="body2"
+                                                    color="textSecondary"
+                                                >
+                                                    {row.unit}
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </LendTableCell>
+                                    <LendTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Typography
+                                            variant="h6"
+                                            color="textPrimary"
+                                        >
+                                            {formatNumber(row.wallet, row.unit)}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                        >
+                                            {row.wallet_2}
+                                        </Typography>
+                                    </LendTableCell>
+                                    <LendTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Typography
+                                            variant="h6"
+                                            color="textPrimary"
+                                        >
+                                            {formatNumber(
+                                                row.balance,
+                                                row.unit
+                                            )}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                        >
+                                            {row.balance_2}
+                                        </Typography>
+                                    </LendTableCell>
+                                    <LendTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Typography
+                                            variant="h6"
+                                            color="textPrimary"
+                                        >
+                                            {formatPercent(row.apr)}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                        >
+                                            {row.apr_2}
+                                        </Typography>
+                                    </LendTableCell>
+                                    <LendTableCell
+                                        align="center"
+                                        style={{ width: "16%" }}
+                                    >
+                                        <Switch
+                                            // checked={state.checkedB}
+                                            // onChange={handleChange}
+                                            name="checkedB"
+                                            color="primary"
+                                        />
+                                    </LendTableCell>
+                                    <LendTableCell align="center">
+                                        <Box
+                                            minWidth={208}
+                                            display="flex"
+                                            alignItems="center"
+                                            justifyContent="flex-end"
+                                        >
+                                            <Box mr={1}>
+                                                <RedeemButton asset={row} />
+                                            </Box>
+                                            <SupplyButton asset={row} />
+                                        </Box>
+                                    </LendTableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </PerfectScrollbar>
             </Paper>
         </Card>
     );
@@ -199,7 +205,7 @@ const LendTableActive = ({ data = [] }) => {
 
 // Section 6: Documentation with PropTypes
 LendTableActive.propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired,
 };
 
 // Section 7:  Connect styles and export

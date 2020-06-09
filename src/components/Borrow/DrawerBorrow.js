@@ -125,7 +125,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
         <>
             <Button
                 type="button"
-                className={classes.btnModal}
+                className={classes.btnDrawer}
                 variant="contained"
                 size="small"
                 onClick={handleOpen}
@@ -165,7 +165,6 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                         <div className={classes.supplyPercent}>
                             {formatPercent(asset.apr)} APR
                         </div>
-
                         <BorrowChartBorrow> </BorrowChartBorrow>
                     </Box>
                     <Box p={2} mt={3}>
@@ -193,6 +192,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                 type="number"
                                 onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}
