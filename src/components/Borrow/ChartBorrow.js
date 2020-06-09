@@ -15,7 +15,7 @@ export default class BorrowChart extends React.PureComponent {
         super(props);
 
         this.state = {
-            data: generateData(2.5, 1000, 33)
+            data: generateData(2.5, 1000, 33),
         };
     }
 
@@ -23,12 +23,7 @@ export default class BorrowChart extends React.PureComponent {
         const { data: chartData } = this.state;
 
         return (
-            <Chart
-                height={81}
-                width={355}
-                style={{ padding: 0 }}
-                data={chartData}
-            >
+            <Chart height={81} style={{ padding: 0 }} data={chartData}>
                 <LineSeries
                     valueField="lineValue"
                     argumentField="argument"

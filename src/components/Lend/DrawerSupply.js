@@ -122,7 +122,7 @@ export default function DrawerSupply({ asset, onSupply }) {
         <>
             <Button
                 type="button"
-                className={classes.btnModal}
+                className={classes.btnDrawer}
                 variant="contained"
                 size="small"
                 onClick={handleOpen}
@@ -162,7 +162,6 @@ export default function DrawerSupply({ asset, onSupply }) {
                         <div className={classes.supplyPercent}>
                             {formatPercent(asset.apr)} APR
                         </div>
-
                         <LendChart> </LendChart>
                     </Box>
                     <Box p={2} mt={3}>
@@ -190,6 +189,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                                 type="number"
                                 onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}

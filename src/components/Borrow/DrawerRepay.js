@@ -125,7 +125,7 @@ export default function DrawerRepay({ asset, onRepay }) {
         <>
             <Button
                 type="button"
-                className={classes.btnActiveOutline}
+                className={classes.btnDrawer}
                 variant="outlined"
                 color="secondary"
                 size="small"
@@ -195,6 +195,7 @@ export default function DrawerRepay({ asset, onRepay }) {
                                 type="number"
                                 onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}

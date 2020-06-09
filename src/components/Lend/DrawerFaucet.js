@@ -119,7 +119,7 @@ export default function DrawerFaucet({ asset, onAllocate }) {
         <>
             <Button
                 type="button"
-                className={classes.btnActiveOutline}
+                className={classes.btnDrawer}
                 variant="outlined"
                 color="secondary"
                 size="small"
@@ -188,6 +188,7 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                                 type="number"
                                 onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}

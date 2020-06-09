@@ -9,10 +9,7 @@ const createShallow = ({ dive }) => {
                 // Diving through a Meterial-UI WidthWith component can not be performed
                 // by default because of React.Fragment used in withWidth
                 // It is a known issue: https://github.com/airbnb/enzyme/issues/1213
-                wrapper = wrapper
-                    .dive()
-                    .children()
-                    .at(0);
+                wrapper = wrapper.dive().children().at(0);
             } else {
                 wrapper = wrapper.dive();
             }

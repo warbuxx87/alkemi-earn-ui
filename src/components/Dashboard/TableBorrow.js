@@ -2,6 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Section 2: Material-UI imports
 import {
@@ -15,7 +16,7 @@ import {
     TableHead,
     TableRow,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -24,7 +25,7 @@ import {
 import BorrowTableCell from "components/UI/TableCell";
 import {
     formatNumber,
-    formatPercent
+    formatPercent,
     // formatMoney,
     // calculateEarnings
 } from "utils/front-end";
@@ -33,13 +34,13 @@ import {
 const useStyles = makeStyles({
     imageSize: {
         width: "18px",
-        height: "18px"
+        height: "18px",
     },
     btnActiveOutline: {
         minWidth: 100,
         minHeight: 36,
-        textTransform: "capitalize"
-    }
+        textTransform: "capitalize",
+    },
 });
 
 const columns = [
@@ -47,7 +48,7 @@ const columns = [
     { id: "2", label: "Wallet", align: "left" },
     { id: "3", label: "Borrowed", align: "left" },
     { id: "4", label: "APR %", align: "right" },
-    { id: "5", label: "Paid", align: "right" }
+    { id: "5", label: "Paid", align: "right" },
 ];
 
 export default function BorrowTables({ activeReserves, currency }) {
@@ -60,60 +61,62 @@ export default function BorrowTables({ activeReserves, currency }) {
             <CardHeader title="Active Loans" />
             <Divider />
             <Paper>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column, i) => (
-                                <BorrowTableCell
-                                    key={column.id}
-                                    align={column.align}
-                                >
-                                    {column.label}
-                                </BorrowTableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {activeReserves.map(row => (
-                            <TableRow key={row.unit}>
-                                <BorrowTableCell component="th" scope="Row">
-                                    <Box
-                                        minWidth={100}
-                                        display="flex"
-                                        alignItems="center"
+                <PerfectScrollbar>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column, i) => (
+                                    <BorrowTableCell
+                                        key={column.id}
+                                        align={column.align}
                                     >
-                                        <img
-                                            className={classes.imageSize}
-                                            src={row.image}
-                                            alt={row.symbol}
-                                        />
-                                        <Box ml={2}>
-                                            <Typography
-                                                variant="h6"
-                                                color="textPrimary"
-                                            >
-                                                {row.symbol}
-                                                {row.unit}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                </BorrowTableCell>
-                                <BorrowTableCell align="left">
-                                    {formatNumber(row.wallet, row.unit)}
-                                </BorrowTableCell>
-                                <BorrowTableCell align="left">
-                                    {formatNumber(row.balance, row.unit)}
-                                </BorrowTableCell>
-                                <BorrowTableCell align="right">
-                                    {formatPercent(row.apr)}
-                                </BorrowTableCell>
-                                <BorrowTableCell align="right">
-                                    0
-                                </BorrowTableCell>
+                                        {column.label}
+                                    </BorrowTableCell>
+                                ))}
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHead>
+                        <TableBody>
+                            {activeReserves.map((row) => (
+                                <TableRow key={row.unit}>
+                                    <BorrowTableCell component="th" scope="Row">
+                                        <Box
+                                            minWidth={100}
+                                            display="flex"
+                                            alignItems="center"
+                                        >
+                                            <img
+                                                className={classes.imageSize}
+                                                src={row.image}
+                                                alt={row.symbol}
+                                            />
+                                            <Box ml={2}>
+                                                <Typography
+                                                    variant="h6"
+                                                    color="textPrimary"
+                                                >
+                                                    {row.symbol}
+                                                    {row.unit}
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </BorrowTableCell>
+                                    <BorrowTableCell align="left">
+                                        {formatNumber(row.wallet, row.unit)}
+                                    </BorrowTableCell>
+                                    <BorrowTableCell align="left">
+                                        {formatNumber(row.balance, row.unit)}
+                                    </BorrowTableCell>
+                                    <BorrowTableCell align="right">
+                                        {formatPercent(row.apr)}
+                                    </BorrowTableCell>
+                                    <BorrowTableCell align="right">
+                                        0
+                                    </BorrowTableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </PerfectScrollbar>
             </Paper>
         </Card>
     );
