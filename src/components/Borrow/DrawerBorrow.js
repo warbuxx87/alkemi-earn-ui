@@ -76,6 +76,8 @@ export default function DrawerBorrow({ asset, onBorrow }) {
 
     React.useEffect(() => {
         let timer;
+        let isMounted = true; // manage async call when unmounted
+
         // TODO extract new code with the rest from component in DF-170, consider also extracting this API call if need to be reused
         const getPrices = () => {
             if (!url_map[currentNetworkName].markets_url) return; // TODO markets_url for rinkeby is gotten from main for now, consider replacing with proper url
@@ -99,15 +101,16 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                             )
                         );
 
-                        setUsdPrice(
-                            `${
-                                marketsData[
-                                    address_map[currentNetworkName][
-                                        `address_${asset.unit}`
-                                    ]
-                                ].price
-                            }`
-                        );
+                        if (isMounted)
+                            setUsdPrice(
+                                `${
+                                    marketsData[
+                                        address_map[currentNetworkName][
+                                            `address_${asset.unit}`
+                                        ]
+                                    ].price
+                                }`
+                            );
                     }
 
                     timer = setTimeout(getPrices, 15 * 1000);
@@ -118,6 +121,8 @@ export default function DrawerBorrow({ asset, onBorrow }) {
 
         return () => {
             if (timer) clearTimeout(timer);
+
+            isMounted = false;
         };
     }, [currentNetworkName, asset.unit]);
 
