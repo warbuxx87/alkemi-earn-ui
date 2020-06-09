@@ -57,13 +57,14 @@ export default function DrawerFaucet({ asset, onAllocate }) {
     // Section 5: Code Component
     const [usdPrice, setUsdPrice] = React.useState(null);
 
-    const [amount, setAmount] = React.useState(null);
+    const [amount, setAmount] = React.useState("");
     const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
 
     const [enableAllocate, setEnableAllocate] = React.useState(false);
 
     React.useEffect(() => {
         if (amount) {
+            // Will eventually crash if fed a NaN, TODO: fix in DF-184
             setEnableAllocate(true);
         }
     }, [amount, asset.wallet, asset.unit]);

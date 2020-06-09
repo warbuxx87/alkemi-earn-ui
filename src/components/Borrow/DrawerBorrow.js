@@ -61,7 +61,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
     // Section 5: Code Component
     const [usdPrice, setUsdPrice] = React.useState(null);
 
-    const [amount, setAmount] = React.useState(null);
+    const [amount, setAmount] = React.useState("");
     // const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
     const [enableBorrow, setEnableBorrow] = React.useState(false);

@@ -61,7 +61,7 @@ export default function DrawerRepay({ asset, onRepay }) {
     };
 
     // Section 5: Code Component
-    const [amount, setAmount] = React.useState(null);
+    const [amount, setAmount] = React.useState("");
     const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
     const [enableRepay, setEnableRepay] = React.useState(false);

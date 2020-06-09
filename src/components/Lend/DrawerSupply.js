@@ -58,7 +58,7 @@ export default function DrawerSupply({ asset, onSupply }) {
     // Section 5: Code Component
     const [usdPrice, setUsdPrice] = React.useState(null);
 
-    const [amount, setAmount] = React.useState(null);
+    const [amount, setAmount] = React.useState("");
     const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
 
     const [enableSupply, setEnableSupply] = React.useState(false);
