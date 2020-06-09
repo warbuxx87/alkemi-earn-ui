@@ -32,6 +32,10 @@ const styles = theme => ({
             marginLeft: 80,
             marginRight: 80
         },
+        "@media (max-width:1024px)": {
+            marginLeft: 0,
+            marginRight: 0
+        },
         [theme.breakpoints.up("sm")]: {
             minHeight: "calc(100% - 64px)"
         }

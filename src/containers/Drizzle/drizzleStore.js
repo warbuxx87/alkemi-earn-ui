@@ -6,7 +6,7 @@ import { generateStore } from "@drizzle/store";
 
 import appReducers from "redux/reducers";
 
-const contractEventNotifier = store => next => action => {
+const contractEventNotifier = (store) => (next) => (action) => {
     if (action.type === EventActions.EVENT_FIRED) {
         const contract = action.name;
         const contractEvent = action.event.event;
@@ -25,16 +25,16 @@ export const drizzleOptions = {
     drizzleOptions: {
         contracts: [],
         web3: {
-            customProvider: Web3.givenProvider
-        }
+            customProvider: Web3.givenProvider,
+        },
     },
     polls: {
-        blocks: 6000
+        blocks: 6000,
     },
     syncAlways: true,
     appMiddlewares,
     appReducers,
-    disableReduxDevTools: false // enable ReduxDevTools!
+    disableReduxDevTools: false, // enable ReduxDevTools!
 };
 
 const store = generateStore(drizzleOptions);

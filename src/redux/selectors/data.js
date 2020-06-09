@@ -5,23 +5,23 @@ import address from "constants/address_map.json";
 import { networkSelector } from "./drizzle";
 
 // Stats Selectors
-export const getStats = state => state.data.stats.tx;
-export const getStatsPending = state => state.data.stats.pending;
-export const getStatsError = state => state.data.stats.error;
+export const getStats = (state) => state.data.stats.tx;
+export const getStatsPending = (state) => state.data.stats.pending;
+export const getStatsError = (state) => state.data.stats.error;
 
 // Lend Selectors
-const lendAssetSelector = state => state.data.lend.assets;
-const lendBalanceSelector = state => {
+const lendAssetSelector = (state) => state.data.lend.assets;
+const lendBalanceSelector = (state) => {
     const supplyBalance = {};
     Object.values(
         _.get(state, "contracts.mMarket.getSupplyBalance", {})
-    ).forEach(balance => (supplyBalance[balance.args[1]] = balance.value));
+    ).forEach((balance) => (supplyBalance[balance.args[1]] = balance.value));
     return supplyBalance;
 };
-const lendAPRSelector = state => {
+const lendAPRSelector = (state) => {
     const supplyAPR = {};
     Object.values(_.get(state, "contracts.mMarket.markets", {})).forEach(
-        apr =>
+        (apr) =>
             (supplyAPR[apr.args[0]] = calculateInterest(
                 apr.value.supplyRateMantissa
             ))
@@ -29,18 +29,19 @@ const lendAPRSelector = state => {
     return supplyAPR;
 };
 
-const lendPrincipalSelector = state => {
+const lendPrincipalSelector = (state) => {
     const supplyPrincipal = {};
 
     Object.values(_.get(state, "contracts.mMarket.supplyBalances", {})).forEach(
-        deposit => (supplyPrincipal[deposit.args[1]] = deposit.value.principal)
+        (deposit) =>
+            (supplyPrincipal[deposit.args[1]] = deposit.value.principal)
     );
     return supplyPrincipal;
 };
 
-const getAllowances = state => {
+const getAllowances = (state) => {
     const allowances = {};
-    Object.keys(state.contracts).forEach(asset => {
+    Object.keys(state.contracts).forEach((asset) => {
         if (asset !== "mMarket") {
             const allowance = Object.values(state.contracts[asset].allowance);
             allowances[asset] = _.get(allowance, "[0].value", "0") !== "0";
@@ -55,10 +56,10 @@ function calculateUtilization(totalBorrow, totalSupply) {
     return utilization;
 }
 
-const getUtilizationValues = state => {
+const getUtilizationValues = (state) => {
     const utilizationRates = {};
     Object.values(_.get(state, "contracts.mMarket.markets", {})).forEach(
-        market =>
+        (market) =>
             (utilizationRates[market.args[0]] = calculateUtilization(
                 market.value[6],
                 market.value[3]
@@ -75,7 +76,7 @@ const getLendAsset = createSelector(
     lendPrincipalSelector,
     getUtilizationValues,
     (assets, network, lendBalances, allAPR, allPrincipal, allUtilization) =>
-        Object.values(assets).map(asset => {
+        Object.values(assets).map((asset) => {
             // supply wallet
             let balance = "0";
             let apr = "0";
@@ -93,15 +94,15 @@ const getLendAsset = createSelector(
                 balance,
                 apr,
                 principal,
-                utilization
+                utilization,
             };
         })
 );
 
 // LEND Create Selectors
 
-export const getLendActive = createSelector(getLendAsset, assets =>
-    assets.filter(asset => asset.balance !== "0")
+export const getLendActive = createSelector(getLendAsset, (assets) =>
+    assets.filter((asset) => asset.balance !== "0")
 );
 
 export const getLendInactive = createSelector(
@@ -109,16 +110,16 @@ export const getLendInactive = createSelector(
     getAllowances,
     (assets, allowances) =>
         assets
-            .filter(asset => asset.balance === "0")
-            .map(asset => {
+            .filter((asset) => asset.balance === "0")
+            .map((asset) => {
                 asset.activated = allowances[asset.unit] || false;
                 return asset;
             })
 );
 
-export const getLendPending = state =>
-    Object.values(state.data.lend.assets).filter(asset => asset.pending);
-export const getLendError = state => state.data.lend.error;
+export const getLendPending = (state) =>
+    Object.values(state.data.lend.assets).filter((asset) => asset.pending);
+export const getLendError = (state) => state.data.lend.error;
 
 // Helpers
 function calculateInterest(rateMantissa) {
@@ -129,19 +130,19 @@ function calculateInterest(rateMantissa) {
 
 // Borrow Selectors
 
-const borrowAssetSelector = state => state.data.borrow.assets;
+const borrowAssetSelector = (state) => state.data.borrow.assets;
 
-const borrowBalanceSelector = state => {
+const borrowBalanceSelector = (state) => {
     const borrowBalance = {};
     Object.values(
         _.get(state, "contracts.mMarket.getBorrowBalance", {})
-    ).forEach(balance => (borrowBalance[balance.args[1]] = balance.value));
+    ).forEach((balance) => (borrowBalance[balance.args[1]] = balance.value));
     return borrowBalance;
 };
-const borrowAPRSelector = state => {
+const borrowAPRSelector = (state) => {
     const borrowAPR = {};
     Object.values(_.get(state, "contracts.mMarket.markets", {})).forEach(
-        apr =>
+        (apr) =>
             (borrowAPR[apr.args[0]] = calculateInterest(
                 apr.value.borrowRateMantissa
             ))
@@ -149,11 +150,11 @@ const borrowAPRSelector = state => {
     return borrowAPR;
 };
 
-const borrowPrincipalSelector = state => {
+const borrowPrincipalSelector = (state) => {
     const borrowPrincipal = {};
 
     Object.values(_.get(state, "contracts.mMarket.borrowBalances", {})).forEach(
-        loan => (borrowPrincipal[loan.args[1]] = loan.value.principal)
+        (loan) => (borrowPrincipal[loan.args[1]] = loan.value.principal)
     );
     return borrowPrincipal;
 };
@@ -175,7 +176,7 @@ const getBorrowAsset = createSelector(
         borrowPrincipal,
         marketUtilization
     ) =>
-        Object.values(assets).map(asset => {
+        Object.values(assets).map((asset) => {
             // TODO: get supply wallet
             let balance = "0";
             let apr = "0";
@@ -193,13 +194,13 @@ const getBorrowAsset = createSelector(
                 balance,
                 apr,
                 principal,
-                utilization
+                utilization,
             };
         })
 );
 
-export const getBorrowActive = createSelector(getBorrowAsset, assets =>
-    assets.filter(asset => asset.balance !== "0")
+export const getBorrowActive = createSelector(getBorrowAsset, (assets) =>
+    assets.filter((asset) => asset.balance !== "0")
 );
 
 export const getBorrowInactive = createSelector(
@@ -207,11 +208,11 @@ export const getBorrowInactive = createSelector(
     getAllowances,
     (assets, allowances) =>
         assets
-            .filter(asset => asset.balance === "0")
-            .map(asset => {
+            .filter((asset) => asset.balance === "0")
+            .map((asset) => {
                 asset.activated = allowances[asset.unit] || false;
                 return asset;
             })
 );
 
-export const getBorrowError = state => state.data.borrow.error;
+export const getBorrowError = (state) => state.data.borrow.error;

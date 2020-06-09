@@ -13,11 +13,11 @@ const TestComponent = ({ classes }) => (
     </IconButton>
 );
 
-const styles = theme => ({
+const styles = (theme) => ({
     iconButton: {
         marginLeft: 12,
-        marginRight: 36
-    }
+        marginRight: 36,
+    },
 });
 
 const Component = withStyles(styles)(TestComponent);

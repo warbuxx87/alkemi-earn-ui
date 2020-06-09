@@ -3,12 +3,14 @@
 
 // Section 1: React low level imports
 import React from "react";
+import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
 import MuiAppBar from "@material-ui/core/AppBar";
 import {
     Button,
     Grid,
+    Hidden,
     makeStyles,
     Toolbar,
     Typography
@@ -17,10 +19,10 @@ import {
 // Section 3: Components & Containers import from the application
 import Settings from "./Settings";
 import Notifications from "./Notifications";
+import MobileMenu from "./MobileMenu";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles(theme => ({
-    root: {},
     statusBadge: {
         backgroundColor: theme.palette.success.main,
         width: "9px",
@@ -30,18 +32,35 @@ const useStyles = makeStyles(theme => ({
     },
     connectWallet: {
         minWidth: 130
+    },
+    appBar: {
+        paddingLeft: "16px",
+        paddingRight: "16px",
+        "@media (min-width:1550px)": {
+            paddingLeft: "0px",
+            paddingRight: "0px"
+        }
     }
 }));
 
 // Section 5: Code Component
-const AppBar = ({ title, onConnect, accountAddress }) => {
+function AppBar({
+    title,
+    onConnect,
+    accountAddress,
+    onMobileNavOpen,
+    ...rest
+}) {
     const classes = useStyles();
-
     const addressParser = address =>
         `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
 
     return (
-        <MuiAppBar color="transparent" position="relative">
+        <MuiAppBar
+            color="transparent"
+            position="relative"
+            className={classes.appBar}
+        >
             <Toolbar disableGutters={true}>
                 <Grid
                     container
@@ -51,12 +70,20 @@ const AppBar = ({ title, onConnect, accountAddress }) => {
                     wrap="nowrap"
                 >
                     <Grid item>
-                        <Typography variant="subtitle2" color="textSecondary">
-                            OVERVIEW
-                        </Typography>
-                        <Typography variant="h3" color="textPrimary">
-                            {title}
-                        </Typography>
+                        <Hidden lgUp>
+                            <MobileMenu />
+                        </Hidden>
+                        <Hidden mdDown>
+                            <Typography
+                                variant="subtitle2"
+                                color="textSecondary"
+                            >
+                                OVERVIEW
+                            </Typography>
+                            <Typography variant="h3" color="textPrimary">
+                                {title}
+                            </Typography>
+                        </Hidden>
                     </Grid>
                     <Grid
                         container
@@ -90,11 +117,11 @@ const AppBar = ({ title, onConnect, accountAddress }) => {
             </Toolbar>
         </MuiAppBar>
     );
-};
+}
 
 // Section 6: Documentation with PropTypes
 AppBar.propTypes = {
-    //classes: PropTypes.object.isRequired
+    onMobileNavOpen: PropTypes.func
 };
 
 // Section 7:  Connect styles and export

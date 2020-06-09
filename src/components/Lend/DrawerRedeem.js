@@ -15,7 +15,7 @@ import {
     Input,
     Grid,
     SvgIcon,
-    Typography
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -56,7 +56,7 @@ export default function DrawerRedeem({ asset, onRedeem }) {
         <>
             <Button
                 type="button"
-                className={classes.btnActiveOutline}
+                className={classes.btnDrawer}
                 variant="outlined"
                 color="secondary"
                 size="small"
@@ -123,8 +123,9 @@ export default function DrawerRedeem({ asset, onRedeem }) {
                                 className={classes.input}
                                 placeholder="0.00"
                                 type="number"
-                                onChange={e => setAmount(e.target.value)}
+                                onChange={(e) => setAmount(e.target.value)}
                                 value={amount}
+                                fullWidth={true}
                             />
                             <span
                                 className={classes.maxTips}
