@@ -17,9 +17,9 @@ const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
     );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onSupplyAction }, dispatch);
 
 export default compose(
