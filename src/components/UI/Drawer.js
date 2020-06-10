@@ -56,12 +56,7 @@ const Drawer = makeStyles((theme) =>
             minHeight: 32,
         },
 
-        divSupply: {
-            paddingTop: "40px",
-            paddingBottom: "30px",
-        },
-
-        divBorrow: {
+        sendButtonDiv: {
             paddingTop: "40px",
             paddingBottom: "30px",
         },

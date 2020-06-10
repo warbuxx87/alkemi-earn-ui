@@ -16,8 +16,6 @@ const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
 
     const [enableAllocate, setEnableAllocate] = React.useState(false);
 
-    const usdPrice = useUSDPrice(asset.unit);
-
     React.useEffect(() => {
         if (amount) {
             // Will eventually crash if fed a NaN, TODO: fix in DF-184
@@ -25,17 +23,25 @@ const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
         }
     }, [amount, asset.wallet, asset.unit]);
 
+    const usdPrice = useUSDPrice(asset.unit);
+
     return (
         <Drawer
             asset={asset}
-            enableAllocate={enableAllocate}
-            onAllocate={({ asset, amount }) =>
+            buttonsLabel="Allocate"
+            triggerButtonColor="secondary"
+            triggerButtonVariant="outlined"
+            enableButtonClick={enableAllocate}
+            onButtonClick={({ asset, amount }) =>
                 onAllocateAction({ drizzle, asset, amount })
             }
+            isDoingAction={asset.allocating}
             usdPrice={usdPrice}
             onSetMax={onSetMax}
             amount={amount}
             setAmount={setAmount}
+            mainTitle={`Mint New ${asset.unit} Tokens`}
+            balanceValue={`0.00`}
         />
     );
 };

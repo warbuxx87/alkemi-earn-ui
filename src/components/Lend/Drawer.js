@@ -32,12 +32,18 @@ import {
 
 const LendDrawer = ({
     asset,
-    enableAllocate,
-    onAllocate,
+    enableButtonClick,
+    onButtonClick,
     usdPrice,
     onSetMax,
     amount,
     setAmount,
+    mainTitle,
+    balanceValue,
+    isDoingAction,
+    buttonsLabel,
+    triggerButtonColor,
+    triggerButtonVariant,
 }) => {
     const classes = DrawerClass();
 
@@ -58,15 +64,16 @@ const LendDrawer = ({
             <Button
                 type="button"
                 className={classes.btnDrawer}
-                variant="outlined"
+                variant={triggerButtonVariant}
                 color="secondary"
                 size="small"
+                color={triggerButtonColor}
                 onClick={handleOpen}
             >
-                {asset.allocating ? (
+                {isDoingAction ? (
                     <CircularProgress size={20} color="inherit" />
                 ) : (
-                    "Allocate"
+                    buttonsLabel
                 )}
             </Button>
             <Drawer
@@ -85,7 +92,7 @@ const LendDrawer = ({
                         p={2}
                     >
                         <Typography variant="h4" color="textPrimary">
-                            Mint New {asset.unit} Tokens
+                            {mainTitle}
                         </Typography>
                         <IconButton onClick={handleClose}>
                             <SvgIcon fontSize="small">
@@ -176,28 +183,28 @@ const LendDrawer = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    0.00
+                                    {balanceValue}
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <div className={classes.divAllocate}>
+                        <div className={classes.sendButtonDiv}>
                             <Button
                                 type="button"
                                 className={classes.btnModal}
                                 variant="contained"
                                 color="primary"
-                                onClick={() => onAllocate({ asset, amount })}
-                                disabled={!enableAllocate || asset.allocating}
+                                onClick={() => onButtonClick({ asset, amount })}
+                                disabled={!enableButtonClick || isDoingAction}
                                 size="large"
                                 fullWidth={true}
                             >
-                                {asset.allocating ? (
+                                {isDoingAction ? (
                                     <CircularProgress
                                         size={20}
                                         color="inherit"
                                     />
                                 ) : (
-                                    "Allocate"
+                                    buttonsLabel
                                 )}
                             </Button>
                         </div>
@@ -210,12 +217,18 @@ const LendDrawer = ({
 
 LendDrawer.propTypes = {
     asset: PropTypes.object.isRequired,
-    enableAllocate: PropTypes.bool.isRequired,
-    onAllocate: PropTypes.func.isRequired,
-    usdPrice: PropTypes.string,
+    enableButtonClick: PropTypes.bool.isRequired,
+    onButtonClick: PropTypes.func.isRequired,
+    usdPrice: PropTypes.string, // It starts as null
     onSetMax: PropTypes.func.isRequired,
     amount: PropTypes.string.isRequired,
     setAmount: PropTypes.func.isRequired,
+    mainTitle: PropTypes.string.isRequired,
+    balanceValue: PropTypes.string.isRequired,
+    isDoingAction: PropTypes.bool, // starts as undefined
+    buttonsLabel: PropTypes.string.isRequired,
+    triggerButtonColor: PropTypes.string, // not required
+    triggerButtonVariant: PropTypes.string,
 };
 
 export default LendDrawer;
