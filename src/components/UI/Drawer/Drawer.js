@@ -29,18 +29,6 @@ import { formatPriceWithCurrency, formatPercent } from "utils/front-end"; // TOD
 // Section 4: Define Styles function taking theme as argument and returning an object
 const DrawerClass = makeStyles((theme) =>
     createStyles({
-        MuiTableHeadroot: {
-            backgroundColor: "#ffffff",
-        },
-        chart: {
-            maxHeight: 150,
-        },
-        borderChart: {
-            padding: 0,
-        },
-        supplyChart: {
-            backgroundColor: "#1B1B1B",
-        },
         supplyPercent: {
             letterSpacing: "0px",
             color: "#00A577",
@@ -51,30 +39,11 @@ const DrawerClass = makeStyles((theme) =>
             // backgroundColor:'#1B1B1B',
             padding: "25px 0",
         },
-        simpleModalChart: {
-            // backgroundColor:'#1B1B1B',
-            paddingBottom: "30px",
-        },
-
-        chartBox: {
-            backgroundColor: "#000000",
-        },
         drawer: {
             width: "100%",
             "@media (min-width: 780px)": {
                 width: 380,
             },
-        },
-
-        buttonWrap: {
-            // width: 90px;
-            // width: '100%',
-            marginTop: "30px",
-            textAlign: "center",
-            // backgroundColor:'#00A793',
-            // height: '55px',
-            marginBottom: "23px",
-            // paddingTop:'10px'
         },
         btnDrawer: {
             minWidth: 100,
@@ -82,19 +51,8 @@ const DrawerClass = makeStyles((theme) =>
             fontWeight: 500,
             minHeight: 32,
         },
-
-        sendButtonDiv: {
-            paddingTop: "40px",
-            paddingBottom: "30px",
-        },
-
         inputWrap: {
             position: "relative",
-        },
-        antInput: {
-            backgroundColor: "#161719 !important",
-            border: "1px solid #000000",
-            height: "40px",
         },
         maxTips: {
             position: "absolute",
@@ -126,14 +84,6 @@ const DrawerClass = makeStyles((theme) =>
             padding: "12px 0",
             borderBottom: "1px dashed #a7a7a7",
         },
-        closeIcon: {
-            paddingRight: "10px",
-            cursor: "pointer",
-        },
-        textSupply: {
-            paddingLeft: "40px",
-        },
-
         walletBalance: {
             color: "#a7a7a7",
         },

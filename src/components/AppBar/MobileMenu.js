@@ -35,7 +35,8 @@ const DrawerClass = makeStyles((theme) =>
     })
 );
 
-export default function DrawerSupply({ asset, onSupply }) {
+// Section 5: Code Component
+export default function MobileMenu({}) {
     const classes = DrawerClass();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [isOpen, setOpen] = React.useState(false);
@@ -48,7 +49,6 @@ export default function DrawerSupply({ asset, onSupply }) {
         setOpen(false);
     };
 
-    // Section 5: Code Component
     return (
         <>
             <IconButton color="inherit" onClick={handleOpen}>
