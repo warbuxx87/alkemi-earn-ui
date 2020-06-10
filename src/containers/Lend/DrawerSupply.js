@@ -45,6 +45,7 @@ const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
             setAmount={setAmount}
             mainTitle={`Supply ${asset.unit}`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
+            amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
         />
     );
 };

@@ -8,7 +8,7 @@ import onAllocateAction from "containers/Lend/AllocateMethod";
 
 import useUSDPrice from "hooks/useUSDPrice";
 
-import { fromWei } from "utils/front-end";
+import { formatNumber, fromWei } from "utils/front-end";
 
 const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
     const [amount, setAmount] = React.useState("");
@@ -42,6 +42,7 @@ const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
             setAmount={setAmount}
             mainTitle={`Mint New ${asset.unit} Tokens`}
             balanceValue={`0.00`}
+            amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
         />
     );
 };

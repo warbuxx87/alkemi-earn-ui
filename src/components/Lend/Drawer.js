@@ -22,11 +22,7 @@ import {
 import { XCircle as XIcon } from "react-feather";
 import LendChart from "./ChartLend";
 import DrawerClass from "components/UI/Drawer";
-import {
-    formatNumber,
-    formatPriceWithCurrency,
-    formatPercent,
-} from "utils/front-end";
+import { formatPriceWithCurrency, formatPercent } from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -44,6 +40,7 @@ const LendDrawer = ({
     buttonsLabel,
     triggerButtonColor,
     triggerButtonVariant,
+    amountValue,
 }) => {
     const classes = DrawerClass();
 
@@ -65,7 +62,6 @@ const LendDrawer = ({
                 type="button"
                 className={classes.btnDrawer}
                 variant={triggerButtonVariant}
-                color="secondary"
                 size="small"
                 color={triggerButtonColor}
                 onClick={handleOpen}
@@ -121,7 +117,7 @@ const LendDrawer = ({
                                 justify="flex-end"
                                 className={classes.walletBalance}
                             >
-                                Wallet: {formatNumber(asset.wallet, asset.unit)}
+                                {amountValue}
                             </Grid>
                         </Grid>
                         <div className={classes.inputWrap}>
@@ -229,6 +225,7 @@ LendDrawer.propTypes = {
     buttonsLabel: PropTypes.string.isRequired,
     triggerButtonColor: PropTypes.string, // not required
     triggerButtonVariant: PropTypes.string,
+    amountValue: PropTypes.string.isRequired,
 };
 
 export default LendDrawer;

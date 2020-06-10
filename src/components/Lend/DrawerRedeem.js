@@ -71,58 +71,6 @@ export default function DrawerRedeem({ asset, onRedeem }) {
         }
     }, [amount, asset.balance, asset.unit]);
 
-    React.useEffect(() => {
-        let timer;
-        let isMounted = true; // manage async call when unmounted
-
-        // TODO extract new code with the rest from component in DF-170, consider also extracting this API call if need to be reused
-        const getPrices = () => {
-            if (!url_map[currentNetworkName].markets_url) return; // TODO markets_url for rinkeby is gotten from main for now, consider replacing with proper url
-
-            // This call is made for each coin in the table, would benefit from making this call only once,
-            // TODO decide later (after refactor tasks) if it should be called at a higher order and dispatched to redux and/or throttled directly
-            fetch(url_map[currentNetworkName].markets_url)
-                .then((res) => {
-                    return res.text();
-                })
-                .then((data) => {
-                    if (data) {
-                        const obj_data = JSON.parse(data);
-
-                        const marketsData = obj_data.find((market) =>
-                            Object.prototype.hasOwnProperty.call(
-                                market,
-                                address_map[currentNetworkName][
-                                    `address_${asset.unit}`
-                                ]
-                            )
-                        );
-
-                        if (isMounted)
-                            setUsdPrice(
-                                `${
-                                    marketsData[
-                                        address_map[currentNetworkName][
-                                            `address_${asset.unit}`
-                                        ]
-                                    ].price
-                                }`
-                            );
-                    }
-
-                    timer = setTimeout(getPrices, 15 * 1000);
-                });
-        };
-
-        if (currentNetworkName !== undefined) getPrices();
-
-        return () => {
-            if (timer) clearTimeout(timer);
-
-            isMounted = false;
-        };
-    }, [currentNetworkName, asset.unit]);
-
     return (
         <>
             <Button
@@ -154,9 +102,10 @@ export default function DrawerRedeem({ asset, onRedeem }) {
                         alignItems="center"
                         p={2}
                     >
-                        <Typography variant="h4" color="textPrimary">
-                            Redeem {asset.unit}
-                        </Typography>
+                        <Typography
+                            variant="h4"
+                            color="textPrimary"
+                        ></Typography>
                         <IconButton onClick={handleClose}>
                             <SvgIcon fontSize="small">
                                 <XIcon />
@@ -183,8 +132,8 @@ export default function DrawerRedeem({ asset, onRedeem }) {
                                 justify="flex-end"
                                 className={classes.walletBalance}
                             >
-                                {"Supplied: "}
-                                {formatNumber(asset.balance, asset.unit)}
+                                {""}
+                                {}
                             </Grid>
                         </Grid>
                         <div className={classes.inputWrap}>
