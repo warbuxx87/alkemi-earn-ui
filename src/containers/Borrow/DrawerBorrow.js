@@ -7,7 +7,7 @@ import useUSDPrice from "hooks/useUSDPrice";
 import { formatNumber } from "utils/front-end";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import Drawer from "components/UI/Drawer";
+import Drawer from "components/UI/Drawer/Drawer";
 import onBorrowAction from "containers/Borrow/BorrowMethod";
 
 const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {

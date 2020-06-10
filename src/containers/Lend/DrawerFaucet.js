@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import Drawer from "components/UI/Drawer";
+import Drawer from "components/UI/Drawer/Drawer";
 import onAllocateAction from "containers/Lend/AllocateMethod";
 
 import useUSDPrice from "hooks/useUSDPrice";

@@ -9,7 +9,7 @@ import useUSDPrice from "hooks/useUSDPrice";
 import { formatNumber, fromWei, toWei } from "utils/front-end";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import Drawer from "components/UI/Drawer";
+import Drawer from "components/UI/Drawer/Drawer";
 import onRepayAction from "containers/Borrow/RepayMethod";
 
 const DrawerRepayContainer = ({ asset, drizzle, onRepayAction }) => {
