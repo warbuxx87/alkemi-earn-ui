@@ -10,7 +10,7 @@ import {
     Drawer,
     IconButton,
     List,
-    SvgIcon
+    SvgIcon,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application

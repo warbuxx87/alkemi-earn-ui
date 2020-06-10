@@ -6,7 +6,7 @@ const decimalsToUnit = {
     9: "gwei",
     12: "micro",
     15: "milli",
-    18: "ether"
+    18: "ether",
 };
 
 // decimals is constant, default will be 12
@@ -17,18 +17,8 @@ const assetToDecimals = {
     PAX: 18,
     USDT: 6,
     USDC: 6,
-    WBTC: 8
+    WBTC: 8,
 };
-
-// const USDxPrice = state => {
-//     const calculateAccountValues = Object.values(
-//         _.get(state, "contracts.mMarket.assetPrices", {})
-//     );
-//     if (calculateAccountValues[0]) {
-//         return _.get(calculateAccountValues, "[0].value");
-//     }
-//     return null;
-// };
 
 export const fromWei = (value, unit) => {
     if (unit === "WBTC") {
@@ -69,12 +59,49 @@ export const formatMoney = (value, currency) => {
     const wei = fromWei(value);
     return new Intl.NumberFormat("en-es", {
         style: "currency",
-        currency
+        currency,
     }).format(wei);
 };
 
+// value in USD
+export const formatETHMoney = (value, currency, unit, usdPrice) => {
+    if (usdPrice === null || usdPrice === undefined) {
+        usdPrice = "4131207138725935";
+    }
+
+    let calculation = web3.utils
+        .toBN(value)
+        .div(web3.utils.toBN(usdPrice))
+        .toString();
+
+    switch (unit) {
+        case "WBTC":
+            calculation = calculation / 1e10;
+            break;
+        case "USDC":
+        case "USDT":
+            calculation = calculation / 1e12;
+            break;
+        default:
+        // code block
+    }
+
+    return new Intl.NumberFormat("en-es", {
+        style: "currency",
+        currency,
+    }).format(calculation);
+};
+
+// Format a price number with proper symbol (ex: $1.01)
+export const formatPriceWithCurrency = (price, currency) => {
+    return new Intl.NumberFormat("en-es", {
+        style: "currency",
+        currency,
+    }).format(price);
+};
+
 // value in Percent
-export const formatPercent = num => {
+export const formatPercent = (num) => {
     return (num * 100).toFixed(2) + "%";
 };
 

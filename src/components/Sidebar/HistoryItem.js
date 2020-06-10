@@ -35,7 +35,7 @@ const SidebarHistoryItem = ({ onClick, selected }) => (
 // Section 6: Documentation with PropTypes
 SidebarHistoryItem.propTypes = {
     selected: PropTypes.bool,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
 };
 
 // Section 7:  Connect styles and export

@@ -68,6 +68,14 @@ const getUtilizationValues = (state) => {
     return utilizationRates;
 };
 
+const getAssetPrices = (state) => {
+    const assetPrices = {};
+    Object.values(_.get(state, "contracts.mMarket.assetPrices", {})).forEach(
+        (asset) => (assetPrices[asset.args[0]] = asset.value)
+    );
+    return assetPrices;
+};
+
 const getLendAsset = createSelector(
     lendAssetSelector,
     networkSelector,
@@ -75,19 +83,30 @@ const getLendAsset = createSelector(
     lendAPRSelector,
     lendPrincipalSelector,
     getUtilizationValues,
-    (assets, network, lendBalances, allAPR, allPrincipal, allUtilization) =>
+    getAssetPrices,
+    (
+        assets,
+        network,
+        lendBalances,
+        allAPR,
+        allPrincipal,
+        allUtilization,
+        assetPrices
+    ) =>
         Object.values(assets).map((asset) => {
             // supply wallet
             let balance = "0";
             let apr = "0";
             let principal = "0";
             let utilization = "0";
+            let price = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = lendBalances[token_address] || "0";
                 apr = allAPR[token_address] || "0";
                 principal = allPrincipal[token_address] || "0";
                 utilization = allUtilization[token_address] || "0";
+                price = assetPrices[token_address] || "0";
             }
             return {
                 ...asset,
@@ -95,6 +114,7 @@ const getLendAsset = createSelector(
                 apr,
                 principal,
                 utilization,
+                price,
             };
         })
 );
@@ -139,6 +159,7 @@ const borrowBalanceSelector = (state) => {
     ).forEach((balance) => (borrowBalance[balance.args[1]] = balance.value));
     return borrowBalance;
 };
+
 const borrowAPRSelector = (state) => {
     const borrowAPR = {};
     Object.values(_.get(state, "contracts.mMarket.markets", {})).forEach(
@@ -168,13 +189,15 @@ const getBorrowAsset = createSelector(
     borrowAPRSelector,
     borrowPrincipalSelector,
     getUtilizationValues,
+    getAssetPrices,
     (
         assets,
         network,
         borrowBalances,
         borrowAPR,
         borrowPrincipal,
-        marketUtilization
+        marketUtilization,
+        assetPrices
     ) =>
         Object.values(assets).map((asset) => {
             // TODO: get supply wallet
@@ -182,12 +205,14 @@ const getBorrowAsset = createSelector(
             let apr = "0";
             let principal = "0";
             let utilization = "0";
+            let price = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
                 apr = borrowAPR[token_address] || "0";
                 principal = borrowPrincipal[token_address] || "0";
                 utilization = marketUtilization[token_address] || "0";
+                price = assetPrices[token_address] || "0";
             }
             return {
                 ...asset,
@@ -195,6 +220,7 @@ const getBorrowAsset = createSelector(
                 apr,
                 principal,
                 utilization,
+                price,
             };
         })
 );

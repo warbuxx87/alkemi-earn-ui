@@ -16,7 +16,7 @@ import {
     TableHead,
     TableRow,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -25,7 +25,7 @@ import {
 import BorrowTableCell from "components/UI/TableCell";
 import {
     formatNumber,
-    formatPercent
+    formatPercent,
     // formatMoney,
     // calculateEarnings
 } from "utils/front-end";
@@ -34,13 +34,13 @@ import {
 const useStyles = makeStyles({
     imageSize: {
         width: "18px",
-        height: "18px"
+        height: "18px",
     },
     btnActiveOutline: {
         minWidth: 100,
         minHeight: 36,
-        textTransform: "capitalize"
-    }
+        textTransform: "capitalize",
+    },
 });
 
 const columns = [
@@ -48,7 +48,7 @@ const columns = [
     { id: "2", label: "Wallet", align: "left" },
     { id: "3", label: "Borrowed", align: "left" },
     { id: "4", label: "APR %", align: "right" },
-    { id: "5", label: "Paid", align: "right" }
+    { id: "5", label: "Paid", align: "right" },
 ];
 
 export default function BorrowTables({ activeReserves, currency }) {
@@ -76,7 +76,7 @@ export default function BorrowTables({ activeReserves, currency }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {activeReserves.map(row => (
+                            {activeReserves.map((row) => (
                                 <TableRow key={row.unit}>
                                     <BorrowTableCell component="th" scope="Row">
                                         <Box

@@ -13,12 +13,12 @@ import Sidebar from "containers/Sidebar/Sidebar";
 import AppBar from "containers/AppBar/AppBar";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const styles = theme => ({
+const styles = (theme) => ({
     frame: {
         position: "relative",
         display: "flex",
         width: "100%",
-        minHeight: "100%"
+        minHeight: "100%",
     },
     content: {
         position: "relative",
@@ -30,15 +30,15 @@ const styles = theme => ({
         marginRight: 32,
         "@media (min-width:1550px)": {
             marginLeft: 80,
-            marginRight: 80
+            marginRight: 80,
         },
         "@media (max-width:1024px)": {
             marginLeft: 0,
-            marginRight: 0
+            marginRight: 0,
         },
         [theme.breakpoints.up("sm")]: {
-            minHeight: "calc(100% - 64px)"
-        }
+            minHeight: "calc(100% - 64px)",
+        },
     },
     contentShifted: {
         width: "calc(100% - 400px)",
@@ -51,13 +51,13 @@ const styles = theme => ({
         marginRight: "100px",
         [theme.breakpoints.up("sm")]: {
             minHeight: "calc(100% - 64px)",
-            marginTop: 100
+            marginTop: 100,
         },
         "@media (min-width: 1550px)": {
             marginLeft: "50px!important",
-            marginRight: "25px!important"
-        }
-    }
+            marginRight: "25px!important",
+        },
+    },
 });
 
 // Section 5: Code Component
@@ -73,7 +73,7 @@ const LayoutSkeleton = ({ classes }) => (
 
 // Section 6: Documentation with PropTypes
 LayoutSkeleton.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
 };
 
 // Section 7:  Connect styles and export

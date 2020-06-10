@@ -5,6 +5,7 @@ import React from "react";
 // import PropTypes from "prop-types";
 // import web3 from "web3";
 // import withDrizzle from "containers/Drizzle/withDrizzle";
+import { useSelector } from "react-redux";
 
 // Section 2: Material-UI imports
 import {
@@ -27,14 +28,25 @@ import BorrowDrawer from "components/UI/Drawer";
 // import { onBorrow } from "containers/Borrow/BorrowAction";
 import {
     formatNumber,
+    formatPriceWithCurrency,
     // fromWei,
     // toWei,
     formatPercent,
 } from "utils/front-end";
+
+// wild selector
+import { networkSelector } from "redux/selectors/drizzle";
+
+// wild url_map
+const url_map = require("constants/url_map.json");
+const address_map = require("constants/address_map.json");
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 
 export default function DrawerBorrow({ asset, onBorrow }) {
     const classes = BorrowDrawer();
+
+    const currentNetworkName = useSelector(networkSelector);
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [isOpen, setOpen] = React.useState(false);
 
@@ -47,7 +59,9 @@ export default function DrawerBorrow({ asset, onBorrow }) {
     };
 
     // Section 5: Code Component
-    const [amount, setAmount] = React.useState(null);
+    const [usdPrice, setUsdPrice] = React.useState(null);
+
+    const [amount, setAmount] = React.useState("");
     // const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
     const [enableBorrow, setEnableBorrow] = React.useState(false);
@@ -59,6 +73,59 @@ export default function DrawerBorrow({ asset, onBorrow }) {
             setEnableBorrow(true);
         }
     }, [amount, asset.balance, asset.unit]);
+
+    React.useEffect(() => {
+        let timer;
+        let isMounted = true; // manage async call when unmounted
+
+        // TODO extract new code with the rest from component in DF-170, consider also extracting this API call if need to be reused
+        const getPrices = () => {
+            if (!url_map[currentNetworkName].markets_url) return; // TODO markets_url for rinkeby is gotten from main for now, consider replacing with proper url
+
+            // This call is made for each coin in the table, would benefit from making this call only once,
+            // TODO decide later (after refactor tasks) if it should be called at a higher order and dispatched to redux and/or throttled directly
+            fetch(url_map[currentNetworkName].markets_url)
+                .then((res) => {
+                    return res.text();
+                })
+                .then((data) => {
+                    if (data) {
+                        const obj_data = JSON.parse(data);
+
+                        const marketsData = obj_data.find((market) =>
+                            Object.prototype.hasOwnProperty.call(
+                                market,
+                                address_map[currentNetworkName][
+                                    `address_${asset.unit}`
+                                ]
+                            )
+                        );
+
+                        if (isMounted)
+                            setUsdPrice(
+                                `${
+                                    marketsData[
+                                        address_map[currentNetworkName][
+                                            `address_${asset.unit}`
+                                        ]
+                                    ].price
+                                }`
+                            );
+                    }
+
+                    timer = setTimeout(getPrices, 15 * 1000);
+                });
+        };
+
+        if (currentNetworkName !== undefined) getPrices();
+
+        return () => {
+            if (timer) clearTimeout(timer);
+
+            isMounted = false;
+        };
+    }, [currentNetworkName, asset.unit]);
+
     return (
         <>
             <Button
@@ -166,7 +233,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    $1.00
+                                    {formatPriceWithCurrency(usdPrice, "USD")}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -180,7 +247,7 @@ export default function DrawerBorrow({ asset, onBorrow }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    0.00
+                                    {formatNumber(asset.balance, asset.unit)}
                                 </Grid>
                             </Grid>
                         </Grid>

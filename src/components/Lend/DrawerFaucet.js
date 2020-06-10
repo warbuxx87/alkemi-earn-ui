@@ -2,6 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
+import { useSelector } from "react-redux";
 
 // Section 2: Material-UI imports
 import {
@@ -21,12 +22,27 @@ import {
 import { XCircle as XIcon } from "react-feather";
 import LendChart from "./ChartLend";
 import FaucetDrawer from "components/UI/Drawer";
-import { formatNumber, fromWei, formatPercent } from "utils/front-end";
+import {
+    formatNumber,
+    formatPriceWithCurrency,
+    fromWei,
+    formatPercent,
+} from "utils/front-end";
+
+// wild selector
+import { networkSelector } from "redux/selectors/drizzle";
+
+// wild url_map
+const url_map = require("constants/url_map.json");
+const address_map = require("constants/address_map.json");
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
 export default function DrawerFaucet({ asset, onAllocate }) {
     const classes = FaucetDrawer();
+
+    const currentNetworkName = useSelector(networkSelector);
+
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [isOpen, setOpen] = React.useState(false);
 
@@ -39,15 +55,72 @@ export default function DrawerFaucet({ asset, onAllocate }) {
     };
 
     // Section 5: Code Component
-    const [amount, setAmount] = React.useState(null);
+    const [usdPrice, setUsdPrice] = React.useState(null);
+
+    const [amount, setAmount] = React.useState("");
     const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
 
     const [enableAllocate, setEnableAllocate] = React.useState(false);
+
     React.useEffect(() => {
         if (amount) {
+            // Will eventually crash if fed a NaN, TODO: fix in DF-184
             setEnableAllocate(true);
         }
     }, [amount, asset.wallet, asset.unit]);
+
+    React.useEffect(() => {
+        let timer;
+        let isMounted = true; // manage async call when unmounted
+
+        // TODO extract new code with the rest from component in DF-170, consider also extracting this API call if need to be reused
+        const getPrices = () => {
+            if (!url_map[currentNetworkName].markets_url) return; // TODO markets_url for rinkeby is gotten from main for now, consider replacing with proper url
+
+            // This call is made for each coin in the table, would benefit from making this call only once,
+            // TODO decide later (after refactor tasks) if it should be called at a higher order and dispatched to redux and/or throttled directly
+            fetch(url_map[currentNetworkName].markets_url)
+                .then((res) => {
+                    return res.text();
+                })
+                .then((data) => {
+                    if (data) {
+                        const obj_data = JSON.parse(data);
+
+                        const marketsData = obj_data.find((market) =>
+                            Object.prototype.hasOwnProperty.call(
+                                market,
+                                address_map[currentNetworkName][
+                                    `address_${asset.unit}`
+                                ]
+                            )
+                        );
+
+                        if (isMounted)
+                            setUsdPrice(
+                                `${
+                                    marketsData[
+                                        address_map[currentNetworkName][
+                                            `address_${asset.unit}`
+                                        ]
+                                    ].price
+                                }`
+                            );
+                    }
+
+                    timer = setTimeout(getPrices, 15 * 1000);
+                });
+        };
+
+        if (currentNetworkName !== undefined) getPrices();
+
+        return () => {
+            if (timer) clearTimeout(timer);
+
+            isMounted = false;
+        };
+    }, [currentNetworkName, asset.unit]);
+
     return (
         <>
             <Button
@@ -157,7 +230,7 @@ export default function DrawerFaucet({ asset, onAllocate }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    $1.00
+                                    {formatPriceWithCurrency(usdPrice, "USD")}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>

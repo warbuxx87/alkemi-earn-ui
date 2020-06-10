@@ -15,7 +15,7 @@ export default class BorrowChart extends React.PureComponent {
         super(props);
 
         this.state = {
-            data: generateData(2.5, 1000, 33)
+            data: generateData(2.5, 1000, 33),
         };
     }
 

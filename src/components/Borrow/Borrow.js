@@ -15,19 +15,19 @@ import BorrowCardInterest from "./CardInterest";
 import BorrowCardAPR from "./CardAPR";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: theme.palette.background.dark,
         minHeight: "100%",
         paddingTop: theme.spacing(3),
-        paddingBottom: theme.spacing(3)
+        paddingBottom: theme.spacing(3),
     },
     container: {
         [theme.breakpoints.up("lg")]: {
             paddingLeft: 0,
-            paddingRight: 0
-        }
-    }
+            paddingRight: 0,
+        },
+    },
 }));
 
 // Section 5: Code Component
@@ -68,7 +68,7 @@ Borrow.propTypes = {
     className: PropTypes.string,
     activeBorrow: PropTypes.array.isRequired,
     inactiveBorrow: PropTypes.array.isRequired,
-    onActivate: PropTypes.func.isRequired
+    onActivate: PropTypes.func.isRequired,
 };
 
 // Section 7:  Connect styles and export

@@ -36,7 +36,7 @@ const SidebarBorrowItem = ({ onClick, selected }) => (
 // Section 6: Documentation with PropTypes
 SidebarBorrowItem.propTypes = {
     selected: PropTypes.bool,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
 };
 
 // Section 7:  Connect styles and export
