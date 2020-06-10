@@ -5,7 +5,7 @@ import { bindActionCreators, compose } from "redux";
 import web3 from "web3";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import Drawer from "components/Lend/Drawer";
+import Drawer from "components/UI/Drawer";
 import onRedeemAction from "containers/Lend/RedeemMethod";
 
 import useUSDPrice from "hooks/useUSDPrice";
