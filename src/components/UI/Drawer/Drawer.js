@@ -90,7 +90,7 @@ const DrawerClass = makeStyles((theme) =>
     })
 );
 
-const LendDrawer = ({
+const DrawerWrapper = ({
     asset,
     enableButtonClick,
     onButtonClick,
@@ -275,7 +275,7 @@ const LendDrawer = ({
     );
 };
 
-LendDrawer.propTypes = {
+DrawerWrapper.propTypes = {
     asset: PropTypes.object.isRequired,
     enableButtonClick: PropTypes.bool.isRequired,
     onButtonClick: PropTypes.func.isRequired,
@@ -292,4 +292,4 @@ LendDrawer.propTypes = {
     amountValue: PropTypes.string.isRequired,
 };
 
-export default LendDrawer;
+export default DrawerWrapper;
