@@ -37,6 +37,9 @@ function Dashboard() {
     return (
         <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
+                <Grid item lg={12} sm={12} xs={12}>
+                    <CardChart />
+                </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <DashCardValue />
                 </Grid>
@@ -45,9 +48,6 @@ function Dashboard() {
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <DashCardBorrow />
-                </Grid>
-                <Grid item lg={12} sm={12} xs={12}>
-                    <CardChart />
                 </Grid>
                 <Grid item lg={6} sm={6} xs={12}>
                     <TableSupply />

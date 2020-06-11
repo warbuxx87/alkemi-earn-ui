@@ -13,42 +13,40 @@ import {
     Divider,
     Grid,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 import { formatMoney } from "utils/front-end";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(3),
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     label: {
-        marginLeft: theme.spacing(1)
+        marginLeft: theme.spacing(1),
     },
     item: {
         textAlign: "left",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     contentCard: {
-        borderBottom: `1px solid ${theme.palette.success.main}`
-    }
+        borderBottom: `1px solid ${theme.palette.success.main}`,
+    },
 }));
 
 function SupplyBalance({
     totalSupply,
     currency,
     apr = (0.0).toFixed(2),
-    percentage = "%"
+    percentage = "%",
 }) {
     const classes = useStyles();
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Current Deposit" className={classes.item} />
-            <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
                     className={classes.item}
@@ -104,7 +102,7 @@ function SupplyBalance({
 
 // Section 6: Documentation with PropTypes
 SupplyBalance.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export

@@ -13,30 +13,30 @@ import {
     Divider,
     Grid,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 import { formatMoney, formatPercent } from "utils/front-end";
 
 // Section 3: Components & Containers import from the application
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(3),
         display: "flex",
         alignItems: "right",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     label: {
-        marginLeft: theme.spacing(1)
+        marginLeft: theme.spacing(1),
     },
     item: {
         textAlign: "left",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     contentCard: {
-        borderBottom: `1px solid ${theme.palette.common.white}`
-    }
+        borderBottom: `1px solid ${theme.palette.common.white}`,
+    },
 }));
 
 function Balance({ aggregatedBalance, currency, collateralRatio }) {
@@ -44,8 +44,6 @@ function Balance({ aggregatedBalance, currency, collateralRatio }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Account Liquidity" className={classes.header} />
-            <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
                     className={classes.item}
@@ -100,7 +98,7 @@ function Balance({ aggregatedBalance, currency, collateralRatio }) {
 
 // Section 6: Documentation with PropTypes
 Balance.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
