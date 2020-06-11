@@ -21,25 +21,12 @@ import AreaChart from "./Chart";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: theme.spacing(3),
-        display: "flex",
-        alignItems: "right",
-        justifyContent: "space-between",
-    },
-    label: {
-        marginLeft: theme.spacing(1),
-    },
     item: {
-        textAlign: "left",
         justifyContent: "center",
-    },
-    contentCard: {
-        borderBottom: `1px solid ${theme.palette.common.white}`,
     },
 }));
 
-function CardChart({ aggregatedBalance, currency, collateralRatio }) {
+function CardChart({ className }) {
     const classes = useStyles();
     // Section 5: Code Component
     return (
@@ -47,14 +34,7 @@ function CardChart({ aggregatedBalance, currency, collateralRatio }) {
             <CardHeader title="Account Liquidity" className={classes.header} />
             <Divider />
             <CardContent className={classes.contentCard}>
-                <Paper
-                    className={classes.item}
-                    display="flex"
-                    alignItems="center"
-                    flexWrap="wrap"
-                >
-                    <AreaChart />
-                </Paper>
+                <AreaChart />
             </CardContent>
         </Card>
     );

@@ -297,11 +297,11 @@ class AreaChart extends Component {
                 chart: {
                     type: "area",
                     height: 300,
-                    foreColor: "#8C87C2",
-                    fontFamily: "Rubik, sans-serif",
+                    foreColor: "#fff",
+                    fontFamily: "Roboto, sans-serif",
                     stacked: true,
                     dropShadow: {
-                        enabled: true,
+                        enabled: false,
                         enabledSeries: [0],
                         top: -2,
                         left: 2,
@@ -324,7 +324,7 @@ class AreaChart extends Component {
                 markers: {
                     size: 0,
                     strokeColor: "#fff",
-                    strokeWidth: 3,
+                    strokeWidth: 1,
                     strokeOpacity: 1,
                     fillOpacity: 1,
                     hover: {
