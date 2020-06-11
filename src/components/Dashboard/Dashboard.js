@@ -12,21 +12,22 @@ import DashCardSupply from "containers/Dashboard/CardSupply";
 import DashCardBorrow from "containers/Dashboard/CardBorrow";
 import TableSupply from "containers/Dashboard/TableSupply";
 import TableBorrow from "containers/Dashboard/TableBorrow";
+import CardChart from "components/Dashboard/CardChart";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: theme.palette.background.dark,
         minHeight: "100%",
         paddingTop: theme.spacing(3),
-        paddingBottom: theme.spacing(3)
+        paddingBottom: theme.spacing(3),
     },
     container: {
         [theme.breakpoints.up("lg")]: {
             paddingLeft: 0,
-            paddingRight: 0
-        }
-    }
+            paddingRight: 0,
+        },
+    },
 }));
 
 function Dashboard() {
@@ -44,6 +45,9 @@ function Dashboard() {
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <DashCardBorrow />
+                </Grid>
+                <Grid item lg={12} sm={12} xs={12}>
+                    <CardChart />
                 </Grid>
                 <Grid item lg={6} sm={6} xs={12}>
                     <TableSupply />
