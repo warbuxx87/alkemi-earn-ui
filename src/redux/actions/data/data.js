@@ -1,37 +1,3 @@
-//                                     //
-// ------------ STATS ACTIONS -------- //
-//                                     //
-
-// Declare action type as a constant
-export const FETCH_STATS_PENDING = "FETCH_STATS_PENDING";
-
-// Declare action creator
-export const fetchStatsPending = () => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_STATS_PENDING
-});
-
-// Declare action type as a constant
-export const FETCH_STATS_SUCCESS = "FETCH_STATS_SUCCESS";
-
-// Declare action creator
-export const fetchStatsSuccess = tx => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_STATS_SUCCESS,
-    payload: tx
-});
-
-// Declare action type as a constant
-export const FETCH_STATS_ERROR = "FETCH_STATS_ERROR";
-
-// Declare action creator
-export const fetchStatsError = error => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_STATS_ERROR,
-    payload: new Error(),
-    error: true
-});
-
 //                                      //
 // ------------ BORROW ACTIONS -------- //
 //                                      //
@@ -40,31 +6,31 @@ export const fetchStatsError = error => ({
 export const FETCH_BORROW_PENDING = "FETCH_BORROW_PENDING";
 
 // Declare action creator
-export const fetchBorrowPending = asset => ({
+export const fetchBorrowPending = (asset) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_PENDING,
-    asset
+    asset,
 });
 
 // Declare action type as a constant
 export const FETCH_BORROW_SUCCESS = "FETCH_BORROW_SUCCESS";
 
 // Declare action creator
-export const fetchBorrowSuccess = asset => ({
+export const fetchBorrowSuccess = (asset) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_SUCCESS,
-    asset
+    asset,
 });
 
 // Declare action type as a constant
 export const FETCH_BORROW_ERROR = "FETCH_BORROW_ERROR";
 
 // Declare action creator
-export const fetchBorrowError = error => ({
+export const fetchBorrowError = (error) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_ERROR,
     payload: new Error(),
-    error: true
+    error: true,
 });
 
 //                                      //
@@ -75,20 +41,20 @@ export const fetchBorrowError = error => ({
 export const FETCH_LEND_PENDING = "FETCH_LEND_PENDING";
 
 // Declare action creator
-export const fetchLendPending = asset => ({
+export const fetchLendPending = (asset) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_LEND_PENDING,
-    asset
+    asset,
 });
 
 // Declare action type as a constant
 export const FETCH_LEND_SUCCESS = "FETCH_LEND_SUCCESS";
 
 // Declare action creator
-export const fetchLendSuccess = asset => ({
+export const fetchLendSuccess = (asset) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_LEND_SUCCESS,
-    asset
+    asset,
 });
 
 // Declare action type as a constant
@@ -100,8 +66,8 @@ export const fetchLendError = (asset, error) => ({
     type: FETCH_LEND_ERROR,
     payload: {
         error,
-        asset
-    }
+        asset,
+    },
 });
 
 //                                      //
@@ -109,15 +75,15 @@ export const fetchLendError = (asset, error) => ({
 //                                      //
 
 export const SUPPLY_PENDING = "SUPPLY_PENDING";
-export const supplyPending = asset => ({
+export const supplyPending = (asset) => ({
     type: SUPPLY_PENDING,
-    payload: asset
+    payload: asset,
 });
 
 export const SUPPLY_SUCCESS = "SUPPLY_SUCCESS";
-export const supplySuccess = asset => ({
+export const supplySuccess = (asset) => ({
     type: SUPPLY_SUCCESS,
-    payload: asset
+    payload: asset,
 });
 
 export const SUPPLY_ERROR = "SUPPLY_ERROR";
@@ -125,8 +91,8 @@ export const supplyError = (asset, error) => ({
     type: SUPPLY_ERROR,
     payload: {
         error,
-        asset
-    }
+        asset,
+    },
 });
 
 //                                               //
@@ -134,15 +100,15 @@ export const supplyError = (asset, error) => ({
 //                                               //
 
 export const BORROW_PENDING = "BORROW_PENDING";
-export const borrowPending = asset => ({
+export const borrowPending = (asset) => ({
     type: BORROW_PENDING,
-    payload: asset
+    payload: asset,
 });
 
 export const BORROW_SUCCESS = "BORROW_SUCCESS";
-export const borrowSuccess = asset => ({
+export const borrowSuccess = (asset) => ({
     type: BORROW_SUCCESS,
-    payload: asset
+    payload: asset,
 });
 
 export const BORROW_ERROR = "BORROW_ERROR";
@@ -150,8 +116,8 @@ export const borrowError = (asset, error) => ({
     type: BORROW_ERROR,
     payload: {
         error,
-        asset
-    }
+        asset,
+    },
 });
 
 //                                               //
@@ -159,15 +125,15 @@ export const borrowError = (asset, error) => ({
 //                                               //
 
 export const REPAY_PENDING = "REPAY_PENDING";
-export const repayPending = asset => ({
+export const repayPending = (asset) => ({
     type: REPAY_PENDING,
-    payload: asset
+    payload: asset,
 });
 
 export const REPAY_SUCCESS = "REPAY_SUCCESS";
-export const repaySuccess = asset => ({
+export const repaySuccess = (asset) => ({
     type: REPAY_SUCCESS,
-    payload: asset
+    payload: asset,
 });
 
 export const REPAY_ERROR = "REPAY_ERROR";
@@ -175,8 +141,8 @@ export const repayError = (asset, error) => ({
     type: REPAY_ERROR,
     payload: {
         error,
-        asset
-    }
+        asset,
+    },
 });
 
 //                                               //
@@ -184,15 +150,15 @@ export const repayError = (asset, error) => ({
 //                                               //
 
 export const REDEEM_PENDING = "REDEEM_PENDING";
-export const redeemPending = asset => ({
+export const redeemPending = (asset) => ({
     type: REDEEM_PENDING,
-    payload: asset
+    payload: asset,
 });
 
 export const REDEEM_SUCCESS = "REDEEM_SUCCESS";
-export const redeemSuccess = asset => ({
+export const redeemSuccess = (asset) => ({
     type: REDEEM_SUCCESS,
-    payload: asset
+    payload: asset,
 });
 
 export const REDEEM_ERROR = "REDEEM_ERROR";
@@ -200,8 +166,8 @@ export const redeemError = (asset, error) => ({
     type: REDEEM_ERROR,
     payload: {
         error,
-        asset
-    }
+        asset,
+    },
 });
 
 //                                               //
@@ -209,15 +175,15 @@ export const redeemError = (asset, error) => ({
 //                                               //
 
 export const APPROVE_PENDING = "APPROVE_PENDING";
-export const approvePending = asset => ({
+export const approvePending = (asset) => ({
     type: APPROVE_PENDING,
-    payload: asset
+    payload: asset,
 });
 
 export const APPROVE_SUCCESS = "APPROVE_SUCCESS";
-export const approveSuccess = asset => ({
+export const approveSuccess = (asset) => ({
     type: APPROVE_SUCCESS,
-    payload: asset
+    payload: asset,
 });
 
 export const APPROVE_ERROR = "APPROVE_ERROR";
@@ -225,8 +191,8 @@ export const approveError = (asset, error) => ({
     type: APPROVE_ERROR,
     payload: {
         error,
-        asset
-    }
+        asset,
+    },
 });
 
 //                                               //
@@ -234,15 +200,15 @@ export const approveError = (asset, error) => ({
 //                                               //
 
 export const ALLOCATE_PENDING = "ALLOCATE_PENDING";
-export const allocatePending = asset => ({
+export const allocatePending = (asset) => ({
     type: ALLOCATE_PENDING,
-    payload: asset
+    payload: asset,
 });
 
 export const ALLOCATE_SUCCESS = "ALLOCATE_SUCCESS";
-export const allocateSuccess = asset => ({
+export const allocateSuccess = (asset) => ({
     type: ALLOCATE_SUCCESS,
-    payload: asset
+    payload: asset,
 });
 
 export const ALLOCATE_ERROR = "ALLOCATE_ERROR";
@@ -250,6 +216,6 @@ export const allocateError = (asset, error) => ({
     type: ALLOCATE_ERROR,
     payload: {
         error,
-        asset
-    }
+        asset,
+    },
 });

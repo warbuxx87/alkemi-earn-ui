@@ -1,17 +1,21 @@
-import { supplyPending, supplySuccess, supplyError } from "redux/actions/data";
+import {
+    supplyPending,
+    supplySuccess,
+    supplyError,
+} from "redux/actions/data/data";
 import { handle_supply_click } from "utils/drizzle";
 import notify from "containers/AppBar/notify";
 
-const onSupplyAction = ({ drizzle, amount, asset }) => async dispatch => {
+const onSupplyAction = ({ drizzle, amount, asset }) => async (dispatch) => {
     dispatch(supplyPending(asset.unit));
     handle_supply_click({ drizzle, amount, asset })
         .then(() => dispatch(supplySuccess(asset.unit)))
-        .catch(error => {
+        .catch((error) => {
             notify.notification({
                 eventCode: "supplyError",
                 type: "error",
                 message: error.message,
-                autoDismiss: 5000
+                autoDismiss: 5000,
             });
             dispatch(supplyError(asset.unit, error.message));
         });
