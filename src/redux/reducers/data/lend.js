@@ -15,7 +15,7 @@ import {
     REDEEM_PENDING,
     REDEEM_SUCCESS,
     REDEEM_ERROR,
-} from "redux/actions/data/data";
+} from "redux/actions/data/lend";
 // import internal assets
 import dai from "assets/images/DAI.svg";
 import usdc from "assets/images/USDC.svg";

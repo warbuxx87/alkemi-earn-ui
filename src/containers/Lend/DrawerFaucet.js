@@ -4,7 +4,7 @@ import { bindActionCreators, compose } from "redux";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
-import onAllocateAction from "containers/Lend/AllocateMethod";
+import { onAllocateAction } from "redux/actions/data/lend";
 
 import useUSDPrice from "hooks/useUSDPrice";
 

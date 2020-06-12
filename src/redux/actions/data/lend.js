@@ -1,3 +1,10 @@
+// TODO place these accordingly
+import { handle_approve } from "utils/drizzle";
+import { handle_faucet_allocateTo } from "utils/drizzle";
+import { handle_supply_click } from "utils/drizzle";
+import { handle_redeem_click } from "utils/drizzle";
+import notify from "containers/AppBar/notify";
+
 //                                      //
 // ------------ LEND ACTIONS --------   //
 //                                      //
@@ -127,6 +134,7 @@ export const allocateSuccess = (asset) => ({
 });
 
 export const ALLOCATE_ERROR = "ALLOCATE_ERROR";
+
 export const allocateError = (asset, error) => ({
     type: ALLOCATE_ERROR,
     payload: {
@@ -134,3 +142,75 @@ export const allocateError = (asset, error) => ({
         asset,
     },
 });
+
+// --- Methods
+
+export const onLendActivate = ({ drizzle, asset }) => async (
+    dispatch,
+    getState
+) => {
+    dispatch(fetchLendPending(asset));
+    const myAccount = getState().accounts[0];
+    handle_approve({ drizzle, asset, myAccount })
+        .then(() => dispatch(fetchLendSuccess(asset)))
+        .catch((error) => {
+            notify.notification({
+                eventCode: "fetchLendError",
+                type: "error",
+                message: error.message,
+                autoDismiss: 5000,
+            });
+            dispatch(fetchLendError(asset, error.message));
+        });
+};
+
+export const onAllocateAction = ({ drizzle, asset, amount }) => async (
+    dispatch
+) => {
+    dispatch(allocatePending(asset));
+    handle_faucet_allocateTo({ drizzle, asset, amount })
+        .then(() => dispatch(allocateSuccess(asset)))
+        .catch((error) => {
+            notify.notification({
+                eventCode: "allocateError",
+                type: "error",
+                message: error.message,
+                autoDismiss: 5000,
+            });
+            dispatch(allocateError(asset, error.message));
+        });
+};
+
+export const onSupplyAction = ({ drizzle, amount, asset }) => async (
+    dispatch
+) => {
+    dispatch(supplyPending(asset.unit));
+    handle_supply_click({ drizzle, amount, asset })
+        .then(() => dispatch(supplySuccess(asset.unit)))
+        .catch((error) => {
+            notify.notification({
+                eventCode: "supplyError",
+                type: "error",
+                message: error.message,
+                autoDismiss: 5000,
+            });
+            dispatch(supplyError(asset.unit, error.message));
+        });
+};
+
+export const onRedeemAction = ({ drizzle, amount, asset }) => async (
+    dispatch
+) => {
+    dispatch(redeemPending(asset.unit));
+    handle_redeem_click({ drizzle, amount, asset })
+        .then(() => dispatch(redeemSuccess(asset.unit)))
+        .catch((error) => {
+            notify.notification({
+                eventCode: "redeemError",
+                type: "error",
+                message: error.message,
+                autoDismiss: 5000,
+            });
+            dispatch(redeemError(asset.unit, error.message));
+        });
+};

@@ -6,7 +6,7 @@ import web3 from "web3";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
-import onSupplyAction from "containers/Lend/SupplyMethod";
+import { onSupplyAction } from "redux/actions/data/lend";
 
 import useUSDPrice from "hooks/useUSDPrice";
 
