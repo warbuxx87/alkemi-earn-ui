@@ -1,39 +1,4 @@
 //                                      //
-// ------------ BORROW ACTIONS -------- //
-//                                      //
-
-// Declare action type as a constant
-export const FETCH_BORROW_PENDING = "FETCH_BORROW_PENDING";
-
-// Declare action creator
-export const fetchBorrowPending = (asset) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROW_PENDING,
-    asset,
-});
-
-// Declare action type as a constant
-export const FETCH_BORROW_SUCCESS = "FETCH_BORROW_SUCCESS";
-
-// Declare action creator
-export const fetchBorrowSuccess = (asset) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROW_SUCCESS,
-    asset,
-});
-
-// Declare action type as a constant
-export const FETCH_BORROW_ERROR = "FETCH_BORROW_ERROR";
-
-// Declare action creator
-export const fetchBorrowError = (error) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROW_ERROR,
-    payload: new Error(),
-    error: true,
-});
-
-//                                      //
 // ------------ LEND ACTIONS --------   //
 //                                      //
 
@@ -89,56 +54,6 @@ export const supplySuccess = (asset) => ({
 export const SUPPLY_ERROR = "SUPPLY_ERROR";
 export const supplyError = (asset, error) => ({
     type: SUPPLY_ERROR,
-    payload: {
-        error,
-        asset,
-    },
-});
-
-//                                               //
-// ------------ BORROW METHOD ACTIONS --------   //
-//                                               //
-
-export const BORROW_PENDING = "BORROW_PENDING";
-export const borrowPending = (asset) => ({
-    type: BORROW_PENDING,
-    payload: asset,
-});
-
-export const BORROW_SUCCESS = "BORROW_SUCCESS";
-export const borrowSuccess = (asset) => ({
-    type: BORROW_SUCCESS,
-    payload: asset,
-});
-
-export const BORROW_ERROR = "BORROW_ERROR";
-export const borrowError = (asset, error) => ({
-    type: BORROW_ERROR,
-    payload: {
-        error,
-        asset,
-    },
-});
-
-//                                               //
-// ------------ REPAY METHOD ACTIONS --------   //
-//                                               //
-
-export const REPAY_PENDING = "REPAY_PENDING";
-export const repayPending = (asset) => ({
-    type: REPAY_PENDING,
-    payload: asset,
-});
-
-export const REPAY_SUCCESS = "REPAY_SUCCESS";
-export const repaySuccess = (asset) => ({
-    type: REPAY_SUCCESS,
-    payload: asset,
-});
-
-export const REPAY_ERROR = "REPAY_ERROR";
-export const repayError = (asset, error) => ({
-    type: REPAY_ERROR,
     payload: {
         error,
         asset,

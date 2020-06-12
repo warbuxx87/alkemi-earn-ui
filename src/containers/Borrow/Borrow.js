@@ -7,14 +7,14 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
-import onBorrowActivate from "containers/Borrow/ApproveMethod";
+import { onBorrowActivate } from "redux/actions/data/borrow";
 import Borrow from "components/Borrow/Borrow";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 3: Selectors
 import {
     getBorrowActive,
-    getBorrowInactive
+    getBorrowInactive,
     //  getBorrowError,
     //  getBorrowPending
 } from "redux/selectors/data";
@@ -23,23 +23,23 @@ const BorrowContainer = ({
     inactiveBorrow,
     activeBorrow,
     onActivate,
-    drizzle
+    drizzle,
 }) => {
     return (
         <Borrow
             inactiveBorrow={inactiveBorrow}
             activeBorrow={activeBorrow}
-            onActivate={asset => onActivate({ drizzle, asset })}
+            onActivate={(asset) => onActivate({ drizzle, asset })}
         />
     );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     inactiveBorrow: getBorrowInactive(state),
-    activeBorrow: getBorrowActive(state)
+    activeBorrow: getBorrowActive(state),
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onActivate: onBorrowActivate }, dispatch);
 
 export default compose(

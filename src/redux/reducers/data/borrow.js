@@ -9,7 +9,7 @@ import {
     REPAY_PENDING,
     REPAY_SUCCESS,
     REPAY_ERROR,
-} from "redux/actions/data/data";
+} from "redux/actions/data/borrow";
 
 // import internal assets
 import dai from "assets/images/DAI.svg";
