@@ -16,14 +16,14 @@ import {
     TableHead,
     TableRow,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 
 //import { useHistory } from "react-router-dom";
 import SupplyTableCell from "components/UI/TableCell";
 import {
     formatNumber,
-    formatPercent
+    formatPercent,
     //    formatMoney,
     //  calculateEarnings
 } from "utils/front-end";
@@ -32,13 +32,13 @@ import {
 const useStyles = makeStyles({
     imageSize: {
         width: "18px",
-        height: "18px"
+        height: "18px",
     },
     btnActiveOutline: {
         minWidth: 100,
         minHeight: 36,
-        textTransform: "capitalize"
-    }
+        textTransform: "capitalize",
+    },
 });
 
 const columns = [
@@ -46,7 +46,7 @@ const columns = [
     { id: "2", label: "Wallet", align: "left" },
     { id: "3", label: "Supplied", align: "left" },
     { id: "4", label: "APR %", align: "right" },
-    { id: "5", label: "Earnings", align: "right" }
+    { id: "5", label: "Earnings", align: "right" },
 ];
 
 export default function SupplyTables({ activeReserves, currency }) {
@@ -73,7 +73,7 @@ export default function SupplyTables({ activeReserves, currency }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {activeReserves.map(row => (
+                            {activeReserves.map((row) => (
                                 <TableRow key={row.unit}>
                                     <SupplyTableCell component="th" scope="row">
                                         <Box

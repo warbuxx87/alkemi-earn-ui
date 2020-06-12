@@ -13,7 +13,7 @@ import {
     Hidden,
     makeStyles,
     Toolbar,
-    Typography
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -22,25 +22,25 @@ import Notifications from "./Notifications";
 import MobileMenu from "./MobileMenu";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     statusBadge: {
         backgroundColor: theme.palette.success.main,
         width: "9px",
         height: "9px",
         borderRadius: "5px",
-        marginRight: "12px"
+        marginRight: "12px",
     },
     connectWallet: {
-        minWidth: 130
+        minWidth: 130,
     },
     appBar: {
         paddingLeft: "16px",
         paddingRight: "16px",
         "@media (min-width:1550px)": {
             paddingLeft: "0px",
-            paddingRight: "0px"
-        }
-    }
+            paddingRight: "0px",
+        },
+    },
 }));
 
 // Section 5: Code Component
@@ -52,7 +52,7 @@ function AppBar({
     ...rest
 }) {
     const classes = useStyles();
-    const addressParser = address =>
+    const addressParser = (address) =>
         `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
 
     return (
@@ -121,7 +121,7 @@ function AppBar({
 
 // Section 6: Documentation with PropTypes
 AppBar.propTypes = {
-    onMobileNavOpen: PropTypes.func
+    onMobileNavOpen: PropTypes.func,
 };
 
 // Section 7:  Connect styles and export

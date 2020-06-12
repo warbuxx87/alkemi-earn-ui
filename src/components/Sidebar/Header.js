@@ -14,7 +14,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import logo from "assets/images/alkemi.png";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const styles = theme => ({
+const styles = (theme) => ({
     drawerHeader: {
         display: "flex",
         alignItems: "center",
@@ -23,20 +23,20 @@ const styles = theme => ({
         width: "inherit",
         overflow: "hidden",
         marginLeft: 20,
-        marginRight: 20
+        marginRight: 20,
     },
     image: {
         width: "163px",
-        height: "27px"
+        height: "27px",
     },
     menu: {
         width: 35,
         height: 35,
-        padding: 0
+        padding: 0,
     },
     activeMenu: {
-        backgroundColor: "#151617"
-    }
+        backgroundColor: "#151617",
+    },
 });
 
 // Section 5: Code Component
@@ -48,7 +48,7 @@ const SidebarHeader = ({ classes, open, onOpen, onClose }) => {
                 <IconButton
                     onClick={open ? onClose : onOpen}
                     className={clsx(classes.menu, {
-                        [classes.activeMenu]: open
+                        [classes.activeMenu]: open,
                     })}
                 >
                     <MenuIcon fontSize="small" />
@@ -63,7 +63,7 @@ SidebarHeader.propTypes = {
     classes: PropTypes.object.isRequired,
     selected: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
-    onOpen: PropTypes.func.isRequired
+    onOpen: PropTypes.func.isRequired,
 };
 
 // Section 7:  Connect styles and export

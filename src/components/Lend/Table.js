@@ -19,7 +19,7 @@ import {
     TableHead,
     TableRow,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -32,13 +32,13 @@ import { formatNumber, formatPercent } from "utils/front-end";
 const useStyles = makeStyles({
     imageSize: {
         width: "36px",
-        height: "36px"
+        height: "36px",
     },
     btnActiveOutline: {
         minWidth: 100,
         minHeight: 32,
-        textTransform: "capitalize"
-    }
+        textTransform: "capitalize",
+    },
 });
 
 const Columns = [
@@ -48,21 +48,21 @@ const Columns = [
     {
         id: "4",
         label: "APR %",
-        align: "center"
+        align: "center",
         //format: value => value.toLocaleString(),
     },
     {
         id: "5",
         label: "Collateral",
-        align: "center"
+        align: "center",
         // format: value => value.toFixed(2),
     },
     {
         id: "6",
         label: "",
-        align: "right"
+        align: "right",
         // format: value => value.toFixed(2),
-    }
+    },
 ];
 
 // Section 5: Code Component
@@ -88,7 +88,7 @@ const LendTable = ({ data = [], onActivate }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {data.map(Row => (
+                            {data.map((Row) => (
                                 <TableRow key={Row.name}>
                                     <LendTableCell
                                         component="th"

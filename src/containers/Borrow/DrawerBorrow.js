@@ -2,24 +2,52 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
+import useUSDPrice from "hooks/useUSDPrice";
+
+import { formatNumber } from "utils/front-end";
+
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import DrawerBorrow from "components/Borrow/DrawerBorrow";
+import Drawer from "components/UI/Drawer/Drawer";
 import onBorrowAction from "containers/Borrow/BorrowMethod";
 
 const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
+    const [amount, setAmount] = React.useState("");
+    const onSetMax = () => {}; /*setAmount(fromWei(asset.balance, asset.unit))*/
+
+    const [enableBorrow, setEnableBorrow] = React.useState(false);
+
+    React.useEffect(() => {
+        if (amount) {
+            setEnableBorrow(true);
+        }
+    }, [amount, asset.balance, asset.unit]);
+
+    const usdPrice = useUSDPrice(asset.unit);
+
     return (
-        <DrawerBorrow
+        <Drawer
             asset={asset}
-            onBorrow={({ asset, amount }) =>
+            buttonsLabel="Borrow"
+            triggerButtonVariant="contained"
+            enableButtonClick={enableBorrow}
+            onButtonClick={({ asset, amount }) =>
                 onBorrowAction({ drizzle, asset, amount })
             }
+            isDoingAction={asset.borrowing}
+            usdPrice={usdPrice}
+            onSetMax={onSetMax} // TODO: define onSetMax properly
+            amount={amount}
+            setAmount={setAmount}
+            mainTitle={`Borrow ${asset.unit}`}
+            balanceValue={formatNumber(asset.balance, asset.unit)}
+            amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
         />
     );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onBorrowAction }, dispatch);
 
 export default compose(

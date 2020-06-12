@@ -18,7 +18,7 @@ import {
     TableHead,
     TableRow,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -33,8 +33,8 @@ import { formatNumber, formatPercent } from "utils/front-end";
 const useStyles = makeStyles({
     imageSize: {
         width: "36px",
-        height: "36px"
-    }
+        height: "36px",
+    },
 });
 
 const columns = [
@@ -47,19 +47,19 @@ const columns = [
 
         align: "center",
         style: "percent",
-        format: value => value.toFixed(2)
+        format: (value) => value.toFixed(2),
     },
     {
         id: "5",
         label: "Collateral",
 
         align: "center",
-        format: value => value.toFixed(2)
+        format: (value) => value.toFixed(2),
     },
     {
         id: "6",
-        label: ""
-    }
+        label: "",
+    },
 ];
 
 // Section 5: Code Component
@@ -85,7 +85,7 @@ const BorrowTableActive = ({ data = [] }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {data.map(row => (
+                            {data.map((row) => (
                                 <TableRow key={row.name}>
                                     <BorrowTableCell
                                         component="th"
@@ -210,7 +210,7 @@ const BorrowTableActive = ({ data = [] }) => {
 
 // Section 6: Documentation with PropTypes
 BorrowTableActive.propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired,
 };
 
 // Section 7:  Connect styles and export

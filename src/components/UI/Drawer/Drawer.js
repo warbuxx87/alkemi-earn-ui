@@ -2,7 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
-import web3 from "web3";
+import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
 import {
@@ -18,17 +18,97 @@ import {
     Typography,
 } from "@material-ui/core";
 
-// Section 3: Components & Containers import from the application
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+
 import { XCircle as XIcon } from "react-feather";
-import LendChart from "./ChartLend";
-import LendDrawer from "components/UI/Drawer";
-import { formatNumber, fromWei, toWei, formatPercent } from "utils/front-end";
+
+// Section 3: Components & Containers import from the application
+import Chart from "./ChartWrapper";
+import { formatPriceWithCurrency, formatPercent } from "utils/front-end"; // TODO: Decide on whether to keep here or not
 
 // Section 4: Define Styles function taking theme as argument and returning an object
+const DrawerClass = makeStyles((theme) =>
+    createStyles({
+        supplyPercent: {
+            letterSpacing: "0px",
+            color: "#00A577",
+            opacity: 1,
+            fontSize: "28px",
+            fontWeight: "500",
+            textAlign: "center",
+            // backgroundColor:'#1B1B1B',
+            padding: "25px 0",
+        },
+        drawer: {
+            width: "100%",
+            "@media (min-width: 780px)": {
+                width: 380,
+            },
+        },
+        btnDrawer: {
+            minWidth: 100,
+            textTransform: "capitalize",
+            fontWeight: 500,
+            minHeight: 32,
+        },
+        inputWrap: {
+            position: "relative",
+        },
+        maxTips: {
+            position: "absolute",
+            right: "15px",
+            top: "17px",
+            cursor: "pointer",
+            color: "#ffffff",
+            fontSize: "14px",
+        },
+        input: {
+            background: "#1B1B1B 0% 0% no-repeat padding-box",
+            border: "1px solid #000000",
+            opacity: 1,
+            height: "54px",
+            paddingLeft: "10px",
+            color: "white",
+            fontSize: "18px",
+        },
+        amount: {
+            color: "white",
+            paddingBottom: "10px",
+        },
+        rateInfo: {
+            color: "white",
+            fontSize: "14px",
+            marginTop: "20px",
+        },
+        rateRow: {
+            padding: "12px 0",
+            borderBottom: "1px dashed #a7a7a7",
+        },
+        walletBalance: {
+            color: "#a7a7a7",
+        },
+    })
+);
 
-export default function DrawerSupply({ asset, onSupply }) {
-    const classes = LendDrawer();
-    // getModalStyle is not a pure function, we roll the style only on the first render
+const DrawerWrapper = ({
+    asset,
+    enableButtonClick,
+    onButtonClick,
+    usdPrice,
+    onSetMax,
+    amount,
+    setAmount,
+    mainTitle,
+    balanceValue,
+    isDoingAction,
+    buttonsLabel,
+    triggerButtonColor,
+    triggerButtonVariant,
+    amountValue,
+}) => {
+    const classes = DrawerClass();
+
+    // UI state
     const [isOpen, setOpen] = React.useState(false);
 
     const handleOpen = () => {
@@ -40,31 +120,20 @@ export default function DrawerSupply({ asset, onSupply }) {
     };
 
     // Section 5: Code Component
-    const [amount, setAmount] = React.useState(null);
-    const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
-
-    const [enableSupply, setEnableSupply] = React.useState(false);
-    React.useEffect(() => {
-        if (amount) {
-            const isAmountLTBalance = web3.utils
-                .toBN(toWei(amount, asset.unit))
-                .lte(web3.utils.toBN(asset.wallet));
-            setEnableSupply(isAmountLTBalance);
-        }
-    }, [amount, asset.wallet, asset.unit]);
     return (
         <>
             <Button
                 type="button"
                 className={classes.btnDrawer}
-                variant="contained"
+                variant={triggerButtonVariant}
                 size="small"
+                color={triggerButtonColor}
                 onClick={handleOpen}
             >
-                {asset.supplying ? (
+                {isDoingAction ? (
                     <CircularProgress size={20} color="inherit" />
                 ) : (
-                    "Supply"
+                    buttonsLabel
                 )}
             </Button>
             <Drawer
@@ -83,7 +152,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                         p={2}
                     >
                         <Typography variant="h4" color="textPrimary">
-                            Supply {asset.unit}
+                            {mainTitle}
                         </Typography>
                         <IconButton onClick={handleClose}>
                             <SvgIcon fontSize="small">
@@ -96,7 +165,8 @@ export default function DrawerSupply({ asset, onSupply }) {
                         <div className={classes.supplyPercent}>
                             {formatPercent(asset.apr)} APR
                         </div>
-                        <LendChart> </LendChart>
+
+                        <Chart> </Chart>
                     </Box>
                     <Box p={2} mt={3}>
                         <Grid container className={classes.amount}>
@@ -111,7 +181,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                                 justify="flex-end"
                                 className={classes.walletBalance}
                             >
-                                Wallet: {formatNumber(asset.wallet, asset.unit)}
+                                {amountValue}
                             </Grid>
                         </Grid>
                         <div className={classes.inputWrap}>
@@ -159,7 +229,7 @@ export default function DrawerSupply({ asset, onSupply }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    $1.00
+                                    {formatPriceWithCurrency(usdPrice, "USD")}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -173,28 +243,28 @@ export default function DrawerSupply({ asset, onSupply }) {
                                     container
                                     justify="flex-end"
                                 >
-                                    0.00
+                                    {balanceValue}
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <div className={classes.divSupply}>
+                        <div className={classes.sendButtonDiv}>
                             <Button
                                 type="button"
                                 className={classes.btnModal}
                                 variant="contained"
                                 color="primary"
-                                onClick={() => onSupply({ asset, amount })}
-                                disabled={!enableSupply || asset.supplying}
+                                onClick={() => onButtonClick({ asset, amount })}
+                                disabled={!enableButtonClick || isDoingAction}
                                 size="large"
                                 fullWidth={true}
                             >
-                                {asset.supplying ? (
+                                {isDoingAction ? (
                                     <CircularProgress
                                         size={20}
                                         color="inherit"
                                     />
                                 ) : (
-                                    "SUPPLY"
+                                    buttonsLabel
                                 )}
                             </Button>
                         </div>
@@ -203,4 +273,23 @@ export default function DrawerSupply({ asset, onSupply }) {
             </Drawer>
         </>
     );
-}
+};
+
+DrawerWrapper.propTypes = {
+    asset: PropTypes.object.isRequired,
+    enableButtonClick: PropTypes.bool.isRequired,
+    onButtonClick: PropTypes.func.isRequired,
+    usdPrice: PropTypes.string, // It starts as null
+    onSetMax: PropTypes.func.isRequired,
+    amount: PropTypes.string.isRequired,
+    setAmount: PropTypes.func.isRequired,
+    mainTitle: PropTypes.string.isRequired,
+    balanceValue: PropTypes.string.isRequired,
+    isDoingAction: PropTypes.bool, // starts as undefined
+    buttonsLabel: PropTypes.string.isRequired,
+    triggerButtonColor: PropTypes.string, // not required
+    triggerButtonVariant: PropTypes.string,
+    amountValue: PropTypes.string.isRequired,
+};
+
+export default DrawerWrapper;

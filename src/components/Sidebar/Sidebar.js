@@ -14,7 +14,7 @@ import {
     Hidden,
     List,
     withWidth,
-    withStyles
+    withStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -24,63 +24,63 @@ import SidebarBorrowItem from "containers/Sidebar/BorrowItem";
 import SidebarHeader from "containers/Sidebar/Header";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const styles = theme => ({
+const styles = (theme) => ({
     drawer: {
         width: 280,
         marginLeft: 24,
         flexShrink: 0,
         "@media (min-width:1550px)": {
             marginLeft: 35,
-            width: 340
-        }
+            width: 340,
+        },
     },
     drawerInner: {
-        overflowX: "hidden"
+        overflowX: "hidden",
     },
     drawerOpen: {
         width: 280,
         "@media (min-width:1550px)": {
-            width: 340
+            width: 340,
         },
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen
-        })
+            duration: theme.transitions.duration.enteringScreen,
+        }),
     },
     drawerClose: {
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen
+            duration: theme.transitions.duration.leavingScreen,
         }),
         overflowX: "hidden",
         width: 70,
         [theme.breakpoints.up("sm")]: {
-            width: 70
+            width: 70,
         },
         "&:hover": {
             width: 280,
             "@media (min-width:1550px)": {
-                width: 340
+                width: 340,
             },
             transition: theme.transitions.create("width", {
                 easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen
-            })
-        }
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+        },
     },
     drawerPaper: {
         // width: drawerWidth,
         margin: "22px 0px 0px 24px",
         "@media (min-width:1550px)": {
-            margin: "22px 0px 0px 35px"
+            margin: "22px 0px 0px 35px",
         },
         background: "#202123",
         color: "white",
-        border: "none"
+        border: "none",
     },
     divider: {
-        backgroundColor: theme.palette.common.black
-    }
+        backgroundColor: theme.palette.common.black,
+    },
 });
 
 // Section 5: Code Component
@@ -107,13 +107,13 @@ function Sidebar({ classes, width, variant, open }) {
                     variant="permanent"
                     className={clsx(classes.drawer, {
                         [classes.drawerOpen]: open,
-                        [classes.drawerClose]: !open
+                        [classes.drawerClose]: !open,
                     })}
                     classes={{
                         paper: clsx(classes.drawerPaper, {
                             [classes.drawerOpen]: open,
-                            [classes.drawerClose]: !open
-                        })
+                            [classes.drawerClose]: !open,
+                        }),
                     }}
                     anchor="left"
                 >
@@ -129,7 +129,7 @@ Sidebar.propTypes = {
     classes: PropTypes.object.isRequired,
     width: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
     variant: PropTypes.string,
-    open: PropTypes.bool
+    open: PropTypes.bool,
 };
 
 // Section 7:  Connect styles and export
