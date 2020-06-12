@@ -12,16 +12,16 @@ import {
     List,
     SvgIcon,
 } from "@material-ui/core";
-
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
+import { XCircle as XIcon, Menu as MenuIcon } from "react-feather";
+
 // Section 3: Components & Containers import from the application
-import { XCircle as XIcon } from "react-feather";
+
 import SidebarDashboardItem from "containers/Sidebar/DashboardItem";
 import SidebarLendItem from "containers/Sidebar/LendItem";
 import SidebarBorrowItem from "containers/Sidebar/BorrowItem";
 import SidebarHeader from "containers/Sidebar/Header";
-import { Menu as MenuIcon } from "react-feather";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const DrawerClass = makeStyles((theme) =>
