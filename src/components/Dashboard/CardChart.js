@@ -320,7 +320,7 @@ class CardChart extends Component {
                         show: false,
                     },
                 },
-                colors: ["#7B6FFF", "#1652F0"],
+                colors: ["#14BB7F", "#ffffff"],
                 stroke: {
                     curve: "smooth",
                     width: 3,
@@ -455,25 +455,22 @@ class CardChart extends Component {
                     <CardContent>
                         <Grid container justify="space-between">
                             <Grid item md={3} sm={6} xs={12}>
+                                <Typography color="textSecondary">
+                                    Aggregated Balance
+                                </Typography>
                                 <Typography variant="h2" color="textPrimary">
                                     $123,123,394.03
                                 </Typography>
-                                <Typography
-                                    variant="overline"
-                                    color="textSecondary"
-                                >
-                                    Aggregated Balance
+                                <Typography variant="overline" color="primary">
+                                    + $34,933.99 Today
                                 </Typography>
                             </Grid>
                             <Grid item md={3} sm={6} xs={12}>
+                                <Typography color="textSecondary">
+                                    Total APR
+                                </Typography>
                                 <Typography variant="h2" color="textPrimary">
                                     4.23%
-                                </Typography>
-                                <Typography
-                                    variant="overline"
-                                    color="textSecondary"
-                                >
-                                    Total APR
                                 </Typography>
                             </Grid>
                             <Grid item md={6} sm={6} xs={12}>
