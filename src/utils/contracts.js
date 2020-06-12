@@ -19,12 +19,12 @@ const ABIs = {
     USDT: USDT_ABI,
     USDC: USDC_ABI,
     WBTC: WBTC_ABI,
-    USDx: USDX_ABI
+    USDx: USDX_ABI,
 };
 
-export const initContracts = drizzle => {
+export const initContracts = (drizzle) => {
     initMarketContract({ drizzle });
-    assets.forEach(asset => initAssetContract({ drizzle, asset }));
+    assets.forEach((asset) => initAssetContract({ drizzle, asset }));
 };
 
 export const initAssetContract = ({ drizzle, asset }) => {
@@ -39,7 +39,7 @@ export const initAssetContract = ({ drizzle, asset }) => {
     );
     drizzle.addContract({
         contractName: asset,
-        web3Contract: tokenContract
+        web3Contract: tokenContract,
     });
     // get allowance
     tokenContract.methods.allowance.cacheCall(
@@ -58,20 +58,29 @@ export const initMarketContract = ({ drizzle }) => {
     const myAddress = drizzleStore.accounts[0];
     const network = constants.network_type[drizzleStore.web3.networkId];
     const address_mMarket = address[network].address_mMarket;
+    const events = [
+        "SupplyReceived",
+        "SupplyWithdrawn",
+        "BorrowTaken",
+        "BorrowRepaid",
+    ];
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
     const mMarketContract = new drizzle.web3.eth.Contract(
         market_ABI,
         address_mMarket
     );
-    drizzle.addContract({
-        contractName: "mMarket",
-        web3Contract: mMarketContract
-    });
+    drizzle.addContract(
+        {
+            contractName: "mMarket",
+            web3Contract: mMarketContract,
+        },
+        events
+    );
 
     const assets = ["USDx", "DAI", "USDT", "USDC", "WBTC", "WETH", "PAX"];
 
-    assets.forEach(asset => {
+    assets.forEach((asset) => {
         // get each asset Supply Balance (current )
         mMarketContract.methods.getSupplyBalance.cacheCall(
             myAddress,

@@ -10,8 +10,8 @@ const contractEventNotifier = (store) => (next) => (action) => {
     if (action.type === EventActions.EVENT_FIRED) {
         const contract = action.name;
         const contractEvent = action.event.event;
-        const contractMessage = action.event.returnValues._message;
-        const display = `${contract}(${contractEvent}): ${contractMessage}`;
+        const contractNewBalance = action.event.returnValues.newBalance;
+        const display = `${contract}(${contractEvent}): ${contractNewBalance}`;
 
         // interact with your service
         console.log("Contract event fired", display);
@@ -29,9 +29,9 @@ export const drizzleOptions = {
         },
     },
     polls: {
-        blocks: 6000,
+        blocks: 15000,
     },
-    syncAlways: true,
+    syncAlways: false,
     appMiddlewares,
     appReducers,
     disableReduxDevTools: false, // enable ReduxDevTools!
