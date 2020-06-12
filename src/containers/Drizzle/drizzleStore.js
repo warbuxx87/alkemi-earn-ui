@@ -1,19 +1,23 @@
-import Web3 from "web3";
-import { EventActions } from "@drizzle/store";
+// 1. React/Redux low level imports
 import thunk from "redux-thunk";
 
-import { generateStore } from "@drizzle/store";
+// 2. Libraries imports
+import Web3 from "web3";
+import { EventActions, generateStore } from "@drizzle/store";
+import { toast } from "react-toastify";
 
+// 3. internal imports
 import appReducers from "redux/reducers";
 
 const contractEventNotifier = (store) => (next) => (action) => {
     if (action.type === EventActions.EVENT_FIRED) {
         const contract = action.name;
         const contractEvent = action.event.event;
-        const contractNewBalance = action.event.returnValues.newBalance;
-        const display = `${contract}(${contractEvent}): ${contractNewBalance}`;
-
+        // const contractNewBalance = action.event.returnValues.newBalance;
+        // const display = `${contract}(${contractEvent}): ${contractNewBalance}`;
+        const display = `${contractEvent}: Successful`;
         // interact with your service
+        toast.success(display, { position: toast.POSITION.TOP_RIGHT });
         console.log("Contract event fired", display);
     }
     return next(action);
@@ -31,7 +35,7 @@ export const drizzleOptions = {
     polls: {
         blocks: 15000,
     },
-    syncAlways: false,
+    syncAlways: true,
     appMiddlewares,
     appReducers,
     disableReduxDevTools: false, // enable ReduxDevTools!

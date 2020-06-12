@@ -40,7 +40,7 @@ export const notifyTransaction = ({
         });
 
         emitter.on("txConfirmed", (transaction) => {
-            console.log(transaction);
+            //  console.log(transaction);
             resolve(transaction);
 
             return events && events.txConfirmed && events.txConfirmed.message
