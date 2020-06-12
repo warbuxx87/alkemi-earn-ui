@@ -6,6 +6,7 @@ clone:
 pipelines:
     default:
         - step:
+              size: 2x # or configure at step level
               caches:
                   - node
               name: "Build and Test"
