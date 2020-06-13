@@ -36,6 +36,8 @@ const fetchStatsError = error => ({
     error: true
 });*/
 
+// Section 3: Action dispatch methods and async funcs
+
 export const fetchStatsAction = (tx) => async (dispatch) => {
     dispatch(fetchStatsPending(tx));
     setTimeout(() => {
@@ -43,5 +45,3 @@ export const fetchStatsAction = (tx) => async (dispatch) => {
         dispatch(fetchStatsSuccess(tx));
     }, 3000);
 };
-
-// Section 3: Action dispatch methods and async funcs
