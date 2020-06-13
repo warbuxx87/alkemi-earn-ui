@@ -1,3 +1,7 @@
+// Section 1: Utilities imports and low level imports
+
+// Section 2: Action types declarations and action creators
+
 //                                     //
 // ------------ STATS ACTIONS -------- //
 //                                     //
@@ -39,3 +43,5 @@ export const fetchStatsAction = (tx) => async (dispatch) => {
         dispatch(fetchStatsSuccess(tx));
     }, 3000);
 };
+
+// Section 3: Action dispatch methods and async funcs

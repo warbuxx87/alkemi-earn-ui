@@ -1,9 +1,13 @@
-// TODO see where to put these
+// Section 1: Utilities imports and low level imports
 
-import { handle_borrow_click } from "utils/drizzle";
-import { handle_approve } from "utils/drizzle";
-import { handle_repay_click } from "utils/drizzle";
-import notify from "containers/AppBar/notify";
+import {
+    handle_borrow_click,
+    handle_approve,
+    handle_repay_click,
+} from "utils/drizzle";
+import notify from "utils/notify";
+
+// Section 2: Action types declarations and action creators
 
 //                                      //
 // ------------ BORROW ACTIONS -------- //
@@ -102,7 +106,7 @@ const repayError = (asset, error) => ({
     },
 });
 
-// --- Methods
+// Section 3: Action dispatch methods and async funcs
 
 export const onBorrowAction = ({ drizzle, amount, asset }) => async (
     dispatch

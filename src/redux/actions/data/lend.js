@@ -1,9 +1,14 @@
-// TODO place these accordingly
-import { handle_approve } from "utils/drizzle";
-import { handle_faucet_allocateTo } from "utils/drizzle";
-import { handle_supply_click } from "utils/drizzle";
-import { handle_redeem_click } from "utils/drizzle";
-import notify from "containers/AppBar/notify";
+// Section 1: Utilities imports and low level imports
+
+import {
+    handle_approve,
+    handle_faucet_allocateTo,
+    handle_supply_click,
+    handle_redeem_click,
+} from "utils/drizzle";
+import notify from "utils/notify";
+
+// Section 2: Action types declarations and action creators
 
 //                                      //
 // ------------ LEND ACTIONS --------   //
@@ -143,7 +148,7 @@ export const allocateError = (asset, error) => ({
     },
 });
 
-// --- Methods
+// Section 3: Action dispatch methods and async funcs
 
 export const onLendActivate = ({ drizzle, asset }) => async (
     dispatch,
