@@ -4,7 +4,7 @@ import web3 from "web3";
 
 const getSupplyAccountValue = (state) => {
     const calculateAccountValues = Object.values(
-        _.get(state, "contracts.mMarket.calculateAccountValues", {})
+        _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );
     if (calculateAccountValues[0]) {
         return _.get(calculateAccountValues, "[0].value[1]");
@@ -14,7 +14,7 @@ const getSupplyAccountValue = (state) => {
 
 // const getAccountLiquidity = state => {
 //     const getAccountLiquidity = Object.values(
-//         _.get(state, "contracts.mMarket.getAccountLiquidity", {})
+//         _.get(state, "contracts.MoneyMarket.getAccountLiquidity", {})
 //     );
 //     if (getAccountLiquidity[0]) {
 //         return _.get(getAccountLiquidity, "[0].value");
@@ -24,7 +24,7 @@ const getSupplyAccountValue = (state) => {
 
 export const getCollateralRatio = (state) => {
     const calculateAccountValues = Object.values(
-        _.get(state, "contracts.mMarket.calculateAccountValues", {})
+        _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );
     if (calculateAccountValues[0]) {
         let totalSupplied = _.get(calculateAccountValues, "[0].value[1]");
@@ -37,7 +37,7 @@ export const getCollateralRatio = (state) => {
 // Getting USDxPrice from drizzle, TODO remove if useless after integration of API call directly from server
 export const getUSDxPrice = (state) => {
     const assetPrices = Object.values(
-        _.get(state, "contracts.mMarket.assetPrices", {})
+        _.get(state, "contracts.MoneyMarket.assetPrices", {})
     );
 
     // TODO, this address filter should be pulled from constants address_map with proper web3 connected Network
@@ -68,7 +68,7 @@ export const getTotalSupply = createSelector(
 
 const getBorrowAccountValue = (state) => {
     const calculateAccountValues = Object.values(
-        _.get(state, "contracts.mMarket.calculateAccountValues", {})
+        _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );
     if (calculateAccountValues[0]) {
         return _.get(calculateAccountValues, "[0].value[2]");

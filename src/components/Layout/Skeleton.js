@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 // Section 2: UI imports
 import { withStyles } from "@material-ui/core/styles";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.minimal.css";
 
 // Section 3: Components & Containers import from the application
 import LayoutContent from "containers/Layout/Content";
@@ -68,8 +68,8 @@ const LayoutSkeleton = ({ classes }) => (
         <Sidebar />
         <div className={classes.content}>
             <AppBar />
-            <LayoutContent />
             <ToastContainer />
+            <LayoutContent />
         </div>
     </div>
 );
