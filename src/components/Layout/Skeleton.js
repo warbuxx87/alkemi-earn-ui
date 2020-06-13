@@ -66,6 +66,7 @@ const styles = (theme) => ({
 const LayoutSkeleton = ({ classes }) => (
     <div className={classes.frame}>
         <Sidebar />
+
         <div className={classes.content}>
             <AppBar />
             <ToastContainer />

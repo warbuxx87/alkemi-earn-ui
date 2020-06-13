@@ -17,6 +17,7 @@ class App extends Component {
                 <ConnectedRouter history={history}>
                     <MuiThemeProvider theme={theme}>
                         <CssBaseline />
+
                         <Layout />
                     </MuiThemeProvider>
                 </ConnectedRouter>

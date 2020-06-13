@@ -13,7 +13,7 @@ export const handle_approve = async ({ drizzle, asset, myAccount }) => {
     const address_MoneyMarket = address[network].address_MoneyMarket;
     const tokenContract = initAssetContract({ drizzle, asset });
     const balance = Object.values(drizzleStore.accountBalances)[0];
-    return await notifyTransaction({
+    return await {
         estimateGas: () =>
             tokenContract.methods
                 .approve(address[network].address_MoneyMarket, -1)
@@ -23,25 +23,10 @@ export const handle_approve = async ({ drizzle, asset, myAccount }) => {
         balance,
         network,
         sendTransaction: () =>
-            new Promise((resolve, reject) =>
-                tokenContract.methods
-                    .approve(address_MoneyMarket, -1)
-                    .send({ from: myAccount }, (error, hash) =>
-                        error ? reject(error) : resolve(hash)
-                    )
-            ),
-        events: {
-            txRequest: {
-                message: "Please confirm your transaction",
-            },
-            txPool: {
-                message: `Activating ${asset} reserve`,
-            },
-            txConfirmed: {
-                message: `${asset} reserve successfully activated`,
-            },
-        },
-    });
+            tokenContract.methods.approve.cacheSend(address_MoneyMarket, -1, {
+                from: myAccount,
+            }),
+    };
 };
 
 export const handle_faucet_allocateTo = async ({ drizzle, asset, amount }) => {
@@ -55,35 +40,14 @@ export const handle_faucet_allocateTo = async ({ drizzle, asset, amount }) => {
     const tokenContract = drizzle.contracts[unit];
     const weiAmount = toWei(amount, unit);
     const balance = Object.values(drizzleStore.accountBalances)[0];
-    return await notifyTransaction({
-        estimateGas: () =>
-            tokenContract.methods
-                .allocateTo(myAccount, weiAmount)
-                .estimateGas({ from: myAccount })
-                .then((result) => result.toString()),
-        gasPrice: web3.eth.getGasPrice,
-        balance,
-        network,
-        sendTransaction: () =>
-            new Promise((resolve, reject) =>
-                tokenContract.methods
-                    .allocateTo(myAccount, weiAmount)
-                    .send({ from: myAccount }, (error, hash) =>
-                        error ? reject(error) : resolve(hash)
-                    )
-            ),
-        events: {
-            txRequest: {
-                message: "Please confirm your transaction",
-            },
-            txPool: {
-                message: `Allocating ${amount} ${asset.unit} to Owner`,
-            },
-            txConfirmed: {
-                message: `${amount} ${asset.unit} successfully allocated`,
-            },
-        },
-    });
+    const sendAllocate = tokenContract.methods.allocateTo.cacheSend(
+        myAccount,
+        weiAmount,
+        {
+            from: myAccount,
+        }
+    );
+    return sendAllocate;
 };
 
 export const handle_supply_click = async ({ drizzle, amount, asset }) => {
@@ -97,38 +61,14 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     const unit = asset.unit;
     const weiAmount = toWei(amount, unit);
     const balance = Object.values(drizzleStore.accountBalances)[0];
-    return await notifyTransaction({
-        estimateGas: () =>
-            MoneyMarketContract.methods
-                .supply(token_address, weiAmount)
-                .estimateGas({ from: myAccount })
-                .then((result) => result.toString()),
-        gasPrice: web3.eth.getGasPrice,
-        balance,
-        network,
-        sendTransaction: () =>
-            new Promise((resolve, reject) =>
-                MoneyMarketContract.methods
-                    .supply(token_address, weiAmount)
-                    .send({ from: myAccount }, (error, hash) =>
-                        error ? reject(error) : resolve(hash)
-                    )
-            ),
-        events: {
-            txRequest: {
-                message: "Please confirm your transaction",
-            },
-            txPool: {
-                message: `Supplying ${amount} ${asset.unit} to Pool`,
-            },
-            txConfirmed: {
-                message: `Your Transaction has been successfully mined on the Ethereum network`,
-            },
-            SupplyReceived: {
-                message: `Supply ${amount} ${asset.unit} Received by liquidity pool`,
-            },
-        },
-    });
+    const sendSupply = MoneyMarketContract.methods.supply.cacheSend(
+        token_address,
+        weiAmount,
+        {
+            from: myAccount,
+        }
+    );
+    return sendSupply;
 };
 
 export const get_available_to_borrow = (

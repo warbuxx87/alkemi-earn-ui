@@ -19,22 +19,30 @@ import MoneyMarket from "contracts/MoneyMarket.json";
 // }
 
 const contractEventNotifier = (store) => (next) => (action) => {
+    const actionTypeConfirmation = "TX_CONFIRMATION";
     const actionTypeSend = "TX_BROADCASTED";
     const actionTypeSuccess = "TX_SUCCESSFUL";
     const actionTypeError = "TX_ERROR";
+
+    // const eventTypeFired = "EVENT_FIRED";
+    // const eventTypeChanged = "EVENT_CHANGED";
+    // const eventTypeError = "EVENT_ERROR";
 
     if (
         action.type === actionTypeSend ||
         action.type === actionTypeSuccess ||
         action.type === actionTypeError ||
-        action.type === EventActions.EVENT_FIRED
+        action.type === actionTypeConfirmation // ||
+        // action.event === eventTypeFired ||
+        // action.event === eventTypeChanged ||
+        // action.event === eventTypeError
     ) {
         let displayMessage;
         let displaySecondaryMessage;
         let toastMessageVariant;
-        let contractEvent;
+        //  let contractEvent;
         let toastIcon;
-
+        // the transaction is still processing
         if (action.type === actionTypeSend) {
             toastMessageVariant = "processing";
             toastIcon = "InfoOutline";
@@ -42,37 +50,53 @@ const contractEventNotifier = (store) => (next) => (action) => {
             displaySecondaryMessage = "This might take a few minutes";
             console.log("Tx Send event fired", displayMessage);
         }
+        // This means it's been mined on the network
         if (action.type === actionTypeSuccess) {
-            toastMessageVariant = "default";
-            toastIcon = "CheckBox";
-            displayMessage = "Transaction confirmed";
-            displaySecondaryMessage = "Thanks for using our dapp";
+            toastMessageVariant = "success";
+            toastIcon = "CloudDone";
+            displayMessage = "Transaction Successful";
+            displaySecondaryMessage = "Contract Response would go here";
             console.log("Tx Success event fired", displayMessage);
         }
+        // // This actually has the return receipt from the smart Contract
+        // if (action.type === actionTypeConfirmation) {
+        //     toastMessageVariant = "success";
+        //     toastIcon = "DoneAll";
+        //     displayMessage = "Transaction Confirmed";
+        //     displaySecondaryMessage = "Contract Response would go here";
+        //     console.log("Tx Confirmation event fired", displayMessage);
+        // }
         if (action.type === actionTypeError) {
             toastIcon = "ErrorOutline";
             toastMessageVariant = "failure";
             displayMessage = "Transaction failed";
-            displaySecondaryMessage = "Better luck next time";
+            displaySecondaryMessage = "The Failure Message Would Go Here";
             console.log("Tx Error event fired", displayMessage);
         }
-        if (action.type === EventActions.EVENT_FIRED) {
-            contractEvent = action.event.event;
-            toastIcon = "Mood";
-            toastMessageVariant = "success";
-            displayMessage = `${contractEvent}`;
-            displaySecondaryMessage = "Thanks for using our dapp";
-
-            // const contract = action.name;
-            // const contractNewBalance = action.event.returnValues.newBalance;
-            // const display = `${contract}(${contractEvent}): ${contractNewBalance}`;
-
-            console.log("Contract event fired", displayMessage);
-        }
+        // if (action.type === EventActions.EVENT_FIRED) {
+        //     contractEvent = action.event.event;
+        //     toastIcon = "Mood";
+        //     toastMessageVariant = "success";
+        //     displayMessage = `${contractEvent}`;
+        //     displaySecondaryMessage = "Thanks for using our dapp";
+        //
+        //     // const contract = action.name;
+        //     // const contractNewBalance = action.event.returnValues.newBalance;
+        //     // const display = `${contract}(${contractEvent}): ${contractNewBalance}`;
+        //
+        //     console.log("Contract event fired", displayMessage);
+        // }
 
         const options = {
-            closeButton: false,
-            position: toast.POSITION.TOP_RIGHT,
+            // closeButton: true,
+            //  position: toast.POSITION.BOTTOM_RIGHT,
+            position: "bottom-right",
+            autoClose: false,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
         };
 
         const display = (
@@ -87,9 +111,9 @@ const contractEventNotifier = (store) => (next) => (action) => {
         );
 
         toast(display, options);
-
-        // toast.onChange( numberOfToastDisplayed => {
-        //   toast.dismiss();
+        //
+        // toast.onChange((numberOfToastDisplayed) => {
+        //     toast.dismiss();
         // });
     }
 
@@ -123,6 +147,14 @@ export const drizzleOptions = {
     appMiddlewares,
     appReducers,
     disableReduxDevTools: false, // enable ReduxDevTools!
+    networkWhitelist: [
+        // Allows the listed networks, plus Ganache
+        //    1, // Mainnet
+        //    3, // Ropsten
+        4, // Rinkeby
+        //      5, // Goerli
+        //      42, // Kovan
+    ],
 };
 
 const store = generateStore(drizzleOptions);

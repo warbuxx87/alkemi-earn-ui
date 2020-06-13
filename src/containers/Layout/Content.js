@@ -15,7 +15,7 @@ import {
     BORROW,
     MARKETS,
     HISTORY,
-    LIQUIDATE
+    LIQUIDATE,
 } from "constants/routes";
 
 const LayoutContent = () => (

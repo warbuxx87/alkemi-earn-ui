@@ -60,7 +60,7 @@ export const initMarketContract = ({ drizzle }) => {
     const drizzleStore = drizzle.store.getState();
     const myAddress = drizzleStore.accounts[0];
     const network = constants.network_type[drizzleStore.web3.networkId];
-    const assets = ["USDX", "PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
+    const assets = ["PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
     const MoneyMarketContract = new drizzle.web3.eth.Contract(
