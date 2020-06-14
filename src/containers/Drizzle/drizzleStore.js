@@ -88,9 +88,9 @@ const contractEventNotifier = (store) => (next) => (action) => {
         // }
 
         const options = {
-            // closeButton: true,
-            //  position: toast.POSITION.BOTTOM_RIGHT,
-            position: "bottom-right",
+            closeButton: true,
+            position: toast.POSITION.BOTTOM_RIGHT,
+            //  position: "bottom-right",
             autoClose: false,
             hideProgressBar: true,
             closeOnClick: true,
