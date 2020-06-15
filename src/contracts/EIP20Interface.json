@@ -27,9 +27,9 @@
     "sourceMap": "",
     "deployedSourceMap": "",
     "source": "pragma solidity ^0.4.24;\n\n\ncontract EIP20Interface {\n    function balanceOf(address _owner) public view returns (uint256 balance);\n}\n\ncontract PriceOracleProxy {\n    address public mostRecentCaller;\n    uint public mostRecentBlock;\n\n    /**\n     * @notice Gets the price of a given asset\n     * @dev fetches the price of a given asset\n     * @param asset Asset to get the price of\n     * @return the price scaled by 10**18, or zero if the price is not available\n     */\n    function assetPrices(address asset) public returns (uint);\n}\n\ncontract MoneyMarket {\n    /**\n     * @dev Account allowed to set oracle prices for this contract. Initially set\n     *      in constructor, but can be changed by the admin.\n     */\n    address public oracle;\n}\n\ncontract LiquidationChecker {\n    MoneyMarket public moneyMarket;\n    address public liquidator;\n    bool public allowLiquidation;\n\n    constructor(address moneyMarket_, address liquidator_) public {\n        moneyMarket = MoneyMarket(moneyMarket_);\n        liquidator = liquidator_;\n        allowLiquidation = false;\n    }\n\n    function isAllowed(address asset, uint newCash) internal returns(bool) {\n        return allowLiquidation || !isLiquidate(asset, newCash);\n    }\n\n    function isLiquidate(address asset, uint newCash) internal returns(bool) {\n        return cashIsUp(asset, newCash) && oracleTouched();\n    }\n\n    function cashIsUp(address asset, uint newCash) internal view returns(bool) {\n        uint oldCash = EIP20Interface(asset).balanceOf(moneyMarket);\n\n        return newCash >= oldCash;\n    }\n\n    function oracleTouched() internal returns(bool) {\n        PriceOracleProxy oracle = PriceOracleProxy(moneyMarket.oracle());\n\n        bool sameOrigin = oracle.mostRecentCaller() == tx.origin;\n        bool sameBlock = oracle.mostRecentBlock() == block.number;\n\n        return sameOrigin && sameBlock;\n    }\n\n    function setAllowLiquidation(bool allowLiquidation_) public {\n        require(msg.sender == liquidator, \"LIQUIDATION_CHECKER_INVALID_LIQUIDATOR\");\n\n        allowLiquidation = allowLiquidation_;\n    }\n}\n",
-    "sourcePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/LiquidationChecker.sol",
+    "sourcePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/LiquidationChecker.sol",
     "ast": {
-        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/LiquidationChecker.sol",
+        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/LiquidationChecker.sol",
         "exportedSymbols": {
             "EIP20Interface": [974],
             "LiquidationChecker": [1131],
@@ -2194,7 +2194,7 @@
         "src": "0:2076:6"
     },
     "legacyAST": {
-        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/LiquidationChecker.sol",
+        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/LiquidationChecker.sol",
         "exportedSymbols": {
             "EIP20Interface": [974],
             "LiquidationChecker": [1131],
@@ -4364,7 +4364,7 @@
     },
     "networks": {},
     "schemaVersion": "3.0.23",
-    "updatedAt": "2020-06-13T13:05:43.330Z",
+    "updatedAt": "2020-06-15T12:10:06.097Z",
     "devdoc": {
         "methods": {}
     },

@@ -27,9 +27,9 @@
     "sourceMap": "",
     "deployedSourceMap": "",
     "source": "pragma solidity ^0.4.24;\n\ncontract PriceOracleInterface {\n    /**\n     * @notice Gets the price of a given asset\n     * @dev fetches the price of a given asset\n     * @param asset Asset to get the price of\n     * @return the price scaled by 10**18, or zero if the price is not available\n     */\n    function assetPrices(address asset) public view returns (uint);\n}\n",
-    "sourcePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/PriceOracleInterface.sol",
+    "sourcePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/PriceOracleInterface.sol",
     "ast": {
-        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/PriceOracleInterface.sol",
+        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/PriceOracleInterface.sol",
         "exportedSymbols": {
             "PriceOracleInterface": [8601]
         },
@@ -144,7 +144,7 @@
         "src": "0:365:11"
     },
     "legacyAST": {
-        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/PriceOracleInterface.sol",
+        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/PriceOracleInterface.sol",
         "exportedSymbols": {
             "PriceOracleInterface": [8601]
         },
@@ -264,7 +264,7 @@
     },
     "networks": {},
     "schemaVersion": "3.0.23",
-    "updatedAt": "2020-06-13T13:05:43.475Z",
+    "updatedAt": "2020-06-15T12:10:06.386Z",
     "devdoc": {
         "methods": {
             "assetPrices(address)": {

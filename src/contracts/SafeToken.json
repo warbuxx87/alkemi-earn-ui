@@ -24,15 +24,15 @@
             "type": "event"
         }
     ],
-    "metadata": "{\"compiler\":{\"version\":\"0.4.24+commit.e67f0147\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"error\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"info\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"detail\",\"type\":\"uint256\"}],\"name\":\"Failure\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/SafeToken.sol\":\"SafeToken\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/EIP20Interface.sol\":{\"keccak256\":\"0x390e7f7ce830a7d1b64a38b11da61596e99f358c4aab58df06eb917a5da5e9b1\",\"urls\":[\"bzzr://c7d5ad7c74fa0fcb1f142298ab742e5115ad155a61268faf7388c47f551f9c26\"]},\"/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/EIP20NonStandardInterface.sol\":{\"keccak256\":\"0xe5e4ca3efdbaa1c2d412c440643fca47e90bda52823c4fcbc3f1a8e34932dc87\",\"urls\":[\"bzzr://cff1295b74931e7d938064bd63e4ddff708a265aee1938df585b4dd8a5475766\"]},\"/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/ErrorReporter.sol\":{\"keccak256\":\"0x33763dc757e6e30bce487f670fa8fb7134afd8accc81d6647fda420f7d84692b\",\"urls\":[\"bzzr://fb6ee276639d8fea3297e2df27e8a866b272ca26eb5f68a236d70416b2354f92\"]},\"/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/SafeToken.sol\":{\"keccak256\":\"0x9bf40651ef8ae14a6e45aaef20830ffd35c49acdee54ff0532a2395d5d7ee4ab\",\"urls\":[\"bzzr://b23543739bd11b43f5cf328e6561d9ae163ba41187cfb394584f74a61e06e5e5\"]}},\"version\":1}",
-    "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820f20790df95165cd21b2bed2040256b2166b22e98a31e60bc6b86f6e744c6a7b40029",
-    "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820f20790df95165cd21b2bed2040256b2166b22e98a31e60bc6b86f6e744c6a7b40029",
+    "metadata": "{\"compiler\":{\"version\":\"0.4.24+commit.e67f0147\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"error\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"info\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"detail\",\"type\":\"uint256\"}],\"name\":\"Failure\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/SafeToken.sol\":\"SafeToken\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/EIP20Interface.sol\":{\"keccak256\":\"0x390e7f7ce830a7d1b64a38b11da61596e99f358c4aab58df06eb917a5da5e9b1\",\"urls\":[\"bzzr://c7d5ad7c74fa0fcb1f142298ab742e5115ad155a61268faf7388c47f551f9c26\"]},\"/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/EIP20NonStandardInterface.sol\":{\"keccak256\":\"0xe5e4ca3efdbaa1c2d412c440643fca47e90bda52823c4fcbc3f1a8e34932dc87\",\"urls\":[\"bzzr://cff1295b74931e7d938064bd63e4ddff708a265aee1938df585b4dd8a5475766\"]},\"/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/ErrorReporter.sol\":{\"keccak256\":\"0x33763dc757e6e30bce487f670fa8fb7134afd8accc81d6647fda420f7d84692b\",\"urls\":[\"bzzr://fb6ee276639d8fea3297e2df27e8a866b272ca26eb5f68a236d70416b2354f92\"]},\"/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/SafeToken.sol\":{\"keccak256\":\"0x9bf40651ef8ae14a6e45aaef20830ffd35c49acdee54ff0532a2395d5d7ee4ab\",\"urls\":[\"bzzr://b23543739bd11b43f5cf328e6561d9ae163ba41187cfb394584f74a61e06e5e5\"]}},\"version\":1}",
+    "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a723058202e95b3b43b92bcb902550536cbc6a92c1c236d5321c36355bc3c09b0302010d10029",
+    "deployedBytecode": "0x6080604052600080fd00a165627a7a723058202e95b3b43b92bcb902550536cbc6a92c1c236d5321c36355bc3c09b0302010d10029",
     "sourceMap": "130:5480:13:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;130:5480:13;;;;;;;",
     "deployedSourceMap": "130:5480:13:-;;;;;",
     "source": "pragma solidity ^0.4.24;\n\nimport \"./EIP20Interface.sol\";\nimport \"./EIP20NonStandardInterface.sol\";\nimport \"./ErrorReporter.sol\";\n\ncontract SafeToken is ErrorReporter {\n\n    /**\n     * @dev Checks whether or not there is sufficient allowance for this contract to move amount from `from` and\n     *      whether or not `from` has a balance of at least `amount`. Does NOT do a transfer.\n     */\n    function checkTransferIn(address asset, address from, uint amount) internal view returns (Error) {\n        EIP20Interface token = EIP20Interface(asset);\n\n        if (token.allowance(from, address(this)) < amount) {\n            return Error.TOKEN_INSUFFICIENT_ALLOWANCE;\n        }\n\n        if (token.balanceOf(from) < amount) {\n            return Error.TOKEN_INSUFFICIENT_BALANCE;\n        }\n\n        return Error.NO_ERROR;\n    }\n\n    /**\n     * @dev Similar to EIP20 transfer, except it handles a False result from `transferFrom` and returns an explanatory\n     *      error code rather than reverting.  If caller has not called `checkTransferIn`, this may revert due to\n     *      insufficient balance or insufficient allowance. If caller has called `checkTransferIn` prior to this call,\n     *      and it returned Error.NO_ERROR, this should not revert in normal conditions.\n     *\n     *      Note: This wrapper safely handles non-standard ERC-20 tokens that do not return a value.\n     *            See here: https://medium.com/coinmonks/missing-return-value-bug-at-least-130-tokens-affected-d67bf08521ca\n     */\n    function doTransferIn(address asset, address from, uint amount) internal returns (Error) {\n        EIP20NonStandardInterface token = EIP20NonStandardInterface(asset);\n\n        bool result;\n\n        token.transferFrom(from, address(this), amount);\n\n        assembly {\n            switch returndatasize()\n                case 0 {                      // This is a non-standard ERC-20\n                    result := not(0)          // set result to true\n                }\n                case 32 {                     // This is a complaint ERC-20\n                    returndatacopy(0, 0, 32)\n                    result := mload(0)        // Set `result = returndata` of external call\n                }\n                default {                     // This is an excessively non-compliant ERC-20, revert.\n                    revert(0, 0)\n                }\n        }\n\n        if (!result) {\n            return Error.TOKEN_TRANSFER_FAILED;\n        }\n\n        return Error.NO_ERROR;\n    }\n\n    /**\n     * @dev Checks balance of this contract in asset\n     */\n    function getCash(address asset) internal view returns (uint) {\n        EIP20Interface token = EIP20Interface(asset);\n\n        return token.balanceOf(address(this));\n    }\n\n    /**\n     * @dev Checks balance of `from` in `asset`\n     */\n    function getBalanceOf(address asset, address from) internal view returns (uint) {\n        EIP20Interface token = EIP20Interface(asset);\n\n        return token.balanceOf(from);\n    }\n\n    /**\n     * @dev Similar to EIP20 transfer, except it handles a False result from `transfer` and returns an explanatory\n     *      error code rather than reverting. If caller has not called checked protocol's balance, this may revert due to\n     *      insufficient cash held in this contract. If caller has checked protocol's balance prior to this call, and verified\n     *      it is >= amount, this should not revert in normal conditions.\n     *\n     *      Note: This wrapper safely handles non-standard ERC-20 tokens that do not return a value.\n     *            See here: https://medium.com/coinmonks/missing-return-value-bug-at-least-130-tokens-affected-d67bf08521ca\n     */\n    function doTransferOut(address asset, address to, uint amount) internal returns (Error) {\n        EIP20NonStandardInterface token = EIP20NonStandardInterface(asset);\n\n        bool result;\n\n        token.transfer(to, amount);\n\n        assembly {\n            switch returndatasize()\n                case 0 {                      // This is a non-standard ERC-20\n                    result := not(0)          // set result to true\n                }\n                case 32 {                     // This is a complaint ERC-20\n                    returndatacopy(0, 0, 32)\n                    result := mload(0)        // Set `result = returndata` of external call\n                }\n                default {                     // This is an excessively non-compliant ERC-20, revert.\n                    revert(0, 0)\n                }\n        }\n\n        if (!result) {\n            return Error.TOKEN_TRANSFER_OUT_FAILED;\n        }\n\n        return Error.NO_ERROR;\n    }\n\n    function doApprove(address asset, address to, uint amount) internal returns (Error) {\n        EIP20NonStandardInterface token = EIP20NonStandardInterface(asset);\n        bool result;\n        token.approve(to, amount);\n        assembly {\n            switch returndatasize()\n                case 0 {                      // This is a non-standard ERC-20\n                    result := not(0)          // set result to true\n                }\n                case 32 {                     // This is a complaint ERC-20\n                    returndatacopy(0, 0, 32)\n                    result := mload(0)        // Set `result = returndata` of external call\n                }\n                default {                     // This is an excessively non-compliant ERC-20, revert.\n                    revert(0, 0)\n                }\n        }\n        if (!result) {\n            return Error.TOKEN_TRANSFER_OUT_FAILED;\n        }\n        return Error.NO_ERROR;\n    }\n}\n",
-    "sourcePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/SafeToken.sol",
+    "sourcePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/SafeToken.sol",
     "ast": {
-        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/SafeToken.sol",
+        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/SafeToken.sol",
         "exportedSymbols": {
             "SafeToken": [8862]
         },
@@ -46,7 +46,7 @@
                 "src": "0:24:13"
             },
             {
-                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/EIP20Interface.sol",
+                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/EIP20Interface.sol",
                 "file": "./EIP20Interface.sol",
                 "id": 8649,
                 "nodeType": "ImportDirective",
@@ -57,7 +57,7 @@
                 "unitAlias": ""
             },
             {
-                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/EIP20NonStandardInterface.sol",
+                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/EIP20NonStandardInterface.sol",
                 "file": "./EIP20NonStandardInterface.sol",
                 "id": 8650,
                 "nodeType": "ImportDirective",
@@ -68,7 +68,7 @@
                 "unitAlias": ""
             },
             {
-                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/ErrorReporter.sol",
+                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/ErrorReporter.sol",
                 "file": "./ErrorReporter.sol",
                 "id": 8651,
                 "nodeType": "ImportDirective",
@@ -2797,7 +2797,7 @@
         "src": "0:5611:13"
     },
     "legacyAST": {
-        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/SafeToken.sol",
+        "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/SafeToken.sol",
         "exportedSymbols": {
             "SafeToken": [8862]
         },
@@ -2811,7 +2811,7 @@
                 "src": "0:24:13"
             },
             {
-                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/EIP20Interface.sol",
+                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/EIP20Interface.sol",
                 "file": "./EIP20Interface.sol",
                 "id": 8649,
                 "nodeType": "ImportDirective",
@@ -2822,7 +2822,7 @@
                 "unitAlias": ""
             },
             {
-                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/EIP20NonStandardInterface.sol",
+                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/EIP20NonStandardInterface.sol",
                 "file": "./EIP20NonStandardInterface.sol",
                 "id": 8650,
                 "nodeType": "ImportDirective",
@@ -2833,7 +2833,7 @@
                 "unitAlias": ""
             },
             {
-                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/debt-facility/alkemi-debt-ui/contracts/ErrorReporter.sol",
+                "absolutePath": "/Users/ryanbreen/workspace/Alkemi/alkemi-earn/alkemi-earn-ui/contracts/ErrorReporter.sol",
                 "file": "./ErrorReporter.sol",
                 "id": 8651,
                 "nodeType": "ImportDirective",
@@ -5567,7 +5567,7 @@
     },
     "networks": {},
     "schemaVersion": "3.0.23",
-    "updatedAt": "2020-06-13T13:05:43.476Z",
+    "updatedAt": "2020-06-15T12:10:06.395Z",
     "devdoc": {
         "methods": {}
     },
