@@ -39,7 +39,7 @@ const fetchStatsError = error => ({
 // Section 3: Action dispatch methods and async funcs
 
 export const fetchStatsAction = (tx) => async (dispatch) => {
-    dispatch(fetchStatsPending(tx));
+    dispatch(fetchStatsPending());
     setTimeout(() => {
         // mock delay, will remove
         dispatch(fetchStatsSuccess(tx));
