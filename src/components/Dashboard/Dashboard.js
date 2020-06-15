@@ -21,6 +21,7 @@ import DashCardBorrow from "containers/Dashboard/CardBorrow";
 import TableSupply from "containers/Dashboard/TableSupply";
 import TableBorrow from "containers/Dashboard/TableBorrow";
 import CardChart from "components/Dashboard/CardChart";
+import AlertStatus from "components/UI/Alerts";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +56,9 @@ function Dashboard() {
     return (
         <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={2}>
+                <Grid item lg={12} sm={12} xs={12}>
+                    <AlertStatus />
+                </Grid>
                 <Grid item lg={12} sm={12} xs={12}>
                     <CardChart />
                 </Grid>
