@@ -1,5 +1,11 @@
+// Section 1: React low level imports
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
+// Section 2: Material-UI imports
+
+// Section 3: Components & Containers import from the application
+
+// Section 4: Define Styles function taking theme as argument and returning an object
 const modal = makeStyles((theme) =>
     createStyles({
         MuiTableHeadroot: {
@@ -117,4 +123,10 @@ const modal = makeStyles((theme) =>
         },
     })
 );
+
+// Section 5: Code Component
+
+// Section 6: Documentation with PropTypes
+
+// Section 7:  Connect styles and export
 export default modal;
