@@ -1,9 +1,9 @@
 import {
     allocatePending,
     allocateSuccess,
-    allocateError
+    allocateError,
 } from "redux/actions/data";
-import { handle_faucet_allocateTo } from "utils/drizzle";
+import { handle_allocate_click } from "utils/drizzle";
 import notify from "containers/AppBar/notify";
 
 const allocateLendAction = ({ drizzle, asset, amount }) => async (
@@ -11,14 +11,14 @@ const allocateLendAction = ({ drizzle, asset, amount }) => async (
     getState
 ) => {
     dispatch(allocatePending(asset));
-    handle_faucet_allocateTo({ drizzle, asset, amount })
+    handle_allocate_click({ drizzle, asset, amount })
         .then(() => dispatch(allocateSuccess(asset)))
-        .catch(error => {
+        .catch((error) => {
             notify.notification({
                 eventCode: "allocateError",
                 type: "error",
                 message: error.message,
-                autoDismiss: 5000
+                autoDismiss: 5000,
             });
             dispatch(allocateError(asset, error.message));
         });

@@ -1,9 +1,9 @@
 import {
     fetchBorrowPending,
     fetchBorrowSuccess,
-    fetchBorrowError
+    fetchBorrowError,
 } from "redux/actions/data";
-import { handle_approve } from "utils/drizzle";
+import { handle_approve_click } from "utils/drizzle";
 import notify from "containers/AppBar/notify";
 
 const activateBorrowAction = ({ drizzle, asset }) => async (
@@ -12,14 +12,14 @@ const activateBorrowAction = ({ drizzle, asset }) => async (
 ) => {
     dispatch(fetchBorrowPending(asset));
     const myAccount = getState().accounts[0];
-    handle_approve({ drizzle, asset, myAccount })
+    handle_approve_click({ drizzle, asset, myAccount })
         .then(() => dispatch(fetchBorrowSuccess(asset)))
-        .catch(error => {
+        .catch((error) => {
             notify.notification({
                 eventCode: "borrowError",
                 type: "error",
                 message: error.message,
-                autoDismiss: 5000
+                autoDismiss: 5000,
             });
             dispatch(fetchBorrowError(asset, error.message));
         });
