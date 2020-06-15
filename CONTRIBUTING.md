@@ -499,6 +499,24 @@ src/
 :   :   :
 ```
 
+### Custom hooks go into _src/hooks_
+
+**Requirements**
+
+- Custom hook **MUST** go into _src/hooks_
+- Custom hook's name **MUST** start with _use_ (for example: useTimer)
+
+**Folder structure**
+
+```
+src/
+:
+├── hooks/
+│   :
+│   ├── useHook.js
+:   :
+```
+
 ## Component & Container separation pattern
 
 We respect a separation between presentational components & containers.

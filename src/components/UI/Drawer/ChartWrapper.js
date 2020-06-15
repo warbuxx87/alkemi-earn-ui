@@ -10,7 +10,7 @@ const generateData = (start, end, step) => {
     return data;
 };
 
-export default class LendChart extends React.PureComponent {
+export default class ChartWrapper extends React.PureComponent {
     constructor(props) {
         super(props);
 
