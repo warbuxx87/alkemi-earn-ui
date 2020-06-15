@@ -2,7 +2,7 @@ import { readyToTransaction } from "containers/AppBar/onboard";
 import { toWei } from "utils/front-end";
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
-import { notifyTransaction } from "containers/AppBar/notify";
+import { notifyTransaction } from "utils/notify";
 import { initMarketContract, initAssetContract } from "utils/contracts";
 
 import WETH_ABI from "contracts/WETH_ABI.json";

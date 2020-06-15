@@ -6,12 +6,12 @@ const notify = Notify({
     dappId: DAPP_ID, // [String] The API key created by step one above
     networkId: 4,
     darkMode: false,
-    desktopPosition: "bottomRight" // [Integer] The Ethereum network ID your Dapp uses.
+    desktopPosition: "bottomRight", // [Integer] The Ethereum network ID your Dapp uses.
 });
 
 const networkIdToUrl = {
     main: "https://etherscan.io/tx",
-    rinkeby: "https://rinkeby.etherscan.io/tx"
+    rinkeby: "https://rinkeby.etherscan.io/tx",
 };
 
 export const notifyTransaction = ({
@@ -20,14 +20,14 @@ export const notifyTransaction = ({
     balance, // wei
     sendTransaction, // () => Promise,
     network, // "main" or "rinkeby"
-    events // even handler https://docs.blocknative.com/notify#event-codes
+    events, // even handler https://docs.blocknative.com/notify#event-codes
 }) =>
     new Promise((resolve, reject) => {
         const { emitter } = notify.transaction({
             estimateGas,
             gasPrice,
             balance,
-            sendTransaction
+            sendTransaction,
         });
 
         emitter.on("txRequest", () => events.txRequest);
@@ -39,7 +39,7 @@ export const notifyTransaction = ({
             return false;
         });
 
-        emitter.on("txConfirmed", transaction => {
+        emitter.on("txConfirmed", (transaction) => {
             resolve(transaction);
             return events && events.txConfirmed && events.txConfirmed.message
                 ? {
@@ -52,13 +52,13 @@ export const notifyTransaction = ({
                         <g><polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128"/></g>
                     </svg>
                 </a>
-            `
+            `,
                   }
                 : {};
         });
 
         // called on every event that doesn't have a listener defined on this transaction
-        emitter.on("all", transaction => {
+        emitter.on("all", (transaction) => {
             switch (transaction.eventCode) {
                 case "txError":
                     return reject(

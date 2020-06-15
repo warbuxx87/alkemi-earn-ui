@@ -2,8 +2,8 @@
 import {
     FETCH_STATS_PENDING,
     FETCH_STATS_SUCCESS,
-    FETCH_STATS_ERROR
-} from "redux/actions/data";
+    FETCH_STATS_ERROR,
+} from "redux/actions/data/stats.js";
 
 import tx from "containers/History/MOCK_DATA.json";
 
@@ -11,7 +11,7 @@ import tx from "containers/History/MOCK_DATA.json";
 const initialState = {
     pending: false,
     tx: tx,
-    error: null
+    error: null,
 };
 
 // Implement "reducer" function with initial state as default state
@@ -20,7 +20,7 @@ export default (state = initialState, { type, action }) => {
         case FETCH_STATS_PENDING:
             return {
                 ...state,
-                pending: true
+                pending: true,
             };
 
         case FETCH_STATS_SUCCESS:
@@ -29,16 +29,16 @@ export default (state = initialState, { type, action }) => {
                     ...state.tx,
                     [action]: {
                         ...state.tx[action.tx],
-                        pending: false
-                    }
-                }
+                        pending: false,
+                    },
+                },
             };
 
         case FETCH_STATS_ERROR:
             return {
                 ...state,
                 pending: false,
-                error: action.error
+                error: action.error,
             };
 
         default:
