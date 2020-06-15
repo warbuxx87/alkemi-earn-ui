@@ -15,7 +15,7 @@ import Drizzle from "containers/Drizzle/Drizzle";
 
 import registerServiceWorker from "./utils/registerServiceWorker";
 
-class App extends Component {
+export class App extends Component {
     render() {
         return (
             <Drizzle>
@@ -32,5 +32,8 @@ class App extends Component {
 
 const AppWithHotReload = hot(App);
 
-ReactDOM.render(<AppWithHotReload />, document.getElementById("root"));
+ReactDOM.render(
+    <AppWithHotReload />,
+    document.getElementById("root") || document.createElement("div")
+);
 registerServiceWorker();
