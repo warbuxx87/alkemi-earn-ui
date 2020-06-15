@@ -105,10 +105,15 @@ export const formatPercent = (num) => {
     return (num * 100).toFixed(2) + "%";
 };
 
-export function calculateEarnings(deposit, balance, unit) {
-    let earnings = balance - deposit;
+export function calculateEarnings(balance, principal, USDprice, unit) {
+    const fPrincipal = fromWei(principal, unit);
+    const fBalance = fromWei(balance, unit);
+    const fUSDprice = fromWei(USDprice, "PAX");
 
-    earnings = fromWei(earnings.toString(), unit);
+    let earnings = fBalance - fPrincipal;
+    earnings = earnings / fUSDprice;
+
+    earnings = formatPriceWithCurrency(earnings, "USD");
 
     return earnings;
 }

@@ -26,12 +26,14 @@ export const getCollateralRatio = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );
+    let collateralRatio = 0;
     if (calculateAccountValues[0]) {
         let totalSupplied = _.get(calculateAccountValues, "[0].value[1]");
         let totalBorrowed = _.get(calculateAccountValues, "[0].value[2]");
-        let collateralRatio = totalSupplied / totalBorrowed;
+        let collateralRatio = totalSupplied / totalBorrowed || 0;
         return collateralRatio;
     }
+    return collateralRatio;
 };
 
 // Getting USDxPrice from drizzle, TODO remove if useless after integration of API call directly from server

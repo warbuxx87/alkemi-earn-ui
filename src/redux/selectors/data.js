@@ -102,6 +102,8 @@ const getLendAsset = createSelector(
             let principal = "0";
             let utilization = "0";
             let price = "0";
+
+            let USDprice = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = lendBalances[token_address] || "0";
@@ -109,6 +111,9 @@ const getLendAsset = createSelector(
                 principal = allPrincipal[token_address] || "0";
                 utilization = allUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
+                USDprice =
+                    assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
+                    "0";
             }
             return {
                 ...asset,
@@ -117,6 +122,7 @@ const getLendAsset = createSelector(
                 principal,
                 utilization,
                 price,
+                USDprice,
             };
         })
 );
@@ -208,6 +214,7 @@ const getBorrowAsset = createSelector(
             let principal = "0";
             let utilization = "0";
             let price = "0";
+            let USDprice = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
@@ -215,6 +222,9 @@ const getBorrowAsset = createSelector(
                 principal = borrowPrincipal[token_address] || "0";
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
+                USDprice =
+                    assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
+                    "0";
             }
             return {
                 ...asset,
@@ -223,6 +233,7 @@ const getBorrowAsset = createSelector(
                 principal,
                 utilization,
                 price,
+                USDprice,
             };
         })
 );
