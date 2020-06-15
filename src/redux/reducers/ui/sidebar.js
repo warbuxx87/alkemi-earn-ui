@@ -4,7 +4,7 @@ const initialState = {
     open: true,
 };
 
-export default (state = initialState, { type }) => {
+export default ({ type }, state = initialState) => {
     switch (type) {
         case OPEN_SIDEBAR:
             return {
