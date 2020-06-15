@@ -42,7 +42,7 @@ export const getUSDxPrice = (state) => {
 
     // TODO, this address filter should be pulled from constants address_map with proper web3 connected Network
     let USDxPrice = assetPrices.filter(function (asset) {
-        return asset.args[0] === "0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"; // rinkeby address for USDx
+        return asset.args[0] === "0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"; // rinkeby address for PAX
     });
 
     if (USDxPrice[0]) {
