@@ -113,3 +113,23 @@ export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
     );
     return sendWithdraw;
 };
+
+export const handle_max_borrow_click = async ({ drizzle, amount, asset }) => {
+    const drizzleStore = drizzle.store.getState();
+
+    // this should be selector
+    let accountSupplyValue =
+        drizzleStore.contracts.mMarket.calculateAccountValues[0].value[1];
+
+    // this should be selector
+    const collateralRatio =
+        drizzleStore.contracts.MoneyMarket.collateralRatio[0].value;
+    let that;
+    let max_borrow = that
+        .bn(accountSupplyValue) // get user total protocol supply value
+        .mul(that.bn(10 ** 18)) // scale by 10e18
+        .div(that.bn(collateralRatio)); // divide by collateralRatio
+    let max_borrow_safe = max_borrow.mul(that.bn("8")).div(that.bn("10"));
+
+    return max_borrow, max_borrow_safe;
+};
