@@ -211,6 +211,7 @@ const BorrowTableActive = ({ data = [] }) => {
 // Section 6: Documentation with PropTypes
 BorrowTableActive.propTypes = {
     data: PropTypes.array.isRequired,
+    columns: PropTypes.array.isRequired,
 };
 
 // Section 7:  Connect styles and export
