@@ -1,7 +1,7 @@
 // Main Component
 
 // Section 1: React low level imports
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // Section 2: Material-UI imports
 import {

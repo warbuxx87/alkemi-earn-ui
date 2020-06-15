@@ -41,6 +41,9 @@ const useStyles = makeStyles({
         minHeight: 36,
         textTransform: "capitalize",
     },
+    customRow: {
+        paddingTop: "100px",
+    },
 });
 
 const columns = [
@@ -77,7 +80,10 @@ export default function BorrowTables({ activeReserves, currency }) {
                         </TableHead>
                         <TableBody>
                             {activeReserves.map((row) => (
-                                <TableRow key={row.unit}>
+                                <TableRow
+                                    key={row.unit}
+                                    className={classes.customRow}
+                                >
                                     <BorrowTableCell component="th" scope="Row">
                                         <Box
                                             minWidth={100}
