@@ -40,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tabs = [
-    { value: "tablesupply", label: "TableSupply" },
-    { value: "tableborrow", label: "TableBorrow" },
+    { value: "tablesupply", label: "Active Supplied" },
+    { value: "tableborrow", label: "Active Borrowed" },
 ];
 
 function Dashboard() {
@@ -63,13 +63,13 @@ function Dashboard() {
                     <CardChart />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <DashCardValue />
-                </Grid>
-                <Grid item lg={4} sm={6} xs={12}>
                     <DashCardSupply />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <DashCardBorrow />
+                </Grid>
+                <Grid item lg={4} sm={6} xs={12}>
+                    <DashCardValue />
                 </Grid>
                 <Grid item lg={12} sm={12} xs={12}>
                     <Box>

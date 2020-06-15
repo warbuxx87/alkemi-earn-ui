@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         justifyContent: "center",
     },
-    contentCard: {
-        borderBottom: `1px solid ${theme.palette.error.main}`,
-    },
+    // contentCard: {
+    //    borderBottom: `1px solid ${theme.palette.error.main}`,
+    //  },
 }));
 
 function BorrowBalance({
@@ -64,7 +64,7 @@ function BorrowBalance({
                                 color="textSecondary"
                                 align="left"
                             >
-                                Total USD
+                                Total Borrowed
                             </Typography>
                             <Typography
                                 variant="h3"

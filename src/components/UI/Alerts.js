@@ -33,7 +33,7 @@ export default function TransitionAlerts() {
             <Collapse in={open}>
                 <Alert
                     className={classes.alert}
-                    severity="info"
+                    severity="warning"
                     action={
                         <IconButton
                             aria-label="close"

@@ -31,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         justifyContent: "center",
     },
-    contentCard: {
-        borderBottom: `1px solid ${theme.palette.success.main}`,
-    },
+    //contentCard: {
+    //    borderBottom: `1px solid ${theme.palette.success.main}`,
+    // },
 }));
 
 function SupplyBalance({
@@ -66,7 +66,7 @@ function SupplyBalance({
                                 color="textSecondary"
                                 align="left"
                             >
-                                Total USD
+                                Total Suppled
                             </Typography>
                             <Typography
                                 variant="h3"

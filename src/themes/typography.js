@@ -23,7 +23,7 @@ export default {
         fontWeight: 400,
         fontSize: 22,
         "@media (min-width:1550px)": {
-            fontSize: 26,
+            fontSize: 22,
         },
     },
     h4: {
