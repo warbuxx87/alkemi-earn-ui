@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
-import onLendActivate from "containers/Lend/ApproveMethod";
+import { onLendActivate } from "redux/actions/data/lend";
 import Lend from "components/Lend/Lend";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
@@ -15,7 +15,7 @@ import withDrizzle from "containers/Drizzle/withDrizzle";
 import {
     getLendError,
     getLendActive,
-    getLendInactive
+    getLendInactive,
 } from "redux/selectors/data";
 
 const LendContainer = ({
@@ -23,28 +23,28 @@ const LendContainer = ({
     activeLend,
     onActivate,
     drizzle,
-    errorLend
+    errorLend,
 }) => {
     return (
         <Lend
             inactiveLend={inactiveLend}
             activeLend={activeLend}
-            onActivate={asset => onActivate({ drizzle, asset })}
+            onActivate={(asset) => onActivate({ drizzle, asset })}
             errorLend={errorLend}
         />
     );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     inactiveLend: getLendInactive(state),
     activeLend: getLendActive(state),
-    errorLend: getLendError(state)
+    errorLend: getLendError(state),
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            onActivate: onLendActivate
+            onActivate: onLendActivate,
         },
         dispatch
     );

@@ -8,7 +8,7 @@ import { formatNumber } from "utils/front-end";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
-import onBorrowAction from "containers/Borrow/BorrowMethod";
+import { onBorrowAction } from "redux/actions/data/borrow";
 
 const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
     const [amount, setAmount] = React.useState("");

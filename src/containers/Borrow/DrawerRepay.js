@@ -10,7 +10,7 @@ import { formatNumber, fromWei, toWei } from "utils/front-end";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
-import onRepayAction from "containers/Borrow/RepayMethod";
+import { onRepayAction } from "redux/actions/data/borrow";
 
 const DrawerRepayContainer = ({ asset, drizzle, onRepayAction }) => {
     const [amount, setAmount] = React.useState("");

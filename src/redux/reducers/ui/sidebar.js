@@ -1,7 +1,7 @@
-import { OPEN_SIDEBAR, CLOSE_SIDEBAR } from "../../actions/ui";
+import { OPEN_SIDEBAR, CLOSE_SIDEBAR } from "../../actions/ui/ui";
 
 const initialState = {
-    open: true
+    open: true,
 };
 
 export default (state = initialState, { type }) => {
@@ -9,13 +9,13 @@ export default (state = initialState, { type }) => {
         case OPEN_SIDEBAR:
             return {
                 ...state,
-                open: true
+                open: true,
             };
 
         case CLOSE_SIDEBAR:
             return {
                 ...state,
-                open: false
+                open: false,
             };
 
         default:

@@ -1,4 +1,9 @@
-import { openSidebar, closeSidebar, OPEN_SIDEBAR, CLOSE_SIDEBAR } from "../ui";
+import {
+    openSidebar,
+    closeSidebar,
+    OPEN_SIDEBAR,
+    CLOSE_SIDEBAR,
+} from "../ui/ui";
 
 describe("openSidebar", () => {
     it("returns an action of type $`{OPEN_SIDE_BAR}`", () => {

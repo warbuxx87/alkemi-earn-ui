@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 // Imports Section 2: internal imports ( actions, selectors etc.)
-import fetchStatsAction from "./Fetch";
+import { fetchStatsAction } from "redux/actions/data/stats";
 import { getStatsError, getStats, getStatsPending } from "redux/selectors/data";
 
 // Imports Section 3: Internal Components Imports
@@ -29,16 +29,16 @@ class withHistory extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     error: getStatsError(state),
     tx: getStats(state),
-    pending: getStatsPending(state)
+    pending: getStatsPending(state),
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            fetchStats: fetchStatsAction
+            fetchStats: fetchStatsAction,
         },
         dispatch
     );
