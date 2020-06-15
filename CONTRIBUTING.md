@@ -339,18 +339,25 @@ src/
 :
 ├── redux/
 │   ├── actions/              #
-│   │   ├── data.js           # Action related to domain Data
-│   │   ├── ui.js             # Action related to UI modification
-│   │   └── status.js         # Actions related to status information
+│   │   ├── data              # Action related to domain Data
+│   │   │   ├── domain1.js    # Action responsible to handle actions of domain 1
+│   │   │   └── domain2.js    # Action responsible to handle actions of domain 2
+│   │   ├── ui                # Action related to UI modification
+│   │   │   └── ui.js         # Action responsible to handle actions of the UI
+│   │   └── status            # Actions related to status information
 :
 ```
 
 **Example**
 
 ```javascript
+// Section 1: Utilities imports and low level imports
+import axios from "axios";
+
+// Section 2: Action types declarations and action creators
 // Declare action type as a constant
 export const ADD_TODO = "ADD_TODO";
-// Declare action creator
+// Declare action creator (remove the export on actions creators if handled only by section 3 async funcs)
 export const addTodo = (text, category) => ({
   // Respect FSA standard format (type, payload, meta properties)
   type: ADD_TODO,
@@ -361,6 +368,17 @@ export const addTodo = (text, category) => ({
     category
   }
 });
+// Section 3: Action dispatch methods and async funcs
+export const onLendActivate = ({ param1, param2 }) => async (
+    dispatch
+) => {
+    try {
+      const response = await axios.get('/todo');
+      dispatch(addTodo(response.data.text, response.data.category));
+    } catch (error) {
+      dispatch(someErrorNotification(error));
+    }
+};
 ```
 
 ##### Enhancers and middlewares
