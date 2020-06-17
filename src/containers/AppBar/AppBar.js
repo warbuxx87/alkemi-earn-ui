@@ -45,7 +45,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
             initContracts(drizzle);
         }
     }, [networkId, accountAddress, drizzle]);
-
+    
     const onConnect = async () => {
         const isSelectWallet = await onboard.walletSelect();
         if (isSelectWallet) {
@@ -55,17 +55,21 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
             }
         }
     };
+    const onReset = async () => {
+        onboard.walletReset();
+    }
 
     return (
         <AppBar
             title={title}
             onConnect={onConnect}
+            onReset={onReset}
             accountAddress={accountAddress}
         />
     );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => ({ 
     networkId: networkSelector(state),
     accountAddress: getAccountAddress(state)
 });
