@@ -4,45 +4,32 @@ import thunk from "redux-thunk";
 
 // 2. Libraries imports
 import Web3 from "web3";
-import { EventActions, generateStore } from "@drizzle/store";
+import { generateStore } from "@drizzle/store";
 import { toast } from "react-toastify";
 import { ToastMessage } from "rimble-ui";
+import "react-toastify/dist/ReactToastify.css";
 
 // 3. internal imports
 import appReducers from "redux/reducers";
-//import address from "constants/address_map";
+import errorMessage from "constants/error_code";
 import MoneyMarket from "contracts/MoneyMarket.json";
 
-import 'react-toastify/dist/ReactToastify.css';
-//
-// {
-//   contractName: 'MoneyMarket',
-//   web3Contract: new web3.eth.Contract(mMarket_ABI, address, {data: 'deployedBytecode' }) // An instance of a Web3 contract
-// }
-
-const contractEventNotifier = (store) => (next) => (action) => {
+const contractTXNotifier = (store) => (next) => (action) => {
     const actionTypeConfirmation = "TX_CONFIRMATION";
     const actionTypeSend = "TX_BROADCASTED";
     const actionTypeSuccess = "TX_SUCCESSFUL";
     const actionTypeError = "TX_ERROR";
 
-    // const eventTypeFired = "EVENT_FIRED";
-    // const eventTypeChanged = "EVENT_CHANGED";
-    // const eventTypeError = "EVENT_ERROR";
-
     if (
         action.type === actionTypeSend ||
         action.type === actionTypeSuccess ||
         action.type === actionTypeError ||
-        action.type === actionTypeConfirmation // ||
-        // action.event === eventTypeFired ||
-        // action.event === eventTypeChanged ||
-        // action.event === eventTypeError
+        action.type === actionTypeConfirmation
     ) {
         let displayMessage;
         let displaySecondaryMessage;
         let toastMessageVariant;
-        //  let contractEvent;
+        let errorCode;
         let toastIcon;
         // the transaction is still processing
         if (action.type === actionTypeSend) {
@@ -54,20 +41,42 @@ const contractEventNotifier = (store) => (next) => (action) => {
         }
         // This means it's been mined on the network
         if (action.type === actionTypeSuccess) {
+            // console.log("Tx Success event fired", displayMessage);
+
+            console.log("Tx Receipt Object", action.receipt);
             toastMessageVariant = "success";
             toastIcon = "CloudDone";
-            displayMessage = "Transaction Successful";
-            displaySecondaryMessage = "Contract Response would go here";
-            console.log("Tx Success event fired", displayMessage);
+            displaySecondaryMessage = "Transaction Successful";
+
+            /// TODO: this needs to be cleaned up with either a switch function. Or we need to create a function that selects the 2nd item within the action.receipt object.
+            if (action.receipt.events.SupplyReceived) {
+                displayMessage = "Supply Received";
+            }
+
+            if (action.receipt.events.BorrowTaken) {
+                displayMessage = "Borrow Taken";
+            }
+
+            if (action.receipt.events.BorrowRepaid) {
+                displayMessage = "Borrow Repaid";
+            }
+
+            if (action.receipt.events.SupplyWithdrawn) {
+                displayMessage = "Supply Withdrawn";
+            }
+            // Contract can still fail even if transaction was Successful
+            // If Failure event detected in receipt object then return transaction failed rather than Successful to user
+            // Error code is in txReceipt.Failure.returnValues.error
+            // We then use this code to identify error message returned to user from constants/error_codes
+            if (action.receipt.events.Failure) {
+                errorCode = action.receipt.events.Failure.returnValues.error;
+                toastMessageVariant = "failure";
+                toastIcon = "ErrorOutline";
+                displayMessage = errorMessage[errorCode];
+                displaySecondaryMessage = "Transaction Failed";
+            }
         }
-        // // This actually has the return receipt from the smart Contract
-        // if (action.type === actionTypeConfirmation) {
-        //     toastMessageVariant = "success";
-        //     toastIcon = "DoneAll";
-        //     displayMessage = "Transaction Confirmed";
-        //     displaySecondaryMessage = "Contract Response would go here";
-        //     console.log("Tx Confirmation event fired", displayMessage);
-        // }
+
         if (action.type === actionTypeError) {
             toastIcon = "ErrorOutline";
             toastMessageVariant = "failure";
@@ -75,23 +84,9 @@ const contractEventNotifier = (store) => (next) => (action) => {
             displaySecondaryMessage = "The Failure Message Would Go Here";
             console.log("Tx Error event fired", displayMessage);
         }
-        // if (action.type === EventActions.EVENT_FIRED) {
-        //     contractEvent = action.event.event;
-        //     toastIcon = "Mood";
-        //     toastMessageVariant = "success";
-        //     displayMessage = `${contractEvent}`;
-        //     displaySecondaryMessage = "Thanks for using our dapp";
-        //
-        //     // const contract = action.name;
-        //     // const contractNewBalance = action.event.returnValues.newBalance;
-        //     // const display = `${contract}(${contractEvent}): ${contractNewBalance}`;
-        //
-        //     console.log("Contract event fired", displayMessage);
-        // }
 
         const options = {
             closeButton: true,
-            // position: toast.POSITION.BOTTOM_RIGHT,
             position: "top-center",
             autoClose: true,
             hideProgressBar: true,
@@ -124,7 +119,7 @@ const contractEventNotifier = (store) => (next) => (action) => {
     return next(action);
 };
 
-const appMiddlewares = [thunk, contractEventNotifier];
+const appMiddlewares = [thunk, contractTXNotifier];
 
 export const drizzleOptions = {
     drizzleOptions: {
