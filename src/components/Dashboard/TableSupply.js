@@ -25,7 +25,7 @@ import {
     formatNumber,
     formatPercent,
     //    formatMoney,
-    //  calculateEarnings
+    calculateEarnings,
 } from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -107,7 +107,12 @@ export default function SupplyTables({ activeReserves, currency }) {
                                         {formatPercent(row.apr)}
                                     </SupplyTableCell>
                                     <SupplyTableCell align="right">
-                                        0
+                                        {calculateEarnings(
+                                            row.balance,
+                                            row.principal,
+                                            row.USDprice,
+                                            row.unit
+                                        )}
                                     </SupplyTableCell>
                                 </TableRow>
                             ))}

@@ -30,8 +30,8 @@
         "address_USDT": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
         "rate_USDT": "0x79BE3Be94b8D25F6628c616a99fA09094bcF3712",
 
-        "address_USDx": "0xeb269732ab75A6fD61Ea60b06fE994cD32a83549",
-        "rate_USDx": "0xeb269732ab75a6fd61ea60b06fe994cd32a83549",
+        "address_USDX": "0xeb269732ab75A6fD61Ea60b06fE994cD32a83549",
+        "rate_USDX": "0xeb269732ab75a6fd61ea60b06fe994cd32a83549",
 
         "address_WBTC": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
         "rate_WBTC": "0x5Dc95A046020880b93F15902540Dbfe86489FddA",
@@ -44,7 +44,7 @@
         "rate_Exchange": "0x3eE954244629c9Bc6e53A50baCCC9A7B472f7D42"
     },
     "rinkeby": {
-        "address_mMarket": "0xe6a53F96ceCA750ef8589c5b376872213aa4f230",
+        "address_MoneyMarket": "0xe6a53F96ceCA750ef8589c5b376872213aa4f230",
         "address_liquidator": "0x84E81B87D1736D2E2Be5dB591326E29F8458c63C",
 
         "oracle_price": "0xE171D8c7e9EE0DDAe1A9bec0c7f35294e48c28d4",
@@ -71,8 +71,8 @@
         "address_USDT": "0x249987094de97C9612b8d04C15Ca8273e43C20AC",
         "rate_USDT": "0x63b920386b3b4021d36EcFaB90F3F5b74Bc8b902",
 
-        "address_USDx": "0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E",
-        "rate_USDx": "0x39e4a8Cf9ec0e20A51aa1Dffe62D34fc8A3D15f9",
+        "address_USDX": "0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E",
+        "rate_USDX": "0x39e4a8Cf9ec0e20A51aa1Dffe62D34fc8A3D15f9",
 
         "address_WBTC": "0x577d296678535e4903d59a4c929b718e1d575e0a",
         "rate_WBTC": "0x0Ecc207Eb5E1d9476543D7e32D61A75e6bf767d3",

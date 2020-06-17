@@ -1,0 +1,7 @@
+organization=project-alkemi-1
+projectKey=project-alkemi_alkemi-debt-ui
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.8612
+dashboardUrl=https://sonarcloud.io/dashboard?id=project-alkemi_alkemi-debt-ui
+ceTaskId=AXKm1soIfrRuzpLgyHQR
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AXKm1soIfrRuzpLgyHQR
