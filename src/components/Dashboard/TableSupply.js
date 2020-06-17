@@ -26,7 +26,6 @@ import {
     formatPercent,
     //    formatMoney,
     calculateEarnings,
-    fromWei,
 } from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object

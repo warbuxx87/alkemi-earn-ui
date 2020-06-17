@@ -37,11 +37,13 @@ const fetchBorrowSuccess = (asset) => ({
 export const FETCH_BORROW_ERROR = "FETCH_BORROW_ERROR";
 
 // Declare action creator
-const fetchBorrowError = (error) => ({
+const fetchBorrowError = (asset, error) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_ERROR,
-    payload: new Error(),
-    error: true,
+    payload: {
+        error,
+        asset,
+    },
 });
 
 //                                               //
@@ -135,7 +137,7 @@ export const onBorrowActivate = ({ drizzle, asset }) => async (
         .then(() => dispatch(fetchBorrowSuccess(asset)))
         .catch((error) => {
             notify.notification({
-                eventCode: "borrowError",
+                eventCode: "fetchBorrowError",
                 type: "error",
                 message: error.message,
                 autoDismiss: 5000,
