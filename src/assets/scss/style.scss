@@ -91,8 +91,16 @@
   margin: 16px !important;
 }
 
- //BNC onboard background overlay
- aside.bn-onboard-modal {
-   z-index: 1200 !important;
-   background: rgba(0, 0, 0, 0.4) !important;
- };
+
+.Toastify__toast--default{
+  background: transparent !important;
+}
+.fMyqQI {
+  &:nth-child(1){
+    width: 330px;
+    margin-top: 0px;
+  }
+}
+.Toastify__toast-container{
+  width: 350px !important;
+}

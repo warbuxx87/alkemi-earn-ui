@@ -12,6 +12,8 @@ import { ToastMessage } from "rimble-ui";
 import appReducers from "redux/reducers";
 //import address from "constants/address_map";
 import MoneyMarket from "contracts/MoneyMarket.json";
+
+import 'react-toastify/dist/ReactToastify.css';
 //
 // {
 //   contractName: 'MoneyMarket',
@@ -89,9 +91,9 @@ const contractEventNotifier = (store) => (next) => (action) => {
 
         const options = {
             closeButton: true,
-            position: toast.POSITION.BOTTOM_RIGHT,
-            //  position: "bottom-right",
-            autoClose: false,
+            // position: toast.POSITION.BOTTOM_RIGHT,
+            position: "top-center",
+            autoClose: true,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
@@ -101,7 +103,7 @@ const contractEventNotifier = (store) => (next) => (action) => {
 
         const display = (
             <ToastMessage
-                colorTheme={"dark"}
+                colorTheme={"light"}
                 my={3}
                 icon={toastIcon}
                 variant={toastMessageVariant}
