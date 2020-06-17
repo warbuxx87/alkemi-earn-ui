@@ -14,5 +14,5 @@ export default () => {
         if (currentNetworkName !== undefined) {
             dispatch(fetchPrice({ currentNetworkName, unit: "USDC" }));
         }
-    }, [currentNetworkName]);
+    }, [currentNetworkName, dispatch]);
 };

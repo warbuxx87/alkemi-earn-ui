@@ -1,5 +1,7 @@
 // Section 1: Utilities imports and low level imports
 
+import _ from "lodash";
+
 //const INFURA_ID = process.env.REACT_APP_INFURA_ID;
 //const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
 
@@ -46,12 +48,7 @@ const fetchPriceError = (error) => ({
 // ------------ PRICE METHOD ACTIONS --------   //
 //                                               //
 
-// Section 3: Action dispatch methods and async funcs
-
-export const fetchPrice = ({ currentNetworkName, unit }) => async (
-    dispatch,
-    getState
-) => {
+const fetchPriceCall = ({ currentNetworkName, unit, dispatch }) => {
     if (!url_map[currentNetworkName].markets_url) return;
 
     dispatch(fetchPricePending());
@@ -87,4 +84,17 @@ export const fetchPrice = ({ currentNetworkName, unit }) => async (
         .catch((error) => {
             dispatch(fetchPriceError(error.message));
         });
+};
+
+// This call may be fetched from multiple containers but only executes once every 15 seconds
+const throttledFetchPrice = _.throttle(fetchPriceCall, 15 * 1000, {
+    trailing: false,
+});
+
+// Section 3: Action dispatch methods and async funcs
+
+export const fetchPrice = ({ currentNetworkName, unit }) => async (
+    dispatch
+) => {
+    throttledFetchPrice({ currentNetworkName, unit, dispatch });
 };
