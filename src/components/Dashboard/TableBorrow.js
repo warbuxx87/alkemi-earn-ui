@@ -36,14 +36,9 @@ const useStyles = makeStyles({
         width: "18px",
         height: "18px",
     },
-    btnActiveOutline: {
-        minWidth: 100,
-        minHeight: 36,
-        textTransform: "capitalize",
-    },
-    customRow: {
-        paddingTop: "100px",
-    },
+    customHead: {
+      backgroundColor: "#000000"
+    }
 });
 
 const columns = [
@@ -61,12 +56,10 @@ export default function BorrowTables({ activeReserves, currency }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Active Loans" />
-            <Divider />
-            <Paper>
+            <Paper >
                 <PerfectScrollbar>
-                    <Table>
-                        <TableHead>
+                    <Table  >
+                        <TableHead className={classes.customHead}>
                             <TableRow>
                                 {columns.map((column, i) => (
                                     <BorrowTableCell
@@ -82,7 +75,6 @@ export default function BorrowTables({ activeReserves, currency }) {
                             {activeReserves.map((row) => (
                                 <TableRow
                                     key={row.unit}
-                                    className={classes.customRow}
                                 >
                                     <BorrowTableCell component="th" scope="Row">
                                         <Box

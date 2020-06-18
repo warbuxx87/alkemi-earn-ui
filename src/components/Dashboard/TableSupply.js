@@ -55,7 +55,6 @@ export default function SupplyTables({ activeReserves, currency }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Active Deposits" />
             <Divider />
             <Paper>
                 <PerfectScrollbar>
@@ -72,7 +71,7 @@ export default function SupplyTables({ activeReserves, currency }) {
                                 ))}
                             </TableRow>
                         </TableHead>
-                        <TableBody>
+                        <TableBody >
                             {activeReserves.map((row) => (
                                 <TableRow key={row.unit}>
                                     <SupplyTableCell component="th" scope="row">
