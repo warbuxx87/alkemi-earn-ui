@@ -1,4 +1,4 @@
-import { readyToTransact } from "containers/AppBar/onboard";
+import { readyToTransact } from "utils/onboard";
 import { toWei } from "utils/front-end";
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
