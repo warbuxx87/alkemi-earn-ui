@@ -1,16 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
 import { onAllocateAction } from "redux/actions/data/lend";
 
-import useUSDPrice from "hooks/useUSDPrice";
+import { formatNumber, fromWei, formatETHMoney } from "utils/front-end";
 
-import { formatNumber, fromWei } from "utils/front-end";
+import useFetchPrice from "hooks/useFetchPrice";
+import { getUSDPrice } from "redux/selectors/totalBalance";
 
 const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
+    useFetchPrice(); // gets current USD price
+    const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
     const [amount, setAmount] = React.useState("");
     const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
 
@@ -23,8 +27,6 @@ const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
         }
     }, [amount, asset.wallet, asset.unit]);
 
-    const usdPrice = useUSDPrice(asset.unit);
-
     return (
         <Drawer
             asset={asset}
@@ -36,7 +38,7 @@ const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
                 onAllocateAction({ drizzle, asset, amount })
             }
             isDoingAction={asset.allocating}
-            usdPrice={usdPrice}
+            usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
             setAmount={setAmount}
