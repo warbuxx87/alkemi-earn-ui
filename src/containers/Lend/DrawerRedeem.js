@@ -14,7 +14,7 @@ import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
 const DrawerRedeemContainer = ({ asset, drizzle, onRedeemAction }) => {
-    useFetchPrice(); // gets current USD price
+    useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
