@@ -2,7 +2,7 @@
 
 import {
     handle_borrow_click,
-    handle_approve,
+    handle_approve_click,
     handle_repay_click,
 } from "utils/drizzle";
 import notify from "utils/notify";
@@ -133,7 +133,7 @@ export const onBorrowActivate = ({ drizzle, asset }) => async (
 ) => {
     dispatch(fetchBorrowPending(asset));
     const myAccount = getState().accounts[0];
-    handle_approve({ drizzle, asset, myAccount })
+    handle_approve_click({ drizzle, asset, myAccount })
         .then(() => dispatch(fetchBorrowSuccess(asset)))
         .catch((error) => {
             notify.notification({

@@ -11,18 +11,18 @@ import {
     SvgIcon,
     Tooltip,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import { Bell as BellIcon } from "react-feather";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     popover: {
         width: 320,
-        padding: theme.spacing(2)
-    }
+        padding: theme.spacing(2),
+    },
 }));
 
 function Notifications() {
@@ -51,7 +51,7 @@ function Notifications() {
             <Popover
                 anchorOrigin={{
                     vertical: "bottom",
-                    horizontal: "center"
+                    horizontal: "center",
                 }}
                 classes={{ paper: classes.popover }}
                 anchorEl={ref.current}

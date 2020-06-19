@@ -16,7 +16,7 @@ const walletChecks = [
     { checkName: "accounts" },
     { checkName: "connect" },
     { checkName: "network" },
-    { checkName: "balance", minimumBalance: "1000000" }
+    { checkName: "balance", minimumBalance: "1000000" },
 ];
 
 const wallets = [
@@ -27,19 +27,19 @@ const wallets = [
         walletName: "portis",
         apiKey: PORTIS_KEY,
         preferred: true,
-        label: "Portis"
+        label: "Portis",
     },
     {
         walletName: "squarelink",
         apiKey: SQUARELINK_KEY,
         preferred: true,
-        label: "SquareLink"
+        label: "SquareLink",
     },
     {
         walletName: "fortmatic",
         apiKey: FORTMATIC_KEY,
-        preferred: true
-    }
+        preferred: true,
+    },
 ];
 
 const onboard = Onboard({
@@ -47,17 +47,17 @@ const onboard = Onboard({
     networkId: 4, // [Integer] The Ethereum network ID your Dapp uses.
     darkMode: true,
     walletSelect: {
-        wallets: wallets
+        wallets: wallets,
     },
     subscriptions: {
-        wallet: wallet => {
+        wallet: (wallet) => {
             window.localStorage.setItem("selectedWallet", wallet.name);
-        }
+        },
     },
-    walletCheck: walletChecks
+    walletCheck: walletChecks,
 });
 
-export const readyToTransaction = async () => {
+export const readyToTransact = async () => {
     if (!window.ethereum) {
         const walletSelected = await onboard.walletSelect();
         if (!walletSelected) return false;

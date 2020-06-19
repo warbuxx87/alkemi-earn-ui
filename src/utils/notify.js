@@ -40,11 +40,14 @@ export const notifyTransaction = ({
         });
 
         emitter.on("txConfirmed", (transaction) => {
+            //  console.log(transaction);
             resolve(transaction);
+
             return events && events.txConfirmed && events.txConfirmed.message
                 ? {
                       message: `
                 ${events.txConfirmed.message}
+
                 <br />
                 <a href="${networkIdToUrl[network]}/${transaction.hash}" target="_blank">
                     View transaction here

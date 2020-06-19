@@ -1,8 +1,8 @@
 // Section 1: Utilities imports and low level imports
 
 import {
-    handle_approve,
-    handle_faucet_allocateTo,
+    handle_approve_click,
+    handle_allocate_click,
     handle_supply_click,
     handle_redeem_click,
 } from "utils/drizzle";
@@ -156,7 +156,7 @@ export const onLendActivate = ({ drizzle, asset }) => async (
 ) => {
     dispatch(fetchLendPending(asset));
     const myAccount = getState().accounts[0];
-    handle_approve({ drizzle, asset, myAccount })
+    handle_approve_click({ drizzle, asset, myAccount })
         .then(() => dispatch(fetchLendSuccess(asset)))
         .catch((error) => {
             notify.notification({
@@ -173,7 +173,7 @@ export const onAllocateAction = ({ drizzle, asset, amount }) => async (
     dispatch
 ) => {
     dispatch(allocatePending(asset));
-    handle_faucet_allocateTo({ drizzle, asset, amount })
+    handle_allocate_click({ drizzle, asset, amount })
         .then(() => dispatch(allocateSuccess(asset)))
         .catch((error) => {
             notify.notification({

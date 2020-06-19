@@ -14,13 +14,13 @@ const lendAssetSelector = (state) => state.data.lend.assets;
 const lendBalanceSelector = (state) => {
     const supplyBalance = {};
     Object.values(
-        _.get(state, "contracts.mMarket.getSupplyBalance", {})
+        _.get(state, "contracts.MoneyMarket.getSupplyBalance", {})
     ).forEach((balance) => (supplyBalance[balance.args[1]] = balance.value));
     return supplyBalance;
 };
 const lendAPRSelector = (state) => {
     const supplyAPR = {};
-    Object.values(_.get(state, "contracts.mMarket.markets", {})).forEach(
+    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
         (apr) =>
             (supplyAPR[apr.args[0]] = calculateInterest(
                 apr.value.supplyRateMantissa
@@ -32,7 +32,9 @@ const lendAPRSelector = (state) => {
 const lendPrincipalSelector = (state) => {
     const supplyPrincipal = {};
 
-    Object.values(_.get(state, "contracts.mMarket.supplyBalances", {})).forEach(
+    Object.values(
+        _.get(state, "contracts.MoneyMarket.supplyBalances", {})
+    ).forEach(
         (deposit) =>
             (supplyPrincipal[deposit.args[1]] = deposit.value.principal)
     );
@@ -42,7 +44,7 @@ const lendPrincipalSelector = (state) => {
 const getAllowances = (state) => {
     const allowances = {};
     Object.keys(state.contracts).forEach((asset) => {
-        if (asset !== "mMarket") {
+        if (asset !== "MoneyMarket") {
             const allowance = Object.values(state.contracts[asset].allowance);
             allowances[asset] = _.get(allowance, "[0].value", "0") !== "0";
         }
@@ -58,7 +60,7 @@ function calculateUtilization(totalBorrow, totalSupply) {
 
 const getUtilizationValues = (state) => {
     const utilizationRates = {};
-    Object.values(_.get(state, "contracts.mMarket.markets", {})).forEach(
+    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
         (market) =>
             (utilizationRates[market.args[0]] = calculateUtilization(
                 market.value[6],
@@ -70,9 +72,9 @@ const getUtilizationValues = (state) => {
 
 const getAssetPrices = (state) => {
     const assetPrices = {};
-    Object.values(_.get(state, "contracts.mMarket.assetPrices", {})).forEach(
-        (asset) => (assetPrices[asset.args[0]] = asset.value)
-    );
+    Object.values(
+        _.get(state, "contracts.MoneyMarket.assetPrices", {})
+    ).forEach((asset) => (assetPrices[asset.args[0]] = asset.value));
     return assetPrices;
 };
 
@@ -100,6 +102,8 @@ const getLendAsset = createSelector(
             let principal = "0";
             let utilization = "0";
             let price = "0";
+
+            let USDprice = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = lendBalances[token_address] || "0";
@@ -107,6 +111,9 @@ const getLendAsset = createSelector(
                 principal = allPrincipal[token_address] || "0";
                 utilization = allUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
+                USDprice =
+                    assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
+                    "0";
             }
             return {
                 ...asset,
@@ -115,6 +122,7 @@ const getLendAsset = createSelector(
                 principal,
                 utilization,
                 price,
+                USDprice,
             };
         })
 );
@@ -155,14 +163,14 @@ const borrowAssetSelector = (state) => state.data.borrow.assets;
 const borrowBalanceSelector = (state) => {
     const borrowBalance = {};
     Object.values(
-        _.get(state, "contracts.mMarket.getBorrowBalance", {})
+        _.get(state, "contracts.MoneyMarket.getBorrowBalance", {})
     ).forEach((balance) => (borrowBalance[balance.args[1]] = balance.value));
     return borrowBalance;
 };
 
 const borrowAPRSelector = (state) => {
     const borrowAPR = {};
-    Object.values(_.get(state, "contracts.mMarket.markets", {})).forEach(
+    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
         (apr) =>
             (borrowAPR[apr.args[0]] = calculateInterest(
                 apr.value.borrowRateMantissa
@@ -174,9 +182,9 @@ const borrowAPRSelector = (state) => {
 const borrowPrincipalSelector = (state) => {
     const borrowPrincipal = {};
 
-    Object.values(_.get(state, "contracts.mMarket.borrowBalances", {})).forEach(
-        (loan) => (borrowPrincipal[loan.args[1]] = loan.value.principal)
-    );
+    Object.values(
+        _.get(state, "contracts.MoneyMarket.borrowBalances", {})
+    ).forEach((loan) => (borrowPrincipal[loan.args[1]] = loan.value.principal));
     return borrowPrincipal;
 };
 
@@ -206,6 +214,7 @@ const getBorrowAsset = createSelector(
             let principal = "0";
             let utilization = "0";
             let price = "0";
+            let USDprice = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
@@ -213,6 +222,9 @@ const getBorrowAsset = createSelector(
                 principal = borrowPrincipal[token_address] || "0";
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
+                USDprice =
+                    assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
+                    "0";
             }
             return {
                 ...asset,
@@ -221,6 +233,7 @@ const getBorrowAsset = createSelector(
                 principal,
                 utilization,
                 price,
+                USDprice,
             };
         })
 );
