@@ -56,8 +56,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.asset]: {
-                        ...state.assets[action.asset],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         pending: true,
                     },
                 },
@@ -67,8 +67,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.asset]: {
-                        ...state.assets[action.asset],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         pending: false,
                         activated: true,
                     },
@@ -81,30 +81,13 @@ export default (state = initialState, action) => {
                 error: action.error,
             };
 
-        case "GOT_CONTRACT_VAR":
-            switch (action.variable) {
-                case "balanceOf":
-                    return {
-                        ...state,
-                        assets: {
-                            ...state.assets,
-                            [action.name]: {
-                                ...state.assets[action.name],
-                                wallet: action.value,
-                            },
-                        },
-                    };
-                default:
-                    return state;
-            }
-
         case BORROW_PENDING:
             return {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         borrowing: true,
                     },
                 },
@@ -114,8 +97,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         borrowing: false,
                         activated: true,
                     },
@@ -130,7 +113,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         borrowing: false,
-                        error: action.payload.error,
+                        error: action.error,
                     },
                 },
             };
@@ -140,8 +123,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         repaying: true,
                     },
                 },
@@ -151,8 +134,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         repaying: false,
                         activated: true,
                     },
@@ -167,7 +150,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         repaying: false,
-                        error: action.payload.error,
+                        error: action.error,
                     },
                 },
             };

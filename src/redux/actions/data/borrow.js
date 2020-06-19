@@ -10,7 +10,7 @@ import notify from "utils/notify";
 // Section 2: Action types declarations and action creators
 
 //                                      //
-// ------------ BORROW ACTIONS -------- //
+// ------- FETCH BORROW ACTIONS ------- //
 //                                      //
 
 // Declare action type as a constant
@@ -20,7 +20,9 @@ export const FETCH_BORROW_PENDING = "FETCH_BORROW_PENDING";
 const fetchBorrowPending = (asset) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_PENDING,
-    asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -30,7 +32,9 @@ export const FETCH_BORROW_SUCCESS = "FETCH_BORROW_SUCCESS";
 const fetchBorrowSuccess = (asset) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_SUCCESS,
-    asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -41,13 +45,13 @@ const fetchBorrowError = (asset, error) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_ERROR,
     payload: {
-        error,
         asset,
     },
+    error,
 });
 
 //                                               //
-// ------------ BORROW METHOD ACTIONS --------   //
+// -------------- BORROW ACTIONS --------------  //
 //                                               //
 
 // Declare action type as a constant
@@ -55,7 +59,9 @@ export const BORROW_PENDING = "BORROW_PENDING";
 
 const borrowPending = (asset) => ({
     type: BORROW_PENDING,
-    payload: asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -63,7 +69,9 @@ export const BORROW_SUCCESS = "BORROW_SUCCESS";
 
 const borrowSuccess = (asset) => ({
     type: BORROW_SUCCESS,
-    payload: asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -72,13 +80,13 @@ export const BORROW_ERROR = "BORROW_ERROR";
 const borrowError = (asset, error) => ({
     type: BORROW_ERROR,
     payload: {
-        error,
         asset,
     },
+    error,
 });
 
 //                                               //
-// ------------ REPAY METHOD ACTIONS --------   //
+// --------------- REPAY ACTIONS --------------  //
 //                                               //
 
 // Declare action type as a constant
@@ -86,7 +94,9 @@ export const REPAY_PENDING = "REPAY_PENDING";
 
 const repayPending = (asset) => ({
     type: REPAY_PENDING,
-    payload: asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -94,7 +104,9 @@ export const REPAY_SUCCESS = "REPAY_SUCCESS";
 
 const repaySuccess = (asset) => ({
     type: REPAY_SUCCESS,
-    payload: asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -103,9 +115,9 @@ export const REPAY_ERROR = "REPAY_ERROR";
 const repayError = (asset, error) => ({
     type: REPAY_ERROR,
     payload: {
-        error,
         asset,
     },
+    error,
 });
 
 // Section 3: Action dispatch methods and async funcs

@@ -61,8 +61,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.asset]: {
-                        ...state.assets[action.asset],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         pending: true,
                         activated: false,
                     },
@@ -73,8 +73,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.asset]: {
-                        ...state.assets[action.asset],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         pending: false,
                         activated: true,
                     },
@@ -90,33 +90,17 @@ export default (state = initialState, action) => {
                         ...state.assets[action.payload.asset],
                         pending: false,
                         activated: false,
-                        error: action.payload.error,
+                        error: action.error,
                     },
                 },
             };
-        case "GOT_CONTRACT_VAR":
-            switch (action.variable) {
-                case "balanceOf":
-                    return {
-                        ...state,
-                        assets: {
-                            ...state.assets,
-                            [action.name]: {
-                                ...state.assets[action.name],
-                                wallet: action.value,
-                            },
-                        },
-                    };
-                default:
-                    return state;
-            }
         case SUPPLY_PENDING:
             return {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         supplying: true,
                     },
                 },
@@ -126,8 +110,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         supplying: false,
                         activated: true,
                     },
@@ -142,7 +126,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         supplying: false,
-                        error: action.payload.error,
+                        error: action.error,
                     },
                 },
             };
@@ -152,8 +136,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         redeeming: true,
                     },
                 },
@@ -163,8 +147,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         redeeming: false,
                         activated: true,
                     },
@@ -179,7 +163,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         redeeming: false,
-                        error: action.payload.error,
+                        error: action.error,
                     },
                 },
             };
@@ -188,8 +172,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         approving: true,
                     },
                 },
@@ -199,8 +183,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         approving: false,
                         activated: true,
                     },
@@ -215,7 +199,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         approving: false,
-                        error: action.payload.error,
+                        error: action.error,
                     },
                 },
             };
@@ -224,8 +208,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         allocating: true,
                     },
                 },
@@ -235,8 +219,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         allocating: false,
                         activated: false,
                     },
@@ -251,7 +235,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         allocating: false,
-                        error: action.payload.error,
+                        error: action.error,
                     },
                 },
             };
