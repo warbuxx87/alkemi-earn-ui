@@ -94,6 +94,24 @@ export default (state = initialState, action) => {
                     },
                 },
             };
+
+        case "GOT_CONTRACT_VAR": {
+            switch (action.variable) {
+                case "balanceOf":
+                    return {
+                        ...state,
+                        assets: {
+                            ...state.assets,
+                            [action.name]: {
+                                ...state.assets[action.name],
+                                wallet: action.value,
+                            },
+                        },
+                    };
+                default:
+                    return state;
+            }
+        }
         case SUPPLY_PENDING:
             return {
                 ...state,
