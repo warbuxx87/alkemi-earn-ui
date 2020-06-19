@@ -1,5 +1,8 @@
 import { combineReducers } from "redux";
 
+import lend from "./lend";
+
 export default combineReducers({
-    // status reducers go here
+    lend,
+    // other status reducers go here
 });
