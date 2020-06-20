@@ -1,13 +1,21 @@
+// Main Container
+
+// Section 1: React low level imports
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import AppBar from "components/AppBar/AppBar";
-import { networkSelector, getAccountAddress } from "redux/selectors/drizzle";
 import { useLocation } from "react-router-dom";
 
-import onboard from "./onboard";
+// Section 2: internal imports
+import onboard from "containers/AppBar/onboard";
 import { initContracts } from "utils/contracts";
 import withDrizzle from "containers/Drizzle/withDrizzle";
+
+// Section 3: Selectors
+import { networkSelector, getAccountAddress } from "redux/selectors/drizzle";
+
+// Section 4: components
+import AppBar from "components/AppBar/AppBar";
 
 const locationToTitles = {
     "/dashboard": "Dashboard",
@@ -16,9 +24,10 @@ const locationToTitles = {
     "/markets": "Markets",
     "/history": "History",
     "/liquidate": "Liquidate",
-    "/connect": "Connect"
+    "/connect": "Connect",
 };
 
+// Section 5: Code Component
 const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
     let location = useLocation();
     // update Appbar title whenever location change
@@ -45,7 +54,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
             initContracts(drizzle);
         }
     }, [networkId, accountAddress, drizzle]);
-    
+
     const onConnect = async () => {
         const isSelectWallet = await onboard.walletSelect();
         if (isSelectWallet) {
@@ -57,7 +66,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
     };
     const onReset = async () => {
         onboard.walletReset();
-    }
+    };
 
     return (
         <AppBar
@@ -69,11 +78,13 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
     );
 };
 
-const mapStateToProps = state => ({ 
+// Connect State to Props
+const mapStateToProps = (state) => ({
     networkId: networkSelector(state),
-    accountAddress: getAccountAddress(state)
+    accountAddress: getAccountAddress(state),
 });
 
+// Export
 export default compose(
     connect(mapStateToProps),
     withDrizzle()
