@@ -4,7 +4,7 @@ import { bindActionCreators, compose } from "redux";
 
 import useUSDPrice from "hooks/useUSDPrice";
 
-import { formatNumber } from "utils/front-end";
+import { formatNumber } from "utils/ui";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
