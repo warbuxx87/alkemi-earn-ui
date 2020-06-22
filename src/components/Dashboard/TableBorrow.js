@@ -37,8 +37,8 @@ const useStyles = makeStyles({
         height: "18px",
     },
     customHead: {
-      backgroundColor: "#000000"
-    }
+        backgroundColor: "#000000",
+    },
 });
 
 const columns = [
@@ -56,9 +56,9 @@ export default function BorrowTables({ activeReserves, currency }) {
     // Section 5: Code Component
     return (
         <Card>
-            <Paper >
+            <Paper>
                 <PerfectScrollbar>
-                    <Table  >
+                    <Table>
                         <TableHead className={classes.customHead}>
                             <TableRow>
                                 {columns.map((column, i) => (
@@ -73,9 +73,7 @@ export default function BorrowTables({ activeReserves, currency }) {
                         </TableHead>
                         <TableBody>
                             {activeReserves.map((row) => (
-                                <TableRow
-                                    key={row.unit}
-                                >
+                                <TableRow key={row.unit}>
                                     <BorrowTableCell component="th" scope="Row">
                                         <Box
                                             minWidth={100}
@@ -119,3 +117,7 @@ export default function BorrowTables({ activeReserves, currency }) {
         </Card>
     );
 }
+
+// Section 6: Documentation with PropTypes
+
+// Section 7:  Connect styles and export

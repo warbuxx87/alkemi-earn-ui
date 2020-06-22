@@ -15,8 +15,11 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
+
+// Section 3: Components & Containers import from the application
 import { formatMoney } from "utils/front-end";
 
+// Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(3),

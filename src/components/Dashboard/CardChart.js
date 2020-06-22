@@ -1,6 +1,10 @@
+// Sub Component
+
+// Section 1: React low level imports
 import React, { Component } from "react";
 import ReactApexChart from "react-apexcharts";
 
+// Section 2: Material-UI imports
 import {
     Box,
     Button,
@@ -9,6 +13,9 @@ import {
     Grid,
     Typography,
 } from "@material-ui/core";
+
+// Section 3: Components & Containers import from the application
+import { formatMoney } from "utils/front-end";
 
 var data = [
     [1327359600000, 10.95],
@@ -288,6 +295,7 @@ var data = [
     [1361919600000, 19.6],
 ];
 
+// Section 4: Define Styles function taking theme as argument and returning an object
 class CardChart extends Component {
     constructor(props) {
         super(props);
@@ -303,7 +311,7 @@ class CardChart extends Component {
                 chart: {
                     type: "area",
                     height: 300,
-                    width: "100%",
+                    width: 500,
                     foreColor: "#fff",
                     fontFamily: "Roboto, sans-serif",
                     stacked: true,
@@ -447,6 +455,7 @@ class CardChart extends Component {
         }
     }
 
+    // Section 5: Code Component
     render() {
         return (
             <>
@@ -458,7 +467,10 @@ class CardChart extends Component {
                                     Aggregated Balance
                                 </Typography>
                                 <Typography variant="h2" color="textPrimary">
-                                    $123,123,394.03
+                                    {formatMoney(
+                                        this.props.aggregatedBalance,
+                                        this.props.currency
+                                    )}
                                 </Typography>
                                 <Typography variant="overline" color="primary">
                                     + $34,933.99 Today
@@ -560,12 +572,13 @@ class CardChart extends Component {
                             </Grid>
                         </Grid>
 
-                        <Box>
+                        <Box style={{ maxWidth: 1336 }}>
                             <ReactApexChart
                                 options={this.state.options}
                                 series={this.state.series}
                                 type="area"
                                 height={300}
+                                width="100%"
                             />
                         </Box>
                     </CardContent>
@@ -575,4 +588,7 @@ class CardChart extends Component {
     }
 }
 
+// Section 6: Documentation with PropTypes
+
+// Section 7:  Connect styles and export
 export default CardChart;

@@ -19,6 +19,7 @@ import {
     makeStyles,
 } from "@material-ui/core";
 
+// Section 3: Components & Containers import from the application
 //import { useHistory } from "react-router-dom";
 import SupplyTableCell from "components/UI/TableCell";
 import {
@@ -71,7 +72,7 @@ export default function SupplyTables({ activeReserves, currency }) {
                                 ))}
                             </TableRow>
                         </TableHead>
-                        <TableBody >
+                        <TableBody>
                             {activeReserves.map((row) => (
                                 <TableRow key={row.unit}>
                                     <SupplyTableCell component="th" scope="row">
@@ -117,3 +118,7 @@ export default function SupplyTables({ activeReserves, currency }) {
         </Card>
     );
 }
+
+// Section 6: Documentation with PropTypes
+
+// Section 7:  Connect styles and export

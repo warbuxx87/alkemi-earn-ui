@@ -20,7 +20,7 @@ import DashCardSupply from "containers/Dashboard/CardSupply";
 import DashCardBorrow from "containers/Dashboard/CardBorrow";
 import TableSupply from "containers/Dashboard/TableSupply";
 import TableBorrow from "containers/Dashboard/TableBorrow";
-import CardChart from "components/Dashboard/CardChart";
+import CardChart from "containers/Dashboard/CardChart";
 import AlertStatus from "components/UI/Alerts";
 
 // Section 4: Define Styles function taking theme as argument and returning an object

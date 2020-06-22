@@ -1,7 +1,10 @@
 // Sub Component
+
+// Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
 
+// Section 2: Material-UI imports
 import {
     Box,
     Card,
@@ -12,6 +15,8 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
+
+// Section 3: Components & Containers import from the application
 import { formatMoney } from "utils/front-end";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
