@@ -24,7 +24,7 @@ import { XCircle as XIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 import Chart from "./ChartWrapper";
-import { formatPriceWithCurrency, formatPercent } from "utils/front-end"; // TODO: Decide on whether to keep here or not
+import { formatPriceWithCurrency, formatPercent } from "utils/ui"; // TODO: Decide on whether to keep here or not
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const DrawerClass = makeStyles((theme) =>

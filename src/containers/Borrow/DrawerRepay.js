@@ -6,7 +6,7 @@ import web3 from "web3";
 
 import useUSDPrice from "hooks/useUSDPrice";
 
-import { formatNumber, fromWei, toWei } from "utils/front-end";
+import { formatNumber, fromWei, toWei } from "utils/ui";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";

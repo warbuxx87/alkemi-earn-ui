@@ -10,7 +10,7 @@ import { onSupplyAction } from "redux/actions/data/lend";
 
 import useUSDPrice from "hooks/useUSDPrice";
 
-import { formatNumber, fromWei, toWei } from "utils/front-end";
+import { formatNumber, fromWei, toWei } from "utils/ui";
 
 const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
     const [amount, setAmount] = React.useState("");
