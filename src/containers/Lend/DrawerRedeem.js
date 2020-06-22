@@ -10,7 +10,7 @@ import { onRedeemAction } from "redux/actions/data/lend";
 
 import useUSDPrice from "hooks/useUSDPrice";
 
-import { formatNumber, fromWei, toWei } from "utils/front-end";
+import { formatNumber, fromWei, toWei } from "utils/ui";
 
 const DrawerRedeemContainer = ({ asset, drizzle, onRedeemAction }) => {
     const [amount, setAmount] = React.useState("");
