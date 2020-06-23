@@ -1,87 +1,138 @@
 image: node:10
 
-pipelines:
-    default:
-        - step:
+clone:
+    depth: full # SonarCloud scanner needs the full history to assign issues properly
+
+definitions:
+    caches:
+        sonar: ~/.sonar/cache # Caching SonarCloud artifacts will speed up your build
+    steps:
+        # DEFINE Code Analysis
+        - step: &analyze
+              name: Code Analysis
               caches:
                   - node
-              name: "Build and Test"
+                  - sonar
               script:
+                  # Increase Node Memory Size to 6GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=6144
+                  - npm install --quiet
+                  - npm run test
+                  - pipe: sonarsource/sonarcloud-scan:1.0.1
+        - step: &check-quality-gate-sonarcloud
+              name: Code Quality Enforcement
+              script:
+                  # Increase Node Memory Size to 6GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=6144
+                  - pipe: sonarsource/sonarcloud-quality-gate:0.1.3
+
+        # DEFINE Build and Test Step
+        - step: &build-test
+              name: "Build and Test"
+              size: 2x
+              caches:
+                  - node
+              script:
+                  # Increase Node Memory Size to 6GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=6144
+                  - echo "Install and Test"
+                  - apt-get update
+                  - apt-get install jq zip -y
+                  - npm install --quiet
+                  - npm run test
+                  - npm run build
+        # DEFINE Build Test and Upload Step
+        - step: &build-test-upload
+              size: 2x
+              caches:
+                  - node
+              name: "Build, Test and Upload to AWS"
+              script:
+                  # Increase Node Memory Size to 6GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=6072
+                  # PACKAGE INSTALLATIONS
                   - echo "Build, Test and Upload"
                   - apt-get update
                   - apt-get install jq zip -y
-                  - npm install
-                  - npm run test
+                  - npm install --quiet
                   - npm run build
+                  - npm run test
+                  - declare -x VERSION=$(jq -r '.version' package.json)
+                  - echo "$VERSION"
+                  - zip -r application.zip .
+                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
+                    variables:
+                        AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                        AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                        AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                        APPLICATION_NAME: "$APPLICATION_NAME"
+                        COMMAND: "upload-only"
+                        ZIP_FILE: "application.zip"
+                        VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
+        # DEFINE Update Confluence Step
+        - step: &update-confluence
+              name: "README to Confluence"
+              script:
+                  - set -ex && apt-get update && apt-get install -y ca-certificates gcc musl-dev git mercurial zip curl
+                  - echo "Updating Readme.md to Confluence Documentation"
+                  - curl -LO https://github.com/justmiles/go-markdown2confluence/releases/download/v3.0.2/markdown2confluence_3.0.2_linux_x86_64.tar.gz
+                  - tar -xzvf markdown2confluence_3.0.2_linux_x86_64.tar.gz -C /usr/local/bin/ markdown2confluence
+                  - markdown2confluence -u $CONFLUENCE_USER -p $CONFLUENCE_PASSWORD -e $CONFLUENCE_ENDPOINT -s 'ARCH' --parent 'Repositories' -t 'alkemi-debt-ui' -d README.md
+        # DEFINE DEPLOY TO STAGING STEP
+        - step: &deploy-staging
+              name: "Deploy to Staging"
+              deployment: staging
+              script:
+                  - echo "$VERSION Deployment to Staging!"
+                  - apt-get update
+                  - apt-get install jq -y
+                  - declare -x VERSION=$(jq -r '.version' package.json)
+                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
+                    variables:
+                        AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                        AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                        AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                        APPLICATION_NAME: "$APPLICATION_NAME"
+                        COMMAND: "deploy-only"
+                        VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
+                        ENVIRONMENT_NAME: "$APPLICATION_NAME-dev"
+                        WAIT: "true"
+        # DEFINE DEPLOY TO PRODUCTION STEP
+        - step: &deploy-production
+              name: "Deploy to Production"
+              deployment: production
+              trigger: manual
+              script:
+                  - echo "Deployment to Production!"
+                  - apt-get update
+                  - apt-get install jq -y
+                  - declare -x VERSION=$(jq -r '.version' package.json)
+                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
+                    variables:
+                        AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                        AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                        AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                        APPLICATION_NAME: "$APPLICATION_NAME"
+                        COMMAND: "deploy-only"
+                        VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
+                        ENVIRONMENT_NAME: "$APPLICATION_NAME-production"
+                        WAIT: "true"
+
+pipelines:
+    default:
+        - step: *build-test
+
+    pull-requests:
+        "**":
+            - step: *build-test
+            - step: *analyze
+            #  - step: *check-quality-gate-sonarcloud
+
     branches:
         master:
-            - step:
-                  size: 2x # or configure at step level
-                  caches:
-                      - node
-                  name: "Build, Test and Upload"
-                  script:
-                      # PACKAGE INSTALLATIONS
-                      - echo "Build, Test and Upload"
-                      - apt-get update
-                      - apt-get install jq zip -y
-                      - npm install
-                      - npm run build
-                      # npm run test
-                      - declare -x VERSION=$(jq -r '.version' package.json)
-                      - echo "$VERSION"
-                      - zip -r application.zip .
-                      - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
-                        variables:
-                            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-                            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                            APPLICATION_NAME: "$APPLICATION_NAME"
-                            COMMAND: "upload-only"
-                            ZIP_FILE: "application.zip"
-                            VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
-            - step:
-                  name: "README to Confluence"
-                  script:
-                      - set -ex && apt-get update && apt-get install -y ca-certificates gcc musl-dev git mercurial zip curl
-                      - echo "Updating Readme.md to Confluence Documentation"
-                      - curl -LO https://github.com/justmiles/go-markdown2confluence/releases/download/v3.0.2/markdown2confluence_3.0.2_linux_x86_64.tar.gz
-                      - tar -xzvf markdown2confluence_3.0.2_linux_x86_64.tar.gz -C /usr/local/bin/ markdown2confluence
-                      - markdown2confluence -u $CONFLUENCE_USER -p $CONFLUENCE_PASSWORD -e $CONFLUENCE_ENDPOINT -s 'ARCH' --parent 'Repositories' -t 'alkemi-debt-ui' -d README.md
-            - step:
-                  name: "Deploy to Staging"
-                  deployment: staging
-                  script:
-                      - echo "$VERSION Deployment to Staging!"
-                      - apt-get update
-                      - apt-get install jq -y
-                      - declare -x VERSION=$(jq -r '.version' package.json)
-                      - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
-                        variables:
-                            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-                            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                            APPLICATION_NAME: "$APPLICATION_NAME"
-                            COMMAND: "deploy-only"
-                            VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
-                            ENVIRONMENT_NAME: "$APPLICATION_NAME-dev"
-                            WAIT: "true"
-            - step:
-                  name: "Deploy to Production"
-                  deployment: production
-                  trigger: manual
-                  script:
-                      - echo "Deployment to Production!"
-                      - apt-get update
-                      - apt-get install jq -y
-                      - declare -x VERSION=$(jq -r '.version' package.json)
-                      - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
-                        variables:
-                            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-                            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-                            AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                            APPLICATION_NAME: "$APPLICATION_NAME"
-                            COMMAND: "deploy-only"
-                            VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
-                            ENVIRONMENT_NAME: "$APPLICATION_NAME-production"
-                            WAIT: "true"
+            - step: *analyze
+            #  - step: *check-quality-gate-sonarcloud
+            - step: *build-test-upload
+            - step: *update-confluence
+            - step: *deploy-staging
+            - step: *deploy-production

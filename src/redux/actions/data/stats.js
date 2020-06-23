@@ -22,7 +22,9 @@ export const FETCH_STATS_SUCCESS = "FETCH_STATS_SUCCESS";
 const fetchStatsSuccess = (tx) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_STATS_SUCCESS,
-    payload: tx,
+    payload: {
+        tx,
+    },
 });
 
 // Declare action type as a constant
@@ -39,7 +41,7 @@ const fetchStatsError = error => ({
 // Section 3: Action dispatch methods and async funcs
 
 export const fetchStatsAction = (tx) => async (dispatch) => {
-    dispatch(fetchStatsPending(tx));
+    dispatch(fetchStatsPending());
     setTimeout(() => {
         // mock delay, will remove
         dispatch(fetchStatsSuccess(tx));

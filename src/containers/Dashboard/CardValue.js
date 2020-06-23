@@ -1,13 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 import CardValue from "components/Dashboard/CardValue";
 import {
     getAggregatedBalance,
-    getCollateralRatio
+    getCollateralRatio,
 } from "redux/selectors/totalBalance";
 
-const CardValueContainer = ({ aggregatedBalance, collateralRatio }) => {
+import useFetchPrice from "hooks/useFetchPrice";
+
+const CardValueContainer = () => {
+    useFetchPrice(); // gets current USD price
+
+    const aggregatedBalance = useSelector(getAggregatedBalance);
+    const collateralRatio = useSelector(getCollateralRatio);
+
     return (
         <CardValue
             aggregatedBalance={aggregatedBalance}
@@ -18,9 +25,4 @@ const CardValueContainer = ({ aggregatedBalance, collateralRatio }) => {
     );
 };
 
-const mapStateToProps = state => ({
-    aggregatedBalance: getAggregatedBalance(state),
-    collateralRatio: getCollateralRatio(state)
-});
-
-export default connect(mapStateToProps)(CardValueContainer);
+export default CardValueContainer;

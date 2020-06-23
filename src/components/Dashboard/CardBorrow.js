@@ -10,35 +10,35 @@ import {
     Divider,
     Grid,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
-import { formatMoney } from "utils/front-end";
+import { formatMoney } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(3),
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     label: {
-        marginLeft: theme.spacing(1)
+        marginLeft: theme.spacing(1),
     },
     item: {
         textAlign: "left",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     contentCard: {
-        borderBottom: `1px solid ${theme.palette.error.main}`
-    }
+        borderBottom: `1px solid ${theme.palette.error.main}`,
+    },
 }));
 
 function BorrowBalance({
     totalBorrow,
     currency,
     apr = (0.0).toFixed(2),
-    percentage = "%"
+    percentage = "%",
 }) {
     const classes = useStyles();
 
@@ -102,7 +102,7 @@ function BorrowBalance({
 
 // Section 6: Documentation with PropTypes
 BorrowBalance.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export

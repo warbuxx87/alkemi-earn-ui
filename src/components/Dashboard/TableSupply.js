@@ -26,8 +26,7 @@ import {
     formatPercent,
     //    formatMoney,
     calculateEarnings,
-    fromWei,
-} from "utils/front-end";
+} from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({

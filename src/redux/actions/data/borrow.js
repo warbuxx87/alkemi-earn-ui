@@ -1,51 +1,12 @@
 // Section 1: Utilities imports and low level imports
 
-import {
-    handle_borrow_click,
-    handle_approve_click,
-    handle_repay_click,
-} from "utils/drizzle";
+import { handle_borrow_click, handle_repay_click } from "utils/drizzle";
 import notify from "utils/notify";
 
 // Section 2: Action types declarations and action creators
 
-//                                      //
-// ------------ BORROW ACTIONS -------- //
-//                                      //
-
-// Declare action type as a constant
-export const FETCH_BORROW_PENDING = "FETCH_BORROW_PENDING";
-
-// Declare action creator
-const fetchBorrowPending = (asset) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROW_PENDING,
-    asset,
-});
-
-// Declare action type as a constant
-export const FETCH_BORROW_SUCCESS = "FETCH_BORROW_SUCCESS";
-
-// Declare action creator
-const fetchBorrowSuccess = (asset) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROW_SUCCESS,
-    asset,
-});
-
-// Declare action type as a constant
-export const FETCH_BORROW_ERROR = "FETCH_BORROW_ERROR";
-
-// Declare action creator
-const fetchBorrowError = (error) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_BORROW_ERROR,
-    payload: new Error(),
-    error: true,
-});
-
 //                                               //
-// ------------ BORROW METHOD ACTIONS --------   //
+// -------------- BORROW ACTIONS --------------  //
 //                                               //
 
 // Declare action type as a constant
@@ -53,7 +14,9 @@ export const BORROW_PENDING = "BORROW_PENDING";
 
 const borrowPending = (asset) => ({
     type: BORROW_PENDING,
-    payload: asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -61,7 +24,9 @@ export const BORROW_SUCCESS = "BORROW_SUCCESS";
 
 const borrowSuccess = (asset) => ({
     type: BORROW_SUCCESS,
-    payload: asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -70,13 +35,13 @@ export const BORROW_ERROR = "BORROW_ERROR";
 const borrowError = (asset, error) => ({
     type: BORROW_ERROR,
     payload: {
-        error,
         asset,
     },
+    error,
 });
 
 //                                               //
-// ------------ REPAY METHOD ACTIONS --------   //
+// --------------- REPAY ACTIONS --------------  //
 //                                               //
 
 // Declare action type as a constant
@@ -84,7 +49,9 @@ export const REPAY_PENDING = "REPAY_PENDING";
 
 const repayPending = (asset) => ({
     type: REPAY_PENDING,
-    payload: asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -92,7 +59,9 @@ export const REPAY_SUCCESS = "REPAY_SUCCESS";
 
 const repaySuccess = (asset) => ({
     type: REPAY_SUCCESS,
-    payload: asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -101,9 +70,9 @@ export const REPAY_ERROR = "REPAY_ERROR";
 const repayError = (asset, error) => ({
     type: REPAY_ERROR,
     payload: {
-        error,
         asset,
     },
+    error,
 });
 
 // Section 3: Action dispatch methods and async funcs
@@ -122,25 +91,6 @@ export const onBorrowAction = ({ drizzle, amount, asset }) => async (
                 autoDismiss: 5000,
             });
             dispatch(borrowError(asset.unit, error.message));
-        });
-};
-
-export const onBorrowActivate = ({ drizzle, asset }) => async (
-    dispatch,
-    getState
-) => {
-    dispatch(fetchBorrowPending(asset));
-    const myAccount = getState().accounts[0];
-    handle_approve_click({ drizzle, asset, myAccount })
-        .then(() => dispatch(fetchBorrowSuccess(asset)))
-        .catch((error) => {
-            notify.notification({
-                eventCode: "borrowError",
-                type: "error",
-                message: error.message,
-                autoDismiss: 5000,
-            });
-            dispatch(fetchBorrowError(asset, error.message));
         });
 };
 

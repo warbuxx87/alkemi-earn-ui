@@ -1,17 +1,19 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 import CardSupply from "components/Dashboard/CardSupply";
 import { getTotalSupply } from "redux/selectors/totalBalance";
 
-const CardSupplyContainer = ({ totalSupply }) => {
+import useFetchPrice from "hooks/useFetchPrice";
+
+const CardSupplyContainer = () => {
+    useFetchPrice(); // gets current USD price
+
+    const totalSupply = useSelector(getTotalSupply);
+
     return (
         <CardSupply totalSupply={totalSupply} currency="USD" difference={0} />
     );
 };
 
-const mapStateToProps = state => ({
-    totalSupply: getTotalSupply(state)
-});
-
-export default connect(mapStateToProps)(CardSupplyContainer);
+export default CardSupplyContainer;

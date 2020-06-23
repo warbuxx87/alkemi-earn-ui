@@ -36,29 +36,17 @@ export const getCollateralRatio = (state) => {
     return collateralRatio;
 };
 
-// Getting USDxPrice from drizzle, TODO remove if useless after integration of API call directly from server
-export const getUSDxPrice = (state) => {
-    const assetPrices = Object.values(
-        _.get(state, "contracts.MoneyMarket.assetPrices", {})
-    );
-
-    // TODO, this address filter should be pulled from constants address_map with proper web3 connected Network
-    let USDxPrice = assetPrices.filter(function (asset) {
-        return asset.args[0] === "0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"; // rinkeby address for PAX
-    });
-
-    if (USDxPrice[0]) {
-        return USDxPrice[0].value;
-    }
-
-    return null;
+export const getUSDPrice = (state) => {
+    if (state.data.price.usdPrice && state.data.price.usdPrice !== "0")
+        return state.data.price.usdPrice;
+    else return null;
 };
 
-export const getUSDprice = createSelector(getUSDxPrice, (price) => price);
+//export const getUSDPrice = createSelector(getUSDPrice, (price) => price);
 
 export const getTotalSupply = createSelector(
     getSupplyAccountValue,
-    getUSDxPrice,
+    getUSDPrice,
     (supplyValue, USDxPrice) =>
         supplyValue && USDxPrice
             ? web3.utils
@@ -80,7 +68,7 @@ const getBorrowAccountValue = (state) => {
 
 export const getTotalBorrow = createSelector(
     getBorrowAccountValue,
-    getUSDxPrice,
+    getUSDPrice,
     (borrowValue, USDxPrice) =>
         borrowValue && USDxPrice
             ? web3.utils
@@ -93,7 +81,7 @@ export const getTotalBorrow = createSelector(
 export const getAggregatedBalance = createSelector(
     getSupplyAccountValue,
     getBorrowAccountValue,
-    getUSDxPrice,
+    getUSDPrice,
     (supplyValue, borrowValue, USDxPrice) =>
         supplyValue && borrowValue && USDxPrice
             ? web3.utils

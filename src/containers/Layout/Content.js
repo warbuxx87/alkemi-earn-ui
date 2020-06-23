@@ -23,7 +23,8 @@ import {
 
 const LayoutContent = () => (
     <div>
-        <ToastContainer />
+        <ToastContainer
+         />
         <Switch>
             <Route path={DASHBOARD} exact component={Dashboard} />
             <Route path={LEND} exact component={Lend} />
