@@ -1,5 +1,10 @@
 import { combineReducers } from "redux";
 
+import lend from "./lend";
+import borrow from "./borrow";
+
 export default combineReducers({
-    // status reducers go here
+    lend,
+    borrow,
+    // other status reducers go here
 });

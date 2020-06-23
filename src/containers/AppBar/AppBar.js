@@ -6,8 +6,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { useLocation } from "react-router-dom";
 
-// Section 2: internal imports
-import onboard from "containers/AppBar/onboard";
+import onboard from "utils/onboard";
 import { initContracts } from "utils/contracts";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 

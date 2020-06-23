@@ -1,8 +1,5 @@
 // Import action of interest as constants
 import {
-    FETCH_BORROW_PENDING,
-    FETCH_BORROW_SUCCESS,
-    FETCH_BORROW_ERROR,
     BORROW_PENDING,
     BORROW_SUCCESS,
     BORROW_ERROR,
@@ -51,36 +48,6 @@ const initialState = {
 // Implement "reducer" function with initial state as default state
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_BORROW_PENDING:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.asset]: {
-                        ...state.assets[action.asset],
-                        pending: true,
-                    },
-                },
-            };
-        case FETCH_BORROW_SUCCESS:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.asset]: {
-                        ...state.assets[action.asset],
-                        pending: false,
-                        activated: true,
-                    },
-                },
-            };
-
-        case FETCH_BORROW_ERROR:
-            return {
-                ...state,
-                error: action.error,
-            };
-
         case "GOT_CONTRACT_VAR":
             switch (action.variable) {
                 case "balanceOf":
@@ -103,8 +70,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         borrowing: true,
                     },
                 },
@@ -114,8 +81,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         borrowing: false,
                         activated: true,
                     },
@@ -130,7 +97,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         borrowing: false,
-                        error: action.payload.error,
+                        error: action.error,
                     },
                 },
             };
@@ -140,8 +107,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         repaying: true,
                     },
                 },
@@ -151,8 +118,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload]: {
-                        ...state.assets[action.payload],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         repaying: false,
                         activated: true,
                     },
@@ -167,7 +134,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         repaying: false,
-                        error: action.payload.error,
+                        error: action.error,
                     },
                 },
             };
