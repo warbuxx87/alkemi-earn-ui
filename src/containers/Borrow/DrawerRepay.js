@@ -4,7 +4,7 @@ import { bindActionCreators, compose } from "redux";
 
 import web3 from "web3";
 
-import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/front-end";
+import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";

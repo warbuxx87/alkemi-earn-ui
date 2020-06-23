@@ -25,7 +25,7 @@ import {
 // Section 3: Components & Containers import from the application
 import BorrowTableCell from "components/UI/TableCell";
 import BorrowDrawerContainer from "containers/Borrow/DrawerBorrow";
-import { formatNumber, formatPercent } from "utils/front-end";
+import { formatNumber, formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({

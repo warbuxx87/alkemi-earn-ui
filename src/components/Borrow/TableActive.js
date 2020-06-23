@@ -27,7 +27,7 @@ import {
 import BorrowDrawerBorrow from "containers/Borrow/DrawerBorrow";
 import BorrowDrawerRepay from "containers/Borrow/DrawerRepay";
 import BorrowTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent } from "utils/front-end";
+import { formatNumber, formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({
@@ -211,7 +211,6 @@ const BorrowTableActive = ({ data = [] }) => {
 // Section 6: Documentation with PropTypes
 BorrowTableActive.propTypes = {
     data: PropTypes.array.isRequired,
-    columns: PropTypes.array.isRequired,
 };
 
 // Section 7:  Connect styles and export

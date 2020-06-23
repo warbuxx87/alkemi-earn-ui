@@ -8,7 +8,7 @@ import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
 import { onSupplyAction } from "redux/actions/data/lend";
 
-import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/front-end";
+import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
 import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";

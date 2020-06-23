@@ -2,7 +2,7 @@ import React from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import { formatNumber, formatETHMoney } from "utils/front-end";
+import { formatNumber, formatETHMoney } from "utils/ui";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
