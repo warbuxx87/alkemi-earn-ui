@@ -4,6 +4,7 @@ import address from "constants/address_map.json";
 import constants from "constants/constant.json";
 import { initAssetContract } from "utils/contracts";
 
+// Approve Unlimited amount of ERC20 tokens to interact with protocol
 export const handle_approve_click = async ({ drizzle, asset, myAccount }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transaction");
     const drizzleStore = drizzle.store.getState();
@@ -20,6 +21,7 @@ export const handle_approve_click = async ({ drizzle, asset, myAccount }) => {
     return sendApprove;
 };
 
+// Mint new Test Tokens
 export const handle_allocate_click = async ({ drizzle, asset, amount }) => {
     console.log(asset.unit);
     if (!(await readyToTransact())) throw new Error("not ready to transaction");
@@ -38,6 +40,7 @@ export const handle_allocate_click = async ({ drizzle, asset, amount }) => {
     return sendAllocate;
 };
 
+// Supply Tokens to Lending Pool
 export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const drizzleStore = drizzle.store.getState();
@@ -57,6 +60,7 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     return sendSupply;
 };
 
+// Borrow Tokens from Lending Pool
 export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const drizzleStore = drizzle.store.getState();
@@ -76,6 +80,7 @@ export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
     return sendBorrow;
 };
 
+// Repay Borrowed Tokens from wallet back to Lending Pool
 export const handle_repay_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const drizzleStore = drizzle.store.getState();
@@ -95,6 +100,7 @@ export const handle_repay_click = async ({ drizzle, amount, asset }) => {
     return sendRepay;
 };
 
+// Withdrawl tokens from lending pool
 export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const drizzleStore = drizzle.store.getState();
@@ -112,24 +118,4 @@ export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
         }
     );
     return sendWithdraw;
-};
-
-export const handle_max_borrow_click = async ({ drizzle, amount, asset }) => {
-    const drizzleStore = drizzle.store.getState();
-
-    // this should be selector
-    let accountSupplyValue =
-        drizzleStore.contracts.mMarket.calculateAccountValues[0].value[1];
-
-    // this should be selector
-    const collateralRatio =
-        drizzleStore.contracts.MoneyMarket.collateralRatio[0].value;
-    let that;
-    let max_borrow = that
-        .bn(accountSupplyValue) // get user total protocol supply value
-        .mul(that.bn(10 ** 18)) // scale by 10e18
-        .div(that.bn(collateralRatio)); // divide by collateralRatio
-    let max_borrow_safe = max_borrow.mul(that.bn("8")).div(that.bn("10"));
-
-    return max_borrow, max_borrow_safe;
 };

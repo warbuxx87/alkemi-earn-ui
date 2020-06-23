@@ -12,6 +12,26 @@ const getSupplyAccountValue = (state) => {
     return null;
 };
 
+export const getCollateralRatio = (state) => {
+    const collateralRatio = _.get(
+        state,
+        "contracts.MoneyMarket.collateralRatio[0].value"
+    );
+    return collateralRatio;
+};
+
+export const getMaxBorrowAmount = createSelector(
+    getSupplyAccountValue,
+    getCollateralRatio,
+    (suppliedValue, collateralValue) =>
+        suppliedValue && collateralValue
+            ? web3.utils
+                  .toBN(suppliedValue)
+                  .div(web3.utils.toBN(collateralValue))
+                  .toString()
+            : "1"
+);
+
 // const getAccountLiquidity = state => {
 //     const getAccountLiquidity = Object.values(
 //         _.get(state, "contracts.MoneyMarket.getAccountLiquidity", {})
@@ -22,7 +42,7 @@ const getSupplyAccountValue = (state) => {
 //     return null;
 // };
 
-export const getCollateralRatio = (state) => {
+export const getUserCollateralRatio = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );
