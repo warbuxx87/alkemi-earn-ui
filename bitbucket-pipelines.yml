@@ -20,6 +20,8 @@ pipelines:
                       - node
                   name: "Build, Test and Upload"
                   script:
+                      # Increase Node Memory Size
+                      - export NODE_OPTIONS=--max_old_space_size=3072
                       # PACKAGE INSTALLATIONS
                       - echo "Build, Test and Upload"
                       - apt-get update
