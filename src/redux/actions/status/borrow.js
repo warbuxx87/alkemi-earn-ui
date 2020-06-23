@@ -16,7 +16,9 @@ export const FETCH_BORROW_PENDING = "FETCH_BORROW_PENDING";
 const fetchBorrowPending = (asset) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_PENDING,
-    asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -26,7 +28,9 @@ export const FETCH_BORROW_SUCCESS = "FETCH_BORROW_SUCCESS";
 const fetchBorrowSuccess = (asset) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_SUCCESS,
-    asset,
+    payload: {
+        asset,
+    },
 });
 
 // Declare action type as a constant
@@ -37,9 +41,9 @@ const fetchBorrowError = (asset, error) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BORROW_ERROR,
     payload: {
-        error,
         asset,
     },
+    error,
 });
 
 // Section 3: Action dispatch methods and async funcs
