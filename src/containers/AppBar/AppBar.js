@@ -5,7 +5,7 @@ import AppBar from "components/AppBar/AppBar";
 import { networkSelector, getAccountAddress } from "redux/selectors/drizzle";
 import { useLocation } from "react-router-dom";
 
-import onboard from "./onboard";
+import onboard from "utils/onboard";
 import { initContracts } from "utils/contracts";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
@@ -16,7 +16,7 @@ const locationToTitles = {
     "/markets": "Markets",
     "/history": "History",
     "/liquidate": "Liquidate",
-    "/connect": "Connect"
+    "/connect": "Connect",
 };
 
 const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
@@ -65,9 +65,9 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
     );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     networkId: networkSelector(state),
-    accountAddress: getAccountAddress(state)
+    accountAddress: getAccountAddress(state),
 });
 
 export default compose(
