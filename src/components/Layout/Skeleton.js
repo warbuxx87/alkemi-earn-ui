@@ -4,7 +4,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// Section 2: Material-UI imports
+// Section 2: UI imports
 import { withStyles } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application
@@ -64,8 +64,10 @@ const styles = (theme) => ({
 const LayoutSkeleton = ({ classes }) => (
     <div className={classes.frame}>
         <Sidebar />
+
         <div className={classes.content}>
             <AppBar />
+
             <LayoutContent />
         </div>
     </div>

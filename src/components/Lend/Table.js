@@ -26,7 +26,7 @@ import {
 import LendTableCell from "components/UI/TableCell";
 import SupplyButton from "containers/Lend/DrawerSupply";
 import FaucetButton from "containers/Lend/DrawerFaucet";
-import { formatNumber, formatPercent } from "utils/front-end";
+import { formatNumber, formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles({

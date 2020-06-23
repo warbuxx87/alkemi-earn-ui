@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
-import { onLendActivate } from "redux/actions/data/lend";
+import { onLendActivate } from "redux/actions/status/lend";
 import Lend from "components/Lend/Lend";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 

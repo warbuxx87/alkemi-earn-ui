@@ -1,8 +1,7 @@
 // Section 1: Utilities imports and low level imports
 
 import {
-    handle_approve,
-    handle_faucet_allocateTo,
+    handle_allocate_click,
     handle_supply_click,
     handle_redeem_click,
 } from "utils/drizzle";
@@ -11,44 +10,7 @@ import notify from "utils/notify";
 // Section 2: Action types declarations and action creators
 
 //                                      //
-// ------------ LEND ACTIONS --------   //
-//                                      //
-
-// Declare action type as a constant
-export const FETCH_LEND_PENDING = "FETCH_LEND_PENDING";
-
-// Declare action creator
-export const fetchLendPending = (asset) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_LEND_PENDING,
-    asset,
-});
-
-// Declare action type as a constant
-export const FETCH_LEND_SUCCESS = "FETCH_LEND_SUCCESS";
-
-// Declare action creator
-export const fetchLendSuccess = (asset) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_LEND_SUCCESS,
-    asset,
-});
-
-// Declare action type as a constant
-export const FETCH_LEND_ERROR = "FETCH_LEND_ERROR";
-
-// Declare action creator
-export const fetchLendError = (asset, error) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_LEND_ERROR,
-    payload: {
-        error,
-        asset,
-    },
-});
-
-//                                      //
-// ------------ SUPPLY METHOD ACTIONS --------   //
+// ------------ SUPPLY ACTIONS --------   //
 //                                      //
 
 export const SUPPLY_PENDING = "SUPPLY_PENDING";
@@ -73,7 +35,7 @@ export const supplyError = (asset, error) => ({
 });
 
 //                                               //
-// ------------ REDEEM METHOD ACTIONS --------   //
+// ---------------- REDEEM ACTIONS ------------  //
 //                                               //
 
 export const REDEEM_PENDING = "REDEEM_PENDING";
@@ -98,7 +60,7 @@ export const redeemError = (asset, error) => ({
 });
 
 //                                               //
-// ------------ APPROVE METHOD ACTIONS --------   //
+// ------------ APPROVE  ACTIONS -------------   //
 //                                               //
 
 export const APPROVE_PENDING = "APPROVE_PENDING";
@@ -123,7 +85,7 @@ export const approveError = (asset, error) => ({
 });
 
 //                                               //
-// ------------ ALLOCATE METHOD ACTIONS --------   //
+// ------------ ALLOCATE ACTIONS -------------   //
 //                                               //
 
 export const ALLOCATE_PENDING = "ALLOCATE_PENDING";
@@ -150,30 +112,11 @@ export const allocateError = (asset, error) => ({
 
 // Section 3: Action dispatch methods and async funcs
 
-export const onLendActivate = ({ drizzle, asset }) => async (
-    dispatch,
-    getState
-) => {
-    dispatch(fetchLendPending(asset));
-    const myAccount = getState().accounts[0];
-    handle_approve({ drizzle, asset, myAccount })
-        .then(() => dispatch(fetchLendSuccess(asset)))
-        .catch((error) => {
-            notify.notification({
-                eventCode: "fetchLendError",
-                type: "error",
-                message: error.message,
-                autoDismiss: 5000,
-            });
-            dispatch(fetchLendError(asset, error.message));
-        });
-};
-
 export const onAllocateAction = ({ drizzle, asset, amount }) => async (
     dispatch
 ) => {
     dispatch(allocatePending(asset));
-    handle_faucet_allocateTo({ drizzle, asset, amount })
+    handle_allocate_click({ drizzle, asset, amount })
         .then(() => dispatch(allocateSuccess(asset)))
         .catch((error) => {
             notify.notification({

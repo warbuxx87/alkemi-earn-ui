@@ -13,11 +13,11 @@ import {
     TableBody,
     TableRow,
     TableCell,
-    TablePagination
+    TablePagination,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import { open_it_onetherscan } from "utils/history";
+
 // import tx_data from "containers/History/MOCK_DATA";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -31,7 +31,7 @@ const History = ({ fetchStats, tx, pending, error }) => {
         setPage(newPage);
     };
 
-    const handleChangeRowsPerPage = event => {
+    const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
     };
 
@@ -97,13 +97,7 @@ const History = ({ fetchStats, tx, pending, error }) => {
                                     className="px-0 capitalize"
                                     align="left"
                                 >
-                                    <Button
-                                        color="primary"
-                                        variant="outlined"
-                                        onClick={() => {
-                                            open_it_onetherscan(this, item.tx);
-                                        }}
-                                    >
+                                    <Button color="primary" variant="outlined">
                                         View
                                     </Button>
                                 </TableCell>
@@ -120,10 +114,10 @@ const History = ({ fetchStats, tx, pending, error }) => {
                 rowsPerPage={rowsPerPage}
                 page={page}
                 backIconButtonProps={{
-                    "aria-label": "Previous Page"
+                    "aria-label": "Previous Page",
                 }}
                 nextIconButtonProps={{
-                    "aria-label": "Next Page"
+                    "aria-label": "Next Page",
                 }}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
@@ -134,7 +128,7 @@ const History = ({ fetchStats, tx, pending, error }) => {
 
 // Section 6: Documentation with PropTypes
 History.propTypes = {
-    tx: PropTypes.array.isRequired
+    tx: PropTypes.array.isRequired,
 };
 
 // Section 7:  Connect styles and export

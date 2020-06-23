@@ -155,7 +155,7 @@ exports[`<Drawer /> matches snapshot 1`] = `
               md={6}
               xs={true}
             >
-              $0.00
+              0
             </WithStyles(ForwardRef(Grid))>
           </WithStyles(ForwardRef(Grid))>
           <WithStyles(ForwardRef(Grid))

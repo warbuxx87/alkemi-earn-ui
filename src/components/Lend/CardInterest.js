@@ -12,27 +12,27 @@ import {
     CardHeader,
     Divider,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import Label from "components/UI/Label";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(3),
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     label: {
-        marginLeft: theme.spacing(1)
+        marginLeft: theme.spacing(1),
     },
     item: {
         textAlign: "center",
-        justifyContent: "center"
-    }
+        justifyContent: "center",
+    },
 }));
 
 function CardValue({ className, ...rest }) {
@@ -40,7 +40,7 @@ function CardValue({ className, ...rest }) {
     const data = {
         value: (0.0).toFixed(2),
         currency: "$",
-        difference: 0
+        difference: 0,
     };
 
     // Section 5: Code Component
@@ -63,7 +63,7 @@ function CardValue({ className, ...rest }) {
                     </Typography>
                     <Label
                         className={classes.label}
-                        color={data.difference > 0 ? "success" : "error"}
+                        color={data.difference >= 0 ? "success" : "error"}
                     >
                         {data.difference > 0 ? "+" : ""}
                         {data.difference}%
@@ -76,7 +76,7 @@ function CardValue({ className, ...rest }) {
 
 // Section 6: Documentation with PropTypes
 CardValue.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
