@@ -24,7 +24,7 @@ import { XCircle as XIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 import Chart from "./ChartWrapper";
-import { formatPriceWithCurrency, formatPercent } from "utils/front-end"; // TODO: Decide on whether to keep here or not
+import { formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const DrawerClass = makeStyles((theme) =>
@@ -229,7 +229,7 @@ const DrawerWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {formatPriceWithCurrency(usdPrice, "USD")}
+                                    {usdPrice}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>

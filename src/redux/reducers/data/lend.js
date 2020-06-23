@@ -1,8 +1,5 @@
 // Import action of interest as constants
 import {
-    FETCH_LEND_PENDING,
-    FETCH_LEND_SUCCESS,
-    FETCH_LEND_ERROR,
     ALLOCATE_PENDING,
     ALLOCATE_SUCCESS,
     ALLOCATE_ERROR,
@@ -56,45 +53,6 @@ const initialState = {
 // Implement "reducer" function with initial state as default state
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_LEND_PENDING:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        pending: true,
-                        activated: false,
-                    },
-                },
-            };
-        case FETCH_LEND_SUCCESS:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        pending: false,
-                        activated: true,
-                    },
-                },
-            };
-
-        case FETCH_LEND_ERROR:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        pending: false,
-                        activated: false,
-                        error: action.error,
-                    },
-                },
-            };
-
         case "GOT_CONTRACT_VAR": {
             switch (action.variable) {
                 case "balanceOf":
