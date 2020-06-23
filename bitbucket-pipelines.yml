@@ -42,6 +42,7 @@ definitions:
                   - npm run test
         # DEFINE Build Test and Upload Step
         - step: &build-test-upload
+              size: 2x
               caches:
                   - node
               name: "Build, Test and Upload to AWS"
