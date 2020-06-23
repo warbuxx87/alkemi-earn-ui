@@ -18,10 +18,12 @@ definitions:
                   - export NODE_OPTIONS=--max_old_space_size=3072
                   - npm install --quiet
                   - npm run test
-                  - pipe: sonarsource/sonarcloud-scan:0.1.5
-                    variables:
-                        EXTRA_ARGS: "-Dsonar.sources=src"
+                  - pipe: sonarsource/sonarcloud-scan:1.0.1
+        - step: &check-quality-gate-sonarcloud
+              name: Check the Quality Gate on SonarCloud
+              script:
                   - pipe: sonarsource/sonarcloud-quality-gate:0.1.3
+
         # DEFINE Build and Test Step
         - step: &build-test
               name: "Build and Test"
@@ -120,10 +122,12 @@ pipelines:
         "**":
             - step: *build-test
             - step: *sonarcloud
+            - step: *check-quality-gate-sonarcloud
 
     branches:
         master:
             - step: *sonarcloud
+            - step: *check-quality-gate-sonarcloud
             - step: *build-test-upload
             - step: *update-confluence
             - step: *deploy-staging
