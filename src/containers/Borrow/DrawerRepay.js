@@ -1,18 +1,22 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import web3 from "web3";
 
-import useUSDPrice from "hooks/useUSDPrice";
-
-import { formatNumber, fromWei, toWei } from "utils/ui";
+import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
 import { onRepayAction } from "redux/actions/data/borrow";
 
+import useFetchPrice from "hooks/useFetchPrice";
+import { getUSDPrice } from "redux/selectors/totalBalance";
+
 const DrawerRepayContainer = ({ asset, drizzle, onRepayAction }) => {
+    useFetchPrice(true); // gets current USD price
+    const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
     const [amount, setAmount] = React.useState("");
     const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
@@ -26,8 +30,6 @@ const DrawerRepayContainer = ({ asset, drizzle, onRepayAction }) => {
         }
     }, [amount, asset.balance, asset.unit]);
 
-    const usdPrice = useUSDPrice(asset.unit);
-
     return (
         <Drawer
             asset={asset}
@@ -39,7 +41,7 @@ const DrawerRepayContainer = ({ asset, drizzle, onRepayAction }) => {
                 onRepayAction({ drizzle, asset, amount })
             }
             isDoingAction={asset.repaying}
-            usdPrice={usdPrice}
+            usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
             setAmount={setAmount}
