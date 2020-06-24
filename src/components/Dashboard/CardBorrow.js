@@ -6,7 +6,6 @@ import {
     Box,
     Card,
     CardContent,
-    CardHeader,
     Divider,
     Grid,
     Typography,
@@ -29,9 +28,6 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         justifyContent: "center",
     },
-    contentCard: {
-        borderBottom: `1px solid ${theme.palette.error.main}`,
-    },
 }));
 
 function BorrowBalance({
@@ -45,7 +41,6 @@ function BorrowBalance({
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Current Debts" className={classes.item} />
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box

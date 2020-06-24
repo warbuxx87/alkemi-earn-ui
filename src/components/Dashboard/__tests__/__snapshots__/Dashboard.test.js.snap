@@ -19,15 +19,15 @@ exports[`<Dashboard /> matches snapshot 1`] = `
 >
   <WithStyles(ForwardRef(Grid))
     container={true}
-    spacing={3}
+    spacing={2}
   >
     <WithStyles(ForwardRef(Grid))
       item={true}
-      lg={4}
-      sm={6}
+      lg={12}
+      sm={12}
       xs={12}
     >
-      <CardValueContainer />
+      <Connect(CardChartContainer) />
     </WithStyles(ForwardRef(Grid))>
     <WithStyles(ForwardRef(Grid))
       item={true}
@@ -44,6 +44,14 @@ exports[`<Dashboard /> matches snapshot 1`] = `
       xs={12}
     >
       <CardValueContainer />
+    </WithStyles(ForwardRef(Grid))>
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      lg={4}
+      sm={6}
+      xs={12}
+    >
+      <CardLimitContainer />
     </WithStyles(ForwardRef(Grid))>
     <WithStyles(ForwardRef(Grid))
       item={true}

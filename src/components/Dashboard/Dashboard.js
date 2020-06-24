@@ -7,7 +7,8 @@ import React from "react";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import DashCardValue from "containers/Dashboard/CardValue";
+import CardChart from "containers/Dashboard/CardChart";
+import DashCardLimit from "containers/Dashboard/CardLimit";
 import DashCardSupply from "containers/Dashboard/CardSupply";
 import DashCardBorrow from "containers/Dashboard/CardBorrow";
 import TableSupply from "containers/Dashboard/TableSupply";
@@ -35,15 +36,18 @@ function Dashboard() {
     // Section 5: Code Component
     return (
         <Container maxWidth={false} className={classes.container}>
-            <Grid container spacing={3}>
-                <Grid item lg={4} sm={6} xs={12}>
-                    <DashCardValue />
+            <Grid container spacing={2}>
+                <Grid item lg={12} sm={12} xs={12}>
+                  <CardChart />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <DashCardSupply />
+                      <DashCardSupply />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <DashCardBorrow />
+                      <DashCardBorrow />
+                </Grid>
+                <Grid item lg={4} sm={6} xs={12}>
+                      <DashCardLimit />
                 </Grid>
                 <Grid item lg={6} sm={6} xs={12}>
                     <TableSupply />
