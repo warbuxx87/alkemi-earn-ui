@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { DrizzleProvider } from "@drizzle/react-plugin";
 
 import "assets/scss/style.scss";
-import store, { drizzleOptions } from "./drizzleStore.js";
+import store, { drizzleOptions } from "./drizzleStore";
 
 export default ({ children }) => {
     const hasWeb3Provider = () => {

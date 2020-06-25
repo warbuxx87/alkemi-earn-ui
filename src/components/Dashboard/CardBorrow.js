@@ -1,6 +1,7 @@
 // Sub Component
 import React from "react";
 import PropTypes from "prop-types";
+import { Translate } from "react-redux-i18n";
 
 import {
     Box,
@@ -45,7 +46,10 @@ function BorrowBalance({
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Current Debts" className={classes.item} />
+            <CardHeader
+                title=<Translate value="Current_Debts" />
+                className={classes.item}
+            />
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
@@ -66,7 +70,7 @@ function BorrowBalance({
                                 color="textSecondary"
                                 align="left"
                             >
-                                Total USD
+                                <Translate value="Total_USD" />
                             </Typography>
                             <Typography
                                 variant="h3"
@@ -82,7 +86,7 @@ function BorrowBalance({
                                 color="textSecondary"
                                 align="right"
                             >
-                                Borrow APR
+                                <Translate value="Borrow_APR" />
                             </Typography>
                             <Typography
                                 variant="h3"

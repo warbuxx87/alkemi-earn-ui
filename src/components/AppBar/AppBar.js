@@ -4,18 +4,19 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import { Translate } from "react-redux-i18n";
 
 // Section 2: Material-UI imports
 import MuiAppBar from "@material-ui/core/AppBar";
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import {
     Button,
     Grid,
     Hidden,
     makeStyles,
     Toolbar,
-    Typography
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -24,25 +25,25 @@ import Notifications from "./Notifications";
 import MobileMenu from "./MobileMenu";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     statusBadge: {
         backgroundColor: theme.palette.success.main,
         width: "9px",
         height: "9px",
         borderRadius: "5px",
-        marginRight: "12px"
+        marginRight: "12px",
     },
     connectWallet: {
-        minWidth: 130
+        minWidth: 130,
     },
     appBar: {
         paddingLeft: "16px",
         paddingRight: "16px",
         "@media (min-width:1550px)": {
             paddingLeft: "0px",
-            paddingRight: "0px"
-        }
-    }
+            paddingRight: "0px",
+        },
+    },
 }));
 
 // Section 5: Code Component
@@ -55,7 +56,7 @@ function AppBar({
     ...rest
 }) {
     const classes = useStyles();
-    const addressParser = address =>
+    const addressParser = (address) =>
         `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -97,10 +98,10 @@ function AppBar({
                                 variant="subtitle2"
                                 color="textSecondary"
                             >
-                                OVERVIEW
+                                <Translate value="OVERVIEW" />
                             </Typography>
                             <Typography variant="h3" color="textPrimary">
-                                {title}
+                                <Translate value={title} />
                             </Typography>
                         </Hidden>
                     </Grid>
@@ -127,9 +128,11 @@ function AppBar({
                                 <Grid className={classes.statusBadge}></Grid>
                                 <Grid className={classes.price}>
                                     {/* 0x121565...6456 */}
-                                    {accountAddress
-                                        ? addressParser(accountAddress)
-                                        : "Connect"}
+                                    {accountAddress ? (
+                                        addressParser(accountAddress)
+                                    ) : (
+                                        <Translate value="Connect" />
+                                    )}
                                 </Grid>
                             </Button>
                             <Menu
@@ -139,8 +142,12 @@ function AppBar({
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                <MenuItem onClick={handleOnConnect}>Change Wallet</MenuItem>
-                                <MenuItem onClick={handleOnReset}>Disconnect Wallet</MenuItem>
+                                <MenuItem onClick={handleOnConnect}>
+                                    <Translate value="Change_Wallet" />
+                                </MenuItem>
+                                <MenuItem onClick={handleOnReset}>
+                                    <Translate value="Disconnect_Wallet" />
+                                </MenuItem>
                             </Menu>
                         </Grid>
                     </Grid>
@@ -152,7 +159,7 @@ function AppBar({
 
 // Section 6: Documentation with PropTypes
 AppBar.propTypes = {
-    onMobileNavOpen: PropTypes.func
+    onMobileNavOpen: PropTypes.func,
 };
 
 // Section 7:  Connect styles and export

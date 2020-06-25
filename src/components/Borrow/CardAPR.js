@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import { Translate } from "react-redux-i18n";
 
 // Section 2: Material-UI imports
 import {
@@ -12,26 +13,26 @@ import {
     CardHeader,
     Divider,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(3),
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     label: {
-        marginLeft: theme.spacing(1)
+        marginLeft: theme.spacing(1),
     },
     item: {
         textAlign: "center",
-        justifyContent: "center"
-    }
+        justifyContent: "center",
+    },
 }));
 
 function CardAPR({ className, ...rest }) {
@@ -39,13 +40,16 @@ function CardAPR({ className, ...rest }) {
     const data = {
         value: (0.0).toFixed(2),
         percentage: "%",
-        difference: 10
+        difference: 10,
     };
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Loan APR%" className={classes.item} />
+            <CardHeader
+                title=<Translate value="Loan_APR_Percent" />
+                className={classes.item}
+            />
             <Divider />
             <CardContent>
                 <Box
@@ -68,7 +72,7 @@ function CardAPR({ className, ...rest }) {
 
 // Section 6: Documentation with PropTypes
 CardAPR.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export

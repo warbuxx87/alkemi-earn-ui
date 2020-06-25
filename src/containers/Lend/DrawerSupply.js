@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { Translate } from "react-redux-i18n";
 
 import web3 from "web3";
 
@@ -34,7 +35,7 @@ const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
     return (
         <Drawer
             asset={asset}
-            buttonsLabel="Supply"
+            buttonsLabel=<Translate value="Supply" />
             triggerButtonVariant="contained"
             enableButtonClick={enableSupply}
             onButtonClick={({ asset, amount }) =>

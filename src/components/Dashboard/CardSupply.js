@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import { Translate } from "react-redux-i18n";
 
 // Section 2: Material-UI imports
 import {
@@ -47,7 +48,10 @@ function SupplyBalance({
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Current Deposit" className={classes.item} />
+            <CardHeader
+                title=<Translate value="Current_Deposit" />
+                className={classes.item}
+            />
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
@@ -68,7 +72,7 @@ function SupplyBalance({
                                 color="textSecondary"
                                 align="left"
                             >
-                                Total USD
+                                <Translate value="Total_USD" />
                             </Typography>
                             <Typography
                                 variant="h3"
@@ -84,7 +88,7 @@ function SupplyBalance({
                                 color="textSecondary"
                                 align="right"
                             >
-                                Earning APR
+                                <Translate value="Earning_APR" />
                             </Typography>
                             <Typography
                                 variant="h3"

@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { Translate } from "react-redux-i18n";
 
 // Section 2: Material-UI imports
 import {
@@ -42,18 +43,18 @@ const useStyles = makeStyles({
 });
 
 const Columns = [
-    { id: "1", label: "Asset" },
-    { id: "2", label: "Available", align: "center" },
-    { id: "3", label: "Supplied", align: "center" },
+    { id: "1", label: <Translate value="Asset" /> },
+    { id: "2", label: <Translate value="Available" />, align: "center" },
+    { id: "3", label: <Translate value="Supplied" />, align: "center" },
     {
         id: "4",
-        label: "APR %",
+        label: <Translate value="APR_Percent" />,
         align: "center",
         //format: value => value.toLocaleString(),
     },
     {
         id: "5",
-        label: "Collateral",
+        label: <Translate value="Collateral" />,
         align: "center",
         // format: value => value.toFixed(2),
     },
@@ -70,7 +71,7 @@ const LendTable = ({ data = [], onActivate }) => {
     const classes = useStyles();
     return (
         <Card>
-            <CardHeader title="Available Markets" />
+            <CardHeader title=<Translate value="Available_Markets" /> />
             <Divider />
             <PerfectScrollbar>
                 <Paper>
@@ -182,7 +183,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                                             color="inherit"
                                                         />
                                                     ) : (
-                                                        "Activate"
+                                                        <Translate value="Activate" />
                                                     )}
                                                 </Button>
                                             )}

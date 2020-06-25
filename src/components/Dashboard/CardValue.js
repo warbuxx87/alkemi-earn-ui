@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import { Translate } from "react-redux-i18n";
 
 // Section 2: Material-UI imports
 import {
@@ -44,7 +45,10 @@ function Balance({ aggregatedBalance, currency, collateralRatio }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Account Liquidity" className={classes.header} />
+            <CardHeader
+                title=<Translate value="Account_Liquidity" />
+                className={classes.header}
+            />
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
@@ -65,7 +69,7 @@ function Balance({ aggregatedBalance, currency, collateralRatio }) {
                                 color="textSecondary"
                                 align="left"
                             >
-                                Total USD
+                                <Translate value="Total_USD" />
                             </Typography>
                             <Typography
                                 variant="h3"
@@ -81,7 +85,7 @@ function Balance({ aggregatedBalance, currency, collateralRatio }) {
                                 color="textSecondary"
                                 align="right"
                             >
-                                Collateral Ratio
+                                <Translate value="Collateral_Ratio" />
                             </Typography>
                             <Typography
                                 variant="h3"

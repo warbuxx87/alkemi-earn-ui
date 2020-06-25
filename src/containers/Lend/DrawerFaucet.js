@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { Translate } from "react-redux-i18n";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
@@ -30,7 +31,7 @@ const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
     return (
         <Drawer
             asset={asset}
-            buttonsLabel="Allocate"
+            buttonsLabel=<Translate value="Allocate" />
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
             enableButtonClick={enableAllocate}

@@ -11,11 +11,11 @@ import "assets/scss/style.scss";
 import theme from "themes/theme";
 import Layout from "containers/Layout/Layout";
 import { history } from "redux/enhancers/middlewares/router";
-import Drizzle from "containers/Drizzle/Drizzle";
+import Drizzle from "./containers/Drizzle/Drizzle";
 
 import registerServiceWorker from "./utils/registerServiceWorker";
 
-export class App extends Component {
+class App extends Component {
     render() {
         return (
             <Drizzle>

@@ -2,6 +2,7 @@
 
 // Section 1: React low level imports
 import React, { useState, useRef } from "react";
+import { Translate } from "react-redux-i18n";
 
 // Section 2: Material-UI imports
 import {
@@ -41,7 +42,7 @@ function Notifications() {
     // Section 5: Code Component
     return (
         <>
-            <Tooltip title="Notications">
+            <Tooltip title=<Translate value="Notifications" />>
                 <IconButton color="inherit" onClick={handleOpen} ref={ref}>
                     <SvgIcon>
                         <BellIcon />
@@ -59,7 +60,7 @@ function Notifications() {
                 open={isOpen}
             >
                 <Typography variant="h6" color="textPrimary">
-                    Notifications
+                    <Translate value="Notifications" />
                 </Typography>
                 <Box mt={2} px={1}>
                     Notifications here

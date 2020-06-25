@@ -4,6 +4,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { Translate } from "react-redux-i18n";
 
 // Section 2: Material-UI imports
 import {
@@ -38,12 +39,12 @@ const useStyles = makeStyles({
 });
 
 const columns = [
-    { id: "1", label: "Asset" },
-    { id: "2", label: "Available", align: "center" },
-    { id: "3", label: "Borrowed", align: "center" },
+    { id: "1", label: <Translate value="Asset" /> },
+    { id: "2", label: <Translate value="Available" />, align: "center" },
+    { id: "3", label: <Translate value="Borrowed" />, align: "center" },
     {
         id: "4",
-        label: "APR %",
+        label: <Translate value="APR_Percent" />,
 
         align: "center",
         style: "percent",
@@ -51,7 +52,7 @@ const columns = [
     },
     {
         id: "5",
-        label: "Collateral",
+        label: <Translate value="Collateral" />,
 
         align: "center",
         format: (value) => value.toFixed(2),
@@ -67,7 +68,7 @@ const BorrowTableActive = ({ data = [] }) => {
     const classes = useStyles();
     return (
         <Card>
-            <CardHeader title="Active Borrowing" />
+            <CardHeader title=<Translate value="Active_Borrowing" /> />
             <Divider />
             <Paper>
                 <PerfectScrollbar>

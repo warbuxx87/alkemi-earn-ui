@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import { Translate } from "react-redux-i18n";
 
 // Section 2: Material-UI imports
 import {
@@ -46,7 +47,10 @@ function TotalInterest({ className, ...rest }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Interest Paid" className={classes.item} />
+            <CardHeader
+                title=<Translate value="Interest_Paid" />
+                className={classes.item}
+            />
             <Divider />
             <CardContent>
                 <Box

@@ -1,10 +1,16 @@
 import { createStore } from "redux";
+import {
+    setLocale,
+    loadTranslations,
+    syncTranslationWithStore,
+} from "react-redux-i18n";
+import rootReducer from "./reducers/index";
+import translations from "../constants/translations";
 
-import _reducer from "./reducers";
-import _enhancer from "./enhancers";
+const store = createStore(rootReducer);
 
-export default (
-  reducer = _reducer,
-  preloadedState = undefined,
-  enhancer = _enhancer
-) => createStore(reducer, preloadedState, enhancer);
+syncTranslationWithStore(store);
+store.dispatch(loadTranslations(translations));
+store.dispatch(setLocale("en"));
+
+export default store;

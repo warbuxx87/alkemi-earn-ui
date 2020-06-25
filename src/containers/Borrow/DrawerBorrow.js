@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { Translate } from "react-redux-i18n";
 
 import { formatNumber, formatETHMoney } from "utils/ui";
 
@@ -29,7 +30,7 @@ const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
     return (
         <Drawer
             asset={asset}
-            buttonsLabel="Borrow"
+            buttonsLabel=<Translate value="Borrow" />
             triggerButtonVariant="contained"
             enableButtonClick={enableBorrow}
             onButtonClick={({ asset, amount }) =>

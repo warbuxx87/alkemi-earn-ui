@@ -8,11 +8,17 @@ import { generateStore } from "@drizzle/store";
 import { toast } from "react-toastify";
 import { ToastMessage } from "rimble-ui";
 import "react-toastify/dist/ReactToastify.css";
+import {
+    setLocale,
+    loadTranslations,
+    syncTranslationWithStore,
+} from "react-redux-i18n";
 
 // 3. internal imports
 import appReducers from "redux/reducers";
 import errorMessage from "constants/error_code";
 import MoneyMarket from "contracts/MoneyMarket.json";
+import translations from "../../constants/translations";
 
 const contractTXNotifier = (store) => (next) => (action) => {
     const actionTypeConfirmation = "TX_CONFIRMATION";
@@ -155,4 +161,7 @@ export const drizzleOptions = {
 };
 
 const store = generateStore(drizzleOptions);
+syncTranslationWithStore(store);
+store.dispatch(loadTranslations(translations));
+store.dispatch(setLocale("en"));
 export default store;
