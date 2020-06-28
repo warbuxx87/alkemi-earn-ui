@@ -4,10 +4,46 @@ import _ from "lodash";
 import address from "constants/address_map.json";
 import { networkSelector } from "./drizzle";
 
+import web3 from "web3";
+
 // Stats Selectors
 export const getStats = (state) => state.data.stats.tx;
 export const getStatsPending = (state) => state.data.stats.pending;
 export const getStatsError = (state) => state.data.stats.error;
+
+// total Selectors
+const getSupplyAccountValue = (state) => {
+    const calculateAccountValues = Object.values(
+        _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
+    );
+    if (calculateAccountValues[0]) {
+        // console.log("Supply Account Value", calculateAccountValues[0].value[1]);
+        return _.get(calculateAccountValues, "[0].value[1]");
+    }
+    return null;
+};
+
+export const getCollateralRatio = (state) => {
+    const collateralRatio = _.get(
+        state,
+        "contracts.MoneyMarket.collateralRatio"
+    );
+    if (collateralRatio["0x0"]) {
+        //console.log("collateralRatio", collateralRatio["0x0"].value);
+        return _.get(collateralRatio, "['0x0'].value");
+    }
+    return null;
+};
+
+const getBorrowAccountValue = (state) => {
+    const calculateAccountValues = Object.values(
+        _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
+    );
+    if (calculateAccountValues[0]) {
+        return _.get(calculateAccountValues, "[0].value[2]");
+    }
+    return null;
+};
 
 // Lend Selectors
 const lendAssetSelector = (state) => state.data.lend.assets;
@@ -198,6 +234,9 @@ const getBorrowAsset = createSelector(
     borrowPrincipalSelector,
     getUtilizationValues,
     getAssetPrices,
+    getSupplyAccountValue,
+    getBorrowAccountValue,
+    getCollateralRatio,
     (
         assets,
         network,
@@ -205,7 +244,10 @@ const getBorrowAsset = createSelector(
         borrowAPR,
         borrowPrincipal,
         marketUtilization,
-        assetPrices
+        assetPrices,
+        suppliedValue,
+        borrowedValue,
+        collateralRatio
     ) =>
         Object.values(assets).map((asset) => {
             // TODO: get supply wallet
@@ -215,6 +257,8 @@ const getBorrowAsset = createSelector(
             let utilization = "0";
             let price = "0";
             let USDprice = "0";
+            let maxBorrowETH = "0";
+            let maxBorrowToken = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
@@ -226,6 +270,17 @@ const getBorrowAsset = createSelector(
                     assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
                     "0";
             }
+            if ((network, suppliedValue, borrowedValue, collateralRatio)) {
+                maxBorrowETH = web3.utils
+                    .toBN(suppliedValue)
+                    .div(web3.utils.toBN(collateralRatio))
+                    .sub(web3.utils.toBN(borrowedValue))
+                    .toString();
+                maxBorrowToken = web3.utils
+                    .toBN(maxBorrowETH)
+                    .div(web3.utils.toBN(price))
+                    .toString();
+            }
             return {
                 ...asset,
                 balance,
@@ -234,6 +289,8 @@ const getBorrowAsset = createSelector(
                 utilization,
                 price,
                 USDprice,
+                maxBorrowETH,
+                maxBorrowToken,
             };
         })
 );

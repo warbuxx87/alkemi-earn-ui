@@ -4,11 +4,11 @@ import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
-import { formatNumber, formatETHMoney } from "utils/ui";
+import { formatNumber, formatETHMoney, fromWei } from "utils/ui";
 
 // Section 3: Selectors, Hooks & Action Listeners
 import useFetchPrice from "hooks/useFetchPrice";
-import { getUSDPrice, getMaxBorrowAmount } from "redux/selectors/totalBalance";
+import { getUSDPrice } from "redux/selectors/totalBalance";
 import { onBorrowAction } from "redux/actions/data/borrow";
 
 // Section 4: Import Underlying Components / Containers
@@ -18,14 +18,16 @@ import Drawer from "components/UI/Drawer/Drawer";
 // Section 5: Code Container
 const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
     useFetchPrice(true); // gets current USD price
+
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
+    // const maxBorrowAmount = useSelector(getMaxBorrowAmount);
+    // console.log("maxBorrowAmount", maxBorrowAmount);
 
     const [amount, setAmount] = React.useState("");
     const onSetMax = () => {
-        let safeBorrowAmount = getMaxBorrowAmount;
-        setAmount(safeBorrowAmount);
-    }; /*setAmount(fromWei(asset.balance, asset.unit))*/
-
+        setAmount(fromWei(asset.maxBorrowToken, asset.unit));
+    };
     const [enableBorrow, setEnableBorrow] = React.useState(false);
 
     React.useEffect(() => {
