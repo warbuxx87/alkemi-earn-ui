@@ -2,13 +2,17 @@
 
 // Section 1: React low level imports
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { compose } from "redux";
 import { useLocation } from "react-router-dom";
 
 import onboard from "utils/onboard";
 import { initContracts } from "utils/contracts";
 import withDrizzle from "containers/Drizzle/withDrizzle";
+
+import { setWalletConnected } from "redux/actions/status/onboard";
+
+import { isWalletConnected } from "redux/selectors/onboard";
 
 // Section 3: Selectors
 import { networkSelector, getAccountAddress } from "redux/selectors/drizzle";
@@ -28,6 +32,10 @@ const locationToTitles = {
 
 // Section 5: Code Component
 const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
+    // Should be moved to an onboard manager probably
+    const dispatch = useDispatch();
+    const shouldInitContracts = useSelector(isWalletConnected);
+
     let location = useLocation();
     // update Appbar title whenever location change
     const [title, setTitle] = useState("Not Set");
@@ -39,25 +47,43 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
 
     // get previous selected wallet
     useEffect(() => {
-        const previouslySelectedWallet = window.localStorage.getItem(
-            "selectedWallet"
-        );
-        if (previouslySelectedWallet && onboard) {
-            onboard.walletSelect(previouslySelectedWallet);
-        }
+        const checkIfPreviouslySelectedWallet = async () => {
+            const previouslySelectedWallet = window.localStorage.getItem(
+                "selectedWallet"
+            );
+            if (previouslySelectedWallet && onboard) {
+                const isSelectWallet = await onboard.walletSelect(
+                    previouslySelectedWallet
+                );
+
+                if (isSelectWallet) {
+                    const readyToTransact = await onboard.walletCheck();
+                    console.log("readyToTransact 1: ", readyToTransact);
+                    dispatch(setWalletConnected(readyToTransact));
+                    if (!readyToTransact) {
+                        // TODO: if it is not ready -> show some warning
+                    }
+                }
+            }
+        };
+
+        checkIfPreviouslySelectedWallet();
     }, []);
 
     useEffect(() => {
-        if (networkId && accountAddress) {
+        if (networkId && accountAddress && shouldInitContracts) {
+            console.log("Will initcontracts in useEffect");
             // account connected
             initContracts(drizzle);
         }
-    }, [networkId, accountAddress, drizzle]);
+    }, [networkId, accountAddress, drizzle, shouldInitContracts]);
 
     const onConnect = async () => {
         const isSelectWallet = await onboard.walletSelect();
         if (isSelectWallet) {
-            const readyToTransact = onboard.walletCheck();
+            const readyToTransact = await onboard.walletCheck();
+            console.log("readyToTransact 2: ", readyToTransact);
+            dispatch(setWalletConnected(readyToTransact));
             if (!readyToTransact) {
                 // TODO: if it is not ready -> show some warning
             }
@@ -65,6 +91,11 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
     };
     const onReset = async () => {
         onboard.walletReset();
+
+        // TODO
+        dispatch(setWalletConnected(false));
+        // &
+        // resetStores
     };
 
     return (

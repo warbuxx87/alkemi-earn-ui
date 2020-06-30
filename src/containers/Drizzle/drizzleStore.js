@@ -134,7 +134,7 @@ export const drizzleOptions = {
             ],
         },
         web3: {
-            customProvider: Web3.givenProvider,
+            customProvider: window.currentlyUsedProvider,
         },
     },
     polls: {

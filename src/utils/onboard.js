@@ -52,6 +52,12 @@ const onboard = Onboard({
     subscriptions: {
         wallet: (wallet) => {
             window.localStorage.setItem("selectedWallet", wallet.name);
+
+            window.currentlyUsedProvider = wallet.provider;
+            console.log(
+                "Set window.currentlyUsedProvider: ",
+                window.currentlyUsedProvider
+            );
         },
     },
     walletCheck: walletChecks,
@@ -60,10 +66,12 @@ const onboard = Onboard({
 export const readyToTransact = async () => {
     if (!window.ethereum) {
         const walletSelected = await onboard.walletSelect();
+        console.log("Ran walletSelect");
         if (!walletSelected) return false;
     }
 
     const ready = await onboard.walletCheck();
+    console.log("Ran check");
     return ready;
 };
 
