@@ -7,7 +7,7 @@ import { compose } from "redux";
 import { useLocation } from "react-router-dom";
 
 import onboard from "utils/onboard";
-import { initContracts } from "utils/contracts";
+import { initContracts, deleteAllContracts } from "utils/contracts";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
 import { setWalletConnected } from "redux/actions/status/onboard";
@@ -86,6 +86,20 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
         dispatch(resetBorrowData());
     }, [dispatch]);
 
+    const onReset = useCallback(async () => {
+        onboard.walletReset();
+
+        window.localStorage.removeItem("selectedWallet");
+
+        deleteAllContracts(drizzle);
+
+        dispatch(setWalletConnected(false));
+
+        setCurrentAddress(null);
+
+        resetStoreData();
+    }, [dispatch, resetStoreData, drizzle]);
+
     useEffect(() => {
         const initDrizzleData = (forceUpdate = false) => {
             if (networkId && accountAddress && shouldInitContracts === true) {
@@ -104,6 +118,8 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                             // Time to reload your interface with accounts[0]!
 
                             resetStoreData();
+
+                            //deleteAllContracts(drizzle)
 
                             setCurrentAddress(accounts[0]);
 
@@ -137,18 +153,6 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                 // TODO: if it is not ready -> show some warning
             }
         }
-    };
-    const onReset = async () => {
-        onboard.walletReset();
-
-        window.localStorage.removeItem("selectedWallet");
-
-        dispatch(setWalletConnected(false));
-
-        setCurrentAddress(null);
-        console.log("Set currentAddress to ", currentAddress);
-
-        resetStoreData();
     };
 
     return (

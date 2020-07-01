@@ -28,6 +28,12 @@ export const initContracts = (drizzle, forceUpdate) => {
     );
 };
 
+export const deleteAllContracts = (drizzle) => {
+    drizzle.deleteContract("MoneyMarket");
+
+    assets.forEach((asset) => drizzle.deleteContract(asset));
+};
+
 export const initMarketContract = ({ drizzle, forceUpdate }) => {
     if (drizzle.contracts.MoneyMarket && !forceUpdate)
         return drizzle.contracts.MoneyMarket;
