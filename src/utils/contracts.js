@@ -20,23 +20,33 @@ const ABIs = {
     WBTC: WBTC_ABI,
 };
 
-export const initContracts = (drizzle) => {
+export const initContracts = (drizzle, forceUpdate) => {
     initMarketContract({ drizzle });
-    assets.forEach((asset) => initAssetContract({ drizzle, asset }));
+
+    assets.forEach((asset) =>
+        initAssetContract({ drizzle, asset, forceUpdate })
+    );
 };
 
-export const initAssetContract = ({ drizzle, asset }) => {
-    if (drizzle.contracts[asset]) return drizzle.contracts[asset];
+export const initAssetContract = ({ drizzle, asset, forceUpdate }) => {
+    if (drizzle.contracts[asset] && !forceUpdate)
+        return drizzle.contracts[asset];
     const drizzleStore = drizzle.store.getState();
-    const myAddress = drizzleStore.accounts[0];
-    const network = constants.network_type[drizzleStore.web3.networkId];
+
+    const myAddress = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // TODO bring the drizzle store value after updating the value
+    const network = constants.network_type[drizzleStore.web3.networkId]; // TODO update network too
     if (!drizzle.web3.eth) return;
+
     const tokenContract = new drizzle.web3.eth.Contract(
         ABIs[asset],
         address[network][`address_${asset}`]
     );
     // const events = ["Approval", "Transfer"];
     const events = [];
+
+    // this.context.drizzle.deleteContract(contractName)
+    if (forceUpdate) drizzle.deleteContract(asset);
+
     drizzle.addContract(
         {
             contractName: asset,
@@ -58,15 +68,17 @@ export const initAssetContract = ({ drizzle, asset }) => {
 export const initMarketContract = ({ drizzle }) => {
     if (drizzle.contracts.MoneyMarket) return drizzle.contracts.MoneyMarket;
     const drizzleStore = drizzle.store.getState();
-    const myAddress = drizzleStore.accounts[0];
+    const myAddress = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // TODO bring the drizzle store value after updating the value
     const network = constants.network_type[drizzleStore.web3.networkId];
     const assets = ["PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
+
     const MoneyMarketContract = new drizzle.web3.eth.Contract(
         MoneyMarket_ABI,
         address[network][`address_MoneyMarket`]
     );
+
     drizzle.addContract({
         contractName: "MoneyMarket",
         web3Contract: MoneyMarketContract,

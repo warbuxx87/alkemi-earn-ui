@@ -3,7 +3,6 @@ import React from "react";
 import thunk from "redux-thunk";
 
 // 2. Libraries imports
-import Web3 from "web3";
 import { generateStore } from "@drizzle/store";
 import { toast } from "react-toastify";
 import { ToastMessage } from "rimble-ui";
@@ -37,13 +36,13 @@ const contractTXNotifier = (store) => (next) => (action) => {
             toastIcon = "InfoOutline";
             displayMessage = "Transaction pending...";
             displaySecondaryMessage = "This might take a few minutes";
-            console.log("Tx Send event fired", displayMessage);
+            //console.log("Tx Send event fired", displayMessage);
         }
         // This means it's been mined on the network
         if (action.type === actionTypeSuccess) {
             // console.log("Tx Success event fired", displayMessage);
 
-            console.log("Tx Receipt Object", action.receipt);
+            //console.log("Tx Receipt Object", action.receipt);
             toastMessageVariant = "success";
             toastIcon = "CloudDone";
             displaySecondaryMessage = "Transaction Successful";
@@ -82,7 +81,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
             toastMessageVariant = "failure";
             displayMessage = "Transaction failed";
             displaySecondaryMessage = "The Failure Message Would Go Here";
-            console.log("Tx Error event fired", displayMessage);
+            //console.log("Tx Error event fired", displayMessage);
         }
 
         const options = {
