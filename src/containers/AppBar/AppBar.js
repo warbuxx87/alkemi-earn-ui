@@ -53,7 +53,6 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
 
     // get previous selected wallet
     useEffect(() => {
-        console.log("ran useEffect");
         const checkIfPreviouslySelectedWallet = async () => {
             const previouslySelectedWallet = window.localStorage.getItem(
                 "selectedWallet"
@@ -145,6 +144,9 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
         window.localStorage.removeItem("selectedWallet");
 
         dispatch(setWalletConnected(false));
+
+        setCurrentAddress(null);
+        console.log("Set currentAddress to ", currentAddress);
 
         resetStoreData();
     };
