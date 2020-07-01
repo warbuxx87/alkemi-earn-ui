@@ -6,6 +6,7 @@ import {
     REPAY_PENDING,
     REPAY_SUCCESS,
     REPAY_ERROR,
+    RESET_BORROW_DATA,
 } from "redux/actions/data/borrow";
 
 // import internal assets
@@ -138,6 +139,9 @@ export default (state = initialState, action) => {
                     },
                 },
             };
+
+        case RESET_BORROW_DATA:
+            return initialState;
 
         default:
             return state;

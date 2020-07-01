@@ -15,6 +15,7 @@ import { setWalletConnected } from "redux/actions/status/onboard";
 import { isWalletConnected } from "redux/selectors/onboard";
 
 import { resetLendData } from "redux/actions/data/lend";
+import { resetBorrowData } from "redux/actions/data/borrow";
 
 // Section 3: Selectors
 import { networkSelector, getAccountAddress } from "redux/selectors/drizzle";
@@ -83,6 +84,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
 
     const resetStoreData = useCallback(() => {
         dispatch(resetLendData());
+        dispatch(resetBorrowData());
     }, [dispatch]);
 
     useEffect(() => {

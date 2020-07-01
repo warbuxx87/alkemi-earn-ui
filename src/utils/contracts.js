@@ -21,52 +21,16 @@ const ABIs = {
 };
 
 export const initContracts = (drizzle, forceUpdate) => {
-    initMarketContract({ drizzle });
+    initMarketContract({ drizzle, forceUpdate });
 
     assets.forEach((asset) =>
         initAssetContract({ drizzle, asset, forceUpdate })
     );
 };
 
-export const initAssetContract = ({ drizzle, asset, forceUpdate }) => {
-    if (drizzle.contracts[asset] && !forceUpdate)
-        return drizzle.contracts[asset];
-    const drizzleStore = drizzle.store.getState();
-
-    const myAddress = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // TODO bring the drizzle store value after updating the value
-    const network = constants.network_type[drizzleStore.web3.networkId]; // TODO update network too
-    if (!drizzle.web3.eth) return;
-
-    const tokenContract = new drizzle.web3.eth.Contract(
-        ABIs[asset],
-        address[network][`address_${asset}`]
-    );
-    // const events = ["Approval", "Transfer"];
-    const events = [];
-
-    // this.context.drizzle.deleteContract(contractName)
-    if (forceUpdate) drizzle.deleteContract(asset);
-
-    drizzle.addContract(
-        {
-            contractName: asset,
-            web3Contract: tokenContract,
-        },
-        events
-    );
-    // get allowance
-    tokenContract.methods.allowance.cacheCall(
-        myAddress,
-        address[network].address_MoneyMarket
-    );
-
-    // get balance
-    tokenContract.methods.balanceOf.cacheCall(myAddress);
-    return drizzle.contracts[asset];
-};
-
-export const initMarketContract = ({ drizzle }) => {
-    if (drizzle.contracts.MoneyMarket) return drizzle.contracts.MoneyMarket;
+export const initMarketContract = ({ drizzle, forceUpdate }) => {
+    if (drizzle.contracts.MoneyMarket && !forceUpdate)
+        return drizzle.contracts.MoneyMarket;
     const drizzleStore = drizzle.store.getState();
     const myAddress = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // TODO bring the drizzle store value after updating the value
     const network = constants.network_type[drizzleStore.web3.networkId];
@@ -78,6 +42,8 @@ export const initMarketContract = ({ drizzle }) => {
         MoneyMarket_ABI,
         address[network][`address_MoneyMarket`]
     );
+
+    if (forceUpdate) drizzle.deleteContract("MoneyMarket");
 
     drizzle.addContract({
         contractName: "MoneyMarket",
@@ -126,4 +92,40 @@ export const initMarketContract = ({ drizzle }) => {
     MoneyMarketContract.methods.calculateAccountValues.cacheCall(myAddress);
 
     return drizzle.contracts.MoneyMarket;
+};
+
+export const initAssetContract = ({ drizzle, asset, forceUpdate }) => {
+    if (drizzle.contracts[asset] && !forceUpdate)
+        return drizzle.contracts[asset];
+    const drizzleStore = drizzle.store.getState();
+
+    const myAddress = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // TODO bring the drizzle store value after updating the value
+    const network = constants.network_type[drizzleStore.web3.networkId]; // TODO update network too
+    if (!drizzle.web3.eth) return;
+
+    const tokenContract = new drizzle.web3.eth.Contract(
+        ABIs[asset],
+        address[network][`address_${asset}`]
+    );
+    // const events = ["Approval", "Transfer"];
+    const events = [];
+
+    if (forceUpdate) drizzle.deleteContract(asset);
+
+    drizzle.addContract(
+        {
+            contractName: asset,
+            web3Contract: tokenContract,
+        },
+        events
+    );
+    // get allowance
+    tokenContract.methods.allowance.cacheCall(
+        myAddress,
+        address[network].address_MoneyMarket
+    );
+
+    // get balance
+    tokenContract.methods.balanceOf.cacheCall(myAddress);
+    return drizzle.contracts[asset];
 };
