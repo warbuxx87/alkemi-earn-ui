@@ -12,6 +12,18 @@ export const getStatsPending = (state) => state.data.stats.pending;
 export const getStatsError = (state) => state.data.stats.error;
 
 // total Selectors
+//
+const getAccountLiquidity = (state) => {
+    const accountLiquidity = Object.values(
+        _.get(state, "contracts.MoneyMarket.getAccountLiquidity", {})
+    );
+    if (accountLiquidity[0]) {
+        console.log(" Account Liquidity", accountLiquidity[0].value);
+        return _.get(accountLiquidity, "[0].value");
+    }
+    return null;
+};
+
 const getSupplyAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
@@ -234,9 +246,7 @@ const getBorrowAsset = createSelector(
     borrowPrincipalSelector,
     getUtilizationValues,
     getAssetPrices,
-    getSupplyAccountValue,
-    getBorrowAccountValue,
-    getCollateralRatio,
+    getAccountLiquidity,
     (
         assets,
         network,
@@ -245,9 +255,7 @@ const getBorrowAsset = createSelector(
         borrowPrincipal,
         marketUtilization,
         assetPrices,
-        suppliedValue,
-        borrowedValue,
-        collateralRatio
+        accountLiquidity
     ) =>
         Object.values(assets).map((asset) => {
             // TODO: get supply wallet
@@ -259,6 +267,7 @@ const getBorrowAsset = createSelector(
             let USDprice = "0";
             let maxBorrowETH = "0";
             let maxBorrowToken = "0";
+            let liquidity = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
@@ -270,16 +279,9 @@ const getBorrowAsset = createSelector(
                     assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
                     "0";
             }
-            if ((network, suppliedValue, borrowedValue, collateralRatio)) {
-                maxBorrowETH = web3.utils
-                    .toBN(suppliedValue)
-                    .div(web3.utils.toBN(collateralRatio))
-                    .sub(web3.utils.toBN(borrowedValue))
-                    .toString();
-                maxBorrowToken = web3.utils
-                    .toBN(maxBorrowETH)
-                    .div(web3.utils.toBN(price))
-                    .toString();
+            if ((network, accountLiquidity, price)) {
+                liquidity = accountLiquidity; // Amount of ETH scaled by 10e18
+                maxBorrowToken = liquidity.toString() * price.toString(); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
             }
             return {
                 ...asset,
@@ -289,7 +291,7 @@ const getBorrowAsset = createSelector(
                 utilization,
                 price,
                 USDprice,
-                maxBorrowETH,
+                liquidity,
                 maxBorrowToken,
             };
         })
