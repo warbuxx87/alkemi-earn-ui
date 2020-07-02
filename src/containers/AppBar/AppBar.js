@@ -38,9 +38,9 @@ const locationToTitles = {
 const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
     // Should be moved to an onboard manager probably
     const dispatch = useDispatch();
-    const shouldInitContracts = useSelector(isWalletConnected);
+    const walletConnected = useSelector(isWalletConnected);
 
-    const [currentAddress, setCurrentAddress] = useState(accountAddress);
+    const [currentAddress, setCurrentAddress] = useState(accountAddress); // using an address because drizzle doesn't update account address on change
 
     let location = useLocation();
     // update Appbar title whenever location change
@@ -102,10 +102,9 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
 
     useEffect(() => {
         const initDrizzleData = (forceUpdate = false) => {
-            if (networkId && accountAddress && shouldInitContracts === true) {
+            if (networkId && accountAddress && walletConnected === true) {
                 if (drizzle && !forceUpdate) {
-                    // perhaps make a check if drizzle was already connected
-                    drizzle.web3 = new Web3(window.currentlyUsedProvider);
+                    drizzle.web3 = new Web3(window.currentlyUsedProvider); // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
                 }
 
                 // account connected
@@ -115,8 +114,6 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                     drizzle.web3.currentProvider.on(
                         "accountsChanged",
                         (accounts) => {
-                            // Time to reload your interface with accounts[0]!
-
                             resetStoreData();
 
                             //deleteAllContracts(drizzle)
@@ -131,13 +128,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
         };
 
         initDrizzleData();
-    }, [
-        networkId,
-        accountAddress,
-        drizzle,
-        shouldInitContracts,
-        resetStoreData,
-    ]);
+    }, [networkId, accountAddress, drizzle, walletConnected, resetStoreData]);
 
     useEffect(() => {
         if (!currentAddress) setCurrentAddress(accountAddress); // TODO: After setting up the address in drizzle store this should be cleaned up
@@ -160,7 +151,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
             title={title}
             onConnect={onConnect}
             onReset={onReset}
-            accountAddress={currentAddress}
+            accountAddress={walletConnected ? currentAddress : null}
         />
     );
 };

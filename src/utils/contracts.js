@@ -29,9 +29,13 @@ export const initContracts = (drizzle, forceUpdate) => {
 };
 
 export const deleteAllContracts = (drizzle) => {
-    drizzle.deleteContract("MoneyMarket");
+    try {
+        drizzle.deleteContract("MoneyMarket");
 
-    assets.forEach((asset) => drizzle.deleteContract(asset));
+        assets.forEach((asset) => drizzle.deleteContract(asset));
+    } catch (e) {
+        // normally if allowed to be clicked it will throw an error, but since we hide the disconnect button it won't
+    }
 };
 
 export const initMarketContract = ({ drizzle, forceUpdate }) => {
