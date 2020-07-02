@@ -41,9 +41,13 @@ export const deleteAllContracts = (drizzle) => {
 export const initMarketContract = ({ drizzle, forceUpdate }) => {
     if (drizzle.contracts.MoneyMarket && !forceUpdate)
         return drizzle.contracts.MoneyMarket;
-    const drizzleStore = drizzle.store.getState();
+    //const drizzleStore = drizzle.store.getState();
     const myAddress = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // TODO bring the drizzle store value after updating the value
-    const network = constants.network_type[drizzleStore.web3.networkId];
+    const network =
+        constants.network_type[
+            drizzle.web3.currentProvider
+                .networkVersion /*drizzleStore.web3.networkId*/
+        ]; // TODO: same for network
     const assets = ["PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
@@ -107,10 +111,15 @@ export const initMarketContract = ({ drizzle, forceUpdate }) => {
 export const initAssetContract = ({ drizzle, asset, forceUpdate }) => {
     if (drizzle.contracts[asset] && !forceUpdate)
         return drizzle.contracts[asset];
-    const drizzleStore = drizzle.store.getState();
+    //const drizzleStore = drizzle.store.getState();
 
     const myAddress = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // TODO bring the drizzle store value after updating the value
-    const network = constants.network_type[drizzleStore.web3.networkId]; // TODO update network too
+    const network =
+        constants.network_type[
+            drizzle.web3.currentProvider
+                .networkVersion /*drizzleStore.web3.networkId*/
+        ]; // TODO: same for network
+
     if (!drizzle.web3.eth) return;
 
     const tokenContract = new drizzle.web3.eth.Contract(
