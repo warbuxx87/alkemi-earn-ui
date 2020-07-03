@@ -6,8 +6,12 @@ import { initAssetContract } from "utils/contracts";
 
 export const handle_approve_click = async ({ drizzle, asset, myAccount }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transaction");
-    const drizzleStore = drizzle.store.getState();
-    const network = constants.network_type[drizzleStore.web3.networkId];
+    //const drizzleStore = drizzle.store.getState();
+    const network =
+        constants.network_type[
+            drizzle.web3.currentProvider
+                .networkVersion /*drizzleStore.web3.networkId*/
+        ]; // Using provider network ID instead of drizzle store value
     const address_MoneyMarket = address[network].address_MoneyMarket;
     const tokenContract = initAssetContract({ drizzle, asset });
     const sendApprove = tokenContract.methods.approve.cacheSend(
@@ -23,8 +27,8 @@ export const handle_approve_click = async ({ drizzle, asset, myAccount }) => {
 export const handle_allocate_click = async ({ drizzle, asset, amount }) => {
     console.log(asset.unit);
     if (!(await readyToTransact())) throw new Error("not ready to transaction");
-    const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzleStore.accounts[0];
+    //const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
     const unit = asset.unit;
     const tokenContract = drizzle.contracts[unit];
     const weiAmount = toWei(amount, unit);
@@ -40,9 +44,13 @@ export const handle_allocate_click = async ({ drizzle, asset, amount }) => {
 
 export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzleStore.accounts[0];
-    const network = constants.network_type[drizzleStore.web3.networkId];
+    //const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const network =
+        constants.network_type[
+            drizzle.web3.currentProvider
+                .networkVersion /*drizzleStore.web3.networkId*/
+        ]; // Using provider network ID instead of drizzle store value
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
@@ -59,9 +67,13 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
 
 export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzleStore.accounts[0];
-    const network = constants.network_type[drizzleStore.web3.networkId];
+    // const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const network =
+        constants.network_type[
+            drizzle.web3.currentProvider
+                .networkVersion /*drizzleStore.web3.networkId*/
+        ]; // Using provider network ID instead of drizzle store value
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
@@ -78,9 +90,13 @@ export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
 
 export const handle_repay_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzleStore.accounts[0];
-    const network = constants.network_type[drizzleStore.web3.networkId];
+    //const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const network =
+        constants.network_type[
+            drizzle.web3.currentProvider
+                .networkVersion /*drizzleStore.web3.networkId*/
+        ]; // Using provider network ID instead of drizzle store value
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
@@ -97,9 +113,13 @@ export const handle_repay_click = async ({ drizzle, amount, asset }) => {
 
 export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzleStore.accounts[0];
-    const network = constants.network_type[drizzleStore.web3.networkId];
+    //const drizzleStore = drizzle.store.getState();
+    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const network =
+        constants.network_type[
+            drizzle.web3.currentProvider
+                .networkVersion /*drizzleStore.web3.networkId*/
+        ]; // Using provider network ID instead of drizzle store value
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;

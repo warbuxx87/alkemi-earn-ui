@@ -60,8 +60,8 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
             );
 
             if (
-                previouslySelectedWallet !== undefined &&
-                typeof previouslySelectedWallet === "string" && // comment these two conditions to show wallet selection on load
+                /* previouslySelectedWallet !== undefined &&
+                typeof previouslySelectedWallet === "string" && */ // comment out these two conditions to not show wallet selection on load
                 onboard
             ) {
                 const isSelectWallet = await onboard.walletSelect(
@@ -134,11 +134,11 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
 
                             /*resetStoreData();
 
-                        //deleteAllContracts(drizzle)
+                            //deleteAllContracts(drizzle)
 
-                        setCurrentNetwork(newNetworkId);                        
+                            setCurrentNetwork(newNetworkId);                        
 
-                        initDrizzleData(true);*/
+                            initDrizzleData(true);*/
                         }
                     );
                 }

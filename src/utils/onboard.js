@@ -59,9 +59,9 @@ const onboard = Onboard({
     walletCheck: walletChecks,
 });
 
-// TODO replace by REDUX state
+// replace by redux state (isWalletConnected) if there is any issue
 export const readyToTransact = async () => {
-    if (!window.ethereum) {
+    if (!window.currentlyUsedProvider) {
         const walletSelected = await onboard.walletSelect();
 
         if (!walletSelected) return false;
