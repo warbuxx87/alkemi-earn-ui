@@ -11,12 +11,12 @@ import {
     CardContent,
     CardHeader,
     Divider,
+    LinearProgress,
     Typography,
     makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import Label from "components/UI/Label";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -26,27 +26,27 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "space-between",
     },
-    label: {
-        marginLeft: theme.spacing(1),
-    },
     item: {
         textAlign: "center",
         justifyContent: "center",
     },
+    progress: {
+        margin: theme.spacing(0, 1, 0, 3),
+        flexGrow: 1,
+        background: "#414244",
+    },
 }));
 
-function TotalInterest({ className, ...rest }) {
+function BorrowLimit({ aggregatedBalance, currency, collateralRatio }) {
     const classes = useStyles();
     const data = {
-        value: (0.0).toFixed(2),
-        currency: "$",
-        difference: 0,
+        value: 50,
     };
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Interest Paid" className={classes.item} />
+            <CardHeader title="Borrow Limit" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box
@@ -58,16 +58,14 @@ function TotalInterest({ className, ...rest }) {
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {data.currency}
-                        {data.value}
+                        {data.value}%
                     </Typography>
-                    <Label
-                        className={classes.label}
-                        color={data.difference < 0 ? "success" : "error"}
-                    >
-                        {data.difference > 0 ? "+" : ""}
-                        {data.difference}%
-                    </Label>
+                    <LinearProgress
+                        className={classes.progress}
+                        value={data.value}
+                        color="secondary"
+                        variant="determinate"
+                    />
                 </Box>
             </CardContent>
         </Card>
@@ -75,9 +73,9 @@ function TotalInterest({ className, ...rest }) {
 }
 
 // Section 6: Documentation with PropTypes
-TotalInterest.propTypes = {
+BorrowLimit.propTypes = {
     className: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
-export default TotalInterest;
+export default BorrowLimit;

@@ -7,13 +7,9 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 // Section 2: Material-UI imports
 import {
     Box,
-    Card,
-    CardHeader,
-    Divider,
-    Paper,
+    fade,
     Table,
     TableBody,
-    TableHead,
     TableRow,
     Typography,
     makeStyles,
@@ -29,97 +25,145 @@ import {
 } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+    root: {
+        borderCollapse: "separate",
+        borderSpacing: "0 1em",
+    },
+    startcell: {
+        borderRadius: "6px 0px 0px 6px",
+    },
+    endcell: {
+        borderRadius: "0px 6px 6px 0px",
+    },
+    row: {
+        backgroundColor: theme.palette.background.paper,
+    },
     imageSize: {
-        width: "18px",
-        height: "18px",
+        width: "30px",
+        height: "30px",
     },
-    btnActiveOutline: {
-        minWidth: 100,
-        minHeight: 36,
-        textTransform: "capitalize",
+    label: {
+        fontFamily: theme.typography.fontFamily,
+        alignItems: "center",
+        borderRadius: 2,
+        display: "inline-flex",
+        flexGrow: 0,
+        whiteSpace: "nowrap",
+        cursor: "default",
+        flexShrink: 0,
+        height: 16,
+        justifyContent: "center",
+        letterSpacing: 0.5,
+        minWidth: 20,
+        padding: theme.spacing(0.5, 0.5),
+        textTransform: "uppercase",
+        color: theme.palette.success.main,
+        backgroundColor: fade(theme.palette.success.main, 0.08),
     },
-});
-
-const columns = [
-    { id: "1", label: "Asset", align: "left" },
-    { id: "2", label: "Wallet", align: "left" },
-    { id: "3", label: "Supplied", align: "left" },
-    { id: "4", label: "APR %", align: "right" },
-    { id: "5", label: "Earnings", align: "right" },
-];
+}));
 
 export default function SupplyTables({ activeReserves, currency }) {
     const classes = useStyles();
     //  let history = useHistory();
     // Section 5: Code Component
     return (
-        <Card>
-            <CardHeader title="Active Deposits" />
-            <Divider />
-            <Paper>
-                <PerfectScrollbar>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column, i) => (
-                                    <SupplyTableCell
-                                        key={column.id}
-                                        align={column.align}
-                                    >
-                                        {column.label}
-                                    </SupplyTableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {activeReserves.map((row) => (
-                                <TableRow key={row.unit}>
-                                    <SupplyTableCell component="th" scope="row">
-                                        <Box
-                                            minWidth={100}
-                                            display="flex"
-                                            alignItems="center"
+        <PerfectScrollbar>
+            <Table className={classes.root}>
+                <TableBody>
+                    {activeReserves.map((row) => (
+                        <TableRow key={row.unit} className={classes.row}>
+                            <SupplyTableCell
+                                component="th"
+                                scope="row"
+                                className={classes.startcell}
+                            >
+                                <Box
+                                    minWidth={100}
+                                    display="flex"
+                                    alignItems="center"
+                                >
+                                    <img
+                                        className={classes.imageSize}
+                                        src={row.image}
+                                        alt={row.symbol}
+                                    />
+                                    <Box ml={2}>
+                                        <Typography
+                                            variant="h6"
+                                            color="textPrimary"
                                         >
-                                            <img
-                                                className={classes.imageSize}
-                                                src={row.image}
-                                                alt={row.symbol}
-                                            />
-                                            <Box ml={2}>
-                                                <Typography
-                                                    variant="h6"
-                                                    color="textPrimary"
-                                                >
-                                                    {row.symbol}
-                                                    {row.unit}
-                                                </Typography>
-                                            </Box>
-                                        </Box>
-                                    </SupplyTableCell>
-                                    <SupplyTableCell align="left">
-                                        {formatNumber(row.wallet, row.unit)}
-                                    </SupplyTableCell>
-                                    <SupplyTableCell align="left">
-                                        {formatNumber(row.balance, row.unit)}
-                                    </SupplyTableCell>
-                                    <SupplyTableCell align="right">
-                                        {formatPercent(row.apr)}
-                                    </SupplyTableCell>
-                                    <SupplyTableCell align="right">
-                                        {calculateEarnings(
-                                            row.balance,
-                                            row.principal,
-                                            row.USDprice,
-                                            row.unit
-                                        )}
-                                    </SupplyTableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </PerfectScrollbar>
-            </Paper>
-        </Card>
+                                            {row.symbol}
+                                            {row.unit}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                        >
+                                            {row.name}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </SupplyTableCell>
+                            <SupplyTableCell align="right">
+                                <Typography variant="h6" color="textPrimary">
+                                    {formatNumber(row.wallet, row.unit)}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Wallet
+                                </Typography>
+                            </SupplyTableCell>
+                            <SupplyTableCell align="right">
+                                <Typography variant="h6" color="textPrimary">
+                                    {formatNumber(row.balance, row.unit)}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Supplied
+                                </Typography>
+                            </SupplyTableCell>
+                            <SupplyTableCell align="right">
+                                <Typography
+                                    variant="h6"
+                                    className={classes.label}
+                                >
+                                    {formatPercent(row.apr)}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    APR
+                                </Typography>
+                            </SupplyTableCell>
+                            <SupplyTableCell
+                                align="right"
+                                className={classes.endcell}
+                            >
+                                <Typography variant="h6" color="textPrimary">
+                                    {calculateEarnings(
+                                        row.balance,
+                                        row.principal,
+                                        row.USDprice,
+                                        row.unit
+                                    )}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Earnings
+                                </Typography>
+                            </SupplyTableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </PerfectScrollbar>
     );
 }

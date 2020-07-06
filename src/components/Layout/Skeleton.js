@@ -28,9 +28,10 @@ const styles = (theme) => ({
         minHeight: "calc(100% - 56px)",
         marginLeft: 32,
         marginRight: 32,
-        "@media (min-width:1550px)": {
-            marginLeft: 80,
-            marginRight: 80,
+        "@media (min-width: 1720px)": {
+            maxWidth: "1280px",
+            margin: "0 auto"
+
         },
         "@media (max-width:1024px)": {
             marginLeft: 0,

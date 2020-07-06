@@ -16,7 +16,6 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import Label from "components/UI/Label";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -61,13 +60,6 @@ function CardValue({ className, ...rest }) {
                         {data.currency}
                         {data.value}
                     </Typography>
-                    <Label
-                        className={classes.label}
-                        color={data.difference >= 0 ? "success" : "error"}
-                    >
-                        {data.difference > 0 ? "+" : ""}
-                        {data.difference}%
-                    </Label>
                 </Box>
             </CardContent>
         </Card>

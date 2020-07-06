@@ -8,15 +8,11 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import {
     Box,
     Button,
-    Card,
-    CardHeader,
     CircularProgress,
-    Divider,
-    Paper,
+    fade,
     Switch,
     Table,
     TableBody,
-    TableHead,
     TableRow,
     Typography,
     makeStyles,
@@ -28,175 +24,210 @@ import BorrowDrawerContainer from "containers/Borrow/DrawerBorrow";
 import { formatNumber, formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+    root: {
+        borderCollapse: "separate",
+        borderSpacing: "0 1em",
+    },
+    startcell: {
+        borderRadius: "6px 0px 0px 6px",
+    },
+    endcell: {
+        borderRadius: "0px 6px 6px 0px",
+    },
+    row: {
+        backgroundColor: theme.palette.background.paper,
+    },
     imageSize: {
-        width: "36px",
-        height: "36px",
+        width: "34px",
+        height: "34px",
+    },
+    label: {
+        fontFamily: theme.typography.fontFamily,
+        alignItems: "center",
+        borderRadius: 2,
+        display: "inline-flex",
+        flexGrow: 0,
+        whiteSpace: "nowrap",
+        cursor: "default",
+        flexShrink: 0,
+        height: 24,
+        justifyContent: "center",
+        letterSpacing: 0.5,
+        minWidth: 20,
+        padding: theme.spacing(0.5, 0.5),
+        textTransform: "uppercase",
+        color: theme.palette.error.main,
+        backgroundColor: fade(theme.palette.error.main, 0.1),
     },
     btnActiveOutline: {
         minWidth: 100,
-        minHeight: 36,
+        minHeight: 32,
         textTransform: "capitalize",
     },
-});
-
-const Columns = [
-    { id: "1", label: "Asset" },
-    { id: "2", label: "Wallet Balance", align: "center" },
-    { id: "3", label: "Balance", align: "center" },
-    {
-        id: "4",
-        label: "APR %",
-        align: "center",
-        //format: value => value.toLocaleString(),
+    heading: {
+        fontWeight: 500,
     },
-    {
-        id: "5",
-        label: "Collateral",
-        align: "center",
-        // format: value => value.toFixed(2),
-    },
-    {
-        id: "6",
-        label: "",
-        align: "right",
-        // format: value => value.toFixed(2),
-    },
-];
+}));
 
 // Section 5: Code Component
 const BorrowTable = ({ data = [], onActivate }) => {
     const classes = useStyles();
     return (
-        <Card>
-            <CardHeader title="Available Markets" />
-            <Divider />
-            <Paper>
-                <PerfectScrollbar>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                {Columns.map((Column, i) => (
-                                    <BorrowTableCell
-                                        key={Column.id}
-                                        align={Column.align}
+        <Box mt={1}>
+            <Typography
+                className={classes.heading}
+                variant="h6"
+                color="textPrimary"
+            >
+                Available Markets
+            </Typography>
+            <PerfectScrollbar>
+                <Table className={classes.root}>
+                    <TableBody>
+                        {data.map((Row) => (
+                            <TableRow key={Row.name} className={classes.row}>
+                                <BorrowTableCell
+                                    className={classes.startcell}
+                                    component="th"
+                                    scope="Row"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Box
+                                        minWidth={150}
+                                        display="flex"
+                                        alignItems="center"
                                     >
-                                        {Column.label}
-                                    </BorrowTableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {data.map((Row) => (
-                                <TableRow key={Row.name}>
-                                    <BorrowTableCell
-                                        component="th"
-                                        scope="Row"
-                                        style={{ width: "16%" }}
-                                    >
-                                        <Box
-                                            minWidth={150}
-                                            display="flex"
-                                            alignItems="center"
-                                        >
-                                            <img
-                                                className={classes.imageSize}
-                                                src={Row.image}
-                                                alt="dai"
-                                            />
-                                            <Box ml={2}>
-                                                <Typography
-                                                    variant="h6"
-                                                    color="textPrimary"
-                                                >
-                                                    {Row.name}
-                                                </Typography>
-                                                <Typography
-                                                    variant="body2"
-                                                    color="textSecondary"
-                                                >
-                                                    {Row.unit}
-                                                </Typography>
-                                            </Box>
+                                        <img
+                                            className={classes.imageSize}
+                                            src={Row.image}
+                                            alt="dai"
+                                        />
+                                        <Box ml={2}>
+                                            <Typography
+                                                variant="h6"
+                                                color="textPrimary"
+                                            >
+                                                {Row.name}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2"
+                                                color="textSecondary"
+                                            >
+                                                {Row.unit}
+                                            </Typography>
                                         </Box>
-                                    </BorrowTableCell>
-                                    <BorrowTableCell
-                                        align="center"
-                                        style={{ width: "16%" }}
+                                    </Box>
+                                </BorrowTableCell>
+                                <BorrowTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Typography
+                                        variant="h6"
+                                        color="textPrimary"
                                     >
                                         {formatNumber(Row.wallet, Row.unit)}
-                                    </BorrowTableCell>
-                                    <BorrowTableCell
-                                        align="center"
-                                        style={{ width: "16%" }}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Available
+                                    </Typography>
+                                </BorrowTableCell>
+                                <BorrowTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Typography
+                                        variant="h6"
+                                        color="textPrimary"
                                     >
                                         {formatNumber(Row.balance, Row.unit)}
-                                    </BorrowTableCell>
-                                    <BorrowTableCell
-                                        align="center"
-                                        style={{ width: "16%" }}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Borrowed
+                                    </Typography>
+                                </BorrowTableCell>
+                                <BorrowTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Typography
+                                        variant="h6"
+                                        color="textPrimary"
+                                        className={classes.label}
                                     >
                                         {formatPercent(Row.apr)}
-                                    </BorrowTableCell>
-                                    <BorrowTableCell
-                                        align="center"
-                                        style={{ width: "16%" }}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
                                     >
-                                        <Switch
-                                            // checked={state.checkedB}
-                                            // onChange={handleChange}
-                                            name="checkedB"
-                                            color="primary"
-                                        />
-                                    </BorrowTableCell>
-                                    <BorrowTableCell align="right">
-                                        <Box
-                                            minWidth={208}
-                                            display="flex"
-                                            alignItems="center"
-                                            justifyContent="flex-end"
-                                        >
-                                            <Box mr={2}>
-                                                {/* <Grid className={classesbtnActive">
-                          Active
-                        </Grid> */}
-                                            </Box>
-                                            {Row.activated ? (
-                                                <BorrowDrawerContainer
-                                                    asset={Row}
-                                                />
-                                            ) : (
-                                                <Button
-                                                    type="button"
-                                                    className={
-                                                        classes.btnActiveOutline
-                                                    }
-                                                    variant="outlined"
-                                                    color="secondary"
-                                                    disable={Row.pending.toString()}
-                                                    onClick={() =>
-                                                        onActivate(Row.unit)
-                                                    }
-                                                >
-                                                    {Row.pending ? (
-                                                        <CircularProgress
-                                                            size={20}
-                                                            color="inherit"
-                                                        />
-                                                    ) : (
-                                                        "Activate"
-                                                    )}
-                                                </Button>
-                                            )}
-                                        </Box>
-                                    </BorrowTableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </PerfectScrollbar>
-            </Paper>
-        </Card>
+                                        APR
+                                    </Typography>
+                                </BorrowTableCell>
+                                <BorrowTableCell
+                                    align="center"
+                                    style={{ width: "16%" }}
+                                >
+                                    <Switch
+                                        // checked={state.checkedB}
+                                        // onChange={handleChange}
+                                        name="checkedB"
+                                        color="primary"
+                                    />
+                                </BorrowTableCell>
+                                <BorrowTableCell
+                                    align="right"
+                                    className={classes.endcell}
+                                >
+                                    <Box
+                                        minWidth={208}
+                                        display="flex"
+                                        alignItems="center"
+                                        justifyContent="flex-end"
+                                    >
+                                        <Box mr={2}></Box>
+                                        {Row.activated ? (
+                                            <BorrowDrawerContainer
+                                                asset={Row}
+                                            />
+                                        ) : (
+                                            <Button
+                                                type="button"
+                                                className={
+                                                    classes.btnActiveOutline
+                                                }
+                                                variant="outlined"
+                                                color="secondary"
+                                                disable={Row.pending.toString()}
+                                                onClick={() =>
+                                                    onActivate(Row.unit)
+                                                }
+                                            >
+                                                {Row.pending ? (
+                                                    <CircularProgress
+                                                        size={20}
+                                                        color="inherit"
+                                                    />
+                                                ) : (
+                                                    "Activate"
+                                                )}
+                                            </Button>
+                                        )}
+                                    </Box>
+                                </BorrowTableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </PerfectScrollbar>
+        </Box>
     );
 };
 

@@ -9,6 +9,7 @@ definitions:
     steps:
         # DEFINE Code Analysis
         - step: &analyze
+              size: 2x
               name: Code Analysis
               caches:
                   - node
