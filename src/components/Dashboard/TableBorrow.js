@@ -7,13 +7,9 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 // Section 2: Material-UI imports
 import {
     Box,
-    Card,
-    CardHeader,
-    Divider,
-    Paper,
+    fade,
     Table,
     TableBody,
-    TableHead,
     TableRow,
     Typography,
     makeStyles,
@@ -31,25 +27,43 @@ import {
 } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+    root: {
+        borderCollapse: "separate",
+        borderSpacing: "0 1em",
+    },
+    startcell: {
+        borderRadius: "6px 0px 0px 6px",
+    },
+    endcell: {
+        borderRadius: "0px 6px 6px 0px",
+    },
+    row: {
+        backgroundColor: theme.palette.background.paper,
+    },
     imageSize: {
-        width: "18px",
-        height: "18px",
+        width: "30px",
+        height: "30px",
     },
-    btnActiveOutline: {
-        minWidth: 100,
-        minHeight: 36,
-        textTransform: "capitalize",
+    label: {
+        fontFamily: theme.typography.fontFamily,
+        alignItems: "center",
+        borderRadius: 2,
+        display: "inline-flex",
+        flexGrow: 0,
+        whiteSpace: "nowrap",
+        cursor: "default",
+        flexShrink: 0,
+        height: 16,
+        justifyContent: "center",
+        letterSpacing: 0.5,
+        minWidth: 20,
+        padding: theme.spacing(0.5, 0.5),
+        textTransform: "uppercase",
+        color: theme.palette.error.main,
+        backgroundColor: fade(theme.palette.error.main, 0.1),
     },
-});
-
-const columns = [
-    { id: "1", label: "Asset", align: "left" },
-    { id: "2", label: "Wallet", align: "left" },
-    { id: "3", label: "Borrowed", align: "left" },
-    { id: "4", label: "APR %", align: "right" },
-    { id: "5", label: "Paid", align: "right" },
-];
+}));
 
 export default function BorrowTables({ activeReserves, currency }) {
     const classes = useStyles();
@@ -57,72 +71,103 @@ export default function BorrowTables({ activeReserves, currency }) {
 
     // Section 5: Code Component
     return (
-        <Card>
-            <CardHeader title="Active Loans" />
-            <Divider />
-            <Paper>
-                <PerfectScrollbar>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column, i) => (
-                                    <BorrowTableCell
-                                        key={column.id}
-                                        align={column.align}
-                                    >
-                                        {column.label}
-                                    </BorrowTableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {activeReserves.map((row) => (
-                                <TableRow key={row.unit}>
-                                    <BorrowTableCell component="th" scope="Row">
-                                        <Box
-                                            minWidth={100}
-                                            display="flex"
-                                            alignItems="center"
+        <PerfectScrollbar>
+            <Table className={classes.root}>
+                <TableBody>
+                    {activeReserves.map((row) => (
+                        <TableRow key={row.unit} className={classes.row}>
+                            <BorrowTableCell
+                                component="th"
+                                scope="Row"
+                                className={classes.startcell}
+                            >
+                                <Box
+                                    minWidth={100}
+                                    display="flex"
+                                    alignItems="center"
+                                >
+                                    <img
+                                        className={classes.imageSize}
+                                        src={row.image}
+                                        alt={row.symbol}
+                                    />
+                                    <Box ml={2}>
+                                        <Typography
+                                            variant="h6"
+                                            color="textPrimary"
                                         >
-                                            <img
-                                                className={classes.imageSize}
-                                                src={row.image}
-                                                alt={row.symbol}
-                                            />
-                                            <Box ml={2}>
-                                                <Typography
-                                                    variant="h6"
-                                                    color="textPrimary"
-                                                >
-                                                    {row.symbol}
-                                                    {row.unit}
-                                                </Typography>
-                                            </Box>
-                                        </Box>
-                                    </BorrowTableCell>
-                                    <BorrowTableCell align="left">
-                                        {formatNumber(row.wallet, row.unit)}
-                                    </BorrowTableCell>
-                                    <BorrowTableCell align="left">
-                                        {formatNumber(row.balance, row.unit)}
-                                    </BorrowTableCell>
-                                    <BorrowTableCell align="right">
-                                        {formatPercent(row.apr)}
-                                    </BorrowTableCell>
-                                    <BorrowTableCell align="right">
-                                        {calculateEarnings(
-                                            row.balance,
-                                            row.principal,
-                                            row.USDprice,
-                                            row.unit
-                                        )}
-                                    </BorrowTableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </PerfectScrollbar>
-            </Paper>
-        </Card>
+                                            {row.symbol}
+                                            {row.unit}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                        >
+                                            {row.name}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </BorrowTableCell>
+                            <BorrowTableCell align="right">
+                                <Typography variant="h6" color="textPrimary">
+                                    {formatNumber(row.wallet, row.unit)}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Wallet
+                                </Typography>
+                            </BorrowTableCell>
+                            <BorrowTableCell align="right">
+                                <Typography variant="h6" color="textPrimary">
+                                    {formatNumber(row.balance, row.unit)}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Borrowed
+                                </Typography>
+                            </BorrowTableCell>
+                            <BorrowTableCell align="right">
+                                <Typography
+                                    variant="h6"
+                                    color="textPrimary"
+                                    className={classes.label}
+                                >
+                                    {formatPercent(row.apr)}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    APR
+                                </Typography>
+                            </BorrowTableCell>
+                            <BorrowTableCell
+                                align="right"
+                                className={classes.endcell}
+                            >
+                                <Typography variant="h6" color="textPrimary">
+                                    {calculateEarnings(
+                                        row.balance,
+                                        row.principal,
+                                        row.USDprice,
+                                        row.unit
+                                    )}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Paid
+                                </Typography>
+                            </BorrowTableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </PerfectScrollbar>
     );
 }
