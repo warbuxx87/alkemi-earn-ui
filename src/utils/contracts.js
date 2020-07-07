@@ -57,7 +57,11 @@ export const initMarketContract = ({ drizzle, forceUpdate }) => {
         address[network][`address_MoneyMarket`]
     );
 
-    if (forceUpdate) drizzle.deleteContract("MoneyMarket");
+    try {
+        if (forceUpdate) drizzle.deleteContract("MoneyMarket");
+    } catch (e) {
+        // catches error
+    }
 
     drizzle.addContract({
         contractName: "MoneyMarket",
@@ -129,7 +133,11 @@ export const initAssetContract = ({ drizzle, asset, forceUpdate }) => {
     // const events = ["Approval", "Transfer"];
     const events = [];
 
-    if (forceUpdate) drizzle.deleteContract(asset);
+    try {
+        if (forceUpdate) drizzle.deleteContract(asset);
+    } catch (e) {
+        // catches error
+    }
 
     drizzle.addContract(
         {

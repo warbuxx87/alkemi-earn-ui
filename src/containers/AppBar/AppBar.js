@@ -60,8 +60,8 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
             );
 
             if (
-                /* previouslySelectedWallet !== undefined &&
-                typeof previouslySelectedWallet === "string" && */ // comment out these two conditions to not show wallet selection on load
+                previouslySelectedWallet !== undefined &&
+                typeof previouslySelectedWallet === "string" && // comment these two conditions to show wallet selection on load/disconnect
                 onboard
             ) {
                 const isSelectWallet = await onboard.walletSelect(
@@ -118,7 +118,8 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                         "accountsChanged",
                         (accounts) => {
                             resetStoreData();
-
+                            // Could be commented out in the current state as try/catch in contracts.js will catch it anyway
+                            // (or the current clean up in contracts can be kept as it is)
                             //deleteAllContracts(drizzle)
 
                             setCurrentAddress(accounts[0]);
