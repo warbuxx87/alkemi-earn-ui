@@ -30,7 +30,7 @@ const darkTheme = createMuiTheme({
         },
 
         error: {
-            main: "#f50057", //red
+            main: "#cb0f51", //red
             contrastText: "#fff"
         },
 
@@ -41,7 +41,7 @@ const darkTheme = createMuiTheme({
 
         text: {
             primary: "#ffffff", // White
-            secondary: "#a7a7a7", // Light Grey
+            secondary: "#979797", // Light Grey
             success: "#21DEAB", //Green
             disabled: "rgba(255, 255, 255, 1)",
             hint: "rgba(184, 233, 134, 1)"

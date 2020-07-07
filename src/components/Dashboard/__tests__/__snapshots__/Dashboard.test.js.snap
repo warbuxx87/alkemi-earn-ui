@@ -47,19 +47,41 @@ exports[`<Dashboard /> matches snapshot 1`] = `
     </WithStyles(ForwardRef(Grid))>
     <WithStyles(ForwardRef(Grid))
       item={true}
-      lg={6}
-      sm={6}
+      lg={12}
+      sm={12}
       xs={12}
     >
-      <DrizzledComponent />
-    </WithStyles(ForwardRef(Grid))>
-    <WithStyles(ForwardRef(Grid))
-      item={true}
-      lg={6}
-      sm={6}
-      xs={12}
-    >
-      <DrizzledComponent />
+      <Styled(MuiBox)>
+        <Styled(MuiBox)
+          mt={2}
+        >
+          <WithStyles(ForwardRef(Tabs))
+            onChange={[Function]}
+            scrollButtons="auto"
+            textColor="secondary"
+            value="tablesupply"
+            variant="scrollable"
+          >
+            <WithStyles(ForwardRef(Tab))
+              key="tablesupply"
+              label="Active Supplied"
+              value="tablesupply"
+            />
+            <WithStyles(ForwardRef(Tab))
+              key="tableborrow"
+              label="Active Borrowed"
+              value="tableborrow"
+            />
+          </WithStyles(ForwardRef(Tabs))>
+        </Styled(MuiBox)>
+        <WithStyles(ForwardRef(Divider)) />
+        <Styled(MuiBox)
+          pb={6}
+          py={3}
+        >
+          <DrizzledComponent />
+        </Styled(MuiBox)>
+      </Styled(MuiBox)>
     </WithStyles(ForwardRef(Grid))>
   </WithStyles(ForwardRef(Grid))>
 </ForwardRef(Container)>

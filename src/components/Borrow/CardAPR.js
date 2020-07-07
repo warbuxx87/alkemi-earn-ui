@@ -11,27 +11,43 @@ import {
     CardContent,
     CardHeader,
     Divider,
+    fade,
     Typography,
-    makeStyles
+    makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(3),
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     label: {
-        marginLeft: theme.spacing(1)
+        fontFamily: theme.typography.fontFamily,
+        alignItems: "center",
+        borderRadius: 4,
+        display: "inline-flex",
+        flexGrow: 0,
+        whiteSpace: "nowrap",
+        cursor: "default",
+        flexShrink: 0,
+        height: 12,
+        justifyContent: "center",
+        letterSpacing: 0.5,
+        minWidth: 20,
+        padding: theme.spacing(2, 1),
+        textTransform: "uppercase",
+        color: theme.palette.error.main,
+        backgroundColor: fade(theme.palette.error.main, 0.08),
     },
     item: {
         textAlign: "center",
-        justifyContent: "center"
-    }
+        justifyContent: "center",
+    },
 }));
 
 function CardAPR({ className, ...rest }) {
@@ -39,7 +55,7 @@ function CardAPR({ className, ...rest }) {
     const data = {
         value: (0.0).toFixed(2),
         percentage: "%",
-        difference: 10
+        difference: 10,
     };
 
     // Section 5: Code Component
@@ -56,7 +72,11 @@ function CardAPR({ className, ...rest }) {
                     alignItems="center"
                     flexWrap="wrap"
                 >
-                    <Typography variant="h3" color="textPrimary">
+                    <Typography
+                        variant="h3"
+                        color="textPrimary"
+                        className={classes.label}
+                    >
                         {data.value}
                         {data.percentage}
                     </Typography>
@@ -68,7 +88,7 @@ function CardAPR({ className, ...rest }) {
 
 // Section 6: Documentation with PropTypes
 CardAPR.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
