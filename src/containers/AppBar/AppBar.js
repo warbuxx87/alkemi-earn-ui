@@ -10,7 +10,11 @@ import onboard from "utils/onboard";
 import { initContracts, deleteAllContracts } from "utils/contracts";
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
-import { setWalletConnected } from "redux/actions/status/onboard";
+import {
+    setWalletConnected,
+    setCurrentlySelectedWalletNetworkID,
+    setCurrentlySelectedWalletAddress,
+} from "redux/actions/status/onboard";
 
 import { isWalletConnected } from "redux/selectors/onboard";
 
@@ -70,6 +74,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
 
                 if (isSelectWallet) {
                     const readyToTransact = await onboard.walletCheck();
+
                     dispatch(setWalletConnected(readyToTransact));
 
                     if (!readyToTransact) {
@@ -88,6 +93,14 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
         // ADD more stores to reset if needs be
     }, [dispatch]);
 
+    const setWalletData = useCallback(
+        (networkVersion = null, selectedAddress = null) => {
+            dispatch(setCurrentlySelectedWalletNetworkID(networkVersion));
+            dispatch(setCurrentlySelectedWalletAddress(selectedAddress));
+        },
+        [dispatch]
+    );
+
     const onReset = useCallback(async () => {
         onboard.walletReset();
 
@@ -96,12 +109,13 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
         deleteAllContracts(drizzle);
 
         dispatch(setWalletConnected(false));
+        setWalletData(null, null);
 
         setCurrentAddress(null);
         setCurrentNetwork(null);
 
         resetStoreData();
-    }, [dispatch, resetStoreData, drizzle]);
+    }, [dispatch, resetStoreData, drizzle, setWalletData]);
 
     useEffect(() => {
         const initDrizzleData = (forceUpdate = false) => {
@@ -114,14 +128,18 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                 initContracts(drizzle, forceUpdate);
 
                 if (drizzle && drizzle.web3 && drizzle.web3.currentProvider) {
+                    setWalletData(
+                        drizzle.web3.currentProvider.networkVersion,
+                        drizzle.web3.currentProvider.selectedAddress
+                    );
+
                     drizzle.web3.currentProvider.on(
                         "accountsChanged",
                         (accounts) => {
                             resetStoreData();
 
-                            // Could be commented out in the current state as try/catch in contracts.js will catch it anyway
-                            // (or the current clean up in contracts can be kept as it is)
-                            //deleteAllContracts(drizzle)
+                            // useful for when changing addresses on an unsupported network
+                            deleteAllContracts(drizzle);
 
                             setCurrentAddress(accounts[0]);
 
@@ -132,23 +150,30 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                     drizzle.web3.currentProvider.on(
                         "networkChanged",
                         (newNetworkId) => {
-                            console.log("networkChanged: ", newNetworkId);
+                            resetStoreData();
 
-                            /*resetStoreData();
+                            deleteAllContracts(drizzle);
 
-                            //deleteAllContracts(drizzle)
+                            setCurrentNetwork(newNetworkId);
 
-                            setCurrentNetwork(newNetworkId);                        
-
-                            initDrizzleData(true);*/
+                            initDrizzleData(true);
                         }
                     );
+                } else {
+                    setWalletData(null, null);
                 }
             }
         };
 
         initDrizzleData();
-    }, [networkId, accountAddress, drizzle, walletConnected, resetStoreData]);
+    }, [
+        networkId,
+        accountAddress,
+        drizzle,
+        walletConnected,
+        resetStoreData,
+        setWalletData,
+    ]);
 
     useEffect(() => {
         if (!currentAddress) setCurrentAddress(accountAddress);

@@ -18,4 +18,27 @@ export const setWalletConnected = (isConnected) => ({
     },
 });
 
+export const SET_CURRENTLY_SELECTED_WALLET_NETWORK_ID =
+    "SET_CURRENTLY_SELECTED_WALLET_NETWORK_ID";
+
+// Declare action creator
+export const setCurrentlySelectedWalletNetworkID = (networkID) => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: SET_CURRENTLY_SELECTED_WALLET_NETWORK_ID,
+    payload: {
+        networkID,
+    },
+});
+
+export const SET_CURRENTLY_SELECTED_WALLET_ADDRESS =
+    "SET_CURRENTLY_SELECTED_WALLET_ADDRESS";
+
+// Declare action creator
+export const setCurrentlySelectedWalletAddress = (address) => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: SET_CURRENTLY_SELECTED_WALLET_ADDRESS,
+    payload: {
+        address,
+    },
+});
 // Section 3: Action dispatch methods and async funcs

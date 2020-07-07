@@ -6,10 +6,10 @@ import PropTypes from "prop-types";
 
 // Section 2: UI imports
 import { withStyles } from "@material-ui/core/styles";
-import {Box } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import ConnectionBanner from '@rimble/connection-banner';
+import ConnectionBanner from "@rimble/connection-banner";
 import LayoutContent from "containers/Layout/Content";
 import Sidebar from "containers/Sidebar/Sidebar";
 import AppBar from "containers/AppBar/AppBar";
@@ -32,8 +32,7 @@ const styles = (theme) => ({
         marginRight: 32,
         "@media (min-width: 1720px)": {
             maxWidth: "1280px",
-            margin: "0 auto"
-
+            margin: "0 auto",
         },
         "@media (max-width:1024px)": {
             marginLeft: 0,
@@ -63,25 +62,27 @@ const styles = (theme) => ({
     },
 });
 
-
-
 // Section 5: Code Component
-const LayoutSkeleton = ({ classes }) => (
-    <div className={classes.frame}>
-        <Sidebar />
+const LayoutSkeleton = ({ classes, networkID /*, address*/ }) => {
+    // networkID is null when no wallet is selected
 
-        <div className={classes.content}>
-            <AppBar />
-            <Box  mx={'auto'} pt={3} pb={3}>
-            <ConnectionBanner
-              currentNetwork={3}
-              requiredNetwork={1}
-              />
-              </Box>
-            <LayoutContent />
+    return (
+        <div className={classes.frame}>
+            <Sidebar />
+
+            <div className={classes.content}>
+                <AppBar />
+                <Box mx={"auto"} pt={3} pb={3}>
+                    <ConnectionBanner
+                        currentNetwork={networkID}
+                        requiredNetwork={1}
+                    />
+                </Box>
+                <LayoutContent />
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 // Section 6: Documentation with PropTypes
 LayoutSkeleton.propTypes = {
