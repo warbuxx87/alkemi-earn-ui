@@ -15,7 +15,8 @@ const CardLimitContainer = () => {
     const totalBorrow = useSelector(getTotalBorrow);
     const totalLiquidity = useSelector(getAggregatedBalance);
 
-    const borrowLimit = ((totalBorrow / totalLiquidity) * 100).toFixed(2);
+    let borrowLimit = ((totalBorrow / totalLiquidity) * 100).toFixed(2);
+    borrowLimit = parseFloat(borrowLimit);
 
     return <CardLimit borrowLimit={borrowLimit} />;
 };
