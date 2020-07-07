@@ -6,8 +6,10 @@ import PropTypes from "prop-types";
 
 // Section 2: UI imports
 import { withStyles } from "@material-ui/core/styles";
+import {Box } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
+import ConnectionBanner from '@rimble/connection-banner';
 import LayoutContent from "containers/Layout/Content";
 import Sidebar from "containers/Sidebar/Sidebar";
 import AppBar from "containers/AppBar/AppBar";
@@ -61,6 +63,8 @@ const styles = (theme) => ({
     },
 });
 
+
+
 // Section 5: Code Component
 const LayoutSkeleton = ({ classes }) => (
     <div className={classes.frame}>
@@ -68,7 +72,12 @@ const LayoutSkeleton = ({ classes }) => (
 
         <div className={classes.content}>
             <AppBar />
-
+            <Box  mx={'auto'} pt={3} pb={3}>
+            <ConnectionBanner
+              currentNetwork={3}
+              requiredNetwork={1}
+              />
+              </Box>
             <LayoutContent />
         </div>
     </div>
