@@ -134,7 +134,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Supplied
+                                        Available
                                     </Typography>
                                 </LendTableCell>
                                 <LendTableCell
