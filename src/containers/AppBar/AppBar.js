@@ -118,6 +118,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                         "accountsChanged",
                         (accounts) => {
                             resetStoreData();
+
                             // Could be commented out in the current state as try/catch in contracts.js will catch it anyway
                             // (or the current clean up in contracts can be kept as it is)
                             //deleteAllContracts(drizzle)
