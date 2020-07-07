@@ -21,6 +21,11 @@ const assetToDecimals = {
 };
 
 export const fromWei = (value, unit) => {
+    if (isNaN(value)) {
+        value = 0;
+    }
+    value = value.toString();
+
     if (unit === "WBTC") {
         let amount = web3.utils.fromWei(value, "lovelace");
         amount = amount / 100;
@@ -117,3 +122,63 @@ export function calculateEarnings(balance, principal, USDprice, unit) {
 
     return earnings;
 }
+
+export const toDate = (timeStamp) => {
+    let dateTime = new Date(timeStamp * 1000);
+    dateTime = dateTime.toDateString(); // Returns "2013-05-31T11:54:44.000Z"
+    return dateTime;
+};
+
+export const checkAction = (toAddress, fromAddress, amount) => {
+    let action;
+    // get users connected address from State
+    const myAddress = "0xf1d3818b2a83bf2d81bfbbf06cf95f175fb00b7d";
+
+    // get MoneyMarket Address from constants
+    const mMarket = "0xe6a53f96ceca750ef8589c5b376872213aa4f230";
+
+    if (amount === "0") {
+        action = "Approved";
+        return action;
+    }
+
+    // if from Address is Users Address
+    if (fromAddress === myAddress) {
+        action = "Supply";
+        return action;
+    }
+
+    if (fromAddress === mMarket) {
+        action = "Borrow";
+        return action;
+    }
+    action = "Allocate";
+    return action;
+};
+
+export const checkAddress = (toAddress, fromAddress) => {
+    // get users connected address from State
+    const myAddress = "0xf1d3818b2a83bf2d81bfbbf06cf95f175fb00b7d";
+
+    // get MoneyMarket Address from constants
+    const mMarket = "0xe6a53f96ceca750ef8589c5b376872213aa4f230";
+
+    // if from Address is Users Address
+    if (fromAddress === myAddress) {
+        //  action = "Sent";
+        return toAddress;
+    }
+
+    if (fromAddress === mMarket) {
+        //  action = "Received";
+        return fromAddress;
+    }
+};
+
+export const openEtherScan = (hash) => {
+    //TODO: grab network id from state https://[network].etherscan.io/tx/"
+    const urlBase = "https://rinkeby.etherscan.io/tx/";
+    const url = urlBase + hash;
+
+    return url;
+};
