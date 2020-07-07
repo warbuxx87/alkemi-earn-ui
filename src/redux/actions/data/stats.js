@@ -22,7 +22,9 @@ export const FETCH_STATS_SUCCESS = "FETCH_STATS_SUCCESS";
 const fetchStatsSuccess = (tx) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_STATS_SUCCESS,
-    payload: tx,
+    payload: {
+        tx,
+    },
 });
 
 // Declare action type as a constant

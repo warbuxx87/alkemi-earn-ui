@@ -89,9 +89,9 @@ Object {
     "divider": "rgba(255, 255, 255, 0.12)",
     "error": Object {
       "contrastText": "#fff",
-      "dark": "rgb(171, 0, 60)",
-      "light": "rgb(247, 51, 120)",
-      "main": "#f50057",
+      "dark": "rgb(142, 10, 56)",
+      "light": "rgb(213, 63, 115)",
+      "main": "#cb0f51",
     },
     "getContrastText": [Function],
     "grey": Object {
@@ -139,7 +139,7 @@ Object {
       "hint": "rgba(184, 233, 134, 1)",
       "icon": "rgba(255, 255, 255, 0.5)",
       "primary": "#ffffff",
-      "secondary": "#a7a7a7",
+      "secondary": "#979797",
       "success": "#21DEAB",
     },
     "tonalOffset": 0.2,
@@ -212,10 +212,11 @@ Object {
     },
     "body2": Object {
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-      "fontSize": 12,
+      "fontSize": 11,
       "fontWeight": 400,
       "letterSpacing": "-0.05px",
       "lineHeight": 1.43,
+      "textTransform": "uppercase",
     },
     "button": Object {
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
@@ -278,8 +279,8 @@ Object {
     },
     "h6": Object {
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-      "fontSize": 14,
-      "fontWeight": 500,
+      "fontSize": 15,
+      "fontWeight": 400,
       "letterSpacing": "0.0075em",
       "lineHeight": 1.6,
     },
@@ -296,14 +297,14 @@ Object {
     "round": [Function],
     "subtitle1": Object {
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-      "fontSize": 12,
+      "fontSize": 11,
       "fontWeight": 400,
       "letterSpacing": "-0.05px",
       "lineHeight": 2.3,
     },
     "subtitle2": Object {
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-      "fontSize": 12,
+      "fontSize": 11,
       "fontWeight": 400,
       "letterSpacing": "-0.05px",
       "lineHeight": 1.3,

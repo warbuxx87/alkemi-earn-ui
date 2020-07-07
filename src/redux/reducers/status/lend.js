@@ -49,8 +49,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.asset]: {
-                        ...state.assets[action.asset],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         pending: true,
                         activated: false,
                     },
@@ -61,8 +61,8 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.asset]: {
-                        ...state.assets[action.asset],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         pending: false,
                         activated: true,
                     },
@@ -78,7 +78,7 @@ export default (state = initialState, action) => {
                         ...state.assets[action.payload.asset],
                         pending: false,
                         activated: false,
-                        error: action.payload.error,
+                        error: action.error,
                     },
                 },
             };

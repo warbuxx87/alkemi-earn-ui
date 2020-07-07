@@ -11,7 +11,7 @@ import { Container, Grid, makeStyles } from "@material-ui/core";
 import BorrowTable from "./Table";
 import BorrowTableActive from "./TableActive";
 import BorrowCardValue from "containers/Borrow/CardValue";
-import BorrowCardInterest from "./CardInterest";
+import BorrowCardLimit from "./CardLimit";
 import BorrowCardAPR from "./CardAPR";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -40,7 +40,7 @@ function Borrow({ className, activeBorrow, inactiveBorrow, onActivate }) {
                     <BorrowCardValue />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <BorrowCardInterest />
+                    <BorrowCardLimit />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <BorrowCardAPR />

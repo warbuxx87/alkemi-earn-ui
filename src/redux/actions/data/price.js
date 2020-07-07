@@ -30,7 +30,9 @@ export const FETCH_PRICE_SUCCESS = "FETCH_PRICE_SUCCESS";
 const fetchPriceSuccess = (price) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_PRICE_SUCCESS,
-    payload: price,
+    payload: {
+        price,
+    },
 });
 
 // Declare action type as a constant

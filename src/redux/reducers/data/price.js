@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 pending: false,
-                usdPrice: action.payload,
+                usdPrice: action.payload.price,
             };
 
         case FETCH_PRICE_ERROR:

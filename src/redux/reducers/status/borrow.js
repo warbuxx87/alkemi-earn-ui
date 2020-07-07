@@ -50,19 +50,20 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.asset]: {
-                        ...state.assets[action.asset],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         pending: true,
                     },
                 },
             };
+
         case FETCH_BORROW_SUCCESS:
             return {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.asset]: {
-                        ...state.assets[action.asset],
+                    [action.payload.asset]: {
+                        ...state.assets[action.payload.asset],
                         pending: false,
                         activated: true,
                     },

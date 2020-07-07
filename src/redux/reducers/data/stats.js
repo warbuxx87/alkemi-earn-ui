@@ -28,7 +28,7 @@ export default (state = initialState, { type, action }) => {
                 tx: {
                     ...state.tx,
                     [action]: {
-                        ...state.tx[action.tx],
+                        ...state.tx[action.payload.tx],
                         pending: false,
                     },
                 },
