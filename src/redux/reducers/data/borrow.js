@@ -6,6 +6,7 @@ import {
     REPAY_PENDING,
     REPAY_SUCCESS,
     REPAY_ERROR,
+    RESET_BORROW_DATA,
 } from "redux/actions/data/borrow";
 
 // import internal assets
@@ -48,7 +49,7 @@ const initialState = {
 // Implement "reducer" function with initial state as default state
 export default (state = initialState, action) => {
     switch (action.type) {
-        case "GOT_CONTRACT_VAR":
+        case "GOT_CONTRACT_VAR": {
             switch (action.variable) {
                 case "balanceOf":
                     return {
@@ -64,7 +65,7 @@ export default (state = initialState, action) => {
                 default:
                     return state;
             }
-
+        }
         case BORROW_PENDING:
             return {
                 ...state,
@@ -138,6 +139,9 @@ export default (state = initialState, action) => {
                     },
                 },
             };
+
+        case RESET_BORROW_DATA:
+            return initialState;
 
         default:
             return state;

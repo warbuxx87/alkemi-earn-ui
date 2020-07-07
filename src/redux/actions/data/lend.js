@@ -126,6 +126,16 @@ export const allocateError = (asset, error) => ({
     error,
 });
 
+//                                               //
+// ------------- RESET LEND DATA -------------   //
+//                                               //
+
+export const RESET_LEND_DATA = "RESET_LEND_DATA";
+
+export const resetLendData = () => ({
+    type: RESET_LEND_DATA,
+});
+
 // Section 3: Action dispatch methods and async funcs
 
 export const onAllocateAction = ({ drizzle, asset, amount }) => async (
