@@ -1,5 +1,7 @@
 import Onboard from "bnc-onboard";
 
+const CURRENT_NETWORK = parseInt(process.env.REACT_APP_ETH_NETWORK, 10);
+
 const DAPP_ID = process.env.REACT_APP_DAPP_ID;
 const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
 //const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
@@ -44,7 +46,7 @@ const wallets = [
 
 const onboard = Onboard({
     dappId: DAPP_ID, // [String] The API key created by step one above
-    networkId: 4, // [Integer] The Ethereum network ID your Dapp uses.
+    networkId: CURRENT_NETWORK, // [Integer] The Ethereum network ID your Dapp uses.
     darkMode: true,
     walletSelect: {
         wallets: wallets,

@@ -63,7 +63,11 @@ const styles = (theme) => ({
 });
 
 // Section 5: Code Component
-const LayoutSkeleton = ({ classes, networkID /*, address*/ }) => {
+const LayoutSkeleton = ({
+    classes,
+    networkID,
+    APP_ETH_NETWORK /*, address*/,
+}) => {
     // networkID is null when no wallet is selected
 
     return (
@@ -75,7 +79,7 @@ const LayoutSkeleton = ({ classes, networkID /*, address*/ }) => {
                 <Box mx={"auto"} pt={3} pb={3}>
                     <ConnectionBanner
                         currentNetwork={networkID}
-                        requiredNetwork={1}
+                        requiredNetwork={APP_ETH_NETWORK}
                     />
                 </Box>
                 <LayoutContent />

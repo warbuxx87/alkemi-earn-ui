@@ -8,15 +8,19 @@ import {
     getWalletCurrentNetworkID /*, getWalletCurrentAddress*/,
 } from "redux/selectors/onboard";
 
+const APP_ETH_NETWORK = parseInt(process.env.REACT_APP_ETH_NETWORK, 10);
+
 export default () => {
     const networkID = useSelector(getWalletCurrentNetworkID);
     //const address = useSelector(getWalletCurrentAddress);
 
+    console.log("networkID: ", networkID);
     return (
         <LayoutSkeleton
-            networkID={
-                !isNaN(networkID) ? parseInt(networkID, 10) : networkID
-            } /*address={address}*/
+            networkID={networkID}
+            /*address={address}*/
+
+            APP_ETH_NETWORK={APP_ETH_NETWORK}
         />
     );
 };
