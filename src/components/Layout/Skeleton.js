@@ -66,7 +66,9 @@ const styles = (theme) => ({
 const LayoutSkeleton = ({
     classes,
     networkID,
-    APP_ETH_NETWORK /*, address*/,
+    APP_ETH_NETWORK,
+    /*, address*/
+    /*, walletConnected*/
 }) => {
     // networkID is null when no wallet is selected
 
@@ -78,9 +80,45 @@ const LayoutSkeleton = ({
                 <AppBar />
                 <Box mx={"auto"} pt={3} pb={3}>
                     <ConnectionBanner
-                        currentNetwork={networkID}
+                        currentNetwork={
+                            networkID === null
+                                ? networkID
+                                : parseInt(networkID, 10)
+                        }
                         requiredNetwork={APP_ETH_NETWORK}
-                    />
+                    >
+                        {{
+                            notWeb3CapableBrowserMessage: (
+                                <div style={{ background: "purple" }}>
+                                    <p>
+                                        Please connect using the connect button
+                                        on the top right
+                                    </p>
+                                </div>
+                            ),
+                            noNetworkAvailableMessage: (
+                                <div style={{ background: "red" }}>
+                                    <p>
+                                        Please connect using the connect button
+                                        on the top right
+                                    </p>
+                                </div>
+                            ),
+                            onWrongNetworkMessage: (
+                                <div
+                                    style={{
+                                        background: "orange",
+                                        color: "black",
+                                    }}
+                                >
+                                    <p>
+                                        Not the right network ID, expected{" "}
+                                        {APP_ETH_NETWORK}, got {networkID}
+                                    </p>
+                                </div>
+                            ),
+                        }}
+                    </ConnectionBanner>
                 </Box>
                 <LayoutContent />
             </div>
