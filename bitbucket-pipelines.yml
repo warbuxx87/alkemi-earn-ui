@@ -125,7 +125,6 @@ pipelines:
 
     pull-requests:
         "**":
-            - step: *build-test
             - step: *analyze
             #  - step: *check-quality-gate-sonarcloud
 
