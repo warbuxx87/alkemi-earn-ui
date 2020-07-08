@@ -14,7 +14,6 @@ export default () => {
     const networkID = useSelector(getWalletCurrentNetworkID);
     //const address = useSelector(getWalletCurrentAddress);
 
-    console.log("networkID: ", networkID);
     return (
         <LayoutSkeleton
             networkID={networkID}
