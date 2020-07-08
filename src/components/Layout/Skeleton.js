@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: UI imports
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, fade  } from "@material-ui/core/styles";
 import { Box,Collapse, IconButton,  } from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
@@ -23,6 +23,9 @@ const styles = (theme) => ({
         display: "flex",
         width: "100%",
         minHeight: "100%",
+      },
+    alert: {
+      backgroundColor: fade (theme.palette.background.paper, 0.5),
     },
     content: {
         position: "relative",
@@ -79,7 +82,7 @@ function LayoutSkeleton ({
             <Sidebar />
             <div className={classes.content}>
                 <AppBar />
-                <Box mx={"auto"} mt={1} mb={6}>
+                <Box>
                     <ConnectionBanner
                         currentNetwork={
                             networkID === null
@@ -91,19 +94,33 @@ function LayoutSkeleton ({
                         {{
                             notWeb3CapableBrowserMessage: (
                                 <div>
-
-                                <Alert  severity="warning" color="warning"
-
-                                 >
+                                <Collapse in={open}>
+                                 <Alert
+                                    className={classes.alert}
+                                    severity="error" color="error"
+                                    action={
+                                   <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                      setOpen(false);
+                                    }}
+                                    >
+                                    <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                  }>
                                         Please connect using a web3 capable browser.
                                   </Alert>
-
+                                  </Collapse>
                                 </div>
                             ),
                             noNetworkAvailableMessage: (
                               <div>
                               <Collapse in={open}>
-                               <Alert  severity="info" color="info"
+                               <Alert
+                               className={classes.alert}
+                               severity="info" color="success"
                                action={
                                  <IconButton
                                   aria-label="close"
@@ -125,8 +142,9 @@ function LayoutSkeleton ({
                             onWrongNetworkMessage: (
                                 <div>
                                 <Collapse in={open}>
-                                 <Alert  severity="warning" color="warning"
-                                 action={
+                                 <Alert
+                                    severity="warning" color="warning"
+                                    action={
                                    <IconButton
                                     aria-label="close"
                                     color="inherit"
@@ -138,10 +156,9 @@ function LayoutSkeleton ({
                                     <CloseIcon fontSize="inherit" />
                                     </IconButton>
                                   }>
-                                        Not the right network ID, expected{" "}
-                                        {APP_ETH_NETWORK}, got {networkID}
-                                        </Alert>
-                                        </Collapse>
+                                        Incorrect Network! Please connect to the Rinkeby Test Network
+                                  </Alert>
+                                  </Collapse>
                                 </div>
                             ),
                         }}

@@ -25,72 +25,88 @@ function ConnectionAlerts({ networkID,
 
     // Section 5: Code Component
     return (
-      <Box mx={"auto"} mt={3} mb={3}>
-      <ConnectionBanner
-          currentNetwork={
-              networkID === null
-                  ? networkID
-                  : parseInt(networkID, 10)
-          }
-          requiredNetwork={APP_ETH_NETWORK}
-      >
-          {{
-              notWeb3CapableBrowserMessage: (
-                  <div>
-                  <Alert  severity="warning" color="warning"
-                   >
-                          Please connect using a web3 capable browser.
-                    </Alert>
-                  </div>
-              ),
-              noNetworkAvailableMessage: (
-                <div>
-                <Collapse in={open}>
-                 <Alert  severity="info" color="info"
-                 action={
-                   <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    size="small"
-                    onClick={() => {
-                      setOpen(false);
-                    }}
-                    >
-                    <CloseIcon fontSize="inherit" />
-                    </IconButton>
-                  }>
-                        Please connect using the connect button
-                        on the top right.
-                  </Alert>
-                  </Collapse>
-                </div>
-              ),
-              onWrongNetworkMessage: (
-                  <div>
-                  <Collapse in={open}>
-                   <Alert  severity="warning" color="warning"
-                   action={
-                     <IconButton
-                      aria-label="close"
-                      color="inherit"
-                      size="small"
-                      onClick={() => {
-                        setOpen(false);
-                      }}
-                      >
-                      <CloseIcon fontSize="inherit" />
-                      </IconButton>
-                    }>
-                          Not the right network ID, expected{" "}
-                          {APP_ETH_NETWORK}, got {networkID}
-                          </Alert>
-                          </Collapse>
-                  </div>
-              ),
-          }}
-      </ConnectionBanner>
-  </Box>
-    </Box>
+      <Box>
+          <ConnectionBanner
+              currentNetwork={
+                  networkID === null
+                      ? networkID
+                      : parseInt(networkID, 10)
+              }
+              requiredNetwork={APP_ETH_NETWORK}
+          >
+              {{
+                  notWeb3CapableBrowserMessage: (
+                      <div>
+                      <Collapse in={open}>
+                       <Alert
+                          className={classes.alert}
+                          severity="error" color="error"
+                          action={
+                         <IconButton
+                          aria-label="close"
+                          color="inherit"
+                          size="small"
+                          onClick={() => {
+                            setOpen(false);
+                          }}
+                          >
+                          <CloseIcon fontSize="inherit" />
+                          </IconButton>
+                        }>
+                              Please connect using a web3 capable browser.
+                        </Alert>
+                        </Collapse>
+                      </div>
+                  ),
+                  noNetworkAvailableMessage: (
+                    <div>
+                    <Collapse in={open}>
+                     <Alert
+                     className={classes.alert}
+                     severity="info" color="success"
+                     action={
+                       <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                        onClick={() => {
+                          setOpen(false);
+                        }}
+                        >
+                        <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                      }>
+                            Please connect using the connect button
+                            on the top right.
+                      </Alert>
+                      </Collapse>
+                    </div>
+                  ),
+                  onWrongNetworkMessage: (
+                      <div>
+                      <Collapse in={open}>
+                       <Alert
+                          severity="warning" color="warning"
+                          action={
+                         <IconButton
+                          aria-label="close"
+                          color="inherit"
+                          size="small"
+                          onClick={() => {
+                            setOpen(false);
+                          }}
+                          >
+                          <CloseIcon fontSize="inherit" />
+                          </IconButton>
+                        }>
+                              Incorrect Network! Please connect to the Rinkeby Test Network
+                        </Alert>
+                        </Collapse>
+                      </div>
+                  ),
+              }}
+          </ConnectionBanner>
+      </Box>
   );
 }
 

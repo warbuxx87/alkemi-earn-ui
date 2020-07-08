@@ -16,13 +16,18 @@ const overrides = {
             textTransform: "capitalize"
         }
     },
+
     MuiAlert: {
-     message: {
-     paddingTop: 10,
-     fontSize: 13,
-     textTransform: "capitalize",
-   }
- },
+        root: {
+          marginBottom: 48,
+         },
+          message: {
+          paddingTop: 10,
+          fontSize: 13,
+          textTransform: "uppercase",
+         }
+        },
+
     MuiAppBar: {
         root: {
             paddingTop: 22,
