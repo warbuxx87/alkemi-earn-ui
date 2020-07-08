@@ -8,8 +8,7 @@ export default {
     body2: {
         fontWeight: 400,
         fontSize: 11,
-        letterSpacing: "-0.05px",
-        textTransform: "uppercase",
+        letterSpacing: "-0.05px",      
     },
 
     h1: {

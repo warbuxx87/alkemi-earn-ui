@@ -38,6 +38,10 @@ const darkTheme = createMuiTheme({
             main: "#21DEAB", //green
             contrastText: "#fff"
         },
+        info: {
+            main: "#fff", //green
+        },
+
 
         text: {
             primary: "#ffffff", // White
