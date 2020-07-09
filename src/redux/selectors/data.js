@@ -257,6 +257,18 @@ const getBorrowAsset = createSelector(
                     "0";
             }
             if ((network, accountLiquidity, price)) {
+                switch (asset.unit) {
+                    case "USDT":
+                        price = price / 1e12;
+                        break;
+                    case "USDC":
+                        price = price / 1e12;
+                        break;
+                    case "WBTC":
+                        price = price / 1e10;
+                        break;
+                    default:
+                }
                 maxBorrowToken = web3.utils
                     .toBN(accountLiquidity) // Amount of User Liquidity in ETH scaled by 10e18
                     .div(web3.utils.toBN(price)); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
