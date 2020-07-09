@@ -37,11 +37,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function BorrowLimit({ aggregatedBalance, currency, collateralRatio }) {
+function BorrowLimit({ borrowLimit }) {
     const classes = useStyles();
-    const data = {
-        value: 50,
-    };
 
     // Section 5: Code Component
     return (
@@ -58,11 +55,11 @@ function BorrowLimit({ aggregatedBalance, currency, collateralRatio }) {
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {data.value}%
+                        {borrowLimit}%
                     </Typography>
                     <LinearProgress
                         className={classes.progress}
-                        value={data.value}
+                        value={borrowLimit}
                         color="secondary"
                         variant="determinate"
                     />
@@ -75,6 +72,7 @@ function BorrowLimit({ aggregatedBalance, currency, collateralRatio }) {
 // Section 6: Documentation with PropTypes
 BorrowLimit.propTypes = {
     className: PropTypes.string,
+    borrowLimit: PropTypes.number,
 };
 
 // Section 7:  Connect styles and export
