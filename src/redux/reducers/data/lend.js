@@ -12,6 +12,7 @@ import {
     REDEEM_PENDING,
     REDEEM_SUCCESS,
     REDEEM_ERROR,
+    RESET_LEND_DATA,
 } from "redux/actions/data/lend";
 // import internal assets
 import dai from "assets/images/DAI.svg";
@@ -215,6 +216,10 @@ export default (state = initialState, action) => {
                     },
                 },
             };
+
+        case RESET_LEND_DATA:
+            return initialState;
+
         default:
             return state;
     }

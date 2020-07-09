@@ -177,9 +177,9 @@ const getLendAsset = createSelector(
 
 // LEND Create Selectors
 
-export const getLendActive = createSelector(getLendAsset, (assets) =>
-    assets.filter((asset) => asset.balance !== "0")
-);
+export const getLendActive = createSelector(getLendAsset, (assets) => {
+    return assets.filter((asset) => asset.balance !== "0");
+});
 
 export const getLendInactive = createSelector(
     getLendAsset,

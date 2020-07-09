@@ -20,53 +20,49 @@ const ABIs = {
     WBTC: WBTC_ABI,
 };
 
-export const initContracts = (drizzle) => {
-    initMarketContract({ drizzle });
-    assets.forEach((asset) => initAssetContract({ drizzle, asset }));
+export const initContracts = (drizzle, forceUpdate) => {
+    initMarketContract({ drizzle, forceUpdate });
+
+    assets.forEach((asset) =>
+        initAssetContract({ drizzle, asset, forceUpdate })
+    );
 };
 
-export const initAssetContract = ({ drizzle, asset }) => {
-    if (drizzle.contracts[asset]) return drizzle.contracts[asset];
-    const drizzleStore = drizzle.store.getState();
-    const myAddress = drizzleStore.accounts[0];
-    const network = constants.network_type[drizzleStore.web3.networkId];
-    if (!drizzle.web3.eth) return;
-    const tokenContract = new drizzle.web3.eth.Contract(
-        ABIs[asset],
-        address[network][`address_${asset}`]
-    );
-    // const events = ["Approval", "Transfer"];
-    const events = [];
-    drizzle.addContract(
-        {
-            contractName: asset,
-            web3Contract: tokenContract,
-        },
-        events
-    );
-    // get allowance
-    tokenContract.methods.allowance.cacheCall(
-        myAddress,
-        address[network].address_MoneyMarket
-    );
+export const deleteAllContracts = (drizzle) => {
+    try {
+        drizzle.deleteContract("MoneyMarket");
 
-    // get balance
-    tokenContract.methods.balanceOf.cacheCall(myAddress);
-    return drizzle.contracts[asset];
+        assets.forEach((asset) => drizzle.deleteContract(asset));
+    } catch (e) {
+        // normally if allowed to be clicked it will throw an error, but since we hide the disconnect button it won't
+    }
 };
 
-export const initMarketContract = ({ drizzle }) => {
-    if (drizzle.contracts.MoneyMarket) return drizzle.contracts.MoneyMarket;
-    const drizzleStore = drizzle.store.getState();
-    const myAddress = drizzleStore.accounts[0];
-    const network = constants.network_type[drizzleStore.web3.networkId];
+export const initMarketContract = ({ drizzle, forceUpdate }) => {
+    if (drizzle.contracts.MoneyMarket && !forceUpdate)
+        return drizzle.contracts.MoneyMarket;
+    //const drizzleStore = drizzle.store.getState();
+    const myAddress = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const network =
+        constants.network_type[
+            drizzle.web3.currentProvider
+                .networkVersion /*drizzleStore.web3.networkId*/
+        ]; // Using provider network ID instead of drizzle store value
     const assets = ["PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
+
     const MoneyMarketContract = new drizzle.web3.eth.Contract(
         MoneyMarket_ABI,
         address[network][`address_MoneyMarket`]
     );
+
+    try {
+        if (forceUpdate) drizzle.deleteContract("MoneyMarket");
+    } catch (e) {
+        // catches error
+    }
+
     drizzle.addContract({
         contractName: "MoneyMarket",
         web3Contract: MoneyMarketContract,
@@ -129,4 +125,49 @@ export const initMarketContract = ({ drizzle }) => {
     MoneyMarketContract.methods.admin.cacheCall();
 
     return drizzle.contracts.MoneyMarket;
+};
+
+export const initAssetContract = ({ drizzle, asset, forceUpdate }) => {
+    if (drizzle.contracts[asset] && !forceUpdate)
+        return drizzle.contracts[asset];
+    //const drizzleStore = drizzle.store.getState();
+
+    const myAddress = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const network =
+        constants.network_type[
+            drizzle.web3.currentProvider
+                .networkVersion /*drizzleStore.web3.networkId*/
+        ]; // Using provider network ID instead of drizzle store value
+
+    if (!drizzle.web3.eth) return;
+
+    const tokenContract = new drizzle.web3.eth.Contract(
+        ABIs[asset],
+        address[network][`address_${asset}`]
+    );
+    // const events = ["Approval", "Transfer"];
+    const events = [];
+
+    try {
+        if (forceUpdate) drizzle.deleteContract(asset);
+    } catch (e) {
+        // catches error
+    }
+
+    drizzle.addContract(
+        {
+            contractName: asset,
+            web3Contract: tokenContract,
+        },
+        events
+    );
+    // get allowance
+    tokenContract.methods.allowance.cacheCall(
+        myAddress,
+        address[network].address_MoneyMarket
+    );
+
+    // get balance
+    tokenContract.methods.balanceOf.cacheCall(myAddress);
+    return drizzle.contracts[asset];
 };

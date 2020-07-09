@@ -75,6 +75,16 @@ const repayError = (asset, error) => ({
     error,
 });
 
+//                                               //
+// ------------- RESET BORROW DATA ------------- //
+//                                               //
+
+export const RESET_BORROW_DATA = "RESET_BORROW_DATA";
+
+export const resetBorrowData = () => ({
+    type: RESET_BORROW_DATA,
+});
+
 // Section 3: Action dispatch methods and async funcs
 
 export const onBorrowAction = ({ drizzle, amount, asset }) => async (

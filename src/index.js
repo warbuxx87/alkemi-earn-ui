@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
+// store provider set up
+import { Provider } from "react-redux";
+import store from "containers/Drizzle/drizzleStore.js";
+
 import { ConnectedRouter } from "connected-react-router";
 import { hot } from "react-hot-loader/root";
 import { MuiThemeProvider } from "@material-ui/core/styles";
@@ -18,14 +22,16 @@ import registerServiceWorker from "./utils/registerServiceWorker";
 export class App extends Component {
     render() {
         return (
-            <Drizzle>
-                <ConnectedRouter history={history}>
-                    <MuiThemeProvider theme={theme}>
-                        <CssBaseline />
-                        <Layout />
-                    </MuiThemeProvider>
-                </ConnectedRouter>
-            </Drizzle>
+            <Provider store={store}>
+                <Drizzle>
+                    <ConnectedRouter history={history}>
+                        <MuiThemeProvider theme={theme}>
+                            <CssBaseline />
+                            <Layout />
+                        </MuiThemeProvider>
+                    </ConnectedRouter>
+                </Drizzle>
+            </Provider>
         );
     }
 }

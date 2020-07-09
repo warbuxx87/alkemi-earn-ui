@@ -11,7 +11,7 @@ import { Container, Grid, makeStyles } from "@material-ui/core";
 import BorrowTable from "./Table";
 import BorrowTableActive from "./TableActive";
 import BorrowCardValue from "containers/Borrow/CardValue";
-import BorrowCardLimit from "./CardLimit";
+import BorrowCardLimit from "containers/Borrow/CardLimit";
 import BorrowCardAPR from "./CardAPR";
 
 // Section 4: Define Styles function taking theme as argument and returning an object

@@ -52,18 +52,23 @@ const onboard = Onboard({
     subscriptions: {
         wallet: (wallet) => {
             window.localStorage.setItem("selectedWallet", wallet.name);
+
+            window.currentlyUsedProvider = wallet.provider;
         },
     },
     walletCheck: walletChecks,
 });
 
+// replace by redux state (isWalletConnected) if there is any issue
 export const readyToTransact = async () => {
-    if (!window.ethereum) {
+    if (!window.currentlyUsedProvider) {
         const walletSelected = await onboard.walletSelect();
+
         if (!walletSelected) return false;
     }
 
     const ready = await onboard.walletCheck();
+
     return ready;
 };
 
