@@ -6,9 +6,18 @@ exports[`<LayoutSkeleton /> matches snapshot 1`] = `
 >
   <Connect(WithWidth(WithStyles(Sidebar))) />
   <div
-    className="LayoutSkeleton-content-2"
+    className="LayoutSkeleton-content-3"
   >
     <Connect(DrizzledComponent) />
+    <Styled(MuiBox)>
+      <ConnectionBanner
+        currentNetwork={NaN}
+        onWeb3Fallback={false}
+        requiredNetwork={null}
+      >
+        <Component />
+      </ConnectionBanner>
+    </Styled(MuiBox)>
     <LayoutContent />
   </div>
 </div>
