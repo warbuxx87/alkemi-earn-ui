@@ -3,7 +3,6 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "constants/address_map.json";
 import { networkSelector } from "./drizzle";
-
 import web3 from "web3";
 
 // Stats Selectors
@@ -18,19 +17,8 @@ const getAccountLiquidity = (state) => {
         _.get(state, "contracts.MoneyMarket.getAccountLiquidity", {})
     );
     if (accountLiquidity[0]) {
-        console.log(" Account Liquidity", accountLiquidity[0].value);
+        //console.log(" Account Liquidity", accountLiquidity[0].value);
         return _.get(accountLiquidity, "[0].value");
-    }
-    return null;
-};
-
-const getSupplyAccountValue = (state) => {
-    const calculateAccountValues = Object.values(
-        _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
-    );
-    if (calculateAccountValues[0]) {
-        // console.log("Supply Account Value", calculateAccountValues[0].value[1]);
-        return _.get(calculateAccountValues, "[0].value[1]");
     }
     return null;
 };
@@ -43,16 +31,6 @@ export const getCollateralRatio = (state) => {
     if (collateralRatio["0x0"]) {
         //console.log("collateralRatio", collateralRatio["0x0"].value);
         return _.get(collateralRatio, "['0x0'].value");
-    }
-    return null;
-};
-
-const getBorrowAccountValue = (state) => {
-    const calculateAccountValues = Object.values(
-        _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
-    );
-    if (calculateAccountValues[0]) {
-        return _.get(calculateAccountValues, "[0].value[2]");
     }
     return null;
 };
@@ -265,9 +243,8 @@ const getBorrowAsset = createSelector(
             let utilization = "0";
             let price = "0";
             let USDprice = "0";
-            let maxBorrowETH = "0";
             let maxBorrowToken = "0";
-            let liquidity = "0";
+            let safeBorrowToken = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
@@ -280,8 +257,13 @@ const getBorrowAsset = createSelector(
                     "0";
             }
             if ((network, accountLiquidity, price)) {
-                liquidity = accountLiquidity; // Amount of ETH scaled by 10e18
-                maxBorrowToken = liquidity.toString() * price.toString(); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
+                maxBorrowToken = web3.utils
+                    .toBN(accountLiquidity) // Amount of User Liquidity in ETH scaled by 10e18
+                    .div(web3.utils.toBN(price)); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
+
+                maxBorrowToken = maxBorrowToken * 0.7999; // Maximum Borrow Amount with collateralRatio + Originatio Fee factored
+
+                safeBorrowToken = maxBorrowToken * 0.8; // 80% of Maximum Borrow Amount
             }
             return {
                 ...asset,
@@ -291,8 +273,8 @@ const getBorrowAsset = createSelector(
                 utilization,
                 price,
                 USDprice,
-                liquidity,
                 maxBorrowToken,
+                safeBorrowToken,
             };
         })
 );
