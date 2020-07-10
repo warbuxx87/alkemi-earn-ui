@@ -138,7 +138,7 @@ const getLendAsset = createSelector(
                 utilization = allUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
                 USDprice =
-                    assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
+                    assetPrices["0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"] ||
                     "0";
             }
             return {
@@ -253,27 +253,29 @@ const getBorrowAsset = createSelector(
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
                 USDprice =
-                    assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
+                    assetPrices["0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"] ||
                     "0";
             }
 
             if (network && accountLiquidity && price && price > 0) {
+                let mantissaPrice;
                 switch (asset.unit) {
                     case "USDT":
-                        price = price / 1e12;
+                        mantissaPrice = price / 1e12;
                         break;
                     case "USDC":
-                        price = price / 1e12;
+                        mantissaPrice = price / 1e12;
                         break;
                     case "WBTC":
-                        price = price / 1e10;
+                        mantissaPrice = price / 1e10;
                         break;
                     default:
+                        mantissaPrice = price;
                 }
 
                 maxBorrowToken = web3.utils
                     .toBN(accountLiquidity) // Amount of User Liquidity in ETH scaled by 10e18
-                    .div(web3.utils.toBN(price)); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
+                    .div(web3.utils.toBN(parseInt(mantissaPrice))); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
 
                 maxBorrowToken = maxBorrowToken * 0.7999; // Maximum Borrow Amount with collateralRatio + Originatio Fee factored
 
