@@ -256,7 +256,8 @@ const getBorrowAsset = createSelector(
                     assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
                     "0";
             }
-            if ((network, accountLiquidity, price)) {
+
+            if (network && accountLiquidity && price && price > 0) {
                 switch (asset.unit) {
                     case "USDT":
                         price = price / 1e12;
@@ -269,6 +270,7 @@ const getBorrowAsset = createSelector(
                         break;
                     default:
                 }
+
                 maxBorrowToken = web3.utils
                     .toBN(accountLiquidity) // Amount of User Liquidity in ETH scaled by 10e18
                     .div(web3.utils.toBN(price)); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
@@ -277,6 +279,7 @@ const getBorrowAsset = createSelector(
 
                 safeBorrowToken = maxBorrowToken * 0.8; // 80% of Maximum Borrow Amount
             }
+
             return {
                 ...asset,
                 balance,
