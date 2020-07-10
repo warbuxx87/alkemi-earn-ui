@@ -30,9 +30,12 @@ const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
 
     React.useEffect(() => {
         if (amount) {
-            setEnableBorrow(true);
+            // check that User Input Amount does not exceed maximum amount of tokens that user can borrow for asset and is not less than 0
+            const isAmountLTmaxBorrow =
+                (amount <= asset.maxBorrowToken) & (amount > 0);
+            setEnableBorrow(isAmountLTmaxBorrow);
         }
-    }, [amount, asset.balance, asset.unit]);
+    }, [amount, asset.balance, asset.maxBorrowToken, asset.unit, asset.wallet]);
 
     return (
         <Drawer
