@@ -109,6 +109,21 @@ export const initMarketContract = ({ drizzle, forceUpdate }) => {
     // get account balance
     MoneyMarketContract.methods.calculateAccountValues.cacheCall(myAddress);
 
+    // get collateralRatio
+    MoneyMarketContract.methods.collateralRatio.cacheCall();
+
+    // get getCollateralMarketsLength
+    MoneyMarketContract.methods.getCollateralMarketsLength.cacheCall();
+
+    // get Origination Fee
+    MoneyMarketContract.methods.originationFee.cacheCall();
+
+    // get liquidationDiscount
+    MoneyMarketContract.methods.liquidationDiscount.cacheCall();
+
+    // get admin
+    MoneyMarketContract.methods.admin.cacheCall();
+
     return drizzle.contracts.MoneyMarket;
 };
 

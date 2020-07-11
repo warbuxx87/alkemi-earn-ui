@@ -1,15 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // Main Container
 
-// Section 1: React/Reduxd low level imports
+// Section 1: React/Redux low level imports
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
 import { onLendActivate } from "redux/actions/status/lend";
 import Lend from "components/Lend/Lend";
 import withDrizzle from "containers/Drizzle/withDrizzle";
+
+import useFetchPrice from "hooks/useFetchPrice";
 
 // Section 3: Selectors
 import {
@@ -18,6 +20,8 @@ import {
     getLendInactive,
 } from "redux/selectors/data";
 
+import { getUSDPrice } from "redux/selectors/totalBalance";
+
 const LendContainer = ({
     inactiveLend,
     activeLend,
@@ -25,12 +29,16 @@ const LendContainer = ({
     drizzle,
     errorLend,
 }) => {
+    useFetchPrice(); // gets current USD price
+    const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
     return (
         <Lend
             inactiveLend={inactiveLend}
             activeLend={activeLend}
             onActivate={(asset) => onActivate({ drizzle, asset })}
             errorLend={errorLend}
+            USDPrice={USDPrice}
         />
     );
 };

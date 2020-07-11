@@ -3,11 +3,37 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "constants/address_map.json";
 import { networkSelector } from "./drizzle";
+import web3 from "web3";
 
 // Stats Selectors
 export const getStats = (state) => state.data.stats.tx;
 export const getStatsPending = (state) => state.data.stats.pending;
 export const getStatsError = (state) => state.data.stats.error;
+
+// total Selectors
+//
+const getAccountLiquidity = (state) => {
+    const accountLiquidity = Object.values(
+        _.get(state, "contracts.MoneyMarket.getAccountLiquidity", {})
+    );
+    if (accountLiquidity[0]) {
+        //console.log(" Account Liquidity", accountLiquidity[0].value);
+        return _.get(accountLiquidity, "[0].value");
+    }
+    return null;
+};
+
+export const getCollateralRatio = (state) => {
+    const collateralRatio = _.get(
+        state,
+        "contracts.MoneyMarket.collateralRatio"
+    );
+    if (collateralRatio["0x0"]) {
+        //console.log("collateralRatio", collateralRatio["0x0"].value);
+        return _.get(collateralRatio, "['0x0'].value");
+    }
+    return null;
+};
 
 // Lend Selectors
 const lendAssetSelector = (state) => state.data.lend.assets;
@@ -112,7 +138,7 @@ const getLendAsset = createSelector(
                 utilization = allUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
                 USDprice =
-                    assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
+                    assetPrices["0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"] ||
                     "0";
             }
             return {
@@ -198,6 +224,7 @@ const getBorrowAsset = createSelector(
     borrowPrincipalSelector,
     getUtilizationValues,
     getAssetPrices,
+    getAccountLiquidity,
     (
         assets,
         network,
@@ -205,7 +232,8 @@ const getBorrowAsset = createSelector(
         borrowAPR,
         borrowPrincipal,
         marketUtilization,
-        assetPrices
+        assetPrices,
+        accountLiquidity
     ) =>
         Object.values(assets).map((asset) => {
             // TODO: get supply wallet
@@ -215,6 +243,8 @@ const getBorrowAsset = createSelector(
             let utilization = "0";
             let price = "0";
             let USDprice = "0";
+            let maxBorrowToken = "0";
+            let safeBorrowToken = "0";
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
@@ -223,9 +253,35 @@ const getBorrowAsset = createSelector(
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
                 USDprice =
-                    assetPrices["0x722E6238335d89393A42e2cA316A5fb1b8B2EB55"] ||
+                    assetPrices["0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"] ||
                     "0";
             }
+
+            if (network && accountLiquidity && price && price > 0) {
+                let mantissaPrice;
+                switch (asset.unit) {
+                    case "USDT":
+                        mantissaPrice = price / 1e12;
+                        break;
+                    case "USDC":
+                        mantissaPrice = price / 1e12;
+                        break;
+                    case "WBTC":
+                        mantissaPrice = price / 1e10;
+                        break;
+                    default:
+                        mantissaPrice = price;
+                }
+
+                maxBorrowToken = web3.utils
+                    .toBN(accountLiquidity) // Amount of User Liquidity in ETH scaled by 10e18
+                    .div(web3.utils.toBN(parseInt(mantissaPrice))); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
+
+                maxBorrowToken = maxBorrowToken * 0.7999; // Maximum Borrow Amount with collateralRatio + Originatio Fee factored
+
+                safeBorrowToken = maxBorrowToken * 0.8; // 80% of Maximum Borrow Amount
+            }
+
             return {
                 ...asset,
                 balance,
@@ -234,6 +290,8 @@ const getBorrowAsset = createSelector(
                 utilization,
                 price,
                 USDprice,
+                maxBorrowToken,
+                safeBorrowToken,
             };
         })
 );
