@@ -47,7 +47,10 @@ const contractTXNotifier = (store) => (next) => (action) => {
             toastIcon = "CloudDone";
             displaySecondaryMessage = "Transaction Successful";
 
-            /// TODO: this needs to be cleaned up with either a switch function. Or we need to create a function that selects the 2nd item within the action.receipt object.
+            if (action.receipt.events.Approval) {
+                displayMessage = "Asset Authorized";
+            }
+
             if (action.receipt.events.SupplyReceived) {
                 displayMessage = "Supply Received";
             }
@@ -87,7 +90,8 @@ const contractTXNotifier = (store) => (next) => (action) => {
         const options = {
             closeButton: true,
             position: "top-center",
-            autoClose: true,
+            // Automatically Close Notification after 15 seconds
+            autoClose: 15000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
@@ -98,7 +102,6 @@ const contractTXNotifier = (store) => (next) => (action) => {
         const display = (
             <ToastMessage
                 colorTheme={"light"}
-                my={3}
                 icon={toastIcon}
                 variant={toastMessageVariant}
                 message={displayMessage}

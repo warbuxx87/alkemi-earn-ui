@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function BorrowTables({ activeReserves, currency }) {
+export default function BorrowTables({ activeReserves, USDPrice }) {
     const classes = useStyles();
     //  let history = useHistory();
 
@@ -153,8 +153,8 @@ export default function BorrowTables({ activeReserves, currency }) {
                                     {calculateEarnings(
                                         row.balance,
                                         row.principal,
-                                        row.USDprice,
-                                        row.unit
+                                        row.unit,
+                                        USDPrice
                                     )}
                                 </Typography>
                                 <Typography

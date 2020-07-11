@@ -110,10 +110,12 @@ export const formatPercent = (num) => {
     return (num * 100).toFixed(2) + "%";
 };
 
-export function calculateEarnings(balance, principal, USDprice, unit) {
+export function calculateEarnings(balance, principal, unit, USDPrice) {
+    if (!USDPrice) return 0;
+
     const fPrincipal = fromWei(principal, unit);
     const fBalance = fromWei(balance, unit);
-    const fUSDprice = fromWei(USDprice, "PAX");
+    const fUSDprice = fromWei(USDPrice, "USDx");
 
     let earnings = fBalance - fPrincipal;
     earnings = earnings / fUSDprice;

@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SupplyTables({ activeReserves, currency }) {
+export default function SupplyTables({ activeReserves, USDPrice }) {
     const classes = useStyles();
     //  let history = useHistory();
     // Section 5: Code Component
@@ -149,8 +149,8 @@ export default function SupplyTables({ activeReserves, currency }) {
                                     {calculateEarnings(
                                         row.balance,
                                         row.principal,
-                                        row.USDprice,
-                                        row.unit
+                                        row.unit,
+                                        USDPrice
                                     )}
                                 </Typography>
                                 <Typography
