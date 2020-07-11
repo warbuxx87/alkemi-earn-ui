@@ -1,7 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
+// Section 1: React/Redux low level imports
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { compose } from "redux";
+
+// Section 2: internal imports
 
 // import {
 //     getMarketContract,
@@ -9,17 +13,29 @@ import { compose } from "redux";
 // } from "utils/drizzle";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
-
 import TableSupply from "components/Dashboard/TableSupply";
 
+import useFetchPrice from "hooks/useFetchPrice";
+
+// Section 3: Selectors
 import { getLendActive } from "redux/selectors/data";
 
+import { getUSDPrice } from "redux/selectors/totalBalance";
+
 const TableSupplyContainer = ({ activeReserves }) => {
-    return <TableSupply activeReserves={activeReserves} currency="USD" />;
+    useFetchPrice(); // gets current USD price
+    const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
+    return (
+        <TableSupply
+            activeReserves={activeReserves}
+            /*currency="USD"*/ USDPrice={USDPrice}
+        />
+    );
 };
 
-const mapStateToProps = state => ({
-    activeReserves: getLendActive(state)
+const mapStateToProps = (state) => ({
+    activeReserves: getLendActive(state),
 });
 
 export default compose(

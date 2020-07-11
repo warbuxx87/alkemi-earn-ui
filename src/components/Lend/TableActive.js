@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const LendTableActive = ({ data = [] }) => {
+const LendTableActive = ({ data = [], USDPrice }) => {
     const classes = useStyles();
     return (
         <Box mt={2}>
@@ -146,8 +146,8 @@ const LendTableActive = ({ data = [] }) => {
                                         {calculateEarnings(
                                             row.balance,
                                             row.principal,
-                                            row.USDprice,
-                                            row.unit
+                                            row.unit,
+                                            USDPrice
                                         )}
                                     </Typography>
                                     <Typography
