@@ -18,7 +18,7 @@ const DrawerRedeemContainer = ({ asset, drizzle, onRedeemAction }) => {
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
-    const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
+    const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
     const [enableRedeem, setEnableRedeem] = React.useState(false);
 

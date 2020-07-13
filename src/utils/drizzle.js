@@ -28,7 +28,7 @@ export const handle_approve_click = async ({ drizzle, asset, myAccount }) => {
 // Mint new Test Tokens
 export const handle_allocate_click = async ({ drizzle, asset, amount }) => {
     console.log(asset.unit);
-    if (!(await readyToTransact())) throw new Error("not ready to transaction");
+    if (!(await readyToTransact())) throw new Error("not ready to transact");
     //const drizzleStore = drizzle.store.getState();
     const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
     const unit = asset.unit;
@@ -105,7 +105,11 @@ export const handle_repay_click = async ({ drizzle, amount, asset }) => {
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
-    const weiAmount = toWei(amount, unit);
+    let weiAmount = toWei(amount, unit);
+    // ensures that accrued interest is also repaid by passing -1 to protocol.
+    if (weiAmount === asset.balance) {
+        weiAmount = -1;
+    }
     const sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
         token_address,
         weiAmount,
@@ -129,7 +133,11 @@ export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
-    const weiAmount = toWei(amount, unit);
+    let weiAmount = toWei(amount, unit);
+    // ensures that accrued interest is also redeemed by passing -1 to protocol.
+    if (weiAmount === asset.balance) {
+        weiAmount = -1;
+    }
     const sendWithdraw = MoneyMarketContract.methods.withdraw.cacheSend(
         token_address,
         weiAmount,
