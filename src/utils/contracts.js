@@ -21,11 +21,12 @@ const ABIs = {
 };
 
 export const initContracts = (drizzle, forceUpdate) => {
-    initMarketContract({ drizzle, forceUpdate });
+    const resolved = initMarketContract({ drizzle, forceUpdate });
 
-    assets.forEach((asset) =>
-        initAssetContract({ drizzle, asset, forceUpdate })
-    );
+    if (resolved !== false)
+        assets.forEach((asset) =>
+            initAssetContract({ drizzle, asset, forceUpdate })
+        );
 };
 
 export const deleteAllContracts = (drizzle) => {
@@ -52,9 +53,13 @@ export const initMarketContract = ({ drizzle, forceUpdate }) => {
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
 
+    const contractAddress = address[network][`address_MoneyMarket`];
+
+    if (!contractAddress) return false;
+
     const MoneyMarketContract = new drizzle.web3.eth.Contract(
         MoneyMarket_ABI,
-        address[network][`address_MoneyMarket`]
+        contractAddress
     );
 
     try {
@@ -70,6 +75,8 @@ export const initMarketContract = ({ drizzle, forceUpdate }) => {
 
     assets.forEach((asset) => {
         // get each asset Supply Balance (current )
+
+        // could put a check to see if the contract address is set for all of them
         MoneyMarketContract.methods.getSupplyBalance.cacheCall(
             myAddress,
             address[network][`address_${asset}`]

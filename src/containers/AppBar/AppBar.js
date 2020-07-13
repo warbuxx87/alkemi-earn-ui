@@ -70,6 +70,12 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
 
                 if (isSelectWallet) {
                     const readyToTransact = await onboard.walletCheck();
+
+                    if (window.currentlyUsedProvider)
+                        setCurrentAddress(
+                            window.currentlyUsedProvider.selectedAddress
+                        );
+
                     dispatch(setWalletConnected(readyToTransact));
 
                     if (!readyToTransact) {
@@ -105,7 +111,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
 
     useEffect(() => {
         const initDrizzleData = (forceUpdate = false) => {
-            if (networkId && accountAddress && walletConnected === true) {
+            if (networkId && currentAddress && walletConnected === true) {
                 if (drizzle && !forceUpdate) {
                     drizzle.web3 = new Web3(window.currentlyUsedProvider); // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
                 }
@@ -132,15 +138,13 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                     drizzle.web3.currentProvider.on(
                         "networkChanged",
                         (newNetworkId) => {
-                            console.log("networkChanged: ", newNetworkId);
+                            resetStoreData();
 
-                            /*resetStoreData();
+                            deleteAllContracts(drizzle);
 
-                            //deleteAllContracts(drizzle)
+                            setCurrentNetwork(newNetworkId);
 
-                            setCurrentNetwork(newNetworkId);                        
-
-                            initDrizzleData(true);*/
+                            initDrizzleData(true);
                         }
                     );
                 }
@@ -148,7 +152,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
         };
 
         initDrizzleData();
-    }, [networkId, accountAddress, drizzle, walletConnected, resetStoreData]);
+    }, [networkId, currentAddress, drizzle, walletConnected, resetStoreData]);
 
     useEffect(() => {
         if (!currentAddress) setCurrentAddress(accountAddress);
