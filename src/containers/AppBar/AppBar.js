@@ -40,7 +40,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
     const dispatch = useDispatch();
     const walletConnected = useSelector(isWalletConnected);
 
-    const [currentAddress, setCurrentAddress] = useState(accountAddress); // using an address because drizzle doesn't update account address on change
+    const [currentAddress, setCurrentAddress] = useState(accountAddress); // using an address because drizzle doesn't update account address on change (TODO change in DF-221 to use one single address)
     const [currentNetwork, setCurrentNetwork] = useState(accountAddress); // using a network ID because drizzle doesn't update network on change
 
     let location = useLocation();
@@ -72,6 +72,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                     const readyToTransact = await onboard.walletCheck();
 
                     if (window.currentlyUsedProvider)
+                        // set current address from chosen provider in onboard
                         setCurrentAddress(
                             window.currentlyUsedProvider.selectedAddress
                         );
@@ -94,6 +95,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
         // ADD more stores to reset if needs be
     }, [dispatch]);
 
+    // When disconnected
     const onReset = useCallback(async () => {
         onboard.walletReset();
 
