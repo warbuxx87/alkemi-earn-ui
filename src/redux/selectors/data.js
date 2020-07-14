@@ -217,7 +217,7 @@ export const getAggregatedLendAPR = createSelector(
             totalAPR = web3.utils.fromWei(totalAPR.toString()); // formats for WEI to decimal
         }
 
-        return totalAPR;
+        return totalAPR.toString();
     }
 );
 
@@ -410,6 +410,6 @@ export const getAggregatedBorrowAPR = createSelector(
             totalAPR = web3.utils.fromWei(totalAPR.toString()); // formats for WEI to decimal
         }
 
-        return totalAPR;
+        return totalAPR.toString();
     }
 );
