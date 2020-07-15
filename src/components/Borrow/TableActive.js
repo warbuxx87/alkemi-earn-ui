@@ -103,20 +103,20 @@ const BorrowTableActive = ({ data = [] }) => {
                                         <img
                                             className={classes.imageSize}
                                             src={row.image}
-                                            alt="dai"
+                                            alt={row.name}
                                         />
                                         <Box ml={2}>
                                             <Typography
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {row.name}
+                                                {row.unit}
                                             </Typography>
                                             <Typography
                                                 variant="body2"
                                                 color="textSecondary"
                                             >
-                                                {row.unit}
+                                                {row.name}
                                             </Typography>
                                         </Box>
                                     </Box>

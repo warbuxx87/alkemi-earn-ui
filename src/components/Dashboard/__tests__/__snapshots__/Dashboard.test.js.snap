@@ -35,7 +35,7 @@ exports[`<Dashboard /> matches snapshot 1`] = `
       sm={6}
       xs={12}
     >
-      <CardSupplyContainer />
+      <DrizzledComponent />
     </WithStyles(ForwardRef(Grid))>
     <WithStyles(ForwardRef(Grid))
       item={true}
@@ -43,7 +43,7 @@ exports[`<Dashboard /> matches snapshot 1`] = `
       sm={6}
       xs={12}
     >
-      <CardValueContainer />
+      <DrizzledComponent />
     </WithStyles(ForwardRef(Grid))>
     <WithStyles(ForwardRef(Grid))
       item={true}
