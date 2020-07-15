@@ -166,15 +166,13 @@ const getLendAsset = createSelector(
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
                 totalSupplied = accountTotalSupply || "0";
-                ethBalance =
-                    web3.utils
-                        .toBN(balance)
-                        .mul(web3.utils.toBN(price))
-                        .toString() || "0";
-                weight =
-                    (
-                        ethBalance / web3.utils.fromWei(totalSupplied)
-                    ).toString() || "0";
+                ethBalance = web3.utils
+                    .toBN(balance)
+                    .mul(web3.utils.toBN(price))
+                    .toString();
+                weight = (
+                    ethBalance / web3.utils.fromWei(totalSupplied)
+                ).toString();
 
                 USDprice =
                     assetPrices["0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"] ||
@@ -319,15 +317,13 @@ const getBorrowAsset = createSelector(
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
                 totalBorrowed = accountTotalBorrow || "0";
-                ethBalance =
-                    web3.utils
-                        .toBN(balance)
-                        .mul(web3.utils.toBN(price))
-                        .toString() || "0";
-                weight =
-                    (
-                        ethBalance / web3.utils.fromWei(totalBorrowed)
-                    ).toString() || "0";
+                ethBalance = web3.utils
+                    .toBN(balance)
+                    .mul(web3.utils.toBN(price))
+                    .toString();
+                weight = (
+                    ethBalance / web3.utils.fromWei(totalBorrowed)
+                ).toString();
 
                 USDprice =
                     assetPrices["0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"] ||
