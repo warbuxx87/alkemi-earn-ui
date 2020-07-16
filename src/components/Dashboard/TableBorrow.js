@@ -19,12 +19,7 @@ import {
 
 //import { useHistory } from "react-router-dom";
 import BorrowTableCell from "components/UI/TableCell";
-import {
-    formatNumber,
-    formatPercent,
-    // formatMoney,
-    calculateEarnings,
-} from "utils/ui";
+import { formatNumber, formatPercent, calculateEarnings } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -67,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BorrowTables({ activeReserves, USDPrice }) {
     const classes = useStyles();
+
     //  let history = useHistory();
 
     // Section 5: Code Component
@@ -161,7 +157,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                     variant="body2"
                                     color="textSecondary"
                                 >
-                                    Paid
+                                    EARNINGS
                                 </Typography>
                             </BorrowTableCell>
                         </TableRow>

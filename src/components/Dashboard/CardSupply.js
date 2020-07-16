@@ -15,8 +15,9 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { formatMoney } from "utils/ui";
+import { formatMoney, formatPercent } from "utils/ui";
 
+// Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(3),
@@ -36,12 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function SupplyBalance({
-    totalSupply,
-    currency,
-    apr = (0.0).toFixed(2),
-    percentage = "%",
-}) {
+function SupplyBalance({ totalSupply, currency, apr }) {
     const classes = useStyles();
 
     // Section 5: Code Component
@@ -91,8 +87,7 @@ function SupplyBalance({
                                 color="textPrimary"
                                 align="right"
                             >
-                                {apr}
-                                {percentage}
+                                {formatPercent(apr)}
                             </Typography>
                         </Grid>
                     </Grid>
