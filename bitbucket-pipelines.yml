@@ -8,26 +8,24 @@ definitions:
         sonar: ~/.sonar/cache # Caching SonarCloud artifacts will speed up your build
     services:
         docker:
-            memory: 2560 #increasing docker service memory 2.5GB
+            memory: 2048 #increasing docker service memory 2GB
     steps:
         # DEFINE Code Analysis
         - step: &analyze
-              size: 2x
               name: Code Analysis
               caches:
                   - node
                   - sonar
               script:
-                  # Increase Node Memory Size to 5GB instead of default 512MB
-                  - export NODE_OPTIONS=--max_old_space_size=5120
+                  # Increase Node Memory Size to 2GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=2048
                   - npm install --quiet
                   - npm run test
                   - pipe: sonarsource/sonarcloud-scan:1.0.1
         - step: &check-quality-gate-sonarcloud
               name: Code Quality Enforcement
               script:
-                  # Increase Node Memory Size to 5GB instead of default 512MB
-                  - export NODE_OPTIONS=--max_old_space_size=5120
+                  # Increased Docker Memory Size to 2GB instead of defailt 1GB
                   - pipe: sonarsource/sonarcloud-quality-gate:0.1.3
 
         # DEFINE Build and Test Step
@@ -37,8 +35,8 @@ definitions:
               caches:
                   - node
               script:
-                  # Increase Node Memory Size to 5GB instead of default 512MB
-                  - export NODE_OPTIONS=--max_old_space_size=5120
+                  # Increase Node Memory Size to 6GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=6144
                   - echo "Install and Test"
                   - apt-get update
                   - apt-get install jq zip -y
@@ -52,8 +50,8 @@ definitions:
                   - node
               name: "Build, Test and Upload to AWS"
               script:
-                  # Increase Node Memory Size to 5GB instead of default 512MB
-                  - export NODE_OPTIONS=--max_old_space_size=5120
+                  # Increase Node Memory Size to 6GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=6144
                   # PACKAGE INSTALLATIONS
                   - echo "Build, Test and Upload"
                   - apt-get update
