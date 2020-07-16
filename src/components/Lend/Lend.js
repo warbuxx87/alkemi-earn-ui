@@ -12,7 +12,7 @@ import LendTable from "./Table";
 import LendTableActive from "./TableActive";
 import LendCardValue from "containers/Lend/CardValue";
 import LendCardInterest from "./CardInterest";
-import LendCardAPR from "./CardAPR";
+import LendCardAPR from "containers/Lend/CardAPR";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
