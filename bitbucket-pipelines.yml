@@ -60,7 +60,7 @@ definitions:
                   - npm run build
               artifacts:
                   # keep all files from this build step and make available for next step
-                  - /**
+                  - build/**
 
         # DEFINE Upload to AWS Step
         - step: &upload
