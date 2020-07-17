@@ -34,7 +34,7 @@ const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
     return (
         <Drawer
             asset={asset}
-            buttonsLabel="Supply"
+            buttonsLabel="Deposit"
             triggerButtonVariant="contained"
             enableButtonClick={enableSupply}
             onButtonClick={({ asset, amount }) =>
@@ -45,7 +45,7 @@ const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
             onSetMax={onSetMax}
             amount={amount}
             setAmount={setAmount}
-            mainTitle={`Supply ${asset.unit}`}
+            mainTitle={`Deposit ${asset.unit}`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
         />

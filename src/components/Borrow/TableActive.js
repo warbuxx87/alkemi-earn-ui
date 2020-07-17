@@ -82,7 +82,7 @@ const BorrowTableActive = ({ data = [] }) => {
                 variant="h6"
                 color="textPrimary"
             >
-                Available Markets
+                Active Borrowed
             </Typography>
             <PerfectScrollbar>
                 <Table className={classes.root}>

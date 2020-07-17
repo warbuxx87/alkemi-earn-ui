@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tabs = [
-    { value: "tablesupply", label: "Active Supplied" },
+    { value: "tablesupply", label: "Active Deposits" },
     { value: "tableborrow", label: "Active Borrowed" },
 ];
 

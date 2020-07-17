@@ -79,7 +79,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                 variant="h6"
                 color="textPrimary"
             >
-                Active Supplied
+                Active Deposits
             </Typography>
             <PerfectScrollbar>
                 <Table className={classes.root}>

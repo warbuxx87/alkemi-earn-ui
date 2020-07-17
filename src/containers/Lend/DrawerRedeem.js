@@ -34,7 +34,7 @@ const DrawerRedeemContainer = ({ asset, drizzle, onRedeemAction }) => {
     return (
         <Drawer
             asset={asset}
-            buttonsLabel="Redeem"
+            buttonsLabel="Withdraw"
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
             enableButtonClick={enableRedeem}

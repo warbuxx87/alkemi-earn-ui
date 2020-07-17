@@ -41,7 +41,7 @@ function TotalValue({ className, totalSupply, currency, difference, ...rest }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Supply Balance" className={classes.item} />
+            <CardHeader title="Total Deposits" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box
