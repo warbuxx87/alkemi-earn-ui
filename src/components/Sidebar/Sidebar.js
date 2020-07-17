@@ -21,6 +21,7 @@ import {
 import SidebarDashboardItem from "containers/Sidebar/DashboardItem";
 import SidebarLendItem from "containers/Sidebar/LendItem";
 import SidebarBorrowItem from "containers/Sidebar/BorrowItem";
+import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
 import SidebarHeader from "containers/Sidebar/Header";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -94,6 +95,7 @@ function Sidebar({ classes, width, variant, open }) {
                     <SidebarDashboardItem />
                     <SidebarLendItem />
                     <SidebarBorrowItem />
+                    <SidebarMarketsItem />
                 </List>
             </Box>
             <Divider className={classes.divider} />

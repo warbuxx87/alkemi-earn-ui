@@ -4,17 +4,13 @@ import { Progress } from "antd";
 import "antd/dist/antd.css";
 import "./progress.scss";
 
-import imBTC from "assets/images/imBTC.svg";
-import HBTC from "assets/images/HBTC.svg";
-import USDx from "assets/images/USDx.svg";
 import USDT from "assets/images/USDT.svg";
 import WETH from "assets/images/WETH.svg";
 import WBTC from "assets/images/WBTC.svg";
 import DAI from "assets/images/DAI.svg";
+import USDC from "assets/images/USDC.svg";
 // png
-import usdc from "assets/images/usdc.png";
-import tusd from "assets/images/tusd.png";
-import pax from "assets/images/pax.png";
+import PAX from "assets/images/pax.png";
 
 export default class MyProgress extends React.Component {
     constructor(props) {
@@ -23,13 +19,9 @@ export default class MyProgress extends React.Component {
         this.state = {
             token: {
                 WETH: WETH,
-                imBTC: imBTC,
                 USDT: USDT,
-                USDx: USDx,
-                HBTC: HBTC,
-                USDC: usdc,
-                TUSD: tusd,
-                PAX: pax,
+                USDC: USDC,
+                PAX: PAX,
                 WBTC: WBTC,
                 DAI: DAI,
             },

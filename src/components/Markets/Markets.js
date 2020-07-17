@@ -3,26 +3,19 @@ import "./markets.scss";
 import _ from "lodash";
 
 import MyProgress from "./Progress";
-import imBTC from "assets/images/imBTC.svg";
-import HUBTC from "assets/images/HBTC.svg";
-import HBTC from "assets/images/HBTC.svg";
-import USDx from "assets/images/USDx.svg";
-import UUDD from "assets/images/UUDD.svg";
 import WETH from "assets/images/WETH.svg";
 import USDT from "assets/images/USDT.svg";
 import WBTC from "assets/images/WBTC.svg";
 import DAI from "assets/images/DAI.svg";
 // png
-import usdc from "assets/images/USDC.svg";
-import tusd from "assets/images/tusd.png";
-import pax from "assets/images/pax.png";
+import USDC from "assets/images/USDC.svg";
+import PAX from "assets/images/pax.png";
 
 import {
     compare_supply,
     compare_borrow,
     format_str_to_kmb,
     format_str_to_percent,
-    format_str_to_K,
 } from "utils/markets";
 
 // add i18n.
@@ -38,41 +31,25 @@ export default class Markets extends React.Component {
             data_is_ok: false,
             token: {
                 WETH: WETH,
-                UUDD: UUDD,
-                imBTC: imBTC,
                 USDT: USDT,
-                USDx: USDx,
-                HUBTC: HUBTC,
-                HBTC: HBTC,
-                USDC: usdc,
-                TUSD: tusd,
-                PAX: pax,
+                USDC: USDC,
+                PAX: PAX,
                 WBTC: WBTC,
                 DAI: DAI,
             },
             cur_language: navigator.language === "zh-CN" ? "中文" : "English",
             arr_token: [
-                "0xeb269732ab75A6fD61Ea60b06fE994cD32a83549", // usdx
-                "0xdAC17F958D2ee523a2206206994597C13D831ec7", // usdt
-                "0x06AF07097C9Eeb7fD685c692751D5C66dB49c215", // dai
-                // "0xb2F74419E49dc9536D8662b3671eB2E334442F3d", // weth
-                "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", // weth
-                "0x3212b29E33587A00FB1C83346f5dBFA69A458923", // imbtc
-                // "0x7b054eBe1D7e003afdA8e717DAEaB05D56D5836A",// imbtc
-                "0x0316eb71485b0ab14103307bf65a021042c6d380", // hbtc
-                // "0x84e96bb630a711d66789AcaBc237c087D8B371D3", // USDC
-                "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", // usdc
-                "0x8E870D67F660D95d5be530380D0eC0bd388289E1", // pax
-                "0x0000000000085d4780B73119b644AE5ecd22b376", // tusd
-                "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599", // wbtc
+                "0x249987094de97C9612b8d04C15Ca8273e43C20AC", // usdt
+                "0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa", // dai
+                "0xC8b1a5ef2e19937dd6c0f804DF2e3efE9F093B1e", // weth
+                "0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b", // usdc
+                "0x722E6238335d89393A42e2cA316A5fb1b8B2EB55", // pax
+                "0x577d296678535e4903d59a4c929b718e1d575e0a", // wbtc
             ],
         };
 
-        // test
-        // this.markets_api = 'http://localhost:8080/info?data=markets';
-
         // product
-        this.markets_api = "https://api.alkemi.network/info?data=markets";
+        this.markets_api = "https://api.alkemi.network/markets";
 
         this.get_markets_data();
 
@@ -88,15 +65,52 @@ export default class Markets extends React.Component {
             })
             .then((data) => {
                 if (data) {
-                    var obj_data = JSON.parse(data);
-                    //console.log(obj_data);
+                    let obj_data = JSON.parse(data);
 
-                    var arr_markets = [];
-                    var key_arr = Object.keys(obj_data.markets);
-                    for (var i = 0; i < key_arr.length; i++) {
-                        arr_markets.push(obj_data.markets[key_arr[i]]);
+                    let arr_markets = [];
+                    let key_markets = Object.keys(obj_data);
+
+                    for (var i = 0; i < key_markets.length; i++) {
+                        arr_markets.push(obj_data[key_markets[i]]);
                     }
-                    //console.log(arr_markets);
+
+                    let arr_items = [];
+
+                    let asset;
+                    let totalSupplyBalanceUSD = 0;
+                    let totalBorrowBalanceUSD = 0;
+
+                    for (var x = 0; x < arr_markets.length; x++) {
+                        let key_items = Object.values(arr_markets[x]);
+
+                        asset = key_items[1];
+
+                        totalSupplyBalanceUSD += parseFloat(
+                            asset.totalSupplyUSD
+                        );
+                        totalBorrowBalanceUSD += parseFloat(
+                            asset.totalBorrowUSD
+                        );
+
+                        arr_items.push(asset);
+                    }
+
+                    let totalCollateralRatio =
+                        (totalSupplyBalanceUSD / totalBorrowBalanceUSD) * 100;
+
+                    let totals = {};
+
+                    totals.totalSupplyBalanceUSD = totalSupplyBalanceUSD.toFixed(
+                        2
+                    );
+                    totals.totalBorrowBalanceUSD = totalBorrowBalanceUSD.toFixed(
+                        2
+                    );
+                    totals.totalCollateralRatio = totalCollateralRatio.toFixed(
+                        2
+                    );
+
+                    arr_markets = arr_items;
                     // return;
 
                     this.setState(
@@ -104,6 +118,7 @@ export default class Markets extends React.Component {
                             data: obj_data,
                             data_is_ok: true,
                             data_markets: arr_markets,
+                            totals: totals,
                         },
                         () => {
                             var supply_array = _.cloneDeep(
@@ -118,15 +133,17 @@ export default class Markets extends React.Component {
 
                             for (var i = 0; i < supply_array.length; i++) {
                                 supply_array[i].percentage_supply = Number(
-                                    (supply_array[i].grossSupplyUSD /
-                                        this.state.data.totalSupplyBalanceUSD) *
+                                    (supply_array[i].totalSupplyUSD /
+                                        this.state.totals
+                                            .totalSupplyBalanceUSD) *
                                         100
                                 ).toFixed(1);
                             }
                             for (var j = 0; j < borrow_array.length; j++) {
                                 borrow_array[j].percentage_borrow = Number(
                                     (borrow_array[j].totalBorrowUSD /
-                                        this.state.data.totalBorrowBalanceUSD) *
+                                        this.state.totals
+                                            .totalBorrowBalanceUSD) *
                                         100
                                 ).toFixed(1);
                             }
@@ -136,8 +153,6 @@ export default class Markets extends React.Component {
                                 borrow_array: borrow_array,
                                 array_is_ok: true,
                             });
-                            //console.log("Supply Array" + supply_array);
-                            //console.log("Borrow Array" + borrow_array);
                         }
                     );
                 }
@@ -156,12 +171,11 @@ export default class Markets extends React.Component {
                             <FormattedMessage id="Total_Supply_Balance" />
                         </div>
                         <div className="item-num">
-                            $
-                            {this.state.data_is_ok
-                                ? format_str_to_K(
-                                      this.state.data.totalSupplyBalanceUSD
-                                  )
-                                : "0.00"}
+                            ${" "}
+                            {this.state.data_is_ok &&
+                                format_str_to_kmb(
+                                    this.state.totals.totalSupplyBalanceUSD.toString()
+                                )}
                         </div>
                     </div>
 
@@ -171,11 +185,10 @@ export default class Markets extends React.Component {
                         </div>
                         <div className="item-num item-num-borrow">
                             $
-                            {this.state.data_is_ok
-                                ? format_str_to_K(
-                                      this.state.data.totalBorrowBalanceUSD
-                                  )
-                                : "0.00"}
+                            {this.state.data_is_ok &&
+                                format_str_to_kmb(
+                                    this.state.totals.totalBorrowBalanceUSD.toString()
+                                )}
                         </div>
                     </div>
 
@@ -184,12 +197,9 @@ export default class Markets extends React.Component {
                             <FormattedMessage id="Total_Collateralization_ratio" />
                         </div>
                         <div className="item-num item-num-ratio">
-                            {this.state.data_is_ok
-                                ? format_str_to_percent(
-                                      this.state.data
-                                          .totalCollateralizationRatio
-                                  )
-                                : "..."}
+                            {this.state.data_is_ok &&
+                                this.state.totals.totalCollateralRatio}
+                            %
                         </div>
                     </div>
                 </div>
@@ -313,535 +323,48 @@ export default class Markets extends React.Component {
                         <table>
                             <tbody>
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => {
-                                        if (
-                                            item.asset.toLowerCase() ===
-                                            this.state.arr_token[0].toLowerCase()
-                                        ) {
-                                            return (
-                                                <tr key={item.asset}>
-                                                    <td>
-                                                        <img
-                                                            alt=""
-                                                            src={
-                                                                this.state
-                                                                    .token[
-                                                                    item.symbol
-                                                                ]
-                                                            }
-                                                        />
-                                                        <span className="token-name">
-                                                            {item.name}
-                                                        </span>
-                                                        <span className="token-name-short">
-                                                            {item.symbol}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.grossSupplyUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.supplyAPR
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.totalBorrowUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.borrowAPR
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        } else {
-                                            return null;
-                                        }
-                                    })}
-
-                                {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => {
-                                        if (
-                                            item.asset.toLowerCase() ===
-                                            this.state.arr_token[1].toLowerCase()
-                                        ) {
-                                            return (
-                                                <tr key={item.asset}>
-                                                    <td>
-                                                        <img
-                                                            alt=""
-                                                            src={
-                                                                this.state
-                                                                    .token[
-                                                                    item.symbol
-                                                                ]
-                                                            }
-                                                        />
-                                                        <span className="token-name">
-                                                            {item.name}
-                                                        </span>
-                                                        <span className="token-name-short">
-                                                            {item.symbol}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.grossSupplyUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.supplyAPR
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.totalBorrowUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.borrowAPR
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                        return null;
-                                    })}
-
-                                {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => {
-                                        if (
-                                            item.asset.toLowerCase() ===
-                                            this.state.arr_token[2].toLowerCase()
-                                        ) {
-                                            return (
-                                                <tr key={item.asset}>
-                                                    <td>
-                                                        <img
-                                                            alt=""
-                                                            src={
-                                                                this.state
-                                                                    .token[
-                                                                    item.symbol
-                                                                ]
-                                                            }
-                                                        />
-                                                        <span className="token-name">
-                                                            {item.name}
-                                                        </span>
-                                                        <span className="token-name-short">
-                                                            {item.symbol}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.grossSupplyUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.supplyAPR
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.totalBorrowUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.borrowAPR
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                        return null;
-                                    })}
-
-                                {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => {
-                                        if (
-                                            item.asset.toLowerCase() ===
-                                            this.state.arr_token[3].toLowerCase()
-                                        ) {
-                                            return (
-                                                <tr key={item.asset}>
-                                                    <td>
-                                                        <img
-                                                            alt=""
-                                                            src={
-                                                                this.state
-                                                                    .token[
-                                                                    item.symbol
-                                                                ]
-                                                            }
-                                                        />
-                                                        <span className="token-name">
-                                                            {item.name}
-                                                        </span>
-                                                        <span className="token-name-short">
-                                                            {item.symbol}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.grossSupplyUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.supplyAPR
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.totalBorrowUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.borrowAPR
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                        return null;
-                                    })}
-
-                                {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => {
-                                        if (
-                                            item.asset.toLowerCase() ===
-                                            this.state.arr_token[4].toLowerCase()
-                                        ) {
-                                            return (
-                                                <tr key={item.asset}>
-                                                    <td>
-                                                        <img
-                                                            alt=""
-                                                            src={
-                                                                this.state
-                                                                    .token[
-                                                                    item.symbol
-                                                                ]
-                                                            }
-                                                        />
-                                                        <span className="token-name">
-                                                            {item.name}
-                                                        </span>
-                                                        <span className="token-name-short">
-                                                            {item.symbol}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.grossSupplyUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.supplyAPR
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.totalBorrowUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.borrowAPR
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                        return null;
-                                    })}
-
-                                {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => {
-                                        if (
-                                            item.asset.toLowerCase() ===
-                                            this.state.arr_token[5].toLowerCase()
-                                        ) {
-                                            return (
-                                                <tr key={item.asset}>
-                                                    <td>
-                                                        <img
-                                                            alt=""
-                                                            src={
-                                                                this.state
-                                                                    .token[
-                                                                    item.symbol
-                                                                ]
-                                                            }
-                                                        />
-                                                        <span className="token-name">
-                                                            {item.name}
-                                                        </span>
-                                                        <span className="token-name-short">
-                                                            {item.symbol}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.grossSupplyUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.supplyAPR
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.totalBorrowUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.borrowAPR
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                        return null;
-                                    })}
-
-                                {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => {
-                                        if (
-                                            item.asset.toLowerCase() ===
-                                            this.state.arr_token[6].toLowerCase()
-                                        ) {
-                                            return (
-                                                <tr key={item.asset}>
-                                                    <td>
-                                                        <img
-                                                            alt=""
-                                                            src={
-                                                                this.state
-                                                                    .token[
-                                                                    item.symbol
-                                                                ]
-                                                            }
-                                                        />
-                                                        <span className="token-name">
-                                                            {item.name}
-                                                        </span>
-                                                        <span className="token-name-short">
-                                                            {item.symbol}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.grossSupplyUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.supplyAPR
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.totalBorrowUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.borrowAPR
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                        return null;
-                                    })}
-
-                                {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => {
-                                        if (
-                                            item.asset.toLowerCase() ===
-                                            this.state.arr_token[7].toLowerCase()
-                                        ) {
-                                            return (
-                                                <tr key={item.asset}>
-                                                    <td>
-                                                        <img
-                                                            alt=""
-                                                            src={
-                                                                this.state
-                                                                    .token[
-                                                                    item.symbol
-                                                                ]
-                                                            }
-                                                        />
-                                                        <span className="token-name">
-                                                            {item.name}
-                                                        </span>
-                                                        <span className="token-name-short">
-                                                            {item.symbol}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.grossSupplyUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.supplyAPR
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.totalBorrowUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.borrowAPR
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                        return null;
-                                    })}
-
-                                {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => {
-                                        if (
-                                            item.asset.toLowerCase() ===
-                                            this.state.arr_token[8].toLowerCase()
-                                        ) {
-                                            return (
-                                                <tr key={item.asset}>
-                                                    <td>
-                                                        <img
-                                                            alt=""
-                                                            src={
-                                                                this.state
-                                                                    .token[
-                                                                    item.symbol
-                                                                ]
-                                                            }
-                                                        />
-                                                        <span className="token-name">
-                                                            {item.name}
-                                                        </span>
-                                                        <span className="token-name-short">
-                                                            {item.symbol}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.grossSupplyUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.supplyAPR
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.totalBorrowUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.borrowAPR
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                        return null;
-                                    })}
-
-                                {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => {
-                                        if (
-                                            item.asset.toLowerCase() ===
-                                            this.state.arr_token[9].toLowerCase()
-                                        ) {
-                                            return (
-                                                <tr key={item.asset}>
-                                                    <td>
-                                                        <img
-                                                            alt=""
-                                                            src={
-                                                                this.state
-                                                                    .token[
-                                                                    item.symbol
-                                                                ]
-                                                            }
-                                                        />
-                                                        <span className="token-name">
-                                                            {item.name}
-                                                        </span>
-                                                        <span className="token-name-short">
-                                                            {item.symbol}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.grossSupplyUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.supplyAPR
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        $
-                                                        {format_str_to_kmb(
-                                                            item.totalBorrowUSD
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {format_str_to_percent(
-                                                            item.borrowAPR
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                        return null;
-                                    })}
+                                    this.state.data_markets.map((item) => (
+                                        <tr key={item.address}>
+                                            <td>
+                                                <img
+                                                    alt={item.name}
+                                                    src={
+                                                        this.state.token[
+                                                            item.symbol
+                                                        ]
+                                                    }
+                                                />
+                                                <span className="token-name">
+                                                    {item.name}
+                                                </span>
+                                                <span className="token-name-short">
+                                                    {item.symbol}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                $
+                                                {format_str_to_kmb(
+                                                    item.totalSupplyUSD
+                                                )}
+                                            </td>
+                                            <td>
+                                                {format_str_to_percent(
+                                                    item.supplyAPR
+                                                )}
+                                            </td>
+                                            <td>
+                                                $
+                                                {format_str_to_kmb(
+                                                    item.totalBorrowUSD
+                                                )}
+                                            </td>
+                                            <td>
+                                                {format_str_to_percent(
+                                                    item.borrowAPR
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
                     </div>
