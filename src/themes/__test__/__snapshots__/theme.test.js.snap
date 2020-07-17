@@ -54,6 +54,13 @@ Object {
         "backgroundColor": "#000000",
       },
     },
+    "MuiInput": Object {
+      "root": Object {
+        "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": Object {
+          "display": "none",
+        },
+      },
+    },
     "MuiToolbar": Object {
       "root": Object {
         "disableGutters": "true",

@@ -64,7 +64,7 @@ exports[`<Dashboard /> matches snapshot 1`] = `
           >
             <WithStyles(ForwardRef(Tab))
               key="tablesupply"
-              label="Active Supplied"
+              label="Active Deposits"
               value="tablesupply"
             />
             <WithStyles(ForwardRef(Tab))

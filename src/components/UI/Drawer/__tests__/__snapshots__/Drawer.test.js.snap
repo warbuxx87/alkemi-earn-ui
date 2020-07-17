@@ -180,7 +180,9 @@ exports[`<Drawer /> matches snapshot 1`] = `
             </WithStyles(ForwardRef(Grid))>
           </WithStyles(ForwardRef(Grid))>
         </WithStyles(ForwardRef(Grid))>
-        <div>
+        <Styled(MuiBox)
+          mt={4}
+        >
           <WithStyles(ForwardRef(Button))
             color="primary"
             disabled={true}
@@ -192,7 +194,7 @@ exports[`<Drawer /> matches snapshot 1`] = `
           >
             Borrow
           </WithStyles(ForwardRef(Button))>
-        </div>
+        </Styled(MuiBox)>
       </Styled(MuiBox)>
     </Styled(MuiBox)>
   </WithStyles(ForwardRef(Drawer))>
