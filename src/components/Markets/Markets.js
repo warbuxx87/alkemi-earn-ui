@@ -22,7 +22,7 @@ import {
     compare_borrow,
     format_str_to_kmb,
     format_str_to_percent,
-    format_str_to_K
+    format_str_to_K,
 } from "utils/markets";
 
 // add i18n.
@@ -48,7 +48,7 @@ export default class Markets extends React.Component {
                 TUSD: tusd,
                 PAX: pax,
                 WBTC: WBTC,
-                DAI: DAI
+                DAI: DAI,
             },
             cur_language: navigator.language === "zh-CN" ? "中文" : "English",
             arr_token: [
@@ -64,8 +64,8 @@ export default class Markets extends React.Component {
                 "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", // usdc
                 "0x8E870D67F660D95d5be530380D0eC0bd388289E1", // pax
                 "0x0000000000085d4780B73119b644AE5ecd22b376", // tusd
-                "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599" // wbtc
-            ]
+                "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599", // wbtc
+            ],
         };
 
         // test
@@ -83,10 +83,10 @@ export default class Markets extends React.Component {
 
     get_markets_data = () => {
         fetch(this.markets_api)
-            .then(res => {
+            .then((res) => {
                 return res.text();
             })
-            .then(data => {
+            .then((data) => {
                 if (data) {
                     var obj_data = JSON.parse(data);
                     //console.log(obj_data);
@@ -103,7 +103,7 @@ export default class Markets extends React.Component {
                         {
                             data: obj_data,
                             data_is_ok: true,
-                            data_markets: arr_markets
+                            data_markets: arr_markets,
                         },
                         () => {
                             var supply_array = _.cloneDeep(
@@ -134,7 +134,7 @@ export default class Markets extends React.Component {
                             this.setState({
                                 supply_array: supply_array,
                                 borrow_array: borrow_array,
-                                array_is_ok: true
+                                array_is_ok: true,
                             });
                             //console.log("Supply Array" + supply_array);
                             //console.log("Borrow Array" + borrow_array);
@@ -204,7 +204,7 @@ export default class Markets extends React.Component {
                             style={{ width: "100%", margin: "0 auto" }}
                         >
                             {this.state.array_is_ok &&
-                                this.state.supply_array.map(supply_item => {
+                                this.state.supply_array.map((supply_item) => {
                                     return (
                                         <MyProgress
                                             {...supply_item}
@@ -225,7 +225,7 @@ export default class Markets extends React.Component {
                             style={{ width: "100%", margin: "0 auto" }}
                         >
                             {this.state.array_is_ok &&
-                                this.state.borrow_array.map(borrow_item => {
+                                this.state.borrow_array.map((borrow_item) => {
                                     return (
                                         <MyProgress
                                             {...borrow_item}
@@ -313,7 +313,7 @@ export default class Markets extends React.Component {
                         <table>
                             <tbody>
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map(item => {
+                                    this.state.data_markets.map((item) => {
                                         if (
                                             item.asset.toLowerCase() ===
                                             this.state.arr_token[0].toLowerCase()
@@ -367,7 +367,7 @@ export default class Markets extends React.Component {
                                     })}
 
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map(item => {
+                                    this.state.data_markets.map((item) => {
                                         if (
                                             item.asset.toLowerCase() ===
                                             this.state.arr_token[1].toLowerCase()
@@ -420,7 +420,7 @@ export default class Markets extends React.Component {
                                     })}
 
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map(item => {
+                                    this.state.data_markets.map((item) => {
                                         if (
                                             item.asset.toLowerCase() ===
                                             this.state.arr_token[2].toLowerCase()
@@ -473,7 +473,7 @@ export default class Markets extends React.Component {
                                     })}
 
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map(item => {
+                                    this.state.data_markets.map((item) => {
                                         if (
                                             item.asset.toLowerCase() ===
                                             this.state.arr_token[3].toLowerCase()
@@ -526,7 +526,7 @@ export default class Markets extends React.Component {
                                     })}
 
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map(item => {
+                                    this.state.data_markets.map((item) => {
                                         if (
                                             item.asset.toLowerCase() ===
                                             this.state.arr_token[4].toLowerCase()
@@ -579,7 +579,7 @@ export default class Markets extends React.Component {
                                     })}
 
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map(item => {
+                                    this.state.data_markets.map((item) => {
                                         if (
                                             item.asset.toLowerCase() ===
                                             this.state.arr_token[5].toLowerCase()
@@ -632,7 +632,7 @@ export default class Markets extends React.Component {
                                     })}
 
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map(item => {
+                                    this.state.data_markets.map((item) => {
                                         if (
                                             item.asset.toLowerCase() ===
                                             this.state.arr_token[6].toLowerCase()
@@ -685,7 +685,7 @@ export default class Markets extends React.Component {
                                     })}
 
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map(item => {
+                                    this.state.data_markets.map((item) => {
                                         if (
                                             item.asset.toLowerCase() ===
                                             this.state.arr_token[7].toLowerCase()
@@ -738,7 +738,7 @@ export default class Markets extends React.Component {
                                     })}
 
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map(item => {
+                                    this.state.data_markets.map((item) => {
                                         if (
                                             item.asset.toLowerCase() ===
                                             this.state.arr_token[8].toLowerCase()
@@ -791,7 +791,7 @@ export default class Markets extends React.Component {
                                     })}
 
                                 {this.state.data_is_ok &&
-                                    this.state.data_markets.map(item => {
+                                    this.state.data_markets.map((item) => {
                                         if (
                                             item.asset.toLowerCase() ===
                                             this.state.arr_token[9].toLowerCase()

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default () => Component => {
+export default () => (Component) => {
     const DrizzledComponent = (props, context) => {
         const drizzle = context.drizzle;
         return (
@@ -15,7 +15,7 @@ export default () => Component => {
 
     DrizzledComponent.contextTypes = {
         drizzleStore: PropTypes.object,
-        drizzle: PropTypes.object
+        drizzle: PropTypes.object,
     };
 
     return DrizzledComponent;

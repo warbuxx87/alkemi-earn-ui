@@ -17,57 +17,57 @@ import tusd from "assets/images/tusd.png";
 import pax from "assets/images/pax.png";
 
 export default class MyProgress extends React.Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      token: {
-        WETH: WETH,
-        imBTC: imBTC,
-        USDT: USDT,
-        USDx: USDx,
-        HBTC: HBTC,
-        USDC: usdc,
-        TUSD: tusd,
-        PAX: pax,
-        WBTC: WBTC,
-        DAI: DAI
-      }
-    };
-  }
+        this.state = {
+            token: {
+                WETH: WETH,
+                imBTC: imBTC,
+                USDT: USDT,
+                USDx: USDx,
+                HBTC: HBTC,
+                USDC: usdc,
+                TUSD: tusd,
+                PAX: pax,
+                WBTC: WBTC,
+                DAI: DAI,
+            },
+        };
+    }
 
-  render() {
-    return (
-      <div className="percent-wrap">
-        <div className="percent-top">
-          <img
-            src={this.state.token[this.props.symbol]}
-            alt={this.props.name}
-          />
-          <span className="token">{this.props.symbol}</span>
-          <span className="percent-num">
-            {this.props.type === "supply"
-              ? this.props.percentage_supply
-              : this.props.percentage_borrow}
-            %
-          </span>
-        </div>
-        <div className="percent-bottom">
-          {this.props.type === "supply" ? (
-            <Progress
-              percent={Number(this.props.percentage_supply)}
-              status="active"
-              showInfo={false}
-            />
-          ) : (
-            <Progress
-              percent={Number(this.props.percentage_borrow)}
-              status="active"
-              showInfo={false}
-            />
-          )}
-        </div>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="percent-wrap">
+                <div className="percent-top">
+                    <img
+                        src={this.state.token[this.props.symbol]}
+                        alt={this.props.name}
+                    />
+                    <span className="token">{this.props.symbol}</span>
+                    <span className="percent-num">
+                        {this.props.type === "supply"
+                            ? this.props.percentage_supply
+                            : this.props.percentage_borrow}
+                        %
+                    </span>
+                </div>
+                <div className="percent-bottom">
+                    {this.props.type === "supply" ? (
+                        <Progress
+                            percent={Number(this.props.percentage_supply)}
+                            status="active"
+                            showInfo={false}
+                        />
+                    ) : (
+                        <Progress
+                            percent={Number(this.props.percentage_borrow)}
+                            status="active"
+                            showInfo={false}
+                        />
+                    )}
+                </div>
+            </div>
+        );
+    }
 }

@@ -17,9 +17,9 @@ const BorrowModalContainer = ({ asset, drizzle, onBorrowAction }) => {
     );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onBorrowAction }, dispatch);
 
 export default compose(

@@ -10,9 +10,7 @@ import { isDashboardSelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = (state, props) => ({
     selected: isDashboardSelected(state),
-    onClick: () => props.history.push(DASHBOARD)
+    onClick: () => props.history.push(DASHBOARD),
 });
 
-export default withRouter(connect(
-    mapStateToProps,
-)(SidebarDashboardItem));
+export default withRouter(connect(mapStateToProps)(SidebarDashboardItem));
