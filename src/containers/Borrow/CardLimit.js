@@ -20,7 +20,13 @@ const CardLimitContainer = () => {
     const maxBorrow = totalSupplied / collateralRatio;
 
     let borrowLimit = ((totalBorrowed / maxBorrow) * 100).toFixed(2);
-    borrowLimit = parseFloat(borrowLimit);
+    if (isFinite(borrowLimit)) {
+        // make sure is finite number
+        borrowLimit = parseFloat(borrowLimit);
+    } else {
+        // otherwise set to 0
+        borrowLimit = 0;
+    }
 
     return <CardLimit borrowLimit={borrowLimit} />;
 };

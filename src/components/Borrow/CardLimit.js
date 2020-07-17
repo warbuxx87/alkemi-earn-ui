@@ -55,7 +55,7 @@ function BorrowLimit({ borrowLimit }) {
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {borrowLimit}%
+                        {borrowLimit.toFixed(2)}%
                     </Typography>
                     <LinearProgress
                         className={classes.progress}
