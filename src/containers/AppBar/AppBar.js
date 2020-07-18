@@ -131,7 +131,7 @@ const AppBarContainer = ({ drizzle }) => {
                     drizzle.web3.currentProvider.on(
                         "accountsChanged",
                         (accounts) => {
-                            console.log("accountsChanged: ", accounts);
+                            console.log("accountsChanged: ", accounts[0]);
                             resetStoreData();
 
                             // Could be commented out in the current state as try/catch in contracts.js will catch it anyway
