@@ -2,23 +2,23 @@
 
 // Section 1: React low level imports
 import React, { useState, useEffect, useCallback } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { compose } from "redux";
 import { useLocation } from "react-router-dom";
 
-import onboard from "utils/onboard";
-import { initContracts, deleteAllContracts } from "utils/contracts";
+// Section 2: internal imports
 import withDrizzle from "containers/Drizzle/withDrizzle";
 
-import { setWalletConnected } from "redux/actions/status/onboard";
+import onboard from "utils/onboard";
 
-import { isWalletConnected } from "redux/selectors/onboard";
-
+import { initContracts, deleteAllContracts } from "utils/contracts";
 import { resetLendData } from "redux/actions/data/lend";
 import { resetBorrowData } from "redux/actions/data/borrow";
 
+import { setWalletConnected } from "redux/actions/status/onboard";
+
 // Section 3: Selectors
-import { networkSelector, getAccountAddress } from "redux/selectors/drizzle";
+import { isWalletConnected } from "redux/selectors/onboard";
 
 // Section 4: components
 import AppBar from "components/AppBar/AppBar";
@@ -35,13 +35,12 @@ const locationToTitles = {
 };
 
 // Section 5: Code Component
-const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
+const AppBarContainer = ({ drizzle }) => {
     // Should be moved to an onboard manager probably
     const dispatch = useDispatch();
     const walletConnected = useSelector(isWalletConnected);
 
-    const [currentAddress, setCurrentAddress] = useState(accountAddress); // using an address because drizzle doesn't update account address on change (TODO change in DF-221 to use one single address)
-    const [currentNetwork, setCurrentNetwork] = useState(accountAddress); // using a network ID because drizzle doesn't update network on change
+    const [currentAddress, setCurrentAddress] = useState(null); // using an address because drizzle doesn't update account address on change (TODO change in DF-221 to use one single address)
 
     let location = useLocation();
     // update Appbar title whenever location change
@@ -71,11 +70,12 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                 if (isSelectWallet) {
                     const readyToTransact = await onboard.walletCheck();
 
-                    if (window.currentlyUsedProvider)
+                    if (window.currentlyUsedProvider) {
                         // set current address from chosen provider in onboard
                         setCurrentAddress(
                             window.currentlyUsedProvider.selectedAddress
                         );
+                    }
 
                     dispatch(setWalletConnected(readyToTransact));
 
@@ -106,14 +106,13 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
         dispatch(setWalletConnected(false));
 
         setCurrentAddress(null);
-        setCurrentNetwork(null);
 
         resetStoreData();
     }, [dispatch, resetStoreData, drizzle]);
 
     useEffect(() => {
         const initDrizzleData = (forceUpdate = false) => {
-            if (networkId && currentAddress && walletConnected === true) {
+            if (walletConnected === true) {
                 if (drizzle && !forceUpdate) {
                     drizzle.web3 = new Web3(window.currentlyUsedProvider); // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
                 }
@@ -122,6 +121,13 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
                 initContracts(drizzle, forceUpdate);
 
                 if (drizzle && drizzle.web3 && drizzle.web3.currentProvider) {
+                    drizzle.web3.currentProvider.removeAllListeners(
+                        "accountsChanged"
+                    );
+                    drizzle.web3.currentProvider.removeAllListeners(
+                        "networkChanged"
+                    );
+
                     drizzle.web3.currentProvider.on(
                         "accountsChanged",
                         (accounts) => {
@@ -144,8 +150,6 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
 
                             deleteAllContracts(drizzle);
 
-                            setCurrentNetwork(newNetworkId);
-
                             initDrizzleData(true);
                         }
                     );
@@ -154,15 +158,7 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
         };
 
         initDrizzleData();
-    }, [networkId, currentAddress, drizzle, walletConnected, resetStoreData]);
-
-    useEffect(() => {
-        if (!currentAddress) setCurrentAddress(accountAddress);
-    }, [accountAddress, currentAddress]);
-
-    useEffect(() => {
-        if (!currentNetwork) setCurrentNetwork(networkId);
-    }, [networkId, currentNetwork]);
+    }, [drizzle, walletConnected, resetStoreData]);
 
     const onConnect = async () => {
         const isSelectWallet = await onboard.walletSelect();
@@ -186,14 +182,5 @@ const AppBarContainer = ({ drizzle, networkId, accountAddress }) => {
     );
 };
 
-// Connect State to Props
-const mapStateToProps = (state) => ({
-    networkId: networkSelector(state),
-    accountAddress: getAccountAddress(state),
-});
-
 // Export
-export default compose(
-    connect(mapStateToProps),
-    withDrizzle()
-)(AppBarContainer);
+export default compose(withDrizzle())(AppBarContainer);
