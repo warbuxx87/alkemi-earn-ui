@@ -125,7 +125,7 @@ const AppBarContainer = ({ drizzle }) => {
                         "accountsChanged"
                     );
                     drizzle.web3.currentProvider.removeAllListeners(
-                        "networkChanged"
+                        "chainChanged"
                     );
 
                     drizzle.web3.currentProvider.on(
@@ -135,7 +135,7 @@ const AppBarContainer = ({ drizzle }) => {
 
                             // Could be commented out in the current state as try/catch in contracts.js will catch it anyway
                             // (or the current clean up in contracts can be kept as it is)
-                            //deleteAllContracts(drizzle)
+                            deleteAllContracts(drizzle);
 
                             setCurrentAddress(accounts[0]);
 
