@@ -7,8 +7,8 @@ import WETH from "assets/images/WETH.svg";
 import USDT from "assets/images/USDT.svg";
 import WBTC from "assets/images/WBTC.svg";
 import DAI from "assets/images/DAI.svg";
-// png
 import USDC from "assets/images/USDC.svg";
+// png
 import PAX from "assets/images/pax.png";
 
 import {
@@ -21,6 +21,12 @@ import {
 // add i18n.
 import { IntlProvider, FormattedMessage } from "react-intl";
 import en_US from "language/en_US";
+import de_DE from "language/de_DE";
+import es_MX from "language/es_MX";
+import fr_FR from "language/fr_FR";
+import ja_JP from "language/ja_JP";
+import ko_KR from "language/ko_KR";
+import pt_PT from "language/pt_PT";
 import zh_CN from "language/zh_CN";
 
 export default class Markets extends React.Component {
@@ -53,6 +59,7 @@ export default class Markets extends React.Component {
 
         this.get_markets_data();
 
+        // refresh api data every 15 seconds
         this.timer = setInterval(() => {
             this.get_markets_data();
         }, 1000 * 15);
@@ -66,13 +73,16 @@ export default class Markets extends React.Component {
             .then((data) => {
                 if (data) {
                     let obj_data = JSON.parse(data);
+                    console.log("obj_data", obj_data);
 
                     let arr_markets = [];
                     let key_markets = Object.keys(obj_data);
+                    console.log("key_markets", key_markets);
 
                     for (var i = 0; i < key_markets.length; i++) {
                         arr_markets.push(obj_data[key_markets[i]]);
                     }
+                    console.log("arr_markets", arr_markets);
 
                     let arr_items = [];
 
@@ -94,6 +104,7 @@ export default class Markets extends React.Component {
 
                         arr_items.push(asset);
                     }
+                    console.log("arr_items", arr_items);
 
                     let totalCollateralRatio =
                         (totalSupplyBalanceUSD / totalBorrowBalanceUSD) * 100;
