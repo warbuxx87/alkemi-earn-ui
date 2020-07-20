@@ -43,9 +43,7 @@ const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
             buttonsLabel="Borrow"
             triggerButtonVariant="contained"
             enableButtonClick={enableBorrow}
-            onButtonClick={({ asset, amount }) =>
-                onBorrowAction({ drizzle, asset, amount })
-            }
+            onButtonClick={() => onBorrowAction({ drizzle, asset, amount })}
             isDoingAction={asset.borrowing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}

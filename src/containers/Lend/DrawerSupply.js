@@ -37,9 +37,7 @@ const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
             buttonsLabel="Deposit"
             triggerButtonVariant="contained"
             enableButtonClick={enableSupply}
-            onButtonClick={({ asset, amount }) =>
-                onSupplyAction({ drizzle, asset, amount })
-            }
+            onButtonClick={() => onSupplyAction({ drizzle, asset, amount })}
             isDoingAction={asset.supplying}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}

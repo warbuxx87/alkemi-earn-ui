@@ -34,9 +34,7 @@ const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
             enableButtonClick={enableAllocate}
-            onButtonClick={({ asset, amount }) =>
-                onAllocateAction({ drizzle, asset, amount })
-            }
+            onButtonClick={() => onAllocateAction({ drizzle, asset, amount })}
             isDoingAction={asset.allocating}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}

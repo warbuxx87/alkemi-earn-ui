@@ -38,9 +38,7 @@ const DrawerRedeemContainer = ({ asset, drizzle, onRedeemAction }) => {
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
             enableButtonClick={enableRedeem}
-            onButtonClick={({ asset, amount }) =>
-                onRedeemAction({ drizzle, asset, amount })
-            }
+            onButtonClick={() => onRedeemAction({ drizzle, asset, amount })}
             isDoingAction={asset.redeeming}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
