@@ -20,8 +20,8 @@ import {
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
-import SupplyButton from "containers/Lend/DrawerSupply";
-import AllocateButton from "containers/Lend/DrawerFaucet";
+import DepositButton from "containers/Lend/DrawerDeposit";
+import AllocateButton from "containers/Lend/DrawerAllocate";
 import { formatNumber, formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -189,10 +189,17 @@ const LendTable = ({ data = [], onActivate }) => {
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={1}>
-                                            <AllocateButton asset={row} />
+                                            {row.allocating ? (
+                                                <CircularProgress
+                                                    size={20}
+                                                    color="inherit"
+                                                />
+                                            ) : (
+                                                <AllocateButton asset={row} />
+                                            )}
                                         </Box>
                                         {row.activated ? (
-                                            <SupplyButton asset={row} />
+                                            <DepositButton asset={row} />
                                         ) : (
                                             <Button
                                                 type="button"
@@ -202,12 +209,12 @@ const LendTable = ({ data = [], onActivate }) => {
                                                 variant="outlined"
                                                 size="small"
                                                 color="secondary"
-                                                disable={row.pending.toString()}
+                                                disable={row.activating.toString()}
                                                 onClick={() =>
                                                     onActivate(row.unit)
                                                 }
                                             >
-                                                {row.pending ? (
+                                                {row.activating ? (
                                                     <CircularProgress
                                                         size={20}
                                                         color="inherit"

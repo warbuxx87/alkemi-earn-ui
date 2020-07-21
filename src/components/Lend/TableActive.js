@@ -18,8 +18,8 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import SupplyButton from "containers/Lend/DrawerSupply";
-import RedeemButton from "containers/Lend/DrawerRedeem";
+import DepositButton from "containers/Lend/DrawerDeposit";
+import WithdrawButton from "containers/Lend/DrawerWithdraw";
 import LendTableCell from "components/UI/TableCell";
 import { formatNumber, formatPercent, calculateEarnings } from "utils/ui";
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -179,12 +179,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    <Switch
-                                        // checked={state.checkedB}
-                                        // onChange={handleChange}
-                                        name="checkedB"
-                                        color="primary"
-                                    />
+                                    <Switch name="checkedB" color="primary" />
                                 </LendTableCell>
                                 <LendTableCell
                                     align="center"
@@ -197,9 +192,9 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={1}>
-                                            <RedeemButton asset={row} />
+                                            <WithdrawButton asset={row} />
                                         </Box>
-                                        <SupplyButton asset={row} />
+                                        <DepositButton asset={row} />
                                     </Box>
                                 </LendTableCell>
                             </TableRow>

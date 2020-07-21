@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import CardLimit from "components/Borrow/CardLimit";
 import {
     getTotalBorrow,
-    getTotalSupply,
+    getTotalDeposit,
     getCollateralRatio,
 } from "redux/selectors/totalBalance";
 
@@ -14,10 +14,10 @@ const CardLimitContainer = () => {
     useFetchPrice(); // gets current USD price
 
     const totalBorrowed = useSelector(getTotalBorrow);
-    const totalSupplied = useSelector(getTotalSupply);
+    const totalDeposited = useSelector(getTotalDeposit);
     const collateralRatio = useSelector(getCollateralRatio) / 1e18;
 
-    const maxBorrow = totalSupplied / collateralRatio;
+    const maxBorrow = totalDeposited / collateralRatio;
 
     let borrowLimit = ((totalBorrowed / maxBorrow) * 100).toFixed(2);
     if (isFinite(borrowLimit)) {

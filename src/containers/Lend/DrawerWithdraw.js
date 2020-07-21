@@ -6,46 +6,47 @@ import web3 from "web3";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
-import { onSupplyAction } from "redux/actions/data/lend";
+import { onWithdrawAction } from "redux/actions/data/lend";
 
 import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
 import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
-const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
+const DrawerWithdrawContainer = ({ asset, drizzle, onRedeemAction }) => {
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
-    const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
+    const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
-    const [enableSupply, setEnableSupply] = React.useState(false);
+    const [enableWithdraw, setEnableWithdraw] = React.useState(false);
 
     React.useEffect(() => {
         if (amount) {
             const isAmountLTBalance = web3.utils
                 .toBN(toWei(amount, asset.unit))
-                .lte(web3.utils.toBN(asset.wallet));
-            setEnableSupply(isAmountLTBalance);
+                .lte(web3.utils.toBN(asset.balance));
+            setEnableWithdraw(isAmountLTBalance);
         }
-    }, [amount, asset.wallet, asset.unit]);
+    }, [amount, asset.balance, asset.unit]);
 
     return (
         <Drawer
             asset={asset}
-            buttonsLabel="Deposit"
-            triggerButtonVariant="contained"
-            enableButtonClick={enableSupply}
-            onButtonClick={() => onSupplyAction({ drizzle, asset, amount })}
-            isDoingAction={asset.supplying}
+            buttonsLabel="Withdraw"
+            triggerButtonColor="secondary"
+            triggerButtonVariant="outlined"
+            enableButtonClick={enableWithdraw}
+            onButtonClick={() => onWithdrawAction({ drizzle, asset, amount })}
+            isDoingAction={asset.withdrawing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
             setAmount={setAmount}
-            mainTitle={`Deposit ${asset.unit}`}
+            mainTitle={`Redeem ${asset.unit}`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
-            amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
+            amountValue={`Supplied: ${formatNumber(asset.balance, asset.unit)}`}
         />
     );
 };
@@ -53,9 +54,9 @@ const SupplyDrawerContainer = ({ asset, drizzle, onSupplyAction }) => {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onSupplyAction }, dispatch);
+    bindActionCreators({ onWithdrawAction }, dispatch);
 
 export default compose(
     withDrizzle(),
     connect(mapStateToProps, mapDispatchToProps)
-)(SupplyDrawerContainer);
+)(DrawerWithdrawContainer);

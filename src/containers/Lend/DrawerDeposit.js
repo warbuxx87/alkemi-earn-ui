@@ -2,46 +2,49 @@ import React from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
+import web3 from "web3";
+
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
-import { onAllocateAction } from "redux/actions/data/lend";
+import { onDepositAction } from "redux/actions/data/lend";
 
-import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
+import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
 import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
-const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
+const DepositDrawerContainer = ({ asset, drizzle, onDepositAction }) => {
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
     const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
 
-    const [enableAllocate, setEnableAllocate] = React.useState(false);
+    const [enableDeposit, setEnableDeposit] = React.useState(false);
 
     React.useEffect(() => {
         if (amount) {
-            // Will eventually crash if fed a NaN, TODO: fix in DF-184
-            setEnableAllocate(true);
+            const isAmountLTBalance = web3.utils
+                .toBN(toWei(amount, asset.unit))
+                .lte(web3.utils.toBN(asset.wallet));
+            setEnableDeposit(isAmountLTBalance);
         }
     }, [amount, asset.wallet, asset.unit]);
 
     return (
         <Drawer
             asset={asset}
-            buttonsLabel="Allocate"
-            triggerButtonColor="secondary"
-            triggerButtonVariant="outlined"
-            enableButtonClick={enableAllocate}
-            onButtonClick={() => onAllocateAction({ drizzle, asset, amount })}
-            isDoingAction={asset.allocating}
+            buttonsLabel="Deposit"
+            triggerButtonVariant="contained"
+            enableButtonClick={enableDeposit}
+            onButtonClick={() => onDepositAction({ drizzle, asset, amount })}
+            isDoingAction={asset.depositing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
             setAmount={setAmount}
-            mainTitle={`Mint New ${asset.unit} Tokens`}
-            balanceValue={`0.00`}
+            mainTitle={`Deposit ${asset.unit}`}
+            balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
         />
     );
@@ -50,9 +53,9 @@ const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onAllocateAction }, dispatch);
+    bindActionCreators({ onDepositAction }, dispatch);
 
 export default compose(
     withDrizzle(),
     connect(mapStateToProps, mapDispatchToProps)
-)(DrawerFaucetContainer);
+)(DepositDrawerContainer);

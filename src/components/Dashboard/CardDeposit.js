@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function SupplyBalance({ totalSupply, currency, apr }) {
+function DepositBalance({ totalDeposit, currency, apr }) {
     const classes = useStyles();
 
     // Section 5: Code Component
@@ -71,7 +71,7 @@ function SupplyBalance({ totalSupply, currency, apr }) {
                                 color="textPrimary"
                                 align="left"
                             >
-                                {formatMoney(totalSupply, currency)}
+                                {formatMoney(totalDeposit, currency)}
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -98,9 +98,9 @@ function SupplyBalance({ totalSupply, currency, apr }) {
 }
 
 // Section 6: Documentation with PropTypes
-SupplyBalance.propTypes = {
+DepositBalance.propTypes = {
     className: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
-export default SupplyBalance;
+export default DepositBalance;

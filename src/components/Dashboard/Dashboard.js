@@ -16,9 +16,9 @@ import {
 
 // Section 3: Components & Containers import from the application
 import DashCardValue from "containers/Dashboard/CardValue";
-import DashCardSupply from "containers/Dashboard/CardSupply";
+import DashCardDeposit from "containers/Dashboard/CardDeposit";
 import DashCardBorrow from "containers/Dashboard/CardBorrow";
-import TableSupply from "containers/Dashboard/TableSupply";
+import TableDeposit from "containers/Dashboard/TableDeposit";
 import TableBorrow from "containers/Dashboard/TableBorrow";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -38,13 +38,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tabs = [
-    { value: "tablesupply", label: "Active Deposits" },
+    { value: "tabledeposit", label: "Active Deposits" },
     { value: "tableborrow", label: "Active Borrowed" },
 ];
 
 function Dashboard() {
     const classes = useStyles();
-    const [currentTab, setCurrentTab] = useState("tablesupply");
+    const [currentTab, setCurrentTab] = useState("tabledeposit");
     const handleTabsChange = (event, value) => {
         setCurrentTab(value);
     };
@@ -57,7 +57,7 @@ function Dashboard() {
                     <DashCardValue />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <DashCardSupply />
+                    <DashCardDeposit />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <DashCardBorrow />
@@ -83,7 +83,7 @@ function Dashboard() {
                         </Box>
                         <Divider />
                         <Box py={3} pb={6}>
-                            {currentTab === "tablesupply" && <TableSupply />}
+                            {currentTab === "tabledeposit" && <TableDeposit />}
                             {currentTab === "tableborrow" && <TableBorrow />}
                         </Box>
                     </Box>

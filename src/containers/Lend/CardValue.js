@@ -3,17 +3,17 @@ import { useSelector } from "react-redux";
 
 import CardValue from "components/Lend/CardValue";
 
-import { getTotalSupply } from "redux/selectors/totalBalance";
+import { getTotalDeposit } from "redux/selectors/totalBalance";
 
 import useFetchPrice from "hooks/useFetchPrice";
 
 const CardValueContainer = () => {
     useFetchPrice(); // gets current USD price
 
-    const totalSupply = useSelector(getTotalSupply);
+    const totalDeposit = useSelector(getTotalDeposit);
 
     return (
-        <CardValue totalSupply={totalSupply} currency="USD" difference={0} />
+        <CardValue totalDeposit={totalDeposit} currency="USD" difference={0} />
     );
 };
 

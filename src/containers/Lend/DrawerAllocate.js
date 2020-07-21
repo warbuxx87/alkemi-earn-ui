@@ -2,51 +2,47 @@ import React from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import web3 from "web3";
-
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
-import { onRedeemAction } from "redux/actions/data/lend";
+import { onAllocateAction } from "redux/actions/data/lend";
 
-import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
+import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
 import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
-const DrawerRedeemContainer = ({ asset, drizzle, onRedeemAction }) => {
+const DrawerAllocateContainer = ({ asset, drizzle, onAllocateAction }) => {
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
-    const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
+    const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
 
-    const [enableRedeem, setEnableRedeem] = React.useState(false);
+    const [enableAllocate, setEnableAllocate] = React.useState(false);
 
     React.useEffect(() => {
         if (amount) {
-            const isAmountLTBalance = web3.utils
-                .toBN(toWei(amount, asset.unit))
-                .lte(web3.utils.toBN(asset.balance));
-            setEnableRedeem(isAmountLTBalance);
+            // Will eventually crash if fed a NaN, TODO: fix in DF-184
+            setEnableAllocate(true);
         }
-    }, [amount, asset.balance, asset.unit]);
+    }, [amount, asset.wallet, asset.unit]);
 
     return (
         <Drawer
             asset={asset}
-            buttonsLabel="Withdraw"
+            buttonsLabel="Allocate"
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
-            enableButtonClick={enableRedeem}
-            onButtonClick={() => onRedeemAction({ drizzle, asset, amount })}
-            isDoingAction={asset.redeeming}
+            enableButtonClick={enableAllocate}
+            onButtonClick={() => onAllocateAction({ drizzle, asset, amount })}
+            isDoingAction={asset.allocating}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
             setAmount={setAmount}
-            mainTitle={`Redeem ${asset.unit}`}
-            balanceValue={formatNumber(asset.balance, asset.unit)}
-            amountValue={`Supplied: ${formatNumber(asset.balance, asset.unit)}`}
+            mainTitle={`Mint New ${asset.unit} Tokens`}
+            balanceValue={`0.00`}
+            amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
         />
     );
 };
@@ -54,9 +50,9 @@ const DrawerRedeemContainer = ({ asset, drizzle, onRedeemAction }) => {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onRedeemAction }, dispatch);
+    bindActionCreators({ onAllocateAction }, dispatch);
 
 export default compose(
     withDrizzle(),
     connect(mapStateToProps, mapDispatchToProps)
-)(DrawerRedeemContainer);
+)(DrawerAllocateContainer);
