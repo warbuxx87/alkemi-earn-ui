@@ -29,7 +29,10 @@ function createData(name, unit, image, wallet) {
         image,
         wallet,
         activated: false,
+        approving: false,
         pending: false,
+        allocating: false,
+        supplying: false,
         borrowing: false,
         repaying: false,
         redeeming: false,
@@ -188,6 +191,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         allocating: true,
+                        pending: false,
                     },
                 },
             };
@@ -200,6 +204,7 @@ export default (state = initialState, action) => {
                         ...state.assets[action.payload.asset],
                         allocating: false,
                         activated: false,
+                        pending: false,
                     },
                 },
             };
@@ -212,6 +217,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         allocating: false,
+                        pending: false,
                         error: action.error,
                     },
                 },
