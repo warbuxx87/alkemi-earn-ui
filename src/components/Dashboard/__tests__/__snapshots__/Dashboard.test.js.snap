@@ -59,13 +59,13 @@ exports[`<Dashboard /> matches snapshot 1`] = `
             onChange={[Function]}
             scrollButtons="auto"
             textColor="secondary"
-            value="tablesupply"
+            value="tabledeposit"
             variant="scrollable"
           >
             <WithStyles(ForwardRef(Tab))
-              key="tablesupply"
+              key="tabledeposit"
               label="Active Deposits"
-              value="tablesupply"
+              value="tabledeposit"
             />
             <WithStyles(ForwardRef(Tab))
               key="tableborrow"
