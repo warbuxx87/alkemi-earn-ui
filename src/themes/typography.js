@@ -1,15 +1,15 @@
 export default {
     body1: {
         fontWeight: 400,
-        fontSize: 14,
+        fontSize: 11,
         letterSpacing: "-0.05px",
     },
 
     body2: {
         fontWeight: 400,
-        fontSize: 11,
-        letterSpacing: "-0.05px",
+        fontSize: 15,
         textTransform: "uppercase",
+        lineHeight: 2,
     },
 
     h1: {
@@ -51,8 +51,8 @@ export default {
     },
 
     subtitle2: {
-        fontWeight: 400,
-        fontSize: 11,
+        fontWeight: 500,
+        fontSize: 12,
         letterSpacing: "-0.05px",
         lineHeight: 1.3,
     },

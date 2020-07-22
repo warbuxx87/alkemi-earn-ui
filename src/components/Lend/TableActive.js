@@ -76,7 +76,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
         <Box mt={2}>
             <Typography
                 className={classes.heading}
-                variant="h6"
+                variant="body2"
                 color="textPrimary"
             >
                 Active Supplied
@@ -104,13 +104,13 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                         />
                                         <Box ml={2}>
                                             <Typography
-                                                variant="h6"
+                                                variant="body2"
                                                 color="textPrimary"
                                             >
                                                 {row.unit}
                                             </Typography>
                                             <Typography
-                                                variant="body2"
+                                                variant="body1"
                                                 color="textSecondary"
                                             >
                                                 {row.name}
@@ -123,13 +123,13 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     style={{ width: "16%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body2"
                                         color="textPrimary"
                                     >
                                         {formatNumber(row.balance, row.unit)}
                                     </Typography>
                                     <Typography
-                                        variant="body2"
+                                        variant="body1"
                                         color="textSecondary"
                                     >
                                         Supplied
@@ -140,7 +140,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     style={{ width: "16%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body2"
                                         color="textPrimary"
                                     >
                                         {calculateEarnings(
@@ -151,7 +151,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                         )}
                                     </Typography>
                                     <Typography
-                                        variant="body2"
+                                        variant="body1"
                                         color="textSecondary"
                                     >
                                         Earnings
@@ -162,14 +162,14 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     style={{ width: "16%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body2"
                                         color="textPrimary"
                                         className={classes.label}
                                     >
                                         {formatPercent(row.apr)}
                                     </Typography>
                                     <Typography
-                                        variant="body2"
+                                        variant="body1"
                                         color="textSecondary"
                                     >
                                         APR

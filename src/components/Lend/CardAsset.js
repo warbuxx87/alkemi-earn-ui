@@ -18,34 +18,24 @@ import {
     makeStyles,
 } from "@material-ui/core";
 import { FiberManualRecord } from "@material-ui/icons";
-import DAI from "assets/images/dai.png";
+import DAI from "assets/images/DAI.svg";
 import { formatMoney } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: theme.spacing(3),
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
+    assetName: {
+        marginLeft: theme.spacing(2),
+        paddingTop: 1,
     },
     iconFont: {
           fontSize: 12,
           color: "#48D878",
         },
-        float: {
-          float: "right",
-        },
-        DiaIcon: {
-          marginRight: 10,
-          transform: "translate(0px, 4px)",
-        },
-        maker: {
-          fontSize: 16,
-          color: "#525254",
-          marginLeft: 14,
+
+        assetIcon: {
+          marginRight: theme.spacing(1.2),
         },
         btnDefault: {
           backgroundColor: "#3A3B3C",
@@ -66,9 +56,6 @@ const useStyles = makeStyles((theme) => ({
           justifyContent: "right",
           position: "relative",
           display: "grid",
-        },
-        FormGroup: {
-          flexDirection: "row-reverse",
         },
         smCenter: {
           [theme.breakpoints.down("sm")]: {
@@ -104,17 +91,38 @@ function CardAsset({
           <Box>
             {/* Active Badge */}
             <FiberManualRecord className={classes.iconFont} />
-            <Box color="#9D9D9D" display="inline-block" fontWeight={600} pl={1.2}>
+            <Box color="#9D9D9D" display="inline-block" mb={2} pl={1.2} >
+            <Typography
+                variant="h6"
+                color="textPrimary"
+            >
               Active Lending
+              </Typography>
             </Box>
 
             {/* Card section started*/}
           <Card>
-          <CardContent>
-              <Box fontWeight={600} color="#F0F0F0">
-                <img className={classes.DiaIcon} src={DAI} width={22} />
-                DAI <span className={classes.maker}>Maker Dai</span>
-                <span className={classes.float}>
+          <Box
+            position="relative"
+            display="flex"
+            alignItems="center"
+            p={2}
+            >
+            <img className={classes.assetIcon} src={DAI} width={24} />
+            <Typography
+            variant="h5"
+            color="textPrimary"
+            >
+            DAI
+            </Typography>
+            <Typography
+            variant="subtitle2"
+            color="textSecondary"
+            className={classes.assetName}
+            >
+            Maker Dai
+            </Typography>
+            < Box flexGrow={1} />
                   <Button
                     className={classes.btnDefault}
                     size="small"
@@ -129,17 +137,23 @@ function CardAsset({
                   >
                     Supply
                   </Button>
-                </span>
               </Box>
-              <Box mt={2} mb={1} pb={2} borderTop="1.5px solid #0a0a0a" />
+              <Divider />
+              <Box p={2}>
               <Grid container>
                 <Grid item xl={2} lg={2} md={2} sm={4} xs={4}>
-                  <Box fontWeight={600} py={0.5} color="#F0F0F0">
+                <Typography
+                    variant="body2"
+                    color="textPrimary"
+                >
                     2,445,656
-                  </Box>
-                  <Box fontWeight={600} fontSize={12} mt={0.5} color="#525254">
+                  </Typography>
+                  <Typography
+                      variant="body1"
+                      color="textSecondary"
+                  >
                     WALLET
-                  </Box>
+                 </Typography>
                 </Grid>
                 <Grid
                   item
@@ -150,12 +164,18 @@ function CardAsset({
                   xs={4}
                   className={classes.smCenter}
                 >
-                  <Box fontWeight={600} py={0.5} color="#F0F0F0">
+                <Typography
+                    variant="body2"
+                    color="textPrimary"
+                >
                     134,423
-                  </Box>
-                  <Box fontWeight={600} fontSize={12} mt={0.5} color="#525254">
+                  </Typography>
+                  <Typography
+                      variant="body1"
+                      color="textSecondary"
+                  >
                     BALANCE
-                  </Box>
+                  </Typography>
                 </Grid>
                 <Grid
                   item
@@ -166,28 +186,33 @@ function CardAsset({
                   xs={4}
                   className={classes.smRight}
                 >
-                  <Box fontWeight={600} py={0.5} color="#F0F0F0">
+                <Typography
+                    variant="body2"
+                    color="textPrimary"
+                >
                     $1344,43
-                  </Box>
-                  <Box fontWeight={600} fontSize={12} mt={0.5} color="#525254">
+                  </Typography>
+                  <Typography
+                      variant="body1"
+                      color="textSecondary"
+                  >
                     BALANCE USED
-                  </Box>
+                 </Typography>
                 </Grid>
                 <Grid item xl={2} lg={2} md={2} sm={4} xs={4}>
                   <Box className={classes.boxCenter}>
-                    <Box
-                      fontWeight={600}
-                      py={0.5}
-                      bgcolor="#1e322d"
-                      display="inline-block"
-                      color="#18A171"
-                      px={1}
-                    >
+                  <Typography
+                      variant="body2"
+                      color="textPrimary"
+                  >
                       3.45%
-                    </Box>
-                    <Box fontWeight={600} fontSize={12} mt={0.5} color="#525254">
+                  </Typography>
+                  <Typography
+                      variant="body1"
+                      color="textSecondary"
+                  >
                       APR
-                    </Box>
+                  </Typography>
                   </Box>
                 </Grid>
                 <Grid
@@ -197,14 +222,19 @@ function CardAsset({
                   md={2}
                   sm={4}
                   xs={4}
-                  className={classes.center}
                 >
-                  <Box fontWeight={600} py={0.5} color="#F0F0F0">
+                <Typography
+                    variant="body2"
+                    color="textPrimary"
+                >
                     $7,666.96
-                  </Box>
-                  <Box fontWeight={600} fontSize={12} mt={0.5} color="#525254">
+                  </Typography>
+                  <Typography
+                      variant="body1"
+                      color="textSecondary"
+                  >
                     EARNINGS USD
-                  </Box>
+                  </Typography>
                 </Grid>
                 <Grid
                   item
@@ -213,15 +243,22 @@ function CardAsset({
                   md={2}
                   sm={4}
                   xs={4}
-                  className={classes.right}
                 >
-                  text
-                  <Box fontWeight={600} fontSize={12} mt={1.3} color="#525254">
-                    COLLATERAL
-                  </Box>
+                <Typography
+                    variant="body2"
+                    color="textPrimary"
+                >
+                    $1344,43
+                  </Typography>
+                  <Typography
+                      variant="body1"
+                      color="textSecondary"
+                  >
+                    BALANCE USED
+                 </Typography>
                 </Grid>
               </Grid>
-            </CardContent>
+            </Box>
             </Card>
           </Box>
         </div>
