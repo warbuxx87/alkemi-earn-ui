@@ -64,21 +64,12 @@ const fetchPriceCall = ({ currentNetworkName, unit, dispatch }) => {
                 const obj_data = JSON.parse(data);
 
                 const marketsData = obj_data.find((market) =>
-                    Object.prototype.hasOwnProperty.call(
-                        market,
-                        address_map[currentNetworkName][`address_${unit}`]
-                    )
+                    Object.prototype.hasOwnProperty.call(market, unit)
                 );
 
                 dispatch(
                     fetchPriceSuccess(
-                        `${
-                            marketsData[
-                                address_map[currentNetworkName][
-                                    `address_${unit}`
-                                ]
-                            ].oraclePrice
-                        }`.slice(0, -12)
+                        marketsData[unit].oraclePrice.slice(0, -12)
                     )
                 ); // TODO: USDC decimals should be only 6 but returns 12 zeros
             }
