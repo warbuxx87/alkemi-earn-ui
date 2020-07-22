@@ -15,7 +15,8 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { formatMoney, formatPercent } from "utils/ui";
+import { fromWei, formatMoney, formatPercent } from "utils/ui";
+import { format_str_to_kmb } from "utils/markets";
 
 // Section 3: Components & Containers import from the application
 
@@ -72,7 +73,7 @@ function Balance({ aggregatedBalance, currency, collateralRatio }) {
                                 color="textPrimary"
                                 align="left"
                             >
-                                {formatMoney(aggregatedBalance, currency)}
+                                ${format_str_to_kmb(fromWei(aggregatedBalance))}
                             </Typography>
                         </Grid>
                         <Grid item>

@@ -15,7 +15,8 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { formatMoney, formatPercent } from "utils/ui";
+import { fromWei, formatPercent } from "utils/ui";
+import { format_str_to_kmb } from "utils/markets";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -71,7 +72,7 @@ function BorrowBalance({ totalBorrow, currency, apr }) {
                                 color="textPrimary"
                                 align="left"
                             >
-                                {formatMoney(totalBorrow, currency)}
+                                ${format_str_to_kmb(fromWei(totalBorrow))}
                             </Typography>
                         </Grid>
                         <Grid item>
