@@ -5,27 +5,27 @@ import { compose } from "redux";
 
 // Section 2: internal imports
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import CardSupply from "components/Dashboard/CardSupply";
+import CardDeposit from "components/Dashboard/CardDeposit";
 
 // Section 3: Selectors / hooks
-import { getTotalSupply } from "redux/selectors/totalBalance";
-import { getAggregatedLendAPR } from "redux/selectors/data";
+import { getTotalDeposit } from "redux/selectors/totalBalance";
+import { getAggregatedDepositAPR } from "redux/selectors/data";
 import useFetchPrice from "hooks/useFetchPrice";
 
 // Section 4: Code Component
-const CardSupplyContainer = () => {
+const CardDepositContainer = () => {
     useFetchPrice(); // gets current USD price
 
-    const totalSupply = useSelector(getTotalSupply); //
+    const totalDeposit = useSelector(getTotalDeposit); //
 
-    const totalLendAPR = useSelector(getAggregatedLendAPR); // combined portfolio APR rate
+    const totalDepositAPR = useSelector(getAggregatedDepositAPR); // combined portfolio APR rate
 
     return (
-        <CardSupply
-            totalSupply={totalSupply}
+        <CardDeposit
+            totalDeposit={totalDeposit}
             currency="USD"
             difference={0}
-            apr={totalLendAPR}
+            apr={totalDepositAPR}
         />
     );
 };
@@ -37,4 +37,4 @@ const CardSupplyContainer = () => {
 export default compose(
     withDrizzle()
     //  connect(mapStateToProps)
-)(CardSupplyContainer);
+)(CardDepositContainer);

@@ -37,9 +37,7 @@ const DrawerRepayContainer = ({ asset, drizzle, onRepayAction }) => {
             triggerButtonVariant="outlined"
             triggerButtonColor="secondary"
             enableButtonClick={enableRepay}
-            onButtonClick={({ asset, amount }) =>
-                onRepayAction({ drizzle, asset, amount })
-            }
+            onButtonClick={() => onRepayAction({ drizzle, asset, amount })}
             isDoingAction={asset.repaying}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
