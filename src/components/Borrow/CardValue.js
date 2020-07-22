@@ -41,7 +41,7 @@ function TotalValue({ className, totalBorrow, currency, difference, ...rest }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Borrow Balance" className={classes.item} />
+            <CardHeader title="Total Borrowed" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box

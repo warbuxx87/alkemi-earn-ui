@@ -6,12 +6,12 @@ import {
     APPROVE_PENDING,
     APPROVE_SUCCESS,
     APPROVE_ERROR,
-    SUPPLY_PENDING,
-    SUPPLY_SUCCESS,
-    SUPPLY_ERROR,
-    REDEEM_PENDING,
-    REDEEM_SUCCESS,
-    REDEEM_ERROR,
+    DEPOSIT_PENDING,
+    DEPOSIT_SUCCESS,
+    DEPOSIT_ERROR,
+    WITHDRAW_PENDING,
+    WITHDRAW_SUCCESS,
+    WITHDRAW_ERROR,
     RESET_LEND_DATA,
 } from "redux/actions/data/lend";
 // import internal assets
@@ -29,10 +29,14 @@ function createData(name, unit, image, wallet) {
         image,
         wallet,
         activated: false,
+        activating: false,
+        approving: false,
         pending: false,
+        allocating: false,
+        depositing: false,
         borrowing: false,
         repaying: false,
-        redeeming: false,
+        withdrawing: false,
     };
 }
 
@@ -71,75 +75,77 @@ export default (state = initialState, action) => {
                     return state;
             }
         }
-        case SUPPLY_PENDING:
+        case DEPOSIT_PENDING:
             return {
                 ...state,
                 assets: {
                     ...state.assets,
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
-                        supplying: true,
+                        depositing: true,
+                        activating: true,
                     },
                 },
             };
-        case SUPPLY_SUCCESS:
+        case DEPOSIT_SUCCESS:
             return {
                 ...state,
                 assets: {
                     ...state.assets,
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
-                        supplying: false,
+                        depositing: false,
                         activated: true,
                     },
                 },
             };
 
-        case SUPPLY_ERROR:
+        case DEPOSIT_ERROR:
             return {
                 ...state,
                 assets: {
                     ...state.assets,
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
-                        supplying: false,
+                        depositing: false,
+                        activating: false,
                         error: action.error,
                     },
                 },
             };
 
-        case REDEEM_PENDING:
+        case WITHDRAW_PENDING:
             return {
                 ...state,
                 assets: {
                     ...state.assets,
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
-                        redeeming: true,
+                        withdrawing: true,
                     },
                 },
             };
-        case REDEEM_SUCCESS:
+        case WITHDRAW_SUCCESS:
             return {
                 ...state,
                 assets: {
                     ...state.assets,
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
-                        redeeming: false,
+                        withdrawing: false,
                         activated: true,
                     },
                 },
             };
 
-        case REDEEM_ERROR:
+        case WITHDRAW_ERROR:
             return {
                 ...state,
                 assets: {
                     ...state.assets,
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
-                        redeeming: false,
+                        withdrawing: false,
                         error: action.error,
                     },
                 },
@@ -188,6 +194,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         allocating: true,
+                        activating: false,
                     },
                 },
             };
@@ -200,6 +207,7 @@ export default (state = initialState, action) => {
                         ...state.assets[action.payload.asset],
                         allocating: false,
                         activated: false,
+                        pending: false,
                     },
                 },
             };
@@ -212,6 +220,7 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         allocating: false,
+                        activating: false,
                         error: action.error,
                     },
                 },

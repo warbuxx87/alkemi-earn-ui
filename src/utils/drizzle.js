@@ -44,8 +44,8 @@ export const handle_allocate_click = async ({ drizzle, asset, amount }) => {
     return sendAllocate;
 };
 
-// Supply Tokens to Lending Pool
-export const handle_supply_click = async ({ drizzle, amount, asset }) => {
+// Deposit Tokens to Lending Pool
+export const handle_deposit_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     //const drizzleStore = drizzle.store.getState();
     const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
@@ -58,14 +58,14 @@ export const handle_supply_click = async ({ drizzle, amount, asset }) => {
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
     const weiAmount = toWei(amount, unit);
-    const sendSupply = MoneyMarketContract.methods.supply.cacheSend(
+    const sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
         token_address,
         weiAmount,
         {
             from: myAccount,
         }
     );
-    return sendSupply;
+    return sendDeposit;
 };
 
 // Borrow Tokens from Lending Pool
@@ -120,8 +120,8 @@ export const handle_repay_click = async ({ drizzle, amount, asset }) => {
     return sendRepay;
 };
 
-// Withdrawl tokens from lending pool
-export const handle_redeem_click = async ({ drizzle, amount, asset }) => {
+// Withdraw tokens from lending pool
+export const handle_withdraw_click = async ({ drizzle, amount, asset }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     //const drizzleStore = drizzle.store.getState();
     const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found

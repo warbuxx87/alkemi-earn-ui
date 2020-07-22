@@ -108,13 +108,13 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {Row.name}
+                                                {Row.unit}
                                             </Typography>
                                             <Typography
                                                 variant="body2"
                                                 color="textSecondary"
                                             >
-                                                {Row.unit}
+                                                {Row.name}
                                             </Typography>
                                         </Box>
                                     </Box>
