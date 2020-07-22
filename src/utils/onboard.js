@@ -9,7 +9,9 @@ const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
 const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
 // const APP_URL = process.env.REACT_APP_APP_URL
 // const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL:
-const RPC_URL = "https://main.infura.io/v3/" + INFURA_KEY;
+const APP_URL = "https://dapp.alkemi.network";
+const RPC_URL = "https://rinkeby.infura.io/v3/" + INFURA_KEY;
+const CONTACT_EMAIL = "dev@alkemi.ai";
 
 const walletChecks = [
     { checkName: "derivationPath" },
@@ -23,6 +25,19 @@ const wallets = [
     { walletName: "coinbase", preferred: true },
     { walletName: "trust", preferred: true, rpcUrl: RPC_URL },
     { walletName: "metamask", preferred: true },
+    { walletName: "dapper", preferred: true },
+    {
+        walletName: "ledger",
+        rpcUrl: RPC_URL,
+        preferred: true,
+    },
+    {
+        walletName: "trezor",
+        appUrl: APP_URL,
+        email: CONTACT_EMAIL,
+        rpcUrl: RPC_URL,
+        preferred: true,
+    },
     {
         walletName: "portis",
         apiKey: PORTIS_KEY,

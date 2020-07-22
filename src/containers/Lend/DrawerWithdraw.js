@@ -13,7 +13,7 @@ import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
-const DrawerWithdrawContainer = ({ asset, drizzle, onRedeemAction }) => {
+const DrawerWithdrawContainer = ({ asset, drizzle, onWithdrawAction }) => {
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
