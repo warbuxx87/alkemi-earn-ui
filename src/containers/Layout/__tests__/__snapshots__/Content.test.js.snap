@@ -44,10 +44,15 @@ exports[`<LayoutContent /> matches snapshot 1`] = `
           "$$typeof": Symbol(react.memo),
           "WrappedComponent": [Function],
           "compare": null,
-          "displayName": "Connect(withHistory)",
+          "displayName": "Connect(MarketContainer)",
           "type": [Function],
         }
       }
+      exact={true}
+      path="/markets2"
+    />
+    <Route
+      component={[Function]}
       exact={true}
       path="/history"
     />

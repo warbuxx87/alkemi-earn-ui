@@ -5,12 +5,12 @@ import {
     FETCH_STATS_ERROR,
 } from "redux/actions/data/stats.js";
 
-import tx from "containers/History/MOCK_DATA.json";
+//import tx from "containers/History/MOCK_DATA.json";
 
 // Define initial state
 const initialState = {
     pending: false,
-    tx: tx,
+    tx: null,
     error: null,
 };
 

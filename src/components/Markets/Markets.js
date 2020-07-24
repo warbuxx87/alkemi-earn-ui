@@ -21,12 +21,6 @@ import {
 // add i18n.
 import { IntlProvider, FormattedMessage } from "react-intl";
 import en_US from "language/en_US";
-import de_DE from "language/de_DE";
-import es_MX from "language/es_MX";
-import fr_FR from "language/fr_FR";
-import ja_JP from "language/ja_JP";
-import ko_KR from "language/ko_KR";
-import pt_PT from "language/pt_PT";
 import zh_CN from "language/zh_CN";
 
 export default class Markets extends React.Component {
@@ -93,7 +87,7 @@ export default class Markets extends React.Component {
                     for (var x = 0; x < arr_markets.length; x++) {
                         let key_items = Object.values(arr_markets[x]);
 
-                        asset = key_items[1];
+                        asset = key_items[0];
 
                         totalSupplyBalanceUSD += parseFloat(
                             asset.totalSupplyUSD
@@ -182,7 +176,7 @@ export default class Markets extends React.Component {
                             <FormattedMessage id="Total_Supply_Balance" />
                         </div>
                         <div className="item-num">
-                            ${" "}
+                            $
                             {this.state.data_is_ok &&
                                 format_str_to_kmb(
                                     this.state.totals.totalSupplyBalanceUSD.toString()

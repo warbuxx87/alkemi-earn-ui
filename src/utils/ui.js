@@ -1,4 +1,11 @@
 import web3 from "web3";
+// import internal assets
+import DAI from "assets/images/DAI.svg";
+import USDC from "assets/images/USDC.svg";
+import WBTC from "assets/images/WBTC.svg";
+import USDT from "assets/images/USDT.svg";
+import WETH from "assets/images/WETH.svg";
+import PAX from "assets/images/pax.png";
 // import _ from "lodash";
 
 const decimalsToUnit = {
@@ -18,6 +25,20 @@ const assetToDecimals = {
     USDT: 6,
     USDC: 6,
     WBTC: 8,
+};
+
+const token2icon = {
+    WETH: WETH,
+    USDT: USDT,
+    USDC: USDC,
+    PAX: PAX,
+    WBTC: WBTC,
+    DAI: DAI,
+};
+
+export const getTokenIcon = (symbol) => {
+    const icon = token2icon[symbol];
+    return icon;
 };
 
 export const fromWei = (value, unit) => {
@@ -126,8 +147,15 @@ export function calculateEarnings(balance, principal, unit, USDPrice) {
 }
 
 export const toDate = (timeStamp) => {
+    const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+    };
     let dateTime = new Date(timeStamp * 1000);
-    dateTime = dateTime.toDateString(); // Returns "2013-05-31T11:54:44.000Z"
+    dateTime = dateTime.toLocaleDateString("en-US", options); // Returns "2013-05-31T11:54:44.000Z"
     return dateTime;
 };
 

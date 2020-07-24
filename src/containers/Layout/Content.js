@@ -8,6 +8,7 @@ import Dashboard from "containers/Dashboard/Dashboard";
 import Lend from "containers/Lend/Lend";
 import Borrow from "containers/Borrow/Borrow";
 import Markets from "components/Markets/Markets";
+import Markets2 from "containers/Markets/Markets";
 import History from "containers/History/History";
 import Liquidate from "components/Liquidate/Liquidate";
 import NoWhere from "components/NoWhere/NoWhere";
@@ -17,6 +18,7 @@ import {
     LEND,
     BORROW,
     MARKETS,
+    MARKETS_STAGE,
     HISTORY,
     LIQUIDATE,
 } from "constants/routes";
@@ -29,6 +31,7 @@ const LayoutContent = () => (
             <Route path={LEND} exact component={Lend} />
             <Route path={BORROW} exact component={Borrow} />
             <Route path={MARKETS} exact component={Markets} />
+            <Route path={MARKETS_STAGE} exact component={Markets2} />
             <Route path={HISTORY} exact component={History} />
             <Route path={LIQUIDATE} exact component={Liquidate} />
             <Route component={NoWhere} />

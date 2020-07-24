@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { connect } from "react-redux";
-import Markets from "components/Markets/Markets";
+import Markets from "components/Markets/Markets_refactor";
 import _ from "lodash";
 
 import WETH from "assets/images/WETH.svg";
@@ -49,7 +49,7 @@ const get_markets_data = () => {
                 let key_markets = Object.keys(obj_data);
                 console.log("key_markets", key_markets);
 
-                for (var i = 0; i < key_markets.length; i++) {
+                for (let i = 0; i < key_markets.length; i++) {
                     arr_markets.push(obj_data[key_markets[i]]);
                 }
                 console.log("arr_markets", arr_markets);
@@ -60,7 +60,7 @@ const get_markets_data = () => {
                 let totalSupplyBalanceUSD = 0;
                 let totalBorrowBalanceUSD = 0;
 
-                for (var x = 0; x < arr_markets.length; x++) {
+                for (let x = 0; x < arr_markets.length; x++) {
                     let key_items = Object.values(arr_markets[x]);
 
                     asset = key_items[1];
@@ -92,20 +92,20 @@ const get_markets_data = () => {
                         totals: totals,
                     },
                     () => {
-                        var supply_array = _.cloneDeep(this.state.data_markets);
-                        var borrow_array = _.cloneDeep(this.state.data_markets);
+                        let supply_array = _.cloneDeep(this.state.data_markets);
+                        let borrow_array = _.cloneDeep(this.state.data_markets);
 
                         supply_array.sort(compare_supply);
                         borrow_array.sort(compare_borrow);
 
-                        for (var i = 0; i < supply_array.length; i++) {
+                        for (let i = 0; i < supply_array.length; i++) {
                             supply_array[i].percentage_supply = Number(
                                 (supply_array[i].totalSupplyUSD /
                                     this.state.totals.totalSupplyBalanceUSD) *
                                     100
                             ).toFixed(1);
                         }
-                        for (var j = 0; j < borrow_array.length; j++) {
+                        for (let j = 0; j < borrow_array.length; j++) {
                             borrow_array[j].percentage_borrow = Number(
                                 (borrow_array[j].totalBorrowUSD /
                                     this.state.totals.totalBorrowBalanceUSD) *
