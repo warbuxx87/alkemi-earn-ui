@@ -5,7 +5,11 @@ import { bindActionCreators } from "redux";
 
 // Imports Section 2: internal imports ( actions, selectors etc.)
 import { fetchStatsAction } from "redux/actions/data/stats";
-import { getStatsError, getStats, getStatsPending } from "redux/selectors/data";
+import {
+    getStatsError,
+    getStats,
+    getStatsPending,
+} from "redux/selectors/data/stats";
 
 // Imports Section 3: Internal Components Imports
 import History from "components/History/History";

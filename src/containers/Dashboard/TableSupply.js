@@ -18,7 +18,7 @@ import TableSupply from "components/Dashboard/TableSupply";
 import useFetchPrice from "hooks/useFetchPrice";
 
 // Section 3: Selectors
-import { getLendActive } from "redux/selectors/data";
+import { getLendActive } from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 

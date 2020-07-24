@@ -17,7 +17,6 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { XCircle as XIcon, Menu as MenuIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
-
 import SidebarDashboardItem from "containers/Sidebar/DashboardItem";
 import SidebarLendItem from "containers/Sidebar/LendItem";
 import SidebarBorrowItem from "containers/Sidebar/BorrowItem";

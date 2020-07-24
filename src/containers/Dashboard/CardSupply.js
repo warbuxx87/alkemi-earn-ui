@@ -9,7 +9,7 @@ import CardSupply from "components/Dashboard/CardSupply";
 
 // Section 3: Selectors / hooks
 import { getTotalSupply } from "redux/selectors/totalBalance";
-import { getAggregatedLendAPR } from "redux/selectors/data";
+import { getAggregatedLendAPR } from "redux/selectors/data/lend";
 import useFetchPrice from "hooks/useFetchPrice";
 
 // Section 4: Code Component

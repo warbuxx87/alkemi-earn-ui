@@ -17,7 +17,7 @@ import {
     getBorrowInactive,
     //  getBorrowError,
     //  getBorrowPending
-} from "redux/selectors/data";
+} from "redux/selectors/data/borrow";
 
 const BorrowContainer = ({
     inactiveBorrow,

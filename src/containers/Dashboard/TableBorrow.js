@@ -12,7 +12,7 @@ import TableBorrow from "components/Dashboard/TableBorrow";
 import useFetchPrice from "hooks/useFetchPrice";
 
 // Section 3: Selectors
-import { getBorrowActive } from "redux/selectors/data";
+import { getBorrowActive } from "redux/selectors/data/borrow";
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 

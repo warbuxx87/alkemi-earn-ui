@@ -18,7 +18,7 @@ import {
     getLendError,
     getLendActive,
     getLendInactive,
-} from "redux/selectors/data";
+} from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
