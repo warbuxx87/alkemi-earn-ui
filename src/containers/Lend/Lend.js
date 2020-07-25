@@ -22,6 +22,7 @@ import {
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
+// Section 4: Container
 const LendContainer = ({
     inactiveLend,
     activeLend,

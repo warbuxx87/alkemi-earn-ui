@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const History = ({ txList, isLoaded, error }) => {
+const History = ({ address, txList, txPending, error }) => {
     const classes = useStyles();
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
     const [page, setPage] = React.useState(0);
@@ -82,9 +82,13 @@ const History = ({ txList, isLoaded, error }) => {
                                     align="left"
                                 >
                                     {checkAction(
+                                        address,
                                         item.to,
                                         item.from,
-                                        item.value
+                                        formatNumber(
+                                            item.value,
+                                            item.tokenSymbol
+                                        )
                                     )}
                                 </TableCell>
                                 <TableCell
@@ -156,7 +160,8 @@ const History = ({ txList, isLoaded, error }) => {
 // Section 6: Documentation with PropTypes
 History.propTypes = {
     txList: PropTypes.array.isRequired,
-    isLoaded: PropTypes.bool.isRequired,
+    txPending: PropTypes.bool.isRequired,
+    address: PropTypes.string.isRequired,
 };
 
 // Section 7:  Connect styles and export

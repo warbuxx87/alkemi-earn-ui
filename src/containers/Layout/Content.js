@@ -17,7 +17,6 @@ import {
     LEND,
     BORROW,
     MARKETS,
-    MARKETS_STAGE,
     HISTORY,
     LIQUIDATE,
 } from "constants/routes";

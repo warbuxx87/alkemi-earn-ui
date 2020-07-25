@@ -6,7 +6,6 @@ import WBTC from "assets/images/WBTC.svg";
 import USDT from "assets/images/USDT.svg";
 import WETH from "assets/images/WETH.svg";
 import PAX from "assets/images/pax.png";
-// import _ from "lodash";
 
 const decimalsToUnit = {
     6: "mwei",
@@ -159,42 +158,36 @@ export const toDate = (timeStamp) => {
     return dateTime;
 };
 
-export const checkAction = (toAddress, fromAddress, amount) => {
-    let action;
-    // get users connected address from State
-    const myAddress = "0xf1d3818b2a83bf2d81bfbbf06cf95f175fb00b7d";
-
+export const checkAction = (address, toAddress, fromAddress, amount) => {
     // get MoneyMarket Address from constants
-    const mMarket = "0xe6a53f96ceca750ef8589c5b376872213aa4f230";
-
+    const mMarket = "0xe6a53f96ceca750ef8589c5b376872213aa4f230".toUpperCase();
+    const myAddress = address.toUpperCase();
+    let action;
     if (amount === "0") {
-        action = "Approved";
+        action = "Mint";
         return action;
     }
 
     // if from Address is Users Address
-    if (fromAddress === myAddress) {
+    if (fromAddress.toUpperCase() === myAddress) {
         action = "Supply";
         return action;
     }
 
-    if (fromAddress === mMarket) {
+    if (toAddress.toUpperCase() === myAddress) {
         action = "Borrow";
         return action;
     }
-    action = "Allocate";
+
     return action;
 };
 
-export const checkAddress = (toAddress, fromAddress) => {
-    // get users connected address from State
-    const myAddress = "0xf1d3818b2a83bf2d81bfbbf06cf95f175fb00b7d";
-
+export const checkAddress = (address, toAddress, fromAddress) => {
     // get MoneyMarket Address from constants
     const mMarket = "0xe6a53f96ceca750ef8589c5b376872213aa4f230";
 
     // if from Address is Users Address
-    if (fromAddress === myAddress) {
+    if (fromAddress === address) {
         //  action = "Sent";
         return toAddress;
     }
