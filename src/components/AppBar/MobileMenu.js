@@ -51,7 +51,11 @@ export default function MobileMenu() {
 
     return (
         <>
-            <IconButton color="inherit" onClick={handleOpen}>
+            <IconButton
+                color="inherit"
+                onClick={handleOpen}
+                data-testid="openMenu"
+            >
                 <MenuIcon />
             </IconButton>
             <Drawer
@@ -62,6 +66,7 @@ export default function MobileMenu() {
                 open={isOpen}
                 variant="temporary"
                 transitionDuration={0}
+                data-testid="menuDrawer"
             >
                 <Box>
                     <Box
