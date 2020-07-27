@@ -2,36 +2,36 @@
 
 import {
     handle_allocate_click,
-    handle_supply_click,
-    handle_redeem_click,
+    handle_deposit_click,
+    handle_withdraw_click,
 } from "utils/drizzle";
 import notify from "utils/notify";
 
 // Section 2: Action types declarations and action creators
 
 //                                            //
-// ------------- SUPPLY ACTIONS ------------- //
+// ------------- DEPOSIT ACTIONS ------------- //
 //                                            //
 
-export const SUPPLY_PENDING = "SUPPLY_PENDING";
-export const supplyPending = (asset) => ({
-    type: SUPPLY_PENDING,
+export const DEPOSIT_PENDING = "DEPOSIT_PENDING";
+export const depositPending = (asset) => ({
+    type: DEPOSIT_PENDING,
     payload: {
         asset,
     },
 });
 
-export const SUPPLY_SUCCESS = "SUPPLY_SUCCESS";
-export const supplySuccess = (asset) => ({
-    type: SUPPLY_SUCCESS,
+export const DEPOSIT_SUCCESS = "DEPOSIT_SUCCESS";
+export const depositSuccess = (asset) => ({
+    type: DEPOSIT_SUCCESS,
     payload: {
         asset,
     },
 });
 
-export const SUPPLY_ERROR = "SUPPLY_ERROR";
-export const supplyError = (asset, error) => ({
-    type: SUPPLY_ERROR,
+export const DEPOSIT_ERROR = "DEPOSIT_ERROR";
+export const depositError = (asset, error) => ({
+    type: DEPOSIT_ERROR,
     payload: {
         asset,
     },
@@ -39,28 +39,28 @@ export const supplyError = (asset, error) => ({
 });
 
 //                                               //
-// ---------------- REDEEM ACTIONS ------------  //
+// ---------------- WITHDRAW ACTIONS ------------  //
 //                                               //
 
-export const REDEEM_PENDING = "REDEEM_PENDING";
-export const redeemPending = (asset) => ({
-    type: REDEEM_PENDING,
+export const WITHDRAW_PENDING = "WITHDRAW_PENDING";
+export const withdrawPending = (asset) => ({
+    type: WITHDRAW_PENDING,
     payload: {
         asset,
     },
 });
 
-export const REDEEM_SUCCESS = "REDEEM_SUCCESS";
-export const redeemSuccess = (asset) => ({
-    type: REDEEM_SUCCESS,
+export const WITHDRAW_SUCCESS = "WITHDRAW_SUCCESS";
+export const withdrawSuccess = (asset) => ({
+    type: WITHDRAW_SUCCESS,
     payload: {
         asset,
     },
 });
 
-export const REDEEM_ERROR = "REDEEM_ERROR";
-export const redeemError = (asset, error) => ({
-    type: REDEEM_ERROR,
+export const WITHDRAW_ERROR = "WITHDRAW_ERROR";
+export const withdrawError = (asset, error) => ({
+    type: WITHDRAW_ERROR,
     payload: {
         asset,
     },
@@ -155,36 +155,36 @@ export const onAllocateAction = ({ drizzle, asset, amount }) => async (
         });
 };
 
-export const onSupplyAction = ({ drizzle, amount, asset }) => async (
+export const onDepositAction = ({ drizzle, amount, asset }) => async (
     dispatch
 ) => {
-    dispatch(supplyPending(asset.unit));
-    handle_supply_click({ drizzle, amount, asset })
-        .then(() => dispatch(supplySuccess(asset.unit)))
+    dispatch(depositPending(asset.unit));
+    handle_deposit_click({ drizzle, amount, asset })
+        .then(() => dispatch(depositSuccess(asset.unit)))
         .catch((error) => {
             notify.notification({
-                eventCode: "supplyError",
+                eventCode: "depositError",
                 type: "error",
                 message: error.message,
                 autoDismiss: 5000,
             });
-            dispatch(supplyError(asset.unit, error.message));
+            dispatch(depositError(asset.unit, error.message));
         });
 };
 
-export const onRedeemAction = ({ drizzle, amount, asset }) => async (
+export const onWithdrawAction = ({ drizzle, amount, asset }) => async (
     dispatch
 ) => {
-    dispatch(redeemPending(asset.unit));
-    handle_redeem_click({ drizzle, amount, asset })
-        .then(() => dispatch(redeemSuccess(asset.unit)))
+    dispatch(withdrawPending(asset.unit));
+    handle_withdraw_click({ drizzle, amount, asset })
+        .then(() => dispatch(withdrawSuccess(asset.unit)))
         .catch((error) => {
             notify.notification({
-                eventCode: "redeemError",
+                eventCode: "withdrawError",
                 type: "error",
                 message: error.message,
                 autoDismiss: 5000,
             });
-            dispatch(redeemError(asset.unit, error.message));
+            dispatch(withdrawError(asset.unit, error.message));
         });
 };

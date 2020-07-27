@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 
 //import { useHistory } from "react-router-dom";
-import SupplyTableCell from "components/UI/TableCell";
+import DepositTableCell from "components/UI/TableCell";
 import {
     formatNumber,
     formatPercent,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SupplyTables({ activeReserves, USDPrice }) {
+export default function DepositTables({ activeReserves, USDPrice }) {
     const classes = useStyles();
     //  let history = useHistory();
     // Section 5: Code Component
@@ -73,7 +73,7 @@ export default function SupplyTables({ activeReserves, USDPrice }) {
                 <TableBody>
                     {activeReserves.map((row) => (
                         <TableRow key={row.unit} className={classes.row}>
-                            <SupplyTableCell
+                            <DepositTableCell
                                 component="th"
                                 scope="row"
                                 className={classes.startcell}
@@ -104,8 +104,8 @@ export default function SupplyTables({ activeReserves, USDPrice }) {
                                         </Typography>
                                     </Box>
                                 </Box>
-                            </SupplyTableCell>
-                            <SupplyTableCell align="right">
+                            </DepositTableCell>
+                            <DepositTableCell align="right">
                                 <Typography variant="h6" color="textPrimary">
                                     {formatNumber(row.wallet, row.unit)}
                                 </Typography>
@@ -115,8 +115,8 @@ export default function SupplyTables({ activeReserves, USDPrice }) {
                                 >
                                     Wallet
                                 </Typography>
-                            </SupplyTableCell>
-                            <SupplyTableCell align="right">
+                            </DepositTableCell>
+                            <DepositTableCell align="right">
                                 <Typography variant="h6" color="textPrimary">
                                     {formatNumber(row.balance, row.unit)}
                                 </Typography>
@@ -126,8 +126,8 @@ export default function SupplyTables({ activeReserves, USDPrice }) {
                                 >
                                     Supplied
                                 </Typography>
-                            </SupplyTableCell>
-                            <SupplyTableCell align="right">
+                            </DepositTableCell>
+                            <DepositTableCell align="right">
                                 <Typography
                                     variant="h6"
                                     className={classes.label}
@@ -140,8 +140,8 @@ export default function SupplyTables({ activeReserves, USDPrice }) {
                                 >
                                     APR
                                 </Typography>
-                            </SupplyTableCell>
-                            <SupplyTableCell
+                            </DepositTableCell>
+                            <DepositTableCell
                                 align="right"
                                 className={classes.endcell}
                             >
@@ -159,7 +159,7 @@ export default function SupplyTables({ activeReserves, USDPrice }) {
                                 >
                                     Earnings
                                 </Typography>
-                            </SupplyTableCell>
+                            </DepositTableCell>
                         </TableRow>
                     ))}
                 </TableBody>

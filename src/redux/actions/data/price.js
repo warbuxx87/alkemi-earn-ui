@@ -6,7 +6,6 @@ import _ from "lodash";
 //const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
 
 const url_map = require("constants/url_map.json");
-const address_map = require("constants/address_map.json");
 
 // Section 2: Action types declarations and action creators
 
@@ -64,21 +63,12 @@ const fetchPriceCall = ({ currentNetworkName, unit, dispatch }) => {
                 const obj_data = JSON.parse(data);
 
                 const marketsData = obj_data.find((market) =>
-                    Object.prototype.hasOwnProperty.call(
-                        market,
-                        address_map[currentNetworkName][`address_${unit}`]
-                    )
+                    Object.prototype.hasOwnProperty.call(market, unit)
                 );
 
                 dispatch(
                     fetchPriceSuccess(
-                        `${
-                            marketsData[
-                                address_map[currentNetworkName][
-                                    `address_${unit}`
-                                ]
-                            ].oraclePrice
-                        }`.slice(0, -12)
+                        marketsData[unit].oraclePrice.slice(0, -12)
                     )
                 ); // TODO: USDC decimals should be only 6 but returns 12 zeros
             }

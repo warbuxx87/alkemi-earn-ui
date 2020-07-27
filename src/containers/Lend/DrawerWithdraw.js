@@ -6,42 +6,40 @@ import web3 from "web3";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
-import { onRedeemAction } from "redux/actions/data/lend";
+import { onWithdrawAction } from "redux/actions/data/lend";
 
 import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
 import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
-const DrawerRedeemContainer = ({ asset, drizzle, onRedeemAction }) => {
+const DrawerWithdrawContainer = ({ asset, drizzle, onWithdrawAction }) => {
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
     const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
 
-    const [enableRedeem, setEnableRedeem] = React.useState(false);
+    const [enableWithdraw, setEnableWithdraw] = React.useState(false);
 
     React.useEffect(() => {
         if (amount) {
             const isAmountLTBalance = web3.utils
                 .toBN(toWei(amount, asset.unit))
                 .lte(web3.utils.toBN(asset.balance));
-            setEnableRedeem(isAmountLTBalance);
+            setEnableWithdraw(isAmountLTBalance);
         }
     }, [amount, asset.balance, asset.unit]);
 
     return (
         <Drawer
             asset={asset}
-            buttonsLabel="Redeem"
+            buttonsLabel="Withdraw"
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
-            enableButtonClick={enableRedeem}
-            onButtonClick={({ asset, amount }) =>
-                onRedeemAction({ drizzle, asset, amount })
-            }
-            isDoingAction={asset.redeeming}
+            enableButtonClick={enableWithdraw}
+            onButtonClick={() => onWithdrawAction({ drizzle, asset, amount })}
+            isDoingAction={asset.withdrawing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
@@ -56,9 +54,9 @@ const DrawerRedeemContainer = ({ asset, drizzle, onRedeemAction }) => {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onRedeemAction }, dispatch);
+    bindActionCreators({ onWithdrawAction }, dispatch);
 
 export default compose(
     withDrizzle(),
     connect(mapStateToProps, mapDispatchToProps)
-)(DrawerRedeemContainer);
+)(DrawerWithdrawContainer);
