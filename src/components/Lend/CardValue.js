@@ -35,13 +35,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function TotalValue({ className, totalSupply, currency, difference, ...rest }) {
+function TotalValue({
+    className,
+    totalDeposit,
+    currency,
+    difference,
+    ...rest
+}) {
     const classes = useStyles();
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Supply Balance" className={classes.item} />
+            <CardHeader title="Total Deposits" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box
@@ -53,7 +59,7 @@ function TotalValue({ className, totalSupply, currency, difference, ...rest }) {
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {formatMoney(totalSupply, currency)}
+                        {formatMoney(totalDeposit, currency)}
                     </Typography>
                 </Box>
             </CardContent>

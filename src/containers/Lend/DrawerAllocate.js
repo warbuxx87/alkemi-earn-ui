@@ -11,7 +11,7 @@ import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
-const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
+const DrawerAllocateContainer = ({ asset, drizzle, onAllocateAction }) => {
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -34,9 +34,7 @@ const DrawerFaucetContainer = ({ asset, drizzle, onAllocateAction }) => {
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
             enableButtonClick={enableAllocate}
-            onButtonClick={({ asset, amount }) =>
-                onAllocateAction({ drizzle, asset, amount })
-            }
+            onButtonClick={() => onAllocateAction({ drizzle, asset, amount })}
             isDoingAction={asset.allocating}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
@@ -57,4 +55,4 @@ const mapDispatchToProps = (dispatch) =>
 export default compose(
     withDrizzle(),
     connect(mapStateToProps, mapDispatchToProps)
-)(DrawerFaucetContainer);
+)(DrawerAllocateContainer);

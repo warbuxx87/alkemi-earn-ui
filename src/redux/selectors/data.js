@@ -35,7 +35,7 @@ export const getCollateralRatio = (state) => {
     return null;
 };
 
-const getSupplyAccountValue = (state) => {
+const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );
@@ -60,34 +60,34 @@ const getBorrowAccountValue = (state) => {
 const lendAssetSelector = (state) => state.data.lend.assets;
 
 const lendBalanceSelector = (state) => {
-    const supplyBalance = {};
+    const depositBalance = {};
     Object.values(
         _.get(state, "contracts.MoneyMarket.getSupplyBalance", {})
-    ).forEach((balance) => (supplyBalance[balance.args[1]] = balance.value));
-    return supplyBalance;
+    ).forEach((balance) => (depositBalance[balance.args[1]] = balance.value));
+    return depositBalance;
 };
 
 const lendAPRSelector = (state) => {
-    const supplyAPR = {};
+    const depositAPR = {};
     Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
         (apr) =>
-            (supplyAPR[apr.args[0]] = calculateInterest(
+            (depositAPR[apr.args[0]] = calculateInterest(
                 apr.value.supplyRateMantissa
             ))
     );
-    return supplyAPR;
+    return depositAPR;
 };
 
 const lendPrincipalSelector = (state) => {
-    const supplyPrincipal = {};
+    const depositPrincipal = {};
 
     Object.values(
         _.get(state, "contracts.MoneyMarket.supplyBalances", {})
     ).forEach(
         (deposit) =>
-            (supplyPrincipal[deposit.args[1]] = deposit.value.principal)
+            (depositPrincipal[deposit.args[1]] = deposit.value.principal)
     );
-    return supplyPrincipal;
+    return depositPrincipal;
 };
 
 const getAllowances = (state) => {
@@ -101,8 +101,8 @@ const getAllowances = (state) => {
     return allowances;
 };
 
-function calculateUtilization(totalBorrow, totalSupply) {
-    const utilization = totalBorrow / totalSupply;
+function calculateUtilization(totalBorrow, totalDeposit) {
+    const utilization = totalBorrow / totalDeposit;
 
     return utilization;
 }
@@ -135,7 +135,7 @@ const getLendAsset = createSelector(
     lendPrincipalSelector,
     getUtilizationValues,
     getAssetPrices,
-    getSupplyAccountValue, // TODO: refactor this to getLendAccountValue for consistency
+    getDepositAccountValue, // TODO: refactor this to getLendAccountValue for consistency
     (
         assets,
         network,
@@ -144,7 +144,7 @@ const getLendAsset = createSelector(
         lendPrincipal,
         marketUtilization,
         assetPrices,
-        accountTotalSupply
+        accountTotalDeposit
     ) =>
         Object.values(assets).map((asset) => {
             // supply wallet
@@ -153,7 +153,7 @@ const getLendAsset = createSelector(
             let principal = "0";
             let utilization = "0";
             let price = "0";
-            let totalSupplied = "0";
+            let totalDeposited = "0";
             let ethBalance = "0";
             let weight = "0";
 
@@ -165,13 +165,13 @@ const getLendAsset = createSelector(
                 principal = lendPrincipal[token_address] || "0";
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
-                totalSupplied = accountTotalSupply || "0";
+                totalDeposited = accountTotalDeposit || "0";
                 ethBalance = web3.utils
                     .toBN(balance)
                     .mul(web3.utils.toBN(price))
                     .toString();
                 weight = (
-                    ethBalance / web3.utils.fromWei(totalSupplied)
+                    ethBalance / web3.utils.fromWei(totalDeposited)
                 ).toString();
 
                 USDprice =
@@ -198,7 +198,7 @@ export const getLendActive = createSelector(getLendAsset, (assets) => {
     return assets.filter((asset) => asset.balance !== "0");
 });
 
-export const getAggregatedLendAPR = createSelector(
+export const getAggregatedDepositAPR = createSelector(
     getLendActive,
     networkSelector,
     (activeAssets, network) => {
