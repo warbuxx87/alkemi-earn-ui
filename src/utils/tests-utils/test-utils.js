@@ -1,5 +1,6 @@
 // test-utils.js
 // Wraps testing-library and add support for redux store
+// TODO: Complete with proper store
 import React from "react";
 import { render as rtlRender } from "@testing-library/react";
 import { createStore } from "redux";
