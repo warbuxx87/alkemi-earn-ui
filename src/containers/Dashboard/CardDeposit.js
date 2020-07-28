@@ -8,7 +8,7 @@ import withDrizzle from "containers/Drizzle/withDrizzle";
 import CardDeposit from "components/Dashboard/CardDeposit";
 
 // Section 3: Selectors / hooks
-import { getTotalSupply } from "redux/selectors/totalBalance";
+import { getTotalDeposit } from "redux/selectors/totalBalance";
 import { getAggregatedLendAPR } from "redux/selectors/data/lend";
 import useFetchPrice from "hooks/useFetchPrice";
 
@@ -16,7 +16,7 @@ import useFetchPrice from "hooks/useFetchPrice";
 const CardDepositContainer = () => {
     useFetchPrice(); // gets current USD price
 
-    const totalDeposit = useSelector(getTotalSupply); //
+    const totalDeposit = useSelector(getTotalDeposit); //
 
     const totalDepositAPR = useSelector(getAggregatedLendAPR); // combined portfolio APR rate
 
