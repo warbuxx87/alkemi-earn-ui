@@ -44,6 +44,7 @@ function DepositBalance({ totalDeposit, currency, apr }) {
     return (
         <Card>
             <CardHeader title="Total Deposits" className={classes.item} />
+
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
