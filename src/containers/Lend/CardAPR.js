@@ -6,9 +6,9 @@ import CardAPR from "components/Lend/CardAPR";
 import { getAggregatedLendAPR } from "redux/selectors/data/lend";
 
 const CardAPRContainer = () => {
-    const totalLendAPR = useSelector(getAggregatedLendAPR);
+    const totalDepositAPR = useSelector(getAggregatedLendAPR);
 
-    return <CardAPR totalAPR={totalLendAPR} />;
+    return <CardAPR totalAPR={totalDepositAPR} />;
 };
 
 export default CardAPRContainer;

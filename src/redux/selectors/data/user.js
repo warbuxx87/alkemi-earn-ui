@@ -1,6 +1,5 @@
 // Libs
 import { createSelector } from "reselect";
-import _ from "lodash";
 import { networkSelector } from "redux/selectors/drizzle";
 
 const myAddressSelector = (state) => {

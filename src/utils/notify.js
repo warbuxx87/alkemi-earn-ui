@@ -62,6 +62,10 @@ const contractTXNotifier = (store) => (next) => (action) => {
             if (action.receipt.events.SupplyWithdrawn) {
                 displayMessage = "Supply Withdrawn";
             }
+
+            if (action.receipt.events.Transfer) {
+                displayMessage = "Tokens Minted";
+            }
             // Contract can still fail even if transaction was Successful
             // If Failure event detected in receipt object then return transaction failed rather than Successful to user
             // Error code is in txReceipt.Failure.returnValues.error
@@ -85,7 +89,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
 
         const options = {
             closeButton: true,
-            position: "top-center",
+            position: "top-right",
             // Automatically Close Notification after 15 seconds
             autoClose: 15000,
             hideProgressBar: true,
@@ -97,7 +101,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
 
         const display = (
             <ToastMessage
-                colorTheme={"light"}
+                colorTheme={"dark"}
                 icon={toastIcon}
                 variant={toastMessageVariant}
                 message={displayMessage}

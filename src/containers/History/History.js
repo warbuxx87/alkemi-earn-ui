@@ -1,6 +1,6 @@
 // Imports Section 1: React/Reduxd low level imports
 import React from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { compose } from "redux";
 
 // Imports Section 2: Internal Imports

@@ -20,8 +20,8 @@ import {
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";
-import SupplyButton from "containers/Lend/DrawerSupply";
-import FaucetButton from "containers/Lend/DrawerFaucet";
+import DepositButton from "containers/Lend/DrawerDeposit";
+import AllocateButton from "containers/Lend/DrawerAllocate";
 import { formatNumber, formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -86,12 +86,12 @@ const LendTable = ({ data = [], onActivate }) => {
             <PerfectScrollbar>
                 <Table className={classes.root}>
                     <TableBody>
-                        {data.map((Row) => (
-                            <TableRow key={Row.name} className={classes.row}>
+                        {data.map((row) => (
+                            <TableRow key={row.name} className={classes.row}>
                                 <LendTableCell
                                     className={classes.startcell}
                                     component="th"
-                                    scope="Row"
+                                    scope="row"
                                     style={{ width: "16%" }}
                                 >
                                     <Box
@@ -101,21 +101,21 @@ const LendTable = ({ data = [], onActivate }) => {
                                     >
                                         <img
                                             className={classes.imageSize}
-                                            src={Row.image}
-                                            alt="dai"
+                                            src={row.image}
+                                            alt={row.name}
                                         />
                                         <Box ml={2}>
                                             <Typography
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {Row.unit}
+                                                {row.unit}
                                             </Typography>
                                             <Typography
                                                 variant="body2"
                                                 color="textSecondary"
                                             >
-                                                {Row.name}
+                                                {row.name}
                                             </Typography>
                                         </Box>
                                     </Box>
@@ -128,7 +128,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(Row.wallet, Row.unit)}
+                                        {formatNumber(row.wallet, row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -163,7 +163,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                         color="textPrimary"
                                         className={classes.label}
                                     >
-                                        {formatPercent(Row.apr)}
+                                        {formatPercent(row.apr)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -176,12 +176,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                     align="center"
                                     style={{ width: "16%" }}
                                 >
-                                    <Switch
-                                        // checked={state.checkedB}
-                                        // onChange={handleChange}
-                                        name="checkedB"
-                                        color="primary"
-                                    />
+                                    <Switch name="checkedB" color="primary" />
                                 </LendTableCell>
                                 <LendTableCell
                                     align="right"
@@ -194,10 +189,17 @@ const LendTable = ({ data = [], onActivate }) => {
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={1}>
-                                            <FaucetButton asset={Row} />
+                                            {row.allocating ? (
+                                                <CircularProgress
+                                                    size={20}
+                                                    color="inherit"
+                                                />
+                                            ) : (
+                                                <AllocateButton asset={row} />
+                                            )}
                                         </Box>
-                                        {Row.activated ? (
-                                            <SupplyButton asset={Row} />
+                                        {row.activated ? (
+                                            <DepositButton asset={row} />
                                         ) : (
                                             <Button
                                                 type="button"
@@ -207,12 +209,12 @@ const LendTable = ({ data = [], onActivate }) => {
                                                 variant="outlined"
                                                 size="small"
                                                 color="secondary"
-                                                disable={Row.pending.toString()}
+                                                disable={row.activating.toString()}
                                                 onClick={() =>
-                                                    onActivate(Row.unit)
+                                                    onActivate(row.unit)
                                                 }
                                             >
-                                                {Row.pending ? (
+                                                {row.activating ? (
                                                     <CircularProgress
                                                         size={20}
                                                         color="inherit"

@@ -15,8 +15,7 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { fromWei, formatPercent } from "utils/ui";
-import { format_str_to_kmb } from "utils/markets";
+import { formatPercent, formatMoney } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -38,13 +37,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function SupplyBalance({ totalSupply, currency, apr }) {
+function DepositBalance({ totalDeposit, currency, apr }) {
     const classes = useStyles();
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Current Deposit" className={classes.item} />
+            <CardHeader title="Total Deposits" className={classes.item} />
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
@@ -72,7 +71,7 @@ function SupplyBalance({ totalSupply, currency, apr }) {
                                 color="textPrimary"
                                 align="left"
                             >
-                                ${format_str_to_kmb(fromWei(totalSupply))}
+                                {formatMoney(totalDeposit, currency)}
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -99,9 +98,9 @@ function SupplyBalance({ totalSupply, currency, apr }) {
 }
 
 // Section 6: Documentation with PropTypes
-SupplyBalance.propTypes = {
+DepositBalance.propTypes = {
     className: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
-export default SupplyBalance;
+export default DepositBalance;

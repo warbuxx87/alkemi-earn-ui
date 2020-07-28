@@ -2,7 +2,7 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 import web3 from "web3";
 
-const getSupplyAccountValue = (state) => {
+const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );
@@ -18,7 +18,7 @@ export const getCollateralRatio = (state) => {
         state,
         "contracts.MoneyMarket.collateralRatio"
     );
-    if (collateralRatio["0x0"]) {
+    if (collateralRatio && collateralRatio["0x0"]) {
         //console.log("collateralRatio", collateralRatio["0x0"].value);
         return _.get(collateralRatio, "['0x0'].value");
     }
@@ -36,7 +36,7 @@ const getBorrowAccountValue = (state) => {
 };
 
 export const getMaxBorrowAmount = createSelector(
-    getSupplyAccountValue,
+    getDepositAccountValue,
     getCollateralRatio,
     getBorrowAccountValue,
     (suppliedValue, collateralValue, borrowedValue) =>
@@ -53,16 +53,6 @@ export const getSafeBorrowAmount = createSelector(
     getMaxBorrowAmount,
     (maxBorrowValue) => (maxBorrowValue ? maxBorrowValue * "0.8" : "0")
 );
-
-// const getAccountLiquidity = state => {
-//     const getAccountLiquidity = Object.values(
-//         _.get(state, "contracts.MoneyMarket.getAccountLiquidity", {})
-//     );
-//     if (getAccountLiquidity[0]) {
-//         return _.get(getAccountLiquidity, "[0].value");
-//     }
-//     return null;
-// };
 
 export const getUserCollateralRatio = (state) => {
     const calculateAccountValues = Object.values(
@@ -84,15 +74,13 @@ export const getUSDPrice = (state) => {
     else return null;
 };
 
-//export const getUSDPrice = createSelector(getUSDPrice, (price) => price);
-
-export const getTotalSupply = createSelector(
-    getSupplyAccountValue,
+export const getTotalDeposit = createSelector(
+    getDepositAccountValue,
     getUSDPrice,
-    (supplyValue, USDxPrice) =>
-        supplyValue && USDxPrice
+    (depositValue, USDxPrice) =>
+        depositValue && USDxPrice
             ? web3.utils
-                  .toBN(supplyValue)
+                  .toBN(depositValue)
                   .div(web3.utils.toBN(USDxPrice))
                   .toString()
             : "0"
@@ -111,13 +99,13 @@ export const getTotalBorrow = createSelector(
 );
 
 export const getAggregatedBalance = createSelector(
-    getSupplyAccountValue,
+    getDepositAccountValue,
     getBorrowAccountValue,
     getUSDPrice,
-    (supplyValue, borrowValue, USDxPrice) =>
-        supplyValue && borrowValue && USDxPrice
+    (depositValue, borrowValue, USDxPrice) =>
+        depositValue && borrowValue && USDxPrice
             ? web3.utils
-                  .toBN(supplyValue)
+                  .toBN(depositValue)
                   .sub(web3.utils.toBN(borrowValue))
                   .div(web3.utils.toBN(USDxPrice))
                   .toString()

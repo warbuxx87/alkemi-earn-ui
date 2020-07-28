@@ -3,7 +3,6 @@
 import _ from "lodash";
 
 const url_map = require("constants/url_map.json");
-//const address_map = require("constants/address_map.json");
 
 // Section 2: Action types declarations and action creators
 
@@ -66,7 +65,7 @@ const fetchPriceCall = ({ currentNetworkName, unit, dispatch }) => {
 
                 dispatch(
                     fetchPriceSuccess(
-                        `${marketsData[unit].oraclePrice}`.slice(0, -12)
+                        marketsData[unit].oraclePrice.slice(0, -12)
                     )
                 ); // TODO: USDC decimals should be only 6 but returns 12 zeros
             }

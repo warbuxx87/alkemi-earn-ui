@@ -1,7 +1,6 @@
 // Section 1: Utilities imports and low level imports
 import _ from "lodash";
 const url_map = require("constants/url_map.json");
-const address_map = require("constants/address_map.json");
 
 // Section 2: Action types declarations and action creators
 

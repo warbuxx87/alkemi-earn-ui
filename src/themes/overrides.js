@@ -10,7 +10,13 @@ const overrides = {
             disableGutters: "true",
         },
     },
-
+    MuiInput: {
+        root: {
+            "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
+                display: "none",
+            },
+        },
+    },
     MuiButton: {
         root: {
             textTransform: "capitalize",

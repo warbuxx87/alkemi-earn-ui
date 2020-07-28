@@ -159,8 +159,6 @@ export const toDate = (timeStamp) => {
 };
 
 export const checkAction = (address, toAddress, fromAddress, amount) => {
-    // get MoneyMarket Address from constants
-    const mMarket = "0xe6a53f96ceca750ef8589c5b376872213aa4f230".toUpperCase();
     const myAddress = address.toUpperCase();
     let action;
     if (amount === "0") {

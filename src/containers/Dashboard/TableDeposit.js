@@ -13,7 +13,7 @@ import { compose } from "redux";
 // } from "utils/drizzle";
 
 import withDrizzle from "containers/Drizzle/withDrizzle";
-import TableSupply from "components/Dashboard/TableSupply";
+import TableSupply from "components/Dashboard/TableDeposit";
 
 import useFetchPrice from "hooks/useFetchPrice";
 
@@ -22,7 +22,7 @@ import { getLendActive } from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
-const TableSupplyContainer = ({ activeReserves }) => {
+const TableDepositContainer = ({ activeReserves }) => {
     useFetchPrice(); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -41,4 +41,4 @@ const mapStateToProps = (state) => ({
 export default compose(
     withDrizzle(),
     connect(mapStateToProps)
-)(TableSupplyContainer);
+)(TableDepositContainer);

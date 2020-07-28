@@ -148,7 +148,7 @@ const getBorrowAsset = createSelector(
             let maxBorrowToken = "0";
             let safeBorrowToken = "0";
             let totalBorrowed = "0";
-            if (network) {
+            if (network && address[network]) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
                 apr = borrowAPR[token_address] || "0";
