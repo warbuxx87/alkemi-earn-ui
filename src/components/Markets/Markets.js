@@ -67,16 +67,16 @@ export default class Markets extends React.Component {
             .then((data) => {
                 if (data) {
                     let obj_data = JSON.parse(data);
-                    console.log("obj_data", obj_data);
+                    // console.log("obj_data", obj_data);
 
                     let arr_markets = [];
                     let key_markets = Object.keys(obj_data);
-                    console.log("key_markets", key_markets);
+                    // console.log("key_markets", key_markets);
 
                     for (var i = 0; i < key_markets.length; i++) {
                         arr_markets.push(obj_data[key_markets[i]]);
                     }
-                    console.log("arr_markets", arr_markets);
+                    // console.log("arr_markets", arr_markets);
 
                     let arr_items = [];
 
@@ -98,7 +98,7 @@ export default class Markets extends React.Component {
 
                         arr_items.push(asset);
                     }
-                    console.log("arr_items", arr_items);
+                    // console.log("arr_items", arr_items);
 
                     let totalCollateralRatio =
                         (totalSupplyBalanceUSD / totalBorrowBalanceUSD) * 100;
