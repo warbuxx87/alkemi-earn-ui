@@ -1,8 +1,23 @@
+// Main Component
+
+// Section 1: React low level imports
 import React from "react";
-import "./markets.scss";
 import _ from "lodash";
 
-import MyProgress from "./Progress";
+// Section 2: Material-UI imports
+import {
+          Box,
+          Container,
+          Card,
+          CardContent,
+          CardHeader,
+          Divider,
+         Grid,
+         makeStyles, } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+
+// Section 3: Components & Containers import from the application
+import Stats from "./CardStats";
 import WETH from "assets/images/WETH.svg";
 import USDT from "assets/images/USDT.svg";
 import WBTC from "assets/images/WBTC.svg";
@@ -18,12 +33,33 @@ import {
     format_str_to_percent,
 } from "utils/markets";
 
-// add i18n.
-import { IntlProvider, FormattedMessage } from "react-intl";
-import en_US from "language/en_US";
-import zh_CN from "language/zh_CN";
+import MarketCardSupply from "./CardSupply";
+import MarketCardBorrow from "./CardBorrow";
+import MarketCardCollateral from "./CardCollateral";
+import MarketTable from "./TableMarkets";
 
-export default class Markets extends React.Component {
+
+
+
+const useStyles = theme => ({
+    root: {
+        marginLeft: 250,
+        marginRight: 10
+    },
+    heading: {
+        fontSize: "1rem",
+        fontWeight: theme.typography.fontWeightRegular
+    },
+    container: {
+        [theme.breakpoints.up("lg")]: {
+            paddingLeft: 0,
+            paddingRight: 0,
+        },
+    },
+});
+
+
+class Markets extends React.Component {
     constructor(props) {
         super(props);
 
@@ -164,217 +200,74 @@ export default class Markets extends React.Component {
             });
     };
 
+  // Section 5: Code Component
     render() {
+       const { classes } = this.props;
         return (
-            <IntlProvider
-                locale={"en"}
-                messages={this.state.cur_language === "中文" ? zh_CN : en_US}
-            >
-                <div className="header">
-                    <div className="header-item supply-balance">
-                        <div className="item-title">
-                            <FormattedMessage id="Total_Supply_Balance" />
-                        </div>
-                        <div className="item-num">
-                            $
-                            {this.state.data_is_ok &&
-                                format_str_to_kmb(
-                                    this.state.totals.totalSupplyBalanceUSD.toString()
-                                )}
-                        </div>
-                    </div>
 
-                    <div className="header-item borrow-balance">
-                        <div className="item-title">
-                            <FormattedMessage id="Total_Borrow_Balance" />
-                        </div>
-                        <div className="item-num item-num-borrow">
-                            $
-                            {this.state.data_is_ok &&
-                                format_str_to_kmb(
-                                    this.state.totals.totalBorrowBalanceUSD.toString()
-                                )}
-                        </div>
-                    </div>
-
-                    <div className="header-item collate-rate no-right-margin">
-                        <div className="item-title">
-                            <FormattedMessage id="Total_Collateralization_ratio" />
-                        </div>
-                        <div className="item-num item-num-ratio">
-                            {this.state.data_is_ok &&
-                                this.state.totals.totalCollateralRatio}
-                            %
-                        </div>
-                    </div>
-                </div>
-
-                <div className="total-wrap">
-                    <div className="total-wrap-supply">
-                        <h4>
-                            <FormattedMessage id="Total_Supply" />
-                        </h4>
-                        <div
-                            className="pro_wrap"
-                            style={{ width: "100%", margin: "0 auto" }}
-                        >
+          <Container maxWidth={false} className={classes.container}>
+               <Grid container spacing={3}>
+               <Grid item lg={4} sm={6} xs={12}>
+                        <MarketCardSupply />
+                        </Grid>
+                      <Grid item lg={4} sm={6} xs={12}>
+                         <MarketCardBorrow />
+                      </Grid>
+                     <Grid item lg={4} sm={6} xs={12}>
+                        <MarketCardCollateral />
+                       </Grid>
+              <Grid item lg={6} sm={6} xs={12}>
+                    <Card>
+                        <CardHeader title="Deposits"  />
+                        <Divider />
+                        <CardContent>
+                        <Box height="180px" overflow="auto" pr={3} pt={1}>
                             {this.state.array_is_ok &&
                                 this.state.supply_array.map((supply_item) => {
                                     return (
-                                        <MyProgress
+                                        <Stats
                                             {...supply_item}
                                             key={supply_item.symbol}
                                             type={"supply"}
                                         />
                                     );
                                 })}
-                        </div>
-                    </div>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                  </Grid>
 
-                    <div className="total-wrap-borrow">
-                        <h4>
-                            <FormattedMessage id="Total_Borrow" />
-                        </h4>
-                        <div
-                            className="pro_wrap"
-                            style={{ width: "100%", margin: "0 auto" }}
-                        >
+                  <Grid item lg={6} sm={6} xs={12}>
+                        <Card>
+                            <CardHeader title="Borrowed"  />
+                            <Divider />
+                            <CardContent>
+
+                            <Box height="180px" overflow="auto" pr={3} pt={1}>
                             {this.state.array_is_ok &&
                                 this.state.borrow_array.map((borrow_item) => {
                                     return (
-                                        <MyProgress
+                                        <Stats
                                             {...borrow_item}
                                             key={borrow_item.symbol}
                                             type={"borrow"}
                                         />
                                     );
                                 })}
-                        </div>
-                    </div>
-                    <div className="clear"></div>
-                </div>
-
-                <div className="all-markets">
-                    <h5>
-                        <FormattedMessage id="All_Markets" />
-                    </h5>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    <span
-                                        className={
-                                            this.state.cur_language ===
-                                            "English"
-                                                ? "linheight45"
-                                                : "linheight30"
-                                        }
-                                    >
-                                        <FormattedMessage id="Market" />
-                                    </span>
-                                </th>
-                                <th>
-                                    <span
-                                        className={
-                                            this.state.cur_language ===
-                                            "English"
-                                                ? "linheight45"
-                                                : "linheight30"
-                                        }
-                                    >
-                                        <FormattedMessage id="Gross_Supply" />
-                                    </span>
-                                </th>
-                                <th>
-                                    <span
-                                        className={
-                                            this.state.cur_language ===
-                                            "English"
-                                                ? "linheight45"
-                                                : "linheight30"
-                                        }
-                                    >
-                                        <FormattedMessage id="Supply_APR" />
-                                    </span>
-                                </th>
-                                <th>
-                                    <span
-                                        className={
-                                            this.state.cur_language ===
-                                            "English"
-                                                ? "linheight45"
-                                                : "linheight30"
-                                        }
-                                    >
-                                        <FormattedMessage id="Gross_Borrow" />
-                                    </span>
-                                </th>
-                                <th>
-                                    <span
-                                        className={
-                                            this.state.cur_language ===
-                                            "English"
-                                                ? "linheight45"
-                                                : "linheight30"
-                                        }
-                                    >
-                                        <FormattedMessage id="Borrow_APR" />
-                                    </span>
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div className="body-wrap">
-                        <table>
-                            <tbody>
-                                {this.state.data_is_ok &&
-                                    this.state.data_markets.map((item) => (
-                                        <tr key={item.address}>
-                                            <td>
-                                                <img
-                                                    alt={item.name}
-                                                    src={
-                                                        this.state.token[
-                                                            item.symbol
-                                                        ]
-                                                    }
-                                                />
-                                                <span className="token-name">
-                                                    {item.name}
-                                                </span>
-                                                <span className="token-name-short">
-                                                    {item.symbol}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                $
-                                                {format_str_to_kmb(
-                                                    item.totalSupplyUSD
-                                                )}
-                                            </td>
-                                            <td>
-                                                {format_str_to_percent(
-                                                    item.supplyAPR
-                                                )}
-                                            </td>
-                                            <td>
-                                                $
-                                                {format_str_to_kmb(
-                                                    item.totalBorrowUSD
-                                                )}
-                                            </td>
-                                            <td>
-                                                {format_str_to_percent(
-                                                    item.borrowAPR
-                                                )}
-                                            </td>
-                                        </tr>
-                                    ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </IntlProvider>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                  </Grid>
+                    <Grid item lg={12} sm={12} xs={12}>
+                    <MarketTable />
+                    </Grid>
+                </Grid>
+            </Container>
         );
     }
 }
+
+// Section 6: Documentation with PropTypes
+
+// Section 7:  Connect styles and export
+export default withStyles(useStyles)(Markets);
