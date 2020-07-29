@@ -1,21 +1,27 @@
+// Section 1: Imports (Low level & from application)
 import React from "react";
-import toJson from "enzyme-to-json";
 
-import Dashboard from "components/Dashboard/Dashboard";
-import createShallow from "utils/tests-utils/createShallow";
+import Dashboard from "../Dashboard";
 
-describe("<Dashboard />", () => {
-    let shallow;
+import { render } from "@testing-library/react";
+
+import ComponentsWrapper from "utils/tests-utils/ComponentsWrapper";
+
+// Section 2: Constants & Helper functions
+
+// Section 3: The Tests
+describe("<App />", () => {
     let wrapper;
 
-    beforeAll(() => {
-        shallow = createShallow({ dive: 1 });
-    });
     beforeEach(() => {
-        wrapper = shallow(<Dashboard />);
+        wrapper = render(
+            <ComponentsWrapper>
+                <Dashboard />
+            </ComponentsWrapper>
+        );
     });
 
     it("matches snapshot", () => {
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 });

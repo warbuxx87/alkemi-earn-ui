@@ -6,9 +6,7 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 import { render, screen, fireEvent } from "@testing-library/react";
 
-import { BrowserRouter as Router } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "containers/Drizzle/drizzleStore.js"; // TODO: Decide between using this real store generator, or a fake barebones one
+import ComponentsWrapper from "utils/tests-utils/ComponentsWrapper";
 
 // Section 2: Constants & Helper functions
 
@@ -25,13 +23,11 @@ describe("MobileMenu component", () => {
         });
 
         render(
-            <Router>
-                <Provider store={store}>
-                    <MuiThemeProvider theme={theme}>
-                        <MobileMenu />
-                    </MuiThemeProvider>
-                </Provider>
-            </Router>
+            <ComponentsWrapper>
+                <MuiThemeProvider theme={theme}>
+                    <MobileMenu />
+                </MuiThemeProvider>
+            </ComponentsWrapper>
         );
 
         expect(screen.queryByTestId("menuDrawer")).toBeNull(); // notice queryByTestId here instead of getByTestId
@@ -44,13 +40,11 @@ describe("MobileMenu component", () => {
         });
 
         render(
-            <Router>
-                <Provider store={store}>
-                    <MuiThemeProvider theme={theme}>
-                        <MobileMenu />
-                    </MuiThemeProvider>
-                </Provider>
-            </Router>
+            <ComponentsWrapper>
+                <MuiThemeProvider theme={theme}>
+                    <MobileMenu />
+                </MuiThemeProvider>
+            </ComponentsWrapper>
         );
 
         expect(screen.queryByTestId("menuDrawer")).toBeNull(); // notice queryByTestId here instead of getByTestId

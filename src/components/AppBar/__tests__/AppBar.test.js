@@ -2,9 +2,9 @@
 import React from "react";
 import AppBar from "../AppBar";
 
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-
 import { render, screen } from "@testing-library/react";
+
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 // Section 2: Constants & Helper functions
 const DEMO_ETH_ADDRESS = "0xA13C9A32BcDB89e58c411941304E7e606f1b4c22";
