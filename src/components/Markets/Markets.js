@@ -12,8 +12,8 @@ import {
           CardContent,
           CardHeader,
           Divider,
-         Grid,
-         makeStyles, } from "@material-ui/core";
+          Grid,
+        } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application

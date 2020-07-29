@@ -6,11 +6,8 @@ import React from "react";
 // Section 2: Material-UI imports
 import {
   Box,
-  Card,
-  Container,
   LinearProgress,
   Typography,
-  makeStyles
 } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
 

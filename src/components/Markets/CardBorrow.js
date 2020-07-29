@@ -2,7 +2,6 @@
 
 // Section 1: React low level imports
 import React from "react";
-import PropTypes from "prop-types";
 import _ from "lodash";
 
 // Section 2: Material-UI imports
@@ -12,7 +11,6 @@ import {
     CardContent,
     CardHeader,
     Divider,
-    Grid,
     Typography,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";

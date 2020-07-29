@@ -2,23 +2,18 @@
 
 // Section 1: React low level imports
 import React from "react";
-import PropTypes from "prop-types";
 import _ from "lodash";
 
 // Section 2: Material-UI imports
 import {
     Box,
     Card,
-    CardContent,
     CardHeader,
     Divider,
-    Grid,
-    fade,
     Paper,
     Table,
     TableBody,
     TableContainer,
-    TableCell,
     TableHead,
     TableRow,
     Typography,
@@ -216,6 +211,7 @@ class TableMarkets extends React.Component {
         <Card>
       <CardHeader title="MArket Liquidity" className={classes.header} />
       <Divider />
+        <PerfectScrollbar>
        <TableContainer component={Paper}>
        <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -314,6 +310,7 @@ class TableMarkets extends React.Component {
         </TableBody>
   </Table>
  </TableContainer>
+  </PerfectScrollbar>
 </Card>
 
       );
