@@ -16,7 +16,7 @@ const MarketsContainer = () => {
         true
     );
 
-    const totalBorrowBalanceContent = `$${
+    const totalBorrowedContent = `$${
         calculationsTotals && calculationsTotals.totalBorrowBalanceUSD
             ? format_str_to_kmb(
                   calculationsTotals.totalBorrowBalanceUSD.toString()
@@ -28,7 +28,7 @@ const MarketsContainer = () => {
         <Markets
             supplyArray={supplyArray}
             borrowArray={borrowArray}
-            totalBorrowBalanceContent={totalBorrowBalanceContent}
+            totalBorrowedContent={totalBorrowedContent}
         />
     );
 };

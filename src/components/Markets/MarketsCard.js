@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const MarketsCard = ({ title, totalBorrowBalanceContent }) => {
+const MarketsCard = ({ title, cardContent }) => {
     const classes = useStyles();
 
     return (
@@ -49,7 +49,7 @@ const MarketsCard = ({ title, totalBorrowBalanceContent }) => {
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {totalBorrowBalanceContent}
+                        {cardContent}
                     </Typography>
                 </Box>
             </CardContent>

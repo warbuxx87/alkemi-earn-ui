@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const Markets = ({ supplyArray, borrowArray, totalBorrowBalanceContent }) => {
+const Markets = ({ supplyArray, borrowArray, totalBorrowedContent }) => {
     const classes = useStyles();
 
     return (
@@ -57,7 +57,7 @@ const Markets = ({ supplyArray, borrowArray, totalBorrowBalanceContent }) => {
                 <Grid item lg={4} sm={6} xs={12}>
                     <MarketsCard
                         title="Total Borrowed"
-                        totalBorrowBalanceContent={totalBorrowBalanceContent}
+                        cardContent={totalBorrowedContent}
                     />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
