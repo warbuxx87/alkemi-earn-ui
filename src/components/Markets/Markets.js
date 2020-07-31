@@ -18,9 +18,7 @@ import {
 
 // Section 3: Components & Containers import from the application
 import Stats from "./CardStats";
-
 import MarketsCard from "./MarketsCard";
-
 import MarketsTable from "./TableMarkets";
 
 // Section 4: Define Styles function taking theme as argument and returning an object

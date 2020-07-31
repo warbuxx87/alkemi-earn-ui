@@ -2,6 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
+import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
 import {
@@ -58,6 +59,10 @@ const MarketsCard = ({ title, cardContent }) => {
 };
 
 // Section 6: Documentation with PropTypes
+MarketsCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    cardContent: PropTypes.string.isRequired,
+};
 
 // Section 7:  Connect styles and export
 export default MarketsCard;
