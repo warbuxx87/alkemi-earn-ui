@@ -21,9 +21,6 @@ import Stats from "./CardStats";
 
 import MarketsCard from "./MarketsCard";
 
-import MarketCardSupply from "./CardSupply";
-import MarketCardCollateral from "./CardCollateral";
-
 import MarketTable from "./TableMarkets";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -45,14 +42,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const Markets = ({ supplyArray, borrowArray, totalBorrowedContent }) => {
+const Markets = ({
+    supplyArray,
+    borrowArray,
+    totalBorrowedContent,
+    collateralRatioContent,
+    totalDepositsContent,
+}) => {
     const classes = useStyles();
 
     return (
         <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <MarketCardSupply />
+                    <MarketsCard
+                        title="Total Deposits"
+                        cardContent={totalDepositsContent}
+                    />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <MarketsCard
@@ -61,7 +67,10 @@ const Markets = ({ supplyArray, borrowArray, totalBorrowedContent }) => {
                     />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <MarketCardCollateral />
+                    <MarketsCard
+                        title="Collateral Ratio"
+                        cardContent={collateralRatioContent}
+                    />
                 </Grid>
                 <Grid item lg={6} sm={6} xs={12}>
                     <Card>

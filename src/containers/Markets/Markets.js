@@ -24,11 +24,27 @@ const MarketsContainer = () => {
             : 0
     }`;
 
+    const collateralRatioContent = `${
+        calculationsTotals && calculationsTotals.totalBorrowBalanceUSD
+            ? calculationsTotals.totalCollateralRatio
+            : 0
+    }%`;
+
+    const totalDepositsContent = `$${
+        calculationsTotals && calculationsTotals.totalBorrowBalanceUSD
+            ? format_str_to_kmb(
+                  calculationsTotals.totalSupplyBalanceUSD.toString()
+              )
+            : 0
+    }`;
+
     return (
         <Markets
             supplyArray={supplyArray}
             borrowArray={borrowArray}
             totalBorrowedContent={totalBorrowedContent}
+            collateralRatioContent={collateralRatioContent}
+            totalDepositsContent={totalDepositsContent}
         />
     );
 };
