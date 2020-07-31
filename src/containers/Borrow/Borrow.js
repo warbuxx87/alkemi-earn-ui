@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // Main Container
 
 // Section 1: React/Reduxd low level imports

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // Main Container
 
 // Section 1: React/Redux low level imports
@@ -58,6 +57,7 @@ const mapDispatchToProps = (dispatch) =>
         dispatch
     );
 
+// Section 6: Exports
 export default compose(
     withDrizzle(),
     connect(mapStateToProps, mapDispatchToProps)

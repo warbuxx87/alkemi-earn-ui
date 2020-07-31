@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 // Section 1: React/Redux low level imports
 import React from "react";
 import { connect, useSelector } from "react-redux";

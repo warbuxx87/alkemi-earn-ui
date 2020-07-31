@@ -1,6 +1,6 @@
 // Section 1: React low level imports
 import React from "react";
-import _ from "lodash";
+import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
 import {
@@ -21,8 +21,7 @@ import MarketCardBorrow from "./CardBorrow";
 import MarketCardCollateral from "./CardCollateral";
 import MarketTable from "./TableMarkets";
 
-import useFetchMarkets from "hooks/useFetchMarkets";
-
+// Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
         marginLeft: 250,
@@ -40,11 +39,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Markets = () => {
+// Section 5: Code Component
+const Markets = ({ supplyArray, borrowArray }) => {
     const classes = useStyles();
-
-    // TODO: to be moved to container
-    const { supplyArray, borrowArray } = useFetchMarkets(true);
 
     return (
         <Container maxWidth={false} className={classes.container}>
@@ -109,4 +106,11 @@ const Markets = () => {
     );
 };
 
+// Section 6: Documentation with PropTypes
+Markets.propTypes = {
+    supplyArray: PropTypes.array.isRequired,
+    borrowArray: PropTypes.array.isRequired,
+};
+
+// Section 7:  Export
 export default Markets;

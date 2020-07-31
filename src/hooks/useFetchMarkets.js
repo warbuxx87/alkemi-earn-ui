@@ -79,14 +79,6 @@ export default (fetchPeriodically = false) => {
                         );
 
                         arr_markets = arr_items;
-                        // return;
-
-                        console.log({
-                            data: obj_data,
-                            data_is_ok: true,
-                            data_markets: arr_markets,
-                            totals: totals,
-                        });
 
                         let supply_array = _.cloneDeep(arr_markets);
                         let borrow_array = _.cloneDeep(arr_markets);
