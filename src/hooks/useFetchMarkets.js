@@ -91,20 +91,25 @@ export default (fetchPeriodically = false) => {
                         supply_array.sort(compare_supply);
                         borrow_array.sort(compare_borrow);
 
-                        for (var i = 0; i < supply_array.length; i++) {
-                            supply_array[i].percentage_supply = Number(
-                                (supply_array[i].totalSupplyUSD /
+                        supply_array = supply_array.map((e) => {
+                            e.percentage_supply = Number(
+                                (e.totalSupplyUSD /
                                     totals.totalSupplyBalanceUSD) *
                                     100
                             ).toFixed(1);
-                        }
-                        for (var j = 0; j < borrow_array.length; j++) {
-                            borrow_array[j].percentage_borrow = Number(
-                                (borrow_array[j].totalBorrowUSD /
+
+                            return e;
+                        });
+
+                        borrow_array = borrow_array.map((e) => {
+                            e.percentage_borrow = Number(
+                                (e.totalBorrowUSD /
                                     totals.totalBorrowBalanceUSD) *
                                     100
                             ).toFixed(1);
-                        }
+
+                            return e;
+                        });
 
                         setSupplyArray(supply_array);
                         setBorrowArray(borrow_array);
