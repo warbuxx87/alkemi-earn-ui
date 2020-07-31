@@ -1,3 +1,5 @@
+// Main component
+
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
@@ -16,9 +18,12 @@ import {
 
 // Section 3: Components & Containers import from the application
 import Stats from "./CardStats";
+
+import MarketsCard from "./MarketsCard";
+
 import MarketCardSupply from "./CardSupply";
-import MarketCardBorrow from "./CardBorrow";
 import MarketCardCollateral from "./CardCollateral";
+
 import MarketTable from "./TableMarkets";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -40,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const Markets = ({ supplyArray, borrowArray }) => {
+const Markets = ({ supplyArray, borrowArray, totalBorrowBalanceContent }) => {
     const classes = useStyles();
 
     return (
@@ -50,7 +55,10 @@ const Markets = ({ supplyArray, borrowArray }) => {
                     <MarketCardSupply />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <MarketCardBorrow />
+                    <MarketsCard
+                        title="Total Borrowed"
+                        totalBorrowBalanceContent={totalBorrowBalanceContent}
+                    />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <MarketCardCollateral />

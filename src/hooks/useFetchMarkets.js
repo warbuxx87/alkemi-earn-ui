@@ -11,9 +11,10 @@ import { compare_supply, compare_borrow } from "utils/markets";
 export default (fetchPeriodically = false) => {
     const dispatch = useDispatch();
 
+    const [calculationsTotals, setCalculationsTotals] = useState({});
+
     const [supplyArray, setSupplyArray] = useState([]);
     const [borrowArray, setBorrowArray] = useState([]);
-    //const [array_is_ok, setArrayReady] = useState(false);
 
     useEffect(() => {
         let timer;
@@ -103,6 +104,7 @@ export default (fetchPeriodically = false) => {
 
                         setSupplyArray(supply_array);
                         setBorrowArray(borrow_array);
+                        setCalculationsTotals(totals);
                     }
                 });
         };
@@ -122,5 +124,5 @@ export default (fetchPeriodically = false) => {
         };
     }, [dispatch, fetchPeriodically]);
 
-    return { supplyArray, borrowArray };
+    return { supplyArray, borrowArray, calculationsTotals };
 };
