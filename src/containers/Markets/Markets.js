@@ -17,7 +17,7 @@ const MarketsContainer = () => {
         supplyArray,
         borrowArray,
         calculationsTotals,
-    } = useFetchMarkets(true);
+    } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
 
     const totalBorrowedContent = `$${
         calculationsTotals && calculationsTotals.totalBorrowBalanceUSD

@@ -5,7 +5,7 @@ import _ from "lodash";
 
 import { compare_supply, compare_borrow } from "utils/markets";
 
-// import { fetchPrice } from "redux/actions/data/price";
+const url_map = require("constants/url_map.json");
 
 // Retrieve the USD price every 15 seconds
 export default (fetchPeriodically = false) => {
@@ -21,9 +21,9 @@ export default (fetchPeriodically = false) => {
     useEffect(() => {
         let timer;
 
-        // TODO: move to redux
+        // move this async call to redux if needs to be called from more than one place
         const get_markets_data = () => {
-            const markets_api = "https://api.alkemi.network/markets";
+            const markets_api = url_map["rinkeby"].markets_url; // TODO: update with automatic network selection when other networks than rinkeby are available
 
             fetch(markets_api)
                 .then((res) => {
@@ -32,27 +32,20 @@ export default (fetchPeriodically = false) => {
                 .then((data) => {
                     if (data) {
                         let obj_data = JSON.parse(data);
-                        // console.log("obj_data", obj_data);
 
-                        let arr_markets = [];
                         let key_markets = Object.keys(obj_data);
-                        // console.log("key_markets", key_markets);
 
-                        for (var i = 0; i < key_markets.length; i++) {
-                            arr_markets.push(obj_data[key_markets[i]]);
-                        }
-                        // console.log("arr_markets", arr_markets);
+                        const arr_markets = key_markets.map((e) => {
+                            return obj_data[e];
+                        });
 
-                        let arr_items = [];
-
-                        let asset;
                         let totalSupplyBalanceUSD = 0;
                         let totalBorrowBalanceUSD = 0;
 
-                        for (var x = 0; x < arr_markets.length; x++) {
-                            let key_items = Object.values(arr_markets[x]);
+                        const arr_items = arr_markets.map((market) => {
+                            let key_items = Object.values(market);
 
-                            asset = key_items[0];
+                            let asset = key_items[0];
 
                             totalSupplyBalanceUSD += parseFloat(
                                 asset.totalSupplyUSD
@@ -61,9 +54,8 @@ export default (fetchPeriodically = false) => {
                                 asset.totalBorrowUSD
                             );
 
-                            arr_items.push(asset);
-                        }
-                        // console.log("arr_items", arr_items);
+                            return asset;
+                        });
 
                         let totalCollateralRatio =
                             (totalSupplyBalanceUSD / totalBorrowBalanceUSD) *
@@ -81,12 +73,10 @@ export default (fetchPeriodically = false) => {
                             2
                         );
 
-                        arr_markets = arr_items;
+                        setMarketsData(arr_items);
 
-                        setMarketsData(arr_markets);
-
-                        let supply_array = _.cloneDeep(arr_markets);
-                        let borrow_array = _.cloneDeep(arr_markets);
+                        let supply_array = _.cloneDeep(arr_items);
+                        let borrow_array = _.cloneDeep(arr_items);
 
                         supply_array.sort(compare_supply);
                         borrow_array.sort(compare_borrow);
@@ -118,15 +108,15 @@ export default (fetchPeriodically = false) => {
                 });
         };
 
-        const getPrice = () => {
+        const getMarketsData = () => {
             get_markets_data();
 
             if (fetchPeriodically === true) {
-                timer = setTimeout(getPrice, 15 * 1000);
+                timer = setTimeout(getMarketsData, 15 * 1000);
             }
         };
 
-        getPrice();
+        getMarketsData();
 
         return () => {
             if (timer) clearTimeout(timer);
