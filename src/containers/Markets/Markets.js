@@ -12,9 +12,12 @@ import { format_str_to_kmb } from "utils/markets";
 
 // Section 4: Container body
 const MarketsContainer = () => {
-    const { supplyArray, borrowArray, calculationsTotals } = useFetchMarkets(
-        true
-    );
+    const {
+        marketsData,
+        supplyArray,
+        borrowArray,
+        calculationsTotals,
+    } = useFetchMarkets(true);
 
     const totalBorrowedContent = `$${
         calculationsTotals && calculationsTotals.totalBorrowBalanceUSD
@@ -40,6 +43,7 @@ const MarketsContainer = () => {
 
     return (
         <Markets
+            marketsData={marketsData}
             supplyArray={supplyArray}
             borrowArray={borrowArray}
             totalBorrowedContent={totalBorrowedContent}

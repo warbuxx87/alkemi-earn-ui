@@ -21,7 +21,7 @@ import Stats from "./CardStats";
 
 import MarketsCard from "./MarketsCard";
 
-import MarketTable from "./TableMarkets";
+import MarketsTable from "./TableMarkets";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 // Section 5: Code Component
 const Markets = ({
+    marketsData,
     supplyArray,
     borrowArray,
     totalBorrowedContent,
@@ -116,7 +117,7 @@ const Markets = ({
                     </Card>
                 </Grid>
                 <Grid item lg={12} sm={12} xs={12}>
-                    <MarketTable />
+                    <MarketsTable marketsData={marketsData} />
                 </Grid>
             </Grid>
         </Container>
