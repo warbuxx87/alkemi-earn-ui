@@ -47,7 +47,7 @@ const fetchTxError = (error) => ({
 const fetchTxCall = ({ currentNetworkName, address, dispatch }) => {
     if (!address) return;
     if (!url_map[currentNetworkName].etherscan_url) return;
-    console.log("fetch address", address);
+
     dispatch(fetchTxPending());
 
     fetch(url_map[currentNetworkName].etherscan_url)
@@ -76,7 +76,7 @@ const fetchTxCall = ({ currentNetworkName, address, dispatch }) => {
                         userTxList.push(txList[i]);
                     }
                 }
-                console.log("userTxList", userTxList);
+
                 dispatch(fetchTxSuccess(userTxList));
             }
         })
