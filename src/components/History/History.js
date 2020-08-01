@@ -161,7 +161,7 @@ const History = ({ address, txList, txPending, error }) => {
 History.propTypes = {
     txList: PropTypes.array.isRequired,
     txPending: PropTypes.bool.isRequired,
-    address: PropTypes.string.isRequired,
+    address: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
