@@ -1,6 +1,5 @@
 // Libs
 // import { createSelector } from "reselect";
-import _ from "lodash";
 import constants from "constants/constant.json";
 
 // Drizzle state selector
