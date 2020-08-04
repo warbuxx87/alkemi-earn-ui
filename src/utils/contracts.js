@@ -21,11 +21,12 @@ const ABIs = {
 };
 
 export const initContracts = (drizzle, forceUpdate) => {
-    initMarketContract({ drizzle, forceUpdate });
+    const resolved = initMarketContract({ drizzle, forceUpdate });
 
-    assets.forEach((asset) =>
-        initAssetContract({ drizzle, asset, forceUpdate })
-    );
+    if (resolved !== false)
+        assets.forEach((asset) =>
+            initAssetContract({ drizzle, asset, forceUpdate })
+        );
 };
 
 export const deleteAllContracts = (drizzle) => {
@@ -41,6 +42,7 @@ export const deleteAllContracts = (drizzle) => {
 export const initMarketContract = ({ drizzle, forceUpdate }) => {
     if (drizzle.contracts.MoneyMarket && !forceUpdate)
         return drizzle.contracts.MoneyMarket;
+
     //const drizzleStore = drizzle.store.getState();
     const myAddress = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
     const network =
@@ -52,9 +54,16 @@ export const initMarketContract = ({ drizzle, forceUpdate }) => {
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
 
+    // check if this network has configured contract addresses
+    if (!address[network]) return false;
+
+    const contractAddress = address[network][`address_MoneyMarket`];
+
+    if (!contractAddress) return false;
+
     const MoneyMarketContract = new drizzle.web3.eth.Contract(
         MoneyMarket_ABI,
-        address[network][`address_MoneyMarket`]
+        contractAddress
     );
 
     try {
@@ -70,6 +79,8 @@ export const initMarketContract = ({ drizzle, forceUpdate }) => {
 
     assets.forEach((asset) => {
         // get each asset Supply Balance (current )
+
+        // could put a check to see if the contract address is set for all of them
         MoneyMarketContract.methods.getSupplyBalance.cacheCall(
             myAddress,
             address[network][`address_${asset}`]
@@ -140,6 +151,7 @@ export const initAssetContract = ({ drizzle, asset, forceUpdate }) => {
         ]; // Using provider network ID instead of drizzle store value
 
     if (!drizzle.web3.eth) return;
+    if (!address[network]) return;
 
     const tokenContract = new drizzle.web3.eth.Contract(
         ABIs[asset],

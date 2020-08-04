@@ -30,8 +30,7 @@ const styles = (theme) => ({
         marginRight: 32,
         "@media (min-width: 1720px)": {
             maxWidth: "1280px",
-            margin: "0 auto"
-
+            margin: "0 auto",
         },
         "@media (max-width:1024px)": {
             marginLeft: 0,

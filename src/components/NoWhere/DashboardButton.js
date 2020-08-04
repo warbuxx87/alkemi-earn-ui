@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = theme => ({
+const styles = (theme) => ({
     button: {
-        margin: theme.spacing(3)
-    }
+        margin: theme.spacing(3),
+    },
 });
 
 const NoWhereDashboardButton = ({ classes, onClick }) => (
@@ -23,7 +23,7 @@ const NoWhereDashboardButton = ({ classes, onClick }) => (
 
 NoWhereDashboardButton.propTypes = {
     classes: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(NoWhereDashboardButton);

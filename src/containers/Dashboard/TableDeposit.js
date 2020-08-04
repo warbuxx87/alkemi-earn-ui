@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 // Section 1: React/Redux low level imports
 import React from "react";
 import { connect, useSelector } from "react-redux";
@@ -18,7 +16,7 @@ import TableSupply from "components/Dashboard/TableDeposit";
 import useFetchPrice from "hooks/useFetchPrice";
 
 // Section 3: Selectors
-import { getLendActive } from "redux/selectors/data";
+import { getLendActive } from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 

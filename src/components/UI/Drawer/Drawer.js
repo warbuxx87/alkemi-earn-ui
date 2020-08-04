@@ -254,8 +254,8 @@ const DrawerWrapper = ({
                                 variant="contained"
                                 color="primary"
                                 onClick={() => {
-                                onButtonClick({ asset, amount });
-                                handleClose()
+                                    onButtonClick({ asset, amount });
+                                    handleClose();
                                 }}
                                 disabled={!enableButtonClick || isDoingAction}
                                 size="large"

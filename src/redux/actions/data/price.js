@@ -2,9 +2,6 @@
 
 import _ from "lodash";
 
-//const INFURA_ID = process.env.REACT_APP_INFURA_ID;
-//const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
-
 const url_map = require("constants/url_map.json");
 
 // Section 2: Action types declarations and action creators

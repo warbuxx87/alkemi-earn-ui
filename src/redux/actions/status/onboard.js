@@ -18,4 +18,16 @@ export const setWalletConnected = (isConnected) => ({
     },
 });
 
+// Declare action type as a constant
+export const SET_WALLET_ADDRESS = "SET_WALLET_ADDRESS";
+
+// Declare action creator
+export const setWalletAddress = (walletAddress) => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: SET_WALLET_ADDRESS,
+    payload: {
+        walletAddress,
+    },
+});
+
 // Section 3: Action dispatch methods and async funcs

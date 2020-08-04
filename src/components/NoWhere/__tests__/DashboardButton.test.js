@@ -12,7 +12,7 @@ describe("<BackDashboardButton />", () => {
 
     beforeEach(() => {
         props = {
-            onClick: jest.fn()
+            onClick: jest.fn(),
         };
         wrapper = shallow(<NoWhereDashboardButton {...props} />).dive();
     });
@@ -22,10 +22,7 @@ describe("<BackDashboardButton />", () => {
     });
 
     it("Button is functional", () => {
-        wrapper
-            .find(Button)
-            .at(0)
-            .simulate("click");
+        wrapper.find(Button).at(0).simulate("click");
         expect(props.onClick.mock.calls.length).toEqual(1);
     });
 
