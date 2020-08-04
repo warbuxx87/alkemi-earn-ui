@@ -29,7 +29,7 @@ import {
     format_num_K,
     get_history,
     change_page_history,
-    open_it_onetherscan
+    open_it_onetherscan,
 } from "utils/drizzle";
 
 // images
@@ -66,8 +66,8 @@ export default class Liquidate extends React.Component {
                     address: "...",
                     Supply: "0.00",
                     Borrow: "0.00",
-                    collateralRate: "0.00%"
-                }
+                    collateralRate: "0.00%",
+                },
             ],
             index: 0,
             amount_to_liquidate: "",
@@ -75,13 +75,13 @@ export default class Liquidate extends React.Component {
             is_btn_enable: true,
             pageNumber: 1,
             pageSize: 15,
-            cur_language: navigator.language === "zh-CN" ? "中文" : "English"
+            cur_language: navigator.language === "zh-CN" ? "中文" : "English",
         };
 
         this.new_web3 = window.new_web3 = new Web3(Web3.givenProvider || null);
         this.bn = this.new_web3.utils.toBN;
 
-        this.new_web3.eth.net.getNetworkType().then(net_type => {
+        this.new_web3.eth.net.getNetworkType().then((net_type) => {
             let mMarket = new this.new_web3.eth.Contract(
                 mMarket_abi,
                 address[net_type]["mMarket"]
@@ -132,7 +132,7 @@ export default class Liquidate extends React.Component {
                 address[net_type]["DSR"]
             );
 
-            this.new_web3.givenProvider.enable().then(res_accounts => {
+            this.new_web3.givenProvider.enable().then((res_accounts) => {
                 this.setState(
                     {
                         net_type: net_type,
@@ -149,7 +149,7 @@ export default class Liquidate extends React.Component {
                         PAX: PAX,
                         TUSD: TUSD,
                         WBTC: WBTC,
-                        DSR: DSR
+                        DSR: DSR,
                     },
                     () => {
                         get_allowance(
@@ -165,11 +165,11 @@ export default class Liquidate extends React.Component {
 
         // add accounts changed
         if (window.ethereum.on) {
-            window.ethereum.on("accountsChanged", accounts => {
+            window.ethereum.on("accountsChanged", (accounts) => {
                 console.log("accountsChanged: ", accounts[0]);
                 this.setState(
                     {
-                        my_account: accounts[0]
+                        my_account: accounts[0],
                     },
                     () => {
                         console.log("connected: ", this.state.my_account);
@@ -220,7 +220,7 @@ export default class Liquidate extends React.Component {
     };
 
     click_connect = () => {
-        this.new_web3.givenProvider.enable().then(res_accounts => {
+        this.new_web3.givenProvider.enable().then((res_accounts) => {
             this.setState({ my_account: res_accounts[0] }, () => {
                 get_balance(this);
                 get_allowance(this, address[this.state.net_type]["liquidator"]);
@@ -347,7 +347,7 @@ export default class Liquidate extends React.Component {
                                             <tbody>
                                                 {this.state.history &&
                                                     this.state.history.map(
-                                                        item => {
+                                                        (item) => {
                                                             return (
                                                                 <tr
                                                                     key={
@@ -469,7 +469,7 @@ export default class Liquidate extends React.Component {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {this.state.data.map(item => {
+                                                {this.state.data.map((item) => {
                                                     return (
                                                         <tr
                                                             key={item.key}
@@ -1042,7 +1042,7 @@ export default class Liquidate extends React.Component {
                                                     this.state.data[
                                                         this.state.index
                                                     ].supply.map(
-                                                        supply_item => {
+                                                        (supply_item) => {
                                                             return (
                                                                 <tr
                                                                     key={
@@ -1105,7 +1105,7 @@ export default class Liquidate extends React.Component {
                                                     this.state.data[
                                                         this.state.index
                                                     ].borrow.map(
-                                                        borrow_item => {
+                                                        (borrow_item) => {
                                                             return (
                                                                 <tr
                                                                     key={
@@ -1181,7 +1181,7 @@ export default class Liquidate extends React.Component {
                                                 <Input
                                                     placeholder="number"
                                                     type="number"
-                                                    onChange={e => {
+                                                    onChange={(e) => {
                                                         input_chang(
                                                             this,
                                                             e.target.value

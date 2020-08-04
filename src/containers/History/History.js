@@ -1,46 +1,46 @@
 // Imports Section 1: React/Reduxd low level imports
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { compose } from "redux";
 
-// Imports Section 2: internal imports ( actions, selectors etc.)
-import { fetchStatsAction } from "redux/actions/data/stats";
-import { getStatsError, getStats, getStatsPending } from "redux/selectors/data";
+import { useSelector } from "react-redux";
 
-// Imports Section 3: Internal Components Imports
+// Imports Section 2: Internal Imports
 import History from "components/History/History";
+import withDrizzle from "containers/Drizzle/withDrizzle";
 
-// Extends History Component
-class withHistory extends Component {
-    render() {
-        // return a presentational component
-        const { tx, error, pending, fetchStats } = this.props;
+// Section 3: Selectors
+import useFetchTx from "hooks/useFetchTx";
+import { getTxList, getTxPending, getTxError } from "redux/selectors/data/tx";
 
-        return (
-            <div className="history-list-wrapper">
-                <History
-                    tx={tx}
-                    error={error}
-                    pending={pending}
-                    fethStats={fetchStats}
-                />
-            </div>
-        );
-    }
-}
+import { walletAddress } from "redux/selectors/onboard";
+
+// Section 4: Container Code
+
+const HistoryContainer = ({ drizzle, address, txList, txPending, txError }) => {
+    useFetchTx(); // gets txList from Etherscan
+
+    const currentAddress = useSelector(walletAddress);
+
+    return (
+        <div className="history-list-wrapper">
+            <History
+                txList={txList}
+                txPending={txPending}
+                txError={txError}
+                address={currentAddress}
+            />
+        </div>
+    );
+};
 
 const mapStateToProps = (state) => ({
-    error: getStatsError(state),
-    tx: getStats(state),
-    pending: getStatsPending(state),
+    txPending: getTxPending(state),
+    txList: getTxList(state),
+    txError: getTxError(state),
 });
 
-const mapDispatchToProps = (dispatch) =>
-    bindActionCreators(
-        {
-            fetchStats: fetchStatsAction,
-        },
-        dispatch
-    );
-
-export default connect(mapStateToProps, mapDispatchToProps)(withHistory);
+export default compose(
+    withDrizzle(),
+    connect(mapStateToProps)
+)(HistoryContainer);

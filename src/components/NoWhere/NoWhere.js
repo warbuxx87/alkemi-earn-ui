@@ -7,22 +7,22 @@ import { grey } from "@material-ui/core/colors";
 
 import NoWhereDashboardButton from "../../containers/NoWhere/DashboardButton";
 
-const styles = theme => ({
+const styles = (theme) => ({
     nowhere: {
-        textAlign: "center"
+        textAlign: "center",
     },
     nowhereHeader: {
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
     },
     nowhereTitle: {
         fontSize: "1.5em",
-        color: grey[500]
+        color: grey[500],
     },
     nowhereIcon: {
         height: 80,
         width: 80,
-        color: grey[500]
-    }
+        color: grey[500],
+    },
 });
 
 const NoWhere = ({ classes }) => (
@@ -38,7 +38,7 @@ const NoWhere = ({ classes }) => (
 );
 
 NoWhere.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(NoWhere);

@@ -10,9 +10,7 @@ import { isLiquidateSelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = (state, props) => ({
     selected: isLiquidateSelected(state),
-    onClick: () => props.history.push(LIQUIDATE)
+    onClick: () => props.history.push(LIQUIDATE),
 });
 
-export default withRouter(connect(
-    mapStateToProps,
-)(SidebarLiquidateItem));
+export default withRouter(connect(mapStateToProps)(SidebarLiquidateItem));

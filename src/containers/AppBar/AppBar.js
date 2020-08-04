@@ -15,10 +15,13 @@ import { initContracts, deleteAllContracts } from "utils/contracts";
 import { resetLendData } from "redux/actions/data/lend";
 import { resetBorrowData } from "redux/actions/data/borrow";
 
-import { setWalletConnected } from "redux/actions/status/onboard";
+import {
+    setWalletConnected,
+    setWalletAddress,
+} from "redux/actions/status/onboard";
 
 // Section 3: Selectors
-import { isWalletConnected } from "redux/selectors/onboard";
+import { isWalletConnected, walletAddress } from "redux/selectors/onboard";
 
 // Section 4: components
 import AppBar from "components/AppBar/AppBar";
@@ -40,7 +43,7 @@ const AppBarContainer = ({ drizzle }) => {
     const dispatch = useDispatch();
     const walletConnected = useSelector(isWalletConnected);
 
-    const [currentAddress, setCurrentAddress] = useState(null); // using an address because drizzle doesn't update account address on change (TODO change in DF-221 to use one single address)
+    const currentAddress = useSelector(walletAddress);
 
     let location = useLocation();
     // update Appbar title whenever location change
@@ -72,8 +75,10 @@ const AppBarContainer = ({ drizzle }) => {
 
                     if (window.currentlyUsedProvider) {
                         // set current address from chosen provider in onboard
-                        setCurrentAddress(
-                            window.currentlyUsedProvider.selectedAddress
+                        dispatch(
+                            setWalletAddress(
+                                window.currentlyUsedProvider.selectedAddress
+                            )
                         );
                     }
 
@@ -105,7 +110,7 @@ const AppBarContainer = ({ drizzle }) => {
 
         dispatch(setWalletConnected(false));
 
-        setCurrentAddress(null);
+        dispatch(setWalletAddress(null));
 
         resetStoreData();
     }, [dispatch, resetStoreData, drizzle]);
@@ -137,7 +142,7 @@ const AppBarContainer = ({ drizzle }) => {
                             // (or the current clean up in contracts can be kept as it is)
                             deleteAllContracts(drizzle);
 
-                            setCurrentAddress(accounts[0]);
+                            dispatch(setWalletAddress(accounts[0]));
 
                             initDrizzleData(true);
                         }
@@ -158,7 +163,7 @@ const AppBarContainer = ({ drizzle }) => {
         };
 
         initDrizzleData();
-    }, [drizzle, walletConnected, resetStoreData]);
+    }, [drizzle, walletConnected, resetStoreData, dispatch]);
 
     const onConnect = async () => {
         const isSelectWallet = await onboard.walletSelect();

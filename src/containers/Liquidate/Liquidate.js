@@ -20,7 +20,7 @@ import {
     get_history,
     change_page_history,
     handle_list_click,
-    format_Shortfall
+    format_Shortfall,
 } from "utils/drizzle";
 
 class LiquidateNoWeb3 extends React.Component {
@@ -35,26 +35,26 @@ class LiquidateNoWeb3 extends React.Component {
                     address: "...",
                     Supply: "0.00",
                     Borrow: "0.00",
-                    collateralRate: "0.00%"
-                }
+                    collateralRate: "0.00%",
+                },
             ],
             index: 0,
             decimals: {
                 USDx: 18,
                 WETH: 18,
-                USDT: 6
+                USDT: 6,
             },
             max_liquidate: {
                 USDx: {},
                 WETH: {},
-                USDT: {}
+                USDT: {},
             },
             amount_to_liquidate: "",
             data_is_ok: false,
             is_btn_enable: true,
             pageNumber: 1,
             pageSize: 15,
-            cur_language: navigator.language === "zh-CN" ? "中文" : "English"
+            cur_language: navigator.language === "zh-CN" ? "中文" : "English",
         };
     }
 
@@ -82,7 +82,7 @@ class LiquidateNoWeb3 extends React.Component {
                             <h3
                                 onClick={() => {
                                     this.setState({
-                                        show_history: !this.state.show_history
+                                        show_history: !this.state.show_history,
                                     });
                                 }}
                                 className="h3-switch"
@@ -118,7 +118,7 @@ class LiquidateNoWeb3 extends React.Component {
                                                 <tbody>
                                                     {this.state.history &&
                                                         this.state.history.map(
-                                                            item => {
+                                                            (item) => {
                                                                 return (
                                                                     <tr
                                                                         key={
@@ -242,7 +242,7 @@ class LiquidateNoWeb3 extends React.Component {
                                                 </thead>
                                                 <tbody>
                                                     {this.state.data.map(
-                                                        item => {
+                                                        (item) => {
                                                             return (
                                                                 <tr
                                                                     key={
@@ -483,7 +483,7 @@ class LiquidateNoWeb3 extends React.Component {
                                                         this.state.data[
                                                             this.state.index
                                                         ].supply.map(
-                                                            supply_item => {
+                                                            (supply_item) => {
                                                                 return (
                                                                     <tr
                                                                         key={
@@ -546,7 +546,7 @@ class LiquidateNoWeb3 extends React.Component {
                                                         this.state.data[
                                                             this.state.index
                                                         ].borrow.map(
-                                                            borrow_item => {
+                                                            (borrow_item) => {
                                                                 return (
                                                                     <tr
                                                                         key={

@@ -9,7 +9,7 @@ import CardDeposit from "components/Dashboard/CardDeposit";
 
 // Section 3: Selectors / hooks
 import { getTotalDeposit } from "redux/selectors/totalBalance";
-import { getAggregatedDepositAPR } from "redux/selectors/data";
+import { getAggregatedLendAPR } from "redux/selectors/data/lend";
 import useFetchPrice from "hooks/useFetchPrice";
 
 // Section 4: Code Component
@@ -18,7 +18,7 @@ const CardDepositContainer = () => {
 
     const totalDeposit = useSelector(getTotalDeposit); //
 
-    const totalDepositAPR = useSelector(getAggregatedDepositAPR); // combined portfolio APR rate
+    const totalDepositAPR = useSelector(getAggregatedLendAPR); // combined portfolio APR rate
 
     return (
         <CardDeposit

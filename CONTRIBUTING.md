@@ -704,16 +704,25 @@ export default compose(withTheme(), withStyles(styles))(AppBar);
 **Example**
 
 ```javascript
-// Section 1: React/Reduxd low level imports
-import React, { Component } from "react";
-import { connect } from "react-redux";
+// Section 1: React/Redux low level imports
+import React from "react";
 
 // Section 2: internal imports
-import AppbarButton from "../../components/AppBar/Button";
-import LayoutSkeleton from "../../components/Layout/Skeleton";
-import { openSidebar } from "../../redux/actions/ui";
+import Markets from "components/Markets/Markets";
 
-import { HOME } from "../../constants/routes";
+import useFetchMarkets from "hooks/useFetchMarkets";
+
+// Section 3: Selectors
+
+// Section 4: Container body
+const MarketsContainer = () => {
+    const { supplyArray, borrowArray } = useFetchMarkets(true);
+
+    return <Markets supplyArray={supplyArray} borrowArray={borrowArray} />;
+};
+
+// Section 5: Exports
+export default MarketsContainer;
 ```
 
 ##### Code container

@@ -9,7 +9,7 @@ import CardBorrow from "components/Dashboard/CardBorrow";
 
 // Section 3: Selectors / hooks
 import { getTotalBorrow } from "redux/selectors/totalBalance";
-import { getAggregatedBorrowAPR } from "redux/selectors/data";
+import { getAggregatedBorrowAPR } from "redux/selectors/data/borrow";
 import useFetchPrice from "hooks/useFetchPrice";
 
 // Section 4: Code Component

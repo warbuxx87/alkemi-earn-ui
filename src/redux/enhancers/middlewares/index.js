@@ -4,8 +4,8 @@ import router from "./router";
 import thunk from "./thunk";
 
 const middlewares = [
-  router,
-  thunk
-  // other middlewares go here
+    router,
+    thunk,
+    // other middlewares go here
 ];
 export default applyMiddleware(...middlewares);
