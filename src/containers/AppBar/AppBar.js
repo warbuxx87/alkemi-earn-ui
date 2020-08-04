@@ -14,6 +14,7 @@ import onboard from "utils/onboard";
 import { initContracts, deleteAllContracts } from "utils/contracts";
 import { resetLendData } from "redux/actions/data/lend";
 import { resetBorrowData } from "redux/actions/data/borrow";
+import { resetTxDataAndCancelFetch } from "redux/actions/data/tx";
 
 import {
     setWalletConnected,
@@ -97,6 +98,7 @@ const AppBarContainer = ({ drizzle }) => {
     const resetStoreData = useCallback(() => {
         dispatch(resetLendData());
         dispatch(resetBorrowData());
+        dispatch(resetTxDataAndCancelFetch());
         // ADD more stores to reset if needs be
     }, [dispatch]);
 

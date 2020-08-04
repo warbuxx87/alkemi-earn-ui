@@ -17,10 +17,11 @@ import { walletAddress } from "redux/selectors/onboard";
 
 // Section 4: Container Code
 
-const HistoryContainer = ({ drizzle, address, txList, txPending, txError }) => {
+const HistoryContainer = ({ txPending, txError }) => {
     useFetchTx(); // gets txList from Etherscan
 
     const currentAddress = useSelector(walletAddress);
+    const txList = useSelector(getTxList);
 
     return (
         <div className="history-list-wrapper">
@@ -36,7 +37,6 @@ const HistoryContainer = ({ drizzle, address, txList, txPending, txError }) => {
 
 const mapStateToProps = (state) => ({
     txPending: getTxPending(state),
-    txList: getTxList(state),
     txError: getTxError(state),
 });
 

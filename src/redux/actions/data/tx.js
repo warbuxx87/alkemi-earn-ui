@@ -40,10 +40,17 @@ const fetchTxError = (error) => ({
     error: true,
 });
 
-//                                            //
-// ------------ TX METHOD ACTIONS --------   //
-//                                          //
+//                                               //
+// ---------------- RESET TX DATA -------------- //
+//                                               //
 
+export const RESET_TX_DATA = "RESET_TX_DATA";
+
+const resetTxData = () => ({
+    type: RESET_TX_DATA,
+});
+
+// Section 3: Action dispatch methods and async funcs
 const fetchTxCall = ({ currentNetworkName, address, dispatch }) => {
     if (!address) return;
     if (!url_map[currentNetworkName].etherscan_url) return;
@@ -90,9 +97,17 @@ const throttledFetchTx = _.throttle(fetchTxCall, 60 * 1000, {
     trailing: false,
 });
 
-// Section 3: Action dispatch methods and async funcs
 export const fetchTx = ({ currentNetworkName, address }) => async (
     dispatch
 ) => {
     throttledFetchTx({ currentNetworkName, address, dispatch });
+};
+
+// Reset Tx data and cancels throttled recurring fetch calls
+export const resetTxDataAndCancelFetch = () => (dispatch) => {
+    if (throttledFetchTx) {
+        throttledFetchTx.cancel();
+    }
+
+    dispatch(resetTxData());
 };
