@@ -97,10 +97,21 @@ const throttledFetchTx = _.throttle(fetchTxCall, 60 * 1000, {
     trailing: false,
 });
 
-export const fetchTx = ({ currentNetworkName, address }) => async (
-    dispatch
-) => {
-    throttledFetchTx({ currentNetworkName, address, dispatch });
+export const fetchTx = ({
+    currentNetworkName,
+    address,
+    fetchPeriodically,
+}) => async (dispatch) => {
+    if (fetchPeriodically)
+        // if fetchPeriodically set to true it will go through the throttled method
+        throttledFetchTx({ currentNetworkName, address, dispatch });
+    // if not, it will call on fetch directly no matter what
+    else fetchTxCall({ currentNetworkName, address, dispatch });
+
+    // this is to avoid the throttle to block the call when the user reconnects their wallet.
+    // Of course as it is now, the call is triggered whenever the user opens the page, which good in a sense that the user wants fresh data each time
+    // <!> Should think about a different logic flow if useFetchTx start being used from different sources,
+    // The throttle code kept back so there is no need to rewrite it again, could be refactored later one if unnecessary
 };
 
 // Reset Tx data and cancels throttled recurring fetch calls

@@ -26,7 +26,7 @@ export default (fetchPeriodically = false) => {
         };
 
         if (currentNetworkName !== undefined) {
-            getTxList();
+            getTxList(fetchPeriodically); // if fetchPeriodically is false, it will trigger the fetch right away (unlike in the other useFetch in the app)
         }
 
         return () => {
