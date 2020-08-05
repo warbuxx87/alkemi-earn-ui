@@ -236,7 +236,8 @@ Object {
                             <h3
                               class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                             >
-                              $0.00
+                              $
+                              0
                             </h3>
                           </div>
                           <div
@@ -364,7 +365,8 @@ Object {
                             <h3
                               class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                             >
-                              $0.00
+                              $
+                              0
                             </h3>
                           </div>
                           <div
@@ -726,7 +728,8 @@ Object {
                           <h3
                             class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                           >
-                            $0.00
+                            $
+                            0
                           </h3>
                         </div>
                         <div
@@ -854,7 +857,8 @@ Object {
                           <h3
                             class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                           >
-                            $0.00
+                            $
+                            0
                           </h3>
                         </div>
                         <div
