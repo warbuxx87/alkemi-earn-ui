@@ -14,9 +14,7 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { formatMoney } from "utils/ui";
 
-// Section 3: Components & Containers import from the application
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -35,19 +33,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function TotalValue({
-    className,
-    totalDeposit,
-    currency,
-    difference,
-    ...rest
-}) {
+// Section 5: Code Component
+const DepositCard = ({ title, cardContent }) => {
     const classes = useStyles();
 
-    // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Total Deposits" className={classes.item} />
+            <CardHeader title={title} className={classes.item} />
             <Divider />
             <CardContent>
                 <Box
@@ -59,18 +51,19 @@ function TotalValue({
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {formatMoney(totalDeposit, currency)}
+                        {cardContent}
                     </Typography>
                 </Box>
             </CardContent>
         </Card>
     );
-}
+};
 
 // Section 6: Documentation with PropTypes
-TotalValue.propTypes = {
-    className: PropTypes.string,
+DepositCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    cardContent: PropTypes.string.isRequired,
 };
 
 // Section 7:  Connect styles and export
-export default TotalValue;
+export default DepositCard;

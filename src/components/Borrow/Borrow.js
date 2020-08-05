@@ -10,9 +10,9 @@ import { Container, Grid, makeStyles } from "@material-ui/core";
 // Section 3: Components & Containers import from the application
 import BorrowTable from "./Table";
 import BorrowTableActive from "./TableActive";
-import BorrowCardValue from "containers/Borrow/CardValue";
+import BorrowCard from "components/UI/DefaultCard";
 import BorrowCardLimit from "containers/Borrow/CardLimit";
-import BorrowCardAPR from "containers/Borrow/CardAPR";
+import { formatMoney, formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -31,24 +31,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Borrow({ className, activeBorrow, inactiveBorrow, onActivate }) {
+function Borrow({ className, activeBorrow, inactiveBorrow, onActivate, totalBorrow, currency, totalAPR }) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
-                <Grid item lg={4} sm={6} xs={12}>
-                    <BorrowCardValue />
-                </Grid>
+            <Grid item lg={4} sm={6} xs={12}>
+             <BorrowCard
+                title="Total Borrowed"
+                cardContent= {formatMoney(totalBorrow, currency)}
+                />
+            </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <BorrowCardLimit />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <BorrowCardAPR />
+                <BorrowCard
+                   title="Loan APR%"
+                   cardContent= {formatPercent(totalAPR)}
+                   />
                 </Grid>
                 {!!activeBorrow.length && (
                     <Grid item lg={12} xs={12}>
                         <BorrowTableActive data={activeBorrow} />
                     </Grid>
+
                 )}
                 {!!inactiveBorrow.length && (
                     <Grid item lg={12} xs={12}>

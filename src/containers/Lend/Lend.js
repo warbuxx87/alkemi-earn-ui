@@ -4,6 +4,7 @@
 import React from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { getTotalDeposit } from "redux/selectors/totalBalance";
 
 // Section 2: internal imports
 import { onLendActivate } from "redux/actions/status/lend";
@@ -17,6 +18,7 @@ import {
     getLendError,
     getLendActive,
     getLendInactive,
+    getAggregatedLendAPR,
 } from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
@@ -31,6 +33,8 @@ const LendContainer = ({
 }) => {
     useFetchPrice(); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+    const totalDeposit = useSelector(getTotalDeposit);
+    const totalDepositAPR = useSelector(getAggregatedLendAPR);
 
     return (
         <Lend
@@ -39,6 +43,8 @@ const LendContainer = ({
             onActivate={(asset) => onActivate({ drizzle, asset })}
             errorLend={errorLend}
             USDPrice={USDPrice}
+            totalDeposit={totalDeposit} currency="USD" difference={0}
+            totalAPR={totalDepositAPR}
         />
     );
 };

@@ -10,9 +10,9 @@ import { Container, Grid, makeStyles } from "@material-ui/core";
 // Section 3: Components & Containers import from the application
 import LendTable from "./Table";
 import LendTableActive from "./TableActive";
-import LendCardValue from "containers/Lend/CardValue";
 import LendCardInterest from "./CardInterest";
-import LendCardAPR from "containers/Lend/CardAPR";
+import DepositCard from "components/UI/DefaultCard";
+import { formatMoney, formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -31,19 +31,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Lend({ className, activeLend, inactiveLend, onActivate, USDPrice }) {
+function Lend({ className, activeLend, inactiveLend, onActivate, USDPrice,totalDeposit,currency,totalAPR }) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <LendCardValue />
+                 <DepositCard
+                            title="Total Deposited"
+                            cardContent= {formatMoney(totalDeposit, currency)}
+                         />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <LendCardInterest />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <LendCardAPR />
+                <DepositCard
+                           title="Earning APR%"
+                           cardContent= {formatPercent(totalAPR)}
+                        />
                 </Grid>
                 {!!activeLend.length && (
                     <Grid item lg={12} xs={12}>
