@@ -154,6 +154,7 @@ pipelines:
     pull-requests:
         # Runs on all pull requests
         "**":
+            - step: *github
             - step: *analyze
             - step: *build
             #  - step: *quality-gate
@@ -161,6 +162,7 @@ pipelines:
     branches:
         master:
             # Runs only on Master Branch
+            - step: *github
             - step: *analyze
             #  - step: *quality-gate
             - step: *build
