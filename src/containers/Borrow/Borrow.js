@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // Main Container
 
 // Section 1: React/Reduxd low level imports
@@ -17,7 +16,7 @@ import {
     getBorrowInactive,
     //  getBorrowError,
     //  getBorrowPending
-} from "redux/selectors/data";
+} from "redux/selectors/data/borrow";
 
 const BorrowContainer = ({
     inactiveBorrow,

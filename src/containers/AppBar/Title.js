@@ -5,7 +5,7 @@ import AppBarTitle from "components/AppBar/Title";
 import { DASHBOARD } from "constants/routes";
 
 const mapDispatchToProps = {
-  onClick: () => push(DASHBOARD)
+    onClick: () => push(DASHBOARD),
 };
 
 export default connect(undefined, mapDispatchToProps)(AppBarTitle);

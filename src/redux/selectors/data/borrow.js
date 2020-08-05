@@ -2,16 +2,53 @@
 import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "constants/address_map.json";
-import { networkSelector } from "./drizzle";
+import { networkSelector } from "redux/selectors/drizzle";
 import web3 from "web3";
 
-// Stats Selectors
-export const getStats = (state) => state.data.stats.tx;
-export const getStatsPending = (state) => state.data.stats.pending;
-export const getStatsError = (state) => state.data.stats.error;
+// Helpers
+function calculateInterest(rateMantissa) {
+    const total_blocks_per_year = (3600 * 24 * 365) / 15;
+    let rateAPR = (rateMantissa * total_blocks_per_year) / 1e18;
+    return rateAPR;
+}
 
-// total Selectors
-//
+function calculateUtilization(totalBorrow, totalSupply) {
+    const utilization = totalBorrow / totalSupply;
+
+    return utilization;
+}
+
+const getAllowances = (state) => {
+    const allowances = {};
+    Object.keys(state.contracts).forEach((asset) => {
+        if (asset !== "MoneyMarket") {
+            const allowance = Object.values(state.contracts[asset].allowance);
+            allowances[asset] = _.get(allowance, "[0].value", "0") !== "0";
+        }
+    });
+    return allowances;
+};
+
+const getUtilizationValues = (state) => {
+    const utilizationRates = {};
+    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
+        (market) =>
+            (utilizationRates[market.args[0]] = calculateUtilization(
+                market.value[6],
+                market.value[3]
+            ))
+    );
+    return utilizationRates;
+};
+
+const getAssetPrices = (state) => {
+    const assetPrices = {};
+    Object.values(
+        _.get(state, "contracts.MoneyMarket.assetPrices", {})
+    ).forEach((asset) => (assetPrices[asset.args[0]] = asset.value));
+    return assetPrices;
+};
+
 const getAccountLiquidity = (state) => {
     const accountLiquidity = Object.values(
         _.get(state, "contracts.MoneyMarket.getAccountLiquidity", {})
@@ -35,17 +72,7 @@ export const getCollateralRatio = (state) => {
     return null;
 };
 
-const getDepositAccountValue = (state) => {
-    const calculateAccountValues = Object.values(
-        _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
-    );
-    if (calculateAccountValues[0]) {
-        // console.log("Supply Account Value", calculateAccountValues[0].value[1]);
-        return _.get(calculateAccountValues, "[0].value[1]");
-    }
-    return null;
-};
-
+// Borrow Selectors
 const getBorrowAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
@@ -55,194 +82,6 @@ const getBorrowAccountValue = (state) => {
     }
     return null;
 };
-
-// Lend Selectors
-const lendAssetSelector = (state) => state.data.lend.assets;
-
-const lendBalanceSelector = (state) => {
-    const depositBalance = {};
-    Object.values(
-        _.get(state, "contracts.MoneyMarket.getSupplyBalance", {})
-    ).forEach((balance) => (depositBalance[balance.args[1]] = balance.value));
-    return depositBalance;
-};
-
-const lendAPRSelector = (state) => {
-    const depositAPR = {};
-    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
-        (apr) =>
-            (depositAPR[apr.args[0]] = calculateInterest(
-                apr.value.supplyRateMantissa
-            ))
-    );
-    return depositAPR;
-};
-
-const lendPrincipalSelector = (state) => {
-    const depositPrincipal = {};
-
-    Object.values(
-        _.get(state, "contracts.MoneyMarket.supplyBalances", {})
-    ).forEach(
-        (deposit) =>
-            (depositPrincipal[deposit.args[1]] = deposit.value.principal)
-    );
-    return depositPrincipal;
-};
-
-const getAllowances = (state) => {
-    const allowances = {};
-    Object.keys(state.contracts).forEach((asset) => {
-        if (asset !== "MoneyMarket") {
-            const allowance = Object.values(state.contracts[asset].allowance);
-            allowances[asset] = _.get(allowance, "[0].value", "0") !== "0";
-        }
-    });
-    return allowances;
-};
-
-function calculateUtilization(totalBorrow, totalDeposit) {
-    const utilization = totalBorrow / totalDeposit;
-
-    return utilization;
-}
-
-const getUtilizationValues = (state) => {
-    const utilizationRates = {};
-    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
-        (market) =>
-            (utilizationRates[market.args[0]] = calculateUtilization(
-                market.value[6],
-                market.value[3]
-            ))
-    );
-    return utilizationRates;
-};
-
-const getAssetPrices = (state) => {
-    const assetPrices = {};
-    Object.values(
-        _.get(state, "contracts.MoneyMarket.assetPrices", {})
-    ).forEach((asset) => (assetPrices[asset.args[0]] = asset.value));
-    return assetPrices;
-};
-
-const getLendAsset = createSelector(
-    lendAssetSelector,
-    networkSelector,
-    lendBalanceSelector,
-    lendAPRSelector,
-    lendPrincipalSelector,
-    getUtilizationValues,
-    getAssetPrices,
-    getDepositAccountValue, // TODO: refactor this to getLendAccountValue for consistency
-    (
-        assets,
-        network,
-        lendBalances,
-        lendAPR,
-        lendPrincipal,
-        marketUtilization,
-        assetPrices,
-        accountTotalDeposit
-    ) =>
-        Object.values(assets).map((asset) => {
-            // supply wallet
-            let balance = "0";
-            let apr = "0";
-            let principal = "0";
-            let utilization = "0";
-            let price = "0";
-            let totalDeposited = "0";
-            let ethBalance = "0";
-            let weight = "0";
-
-            let USDprice = "0";
-            if (network) {
-                const token_address = address[network][`address_${asset.unit}`];
-                balance = lendBalances[token_address] || "0";
-                apr = lendAPR[token_address] || "0";
-                principal = lendPrincipal[token_address] || "0";
-                utilization = marketUtilization[token_address] || "0";
-                price = assetPrices[token_address] || "0";
-                totalDeposited = accountTotalDeposit || "0";
-                ethBalance = web3.utils
-                    .toBN(balance)
-                    .mul(web3.utils.toBN(price))
-                    .toString();
-                weight = (
-                    ethBalance / web3.utils.fromWei(totalDeposited)
-                ).toString();
-
-                USDprice =
-                    assetPrices["0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"] ||
-                    "0";
-            }
-            return {
-                ...asset,
-                balance,
-                ethBalance,
-                weight,
-                apr,
-                principal,
-                utilization,
-                price,
-                USDprice,
-            };
-        })
-);
-
-// LEND Create Selectors
-
-export const getLendActive = createSelector(getLendAsset, (assets) => {
-    return assets.filter((asset) => asset.balance !== "0");
-});
-
-export const getAggregatedDepositAPR = createSelector(
-    getLendActive,
-    networkSelector,
-    (activeAssets, network) => {
-        let totalAPR = 0;
-        if (network) {
-            // checks that web3 wallet is connected
-            activeAssets.forEach(function (asset) {
-                totalAPR += asset.weight * asset.apr;
-                totalAPR = parseInt(totalAPR);
-            });
-        }
-
-        if (isFinite(totalAPR)) {
-            totalAPR = web3.utils.fromWei(totalAPR.toString()); // formats for WEI to decimal
-        }
-
-        return totalAPR.toString();
-    }
-);
-
-export const getLendInactive = createSelector(
-    getLendAsset,
-    getAllowances,
-    (assets, allowances) =>
-        assets
-            .filter((asset) => asset.balance === "0")
-            .map((asset) => {
-                asset.activated = allowances[asset.unit] || false;
-                return asset;
-            })
-);
-
-export const getLendPending = (state) =>
-    Object.values(state.data.lend.assets).filter((asset) => asset.pending);
-export const getLendError = (state) => state.data.lend.error;
-
-// Helpers
-function calculateInterest(rateMantissa) {
-    const total_blocks_per_year = (3600 * 24 * 365) / 15;
-    let rateAPR = (rateMantissa * total_blocks_per_year) / 1e18;
-    return rateAPR;
-}
-
-// Borrow Selectors
 
 const borrowAssetSelector = (state) => state.data.borrow.assets;
 
@@ -309,7 +148,7 @@ const getBorrowAsset = createSelector(
             let maxBorrowToken = "0";
             let safeBorrowToken = "0";
             let totalBorrowed = "0";
-            if (network) {
+            if (network && address[network]) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
                 apr = borrowAPR[token_address] || "0";

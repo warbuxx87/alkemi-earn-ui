@@ -14,16 +14,30 @@ import {
     TableRow,
     TableCell,
     TablePagination,
+    makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 
-// import tx_data from "containers/History/MOCK_DATA";
+import {
+    toDate,
+    openEtherScan,
+    formatNumber,
+    getTokenIcon,
+    checkAction,
+} from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
+const useStyles = makeStyles((theme) => ({
+    imageSize: {
+        width: "30px",
+        height: "30px",
+    },
+}));
 
 // Section 5: Code Component
-const History = ({ fetchStats, tx, pending, error }) => {
+const History = ({ address, txList, txPending, error }) => {
+    const classes = useStyles();
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
     const [page, setPage] = React.useState(0);
 
@@ -42,15 +56,15 @@ const History = ({ fetchStats, tx, pending, error }) => {
                     <TableRow>
                         <TableCell className="px-0">Date</TableCell>
                         <TableCell className="px-0">Action</TableCell>
-                        <TableCell className="px-0">Address</TableCell>
                         <TableCell className="px-0">Asset</TableCell>
+                        <TableCell className="px-0">Symbol</TableCell>
                         <TableCell className="px-0">Amount</TableCell>
                         <TableCell className="px-0">Value</TableCell>
                         <TableCell className="px-0">TX</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tx
+                    {txList
                         .slice(
                             page * rowsPerPage,
                             page * rowsPerPage + rowsPerPage
@@ -61,43 +75,60 @@ const History = ({ fetchStats, tx, pending, error }) => {
                                     className="px-0 capitalize"
                                     align="left"
                                 >
-                                    {item.date}
+                                    {toDate(item.timeStamp)}
                                 </TableCell>
                                 <TableCell
                                     className="px-0 capitalize"
                                     align="left"
                                 >
-                                    {item.action}
+                                    {checkAction(
+                                        address,
+                                        item.to,
+                                        item.from,
+                                        formatNumber(
+                                            item.value,
+                                            item.tokenSymbol
+                                        )
+                                    )}
                                 </TableCell>
                                 <TableCell
                                     className="px-0 capitalize"
                                     align="left"
                                 >
-                                    {item.address}
+                                    {item.tokenName}
                                 </TableCell>
                                 <TableCell
                                     className="px-0 capitalize"
                                     align="left"
                                 >
-                                    {item.symbol}
+                                    <img
+                                        className={classes.imageSize}
+                                        src={getTokenIcon(item.tokenSymbol)}
+                                        alt={item.tokenName}
+                                    />
                                 </TableCell>
                                 <TableCell
                                     className="px-0 capitalize"
                                     align="left"
                                 >
-                                    {item.amount}
+                                    {formatNumber(item.value, item.tokenSymbol)}
                                 </TableCell>
                                 <TableCell
                                     className="px-0 capitalize"
                                     align="left"
                                 >
-                                    {item.value}
+                                    $
                                 </TableCell>
                                 <TableCell
                                     className="px-0 capitalize"
                                     align="left"
                                 >
-                                    <Button color="primary" variant="outlined">
+                                    <Button
+                                        href={openEtherScan(item.hash)}
+                                        target="_blank"
+                                        color="primary"
+                                        variant="outlined"
+                                    >
                                         View
                                     </Button>
                                 </TableCell>
@@ -110,7 +141,7 @@ const History = ({ fetchStats, tx, pending, error }) => {
                 className="px-4"
                 rowsPerPageOptions={[8, 25, 50, 100]}
                 component="div"
-                count={tx.length}
+                count={txList.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 backIconButtonProps={{
@@ -128,7 +159,9 @@ const History = ({ fetchStats, tx, pending, error }) => {
 
 // Section 6: Documentation with PropTypes
 History.propTypes = {
-    tx: PropTypes.array.isRequired,
+    txList: PropTypes.array.isRequired,
+    txPending: PropTypes.bool.isRequired,
+    address: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export

@@ -22,7 +22,6 @@ const zh_CN = {
     supplying_balance: "你的存款量",
     utilization_Rate: "借存比率",
 
-
     SUPPLY: "存款",
     WITHDRAW: "取出",
     BORROW: "借款",
@@ -49,7 +48,6 @@ const zh_CN = {
     before_supplying_hbtc: "授权首次HBTC存款",
     before_borrowing_hbtc: "授权首次HBTC借款",
 
-
     already_borrow_usdx: "存款前需还清所有USDX借款",
     already_borrow_usdt: "存款前需还清所有USDT借款",
     already_borrow_weth: "存款前需还清所有WETH借款",
@@ -62,10 +60,10 @@ const zh_CN = {
     already_supply_imbtc: "借款前需取出所有imBTC存款",
     already_supply_hbtc: "借款前需取出所有HBTC存款",
 
-    safe_max_tips: "抵押率低于125%时，抵押物将被清算，SAFE MAX允许你的借款量保持健康的抵押率",
+    safe_max_tips:
+        "抵押率低于125%时，抵押物将被清算，SAFE MAX允许你的借款量保持健康的抵押率",
     deposit_first: "先抵押再借款",
     coming_soon: "敬请期待...",
-
 
     // history
     withdraw: "取出 ",
@@ -78,22 +76,21 @@ const zh_CN = {
 
     INSUFFICIENT_BALANCE: "余额不足",
     INSUFFICIENT_LIQUIDITY: "流动性不足",
-    Resource: '资源',
-    Products: '产品',
+    Resource: "资源",
+    Products: "产品",
 
     // market
-    Total_Supply_Balance: '市场存款总额',
-    Total_Borrow_Balance: '市场借款总额',
-    Total_Collateralization_ratio: '市场抵押率',
-    Market_Overview: '市场概览',
-    Total_Supply: '存款资产比例',
-    Total_Borrow: '借款资产比例',
-    All_Markets: '所有资产',
-    Market: '资产',
-    Gross_Supply: '存款总额',
-    Supply_APR: '存款利率',
-    Gross_Borrow: '借款总额',
-    Borrow_APR: '借款利率',
-
-}
+    Total_Supply_Balance: "市场存款总额",
+    Total_Borrow_Balance: "市场借款总额",
+    Total_Collateralization_ratio: "市场抵押率",
+    Market_Overview: "市场概览",
+    Total_Supply: "存款资产比例",
+    Total_Borrow: "借款资产比例",
+    All_Markets: "所有资产",
+    Market: "资产",
+    Gross_Supply: "存款总额",
+    Supply_APR: "存款利率",
+    Gross_Borrow: "借款总额",
+    Borrow_APR: "借款利率",
+};
 export default zh_CN;

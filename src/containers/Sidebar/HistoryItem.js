@@ -10,9 +10,7 @@ import { isHistorySelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = (state, props) => ({
     selected: isHistorySelected(state),
-    onClick: () => props.history.push(HISTORY)
+    onClick: () => props.history.push(HISTORY),
 });
 
-export default withRouter(connect(
-    mapStateToProps,
-)(SidebarHistoryItem));
+export default withRouter(connect(mapStateToProps)(SidebarHistoryItem));

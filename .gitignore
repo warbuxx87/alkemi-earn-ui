@@ -3,3 +3,7 @@ node_modules
 build
 .DS_Store
 .scannerwork
+src/components/History/AppBar/AppBar.js
+src/components/History/AppBar/MobileMenu.js
+src/components/History/AppBar/Notifications.js
+src/components/History/AppBar/Settings.js

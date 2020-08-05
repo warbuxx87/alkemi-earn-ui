@@ -15,7 +15,7 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { formatMoney, formatPercent } from "utils/ui";
+import { formatPercent, formatMoney } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +44,7 @@ function DepositBalance({ totalDeposit, currency, apr }) {
     return (
         <Card>
             <CardHeader title="Total Deposits" className={classes.item} />
+
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box

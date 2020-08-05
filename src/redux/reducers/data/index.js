@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 
-import stats from "./stats";
+import tx from "./tx";
 import lend from "./lend";
 import borrow from "./borrow";
 import price from "./price";
 
 export default combineReducers({
-    stats,
+    tx,
     lend,
     borrow,
     price,

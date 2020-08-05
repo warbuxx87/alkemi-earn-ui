@@ -1,12 +1,12 @@
 export const compare_supply = (val1, val2) => {
-    return val2.grossSupplyUSD - val1.grossSupplyUSD;
+    return val2.totalSupplyUSD - val1.totalSupplyUSD;
 };
 
 export const compare_borrow = (val1, val2) => {
     return val2.totalBorrowUSD - val1.totalBorrowUSD;
 };
 
-export const format_str_to_kmb = str_num => {
+export const format_str_to_kmb = (str_num) => {
     var t_num = Number(str_num);
     var out_a, out_b, t_index;
 
@@ -50,7 +50,7 @@ export const format_str_to_kmb = str_num => {
     return str_num;
 };
 
-export const format_str_to_percent = str_num => {
+export const format_str_to_percent = (str_num) => {
     // console.log(str_num)
     var index_num = str_num.indexOf(".") + 2;
     var cpmp_str = str_num.replace(/\./, "");
@@ -65,7 +65,7 @@ export const format_str_to_percent = str_num => {
     }
 };
 
-export const format_str_to_K = str_num => {
+export const format_str_to_K = (str_num) => {
     var reg = /\d{1,3}(?=(\d{3})+$)/g;
 
     if (str_num.indexOf(".") > 0) {

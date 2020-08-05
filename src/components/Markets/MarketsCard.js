@@ -1,0 +1,68 @@
+// Sub Component
+
+// Section 1: React low level imports
+import React from "react";
+import PropTypes from "prop-types";
+
+// Section 2: Material-UI imports
+import {
+    Box,
+    Card,
+    CardContent,
+    CardHeader,
+    Divider,
+    Typography,
+    makeStyles,
+} from "@material-ui/core";
+
+// Section 4: Define Styles function taking theme as argument and returning an object
+const useStyles = makeStyles((theme) => ({
+    root: {
+        padding: theme.spacing(3),
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+    label: {
+        marginLeft: theme.spacing(1),
+    },
+    item: {
+        textAlign: "center",
+        justifyContent: "center",
+    },
+}));
+
+// Section 5: Code Component
+const MarketsCard = ({ title, cardContent }) => {
+    const classes = useStyles();
+
+    return (
+        <Card>
+            <CardHeader title={title} className={classes.item} />
+            <Divider />
+            <CardContent>
+                <Box
+                    className={classes.item}
+                    mt={2}
+                    mb={1}
+                    display="flex"
+                    alignItems="center"
+                    flexWrap="wrap"
+                >
+                    <Typography variant="h3" color="textPrimary">
+                        {cardContent}
+                    </Typography>
+                </Box>
+            </CardContent>
+        </Card>
+    );
+};
+
+// Section 6: Documentation with PropTypes
+MarketsCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    cardContent: PropTypes.string.isRequired,
+};
+
+// Section 7:  Connect styles and export
+export default MarketsCard;

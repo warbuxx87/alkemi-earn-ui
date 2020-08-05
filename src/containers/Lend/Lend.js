@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // Main Container
 
 // Section 1: React/Redux low level imports
@@ -18,10 +17,11 @@ import {
     getLendError,
     getLendActive,
     getLendInactive,
-} from "redux/selectors/data";
+} from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
+// Section 4: Container
 const LendContainer = ({
     inactiveLend,
     activeLend,
@@ -57,6 +57,7 @@ const mapDispatchToProps = (dispatch) =>
         dispatch
     );
 
+// Section 6: Exports
 export default compose(
     withDrizzle(),
     connect(mapStateToProps, mapDispatchToProps)
