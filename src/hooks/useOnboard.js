@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import onboard from "utils/onboard";
@@ -15,13 +15,18 @@ import {
 
 import Web3 from "web3";
 
-import { isWalletConnected } from "redux/selectors/onboard";
+import { isWalletConnected, walletAddress } from "redux/selectors/onboard";
 
-export default ({ drizzle }) => {
+import DrizzleContext from "containers/Drizzle/DrizzleContext";
+
+export default () => {
     const dispatch = useDispatch();
+
+    const drizzle = useContext(DrizzleContext);
 
     const walletConnected = useSelector(isWalletConnected);
 
+    const userWalletAddress = useSelector(walletAddress);
     // get previous selected wallet
     useEffect(() => {
         const checkIfPreviouslySelectedWallet = async () => {
@@ -43,9 +48,12 @@ export default ({ drizzle }) => {
 
                     if (window.currentlyUsedProvider) {
                         // set current address from chosen provider in onboard
+                        // For Metamask: selectedAddress
+                        // For Fortmatic: account
                         dispatch(
                             setWalletAddress(
-                                window.currentlyUsedProvider.selectedAddress
+                                window.currentlyUsedProvider.selectedAddress ||
+                                    window.currentlyUsedProvider.account
                             )
                         );
                     }
@@ -88,51 +96,60 @@ export default ({ drizzle }) => {
         const initDrizzleData = (forceUpdate = false) => {
             if (walletConnected === true) {
                 if (drizzle && !forceUpdate) {
-                    drizzle.web3 = new Web3(window.currentlyUsedProvider); // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
+                    const web3 = new Web3(window.currentlyUsedProvider);
+
+                    drizzle.web3 = web3; // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
+
+                    console.log("drizzle.web3 after web3: ", drizzle.web3);
+                    console.log("------------------------------");
                 }
 
                 // account connected
-                initContracts(drizzle, forceUpdate);
+                initContracts(drizzle, userWalletAddress, forceUpdate);
 
                 if (drizzle && drizzle.web3 && drizzle.web3.currentProvider) {
-                    drizzle.web3.currentProvider.removeAllListeners(
-                        "accountsChanged"
-                    );
-                    drizzle.web3.currentProvider.removeAllListeners(
-                        "chainChanged"
-                    );
+                    try {
+                        drizzle.web3.currentProvider.removeAllListeners(
+                            "accountsChanged"
+                        );
+                        drizzle.web3.currentProvider.removeAllListeners(
+                            "chainChanged"
+                        );
 
-                    drizzle.web3.currentProvider.on(
-                        "accountsChanged",
-                        (accounts) => {
-                            resetStoreData();
+                        drizzle.web3.currentProvider.on(
+                            "accountsChanged",
+                            (accounts) => {
+                                resetStoreData();
 
-                            // Could be commented out in the current state as try/catch in contracts.js will catch it anyway
-                            // (or the current clean up in contracts can be kept as it is)
-                            deleteAllContracts(drizzle);
+                                // Could be commented out in the current state as try/catch in contracts.js will catch it anyway
+                                // (or the current clean up in contracts can be kept as it is)
+                                deleteAllContracts(drizzle);
 
-                            dispatch(setWalletAddress(accounts[0]));
+                                dispatch(setWalletAddress(accounts[0]));
 
-                            initDrizzleData(true);
-                        }
-                    );
+                                initDrizzleData(true);
+                            }
+                        );
 
-                    drizzle.web3.currentProvider.on(
-                        "networkChanged",
-                        (/*newNetworkId*/) => {
-                            resetStoreData();
+                        drizzle.web3.currentProvider.on(
+                            "networkChanged",
+                            (/*newNetworkId*/) => {
+                                resetStoreData();
 
-                            deleteAllContracts(drizzle);
+                                deleteAllContracts(drizzle);
 
-                            initDrizzleData(true);
-                        }
-                    );
+                                initDrizzleData(true);
+                            }
+                        );
+                    } catch (e) {
+                        // Formatic doesn't subscribe to anything
+                    }
                 }
             }
         };
 
         initDrizzleData();
-    }, [drizzle, walletConnected, resetStoreData, dispatch]);
+    }, [drizzle, walletConnected, userWalletAddress, resetStoreData, dispatch]);
 
     const onConnect = async () => {
         const isSelectWallet = await onboard.walletSelect();

@@ -9,12 +9,16 @@ export const handle_approve_click = async ({ drizzle, asset, myAccount }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transaction");
     //const drizzleStore = drizzle.store.getState();
     const network =
-        constants.network_type[
-            drizzle.web3.currentProvider
-                .networkVersion /*drizzleStore.web3.networkId*/
+        constants.network_type /*drizzleStore.web3.networkId*/[
+            /*drizzle.web3.currentProvider
+                .networkVersion*/ "4"
         ]; // Using provider network ID instead of drizzle store value
     const address_MoneyMarket = address[network].address_MoneyMarket;
-    const tokenContract = initAssetContract({ drizzle, asset });
+    const tokenContract = initAssetContract({
+        drizzle,
+        userWalletAddress: myAccount,
+        asset,
+    });
     const sendApprove = tokenContract.methods.approve.cacheSend(
         address_MoneyMarket,
         -1,

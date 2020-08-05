@@ -1,3 +1,4 @@
+// Injects drizzle
 import React from "react";
 import { useSelector } from "react-redux";
 import { DrizzleProvider } from "@drizzle/react-plugin";

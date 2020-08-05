@@ -2,7 +2,7 @@ import Onboard from "bnc-onboard";
 
 const DAPP_ID = process.env.REACT_APP_DAPP_ID;
 const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
-//const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
+const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
 const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
 const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
 //const INFURA_ID = process.env.REACT_APP_INFURA_ID;
@@ -52,7 +52,7 @@ const wallets = [
     },
     {
         walletName: "fortmatic",
-        apiKey: FORTMATIC_KEY,
+        apiKey: true ? FORTMATIC_TEST_KEY : FORTMATIC_KEY, // TODO: make choose test key when in dev
         preferred: true,
     },
 ];
@@ -68,7 +68,19 @@ const onboard = Onboard({
         wallet: (wallet) => {
             window.localStorage.setItem("selectedWallet", wallet.name);
 
-            window.currentlyUsedProvider = wallet.provider;
+            switch (wallet.name) {
+                case "Fortmatic": {
+                    window.currentlyUsedProvider = wallet.instance.getProvider();
+                    break;
+                }
+                default:
+                    window.currentlyUsedProvider = wallet.provider;
+            }
+
+            console.log(
+                "window.currentlyUsedProvider: ",
+                window.currentlyUsedProvider
+            );
         },
     },
     walletCheck: walletChecks,

@@ -1,8 +1,8 @@
 // Main Container
 
 // Section 1: React/Reduxd low level imports
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
@@ -18,17 +18,21 @@ import {
     //  getBorrowPending
 } from "redux/selectors/data/borrow";
 
-const BorrowContainer = ({
-    inactiveBorrow,
-    activeBorrow,
-    onActivate,
-    drizzle,
-}) => {
+import DrizzleContext from "containers/Drizzle/DrizzleContext";
+
+import { walletAddress } from "redux/selectors/onboard";
+
+const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
+    const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
+
     return (
         <Borrow
             inactiveBorrow={inactiveBorrow}
             activeBorrow={activeBorrow}
-            onActivate={(asset) => onActivate({ drizzle, asset })}
+            onActivate={(asset) =>
+                onActivate({ drizzle, userWalletAddress, asset })
+            }
         />
     );
 };

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 export default () => (Component) => {
     const DrizzledComponent = (props, context) => {
         const drizzle = context.drizzle;
+
         return (
             <Component
                 {...props}

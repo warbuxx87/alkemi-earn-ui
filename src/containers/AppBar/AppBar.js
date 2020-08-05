@@ -27,8 +27,8 @@ const locationToTitles = {
 };
 
 // Section 5: Code Component
-const AppBarContainer = ({ drizzle }) => {
-    const { onConnect, onReset } = useOnboard({ drizzle });
+const AppBarContainer = () => {
+    const { onConnect, onReset } = useOnboard();
 
     const walletConnected = useSelector(isWalletConnected);
     const currentAddress = useSelector(walletAddress);
@@ -54,4 +54,4 @@ const AppBarContainer = ({ drizzle }) => {
 };
 
 // Export
-export default compose(withDrizzle())(AppBarContainer);
+export default AppBarContainer;
