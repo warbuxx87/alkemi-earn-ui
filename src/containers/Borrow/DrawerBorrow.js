@@ -1,10 +1,12 @@
 // Section 1: React/Reduxd low level imports
-import React from "react";
+import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
 import { formatNumber, formatETHMoney } from "utils/ui";
+
+import DrizzleContext from "containers/Drizzle/DrizzleContext";
 
 // Section 3: Selectors, Hooks & Action Listeners
 import useFetchPrice from "hooks/useFetchPrice";
@@ -12,11 +14,12 @@ import { getUSDPrice } from "redux/selectors/totalBalance";
 import { onBorrowAction } from "redux/actions/data/borrow";
 
 // Section 4: Import Underlying Components / Containers
-import withDrizzle from "containers/Drizzle/withDrizzle";
 import Drawer from "components/UI/Drawer/Drawer";
 
 // Section 5: Code Container
-const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
+const BorrowDrawerContainer = ({ asset, onBorrowAction }) => {
+    const drizzle = useContext(DrizzleContext);
+
     useFetchPrice(true); // gets current USD price
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
@@ -62,7 +65,6 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onBorrowAction }, dispatch);
 
 // Section 7: Export Container
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(BorrowDrawerContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    BorrowDrawerContainer
+);

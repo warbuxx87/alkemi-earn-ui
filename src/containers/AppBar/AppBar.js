@@ -3,11 +3,9 @@
 // Section 1: React low level imports
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { compose } from "redux";
 import { useLocation } from "react-router-dom";
 
 // Section 2: internal imports
-import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 3: Selectors
 import { isWalletConnected, walletAddress } from "redux/selectors/onboard";

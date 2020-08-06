@@ -1,19 +1,26 @@
-import React from "react";
+// Section 1: React/Redux low level imports
+import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import web3 from "web3";
 
-import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
-
-import withDrizzle from "containers/Drizzle/withDrizzle";
+// Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
+import useFetchPrice from "hooks/useFetchPrice";
+
+import DrizzleContext from "containers/Drizzle/DrizzleContext";
+
 import { onRepayAction } from "redux/actions/data/borrow";
 
-import useFetchPrice from "hooks/useFetchPrice";
+import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
+
+// Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
-const DrawerRepayContainer = ({ asset, drizzle, onRepayAction }) => {
+const DrawerRepayContainer = ({ asset, onRepayAction }) => {
+    const drizzle = useContext(DrizzleContext);
+
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -55,7 +62,6 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onRepayAction }, dispatch);
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(DrawerRepayContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    DrawerRepayContainer
+);

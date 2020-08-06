@@ -1,14 +1,16 @@
 // Main Container
 
-// Section 1: React/Reduxd low level imports
+// Section 1: React/Redux low level imports
 import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
-import { onBorrowActivate } from "redux/actions/status/borrow";
 import Borrow from "components/Borrow/Borrow";
-import withDrizzle from "containers/Drizzle/withDrizzle";
+
+import DrizzleContext from "containers/Drizzle/DrizzleContext";
+
+import { onBorrowActivate } from "redux/actions/status/borrow";
 
 // Section 3: Selectors
 import {
@@ -17,8 +19,6 @@ import {
     //  getBorrowError,
     //  getBorrowPending
 } from "redux/selectors/data/borrow";
-
-import DrizzleContext from "containers/Drizzle/DrizzleContext";
 
 import { walletAddress } from "redux/selectors/onboard";
 
@@ -45,7 +45,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onActivate: onBorrowActivate }, dispatch);
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(BorrowContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    BorrowContainer
+);

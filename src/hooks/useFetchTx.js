@@ -17,7 +17,7 @@ export default (fetchPeriodically = false) => {
     useEffect(() => {
         let timer;
 
-        const getTxList = () => {
+        const getTxList = (fetchPeriodically) => {
             dispatch(fetchTx({ currentNetworkName, address }));
 
             if (fetchPeriodically === true) {
