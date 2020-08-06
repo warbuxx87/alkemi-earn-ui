@@ -10,7 +10,6 @@ import { Container, Grid, makeStyles } from "@material-ui/core";
 // Section 3: Components & Containers import from the application
 import LendTable from "./Table";
 import LendTableActive from "./TableActive";
-import LendCardInterest from "./CardInterest";
 import DepositCard from "components/UI/DefaultCard";
 import { formatMoney, formatPercent } from "utils/ui";
 
@@ -33,6 +32,11 @@ const useStyles = makeStyles((theme) => ({
 // Section 5: Code Component
 function Lend({ className, activeLend, inactiveLend, onActivate, USDPrice,totalDeposit,currency,totalAPR }) {
     const classes = useStyles();
+    const data = {
+        value: (0.0).toFixed(2),
+        currency: "$",
+        difference: 0,
+    };
     return (
         <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
@@ -43,7 +47,10 @@ function Lend({ className, activeLend, inactiveLend, onActivate, USDPrice,totalD
                          />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <LendCardInterest />
+                <DepositCard
+                           title="Earning APR%"
+                           cardContent= {data.value}
+                        />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                 <DepositCard
