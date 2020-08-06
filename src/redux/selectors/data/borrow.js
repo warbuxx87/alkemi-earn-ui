@@ -107,9 +107,13 @@ const borrowAPRSelector = (state) => {
 const borrowPrincipalSelector = (state) => {
     const borrowPrincipal = {};
 
-    Object.values(
-        _.get(state, "contracts.MoneyMarket.borrowBalances", {})
-    ).forEach((loan) => (borrowPrincipal[loan.args[1]] = loan.value.principal));
+    try {
+        Object.values(
+            _.get(state, "contracts.MoneyMarket.borrowBalances", {})
+        ).forEach(
+            (loan) => (borrowPrincipal[loan.args[1]] = loan.value.principal)
+        );
+    } catch (e) {}
     return borrowPrincipal;
 };
 

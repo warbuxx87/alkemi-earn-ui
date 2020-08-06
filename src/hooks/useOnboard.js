@@ -59,8 +59,10 @@ export default () => {
                         // For Fortmatic: account
                         dispatch(
                             setWalletAddress(
-                                window.currentlyUsedProvider.selectedAddress ||
-                                    window.currentlyUsedProvider.account
+                                window.currentlyUsedProvider.selectedAddress
+                                    ? window.currentlyUsedProvider
+                                          .selectedAddress
+                                    : window.currentlyUsedProvider.account
                             )
                         );
 
@@ -112,20 +114,32 @@ export default () => {
     useEffect(() => {
         const initDrizzleData = (forceUpdate = false) => {
             if (walletConnected === true) {
+                let currentWalletAddress = userWalletAddress;
+                let currentWalletNetwork = userWalletNetwork;
+
                 if (drizzle && !forceUpdate) {
                     const web3 = new Web3(window.currentlyUsedProvider);
 
                     drizzle.web3 = web3; // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
 
-                    console.log("drizzle.web3 after web3: ", drizzle.web3);
-                    console.log("------------------------------");
+                    // set it in sync vars as redux stores data async here it seems
+                    currentWalletAddress = drizzle.web3.currentProvider
+                        .selectedAddress
+                        ? drizzle.web3.currentProvider.selectedAddress
+                        : drizzle.web3.currentProvider.account;
+                    currentWalletNetwork =
+                        drizzle.web3.currentProvider.networkVersion || "4";
+
+                    dispatch(setWalletAddress(currentWalletAddress));
+
+                    dispatch(setWalletNetwork(currentWalletNetwork));
                 }
 
                 // account connected
                 initContracts(
                     drizzle,
-                    userWalletAddress,
-                    userWalletNetwork,
+                    currentWalletAddress,
+                    currentWalletNetwork,
                     forceUpdate
                 );
 
