@@ -63,11 +63,7 @@ export const initMarketContract = ({
 }) => {
     if (drizzle.contracts.MoneyMarket && !forceUpdate)
         return drizzle.contracts.MoneyMarket;
-    console.log("inside initmarket");
-    console.log("userWalletAddress: ", userWalletAddress);
-    console.log("userWalletNetwork: ", userWalletNetwork);
-    //const drizzleStore = drizzle.store.getState();
-    const myAddress = userWalletAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const myAddress = userWalletAddress;
 
     const network = constants.network_type[userWalletNetwork];
     const assets = ["PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
@@ -167,9 +163,8 @@ export const initAssetContract = ({
 }) => {
     if (drizzle.contracts[asset] && !forceUpdate)
         return drizzle.contracts[asset];
-    //const drizzleStore = drizzle.store.getState();
 
-    const myAddress = userWalletAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const myAddress = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
 
     if (!drizzle.web3.eth) return;
