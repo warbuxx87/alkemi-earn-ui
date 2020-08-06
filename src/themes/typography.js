@@ -3,6 +3,7 @@ export default {
         fontWeight: 400,
         fontSize: 14,
         letterSpacing: "-0.05px",
+        textTransform: "capitalize",
     },
 
     body2: {
