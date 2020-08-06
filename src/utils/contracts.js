@@ -20,12 +20,16 @@ const ABIs = {
     WBTC: WBTC_ABI,
 };
 
-export const initContracts = (drizzle, userWalletAddress, forceUpdate) => {
-    console.log("5-1 drizzle: ", drizzle);
-    console.log("5-1 - drizzle.web3: ", drizzle.web3);
+export const initContracts = (
+    drizzle,
+    userWalletAddress,
+    userWalletNetwork,
+    forceUpdate
+) => {
     const resolved = initMarketContract({
         drizzle,
         userWalletAddress,
+        userWalletNetwork,
         forceUpdate,
     });
 
@@ -34,6 +38,7 @@ export const initContracts = (drizzle, userWalletAddress, forceUpdate) => {
             initAssetContract({
                 drizzle,
                 userWalletAddress,
+                userWalletNetwork,
                 asset,
                 forceUpdate,
             })
@@ -53,31 +58,16 @@ export const deleteAllContracts = (drizzle) => {
 export const initMarketContract = ({
     drizzle,
     userWalletAddress,
+    userWalletNetwork,
     forceUpdate,
 }) => {
-    console.log("5-2 drizzle: ", drizzle);
-    console.log("5-2 - drizzle.web3: ", drizzle.web3);
-
     if (drizzle.contracts.MoneyMarket && !forceUpdate)
         return drizzle.contracts.MoneyMarket;
 
-    console.log(
-        "5-2 drizzle.web3.currentProvider",
-        drizzle.web3.currentProvider
-    );
     //const drizzleStore = drizzle.store.getState();
     const myAddress = userWalletAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
-    console.log(
-        "5-2 drizzle.web3.currentProvider.selectedAddress",
-        drizzle.web3.currentProvider.selectedAddress,
-        myAddress
-    );
 
-    const network =
-        constants.network_type[
-            drizzle.web3.currentProvider
-                .networkVersion /*drizzleStore.web3.networkId*/
-        ]; // Using provider network ID instead of drizzle store value
+    const network = constants.network_type[userWalletNetwork];
     const assets = ["PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
@@ -169,6 +159,7 @@ export const initMarketContract = ({
 export const initAssetContract = ({
     drizzle,
     userWalletAddress,
+    userWalletNetwork,
     asset,
     forceUpdate,
 }) => {
@@ -177,12 +168,7 @@ export const initAssetContract = ({
     //const drizzleStore = drizzle.store.getState();
 
     const myAddress = userWalletAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
-    const network =
-        constants.network_type[
-            "4" /*drizzleStore.web3.networkId*/
-            /*drizzle.web3.currentProvider
-                .networkVersion*/
-        ]; // Using provider network ID instead of drizzle store value
+    const network = constants.network_type[userWalletNetwork];
 
     if (!drizzle.web3.eth) return;
     if (!address[network]) return;

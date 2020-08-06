@@ -9,3 +9,7 @@ export const isWalletConnected = (state) => {
 export const walletAddress = (state) => {
     return state.status.onboard.walletAddress;
 };
+
+export const walletNetwork = (state) => {
+    return state.status.onboard.walletNetwork;
+};

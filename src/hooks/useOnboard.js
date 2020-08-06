@@ -11,11 +11,16 @@ import { resetTxDataAndCancelFetch } from "redux/actions/data/tx";
 import {
     setWalletConnected,
     setWalletAddress,
+    setWalletNetwork,
 } from "redux/actions/status/onboard";
 
 import Web3 from "web3";
 
-import { isWalletConnected, walletAddress } from "redux/selectors/onboard";
+import {
+    isWalletConnected,
+    walletAddress,
+    walletNetwork,
+} from "redux/selectors/onboard";
 
 import DrizzleContext from "containers/Drizzle/DrizzleContext";
 
@@ -27,6 +32,8 @@ export default () => {
     const walletConnected = useSelector(isWalletConnected);
 
     const userWalletAddress = useSelector(walletAddress);
+    const userWalletNetwork = useSelector(walletNetwork);
+
     // get previous selected wallet
     useEffect(() => {
         const checkIfPreviouslySelectedWallet = async () => {
@@ -54,6 +61,13 @@ export default () => {
                             setWalletAddress(
                                 window.currentlyUsedProvider.selectedAddress ||
                                     window.currentlyUsedProvider.account
+                            )
+                        );
+
+                        dispatch(
+                            setWalletNetwork(
+                                window.currentlyUsedProvider.networkVersion ||
+                                    "4"
                             )
                         );
                     }
@@ -88,6 +102,9 @@ export default () => {
         dispatch(setWalletConnected(false));
 
         dispatch(setWalletAddress(null));
+        dispatch(
+            setWalletNetwork("4") // TODO: Set default one for app env
+        );
 
         resetStoreData();
     }, [dispatch, resetStoreData, drizzle]);
@@ -105,7 +122,12 @@ export default () => {
                 }
 
                 // account connected
-                initContracts(drizzle, userWalletAddress, forceUpdate);
+                initContracts(
+                    drizzle,
+                    userWalletAddress,
+                    userWalletNetwork,
+                    forceUpdate
+                );
 
                 if (drizzle && drizzle.web3 && drizzle.web3.currentProvider) {
                     try {
@@ -133,10 +155,12 @@ export default () => {
 
                         drizzle.web3.currentProvider.on(
                             "networkChanged",
-                            (/*newNetworkId*/) => {
+                            (newNetworkId) => {
                                 resetStoreData();
 
                                 deleteAllContracts(drizzle);
+
+                                dispatch(setWalletNetwork(newNetworkId || "4"));
 
                                 initDrizzleData(true);
                             }
@@ -149,7 +173,14 @@ export default () => {
         };
 
         initDrizzleData();
-    }, [drizzle, walletConnected, userWalletAddress, resetStoreData, dispatch]);
+    }, [
+        drizzle,
+        walletConnected,
+        userWalletAddress,
+        walletNetwork,
+        resetStoreData,
+        dispatch,
+    ]);
 
     const onConnect = async () => {
         const isSelectWallet = await onboard.walletSelect();
