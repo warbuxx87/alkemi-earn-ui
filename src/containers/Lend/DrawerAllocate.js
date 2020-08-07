@@ -16,9 +16,11 @@ import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/totalBalance";
+import { walletAddress } from "redux/selectors/onboard";
 
 const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
     const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
 
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
@@ -42,7 +44,9 @@ const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
             enableButtonClick={enableAllocate}
-            onButtonClick={() => onAllocateAction({ drizzle, asset, amount })}
+            onButtonClick={() =>
+                onAllocateAction({ drizzle, userWalletAddress, asset, amount })
+            }
             isDoingAction={asset.allocating}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}

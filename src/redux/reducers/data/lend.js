@@ -186,31 +186,38 @@ export default (state = initialState, action) => {
                     },
                 },
             };
-        case ALLOCATE_PENDING:
-            return {
+        case ALLOCATE_PENDING: {
+            const newState = {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
+                    [action.payload.asset.unit]: {
+                        ...state.assets[action.payload.asset.unit],
                         allocating: true,
                         activating: false,
                     },
                 },
             };
-        case ALLOCATE_SUCCESS:
-            return {
+
+            return newState;
+        }
+
+        case ALLOCATE_SUCCESS: {
+            const newState = {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
+                    [action.payload.asset.unit]: {
+                        ...state.assets[action.payload.asset.unit],
                         allocating: false,
                         activated: false,
                         pending: false,
                     },
                 },
             };
+
+            return newState;
+        }
 
         case ALLOCATE_ERROR:
             return {

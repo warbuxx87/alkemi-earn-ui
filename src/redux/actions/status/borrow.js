@@ -52,20 +52,13 @@ export const onBorrowActivate = ({
     drizzle,
     userWalletAddress,
     asset,
-}) => async (dispatch, getState) => {
-    console.log("Activating borrow");
-    //console.log('3-1 drizzle version in init: ', drizzle)
-    //console.log('3-1 drizzle.web3 version in init: ', drizzle.web3)
-    console.log(
-        "3-1 drizzle.web3.currentProvider version in init: ",
-        drizzle.web3.currentProvider
-    );
+}) => async (dispatch) => {
     dispatch(fetchBorrowPending(asset));
     const myAccount = userWalletAddress;
-    console.log("drizzle inside of borrow approva; ", drizzle);
     handle_approve_click({ drizzle, asset, myAccount })
         .then(() => dispatch(fetchBorrowSuccess(asset)))
         .catch((error) => {
+            // TODO: check notify crashing
             /*notify.notification({
                 eventCode: "fetchBorrowError",
                 type: "error",

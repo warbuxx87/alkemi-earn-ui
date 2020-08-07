@@ -11,7 +11,7 @@ export const handle_approve_click = async ({ drizzle, asset, myAccount }) => {
     const network =
         constants.network_type /*drizzleStore.web3.networkId*/[
             /*drizzle.web3.currentProvider
-                .networkVersion*/ "4"
+                .networkVersion*/ "4" // TODO set network properly
         ]; // Using provider network ID instead of drizzle store value
     const address_MoneyMarket = address[network].address_MoneyMarket;
     const tokenContract = initAssetContract({
@@ -30,11 +30,14 @@ export const handle_approve_click = async ({ drizzle, asset, myAccount }) => {
 };
 
 // Mint new Test Tokens
-export const handle_allocate_click = async ({ drizzle, asset, amount }) => {
-    console.log(asset.unit);
+export const handle_allocate_click = async ({
+    drizzle,
+    userWalletAddress,
+    asset,
+    amount,
+}) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    //const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const myAccount = userWalletAddress;
     const unit = asset.unit;
     const tokenContract = drizzle.contracts[unit];
     const weiAmount = toWei(amount, unit);

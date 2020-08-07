@@ -138,11 +138,14 @@ export const resetLendData = () => ({
 
 // Section 3: Action dispatch methods and async funcs
 
-export const onAllocateAction = ({ drizzle, asset, amount }) => async (
-    dispatch
-) => {
+export const onAllocateAction = ({
+    drizzle,
+    userWalletAddress,
+    asset,
+    amount,
+}) => async (dispatch) => {
     dispatch(allocatePending(asset));
-    handle_allocate_click({ drizzle, asset, amount })
+    handle_allocate_click({ drizzle, userWalletAddress, asset, amount })
         .then(() => dispatch(allocateSuccess(asset)))
         .catch((error) => {
             notify.notification({
