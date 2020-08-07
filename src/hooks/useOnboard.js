@@ -191,7 +191,7 @@ export default () => {
         drizzle,
         walletConnected,
         userWalletAddress,
-        walletNetwork,
+        userWalletNetwork,
         resetStoreData,
         dispatch,
     ]);
