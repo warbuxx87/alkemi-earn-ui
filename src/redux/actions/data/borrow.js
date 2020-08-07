@@ -89,12 +89,19 @@ export const resetBorrowData = () => ({
 
 export const onBorrowAction = ({
     drizzle,
+    userWalletNetwork,
     userWalletAddress,
     amount,
     asset,
 }) => async (dispatch) => {
     dispatch(borrowPending(asset.unit));
-    handle_borrow_click({ drizzle, userWalletAddress, amount, asset })
+    handle_borrow_click({
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        amount,
+        asset,
+    })
         .then(() => dispatch(borrowSuccess(asset.unit)))
         .catch((error) => {
             notify.notification({
@@ -109,12 +116,19 @@ export const onBorrowAction = ({
 
 export const onRepayAction = ({
     drizzle,
+    userWalletNetwork,
     userWalletAddress,
     amount,
     asset,
 }) => async (dispatch) => {
     dispatch(repayPending(asset.unit));
-    handle_repay_click({ drizzle, userWalletAddress, amount, asset })
+    handle_repay_click({
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        amount,
+        asset,
+    })
         .then(() => dispatch(repaySuccess(asset.unit)))
         .catch((error) => {
             notify.notification({

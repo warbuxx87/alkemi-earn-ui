@@ -160,32 +160,49 @@ export const onAllocateAction = ({
 
 export const onDepositAction = ({
     drizzle,
+    userWalletNetwork,
     userWalletAddress,
     amount,
     asset,
 }) => async (dispatch) => {
     dispatch(depositPending(asset.unit));
-    handle_deposit_click({ drizzle, userWalletAddress, amount, asset })
+    handle_deposit_click({
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        amount,
+        asset,
+    })
         .then(() => dispatch(depositSuccess(asset.unit)))
         .catch((error) => {
-            notify.notification({
+            /*notify.notification({
                 eventCode: "depositError",
                 type: "error",
                 message: error.message,
                 autoDismiss: 5000,
-            });
+            });*/
+
+            console.log("error: ", error);
+
             dispatch(depositError(asset.unit, error.message));
         });
 };
 
 export const onWithdrawAction = ({
     drizzle,
+    userWalletNetwork,
     userWalletAddress,
     amount,
     asset,
 }) => async (dispatch) => {
     dispatch(withdrawPending(asset.unit));
-    handle_withdraw_click({ drizzle, userWalletAddress, amount, asset })
+    handle_withdraw_click({
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        amount,
+        asset,
+    })
         .then(() => dispatch(withdrawSuccess(asset.unit)))
         .catch((error) => {
             notify.notification({

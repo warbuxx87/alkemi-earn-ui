@@ -23,7 +23,7 @@ import {
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
-import { walletAddress } from "redux/selectors/onboard";
+import { walletAddress, walletNetwork } from "redux/selectors/onboard";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
@@ -32,13 +32,19 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
 
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
+    const userWalletNetwork = useSelector(walletNetwork);
 
     return (
         <Lend
             inactiveLend={inactiveLend}
             activeLend={activeLend}
             onActivate={(asset) =>
-                onActivate({ drizzle, userWalletAddress, asset })
+                onActivate({
+                    drizzle,
+                    userWalletNetwork,
+                    userWalletAddress,
+                    asset,
+                })
             }
             errorLend={errorLend}
             USDPrice={USDPrice}

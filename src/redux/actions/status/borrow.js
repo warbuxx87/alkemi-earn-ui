@@ -50,12 +50,13 @@ const fetchBorrowError = (asset, error) => ({
 
 export const onBorrowActivate = ({
     drizzle,
+    userWalletNetwork,
     userWalletAddress,
     asset,
 }) => async (dispatch) => {
     dispatch(fetchBorrowPending(asset));
     const myAccount = userWalletAddress;
-    handle_approve_click({ drizzle, asset, myAccount })
+    handle_approve_click({ drizzle, userWalletNetwork, asset, myAccount })
         .then(() => dispatch(fetchBorrowSuccess(asset)))
         .catch((error) => {
             // TODO: check notify crashing

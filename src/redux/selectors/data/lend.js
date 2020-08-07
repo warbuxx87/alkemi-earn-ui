@@ -65,12 +65,14 @@ const lendAPRSelector = (state) => {
 const lendPrincipalSelector = (state) => {
     const supplyPrincipal = {};
 
-    Object.values(
-        _.get(state, "contracts.MoneyMarket.supplyBalances", {})
-    ).forEach(
-        (deposit) =>
-            (supplyPrincipal[deposit.args[1]] = deposit.value.principal)
-    );
+    try {
+        Object.values(
+            _.get(state, "contracts.MoneyMarket.supplyBalances", {})
+        ).forEach(
+            (deposit) =>
+                (supplyPrincipal[deposit.args[1]] = deposit.value.principal)
+        );
+    } catch (e) {}
     return supplyPrincipal;
 };
 
