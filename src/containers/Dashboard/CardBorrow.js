@@ -5,10 +5,11 @@ import { useSelector } from "react-redux";
 // Section 2: internal imports
 import CardBorrow from "components/Dashboard/CardBorrow";
 
-// Section 3: Selectors / hooks
+import useFetchPrice from "hooks/useFetchPrice";
+
+// Section 3: Selectors
 import { getTotalBorrow } from "redux/selectors/totalBalance";
 import { getAggregatedBorrowAPR } from "redux/selectors/data/borrow";
-import useFetchPrice from "hooks/useFetchPrice";
 
 // Section 4: Code Component
 const CardValueContainer = () => {
@@ -27,9 +28,5 @@ const CardValueContainer = () => {
         />
     );
 };
-
-// const mapStateToProps = (state) => ({
-//     activeReserves: getBorrowActive(state),
-// });
 
 export default CardValueContainer;

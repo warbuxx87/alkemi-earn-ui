@@ -1,17 +1,25 @@
-import React from "react";
+// Section 1: React/Redux low level imports
+import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import withDrizzle from "containers/Drizzle/withDrizzle";
+// Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
+
+import useFetchPrice from "hooks/useFetchPrice";
+
+import DrizzleContext from "containers/Drizzle/DrizzleContext";
+
 import { onAllocateAction } from "redux/actions/data/lend";
 
 import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
-import useFetchPrice from "hooks/useFetchPrice";
+// Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
-const DrawerAllocateContainer = ({ asset, drizzle, onAllocateAction }) => {
+const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
+    const drizzle = useContext(DrizzleContext);
+
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -52,7 +60,6 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onAllocateAction }, dispatch);
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(DrawerAllocateContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    DrawerAllocateContainer
+);

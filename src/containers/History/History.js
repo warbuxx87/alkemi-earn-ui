@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 // Imports Section 2: Internal Imports
 import History from "components/History/History";
-import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 3: Selectors
 import useFetchTx from "hooks/useFetchTx";
@@ -40,7 +39,4 @@ const mapStateToProps = (state) => ({
     txError: getTxError(state),
 });
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps)
-)(HistoryContainer);
+export default compose(connect(mapStateToProps))(HistoryContainer);
