@@ -17,9 +17,11 @@ import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/totalBalance";
+import { walletAddress } from "redux/selectors/onboard";
 
 const DrawerRepayContainer = ({ asset, onRepayAction }) => {
     const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
 
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
@@ -44,7 +46,9 @@ const DrawerRepayContainer = ({ asset, onRepayAction }) => {
             triggerButtonVariant="outlined"
             triggerButtonColor="secondary"
             enableButtonClick={enableRepay}
-            onButtonClick={() => onRepayAction({ drizzle, asset, amount })}
+            onButtonClick={() =>
+                onRepayAction({ drizzle, userWalletAddress, asset, amount })
+            }
             isDoingAction={asset.repaying}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}

@@ -178,11 +178,14 @@ export const onDepositAction = ({
         });
 };
 
-export const onWithdrawAction = ({ drizzle, amount, asset }) => async (
-    dispatch
-) => {
+export const onWithdrawAction = ({
+    drizzle,
+    userWalletAddress,
+    amount,
+    asset,
+}) => async (dispatch) => {
     dispatch(withdrawPending(asset.unit));
-    handle_withdraw_click({ drizzle, amount, asset })
+    handle_withdraw_click({ drizzle, userWalletAddress, amount, asset })
         .then(() => dispatch(withdrawSuccess(asset.unit)))
         .catch((error) => {
             notify.notification({

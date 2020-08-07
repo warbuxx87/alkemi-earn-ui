@@ -107,11 +107,14 @@ export const onBorrowAction = ({
         });
 };
 
-export const onRepayAction = ({ drizzle, amount, asset }) => async (
-    dispatch
-) => {
+export const onRepayAction = ({
+    drizzle,
+    userWalletAddress,
+    amount,
+    asset,
+}) => async (dispatch) => {
     dispatch(repayPending(asset.unit));
-    handle_repay_click({ drizzle, amount, asset })
+    handle_repay_click({ drizzle, userWalletAddress, amount, asset })
         .then(() => dispatch(repaySuccess(asset.unit)))
         .catch((error) => {
             notify.notification({

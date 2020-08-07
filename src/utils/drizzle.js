@@ -88,7 +88,6 @@ export const handle_borrow_click = async ({
     asset,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    // const drizzleStore = drizzle.store.getState();
     const myAccount = userWalletAddress;
     const network =
         constants.network_type[
@@ -110,10 +109,14 @@ export const handle_borrow_click = async ({
 };
 
 // Repay Borrowed Tokens from wallet back to Lending Pool
-export const handle_repay_click = async ({ drizzle, amount, asset }) => {
+export const handle_repay_click = async ({
+    drizzle,
+    userWalletAddress,
+    amount,
+    asset,
+}) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    //const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const myAccount = userWalletAddress;
     const network =
         constants.network_type[
             drizzle.web3.currentProvider
@@ -138,10 +141,14 @@ export const handle_repay_click = async ({ drizzle, amount, asset }) => {
 };
 
 // Withdraw tokens from lending pool
-export const handle_withdraw_click = async ({ drizzle, amount, asset }) => {
+export const handle_withdraw_click = async ({
+    drizzle,
+    userWalletAddress,
+    amount,
+    asset,
+}) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    //const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const myAccount = userWalletAddress;
     const network =
         constants.network_type[
             drizzle.web3.currentProvider

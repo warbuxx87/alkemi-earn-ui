@@ -17,9 +17,11 @@ import DrizzleContext from "containers/Drizzle/DrizzleContext";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/totalBalance";
+import { walletAddress } from "redux/selectors/onboard";
 
 const DrawerWithdrawContainer = ({ asset, onWithdrawAction }) => {
     const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
 
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
@@ -45,7 +47,9 @@ const DrawerWithdrawContainer = ({ asset, onWithdrawAction }) => {
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
             enableButtonClick={enableWithdraw}
-            onButtonClick={() => onWithdrawAction({ drizzle, asset, amount })}
+            onButtonClick={() =>
+                onWithdrawAction({ drizzle, userWalletAddress, asset, amount })
+            }
             isDoingAction={asset.withdrawing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
