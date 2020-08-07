@@ -18,9 +18,11 @@ import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/totalBalance";
+import { walletAddress } from "redux/selectors/onboard";
 
 const DepositDrawerContainer = ({ asset, onDepositAction }) => {
     const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
 
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
@@ -45,7 +47,9 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
             buttonsLabel="Deposit"
             triggerButtonVariant="contained"
             enableButtonClick={enableDeposit}
-            onButtonClick={() => onDepositAction({ drizzle, asset, amount })}
+            onButtonClick={() =>
+                onDepositAction({ drizzle, userWalletAddress, asset, amount })
+            }
             isDoingAction={asset.depositing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}

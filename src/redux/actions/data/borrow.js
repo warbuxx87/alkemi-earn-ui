@@ -87,11 +87,14 @@ export const resetBorrowData = () => ({
 
 // Section 3: Action dispatch methods and async funcs
 
-export const onBorrowAction = ({ drizzle, amount, asset }) => async (
-    dispatch
-) => {
+export const onBorrowAction = ({
+    drizzle,
+    userWalletAddress,
+    amount,
+    asset,
+}) => async (dispatch) => {
     dispatch(borrowPending(asset.unit));
-    handle_borrow_click({ drizzle, amount, asset })
+    handle_borrow_click({ drizzle, userWalletAddress, amount, asset })
         .then(() => dispatch(borrowSuccess(asset.unit)))
         .catch((error) => {
             notify.notification({

@@ -158,11 +158,14 @@ export const onAllocateAction = ({
         });
 };
 
-export const onDepositAction = ({ drizzle, amount, asset }) => async (
-    dispatch
-) => {
+export const onDepositAction = ({
+    drizzle,
+    userWalletAddress,
+    amount,
+    asset,
+}) => async (dispatch) => {
     dispatch(depositPending(asset.unit));
-    handle_deposit_click({ drizzle, amount, asset })
+    handle_deposit_click({ drizzle, userWalletAddress, amount, asset })
         .then(() => dispatch(depositSuccess(asset.unit)))
         .catch((error) => {
             notify.notification({

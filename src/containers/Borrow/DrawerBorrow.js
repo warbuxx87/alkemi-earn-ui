@@ -13,12 +13,15 @@ import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";
 import { onBorrowAction } from "redux/actions/data/borrow";
 
+import { walletAddress } from "redux/selectors/onboard";
+
 // Section 4: Import Underlying Components / Containers
 import Drawer from "components/UI/Drawer/Drawer";
 
 // Section 5: Code Container
 const BorrowDrawerContainer = ({ asset, onBorrowAction }) => {
     const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
 
     useFetchPrice(true); // gets current USD price
 
@@ -46,7 +49,9 @@ const BorrowDrawerContainer = ({ asset, onBorrowAction }) => {
             buttonsLabel="Borrow"
             triggerButtonVariant="contained"
             enableButtonClick={enableBorrow}
-            onButtonClick={() => onBorrowAction({ drizzle, asset, amount })}
+            onButtonClick={() =>
+                onBorrowAction({ drizzle, userWalletAddress, asset, amount })
+            }
             isDoingAction={asset.borrowing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
