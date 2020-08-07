@@ -76,11 +76,6 @@ const onboard = Onboard({
                 default:
                     window.currentlyUsedProvider = wallet.provider;
             }
-
-            console.log(
-                "window.currentlyUsedProvider: ",
-                window.currentlyUsedProvider
-            );
         },
     },
     walletCheck: walletChecks,
