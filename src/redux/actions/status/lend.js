@@ -48,12 +48,11 @@ export const fetchLendError = (asset, error) => ({
 
 // Section 3: Action dispatch methods and async funcs
 
-export const onLendActivate = ({ drizzle, asset }) => async (
-    dispatch,
-    getState
+export const onLendActivate = ({ drizzle, userWalletAddress, asset }) => async (
+    dispatch
 ) => {
     dispatch(fetchLendPending(asset));
-    const myAccount = getState().accounts[0];
+    const myAccount = userWalletAddress;
     handle_approve_click({ drizzle, asset, myAccount })
         .then(() => dispatch(fetchLendSuccess(asset)))
         .catch((error) => {

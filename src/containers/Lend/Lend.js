@@ -23,18 +23,23 @@ import {
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
+import { walletAddress } from "redux/selectors/onboard";
+
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
-    const drizzle = useContext(DrizzleContext);
-
     useFetchPrice(); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
+    const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
 
     return (
         <Lend
             inactiveLend={inactiveLend}
             activeLend={activeLend}
-            onActivate={(asset) => onActivate({ drizzle, asset })}
+            onActivate={(asset) =>
+                onActivate({ drizzle, userWalletAddress, asset })
+            }
             errorLend={errorLend}
             USDPrice={USDPrice}
         />
