@@ -86,6 +86,26 @@ export default () => {
         checkIfPreviouslySelectedWallet();
     }, [dispatch]);
 
+    const deleteCurrentData = useCallback(() => {
+        deleteAllContracts(drizzle);
+
+        dispatch(setWalletConnected(false));
+        dispatch(setWalletAddress(null));
+
+        dispatch(
+            setWalletNetwork("4") // TODO: Set default one for app env
+        );
+
+        resetStoreData();
+
+        try {
+            drizzle.web3.currentProvider.removeAllListeners("accountsChanged");
+            drizzle.web3.currentProvider.removeAllListeners("chainChanged");
+        } catch (e) {
+            // Formatic doesn't subscribe to anything
+        }
+    }, [dispatch, drizzle]);
+
     const resetStoreData = useCallback(() => {
         dispatch(resetLendData());
         dispatch(resetBorrowData());
@@ -99,17 +119,8 @@ export default () => {
 
         window.localStorage.removeItem("selectedWallet");
 
-        deleteAllContracts(drizzle);
-
-        dispatch(setWalletConnected(false));
-
-        dispatch(setWalletAddress(null));
-        dispatch(
-            setWalletNetwork("4") // TODO: Set default one for app env
-        );
-
-        resetStoreData();
-    }, [dispatch, resetStoreData, drizzle]);
+        deleteCurrentData();
+    }, [dispatch, resetStoreData]);
 
     useEffect(() => {
         const initDrizzleData = (forceUpdate = false) => {
@@ -198,8 +209,12 @@ export default () => {
 
     const onConnect = async () => {
         const isSelectWallet = await onboard.walletSelect();
+
         if (isSelectWallet) {
+            deleteCurrentData();
+
             const readyToTransact = await onboard.walletCheck();
+
             dispatch(setWalletConnected(readyToTransact));
 
             if (!readyToTransact) {

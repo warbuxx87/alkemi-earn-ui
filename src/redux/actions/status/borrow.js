@@ -60,12 +60,12 @@ export const onBorrowActivate = ({
         .then(() => dispatch(fetchBorrowSuccess(asset)))
         .catch((error) => {
             // TODO: check notify crashing
-            /*notify.notification({
+            notify.notification({
                 eventCode: "fetchBorrowError",
                 type: "error",
                 message: error.message,
                 autoDismiss: 5000,
-            });*/
+            });
             console.log("Error aproving: ", error);
             dispatch(fetchBorrowError(asset, error.message));
         });
