@@ -13,6 +13,9 @@ import LendTableActive from "./TableActive";
 import LendCardValue from "containers/Lend/CardValue";
 import LendCardInterest from "./CardInterest";
 import LendCardAPR from "containers/Lend/CardAPR";
+import Success from 'components/UI/NotifySuccess'
+import Loading from 'components/UI/NotifyProccess'
+import Error from 'components/UI/NotifyError'
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -62,6 +65,9 @@ function Lend({ className, activeLend, inactiveLend, onActivate, USDPrice }) {
                     </Grid>
                 )}{" "}
             </Grid>
+      <Success />
+      <Loading />
+      <Error />
         </Container>
     );
 }
