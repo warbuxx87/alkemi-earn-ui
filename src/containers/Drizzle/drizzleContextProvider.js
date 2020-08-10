@@ -8,7 +8,6 @@ import { Drizzle } from "@drizzle/store";
 
 import DrizzleContext from "./DrizzleContext";
 
-//const drizzleStore = generateStore(drizzleOptions);
 const drizzle = new Drizzle(drizzleOptions, store);
 
 export default ({ children }) => {
