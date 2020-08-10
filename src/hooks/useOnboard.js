@@ -1,3 +1,4 @@
+// Section 1: React imports
 import { useEffect, useCallback, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,6 +24,8 @@ import {
 } from "redux/selectors/onboard";
 
 import DrizzleContext from "containers/Drizzle/DrizzleContext";
+
+const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
 export default () => {
     const dispatch = useDispatch();
@@ -68,8 +71,10 @@ export default () => {
 
                         dispatch(
                             setWalletNetwork(
-                                window.currentlyUsedProvider.networkVersion ||
-                                    "4"
+                                window.currentlyUsedProvider.networkVersion
+                                    ? window.currentlyUsedProvider
+                                          .networkVersion
+                                    : DEFAULT_NETWORK
                             )
                         );
                     }
@@ -86,15 +91,20 @@ export default () => {
         checkIfPreviouslySelectedWallet();
     }, [dispatch]);
 
+    const resetStoreData = useCallback(() => {
+        dispatch(resetLendData());
+        dispatch(resetBorrowData());
+        dispatch(resetTxDataAndCancelFetch());
+        // ADD more stores to reset if needs be
+    }, [dispatch]);
+
     const deleteCurrentData = useCallback(() => {
         deleteAllContracts(drizzle);
 
         dispatch(setWalletConnected(false));
         dispatch(setWalletAddress(null));
 
-        dispatch(
-            setWalletNetwork("4") // TODO: Set default one for app env
-        );
+        dispatch(setWalletNetwork(DEFAULT_NETWORK));
 
         resetStoreData();
 
@@ -104,14 +114,7 @@ export default () => {
         } catch (e) {
             // Formatic doesn't subscribe to anything
         }
-    }, [dispatch, drizzle]);
-
-    const resetStoreData = useCallback(() => {
-        dispatch(resetLendData());
-        dispatch(resetBorrowData());
-        dispatch(resetTxDataAndCancelFetch());
-        // ADD more stores to reset if needs be
-    }, [dispatch]);
+    }, [dispatch, drizzle, resetStoreData]);
 
     // When disconnected
     const onReset = useCallback(async () => {
@@ -120,7 +123,7 @@ export default () => {
         window.localStorage.removeItem("selectedWallet");
 
         deleteCurrentData();
-    }, [dispatch, resetStoreData]);
+    }, [deleteCurrentData]);
 
     useEffect(() => {
         const initDrizzleData = (forceUpdate = false) => {
@@ -138,8 +141,10 @@ export default () => {
                         .selectedAddress
                         ? drizzle.web3.currentProvider.selectedAddress
                         : drizzle.web3.currentProvider.account;
-                    currentWalletNetwork =
-                        drizzle.web3.currentProvider.networkVersion || "4";
+                    currentWalletNetwork = drizzle.web3.currentProvider
+                        .networkVersion
+                        ? drizzle.web3.currentProvider.networkVersion
+                        : DEFAULT_NETWORK;
 
                     dispatch(setWalletAddress(currentWalletAddress));
 
@@ -185,7 +190,13 @@ export default () => {
 
                                 deleteAllContracts(drizzle);
 
-                                dispatch(setWalletNetwork(newNetworkId || "4"));
+                                dispatch(
+                                    setWalletNetwork(
+                                        newNetworkId
+                                            ? newNetworkId
+                                            : DEFAULT_NETWORK
+                                    )
+                                );
 
                                 initDrizzleData(true);
                             }
