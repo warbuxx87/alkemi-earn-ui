@@ -78,8 +78,6 @@ const onboard = Onboard({
                 default:
                     window.currentlyUsedProvider = wallet.provider;
             }
-
-            console.log("New wallet: ", wallet);
         },
     },
     walletCheck: walletChecks,

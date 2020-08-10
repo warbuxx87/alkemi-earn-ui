@@ -13,7 +13,7 @@ import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
 import useFetchPrice from "hooks/useFetchPrice";
 
-import DrizzleContext from "containers/Drizzle/DrizzleContext";
+import DrizzleContext from "utils/DrizzleContext";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/totalBalance";

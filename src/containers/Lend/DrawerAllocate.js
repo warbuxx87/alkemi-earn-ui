@@ -8,7 +8,7 @@ import Drawer from "components/UI/Drawer/Drawer";
 
 import useFetchPrice from "hooks/useFetchPrice";
 
-import DrizzleContext from "containers/Drizzle/DrizzleContext";
+import DrizzleContext from "utils/DrizzleContext";
 
 import { onAllocateAction } from "redux/actions/data/lend";
 

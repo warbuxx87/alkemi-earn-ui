@@ -6,7 +6,7 @@ import store, { drizzleOptions } from "./drizzleStore.js";
 
 import { Drizzle } from "@drizzle/store";
 
-import DrizzleContext from "./DrizzleContext";
+import DrizzleContext from "utils/DrizzleContext";
 
 const drizzle = new Drizzle(drizzleOptions, store);
 

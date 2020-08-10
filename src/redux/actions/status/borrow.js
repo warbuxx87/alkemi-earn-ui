@@ -66,7 +66,8 @@ export const onBorrowActivate = ({
                 message: error.message,
                 autoDismiss: 5000,
             });
-            console.log("Error aproving: ", error);
+            console.log("Error approving: ", error);
+
             dispatch(fetchBorrowError(asset, error.message));
         });
 };

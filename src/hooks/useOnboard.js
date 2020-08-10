@@ -23,7 +23,7 @@ import {
     walletNetwork,
 } from "redux/selectors/onboard";
 
-import DrizzleContext from "containers/Drizzle/DrizzleContext";
+import DrizzleContext from "utils/DrizzleContext";
 
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 

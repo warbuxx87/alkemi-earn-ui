@@ -175,6 +175,8 @@ export const onDepositAction = ({
     })
         .then(() => dispatch(depositSuccess(asset.unit)))
         .catch((error) => {
+            // TODO: check notify crashing
+
             /*notify.notification({
                 eventCode: "depositError",
                 type: "error",

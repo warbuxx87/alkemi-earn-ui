@@ -5,7 +5,7 @@ import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
 import BorrowModal from "components/Borrow/ModalBorrow";
-import DrizzleContext from "containers/Drizzle/DrizzleContext";
+import DrizzleContext from "utils/DrizzleContext";
 import onBorrowAction from "./BorrowAction";
 
 const BorrowModalContainer = ({ asset, onBorrowAction }) => {

@@ -6,7 +6,7 @@ import { bindActionCreators, compose } from "redux";
 // Section 2: internal imports
 import { formatNumber, formatETHMoney } from "utils/ui";
 
-import DrizzleContext from "containers/Drizzle/DrizzleContext";
+import DrizzleContext from "utils/DrizzleContext";
 
 // Section 3: Selectors, Hooks & Action Listeners
 import useFetchPrice from "hooks/useFetchPrice";

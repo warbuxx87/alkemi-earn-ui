@@ -10,7 +10,7 @@ import Lend from "components/Lend/Lend";
 
 import useFetchPrice from "hooks/useFetchPrice";
 
-import DrizzleContext from "containers/Drizzle/DrizzleContext";
+import DrizzleContext from "utils/DrizzleContext";
 
 import { onLendActivate } from "redux/actions/status/lend";
 

@@ -9,7 +9,7 @@ import web3 from "web3";
 import Drawer from "components/UI/Drawer/Drawer";
 import useFetchPrice from "hooks/useFetchPrice";
 
-import DrizzleContext from "containers/Drizzle/DrizzleContext";
+import DrizzleContext from "utils/DrizzleContext";
 
 import { onRepayAction } from "redux/actions/data/borrow";
 

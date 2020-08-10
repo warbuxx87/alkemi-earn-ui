@@ -8,7 +8,7 @@ import { bindActionCreators, compose } from "redux";
 // Section 2: internal imports
 import Borrow from "components/Borrow/Borrow";
 
-import DrizzleContext from "containers/Drizzle/DrizzleContext";
+import DrizzleContext from "utils/DrizzleContext";
 
 import { onBorrowActivate } from "redux/actions/status/borrow";
 
