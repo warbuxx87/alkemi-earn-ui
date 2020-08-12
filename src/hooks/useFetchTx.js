@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { networkSelector } from "redux/selectors/drizzle";
+import { walletNetworkName } from "redux/selectors/onboard";
 
 import { fetchTx } from "redux/actions/data/tx";
 
@@ -11,7 +11,7 @@ import { walletAddress } from "redux/selectors/onboard";
 export default (fetchPeriodically = false) => {
     const dispatch = useDispatch();
 
-    const currentNetworkName = useSelector(networkSelector);
+    const currentNetworkName = useSelector(walletNetworkName);
     const address = useSelector(walletAddress);
 
     useEffect(() => {
