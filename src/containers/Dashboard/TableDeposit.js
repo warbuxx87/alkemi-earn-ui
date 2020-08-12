@@ -23,7 +23,6 @@ import { getUSDPrice } from "redux/selectors/totalBalance";
 const TableDepositContainer = ({ activeReserves }) => {
     useFetchPrice(); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
-
     return (
         <TableSupply
             activeReserves={activeReserves}

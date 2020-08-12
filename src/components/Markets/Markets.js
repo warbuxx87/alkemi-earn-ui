@@ -15,6 +15,7 @@ import {
     Grid,
     makeStyles,
 } from "@material-ui/core";
+import Loading from "../Loading/Loading";
 
 // Section 3: Components & Containers import from the application
 import Stats from "./CardStats";
@@ -73,10 +74,13 @@ const Markets = ({
                 </Grid>
                 <Grid item lg={6} sm={6} xs={12}>
                     <Card>
-                        <CardHeader title="Deposits" />
+                        <CardHeader title="Deposits2" />
                         <Divider />
                         <CardContent>
                             <Box height="180px" overflow="auto" pr={3} pt={1}>
+                                {!supplyArray.length && (
+                                    <Loading row={3} height={50} />
+                                )}
                                 {supplyArray &&
                                     supplyArray.length > 0 &&
                                     supplyArray.map((supply_item) => {
@@ -99,6 +103,9 @@ const Markets = ({
                         <Divider />
                         <CardContent>
                             <Box height="180px" overflow="auto" pr={3} pt={1}>
+                                {!borrowArray.length && (
+                                    <Loading row={3} height={50} />
+                                )}
                                 {borrowArray &&
                                     borrowArray.length > 0 &&
                                     borrowArray.map((borrow_item) => {

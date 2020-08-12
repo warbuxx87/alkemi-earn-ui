@@ -17,6 +17,7 @@ import {
 
 //import { useHistory } from "react-router-dom";
 import DepositTableCell from "components/UI/TableCell";
+import Loading from "../Loading/LoadingTable";
 import {
     formatNumber,
     formatPercent,
@@ -71,6 +72,9 @@ export default function DepositTables({ activeReserves, USDPrice }) {
         <PerfectScrollbar>
             <Table className={classes.root}>
                 <TableBody>
+                    {!activeReserves.length && (
+                        <Loading colSpan={7} row={8} height={63} />
+                    )}
                     {activeReserves.map((row) => (
                         <TableRow key={row.unit} className={classes.row}>
                             <DepositTableCell

@@ -168,7 +168,7 @@ export const checkAction = (address, toAddress, fromAddress, amount) => {
 
     // if from Address is Users Address
     if (fromAddress.toUpperCase() === myAddress) {
-        action = "Supply";
+        action = "Deposit";
         return action;
     }
 

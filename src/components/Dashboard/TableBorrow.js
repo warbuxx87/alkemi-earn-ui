@@ -20,6 +20,7 @@ import {
 //import { useHistory } from "react-router-dom";
 import BorrowTableCell from "components/UI/TableCell";
 import { formatNumber, formatPercent, calculateEarnings } from "utils/ui";
+import Loading from "../Loading/LoadingTable";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -70,6 +71,9 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
         <PerfectScrollbar>
             <Table className={classes.root}>
                 <TableBody>
+                    {!activeReserves.length && (
+                        <Loading colSpan={7} row={8} height={63} />
+                    )}
                     {activeReserves.map((row) => (
                         <TableRow key={row.unit} className={classes.row}>
                             <BorrowTableCell
