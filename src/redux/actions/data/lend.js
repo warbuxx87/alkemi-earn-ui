@@ -138,11 +138,14 @@ export const resetLendData = () => ({
 
 // Section 3: Action dispatch methods and async funcs
 
-export const onAllocateAction = ({ drizzle, asset, amount }) => async (
-    dispatch
-) => {
+export const onAllocateAction = ({
+    drizzle,
+    userWalletAddress,
+    asset,
+    amount,
+}) => async (dispatch) => {
     dispatch(allocatePending(asset));
-    handle_allocate_click({ drizzle, asset, amount })
+    handle_allocate_click({ drizzle, userWalletAddress, asset, amount })
         .then(() => dispatch(allocateSuccess(asset)))
         .catch((error) => {
             notify.notification({
@@ -155,28 +158,53 @@ export const onAllocateAction = ({ drizzle, asset, amount }) => async (
         });
 };
 
-export const onDepositAction = ({ drizzle, amount, asset }) => async (
-    dispatch
-) => {
+export const onDepositAction = ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    amount,
+    asset,
+}) => async (dispatch) => {
     dispatch(depositPending(asset.unit));
-    handle_deposit_click({ drizzle, amount, asset })
+    handle_deposit_click({
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        amount,
+        asset,
+    })
         .then(() => dispatch(depositSuccess(asset.unit)))
         .catch((error) => {
-            notify.notification({
+            // TODO: check notify crashing
+
+            /*notify.notification({
                 eventCode: "depositError",
                 type: "error",
                 message: error.message,
                 autoDismiss: 5000,
-            });
+            });*/
+
+            console.log("error: ", error);
+
             dispatch(depositError(asset.unit, error.message));
         });
 };
 
-export const onWithdrawAction = ({ drizzle, amount, asset }) => async (
-    dispatch
-) => {
+export const onWithdrawAction = ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    amount,
+    asset,
+}) => async (dispatch) => {
     dispatch(withdrawPending(asset.unit));
-    handle_withdraw_click({ drizzle, amount, asset })
+    handle_withdraw_click({
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        amount,
+        asset,
+    })
         .then(() => dispatch(withdrawSuccess(asset.unit)))
         .catch((error) => {
             notify.notification({

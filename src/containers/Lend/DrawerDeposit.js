@@ -1,19 +1,30 @@
-import React from "react";
+// Section 1: React/Redux low level imports
+import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import web3 from "web3";
 
-import withDrizzle from "containers/Drizzle/withDrizzle";
+// Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
+
+import useFetchPrice from "hooks/useFetchPrice";
+
+import DrizzleContext from "utils/DrizzleContext";
+
 import { onDepositAction } from "redux/actions/data/lend";
 
 import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
-import useFetchPrice from "hooks/useFetchPrice";
+// Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/totalBalance";
+import { walletAddress, walletNetwork } from "redux/selectors/onboard";
 
-const DepositDrawerContainer = ({ asset, drizzle, onDepositAction }) => {
+const DepositDrawerContainer = ({ asset, onDepositAction }) => {
+    const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
+    const userWalletNetwork = useSelector(walletNetwork);
+
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -37,7 +48,15 @@ const DepositDrawerContainer = ({ asset, drizzle, onDepositAction }) => {
             buttonsLabel="Deposit"
             triggerButtonVariant="contained"
             enableButtonClick={enableDeposit}
-            onButtonClick={() => onDepositAction({ drizzle, asset, amount })}
+            onButtonClick={() =>
+                onDepositAction({
+                    drizzle,
+                    userWalletNetwork,
+                    userWalletAddress,
+                    asset,
+                    amount,
+                })
+            }
             isDoingAction={asset.depositing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
@@ -55,7 +74,6 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onDepositAction }, dispatch);
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(DepositDrawerContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    DepositDrawerContainer
+);

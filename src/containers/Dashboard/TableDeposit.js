@@ -10,7 +10,6 @@ import { compose } from "redux";
 //     createActiveAssetContract
 // } from "utils/drizzle";
 
-import withDrizzle from "containers/Drizzle/withDrizzle";
 import TableSupply from "components/Dashboard/TableDeposit";
 
 import useFetchPrice from "hooks/useFetchPrice";
@@ -36,7 +35,4 @@ const mapStateToProps = (state) => ({
     activeReserves: getLendActive(state),
 });
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps)
-)(TableDepositContainer);
+export default compose(connect(mapStateToProps))(TableDepositContainer);

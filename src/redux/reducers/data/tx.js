@@ -3,6 +3,7 @@ import {
     FETCH_TX_PENDING,
     FETCH_TX_SUCCESS,
     FETCH_TX_ERROR,
+    RESET_TX_DATA,
 } from "redux/actions/data/tx.js";
 
 //import tx from "containers/History/MOCK_DATA.json";
@@ -36,6 +37,9 @@ export default (state = initialState, action) => {
                 pending: false,
                 error: action.error,
             };
+
+        case RESET_TX_DATA:
+            return initialState;
 
         default:
             return state;

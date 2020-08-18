@@ -15,7 +15,7 @@ import "assets/scss/style.scss";
 import theme from "themes/theme";
 import Layout from "containers/Layout/Layout";
 import { history } from "redux/enhancers/middlewares/router";
-import Drizzle from "containers/Drizzle/Drizzle";
+import Drizzle from "containers/Drizzle/drizzleContextProvider";
 
 import registerServiceWorker from "./utils/registerServiceWorker";
 

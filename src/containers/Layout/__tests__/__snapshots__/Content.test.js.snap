@@ -24,12 +24,28 @@ exports[`<LayoutContent /> matches snapshot 1`] = `
       path="/dashboard"
     />
     <Route
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(LendContainer)",
+          "type": [Function],
+        }
+      }
       exact={true}
       path="/lend"
     />
     <Route
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(BorrowContainer)",
+          "type": [Function],
+        }
+      }
       exact={true}
       path="/borrow"
     />
@@ -39,7 +55,15 @@ exports[`<LayoutContent /> matches snapshot 1`] = `
       path="/markets"
     />
     <Route
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(HistoryContainer)",
+          "type": [Function],
+        }
+      }
       exact={true}
       path="/history"
     />

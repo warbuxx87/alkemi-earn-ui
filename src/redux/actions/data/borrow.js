@@ -87,11 +87,21 @@ export const resetBorrowData = () => ({
 
 // Section 3: Action dispatch methods and async funcs
 
-export const onBorrowAction = ({ drizzle, amount, asset }) => async (
-    dispatch
-) => {
+export const onBorrowAction = ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    amount,
+    asset,
+}) => async (dispatch) => {
     dispatch(borrowPending(asset.unit));
-    handle_borrow_click({ drizzle, amount, asset })
+    handle_borrow_click({
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        amount,
+        asset,
+    })
         .then(() => dispatch(borrowSuccess(asset.unit)))
         .catch((error) => {
             notify.notification({
@@ -104,11 +114,21 @@ export const onBorrowAction = ({ drizzle, amount, asset }) => async (
         });
 };
 
-export const onRepayAction = ({ drizzle, amount, asset }) => async (
-    dispatch
-) => {
+export const onRepayAction = ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    amount,
+    asset,
+}) => async (dispatch) => {
     dispatch(repayPending(asset.unit));
-    handle_repay_click({ drizzle, amount, asset })
+    handle_repay_click({
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        amount,
+        asset,
+    })
         .then(() => dispatch(repaySuccess(asset.unit)))
         .catch((error) => {
             notify.notification({

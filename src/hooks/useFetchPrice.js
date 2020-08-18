@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { networkSelector } from "redux/selectors/drizzle";
+import { walletNetworkName } from "redux/selectors/onboard";
 
 import { fetchPrice } from "redux/actions/data/price";
 
@@ -9,7 +9,7 @@ import { fetchPrice } from "redux/actions/data/price";
 export default (fetchPeriodically = false) => {
     const dispatch = useDispatch();
 
-    const currentNetworkName = useSelector(networkSelector);
+    const currentNetworkName = useSelector(walletNetworkName);
 
     useEffect(() => {
         let timer;

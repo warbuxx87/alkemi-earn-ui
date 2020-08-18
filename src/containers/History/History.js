@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 // Imports Section 2: Internal Imports
 import History from "components/History/History";
-import withDrizzle from "containers/Drizzle/withDrizzle";
 
 // Section 3: Selectors
 import useFetchTx from "hooks/useFetchTx";
@@ -17,10 +16,11 @@ import { walletAddress } from "redux/selectors/onboard";
 
 // Section 4: Container Code
 
-const HistoryContainer = ({ drizzle, address, txList, txPending, txError }) => {
+const HistoryContainer = ({ txPending, txError }) => {
     useFetchTx(); // gets txList from Etherscan
 
     const currentAddress = useSelector(walletAddress);
+    const txList = useSelector(getTxList);
 
     return (
         <div className="history-list-wrapper">
@@ -36,11 +36,7 @@ const HistoryContainer = ({ drizzle, address, txList, txPending, txError }) => {
 
 const mapStateToProps = (state) => ({
     txPending: getTxPending(state),
-    txList: getTxList(state),
     txError: getTxError(state),
 });
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps)
-)(HistoryContainer);
+export default compose(connect(mapStateToProps))(HistoryContainer);

@@ -5,16 +5,23 @@ import constants from "constants/constant.json";
 import { initAssetContract } from "utils/contracts";
 
 // Approve Unlimited amount of ERC20 tokens to interact with protocol
-export const handle_approve_click = async ({ drizzle, asset, myAccount }) => {
+export const handle_approve_click = async ({
+    drizzle,
+    userWalletNetwork,
+    asset,
+    myAccount,
+}) => {
     if (!(await readyToTransact())) throw new Error("not ready to transaction");
-    //const drizzleStore = drizzle.store.getState();
-    const network =
-        constants.network_type[
-            drizzle.web3.currentProvider
-                .networkVersion /*drizzleStore.web3.networkId*/
-        ]; // Using provider network ID instead of drizzle store value
+
+    const network = constants.network_type[userWalletNetwork];
+
     const address_MoneyMarket = address[network].address_MoneyMarket;
-    const tokenContract = initAssetContract({ drizzle, asset });
+
+    const tokenContract = initAssetContract({
+        drizzle,
+        userWalletAddress: myAccount,
+        asset,
+    });
     const sendApprove = tokenContract.methods.approve.cacheSend(
         address_MoneyMarket,
         -1,
@@ -26,11 +33,14 @@ export const handle_approve_click = async ({ drizzle, asset, myAccount }) => {
 };
 
 // Mint new Test Tokens
-export const handle_allocate_click = async ({ drizzle, asset, amount }) => {
-    console.log(asset.unit);
+export const handle_allocate_click = async ({
+    drizzle,
+    userWalletAddress,
+    asset,
+    amount,
+}) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    //const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
+    const myAccount = userWalletAddress;
     const unit = asset.unit;
     const tokenContract = drizzle.contracts[unit];
     const weiAmount = toWei(amount, unit);
@@ -45,15 +55,16 @@ export const handle_allocate_click = async ({ drizzle, asset, amount }) => {
 };
 
 // Deposit Tokens to Lending Pool
-export const handle_deposit_click = async ({ drizzle, amount, asset }) => {
+export const handle_deposit_click = async ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    amount,
+    asset,
+}) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    //const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
-    const network =
-        constants.network_type[
-            drizzle.web3.currentProvider
-                .networkVersion /*drizzleStore.web3.networkId*/
-        ]; // Using provider network ID instead of drizzle store value
+    const myAccount = userWalletAddress;
+    const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
@@ -69,15 +80,16 @@ export const handle_deposit_click = async ({ drizzle, amount, asset }) => {
 };
 
 // Borrow Tokens from Lending Pool
-export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
+export const handle_borrow_click = async ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    amount,
+    asset,
+}) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    // const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
-    const network =
-        constants.network_type[
-            drizzle.web3.currentProvider
-                .networkVersion /*drizzleStore.web3.networkId*/
-        ]; // Using provider network ID instead of drizzle store value
+    const myAccount = userWalletAddress;
+    const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
@@ -93,15 +105,16 @@ export const handle_borrow_click = async ({ drizzle, amount, asset }) => {
 };
 
 // Repay Borrowed Tokens from wallet back to Lending Pool
-export const handle_repay_click = async ({ drizzle, amount, asset }) => {
+export const handle_repay_click = async ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    amount,
+    asset,
+}) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    //const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
-    const network =
-        constants.network_type[
-            drizzle.web3.currentProvider
-                .networkVersion /*drizzleStore.web3.networkId*/
-        ]; // Using provider network ID instead of drizzle store value
+    const myAccount = userWalletAddress;
+    const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
@@ -121,15 +134,16 @@ export const handle_repay_click = async ({ drizzle, amount, asset }) => {
 };
 
 // Withdraw tokens from lending pool
-export const handle_withdraw_click = async ({ drizzle, amount, asset }) => {
+export const handle_withdraw_click = async ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    amount,
+    asset,
+}) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
-    //const drizzleStore = drizzle.store.getState();
-    const myAccount = drizzle.web3.currentProvider.selectedAddress; //drizzleStore.accounts[0]; // might need to use the drizzle store value after updating the value if there a feature to update automatically it is found
-    const network =
-        constants.network_type[
-            drizzle.web3.currentProvider
-                .networkVersion /*drizzleStore.web3.networkId*/
-        ]; // Using provider network ID instead of drizzle store value
+    const myAccount = userWalletAddress;
+    const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
