@@ -10,6 +10,13 @@ definitions:
         docker:
             memory: 2048 # Increasing Docker Memory Size to 2GB instead of defailt 1GB
     steps:
+        # DEFINE Mirror to Github STEP
+        - step: &github
+              name: "Mirror to Github"
+
+              script:
+                  - git push --mirror git@github.com:project-alkemi/alkemi-earn-ui.git
+
         # DEFINE Test Step
         - step: &test
               name: "Test"
@@ -142,6 +149,7 @@ pipelines:
     default:
         # This runs on every single push
         - step: *test
+        - step: *github
 
     pull-requests:
         # Runs on all pull requests
