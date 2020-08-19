@@ -15,7 +15,12 @@ export default (fetchPeriodically = false) => {
         let timer;
 
         const getPrice = () => {
-            dispatch(fetchPrice({ currentNetworkName, unit: "USDC" }));
+            dispatch(
+                fetchPrice({
+                    currentNetworkName,
+                    address: "0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b", // USDC Address
+                })
+            );
 
             if (fetchPeriodically === true) {
                 timer = setTimeout(getPrice, 15 * 1000);
