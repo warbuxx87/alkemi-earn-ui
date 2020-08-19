@@ -1,7 +1,7 @@
 // Main Component
 
 // Section 1: React low level imports
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { compose } from "redux";
 import clsx from "clsx";
@@ -140,15 +140,7 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
         sortBy: "",
     });
 
-    React.useEffect(() => {
-        filterData();
-    }, [txList]);
-
-    React.useEffect(() => {
-        filterData();
-    }, [values]);
-
-    const filterData = () => {
+    const filterData = useCallback(() => {
         let data = JSON.parse(JSON.stringify(txList));
         if (values.asset && values.asset !== "ALL") {
             data = data.filter((item) => item.tokenSymbol === values.asset);
@@ -219,7 +211,15 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
 
         setPage(0);
         setTxtListData(data);
-    };
+    }, [address, txList, values.action, values.asset, values.sortBy]);
+
+    React.useEffect(() => {
+        filterData();
+    }, [filterData]);
+
+    React.useEffect(() => {
+        filterData();
+    }, [filterData]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -228,7 +228,6 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
     };
-
 
     const handleChange = (event) => {
         setValues({
