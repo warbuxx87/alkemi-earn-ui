@@ -15,7 +15,7 @@ import {
     makeStyles,
 } from "@material-ui/core";
 
-import LiquidateButton from "containers/Lend/DrawerLiquidate";
+import LiquidateButton from "containers/Liquidate/DrawerLiquidate";
 
 import LiquidTableCell from "components/UI/TableCell";
 
