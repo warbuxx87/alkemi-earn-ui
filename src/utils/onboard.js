@@ -20,7 +20,7 @@ const walletChecks = [
     { checkName: "accounts" },
     { checkName: "connect" },
     { checkName: "network" }, // connects to any network
-    //{ checkName: "balance", minimumBalance: "1000000" },
+    { checkName: "balance", minimumBalance: "1000000" },
 ];
 
 const wallets = [
