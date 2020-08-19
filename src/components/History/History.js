@@ -9,23 +9,19 @@ import clsx from "clsx";
 // Section 2: Material-UI imports
 import {
     Box,
-    Button,
     Card,
     Table,
     IconButton,
-    Link,
     SvgIcon,
     TableHead,
     TableBody,
     TableRow,
-    TableCell,
     TablePagination,
     TextField,
     Typography,
     makeStyles,
     MenuItem,
 } from "@material-ui/core";
-import _ from "lodash";
 
 import { ExternalLink as LinkIcon } from "react-feather";
 
@@ -138,7 +134,6 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
     const [page, setPage] = React.useState(0);
     const [txtListData, setTxtListData] = React.useState([]);
-    const [isOpen, setOpen] = useState(false);
     const [values, setValues] = useState({
         asset: "",
         action: "",
@@ -234,13 +229,6 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
         setRowsPerPage(+event.target.value);
     };
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const handleChange = (event) => {
         setValues({
