@@ -187,7 +187,7 @@ export default (state = initialState, action) => {
                 },
             };
         case ALLOCATE_PENDING: {
-            const newState = {
+            return {
                 ...state,
                 assets: {
                     ...state.assets,
@@ -198,12 +198,10 @@ export default (state = initialState, action) => {
                     },
                 },
             };
-
-            return newState;
         }
 
         case ALLOCATE_SUCCESS: {
-            const newState = {
+            return {
                 ...state,
                 assets: {
                     ...state.assets,
@@ -215,8 +213,6 @@ export default (state = initialState, action) => {
                     },
                 },
             };
-
-            return newState;
         }
 
         case ALLOCATE_ERROR:
