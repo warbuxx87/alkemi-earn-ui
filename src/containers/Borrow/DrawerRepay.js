@@ -1,19 +1,29 @@
-import React from "react";
+// Section 1: React/Redux low level imports
+import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import web3 from "web3";
 
-import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
-
-import withDrizzle from "containers/Drizzle/withDrizzle";
+// Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
+import useFetchPrice from "hooks/useFetchPrice";
+
+import DrizzleContext from "utils/DrizzleContext";
+
 import { onRepayAction } from "redux/actions/data/borrow";
 
-import useFetchPrice from "hooks/useFetchPrice";
-import { getUSDPrice } from "redux/selectors/totalBalance";
+import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
-const DrawerRepayContainer = ({ asset, drizzle, onRepayAction }) => {
+// Section 3: Selectors
+import { getUSDPrice } from "redux/selectors/totalBalance";
+import { walletAddress, walletNetwork } from "redux/selectors/onboard";
+
+const DrawerRepayContainer = ({ asset, onRepayAction }) => {
+    const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
+    const userWalletNetwork = useSelector(walletNetwork);
+
     useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -37,7 +47,15 @@ const DrawerRepayContainer = ({ asset, drizzle, onRepayAction }) => {
             triggerButtonVariant="outlined"
             triggerButtonColor="secondary"
             enableButtonClick={enableRepay}
-            onButtonClick={() => onRepayAction({ drizzle, asset, amount })}
+            onButtonClick={() =>
+                onRepayAction({
+                    drizzle,
+                    userWalletNetwork,
+                    userWalletAddress,
+                    asset,
+                    amount,
+                })
+            }
             isDoingAction={asset.repaying}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
@@ -55,7 +73,6 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onRepayAction }, dispatch);
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(DrawerRepayContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    DrawerRepayContainer
+);

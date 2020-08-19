@@ -40,10 +40,17 @@ const fetchTxError = (error) => ({
     error: true,
 });
 
-//                                            //
-// ------------ TX METHOD ACTIONS --------   //
-//                                          //
+//                                               //
+// ---------------- RESET TX DATA -------------- //
+//                                               //
 
+export const RESET_TX_DATA = "RESET_TX_DATA";
+
+const resetTxData = () => ({
+    type: RESET_TX_DATA,
+});
+
+// Section 3: Action dispatch methods and async funcs
 const fetchTxCall = ({ currentNetworkName, address, dispatch }) => {
     if (!address) return;
     if (!url_map[currentNetworkName].etherscan_url) return;
@@ -90,9 +97,28 @@ const throttledFetchTx = _.throttle(fetchTxCall, 60 * 1000, {
     trailing: false,
 });
 
-// Section 3: Action dispatch methods and async funcs
-export const fetchTx = ({ currentNetworkName, address }) => async (
-    dispatch
-) => {
-    throttledFetchTx({ currentNetworkName, address, dispatch });
+export const fetchTx = ({
+    currentNetworkName,
+    address,
+    fetchPeriodically,
+}) => async (dispatch) => {
+    if (fetchPeriodically)
+        // if fetchPeriodically set to true it will go through the throttled method
+        throttledFetchTx({ currentNetworkName, address, dispatch });
+    // if not, it will call on fetch directly no matter what
+    else fetchTxCall({ currentNetworkName, address, dispatch });
+
+    // this is to avoid the throttle to block the call when the user reconnects their wallet.
+    // Of course as it is now, the call is triggered whenever the user opens the page, which good in a sense that the user wants fresh data each time
+    // <!> Should think about a different logic flow if useFetchTx start being used from different sources,
+    // The throttle code kept back so there is no need to rewrite it again, could be refactored later one if unnecessary
+};
+
+// Reset Tx data and cancels throttled recurring fetch calls
+export const resetTxDataAndCancelFetch = () => (dispatch) => {
+    if (throttledFetchTx) {
+        throttledFetchTx.cancel();
+    }
+
+    dispatch(resetTxData());
 };

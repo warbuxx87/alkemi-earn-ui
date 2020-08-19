@@ -4,7 +4,6 @@ import { connect, useSelector } from "react-redux";
 import { compose } from "redux";
 
 // Section 2: internal imports
-import withDrizzle from "containers/Drizzle/withDrizzle";
 import TableBorrow from "components/Dashboard/TableBorrow";
 
 import useFetchPrice from "hooks/useFetchPrice";
@@ -30,7 +29,4 @@ const mapStateToProps = (state) => ({
     activeReserves: getBorrowActive(state),
 });
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps)
-)(TableBorrowContainer);
+export default compose(connect(mapStateToProps))(TableBorrowContainer);

@@ -1,5 +1,6 @@
 // Libs
 // import { createSelector } from "reselect";
+import constants from "constants/constant.json";
 
 // Drizzle state selector
 export const isWalletConnected = (state) => {
@@ -9,3 +10,12 @@ export const isWalletConnected = (state) => {
 export const walletAddress = (state) => {
     return state.status.onboard.walletAddress;
 };
+
+// Returns walletNetwork ID (Example: 4)
+export const walletNetwork = (state) => {
+    return state.status.onboard.walletNetwork;
+};
+
+// Returns walletNetwork Name (Example: rinkeby)
+export const walletNetworkName = (state) =>
+    constants.network_type[state.status.onboard.walletNetwork]; // Not the source of truth, to be cleaned up in UI-249

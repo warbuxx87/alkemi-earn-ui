@@ -2,7 +2,7 @@
 import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "constants/address_map.json";
-import { networkSelector } from "redux/selectors/drizzle";
+import { walletNetworkName } from "redux/selectors/onboard";
 import web3 from "web3";
 
 // Helpers
@@ -107,9 +107,13 @@ const borrowAPRSelector = (state) => {
 const borrowPrincipalSelector = (state) => {
     const borrowPrincipal = {};
 
-    Object.values(
-        _.get(state, "contracts.MoneyMarket.borrowBalances", {})
-    ).forEach((loan) => (borrowPrincipal[loan.args[1]] = loan.value.principal));
+    try {
+        Object.values(
+            _.get(state, "contracts.MoneyMarket.borrowBalances", {})
+        ).forEach(
+            (loan) => (borrowPrincipal[loan.args[1]] = loan.value.principal)
+        );
+    } catch (e) {}
     return borrowPrincipal;
 };
 
@@ -117,7 +121,7 @@ const borrowPrincipalSelector = (state) => {
 
 const getBorrowAsset = createSelector(
     borrowAssetSelector,
-    networkSelector,
+    walletNetworkName,
     borrowBalanceSelector,
     borrowAPRSelector,
     borrowPrincipalSelector,
@@ -230,7 +234,7 @@ export const getBorrowError = (state) => state.data.borrow.error;
 
 export const getAggregatedBorrowAPR = createSelector(
     getBorrowActive,
-    networkSelector,
+    walletNetworkName,
     (activeAssets, network) => {
         let totalAPR = 0;
         if (network) {

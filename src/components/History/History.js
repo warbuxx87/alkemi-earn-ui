@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const History = ({ address, txList, txPending, error }) => {
+const History = ({ address, txList }) => {
     const classes = useStyles();
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
     const [page, setPage] = React.useState(0);
@@ -64,76 +64,80 @@ const History = ({ address, txList, txPending, error }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {txList
-                        .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                        )
-                        .map((item, index) => (
-                            <TableRow key={index}>
-                                <TableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    {toDate(item.timeStamp)}
-                                </TableCell>
-                                <TableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    {checkAction(
-                                        address,
-                                        item.to,
-                                        item.from,
-                                        formatNumber(
+                    {address &&
+                        txList
+                            .slice(
+                                page * rowsPerPage,
+                                page * rowsPerPage + rowsPerPage
+                            )
+                            .map((item, index) => (
+                                <TableRow key={index}>
+                                    <TableCell
+                                        className="px-0 capitalize"
+                                        align="left"
+                                    >
+                                        {toDate(item.timeStamp)}
+                                    </TableCell>
+                                    <TableCell
+                                        className="px-0 capitalize"
+                                        align="left"
+                                    >
+                                        {checkAction(
+                                            address,
+                                            item.to,
+                                            item.from,
+                                            formatNumber(
+                                                item.value,
+                                                item.tokenSymbol
+                                            )
+                                        )}
+                                    </TableCell>
+                                    <TableCell
+                                        className="px-0 capitalize"
+                                        align="left"
+                                    >
+                                        {item.tokenName}
+                                    </TableCell>
+                                    <TableCell
+                                        className="px-0 capitalize"
+                                        align="left"
+                                    >
+                                        <img
+                                            className={classes.imageSize}
+                                            src={getTokenIcon(item.tokenSymbol)}
+                                            alt={item.tokenName}
+                                        />
+                                    </TableCell>
+                                    <TableCell
+                                        className="px-0 capitalize"
+                                        align="left"
+                                    >
+                                        {formatNumber(
                                             item.value,
                                             item.tokenSymbol
-                                        )
-                                    )}
-                                </TableCell>
-                                <TableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    {item.tokenName}
-                                </TableCell>
-                                <TableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    <img
-                                        className={classes.imageSize}
-                                        src={getTokenIcon(item.tokenSymbol)}
-                                        alt={item.tokenName}
-                                    />
-                                </TableCell>
-                                <TableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    {formatNumber(item.value, item.tokenSymbol)}
-                                </TableCell>
-                                <TableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    $
-                                </TableCell>
-                                <TableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    <Button
-                                        href={openEtherScan(item.hash)}
-                                        target="_blank"
-                                        color="primary"
-                                        variant="outlined"
+                                        )}
+                                    </TableCell>
+                                    <TableCell
+                                        className="px-0 capitalize"
+                                        align="left"
                                     >
-                                        View
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                                        $
+                                    </TableCell>
+                                    <TableCell
+                                        className="px-0 capitalize"
+                                        align="left"
+                                    >
+                                        <Button
+                                            href={openEtherScan(item.hash)}
+                                            target="_blank"
+                                            color="primary"
+                                            variant="outlined"
+                                        >
+                                            View
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
                 </TableBody>
             </Table>
 

@@ -1,12 +1,16 @@
-import React from "react";
+// Section 1: React/Redux low level imports
+import React, { useContext } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import withDrizzle from "containers/Drizzle/withDrizzle";
+// Section 2: internal imports
 import BorrowModal from "components/Borrow/ModalBorrow";
+import DrizzleContext from "utils/DrizzleContext";
 import onBorrowAction from "./BorrowAction";
 
-const BorrowModalContainer = ({ asset, drizzle, onBorrowAction }) => {
+const BorrowModalContainer = ({ asset, onBorrowAction }) => {
+    const drizzle = useContext(DrizzleContext);
+
     return (
         <BorrowModal
             asset={asset}
@@ -22,7 +26,6 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onBorrowAction }, dispatch);
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(BorrowModalContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    BorrowModalContainer
+);
