@@ -41,7 +41,9 @@
         "build": "react-scripts build",
         "build:staging": "env-cmd -f .env.staging npm run build",
         "analyze": "source-map-explorer 'build/static/js/*.js'",
+        "prettier": "prettier --write './**/*'",
         "test": "react-scripts test --env=jsdom",
+        "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
         "eject": "react-scripts eject"
     },
     "lint-staged": {
@@ -62,7 +64,8 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged"
+            "pre-commit": "lint-staged",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
     },
     "eslintConfig": {
@@ -94,7 +97,10 @@
         "@babel/plugin-transform-runtime": "^7.10.1",
         "@babel/preset-env": "^7.10.2",
         "@babel/preset-react": "^7.10.1",
+        "@commitlint/cli": "^8.3.5",
+        "@commitlint/config-conventional": "^8.3.4",
         "babel-loader": "^8.1.0",
+        "conventional-changelog-cli": "^2.0.31",
         "css-loader": "^3.5.3",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.2",
