@@ -3,8 +3,8 @@ import Onboard from "bnc-onboard";
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
 const DAPP_ID = process.env.REACT_APP_DAPP_ID;
-// const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
-const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
+const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
+const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
 const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
 const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
 //const INFURA_ID = process.env.REACT_APP_INFURA_ID;
