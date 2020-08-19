@@ -18,7 +18,7 @@ describe("MobileMenu component", () => {
 
     it("starts with menu closed", () => {
         // Setting the initialWidth as material-ui's mediaqueries do not react to window resize (as per the docs), this method works like a charm
-        let theme = createMuiTheme({
+        const theme = createMuiTheme({
             props: { MuiWithWidth: { initialWidth: "xs" } },
         });
 
@@ -35,7 +35,7 @@ describe("MobileMenu component", () => {
 
     it("open menu when openMenu button gets clicked", () => {
         // Setting the initialWidth as material-ui's mediaqueries do not react to window resize (as per the docs), this method works like a charm
-        let theme = createMuiTheme({
+        const theme = createMuiTheme({
             props: { MuiWithWidth: { initialWidth: "xs" } },
         });
 

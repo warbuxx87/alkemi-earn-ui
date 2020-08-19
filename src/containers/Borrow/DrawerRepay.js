@@ -11,8 +11,6 @@ import useFetchPrice from "hooks/useFetchPrice";
 
 import DrizzleContext from "utils/DrizzleContext";
 
-import { onRepayAction } from "redux/actions/data/borrow";
-
 import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
 
 // Section 3: Selectors
