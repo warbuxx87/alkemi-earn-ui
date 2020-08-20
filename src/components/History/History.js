@@ -140,6 +140,7 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
         sortBy: "",
     });
 
+    // filter the data displayed by type and sorting selected
     const filterData = useCallback(() => {
         let data = JSON.parse(JSON.stringify(txList));
         if (values.asset && values.asset !== "ALL") {
@@ -212,10 +213,6 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
         setPage(0);
         setTxtListData(data);
     }, [address, txList, values.action, values.asset, values.sortBy]);
-
-    React.useEffect(() => {
-        filterData();
-    }, [filterData]);
 
     React.useEffect(() => {
         filterData();
