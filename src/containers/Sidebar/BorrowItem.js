@@ -10,9 +10,7 @@ import { isBorrowSelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = (state, props) => ({
     selected: isBorrowSelected(state),
-    onClick: () => props.history.push(BORROW)
+    onClick: () => props.history.push(BORROW),
 });
 
-export default withRouter(connect(
-    mapStateToProps,
-)(SidebarBorrowItem));
+export default withRouter(connect(mapStateToProps)(SidebarBorrowItem));

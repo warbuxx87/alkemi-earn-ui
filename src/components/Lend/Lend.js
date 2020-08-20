@@ -12,7 +12,7 @@ import LendTable from "./Table";
 import LendTableActive from "./TableActive";
 import LendCardValue from "containers/Lend/CardValue";
 import LendCardInterest from "./CardInterest";
-import LendCardAPR from "./CardAPR";
+import LendCardAPR from "containers/Lend/CardAPR";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Lend({ className, activeLend, inactiveLend, onActivate }) {
+function Lend({ className, activeLend, inactiveLend, onActivate, USDPrice }) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
@@ -47,7 +47,10 @@ function Lend({ className, activeLend, inactiveLend, onActivate }) {
                 </Grid>
                 {!!activeLend.length && (
                     <Grid item lg={12} xs={12}>
-                        <LendTableActive data={activeLend} />
+                        <LendTableActive
+                            data={activeLend}
+                            USDPrice={USDPrice}
+                        />
                     </Grid>
                 )}
                 {!!inactiveLend.length && (

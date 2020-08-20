@@ -1,95 +1,126 @@
-import Notify from "bnc-notify";
+// 1. React/Redux low level imports
+import React from "react";
 
-const DAPP_ID = process.env.REACT_APP_DAPP_ID;
+// 2. Libraries imports
+import { toast } from "react-toastify";
+import { ToastMessage } from "rimble-ui";
+import "react-toastify/dist/ReactToastify.css";
 
-const notify = Notify({
-    dappId: DAPP_ID, // [String] The API key created by step one above
-    networkId: 4,
-    darkMode: false,
-    desktopPosition: "bottomRight", // [Integer] The Ethereum network ID your Dapp uses.
-});
+// 3. constants imports
+import errorMessage from "constants/error_code";
 
-const networkIdToUrl = {
-    main: "https://etherscan.io/tx",
-    rinkeby: "https://rinkeby.etherscan.io/tx",
+const contractTXNotifier = (store) => (next) => (action) => {
+    if (!action) next(action); // could be replaced with a simple return since we don't really have an action
+
+    const actionTypeConfirmation = "TX_CONFIRMATION";
+    const actionTypeSend = "TX_BROADCASTED";
+    const actionTypeSuccess = "TX_SUCCESSFUL";
+    const actionTypeError = "TX_ERROR";
+
+    if (
+        action.type === actionTypeSend ||
+        action.type === actionTypeSuccess ||
+        action.type === actionTypeError ||
+        action.type === actionTypeConfirmation
+    ) {
+        let displayMessage;
+        let displaySecondaryMessage;
+        let toastMessageVariant;
+        let errorCode;
+        let toastIcon;
+        // the transaction is still processing
+        if (action.type === actionTypeSend) {
+            toastMessageVariant = "processing";
+            toastIcon = "InfoOutline";
+            displayMessage = "Transaction pending...";
+            displaySecondaryMessage = "This might take a few minutes";
+            //console.log("Tx Send event fired", displayMessage);
+        }
+        // This means it's been mined on the network
+        if (action.type === actionTypeSuccess) {
+            // console.log("Tx Success event fired", displayMessage);
+
+            //console.log("Tx Receipt Object", action.receipt);
+            toastMessageVariant = "success";
+            toastIcon = "CloudDone";
+            displaySecondaryMessage = "Transaction Successful";
+
+            if (action.receipt.events.Approval) {
+                displayMessage = "Asset Authorized";
+            }
+
+            if (action.receipt.events.SupplyReceived) {
+                displayMessage = "Supply Received";
+            }
+
+            if (action.receipt.events.BorrowTaken) {
+                displayMessage = "Borrow Taken";
+            }
+
+            if (action.receipt.events.BorrowRepaid) {
+                displayMessage = "Borrow Repaid";
+            }
+
+            if (action.receipt.events.SupplyWithdrawn) {
+                displayMessage = "Supply Withdrawn";
+            }
+
+            if (action.receipt.events.Transfer) {
+                displayMessage = "Tokens Minted";
+            }
+            // Contract can still fail even if transaction was Successful
+            // If Failure event detected in receipt object then return transaction failed rather than Successful to user
+            // Error code is in txReceipt.Failure.returnValues.error
+            // We then use this code to identify error message returned to user from constants/error_codes
+            if (action.receipt.events.Failure) {
+                errorCode = action.receipt.events.Failure.returnValues.error;
+                toastMessageVariant = "failure";
+                toastIcon = "ErrorOutline";
+                displayMessage = errorMessage[errorCode];
+                displaySecondaryMessage = "Transaction Failed";
+            }
+        }
+
+        if (action.type === actionTypeError) {
+            toastIcon = "ErrorOutline";
+            toastMessageVariant = "failure";
+            displayMessage = "Transaction failed";
+            displaySecondaryMessage = "The Failure Message Would Go Here";
+            //console.log("Tx Error event fired", displayMessage);
+        }
+
+        const options = {
+            closeButton: true,
+            position: "top-right",
+            // Automatically Close Notification after 15 seconds
+            autoClose: 15000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+        };
+
+        const display = (
+            <ToastMessage
+                colorTheme={"dark"}
+                icon={toastIcon}
+                variant={toastMessageVariant}
+                message={displayMessage}
+                secondaryMessage={displaySecondaryMessage}
+            />
+        );
+
+        toast(display, options);
+        //
+        // toast.onChange((numberOfToastDisplayed) => {
+        //     toast.dismiss();
+        // });
+    }
+
+    ///
+
+    return next(action);
 };
 
-export const notifyTransaction = ({
-    estimateGas, // () => Promise
-    gasPrice, // () => Promise
-    balance, // wei
-    sendTransaction, // () => Promise,
-    network, // "main" or "rinkeby"
-    events, // even handler https://docs.blocknative.com/notify#event-codes
-}) =>
-    new Promise((resolve, reject) => {
-        const { emitter } = notify.transaction({
-            estimateGas,
-            gasPrice,
-            balance,
-            sendTransaction,
-        });
-
-        emitter.on("txRequest", () => events.txRequest);
-
-        emitter.on("txPool", () => events.txPool);
-
-        emitter.on("txSendFail", () => {
-            reject(new Error("The user rejected the transaction"));
-            return false;
-        });
-
-        emitter.on("txConfirmed", (transaction) => {
-            //  console.log(transaction);
-            resolve(transaction);
-
-            return events && events.txConfirmed && events.txConfirmed.message
-                ? {
-                      message: `
-                ${events.txConfirmed.message}
-
-                <br />
-                <a href="${networkIdToUrl[network]}/${transaction.hash}" target="_blank">
-                    View transaction here
-                    <svg version="1.1" x="0px" y="0px" viewBox="0 0 256 256" style="enable-background:new 0 0 256 256;height: 12px;fill: #1890ff;" xml:space="preserve">
-                        <g><polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128"/></g>
-                    </svg>
-                </a>
-            `,
-                  }
-                : {};
-        });
-
-        // called on every event that doesn't have a listener defined on this transaction
-        emitter.on("all", (transaction) => {
-            switch (transaction.eventCode) {
-                case "txError":
-                    return reject(
-                        new Error("An error has occurred with the transaction")
-                    );
-                case "txUnderpriced":
-                    return reject(
-                        new Error(
-                            "The gas was set too low for the transaction to complete"
-                        )
-                    );
-                case "txFailed":
-                    return reject(new Error("Transaction has failed"));
-                case "txCancel":
-                    return reject(
-                        new Error(
-                            "A new transaction has been submitted with the same nonce, a higher gas price, a value of zero and sent to an external address (not a contract)"
-                        )
-                    );
-                case "txDropped":
-                    return reject(
-                        new Error(
-                            "Transaction was dropped from the mempool without being added to a block."
-                        )
-                    );
-                default:
-            }
-        });
-    });
-
-export default notify;
+export default contractTXNotifier;

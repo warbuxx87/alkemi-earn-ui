@@ -17,6 +17,7 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
+import { formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -50,13 +51,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function CardAPR({ className, ...rest }) {
+function CardAPR({ className, totalAPR, ...rest }) {
     const classes = useStyles();
-    const data = {
-        value: (0.0).toFixed(2),
-        percentage: "%",
-        difference: 10,
-    };
 
     // Section 5: Code Component
     return (
@@ -77,8 +73,7 @@ function CardAPR({ className, ...rest }) {
                         color="textPrimary"
                         className={classes.label}
                     >
-                        {data.value}
-                        {data.percentage}
+                        {formatPercent(totalAPR)}
                     </Typography>
                 </Box>
             </CardContent>
@@ -89,6 +84,7 @@ function CardAPR({ className, ...rest }) {
 // Section 6: Documentation with PropTypes
 CardAPR.propTypes = {
     className: PropTypes.string,
+    totalAPR: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export

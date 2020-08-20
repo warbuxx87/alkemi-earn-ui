@@ -3,12 +3,13 @@ export default {
         fontWeight: 400,
         fontSize: 14,
         letterSpacing: "-0.05px",
+        textTransform: "capitalize",
     },
 
     body2: {
         fontWeight: 400,
         fontSize: 11,
-        letterSpacing: "-0.05px",      
+        letterSpacing: "-0.05px",
     },
 
     h1: {

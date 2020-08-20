@@ -10,9 +10,7 @@ import { isMarketsSelected } from "../../redux/selectors/ui";
 
 const mapStateToProps = (state, props) => ({
     selected: isMarketsSelected(state),
-    onClick: () => props.history.push(MARKETS)
+    onClick: () => props.history.push(MARKETS),
 });
 
-export default withRouter(connect(
-    mapStateToProps,
-)(SidebarMarketsItem));
+export default withRouter(connect(mapStateToProps)(SidebarMarketsItem));

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { networkSelector } from "redux/selectors/drizzle";
+import { walletNetworkName } from "redux/selectors/onboard";
 
 import { fetchPrice } from "redux/actions/data/price";
 
@@ -9,13 +9,18 @@ import { fetchPrice } from "redux/actions/data/price";
 export default (fetchPeriodically = false) => {
     const dispatch = useDispatch();
 
-    const currentNetworkName = useSelector(networkSelector);
+    const currentNetworkName = useSelector(walletNetworkName);
 
     useEffect(() => {
         let timer;
 
         const getPrice = () => {
-            dispatch(fetchPrice({ currentNetworkName, unit: "USDC" }));
+            dispatch(
+                fetchPrice({
+                    currentNetworkName,
+                    address: "0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b", // USDC Address
+                })
+            );
 
             if (fetchPeriodically === true) {
                 timer = setTimeout(getPrice, 15 * 1000);

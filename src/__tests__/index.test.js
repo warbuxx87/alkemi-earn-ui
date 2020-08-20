@@ -1,16 +1,17 @@
 import React from "react";
-import { shallow } from "enzyme";
 
 import { App } from "index";
+
+import { render } from "@testing-library/react";
 
 describe("<App />", () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(<App />);
+        wrapper = render(<App />);
     });
 
     it("matches snapshot", () => {
-        expect(wrapper.find(App)).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 });

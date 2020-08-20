@@ -247,13 +247,16 @@ const DrawerWrapper = ({
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <div className={classes.sendButtonDiv}>
+                        <Box className={classes.sendButtonDiv} mt={4}>
                             <Button
                                 type="button"
                                 className={classes.btnModal}
                                 variant="contained"
                                 color="primary"
-                                onClick={() => onButtonClick({ asset, amount })}
+                                onClick={() => {
+                                    onButtonClick({ asset, amount });
+                                    handleClose();
+                                }}
                                 disabled={!enableButtonClick || isDoingAction}
                                 size="large"
                                 fullWidth={true}
@@ -267,7 +270,7 @@ const DrawerWrapper = ({
                                     buttonsLabel
                                 )}
                             </Button>
-                        </div>
+                        </Box>
                     </Box>
                 </Box>
             </Drawer>

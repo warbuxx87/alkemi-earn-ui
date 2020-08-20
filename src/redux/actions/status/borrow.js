@@ -48,21 +48,26 @@ const fetchBorrowError = (asset, error) => ({
 
 // Section 3: Action dispatch methods and async funcs
 
-export const onBorrowActivate = ({ drizzle, asset }) => async (
-    dispatch,
-    getState
-) => {
+export const onBorrowActivate = ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    asset,
+}) => async (dispatch) => {
     dispatch(fetchBorrowPending(asset));
-    const myAccount = getState().accounts[0];
-    handle_approve_click({ drizzle, asset, myAccount })
+    const myAccount = userWalletAddress;
+    handle_approve_click({ drizzle, userWalletNetwork, asset, myAccount })
         .then(() => dispatch(fetchBorrowSuccess(asset)))
         .catch((error) => {
+            // TODO: check notify crashing
             notify.notification({
                 eventCode: "fetchBorrowError",
                 type: "error",
                 message: error.message,
                 autoDismiss: 5000,
             });
+            console.log("Error approving: ", error);
+
             dispatch(fetchBorrowError(asset, error.message));
         });
 };

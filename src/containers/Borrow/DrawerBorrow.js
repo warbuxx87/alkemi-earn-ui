@@ -1,30 +1,48 @@
-import React from "react";
+// Section 1: React/Reduxd low level imports
+import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
+// Section 2: internal imports
 import { formatNumber, formatETHMoney } from "utils/ui";
 
-import withDrizzle from "containers/Drizzle/withDrizzle";
-import Drawer from "components/UI/Drawer/Drawer";
-import { onBorrowAction } from "redux/actions/data/borrow";
+import DrizzleContext from "utils/DrizzleContext";
 
+// Section 3: Selectors, Hooks & Action Listeners
 import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";
+import { onBorrowAction } from "redux/actions/data/borrow";
 
-const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
+import { walletAddress, walletNetwork } from "redux/selectors/onboard";
+
+// Section 4: Import Underlying Components / Containers
+import Drawer from "components/UI/Drawer/Drawer";
+
+// Section 5: Code Container
+const BorrowDrawerContainer = ({ asset, onBorrowAction }) => {
+    const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
+    const userWalletNetwork = useSelector(walletNetwork);
+
     useFetchPrice(true); // gets current USD price
+
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
-    const onSetMax = () => {}; /*setAmount(fromWei(asset.balance, asset.unit))*/
-
+    const onSetMax = () => {
+        setAmount(asset.maxBorrowToken.toString()); // retrieves Maximum Token Borrow Amount
+        //  setAmount(asset.safeBorrowToken.toString()); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
+    };
     const [enableBorrow, setEnableBorrow] = React.useState(false);
 
     React.useEffect(() => {
         if (amount) {
-            setEnableBorrow(true);
+            // check that User Input Amount does not exceed maximum amount of tokens that user can borrow for asset and is not less than 0
+            const isAmountLTmaxBorrow =
+                amount <= asset.maxBorrowToken && amount > 0 ? true : false;
+            setEnableBorrow(isAmountLTmaxBorrow);
         }
-    }, [amount, asset.balance, asset.unit]);
+    }, [amount, asset.balance, asset.maxBorrowToken, asset.unit, asset.wallet]);
 
     return (
         <Drawer
@@ -32,12 +50,18 @@ const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
             buttonsLabel="Borrow"
             triggerButtonVariant="contained"
             enableButtonClick={enableBorrow}
-            onButtonClick={({ asset, amount }) =>
-                onBorrowAction({ drizzle, asset, amount })
+            onButtonClick={() =>
+                onBorrowAction({
+                    drizzle,
+                    userWalletNetwork,
+                    userWalletAddress,
+                    asset,
+                    amount,
+                })
             }
             isDoingAction={asset.borrowing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
-            onSetMax={onSetMax} // TODO: define onSetMax properly
+            onSetMax={onSetMax}
             amount={amount}
             setAmount={setAmount}
             mainTitle={`Borrow ${asset.unit}`}
@@ -46,13 +70,13 @@ const BorrowDrawerContainer = ({ asset, drizzle, onBorrowAction }) => {
         />
     );
 };
-
+// Section 6: Dispatch & Props Mapping
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onBorrowAction }, dispatch);
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(BorrowDrawerContainer);
+// Section 7: Export Container
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    BorrowDrawerContainer
+);

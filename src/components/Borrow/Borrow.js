@@ -12,7 +12,7 @@ import BorrowTable from "./Table";
 import BorrowTableActive from "./TableActive";
 import BorrowCardValue from "containers/Borrow/CardValue";
 import BorrowCardLimit from "containers/Borrow/CardLimit";
-import BorrowCardAPR from "./CardAPR";
+import BorrowCardAPR from "containers/Borrow/CardAPR";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({

@@ -1,7 +1,10 @@
 // Sub Component
+
+// Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
 
+// Section 2: Material-UI imports
 import {
     Box,
     Card,
@@ -12,7 +15,8 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { formatMoney } from "utils/ui";
+import { fromWei, formatPercent } from "utils/ui";
+import { format_str_to_kmb } from "utils/markets";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -34,18 +38,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function BorrowBalance({
-    totalBorrow,
-    currency,
-    apr = (0.0).toFixed(2),
-    percentage = "%",
-}) {
+function BorrowBalance({ totalBorrow, currency, apr }) {
     const classes = useStyles();
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Current Debts" className={classes.item} />
+            <CardHeader title="Total Borrowed" className={classes.item} />
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
@@ -73,7 +72,7 @@ function BorrowBalance({
                                 color="textPrimary"
                                 align="left"
                             >
-                                {formatMoney(totalBorrow, currency)}
+                                ${format_str_to_kmb(fromWei(totalBorrow))}
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -89,8 +88,7 @@ function BorrowBalance({
                                 color="textPrimary"
                                 align="right"
                             >
-                                {apr}
-                                {percentage}
+                                {formatPercent(apr)}
                             </Typography>
                         </Grid>
                     </Grid>

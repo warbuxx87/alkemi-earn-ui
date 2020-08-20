@@ -1,15 +1,17 @@
 // Import action of interest as constants
 import {
     SET_WALLET_CONNECTED,
-    SET_CURRENTLY_SELECTED_WALLET_NETWORK_ID,
-    SET_CURRENTLY_SELECTED_WALLET_ADDRESS,
+    SET_WALLET_ADDRESS,
+    SET_WALLET_NETWORK,
 } from "redux/actions/status/onboard";
+
+const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
 // Define initial state
 const initialState = {
     isConnected: false,
-    networkID: null,
-    address: null,
+    walletAddress: null,
+    walletNetwork: DEFAULT_NETWORK,
 };
 
 // Implement "reducer" function with initial state as default state
@@ -21,16 +23,16 @@ export default (state = initialState, action) => {
                 isConnected: action.payload.isConnected,
             };
 
-        case SET_CURRENTLY_SELECTED_WALLET_NETWORK_ID:
+        case SET_WALLET_ADDRESS:
             return {
                 ...state,
-                networkID: action.payload.networkID,
+                walletAddress: action.payload.walletAddress,
             };
 
-        case SET_CURRENTLY_SELECTED_WALLET_ADDRESS:
+        case SET_WALLET_NETWORK:
             return {
                 ...state,
-                address: action.payload.address,
+                walletNetwork: action.payload.walletNetwork,
             };
 
         default:

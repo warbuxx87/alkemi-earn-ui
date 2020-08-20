@@ -8,16 +8,7 @@ exports[`<LayoutSkeleton /> matches snapshot 1`] = `
   <div
     className="LayoutSkeleton-content-3"
   >
-    <Connect(DrizzledComponent) />
-    <Styled(MuiBox)>
-      <ConnectionBanner
-        currentNetwork={NaN}
-        onWeb3Fallback={false}
-        requiredNetwork={null}
-      >
-        <Component />
-      </ConnectionBanner>
-    </Styled(MuiBox)>
+    <AppBarContainer />
     <LayoutContent />
   </div>
 </div>

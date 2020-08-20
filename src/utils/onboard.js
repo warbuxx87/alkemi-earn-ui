@@ -1,23 +1,25 @@
 import Onboard from "bnc-onboard";
 
-const CURRENT_NETWORK = parseInt(process.env.REACT_APP_ETH_NETWORK, 10);
+const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
 const DAPP_ID = process.env.REACT_APP_DAPP_ID;
+const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
 const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
-//const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
 const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
 const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
 //const INFURA_ID = process.env.REACT_APP_INFURA_ID;
 const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
 // const APP_URL = process.env.REACT_APP_APP_URL
 // const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL:
-const RPC_URL = "https://main.infura.io/v3/" + INFURA_KEY;
+const APP_URL = "https://dapp.alkemi.network";
+const RPC_URL = "https://rinkeby.infura.io/v3/" + INFURA_KEY;
+const CONTACT_EMAIL = "dev@alkemi.ai";
 
 const walletChecks = [
     { checkName: "derivationPath" },
     { checkName: "accounts" },
     { checkName: "connect" },
-    { checkName: "network" },
+    { checkName: "network" }, // connects to any network
     { checkName: "balance", minimumBalance: "1000000" },
 ];
 
@@ -25,6 +27,19 @@ const wallets = [
     { walletName: "coinbase", preferred: true },
     { walletName: "trust", preferred: true, rpcUrl: RPC_URL },
     { walletName: "metamask", preferred: true },
+    { walletName: "dapper", preferred: true },
+    {
+        walletName: "ledger",
+        rpcUrl: RPC_URL,
+        preferred: true,
+    },
+    {
+        walletName: "trezor",
+        appUrl: APP_URL,
+        email: CONTACT_EMAIL,
+        rpcUrl: RPC_URL,
+        preferred: true,
+    },
     {
         walletName: "portis",
         apiKey: PORTIS_KEY,
@@ -39,14 +54,14 @@ const wallets = [
     },
     {
         walletName: "fortmatic",
-        apiKey: FORTMATIC_KEY,
+        apiKey: DEFAULT_NETWORK === "4" ? FORTMATIC_TEST_KEY : FORTMATIC_KEY,
         preferred: true,
     },
 ];
 
 const onboard = Onboard({
     dappId: DAPP_ID, // [String] The API key created by step one above
-    networkId: CURRENT_NETWORK, // [Integer] The Ethereum network ID your Dapp uses.
+    networkId: parseInt(DEFAULT_NETWORK, 10), // [Integer] The Ethereum network ID your Dapp uses.
     darkMode: true,
     walletSelect: {
         wallets: wallets,
@@ -55,7 +70,14 @@ const onboard = Onboard({
         wallet: (wallet) => {
             window.localStorage.setItem("selectedWallet", wallet.name);
 
-            window.currentlyUsedProvider = wallet.provider;
+            switch (wallet.name) {
+                case "Fortmatic": {
+                    window.currentlyUsedProvider = wallet.instance.getProvider();
+                    break;
+                }
+                default:
+                    window.currentlyUsedProvider = wallet.provider;
+            }
         },
     },
     walletCheck: walletChecks,

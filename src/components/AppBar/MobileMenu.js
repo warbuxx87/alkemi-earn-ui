@@ -17,10 +17,11 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { XCircle as XIcon, Menu as MenuIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
-
 import SidebarDashboardItem from "containers/Sidebar/DashboardItem";
 import SidebarLendItem from "containers/Sidebar/LendItem";
 import SidebarBorrowItem from "containers/Sidebar/BorrowItem";
+import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
+import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
 import SidebarHeader from "containers/Sidebar/Header";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -51,7 +52,11 @@ export default function MobileMenu() {
 
     return (
         <>
-            <IconButton color="inherit" onClick={handleOpen}>
+            <IconButton
+                color="inherit"
+                onClick={handleOpen}
+                data-testid="openMenu"
+            >
                 <MenuIcon />
             </IconButton>
             <Drawer
@@ -62,6 +67,7 @@ export default function MobileMenu() {
                 open={isOpen}
                 variant="temporary"
                 transitionDuration={0}
+                data-testid="menuDrawer"
             >
                 <Box>
                     <Box
@@ -83,6 +89,8 @@ export default function MobileMenu() {
                             <SidebarDashboardItem />
                             <SidebarLendItem />
                             <SidebarBorrowItem />
+                            <SidebarMarketsItem />
+                            <SidebarHistoryItem />
                         </List>
                     </Box>
                 </Box>

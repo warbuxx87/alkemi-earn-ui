@@ -1,5 +1,11 @@
 import web3 from "web3";
-// import _ from "lodash";
+// import internal assets
+import DAI from "assets/images/DAI.svg";
+import USDC from "assets/images/USDC.svg";
+import WBTC from "assets/images/WBTC.svg";
+import USDT from "assets/images/USDT.svg";
+import WETH from "assets/images/WETH.svg";
+import PAX from "assets/images/pax.png";
 
 const decimalsToUnit = {
     6: "mwei",
@@ -18,6 +24,20 @@ const assetToDecimals = {
     USDT: 6,
     USDC: 6,
     WBTC: 8,
+};
+
+const token2icon = {
+    WETH: WETH,
+    USDT: USDT,
+    USDC: USDC,
+    PAX: PAX,
+    WBTC: WBTC,
+    DAI: DAI,
+};
+
+export const getTokenIcon = (symbol) => {
+    const icon = token2icon[symbol];
+    return icon;
 };
 
 export const fromWei = (value, unit) => {
@@ -110,10 +130,12 @@ export const formatPercent = (num) => {
     return (num * 100).toFixed(2) + "%";
 };
 
-export function calculateEarnings(balance, principal, USDprice, unit) {
+export function calculateEarnings(balance, principal, unit, USDPrice) {
+    if (!USDPrice) return 0;
+
     const fPrincipal = fromWei(principal, unit);
     const fBalance = fromWei(balance, unit);
-    const fUSDprice = fromWei(USDprice, "PAX");
+    const fUSDprice = fromWei(USDPrice, "USDx");
 
     let earnings = fBalance - fPrincipal;
     earnings = earnings / fUSDprice;
@@ -124,47 +146,46 @@ export function calculateEarnings(balance, principal, USDprice, unit) {
 }
 
 export const toDate = (timeStamp) => {
+    const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+    };
     let dateTime = new Date(timeStamp * 1000);
-    dateTime = dateTime.toDateString(); // Returns "2013-05-31T11:54:44.000Z"
+    dateTime = dateTime.toLocaleDateString("en-US", options); // Returns "2013-05-31T11:54:44.000Z"
     return dateTime;
 };
 
-export const checkAction = (toAddress, fromAddress, amount) => {
+export const checkAction = (address, toAddress, fromAddress, amount) => {
+    const myAddress = address.toUpperCase();
     let action;
-    // get users connected address from State
-    const myAddress = "0xf1d3818b2a83bf2d81bfbbf06cf95f175fb00b7d";
-
-    // get MoneyMarket Address from constants
-    const mMarket = "0xe6a53f96ceca750ef8589c5b376872213aa4f230";
-
     if (amount === "0") {
-        action = "Approved";
+        action = "Mint";
         return action;
     }
 
     // if from Address is Users Address
-    if (fromAddress === myAddress) {
-        action = "Supply";
+    if (fromAddress.toUpperCase() === myAddress) {
+        action = "Deposit";
         return action;
     }
 
-    if (fromAddress === mMarket) {
+    if (toAddress.toUpperCase() === myAddress) {
         action = "Borrow";
         return action;
     }
-    action = "Allocate";
+
     return action;
 };
 
-export const checkAddress = (toAddress, fromAddress) => {
-    // get users connected address from State
-    const myAddress = "0xf1d3818b2a83bf2d81bfbbf06cf95f175fb00b7d";
-
+export const checkAddress = (address, toAddress, fromAddress) => {
     // get MoneyMarket Address from constants
     const mMarket = "0xe6a53f96ceca750ef8589c5b376872213aa4f230";
 
     // if from Address is Users Address
-    if (fromAddress === myAddress) {
+    if (fromAddress === address) {
         //  action = "Sent";
         return toAddress;
     }

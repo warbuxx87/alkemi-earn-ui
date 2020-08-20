@@ -2,11 +2,7 @@
 
 import _ from "lodash";
 
-//const INFURA_ID = process.env.REACT_APP_INFURA_ID;
-//const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
-
 const url_map = require("constants/url_map.json");
-const address_map = require("constants/address_map.json");
 
 // Section 2: Action types declarations and action creators
 
@@ -50,7 +46,7 @@ const fetchPriceError = (error) => ({
 // ------------ PRICE METHOD ACTIONS --------   //
 //                                               //
 
-const fetchPriceCall = ({ currentNetworkName, unit, dispatch }) => {
+const fetchPriceCall = ({ currentNetworkName, address, dispatch }) => {
     if (!url_map[currentNetworkName].markets_url) return;
 
     dispatch(fetchPricePending());
@@ -64,21 +60,12 @@ const fetchPriceCall = ({ currentNetworkName, unit, dispatch }) => {
                 const obj_data = JSON.parse(data);
 
                 const marketsData = obj_data.find((market) =>
-                    Object.prototype.hasOwnProperty.call(
-                        market,
-                        address_map[currentNetworkName][`address_${unit}`]
-                    )
+                    Object.prototype.hasOwnProperty.call(market, address)
                 );
 
                 dispatch(
                     fetchPriceSuccess(
-                        `${
-                            marketsData[
-                                address_map[currentNetworkName][
-                                    `address_${unit}`
-                                ]
-                            ].oraclePrice
-                        }`.slice(0, -12)
+                        marketsData[address].oraclePrice.slice(0, -12)
                     )
                 ); // TODO: USDC decimals should be only 6 but returns 12 zeros
             }
@@ -95,8 +82,8 @@ const throttledFetchPrice = _.throttle(fetchPriceCall, 15 * 1000, {
 
 // Section 3: Action dispatch methods and async funcs
 
-export const fetchPrice = ({ currentNetworkName, unit }) => async (
+export const fetchPrice = ({ currentNetworkName, address }) => async (
     dispatch
 ) => {
-    throttledFetchPrice({ currentNetworkName, unit, dispatch });
+    throttledFetchPrice({ currentNetworkName, address, dispatch });
 };
