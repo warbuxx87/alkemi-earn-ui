@@ -6,15 +6,13 @@ import PropTypes from "prop-types";
 
 // Section 2: UI imports
 import { withStyles, fade } from "@material-ui/core/styles";
-import { Box, Collapse, IconButton } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-import CloseIcon from "@material-ui/icons/Close";
 
 // Section 3: Components & Containers import from the application
-import ConnectionBanner from "@rimble/connection-banner";
 import LayoutContent from "containers/Layout/Content";
 import Sidebar from "containers/Sidebar/Sidebar";
 import AppBar from "containers/AppBar/AppBar";
+
+import ConnectionBanner from "components/UI/ConnectionBanner";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
@@ -68,104 +66,14 @@ const styles = (theme) => ({
 });
 
 // Section 5: Code Component
-function LayoutSkeleton({ classes, networkID, APP_ETH_NETWORK }) {
-    const [open, setOpen] = React.useState(true);
+function LayoutSkeleton({ classes }) {
     // networkID is null when no wallet is selected
     return (
         <div className={classes.frame}>
             <Sidebar />
             <div className={classes.content}>
                 <AppBar />
-                <Box>
-                    <ConnectionBanner
-                        currentNetwork={
-                            networkID === null
-                                ? networkID
-                                : parseInt(networkID, 10)
-                        }
-                        requiredNetwork={APP_ETH_NETWORK}
-                    >
-                        {{
-                            notWeb3CapableBrowserMessage: (
-                                <div>
-                                    <Collapse in={open}>
-                                        <Alert
-                                            className={classes.alert}
-                                            severity="error"
-                                            color="error"
-                                            action={
-                                                <IconButton
-                                                    aria-label="close"
-                                                    color="inherit"
-                                                    size="small"
-                                                    onClick={() => {
-                                                        setOpen(false);
-                                                    }}
-                                                >
-                                                    <CloseIcon fontSize="inherit" />
-                                                </IconButton>
-                                            }
-                                        >
-                                            Please connect using a web3 capable
-                                            browser.
-                                        </Alert>
-                                    </Collapse>
-                                </div>
-                            ),
-                            noNetworkAvailableMessage: (
-                                <div>
-                                    <Collapse in={open}>
-                                        <Alert
-                                            className={classes.alert}
-                                            severity="info"
-                                            color="success"
-                                            action={
-                                                <IconButton
-                                                    aria-label="close"
-                                                    color="inherit"
-                                                    size="small"
-                                                    onClick={() => {
-                                                        setOpen(false);
-                                                    }}
-                                                >
-                                                    <CloseIcon fontSize="inherit" />
-                                                </IconButton>
-                                            }
-                                        >
-                                            Please connect using the connect
-                                            button on the top right.
-                                        </Alert>
-                                    </Collapse>
-                                </div>
-                            ),
-                            onWrongNetworkMessage: (
-                                <div>
-                                    <Collapse in={open}>
-                                        <Alert
-                                            severity="warning"
-                                            color="warning"
-                                            action={
-                                                <IconButton
-                                                    aria-label="close"
-                                                    color="inherit"
-                                                    size="small"
-                                                    onClick={() => {
-                                                        setOpen(false);
-                                                    }}
-                                                >
-                                                    <CloseIcon fontSize="inherit" />
-                                                </IconButton>
-                                            }
-                                        >
-                                            Incorrect Network! Please connect to
-                                            the Rinkeby Test Network
-                                        </Alert>
-                                    </Collapse>
-                                </div>
-                            ),
-                        }}
-                    </ConnectionBanner>
-                </Box>
+                <ConnectionBanner />
                 <LayoutContent />
             </div>
         </div>
