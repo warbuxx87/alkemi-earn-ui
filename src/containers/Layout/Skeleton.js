@@ -4,17 +4,26 @@ import { useSelector } from "react-redux";
 
 // Section 2: internal imports
 import LayoutSkeleton from "components/Layout/Skeleton";
-import { walletNetwork } from "redux/selectors/onboard";
 
-const APP_ETH_NETWORK = parseInt(process.env.REACT_APP_ETH_NETWORK, 10);
+import {
+    walletAddress,
+    walletNetwork,
+    walletNetworkName,
+} from "redux/selectors/onboard";
+
+const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
 export default () => {
-    const networkID = useSelector(walletNetwork);
+    const userWalletNetwork = useSelector(walletNetwork);
+    const currentNetworkName = useSelector(walletNetworkName);
+    const userWalletAddress = useSelector(walletAddress);
 
     return (
         <LayoutSkeleton
-            APP_ETH_NETWORK={APP_ETH_NETWORK}
-            networkID={networkID}
+            userWalletNetwork={userWalletNetwork}
+            currentNetworkName={currentNetworkName}
+            userWalletAddress={userWalletAddress}
+            DEFAULT_NETWORK={DEFAULT_NETWORK}
         />
     );
 };

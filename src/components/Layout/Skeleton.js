@@ -66,14 +66,25 @@ const styles = (theme) => ({
 });
 
 // Section 5: Code Component
-function LayoutSkeleton({ classes }) {
+function LayoutSkeleton({
+    classes,
+    userWalletNetwork,
+    currentNetworkName,
+    userWalletAddress,
+    DEFAULT_NETWORK,
+}) {
     // networkID is null when no wallet is selected
     return (
         <div className={classes.frame}>
             <Sidebar />
             <div className={classes.content}>
                 <AppBar />
-                <ConnectionBanner />
+                <ConnectionBanner
+                    userWalletNetwork={userWalletNetwork}
+                    currentNetworkName={currentNetworkName}
+                    userWalletAddress={userWalletAddress}
+                    DEFAULT_NETWORK={DEFAULT_NETWORK}
+                />
                 <LayoutContent />
             </div>
         </div>
