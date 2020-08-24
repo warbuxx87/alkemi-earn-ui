@@ -235,9 +235,10 @@ const LendTable = ({ data = [], onActivate }) => {
     );
 };
 
-// Documentation with PropTypes
-LendTable.propTypes = {
-    //onboard: PropTypes.object.isRequired
-};
+// Section 6: Documentation with PropTypes
+//LendTable.propTypes = {
+//onboard: PropTypes.object.isRequired
+//};
 
+// Section 7:  Connect styles and export
 export default LendTable;

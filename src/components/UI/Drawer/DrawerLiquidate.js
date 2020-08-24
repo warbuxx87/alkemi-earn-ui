@@ -1,7 +1,7 @@
 // Sub Component
 
 // Section 1: React low level imports
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
@@ -113,17 +113,17 @@ const DrawerLiquidateClass = makeStyles(
                 border: "1px solid #FFF",
             },
             mr15: {
-                marginRight: "15px"
+                marginRight: "15px",
             },
             styleRadio: {
-                padding: "0px"
+                padding: "0px",
             },
             text: {
                 fontSize: "12px",
                 color: "#979797",
                 marginBottom: "5px",
-                textTransform: "none"
-            }
+                textTransform: "none",
+            },
         }),
     {
         name: "drawerLiquidate",
@@ -131,10 +131,7 @@ const DrawerLiquidateClass = makeStyles(
     }
 );
 
-const DrawerLiquidateWrapper = ({
-    buttonsLabel,
-    data
-}) => {
+const DrawerLiquidateWrapper = ({ buttonsLabel, data }) => {
     const classes = DrawerLiquidateClass();
 
     // UI state
@@ -156,7 +153,7 @@ const DrawerLiquidateWrapper = ({
         setDataAmount(val);
     };
     useEffect(() => {
-        if(data.length){
+        if (data.length) {
             setValue(data[0].name);
             setDataAmount(data[0]);
         }
@@ -170,7 +167,7 @@ const DrawerLiquidateWrapper = ({
                 className={classes.btnDrawer}
                 size="small"
                 onClick={handleOpen}
-                style={{background: "#e0e0e0", color: "rgba(0, 0, 0, 0.87)"}}
+                style={{ background: "#e0e0e0", color: "rgba(0, 0, 0, 0.87)" }}
             >
                 View
             </Button>
@@ -201,7 +198,7 @@ const DrawerLiquidateWrapper = ({
                     <Divider />
                     <Box pt={5} p={2}>
                         <Grid container className={classes.amount}>
-                        Avaiable Assets
+                            Avaiable Assets
                         </Grid>
                         {data.map((val) => (
                             <Grid
@@ -212,9 +209,9 @@ const DrawerLiquidateWrapper = ({
                                 className={
                                     value === val.name
                                         ? clsx(
-                                            classes.wrapperRadio,
-                                            classes.borderWhite
-                                        )
+                                              classes.wrapperRadio,
+                                              classes.borderWhite
+                                          )
                                         : classes.wrapperRadio
                                 }
                                 onClick={() => handleChooseCoin(val)}
@@ -230,7 +227,9 @@ const DrawerLiquidateWrapper = ({
                                         <h3 className={classes.title}>
                                             {val.total} {val.name}
                                         </h3>
-                                        <h5 className={classes.subtitle}>${val.amount}</h5>
+                                        <h5 className={classes.subtitle}>
+                                            ${val.amount}
+                                        </h5>
                                     </Grid>
                                 </Grid>
                                 <Grid item className={classes.textRight}>
@@ -242,7 +241,14 @@ const DrawerLiquidateWrapper = ({
                                     />
                                     <div>
                                         <span>{val.discount} </span>
-                                        <span style={{opacity: "0.5", textTransform: "none"}}>Discount</span>
+                                        <span
+                                            style={{
+                                                opacity: "0.5",
+                                                textTransform: "none",
+                                            }}
+                                        >
+                                            Discount
+                                        </span>
                                     </div>
                                 </Grid>
                             </Grid>
@@ -264,11 +270,7 @@ const DrawerLiquidateWrapper = ({
                                 value={0}
                                 fullWidth={true}
                             />
-                            <span
-                                className={classes.maxTips}
-                            >
-                                MAX
-                            </span>
+                            <span className={classes.maxTips}>MAX</span>
                             {/* onClick={() => { click_max(this) }} */}
                         </div>
                         <Grid className={classes.rateInfo}>
@@ -297,7 +299,8 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {dataAmount.discountValue | 0} {dataAmount.name}
+                                    {dataAmount.discountValue | 0}{" "}
+                                    {dataAmount.name}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -311,7 +314,7 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                {dataAmount.recieve | 0} {dataAmount.name}
+                                    {dataAmount.recieve | 0} {dataAmount.name}
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -336,8 +339,12 @@ const DrawerLiquidateWrapper = ({
         </>
     );
 };
+
+// Section 6: Documentation with PropTypes
 DrawerLiquidateWrapper.propTypes = {
     buttonsLabel: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired,
 };
+
+// Section 7:  Connect styles and export
 export default DrawerLiquidateWrapper;
