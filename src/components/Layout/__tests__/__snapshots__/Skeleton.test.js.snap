@@ -9,6 +9,7 @@ exports[`<LayoutSkeleton /> matches snapshot 1`] = `
     className="LayoutSkeleton-content-3"
   >
     <AppBarContainer />
+    <ConnectionBanner />
     <LayoutContent />
   </div>
 </div>
