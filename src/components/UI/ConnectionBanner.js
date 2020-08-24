@@ -2,7 +2,7 @@
 import React from "react";
 
 // Section 2: Material-UI imports
-import { Box, Collapse, IconButton, makeStyles } from "@material-ui/core";
+import { Box, Collapse, IconButton } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
 
