@@ -174,10 +174,12 @@ const assetName = [
     },
 ];
 
-const Liquidate = ({ className, ...rest }) => {
+const Liquidate = ({ className, liquidationsList, ...rest }) => {
     const classes = useStyles();
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
     const [page, setPage] = React.useState(0);
+
+    console.log("liquidationsList: ", liquidationsList);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

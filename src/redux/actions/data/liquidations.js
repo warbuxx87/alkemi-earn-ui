@@ -57,20 +57,19 @@ const fetchLiquidationsCall = ({ currentNetworkName, address, dispatch }) => {
         })
         .then((data) => {
             if (data) {
-                const obj_data = JSON.parse(data);
-                console.log(obj_data);
+                //const obj_data = JSON.parse(data);
 
                 const liquidationsData = [
                     {
                         address: "0x4553e229A33023a262B1Fc5Dc0076e4798AdDfC1",
-                        shortfallEth: "0",
+                        //shortfallEth: "0",
 
-                        totalSupplyWeth: "string",
-                        totalSupplyUSD: "string",
-                        totalBorrowWeth: "string",
-                        totalBorrowUSD: "string",
-                        shortfallWeth: "string",
-                        collateralRate: "1.7244495922033622",
+                        totalSupplyWeth: "3845.0579907454335",
+                        totalSupplyUSD: "1530148.5175331268",
+                        totalBorrowWeth: "2242.736099230467",
+                        totalBorrowUSD: "892501.3161609628",
+                        shortfallWeth: "1", //
+                        collateralRate: "1.1", // supposed 110%
                         borrow: [
                             {
                                 asset: "string",
@@ -85,14 +84,14 @@ const fetchLiquidationsCall = ({ currentNetworkName, address, dispatch }) => {
                         ],
                         supply: [
                             {
-                                asset: "string",
-                                name: "string",
-                                symbol: "string",
-                                decimal: 0,
-                                oraclePrice: "string",
-                                amount: "string",
-                                USDValue: "string",
-                                price: "string",
+                                asset: "DAI",
+                                name: "DAI",
+                                symbol: "DAI",
+                                decimal: 18,
+                                oraclePrice: "153.45",
+                                amount: "10",
+                                USDValue: "1",
+                                price: "1",
                             },
                         ],
                     },

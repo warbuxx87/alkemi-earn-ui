@@ -9,16 +9,17 @@ import useFetchLiquidations from "hooks/useFetchLiquidations";
 import DrizzleContext from "utils/DrizzleContext";
 
 // Section 3: Selectors
-import { walletNetworkName } from "redux/selectors/onboard";
+import { getLiquidationsList } from "redux/selectors/data/liquidations";
 
 // Section 4: Container body
 const LiquidateContainer = () => {
     useFetchLiquidations(); // retrieve liquidations
 
-    const drizzle = useContext(DrizzleContext);
-    const currentNetworkName = useSelector(walletNetworkName);
+    const liquidationsList = useSelector(getLiquidationsList);
 
-    return <Liquidate currentNetworkName={currentNetworkName} />;
+    const drizzle = useContext(DrizzleContext);
+
+    return <Liquidate liquidationsList={liquidationsList} />;
 };
 
 // Section 5: Exports

@@ -27,13 +27,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Liquidate({}) {
+function Liquidate({ liquidationsList }) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
                 <Grid item lg={12} xs={12}>
-                    <LiquidateTable />
+                    <LiquidateTable liquidationsList={liquidationsList} />
                 </Grid>
             </Grid>
         </Container>
