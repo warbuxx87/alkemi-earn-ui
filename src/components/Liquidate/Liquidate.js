@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Liquidate({ className }) {
+function Liquidate({}) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
