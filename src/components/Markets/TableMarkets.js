@@ -26,7 +26,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { format_str_to_kmb, format_str_to_percent } from "utils/markets";
 
 import MarketsTableCell from "components/UI/TableCell";
-import Loading from "../Loading/LoadingTable";
+
 // tokens icons
 import WETH from "assets/images/WETH.svg";
 import USDT from "assets/images/USDT.svg";
@@ -123,9 +123,6 @@ const TableMarkets = ({ marketsData }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {!marketsData.length && (
-                                <Loading colSpan={7} row={6} height={63} />
-                            )}
                             {marketsData &&
                                 marketsData.length > 0 &&
                                 marketsData.map((item) => (
