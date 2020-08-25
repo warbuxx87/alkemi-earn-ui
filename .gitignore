@@ -2,9 +2,6 @@ node_modules
 .tern-project
 build
 .DS_Store
-#src/components/Lend/CardAsset.js
-#.scannerwork
-#src/components/History/AppBar/AppBar.js
-#src/components/History/AppBar/MobileMenu.js
-#src/components/History/AppBar/Notifications.js
-#src/components/History/AppBar/Settings.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
