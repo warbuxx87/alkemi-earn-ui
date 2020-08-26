@@ -134,7 +134,7 @@ const DrawerLiquidateClass = makeStyles(
     }
 );
 
-const DrawerLiquidateWrapper = ({ buttonsLabel, data, supplyList }) => {
+const DrawerLiquidateWrapper = ({ buttonsLabel, supplyList, shortfallETH }) => {
     const classes = DrawerLiquidateClass();
 
     // UI state
@@ -160,13 +160,6 @@ const DrawerLiquidateWrapper = ({ buttonsLabel, data, supplyList }) => {
     useEffect(() => {
         handleChooseCoin(supplyList[0]);
     }, []);
-
-    useEffect(() => {
-        if (data.length) {
-            setValue(data[0].symbol);
-            setDataAmount(data[0]);
-        }
-    }, [data]);
 
     console.log("supplyList: ", supplyList);
 
@@ -296,7 +289,7 @@ const DrawerLiquidateWrapper = ({ buttonsLabel, data, supplyList }) => {
                                     container
                                     justify="flex-end"
                                 >
-                                    {dataAmount.debtToCover | 0} ETH
+                                    {shortfallETH} ETH
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>

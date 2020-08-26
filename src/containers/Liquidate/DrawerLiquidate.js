@@ -12,7 +12,7 @@ import { onDepositAction } from "redux/actions/data/lend";
 
 // import useFetchPrice from "hooks/useFetchPrice";
 // import { getUSDPrice } from "redux/selectors/totalBalance";
-const data = [
+/*const data = [
     {
         name: "Dai",
         image: "/images/DAI.svg",
@@ -43,13 +43,14 @@ const data = [
         discountValue: 137.88,
         recieve: 1265.1,
     },
-];
-const DepositDrawerContainer = ({ supplyList }) => {
+];*/
+const DepositDrawerContainer = ({ supplyList, shortfallETH }) => {
     return (
         <DrawerLiquidate
             buttonsLabel="Liquidate"
-            data={data}
+            //data={data}
             supplyList={supplyList}
+            shortfallETH={shortfallETH}
         />
     );
 };

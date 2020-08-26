@@ -23,14 +23,6 @@ import {
 // Section 3: Components & Containers import from the application
 import LiquidateButton from "containers/Liquidate/DrawerLiquidate";
 import LiquidTableCell from "components/UI/TableCell";
-import USDT from "assets/images/USDT.svg";
-//import WETH from "assets/images/WETH.svg";
-import WBTC from "assets/images/WBTC.svg";
-import DAI from "assets/images/DAI.svg";
-import USDC from "assets/images/USDC.svg";
-// png
-//import PAX from "assets/images/pax.png";
-import ETH from "assets/images/eth.png";
 
 import { addressParser } from "utils/ui";
 
@@ -52,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const liquidateList = [
+/*const liquidateList = [
     {
         tokenDebt: "124.344",
         collateral: "0.9345",
@@ -143,7 +135,7 @@ const liquidateList = [
         tokenHealth: 20,
         walletAddress: "0x813..9c1a",
     },
-];
+];*/
 
 const assetName = [
     {
@@ -350,6 +342,7 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                     >
                                         <LiquidateButton
                                             supplyList={item.supply}
+                                            shortfallETH={item.shortfallETH}
                                         />
                                     </LiquidTableCell>
                                 </TableRow>
@@ -361,7 +354,7 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                 className="px-4"
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={liquidateList.length}
+                count={liquidationsList.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 backIconButtonProps={{
