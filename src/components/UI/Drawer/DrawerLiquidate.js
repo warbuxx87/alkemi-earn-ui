@@ -24,6 +24,9 @@ import { XCircle as XIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 import clsx from "clsx";
+
+import { getTokenIcon } from "utils/ui";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 const DrawerLiquidateClass = makeStyles(
     (theme) =>
@@ -226,7 +229,7 @@ const DrawerLiquidateWrapper = ({ buttonsLabel, data, supplyList }) => {
                             >
                                 <Grid container item xs>
                                     <img
-                                        src={val.image}
+                                        src={getTokenIcon(val.symbol)}
                                         alt="asset"
                                         width="35px"
                                         className={classes.mr15}
