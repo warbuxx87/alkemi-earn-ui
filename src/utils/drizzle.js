@@ -1,4 +1,4 @@
-import { readyToTransact } from "utils/onboard";
+import { readyToTransact } from "utils/onboard"; // TODO: Should probably be replaced by checking if address is selected and such
 import { toWei } from "utils/ui";
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
@@ -168,22 +168,22 @@ export const handle_liquidate_click = async ({
     userWalletNetwork,
     userWalletAddress,
     symbol,
-    //amount,
+    amount,
 }) => {
-    /*
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
-    const token_address = address[network][`address_${asset.unit}`];
-    const unit = asset.unit;
-    const weiAmount = toWei(amount, unit);
-    const sendBorrow = MoneyMarketContract.methods.borrow.cacheSend(
+    const token_address = address[network][`address_${symbol}`];
+    const weiAmount = toWei(amount, symbol);
+
+    const sendLiquidate = MoneyMarketContract.methods.liquidateBorrow.cacheSend(
         token_address,
         weiAmount,
         {
             from: myAccount,
         }
     );
-    return sendBorrow;*/
+
+    return sendLiquidate;
 };

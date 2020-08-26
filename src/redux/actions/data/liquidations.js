@@ -198,17 +198,15 @@ export const onLiquidateAction = ({
     userWalletNetwork,
     userWalletAddress,
     symbol,
-    /*
     amount,
-    asset,
-    */
 }) => async (dispatch) => {
     console.log(
         "called liquidate",
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        symbol
+        symbol,
+        amount
     );
 
     dispatch(liquidatePending(symbol));
@@ -217,8 +215,7 @@ export const onLiquidateAction = ({
         userWalletNetwork,
         userWalletAddress,
         symbol,
-        /*amount,
-        asset,*/
+        amount,
     })
         .then(() => dispatch(liquidateSuccess(symbol)))
         .catch((error) => {

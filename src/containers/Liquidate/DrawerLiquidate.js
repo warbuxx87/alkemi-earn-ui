@@ -79,8 +79,7 @@ const LiquidateDrawerContainer = ({
                     userWalletNetwork,
                     userWalletAddress,
                     symbol,
-                    /*asset,
-                    amount,*/
+                    amount,
                 });
             }}
             onSetMax={onSetMax}
