@@ -139,6 +139,13 @@ const DrawerLiquidateWrapper = ({
     supplyList,
     shortfallETH,
     onButtonClick,
+
+    onSetMax,
+    amount,
+    setAmount,
+
+    enableButtonClick,
+    isDoingAction,
 }) => {
     const classes = DrawerLiquidateClass();
 
@@ -211,8 +218,8 @@ const DrawerLiquidateWrapper = ({
                         </Grid>
                         {supplyList.map((val) => (
                             <Grid
+                                key={val.symbol}
                                 container
-                                xs
                                 justify="space-between"
                                 alignItems="center"
                                 className={
@@ -276,11 +283,16 @@ const DrawerLiquidateWrapper = ({
                                 className={classes.input}
                                 placeholder="0.00"
                                 type="number"
-                                value={0}
+                                onChange={(e) => setAmount(e.target.value)}
+                                value={amount}
                                 fullWidth={true}
                             />
-                            <span className={classes.maxTips}>MAX</span>
-                            {/* onClick={() => { click_max(this) }} */}
+                            <span
+                                className={classes.maxTips}
+                                onClick={onSetMax}
+                            >
+                                MAX
+                            </span>
                         </div>
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
@@ -341,6 +353,7 @@ const DrawerLiquidateWrapper = ({
                                 }}
                                 size="large"
                                 fullWidth={true}
+                                disabled={!enableButtonClick || isDoingAction}
                             >
                                 {buttonsLabel}
                             </Button>
@@ -355,7 +368,7 @@ const DrawerLiquidateWrapper = ({
 // Section 6: Documentation with PropTypes
 DrawerLiquidateWrapper.propTypes = {
     buttonsLabel: PropTypes.string.isRequired,
-    data: PropTypes.array.isRequired,
+    supplyList: PropTypes.array.isRequired,
 };
 
 // Section 7:  Connect styles and export

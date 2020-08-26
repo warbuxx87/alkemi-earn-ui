@@ -243,7 +243,10 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                         {addressParser(item.address)}
                                     </LiquidTableCell>
                                     <LiquidTableCell className="px-0 capitalize">
-                                        <LiquidationChart />
+                                        <LiquidationChart
+                                            supplyList={item.supply}
+                                            borrowList={item.borrow}
+                                        />
                                     </LiquidTableCell>
                                     <LiquidTableCell
                                         className="px-0"
@@ -261,7 +264,7 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
             </PerfectScrollbar>
             <TablePagination
                 className="px-4"
-                rowsPerPageOptions={[5, 10, 25]}
+                rowsPerPageOptions={[5, 8, 10, 25]}
                 component="div"
                 count={liquidationsList.length}
                 rowsPerPage={rowsPerPage}

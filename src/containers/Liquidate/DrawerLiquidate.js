@@ -52,6 +52,22 @@ const LiquidateDrawerContainer = ({
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
+    const [amount, setAmount] = React.useState("");
+    const onSetMax = () => {
+        setAmount("999999"); // TODO define max
+        //  setAmount(asset.safeBorrowToken.toString()); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
+    };
+
+    const [enableLiquidate, setEnableLiquidate] = React.useState(false);
+
+    React.useEffect(() => {
+        if (amount) {
+            // check that User Input Amount does not exceed maximum amount of tokens that user can liquidate for symbol and is not less than 0
+            const isAmountValid = amount <= 999999 && amount > 0 ? true : false;
+            setEnableLiquidate(isAmountValid);
+        }
+    }, [amount /*, symbol*/]);
+
     return (
         <DrawerLiquidate
             buttonsLabel="Liquidate"
@@ -67,6 +83,11 @@ const LiquidateDrawerContainer = ({
                     amount,*/
                 });
             }}
+            onSetMax={onSetMax}
+            amount={amount}
+            setAmount={setAmount}
+            enableButtonClick={enableLiquidate}
+            isDoingAction={false /* TODO: define action being done */}
         />
     );
 };
