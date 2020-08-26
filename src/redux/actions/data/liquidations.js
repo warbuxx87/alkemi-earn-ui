@@ -57,43 +57,72 @@ const fetchLiquidationsCall = ({ currentNetworkName, address, dispatch }) => {
         })
         .then((data) => {
             if (data) {
-                //const obj_data = JSON.parse(data);
-
+                const obj_data = JSON.parse(data);
+                console.log("obj_data: ", obj_data);
                 const liquidationsData = [
                     {
-                        address: "0x4553e229A33023a262B1Fc5Dc0076e4798AdDfC1",
-                        //shortfallEth: "0",
-
-                        totalSupplyWeth: "3845.0579907454335",
-                        totalSupplyUSD: "1530148.5175331268",
-                        totalBorrowWeth: "2242.736099230467",
-                        totalBorrowUSD: "892501.3161609628",
-                        shortfallWeth: "1", //
-                        collateralRate: "1.1", // supposed 110%
-                        borrow: [
-                            {
-                                asset: "string",
-                                name: "string",
-                                symbol: "string",
-                                decimal: 0,
-                                oraclePrice: "string",
-                                amount: "string",
-                                USDValue: "string",
-                                price: "string",
-                            },
-                        ],
+                        address: "0x3C5EF68490b1E85B9474B1a6a7805651D95479D9",
+                        totalSupplyETH: "447.90117363817166",
+                        totalSupplyUSD: "171089.2903063089",
+                        totalBorrowETH: "359.19912484127724",
+                        totalBorrowUSD: "137206.88170687112",
+                        shortfallETH: "1",
+                        shortfallUSD: "383.09",
+                        collateralRate: "1.1",
                         supply: [
                             {
-                                asset: "DAI",
-                                name: "DAI",
-                                symbol: "DAI",
-                                decimal: 18,
-                                oraclePrice: "153.45",
-                                amount: "10",
-                                USDValue: "1",
-                                price: "1",
+                                asset:
+                                    "0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b",
+                                name: "USD Coin",
+                                symbol: "USDC",
+                                decimal: 6,
+                                amountToken: 500.299829,
+                                priceETH: "0.0026179381119430327",
+                                priceUSD: "1",
+                                valueETH: "5.002998289999999e-10",
+                                valueUSD: "500.299829",
+                            },
+                            {
+                                asset:
+                                    "0x577d296678535e4903d59a4c929b718e1d575e0a",
+                                name: "Wrapped Bitcoin",
+                                symbol: "WBTC",
+                                decimal: 8,
+                                amountToken: 15.01485012,
+                                priceETH: "29.743315189911065",
+                                priceUSD: "11361.351536242231",
+                                valueETH: "446.591419648434",
+                                valueUSD: "170588.99047730886",
                             },
                         ],
+                        borrow: [
+                            {
+                                asset:
+                                    "0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b",
+                                name: "USD Coin",
+                                symbol: "USDC",
+                                decimal: 6,
+                                amountToken: 9828.957053,
+                                priceETH: "0.0026179381119430327",
+                                priceUSD: "1",
+                                valueETH: "25.731601269699976",
+                                valueUSD: "9828.957053",
+                            },
+                            {
+                                asset:
+                                    "0x577d296678535e4903d59a4c929b718e1d575e0a",
+                                name: "Wrapped Bitcoin",
+                                symbol: "WBTC",
+                                decimal: 8,
+                                amountToken: 11.21151161,
+                                priceETH: "29.743315189911065",
+                                priceUSD: "11361.351536242231",
+                                valueETH: "333.46752357157726",
+                                valueUSD: "127377.92465387112",
+                            },
+                        ],
+                        created_at: "2020-08-26T09:53:41.228Z",
+                        updated_at: "2020-08-26T09:53:41.228Z",
                     },
                 ];
 

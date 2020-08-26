@@ -19,8 +19,8 @@ const walletChecks = [
     { checkName: "derivationPath" },
     { checkName: "accounts" },
     { checkName: "connect" },
-    { checkName: "network" }, // connects to any network
-    { checkName: "balance", minimumBalance: "1000000" },
+    // { checkName: "network" }, // connects to any network
+    // { checkName: "balance", minimumBalance: "1000000" },
 ];
 
 const wallets = [

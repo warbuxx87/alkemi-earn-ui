@@ -32,6 +32,8 @@ import USDC from "assets/images/USDC.svg";
 //import PAX from "assets/images/pax.png";
 import ETH from "assets/images/eth.png";
 
+import { addressParser } from "utils/ui";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     imageSize: {
@@ -247,7 +249,7 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                     variant="body2"
                                     color="textSecondary"
                                 >
-                                    LTV Ratio
+                                    Collateral Ratio
                                 </Typography>
                             </LiquidTableCell>
                             <LiquidTableCell>
@@ -270,7 +272,7 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {liquidateList
+                        {liquidationsList
                             .slice(
                                 page * rowsPerPage,
                                 page * rowsPerPage + rowsPerPage
@@ -283,24 +285,18 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                             display="flex"
                                             alignItems="center"
                                         >
-                                            <img
-                                                className={classes.imageSize}
-                                                alt={item.tokenName}
-                                                src={item.tokenIcon}
-                                            />
                                             <Box ml={2}>
                                                 <Typography
                                                     variant="h6"
                                                     color="textPrimary"
                                                 >
-                                                    {item.tokenDebt}{" "}
-                                                    {item.tokenSymbol}
+                                                    {item.shortfallETH} ETH
                                                 </Typography>
                                                 <Typography
                                                     variant="body2"
                                                     color="textSecondary"
                                                 >
-                                                    {item.tokenDebtUSD}
+                                                    ${item.shortfallUSD}
                                                 </Typography>
                                             </Box>
                                         </Box>
@@ -311,23 +307,27 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                             display="flex"
                                             alignItems="center"
                                         >
-                                            <img
+                                            {/*<img
                                                 className={classes.imageSize}
                                                 src={ETH}
                                                 alt="ETH"
-                                            />
-                                            <Box ml={2}>
+                                            />*/
+                                            /*  supply array icons */}
+                                            <Box>
+                                                {" "}
+                                                {/*ml={2} */
+                                                /* TODO: put back on if we dispplay icons from suppy*/}
                                                 <Typography
                                                     variant="h6"
                                                     color="textPrimary"
                                                 >
-                                                    {item.collateral} ETH
+                                                    {item.totalSupplyETH} ETH
                                                 </Typography>
                                                 <Typography
                                                     variant="body2"
                                                     color="textSecondary"
                                                 >
-                                                    {item.collateralUSD}
+                                                    ${item.totalSupplyUSD}
                                                 </Typography>
                                             </Box>
                                         </Box>
@@ -336,10 +336,10 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                         className="px-0 capitalize"
                                         align="left"
                                     >
-                                        {item.tokenHealth}
+                                        {item.collateralRate}
                                     </LiquidTableCell>
                                     <LiquidTableCell className="px-0 capitalize">
-                                        {item.walletAddress}
+                                        {addressParser(item.address)}
                                     </LiquidTableCell>
                                     <LiquidTableCell className="px-0 capitalize">
                                         Donut Chart
