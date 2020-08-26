@@ -2,6 +2,9 @@
 
 import _ from "lodash";
 
+import { handle_liquidate_click } from "utils/drizzle";
+import notify from "utils/notify";
+
 const url_map = require("constants/url_map.json");
 
 // Section 2: Action types declarations and action creators
@@ -9,6 +12,8 @@ const url_map = require("constants/url_map.json");
 //                                      //
 // ------- LIQUIDATIONS ACTIONS ------- //
 //                                      //
+
+// Liquidation data (ones that populate the table + drawer)
 
 // Declare action type as a constant
 export const FETCH_LIQUIDATIONS_PENDING = "FETCH_LIQUIDATIONS_PENDING";
@@ -29,6 +34,43 @@ const fetchLiquidationsSuccess = (liquidations) => ({
     payload: {
         liquidations,
     },
+});
+
+//                                               //
+// -------------- LIQUIDATE ACTIONS --------------  //
+//                                               //
+
+// track the smart contract calls
+
+// Declare action type as a constant
+export const LIQUIDATE_PENDING = "LIQUIDATE_PENDING";
+
+const liquidatePending = (asset) => ({
+    type: LIQUIDATE_PENDING,
+    payload: {
+        asset,
+    },
+});
+
+// Declare action type as a constant
+export const LIQUIDATE_SUCCESS = "LIQUIDATE_SUCCESS";
+
+const liquidateSuccess = (asset) => ({
+    type: LIQUIDATE_SUCCESS,
+    payload: {
+        asset,
+    },
+});
+
+// Declare action type as a constant
+export const LIQUIDATE_ERROR = "LIQUIDATE_ERROR";
+
+const liquidateError = (symbol, error) => ({
+    type: LIQUIDATE_ERROR,
+    payload: {
+        symbol,
+    },
+    error,
 });
 
 // Declare action type as a constant
@@ -95,7 +137,7 @@ const fetchLiquidationsCall = ({ currentNetworkName, address, dispatch }) => {
                                 valueUSD: "170588.99047730886",
                             },
                         ],
-                        borrow: [
+                        liquidate: [
                             {
                                 asset:
                                     "0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b",
@@ -149,4 +191,43 @@ export const fetchLiquidations = ({ currentNetworkName, address }) => async (
     dispatch
 ) => {
     throttledFetchLiquidations({ currentNetworkName, address, dispatch });
+};
+
+export const onLiquidateAction = ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    symbol,
+    /*
+    amount,
+    asset,
+    */
+}) => async (dispatch) => {
+    console.log(
+        "called liquidate",
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        symbol
+    );
+
+    dispatch(liquidatePending(symbol));
+    handle_liquidate_click({
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        symbol,
+        /*amount,
+        asset,*/
+    })
+        .then(() => dispatch(liquidateSuccess(symbol)))
+        .catch((error) => {
+            notify.notification({
+                eventCode: "liquidateError",
+                type: "error",
+                message: error.message,
+                autoDismiss: 5000,
+            });
+            dispatch(liquidateError(symbol, error.message));
+        });
 };

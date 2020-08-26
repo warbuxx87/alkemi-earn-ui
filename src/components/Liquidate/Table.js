@@ -23,6 +23,7 @@ import {
 // Section 3: Components & Containers import from the application
 import LiquidateButton from "containers/Liquidate/DrawerLiquidate";
 import LiquidTableCell from "components/UI/TableCell";
+import LiquidationChart from "components/Liquidate/LiquidationChart";
 
 import { addressParser } from "utils/ui";
 
@@ -44,99 +45,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-/*const liquidateList = [
-    {
-        tokenDebt: "124.344",
-        collateral: "0.9345",
-        collateralUSD: "$153.45",
-        tokenDebtUSD: "$123.39",
-        tokenIcon: DAI,
-        tokenSymbol: "DAI",
-        tokenHealth: 20,
-        walletAddress: "0x813..9c1a",
-    },
-    {
-        tokenDebt: "343.065",
-        collateral: "1.1245",
-        collateralUSD: "$543.45",
-        tokenDebtUSD: "$345.45",
-        tokenIcon: USDC,
-        tokenSymbol: "USDC",
-        tokenHealth: 22,
-        walletAddress: "0x834..3c3g",
-    },
-    {
-        tokenDebt: "3264.733",
-        collateral: "2.4345",
-        collateralUSD: "$3545.95",
-        tokenDebtUSD: "$8674.53",
-        tokenIcon: USDT,
-        tokenSymbol: "USDT",
-        tokenHealth: 43,
-        walletAddress: "0x234..6x7h",
-    },
-    {
-        tokenDebt: "74398.934",
-        collateral: "12.7434",
-        collateralUSD: "$74956.49",
-        tokenDebtUSD: "$54562.35",
-        tokenIcon: USDC,
-        tokenSymbol: "USDC",
-        tokenHealth: 54,
-        walletAddress: "0x834..5b6a",
-    },
-    {
-        tokenDebt: "973.382",
-        collateral: "4.4543",
-        collateralUSD: "$973.44",
-        tokenDebtUSD: "$837.34",
-        tokenIcon: DAI,
-        tokenSymbol: "DAI",
-        tokenHealth: 77,
-        walletAddress: "0x553..5f3a",
-    },
-    {
-        tokenDebt: "6.38958",
-        collateral: "12.3948",
-        collateralUSD: "$123453.45",
-        tokenDebtUSD: "$87455.38",
-        tokenIcon: WBTC,
-        tokenSymbol: "WBTC",
-        tokenHealth: 80,
-        walletAddress: "0x823..0b2a",
-    },
-    {
-        tokenDebt: "92.345",
-        collateral: "0.5343",
-        collateralUSD: "$94.05",
-        tokenDebtUSD: "$73.43",
-        tokenIcon: USDT,
-        tokenSymbol: "USDT",
-        tokenHealth: 101,
-        walletAddress: "0x803..7c7a",
-    },
-    {
-        tokenDebt: "34234.76",
-        collateral: "13.4534",
-        collateralUSD: "$36544.09",
-        tokenDebtUSD: "$34563.29",
-        tokenIcon: USDC,
-        tokenSymbol: "USDC",
-        tokenHealth: 112,
-        walletAddress: "0x413..5z2a",
-    },
-    {
-        tokenDebt: "124.344",
-        collateral: "0.93",
-        collateralUSD: "$653.45",
-        tokenDebtUSD: "$123.39",
-        tokenIcon: DAI,
-        tokenSymbol: "DAI",
-        tokenHealth: 20,
-        walletAddress: "0x813..9c1a",
-    },
-];*/
-
+/*
 const assetName = [
     {
         id: "ALL",
@@ -166,7 +75,7 @@ const assetName = [
         id: "WETH",
         name: "WETH - Ether",
     },
-];
+];*/
 
 const Liquidate = ({ className, liquidationsList, ...rest }) => {
     const classes = useStyles();
@@ -194,7 +103,7 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
     // Section 5: Code Component
     return (
         <Card className={clsx(classes.root, className)} {...rest}>
-            <Box p={2} pt={3} display="flex">
+            {/*<Box p={2} pt={3} display="flex">
                 <Box display="flex" alignItems="center">
                     <TextField
                         fullWidth
@@ -213,9 +122,9 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                 {category.name}
                             </option>
                         ))}
-                    </TextField>
+                        </TextField>
                 </Box>
-            </Box>
+            </Box>*/}
             <PerfectScrollbar>
                 <Table className="whitespace-pre">
                     <TableHead>
@@ -334,7 +243,7 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                         {addressParser(item.address)}
                                     </LiquidTableCell>
                                     <LiquidTableCell className="px-0 capitalize">
-                                        Donut Chart
+                                        <LiquidationChart />
                                     </LiquidTableCell>
                                     <LiquidTableCell
                                         className="px-0"

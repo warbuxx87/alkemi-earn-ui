@@ -1,17 +1,16 @@
-import React from "react";
-import { connect } from "react-redux";
+// Section 1: React/Redux low level imports
+import React, { useContext } from "react";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-// import web3 from "web3";
-
-import withDrizzle from "containers/Drizzle/withDrizzle";
+// Section 2: internal imports
 import DrawerLiquidate from "components/UI/Drawer/DrawerLiquidate";
-import { onDepositAction } from "redux/actions/data/lend";
+import DrizzleContext from "utils/DrizzleContext";
 
-// import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
+import { onLiquidateAction } from "redux/actions/data/liquidations";
 
-// import useFetchPrice from "hooks/useFetchPrice";
-// import { getUSDPrice } from "redux/selectors/totalBalance";
+import { walletAddress, walletNetwork } from "redux/selectors/onboard";
+
 /*const data = [
     {
         name: "Dai",
@@ -44,13 +43,30 @@ import { onDepositAction } from "redux/actions/data/lend";
         recieve: 1265.1,
     },
 ];*/
-const DepositDrawerContainer = ({ supplyList, shortfallETH }) => {
+const LiquidateDrawerContainer = ({
+    supplyList,
+    shortfallETH,
+    onLiquidateAction,
+}) => {
+    const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
+    const userWalletNetwork = useSelector(walletNetwork);
+
     return (
         <DrawerLiquidate
             buttonsLabel="Liquidate"
-            //data={data}
             supplyList={supplyList}
             shortfallETH={shortfallETH}
+            onButtonClick={({ symbol }) => {
+                onLiquidateAction({
+                    drizzle,
+                    userWalletNetwork,
+                    userWalletAddress,
+                    symbol,
+                    /*asset,
+                    amount,*/
+                });
+            }}
         />
     );
 };
@@ -58,9 +74,8 @@ const DepositDrawerContainer = ({ supplyList, shortfallETH }) => {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onDepositAction }, dispatch);
+    bindActionCreators({ onLiquidateAction }, dispatch);
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(DepositDrawerContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    LiquidateDrawerContainer
+);

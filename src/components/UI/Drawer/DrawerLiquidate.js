@@ -134,7 +134,12 @@ const DrawerLiquidateClass = makeStyles(
     }
 );
 
-const DrawerLiquidateWrapper = ({ buttonsLabel, supplyList, shortfallETH }) => {
+const DrawerLiquidateWrapper = ({
+    buttonsLabel,
+    supplyList,
+    shortfallETH,
+    onButtonClick,
+}) => {
     const classes = DrawerLiquidateClass();
 
     // UI state
@@ -329,6 +334,9 @@ const DrawerLiquidateWrapper = ({ buttonsLabel, supplyList, shortfallETH }) => {
                                 variant="contained"
                                 color="primary"
                                 onClick={() => {
+                                    onButtonClick({
+                                        symbol: dataAmount.symbol,
+                                    });
                                     handleClose();
                                 }}
                                 size="large"
