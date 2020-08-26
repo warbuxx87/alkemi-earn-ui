@@ -348,7 +348,9 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                         className="px-0"
                                         align="right"
                                     >
-                                        <LiquidateButton />
+                                        <LiquidateButton
+                                            supplyList={item.supply}
+                                        />
                                     </LiquidTableCell>
                                 </TableRow>
                             ))}

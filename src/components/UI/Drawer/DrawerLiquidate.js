@@ -131,7 +131,7 @@ const DrawerLiquidateClass = makeStyles(
     }
 );
 
-const DrawerLiquidateWrapper = ({ buttonsLabel, data }) => {
+const DrawerLiquidateWrapper = ({ buttonsLabel, data, supplyList }) => {
     const classes = DrawerLiquidateClass();
 
     // UI state
@@ -149,15 +149,23 @@ const DrawerLiquidateWrapper = ({ buttonsLabel, data }) => {
     const [dataAmount, setDataAmount] = React.useState({});
 
     const handleChooseCoin = (val) => {
-        setValue(val.name);
+        setValue(val.symbol);
         setDataAmount(val);
     };
+
+    // Choose first entry by default on load
+    useEffect(() => {
+        handleChooseCoin(supplyList[0]);
+    }, []);
+
     useEffect(() => {
         if (data.length) {
-            setValue(data[0].name);
+            setValue(data[0].symbol);
             setDataAmount(data[0]);
         }
     }, [data]);
+
+    console.log("supplyList: ", supplyList);
 
     // Section 5: Code Component
     return (
@@ -187,7 +195,7 @@ const DrawerLiquidateWrapper = ({ buttonsLabel, data }) => {
                         p={2}
                     >
                         <Typography variant="h4" color="textPrimary">
-                            Liquidate DAI
+                            Liquidate
                         </Typography>
                         <IconButton onClick={handleClose}>
                             <SvgIcon fontSize="small">
@@ -198,16 +206,16 @@ const DrawerLiquidateWrapper = ({ buttonsLabel, data }) => {
                     <Divider />
                     <Box pt={5} p={2}>
                         <Grid container className={classes.amount}>
-                            Avaiable Assets
+                            Available Assets
                         </Grid>
-                        {data.map((val) => (
+                        {supplyList.map((val) => (
                             <Grid
                                 container
                                 xs
                                 justify="space-between"
                                 alignItems="center"
                                 className={
-                                    value === val.name
+                                    value === val.symbol
                                         ? clsx(
                                               classes.wrapperRadio,
                                               classes.borderWhite
@@ -225,22 +233,22 @@ const DrawerLiquidateWrapper = ({ buttonsLabel, data }) => {
                                     />
                                     <Grid>
                                         <h3 className={classes.title}>
-                                            {val.total} {val.name}
+                                            {val.amountToken} {val.symbol}
                                         </h3>
                                         <h5 className={classes.subtitle}>
-                                            ${val.amount}
+                                            ${val.valueUSD}
                                         </h5>
                                     </Grid>
                                 </Grid>
                                 <Grid item className={classes.textRight}>
                                     <Radio
-                                        checked={value === val.name}
-                                        value={val.name}
+                                        checked={value === val.symbol}
+                                        value={val.symbol}
                                         name="radio-button"
                                         className={classes.styleRadio}
                                     />
                                     <div>
-                                        <span>{val.discount} </span>
+                                        <span>{/*val.discount*/}?% </span>
                                         <span
                                             style={{
                                                 opacity: "0.5",
@@ -300,7 +308,7 @@ const DrawerLiquidateWrapper = ({ buttonsLabel, data }) => {
                                     justify="flex-end"
                                 >
                                     {dataAmount.discountValue | 0}{" "}
-                                    {dataAmount.name}
+                                    {dataAmount.symbol}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -314,7 +322,7 @@ const DrawerLiquidateWrapper = ({ buttonsLabel, data }) => {
                                     container
                                     justify="flex-end"
                                 >
-                                    {dataAmount.recieve | 0} {dataAmount.name}
+                                    {dataAmount.recieve | 0} {dataAmount.symbol}
                                 </Grid>
                             </Grid>
                         </Grid>
