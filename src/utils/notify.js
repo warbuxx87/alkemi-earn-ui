@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import { ToastMessage } from "rimble-ui";
 import "react-toastify/dist/ReactToastify.css";
 
+import NotifyProccess from "components/UI/NotifyProccess";
+
 // 3. constants imports
 import errorMessage from "constants/error_code";
 
@@ -102,13 +104,15 @@ const contractTXNotifier = (store) => (next) => (action) => {
         };
 
         const display = (
-            <ToastMessage
+            /*<ToastMessage
                 colorTheme={"dark"}
                 icon={toastIcon}
                 variant={toastMessageVariant}
                 message={displayMessage}
                 secondaryMessage={displaySecondaryMessage}
-            />
+            />*/
+
+            <NotifyProccess />
         );
 
         toast(display, options);
