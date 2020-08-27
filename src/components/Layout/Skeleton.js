@@ -5,12 +5,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: UI imports
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, fade } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application
 import LayoutContent from "containers/Layout/Content";
 import Sidebar from "containers/Sidebar/Sidebar";
 import AppBar from "containers/AppBar/AppBar";
+
+import ConnectionBanner from "components/UI/ConnectionBanner";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
@@ -19,6 +21,9 @@ const styles = (theme) => ({
         display: "flex",
         width: "100%",
         minHeight: "100%",
+    },
+    alert: {
+        backgroundColor: fade(theme.palette.background.paper, 0.5),
     },
     content: {
         position: "relative",
@@ -61,17 +66,30 @@ const styles = (theme) => ({
 });
 
 // Section 5: Code Component
-const LayoutSkeleton = ({ classes }) => (
-    <div className={classes.frame}>
-        <Sidebar />
-
-        <div className={classes.content}>
-            <AppBar />
-
-            <LayoutContent />
+function LayoutSkeleton({
+    classes,
+    userWalletNetwork,
+    currentNetworkName,
+    userWalletAddress,
+    DEFAULT_NETWORK,
+}) {
+    // networkID is null when no wallet is selected
+    return (
+        <div className={classes.frame}>
+            <Sidebar />
+            <div className={classes.content}>
+                <AppBar />
+                <ConnectionBanner
+                    userWalletNetwork={userWalletNetwork}
+                    currentNetworkName={currentNetworkName}
+                    userWalletAddress={userWalletAddress}
+                    DEFAULT_NETWORK={DEFAULT_NETWORK}
+                />
+                <LayoutContent />
+            </div>
         </div>
-    </div>
-);
+    );
+}
 
 // Section 6: Documentation with PropTypes
 LayoutSkeleton.propTypes = {

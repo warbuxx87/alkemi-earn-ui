@@ -10,7 +10,6 @@ export default {
         fontWeight: 400,
         fontSize: 11,
         letterSpacing: "-0.05px",
-        textTransform: "uppercase",
     },
 
     h1: {

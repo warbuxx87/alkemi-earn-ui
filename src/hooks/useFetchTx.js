@@ -18,17 +18,17 @@ export default (fetchPeriodically = false) => {
         (fetchPeriodically) => {
             let timer;
 
-        const getTxList = (fetchPeriodically) => {
-            dispatch(fetchTx({ currentNetworkName, address }));
+            const getTxList = (fetchPeriodically) => {
+                dispatch(fetchTx({ currentNetworkName, address }));
 
                 if (fetchPeriodically === true) {
                     timer = setTimeout(getTxList, 60 * 1000);
                 }
             };
 
-        if (currentNetworkName !== undefined) {
-            getTxList(fetchPeriodically); // if fetchPeriodically is false, it will trigger the fetch right away (unlike in the other useFetch in the app)
-        }
+            if (currentNetworkName !== undefined) {
+                getTxList(fetchPeriodically); // if fetchPeriodically is false, it will trigger the fetch right away (unlike in the other useFetch in the app)
+            }
 
             return () => {
                 if (timer) clearTimeout(timer);

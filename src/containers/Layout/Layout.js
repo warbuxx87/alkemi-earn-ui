@@ -1,7 +1,9 @@
+// Section 1: React low level imports
 import React from "react";
 import { Switch, Route, Redirect } from "react-router";
 
-import LayoutSkeleton from "components/Layout/Skeleton";
+// Section 2: internal imports
+import LayoutSkeleton from "./Skeleton";
 import { DASHBOARD } from "constants/routes";
 
 const Layout = () => (

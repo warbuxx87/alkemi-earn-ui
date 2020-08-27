@@ -18,4 +18,4 @@ export const walletNetwork = (state) => {
 
 // Returns walletNetwork Name (Example: rinkeby)
 export const walletNetworkName = (state) =>
-    constants.network_type[state.status.onboard.walletNetwork]; // Not the source of truth, to be cleaned up in UI-249
+    constants.network_type[state.status.onboard.walletNetwork];
