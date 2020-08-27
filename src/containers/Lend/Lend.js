@@ -1,16 +1,18 @@
 // Main Container
 
 // Section 1: React/Redux low level imports
-import React from "react";
+import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
-import { onLendActivate } from "redux/actions/status/lend";
 import Lend from "components/Lend/Lend";
-import withDrizzle from "containers/Drizzle/withDrizzle";
 
 import useFetchPrice from "hooks/useFetchPrice";
+
+import DrizzleContext from "utils/DrizzleContext";
+
+import { onLendActivate } from "redux/actions/status/lend";
 
 // Section 3: Selectors
 import {
@@ -21,22 +23,29 @@ import {
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
+import { walletAddress, walletNetwork } from "redux/selectors/onboard";
+
 // Section 4: Container
-const LendContainer = ({
-    inactiveLend,
-    activeLend,
-    onActivate,
-    drizzle,
-    errorLend,
-}) => {
+const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     useFetchPrice(); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
+    const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
+    const userWalletNetwork = useSelector(walletNetwork);
 
     return (
         <Lend
             inactiveLend={inactiveLend}
             activeLend={activeLend}
-            onActivate={(asset) => onActivate({ drizzle, asset })}
+            onActivate={(asset) =>
+                onActivate({
+                    drizzle,
+                    userWalletNetwork,
+                    userWalletAddress,
+                    asset,
+                })
+            }
             errorLend={errorLend}
             USDPrice={USDPrice}
         />
@@ -58,7 +67,6 @@ const mapDispatchToProps = (dispatch) =>
     );
 
 // Section 6: Exports
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(LendContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    LendContainer
+);

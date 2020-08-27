@@ -6,9 +6,10 @@ exports[`<LayoutSkeleton /> matches snapshot 1`] = `
 >
   <Connect(WithWidth(WithStyles(Sidebar))) />
   <div
-    className="LayoutSkeleton-content-2"
+    className="LayoutSkeleton-content-3"
   >
-    <DrizzledComponent />
+    <AppBarContainer />
+    <ConnectionBanner />
     <LayoutContent />
   </div>
 </div>

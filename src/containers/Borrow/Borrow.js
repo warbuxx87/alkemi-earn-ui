@@ -1,14 +1,16 @@
 // Main Container
 
-// Section 1: React/Reduxd low level imports
-import React from "react";
-import { connect } from "react-redux";
+// Section 1: React/Redux low level imports
+import React, { useContext } from "react";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
-import { onBorrowActivate } from "redux/actions/status/borrow";
 import Borrow from "components/Borrow/Borrow";
-import withDrizzle from "containers/Drizzle/withDrizzle";
+
+import DrizzleContext from "utils/DrizzleContext";
+
+import { onBorrowActivate } from "redux/actions/status/borrow";
 
 // Section 3: Selectors
 import {
@@ -18,17 +20,25 @@ import {
     //  getBorrowPending
 } from "redux/selectors/data/borrow";
 
-const BorrowContainer = ({
-    inactiveBorrow,
-    activeBorrow,
-    onActivate,
-    drizzle,
-}) => {
+import { walletAddress, walletNetwork } from "redux/selectors/onboard";
+
+const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
+    const drizzle = useContext(DrizzleContext);
+    const userWalletAddress = useSelector(walletAddress);
+    const userWalletNetwork = useSelector(walletNetwork);
+
     return (
         <Borrow
             inactiveBorrow={inactiveBorrow}
             activeBorrow={activeBorrow}
-            onActivate={(asset) => onActivate({ drizzle, asset })}
+            onActivate={(asset) =>
+                onActivate({
+                    drizzle,
+                    userWalletNetwork,
+                    userWalletAddress,
+                    asset,
+                })
+            }
         />
     );
 };
@@ -41,7 +51,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ onActivate: onBorrowActivate }, dispatch);
 
-export default compose(
-    withDrizzle(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(BorrowContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+    BorrowContainer
+);

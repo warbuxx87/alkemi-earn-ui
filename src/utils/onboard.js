@@ -1,8 +1,10 @@
 import Onboard from "bnc-onboard";
 
+const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
+
 const DAPP_ID = process.env.REACT_APP_DAPP_ID;
+const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
 const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
-//const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
 const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
 const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
 //const INFURA_ID = process.env.REACT_APP_INFURA_ID;
@@ -17,8 +19,8 @@ const walletChecks = [
     { checkName: "derivationPath" },
     { checkName: "accounts" },
     { checkName: "connect" },
-    //{ checkName: "network" }, // connects to any network
-    //{ checkName: "balance", minimumBalance: "1000000" },
+    // { checkName: "network" }, // connects to any network
+    // { checkName: "balance", minimumBalance: "1000000" },
 ];
 
 const wallets = [
@@ -52,14 +54,14 @@ const wallets = [
     },
     {
         walletName: "fortmatic",
-        apiKey: FORTMATIC_KEY,
+        apiKey: DEFAULT_NETWORK === "4" ? FORTMATIC_TEST_KEY : FORTMATIC_KEY,
         preferred: true,
     },
 ];
 
 const onboard = Onboard({
     dappId: DAPP_ID, // [String] The API key created by step one above
-    networkId: 4, // [Integer] The Ethereum network ID your Dapp uses.
+    networkId: parseInt(DEFAULT_NETWORK, 10), // [Integer] The Ethereum network ID your Dapp uses.
     darkMode: true,
     walletSelect: {
         wallets: wallets,
@@ -68,7 +70,14 @@ const onboard = Onboard({
         wallet: (wallet) => {
             window.localStorage.setItem("selectedWallet", wallet.name);
 
-            window.currentlyUsedProvider = wallet.provider;
+            switch (wallet.name) {
+                case "Fortmatic": {
+                    window.currentlyUsedProvider = wallet.instance.getProvider();
+                    break;
+                }
+                default:
+                    window.currentlyUsedProvider = wallet.provider;
+            }
         },
     },
     walletCheck: walletChecks,

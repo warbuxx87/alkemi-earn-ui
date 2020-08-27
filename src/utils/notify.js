@@ -10,6 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 import errorMessage from "constants/error_code";
 
 const contractTXNotifier = (store) => (next) => (action) => {
+    if (!action) next(action); // could be replaced with a simple return since we don't really have an action
+
     const actionTypeConfirmation = "TX_CONFIRMATION";
     const actionTypeSend = "TX_BROADCASTED";
     const actionTypeSuccess = "TX_SUCCESSFUL";

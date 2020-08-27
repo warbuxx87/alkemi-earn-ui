@@ -1,10 +1,8 @@
 // Section 1: React/Redux low level imports
 import React from "react";
 import { useSelector } from "react-redux";
-import { compose } from "redux";
 
 // Section 2: internal imports
-import withDrizzle from "containers/Drizzle/withDrizzle";
 import CardDeposit from "components/Dashboard/CardDeposit";
 
 // Section 3: Selectors / hooks
@@ -30,11 +28,4 @@ const CardDepositContainer = () => {
     );
 };
 
-// const mapStateToProps = (state) => ({
-//     activeReserves: getLendActive(state),
-// });
-
-export default compose(
-    withDrizzle()
-    //  connect(mapStateToProps)
-)(CardDepositContainer);
+export default CardDepositContainer;
