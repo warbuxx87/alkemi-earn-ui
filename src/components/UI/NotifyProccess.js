@@ -5,12 +5,14 @@ import {
     IconButton,
     Snackbar,
     Box,
-    Slide,
     CircularProgress,
 } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import { AlertTitle } from "@material-ui/lab";
+
 import CloseIcon from "@material-ui/icons/Close";
+import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
+import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 
 const useStyles = makeStyles((theme) => ({
     Icon: {
@@ -47,79 +49,81 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function PositionedSnackbar() {
+export default function PositionedSnackbar({
+    variant,
+    message,
+    secondaryMessage,
+}) {
     const classes = useStyles();
     const [state, setState] = React.useState({
-        open: false,
         vertical: "top",
         horizontal: "center",
     });
 
-    const { vertical, horizontal, open } = state;
-
-    const handleClick = (newState) => () => {
-        setState({ open: true, ...newState });
-        setTimeout(function () {
-            setState({ open: false, ...newState });
-        }, 2000);
-    };
+    const { vertical, horizontal } = state;
 
     const handleClose = () => {
         setState({ ...state, open: false });
     };
 
+    const getIcon = () => {
+        switch (variant) {
+            case "processing":
+                return (
+                    <CircularProgress size={25} className={classes.circle} />
+                );
+                break;
+            case "success":
+                return (
+                    <CheckCircleOutlineOutlinedIcon className={classes.Icon} />
+                );
+                break;
+            case "failure":
+                return <ErrorOutlineOutlinedIcon className={classes.Icon} />;
+                break;
+            default:
+                return null;
+        }
+    };
+
     return (
         <>
-            <Button
-                onClick={handleClick({ vertical: "top", horizontal: "right" })}
+            <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={true}
+                key={vertical + horizontal}
             >
-                processing
-            </Button>
-            <Slide direction={open ? "down" : "left"} timeout={500} in={open}>
-                <Snackbar
-                    anchorOrigin={{ vertical, horizontal }}
-                    open={true}
-                    key={vertical + horizontal}
+                <Alert
+                    action={
+                        <>
+                            <Button
+                                className={classes.Button}
+                                color="inherit"
+                                size="small"
+                            >
+                                Check
+                            </Button>
+                            <IconButton
+                                size="small"
+                                onClick={handleClose}
+                                className={classes.CloseButton}
+                                color="inherit"
+                            >
+                                <CloseIcon fontSize="small" />
+                            </IconButton>
+                        </>
+                    }
+                    className={classes.Alert}
+                    icon={getIcon()}
+                    severity="info"
                 >
-                    <Alert
-                        action={
-                            <>
-                                <Button
-                                    className={classes.Button}
-                                    color="inherit"
-                                    size="small"
-                                >
-                                    Check
-                                </Button>
-                                <IconButton
-                                    size="small"
-                                    onClick={handleClose}
-                                    className={classes.CloseButton}
-                                    color="inherit"
-                                >
-                                    <CloseIcon fontSize="small" />
-                                </IconButton>
-                            </>
-                        }
-                        className={classes.Alert}
-                        icon={
-                            <CircularProgress
-                                size={25}
-                                className={classes.circle}
-                            />
-                        }
-                        severity="info"
-                    >
-                        <AlertTitle className={classes.Title}>
-                            Processing
-                        </AlertTitle>
-                        <Box fontWeight={400} color="#b8b8b8">
-                            {" "}
-                            This is a processing message!
-                        </Box>
-                    </Alert>
-                </Snackbar>
-            </Slide>
+                    <AlertTitle className={classes.Title}>{message}</AlertTitle>
+                    <Box fontWeight={400} color="#b8b8b8">
+                        {" "}
+                        {secondaryMessage}
+                    </Box>
+                </Alert>
+            </Snackbar>
         </>
     );
 }

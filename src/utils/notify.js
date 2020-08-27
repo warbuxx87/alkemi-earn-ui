@@ -112,7 +112,11 @@ const contractTXNotifier = (store) => (next) => (action) => {
                 secondaryMessage={displaySecondaryMessage}
             />*/
 
-            <NotifyProccess />
+            <NotifyProccess
+                variant={toastMessageVariant}
+                message={displayMessage}
+                secondaryMessage={displaySecondaryMessage}
+            />
         );
 
         toast(display, options);
