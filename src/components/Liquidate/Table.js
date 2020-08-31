@@ -23,7 +23,7 @@ import {
 // Section 3: Components & Containers import from the application
 import LiquidateButton from "containers/Liquidate/DrawerLiquidate";
 import LiquidTableCell from "components/UI/TableCell";
-import LiquidationChart from "components/Liquidate/LiquidationChart";
+import LiquidationChart from "components/Liquidate/Chart";
 
 import { addressParser } from "utils/ui";
 
@@ -179,7 +179,7 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                 page * rowsPerPage + rowsPerPage
                             )
                             .map((item, index) => (
-                                <TableRow key={index}>
+                                <TableRow key={index} >
                                     <LiquidTableCell component="th" scope="row">
                                         <Box
                                             minWidth={150}
