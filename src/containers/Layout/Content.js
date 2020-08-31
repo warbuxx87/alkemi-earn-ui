@@ -1,9 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.minimal.css";
-
 import Dashboard from "containers/Dashboard/Dashboard";
 import Lend from "containers/Lend/Lend";
 import Borrow from "containers/Borrow/Borrow";
@@ -23,7 +20,6 @@ import {
 
 const LayoutContent = () => (
     <div>
-        <ToastContainer />
         <Switch>
             <Route path={DASHBOARD} exact component={Dashboard} />
             <Route path={LEND} exact component={Lend} />

@@ -2,11 +2,7 @@
 import React from "react";
 
 // 2. Libraries imports
-import { toast } from "react-toastify";
-import { ToastMessage } from "rimble-ui";
-import "react-toastify/dist/ReactToastify.css";
-
-import NotifyProccess from "components/UI/NotifyProccess";
+import Notify from "components/UI/Notify";
 
 // 3. constants imports
 import errorMessage from "constants/error_code";
@@ -104,29 +100,13 @@ const contractTXNotifier = (store) => (next) => (action) => {
         };
 
         const display = (
-            /*<ToastMessage
-                colorTheme={"dark"}
-                icon={toastIcon}
-                variant={toastMessageVariant}
-                message={displayMessage}
-                secondaryMessage={displaySecondaryMessage}
-            />*/
-
-            <NotifyProccess
+            <Notify
                 variant={toastMessageVariant}
                 message={displayMessage}
                 secondaryMessage={displaySecondaryMessage}
             />
         );
-
-        toast(display, options);
-        //
-        // toast.onChange((numberOfToastDisplayed) => {
-        //     toast.dismiss();
-        // });
     }
-
-    ///
 
     return next(action);
 };

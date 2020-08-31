@@ -66,6 +66,7 @@ export default function PositionedSnackbar({
         setState({ ...state, open: false });
     };
 
+    // Choose the icon depending on the variant, could send the selected icon from caller if this notification snackbar is to be used from other places than utils/notify.js
     const getIcon = () => {
         switch (variant) {
             case "processing":
