@@ -1,0 +1,2 @@
+//npm.pkg.github.com/:_authToken={YOUR_GITHUB_ACCESS_TOKEN}
+@project-alkemi:registry=https://npm.pkg.github.com
