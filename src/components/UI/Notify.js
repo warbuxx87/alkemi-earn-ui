@@ -73,15 +73,12 @@ export default function PositionedSnackbar({
                 return (
                     <CircularProgress size={25} className={classes.circle} />
                 );
-                break;
             case "success":
                 return (
                     <CheckCircleOutlineOutlinedIcon className={classes.Icon} />
                 );
-                break;
             case "failure":
                 return <ErrorOutlineOutlinedIcon className={classes.Icon} />;
-                break;
             default:
                 return null;
         }

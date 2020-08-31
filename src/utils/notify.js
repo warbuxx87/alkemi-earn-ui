@@ -2,6 +2,9 @@
 import React from "react";
 
 // 2. Libraries imports
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Notify from "components/UI/Notify";
 
 // 3. constants imports
@@ -82,6 +85,18 @@ const contractTXNotifier = (store) => (next) => (action) => {
             //console.log("Tx Error event fired", displayMessage);
         }
 
+        const options = {
+            closeButton: true,
+            position: "top-right",
+            // Automatically Close Notification after 15 seconds
+            autoClose: 15000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+        };
+
         const display = (
             <Notify
                 variant={toastMessageVariant}
@@ -89,6 +104,8 @@ const contractTXNotifier = (store) => (next) => (action) => {
                 secondaryMessage={displaySecondaryMessage}
             />
         );
+
+        toast(display, options);
     }
 
     return next(action);
