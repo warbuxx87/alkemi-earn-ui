@@ -25,11 +25,9 @@ const contractTXNotifier = (store) => (next) => (action) => {
         let displaySecondaryMessage;
         let toastMessageVariant;
         let errorCode;
-        let toastIcon;
         // the transaction is still processing
         if (action.type === actionTypeSend) {
             toastMessageVariant = "processing";
-            toastIcon = "InfoOutline";
             displayMessage = "Transaction pending...";
             displaySecondaryMessage = "This might take a few minutes";
             //console.log("Tx Send event fired", displayMessage);
@@ -40,7 +38,6 @@ const contractTXNotifier = (store) => (next) => (action) => {
 
             //console.log("Tx Receipt Object", action.receipt);
             toastMessageVariant = "success";
-            toastIcon = "CloudDone";
             displaySecondaryMessage = "Transaction Successful";
 
             if (action.receipt.events.Approval) {
@@ -73,31 +70,17 @@ const contractTXNotifier = (store) => (next) => (action) => {
             if (action.receipt.events.Failure) {
                 errorCode = action.receipt.events.Failure.returnValues.error;
                 toastMessageVariant = "failure";
-                toastIcon = "ErrorOutline";
                 displayMessage = errorMessage[errorCode];
                 displaySecondaryMessage = "Transaction Failed";
             }
         }
 
         if (action.type === actionTypeError) {
-            toastIcon = "ErrorOutline";
             toastMessageVariant = "failure";
             displayMessage = "Transaction failed";
             displaySecondaryMessage = "The Failure Message Would Go Here";
             //console.log("Tx Error event fired", displayMessage);
         }
-
-        const options = {
-            closeButton: true,
-            position: "top-right",
-            // Automatically Close Notification after 15 seconds
-            autoClose: 15000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: false,
-            progress: undefined,
-        };
 
         const display = (
             <Notify
