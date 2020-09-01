@@ -1,74 +1,73 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Doughnut } from 'react-chartjs-2';
-import { Box, useTheme } from '@material-ui/core';
+import React, { useState } from "react";
+import Chart from "react-apexcharts";
+import {
+    Box,
+} from "@material-ui/core";
 
-function Chart({ data: dataProp, ...rest }) {
-  const theme = useTheme();
-
-  const data = {
-    maintainAspectRatio: false,
-    responsive: false,
-    labels: ["DAI", "USDC", "WETH"],
-    datasets: [
-      {
-        data: [57.74, 16, 26.26],
-        backgroundColor: ["#fac34a", "#4088fa", "#00e1a2"],
-        borderRadius: "16px",
-        borderWidth: 0
-      }
-    ]
-  };
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: false,
-    cutoutPercentage: 80,
-    legend: {
-      display: false
+export default function App(props) {
+  const [chartProps, setChartProps] = useState({
+    options: {
+      tooltip: {
+           enabled: true,
+           enabledOnSeries: undefined,
+           shared: true,
+           followCursor: true,
+           fillSeriesColor: false,
+           theme: true,
+           style: {
+             fontSize: '12px',
+             fontFamily: undefined
+           },
+           onDatasetHover: {
+               highlightDataSeries: false,
+           },
+           y: {
+               formatter: undefined,
+               title: {
+                   formatter: (seriesName) => seriesName,
+               },
+           },
+           marker: {
+               show: true,
+           },
+         },
+      chart: {
+        animations: {
+       enabled: false,
+     },
+       type: 'donut'
+       },
+      legend: {
+        show: false
+      },
+      dataLabels: {
+     enabled: false,
     },
-    layout: {
-      padding: 0
-    },
-    tooltips: {
-      enabled: true,
-      mode: 'index',
-      intersect: false,
-      caretSize: 10,
-      yPadding: 20,
-      xPadding: 20,
-      borderWidth: 1,
-      borderColor: theme.palette.divider,
-      backgroundColor: theme.palette.background.dark,
-      titleFontColor: theme.palette.text.primary,
-      bodyFontColor: theme.palette.text.secondary,
-      footerFontColor: theme.palette.text.secondary,
-      callbacks: {
-        label(tooltipItem, _data) {
-          const label = _data.labels[tooltipItem.index];
-          const value = _data.datasets[0].data[tooltipItem.index];
-
-          return `${label}: ${value}%`;
-        }
+     plotOptions: {
+        pie: {
+           donut: {
+           size: '75%',},
+          expandOnClick: false,
+          },
+        radialBar: {
+          hollow: {
+            size: "100%"
+          }
       }
-    }
-  };
+      },
+      stroke: {
+        show: false,
+      },
+      labels: ['DAI', 'WETH', 'USDC']
+    },
+    series: [1634, 3743, 2744],
+    type: "donut",
+    width: "100%",
+    height: 60
+  });
 
   return (
-    <Box width={50} height={50}>
-    <Doughnut
-      data={data}
-      options={options}
-      {...rest}
-    />
-    </Box>
-  );
+  <Box width={80} pr={1}>
+  <Chart {...chartProps} />
+  </Box>  );
 }
-
-Chart.propTypes = {
-  className: PropTypes.string,
-  data: PropTypes.object.isRequired
-};
-
-export default Chart;
