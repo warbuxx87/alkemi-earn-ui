@@ -254,6 +254,7 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                     >
                                         <LiquidateButton
                                             supplyList={item.supply}
+                                            borrowList={item.borrow}
                                             shortfallETH={item.shortfallETH}
                                             targetAccount={item.address}
                                         />

@@ -137,6 +137,8 @@ const DrawerLiquidateClass = makeStyles(
 const DrawerLiquidateWrapper = ({
     buttonsLabel,
     supplyList,
+    borrowList,
+
     shortfallETH,
     onButtonClick,
 
@@ -160,18 +162,101 @@ const DrawerLiquidateWrapper = ({
         setOpen(false);
     };
 
-    const [value, setValue] = React.useState("");
-    const [dataAmount, setDataAmount] = React.useState({});
+    const [selectedSupplyAsset, setSelectedSupplyAsset] = React.useState("");
+    const [selectedBorrowAsset, setSelectedBorrowAsset] = React.useState("");
 
-    const handleChooseCoin = (val) => {
-        setValue(val.symbol);
-        setDataAmount(val);
+    const [
+        selectedSupplyAssetData,
+        setSelectedSupplyAssetData,
+    ] = React.useState({});
+    const [
+        selectedBorrowAssetData,
+        setSelectedBorrowAssetData,
+    ] = React.useState({});
+
+    const handleChooseSupplyCoin = (val) => {
+        setSelectedSupplyAsset(val.symbol);
+        setSelectedSupplyAssetData(val);
     };
 
-    // Choose first entry by default on load
+    const handleChooseBorrowCoin = (val) => {
+        setSelectedBorrowAsset(val.symbol);
+        setSelectedBorrowAssetData(val);
+    };
+
+    // Choose first entry by default on load/data change
     useEffect(() => {
-        handleChooseCoin(supplyList[0]);
+        handleChooseSupplyCoin(supplyList[0]);
     }, [supplyList]);
+
+    useEffect(() => {
+        handleChooseBorrowCoin(borrowList[0]);
+    }, [borrowList]);
+
+    const displayAssets = ({
+        list,
+        selectedAsset,
+        setSelectedAsset,
+        handleChooseCoin,
+    }) => {
+        return (
+            <>
+                {list.map((val) => (
+                    <Grid
+                        key={val.symbol}
+                        container
+                        justify="space-between"
+                        alignItems="center"
+                        className={
+                            selectedAsset === val.symbol
+                                ? clsx(
+                                      classes.wrapperRadio,
+                                      classes.borderWhite
+                                  )
+                                : classes.wrapperRadio
+                        }
+                        onClick={() => handleChooseCoin(val)}
+                    >
+                        <Grid container item xs>
+                            <img
+                                src={getTokenIcon(val.symbol)}
+                                alt="asset"
+                                width="35px"
+                                className={classes.mr15}
+                            />
+                            <Grid>
+                                <h3 className={classes.title}>
+                                    {val.amountToken} {val.symbol}
+                                </h3>
+                                <h5 className={classes.subtitle}>
+                                    ${val.valueUSD}
+                                </h5>
+                            </Grid>
+                        </Grid>
+                        <Grid item className={classes.textRight}>
+                            <Radio
+                                checked={selectedAsset === val.symbol}
+                                value={val.symbol}
+                                name="radio-button"
+                                className={classes.styleRadio}
+                            />
+                            <div>
+                                <span>{/*val.discount*/}?% </span>
+                                <span
+                                    style={{
+                                        opacity: "0.5",
+                                        textTransform: "none",
+                                    }}
+                                >
+                                    Discount
+                                </span>
+                            </div>
+                        </Grid>
+                    </Grid>
+                ))}
+            </>
+        );
+    };
 
     console.log("supplyList: ", supplyList);
 
@@ -216,59 +301,12 @@ const DrawerLiquidateWrapper = ({
                         <Grid container className={classes.amount}>
                             Available Assets
                         </Grid>
-                        {supplyList.map((val) => (
-                            <Grid
-                                key={val.symbol}
-                                container
-                                justify="space-between"
-                                alignItems="center"
-                                className={
-                                    value === val.symbol
-                                        ? clsx(
-                                              classes.wrapperRadio,
-                                              classes.borderWhite
-                                          )
-                                        : classes.wrapperRadio
-                                }
-                                onClick={() => handleChooseCoin(val)}
-                            >
-                                <Grid container item xs>
-                                    <img
-                                        src={getTokenIcon(val.symbol)}
-                                        alt="asset"
-                                        width="35px"
-                                        className={classes.mr15}
-                                    />
-                                    <Grid>
-                                        <h3 className={classes.title}>
-                                            {val.amountToken} {val.symbol}
-                                        </h3>
-                                        <h5 className={classes.subtitle}>
-                                            ${val.valueUSD}
-                                        </h5>
-                                    </Grid>
-                                </Grid>
-                                <Grid item className={classes.textRight}>
-                                    <Radio
-                                        checked={value === val.symbol}
-                                        value={val.symbol}
-                                        name="radio-button"
-                                        className={classes.styleRadio}
-                                    />
-                                    <div>
-                                        <span>{/*val.discount*/}?% </span>
-                                        <span
-                                            style={{
-                                                opacity: "0.5",
-                                                textTransform: "none",
-                                            }}
-                                        >
-                                            Discount
-                                        </span>
-                                    </div>
-                                </Grid>
-                            </Grid>
-                        ))}
+                        {displayAssets({
+                            list: supplyList,
+                            selectedAsset: selectedSupplyAsset,
+                            setSelectedAsset: setSelectedSupplyAsset,
+                            handleChooseCoin: handleChooseSupplyCoin,
+                        })}
                     </Box>
                     <Box p={2}>
                         <Grid container className={classes.amount}>

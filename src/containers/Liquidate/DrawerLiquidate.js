@@ -13,6 +13,8 @@ import { walletAddress, walletNetwork } from "redux/selectors/onboard";
 
 const LiquidateDrawerContainer = ({
     supplyList,
+    borrowList,
+
     shortfallETH,
     targetAccount,
 
@@ -42,6 +44,7 @@ const LiquidateDrawerContainer = ({
         <DrawerLiquidate
             buttonsLabel="Liquidate"
             supplyList={supplyList}
+            borrowList={borrowList}
             shortfallETH={shortfallETH}
             onButtonClick={({ symbol, assetCollateral, assetBorrow }) => {
                 onLiquidateAction({
