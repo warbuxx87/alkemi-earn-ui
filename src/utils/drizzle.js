@@ -169,16 +169,23 @@ export const handle_liquidate_click = async ({
     userWalletAddress,
     symbol,
     amount,
+    assetCollateral,
+    assetBorrow,
+    targetAccount,
 }) => {
+    console.log("called here");
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
-    const network = constants.network_type[userWalletNetwork];
+    //const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
-    const token_address = address[network][`address_${symbol}`];
+    //const token_address = address[network][`address_${symbol}`];
     const weiAmount = toWei(amount, symbol);
 
     const sendLiquidate = MoneyMarketContract.methods.liquidateBorrow.cacheSend(
-        token_address,
+        targetAccount,
+        assetBorrow,
+        assetCollateral,
+        //token_address,
         weiAmount,
         {
             from: myAccount,

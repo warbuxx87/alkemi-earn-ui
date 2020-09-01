@@ -89,7 +89,7 @@ const fetchLiquidationsError = (error) => ({
 //                                               //
 
 const fetchLiquidationsCall = ({ currentNetworkName, address, dispatch }) => {
-    if (!url_map[currentNetworkName].accounts_url) return;
+    if (!url_map[currentNetworkName].liquidations_url) return;
 
     dispatch(fetchLiquidationsPending());
 
@@ -199,6 +199,9 @@ export const onLiquidateAction = ({
     userWalletAddress,
     symbol,
     amount,
+    assetCollateral,
+    assetBorrow,
+    targetAccount,
 }) => async (dispatch) => {
     console.log(
         "called liquidate",
@@ -206,7 +209,10 @@ export const onLiquidateAction = ({
         userWalletNetwork,
         userWalletAddress,
         symbol,
-        amount
+        amount,
+        assetCollateral,
+        assetBorrow,
+        targetAccount
     );
 
     dispatch(liquidatePending(symbol));
@@ -216,6 +222,9 @@ export const onLiquidateAction = ({
         userWalletAddress,
         symbol,
         amount,
+        assetCollateral,
+        assetBorrow,
+        targetAccount,
     })
         .then(() => dispatch(liquidateSuccess(symbol)))
         .catch((error) => {

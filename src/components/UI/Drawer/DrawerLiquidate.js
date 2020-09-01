@@ -171,7 +171,7 @@ const DrawerLiquidateWrapper = ({
     // Choose first entry by default on load
     useEffect(() => {
         handleChooseCoin(supplyList[0]);
-    }, []);
+    }, [supplyList]);
 
     console.log("supplyList: ", supplyList);
 
@@ -346,9 +346,12 @@ const DrawerLiquidateWrapper = ({
                                 variant="contained"
                                 color="primary"
                                 onClick={() => {
-                                    onButtonClick({
+                                    console.log(dataAmount);
+                                    /*onButtonClick({
                                         symbol: dataAmount.symbol,
-                                    });
+                                        assetCollateral: dataAmount.asset,
+                                        assetBorrow: "?"
+                                    });*/
                                     handleClose();
                                 }}
                                 size="large"

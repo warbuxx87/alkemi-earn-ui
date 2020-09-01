@@ -11,41 +11,11 @@ import { onLiquidateAction } from "redux/actions/data/liquidations";
 
 import { walletAddress, walletNetwork } from "redux/selectors/onboard";
 
-/*const data = [
-    {
-        name: "Dai",
-        image: "/images/DAI.svg",
-        total: 234.53345,
-        amount: 234.43,
-        discount: "10%",
-        debtToCover: 123.44,
-        discountValue: 133.45,
-        recieve: 123.34,
-    },
-    {
-        name: "Usdt",
-        image: "/images/USDT.svg",
-        total: 33.7554,
-        amount: 234.43,
-        discount: "5%",
-        debtToCover: 456.44,
-        discountValue: 223.45,
-        recieve: 234.34,
-    },
-    {
-        name: "Usdc",
-        image: "/static/media/USDC.ceb8339c.svg",
-        total: 27.7575,
-        amount: 234.43,
-        discount: "10%",
-        debtToCover: 123.44,
-        discountValue: 137.88,
-        recieve: 1265.1,
-    },
-];*/
 const LiquidateDrawerContainer = ({
     supplyList,
     shortfallETH,
+    targetAccount,
+
     onLiquidateAction,
 }) => {
     const drizzle = useContext(DrizzleContext);
@@ -73,13 +43,16 @@ const LiquidateDrawerContainer = ({
             buttonsLabel="Liquidate"
             supplyList={supplyList}
             shortfallETH={shortfallETH}
-            onButtonClick={({ symbol }) => {
+            onButtonClick={({ symbol, assetCollateral, assetBorrow }) => {
                 onLiquidateAction({
                     drizzle,
                     userWalletNetwork,
                     userWalletAddress,
                     symbol,
                     amount,
+                    assetCollateral,
+                    assetBorrow,
+                    targetAccount,
                 });
             }}
             onSetMax={onSetMax}
