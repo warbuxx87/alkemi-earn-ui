@@ -193,12 +193,7 @@ const DrawerLiquidateWrapper = ({
         handleChooseBorrowCoin(borrowList[0]);
     }, [borrowList]);
 
-    const displayAssets = ({
-        list,
-        selectedAsset,
-        setSelectedAsset,
-        handleChooseCoin,
-    }) => {
+    const displayAssets = ({ list, selectedAsset, handleChooseCoin }) => {
         return (
             <>
                 {list.map((val) => (
@@ -304,8 +299,18 @@ const DrawerLiquidateWrapper = ({
                         {displayAssets({
                             list: supplyList,
                             selectedAsset: selectedSupplyAsset,
-                            setSelectedAsset: setSelectedSupplyAsset,
                             handleChooseCoin: handleChooseSupplyCoin,
+                        })}
+                    </Box>
+
+                    <Box pt={5} p={2}>
+                        <Grid container className={classes.amount}>
+                            Borrow Assets
+                        </Grid>
+                        {displayAssets({
+                            list: borrowList,
+                            selectedAsset: selectedBorrowAsset,
+                            handleChooseCoin: handleChooseBorrowCoin,
                         })}
                     </Box>
                     <Box p={2}>
@@ -358,8 +363,8 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {dataAmount.discountValue | 0}{" "}
-                                    {dataAmount.symbol}
+                                    {selectedSupplyAssetData.discountValue | 0}{" "}
+                                    {selectedSupplyAssetData.symbol}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -373,7 +378,8 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {dataAmount.recieve | 0} {dataAmount.symbol}
+                                    {selectedSupplyAssetData.receive | 0}{" "}
+                                    {selectedSupplyAssetData.symbol}
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -384,9 +390,10 @@ const DrawerLiquidateWrapper = ({
                                 variant="contained"
                                 color="primary"
                                 onClick={() => {
-                                    console.log(dataAmount);
+                                    console.log(selectedSupplyAssetData);
+                                    console.log(selectedBorrowAssetData);
                                     /*onButtonClick({
-                                        symbol: dataAmount.symbol,
+                                        //symbol: dataAmount.symbol,
                                         assetCollateral: dataAmount.asset,
                                         assetBorrow: "?"
                                     });*/
