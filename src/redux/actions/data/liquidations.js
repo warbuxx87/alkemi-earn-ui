@@ -93,15 +93,15 @@ const fetchLiquidationsCall = ({ currentNetworkName, address, dispatch }) => {
 
     dispatch(fetchLiquidationsPending());
 
-    fetch(url_map[currentNetworkName].accounts_url)
+    fetch(url_map[currentNetworkName].liquidations_url)
         .then((res) => {
             return res.text();
         })
         .then((data) => {
             if (data) {
                 const obj_data = JSON.parse(data);
-                console.log("obj_data: ", obj_data);
-                const liquidationsData = [
+                //console.log("obj_data: ", obj_data);
+                /*const liquidationsData = [
                     {
                         address: "0x3C5EF68490b1E85B9474B1a6a7805651D95479D9",
                         totalSupplyETH: "447.90117363817166",
@@ -166,9 +166,9 @@ const fetchLiquidationsCall = ({ currentNetworkName, address, dispatch }) => {
                         created_at: "2020-08-26T09:53:41.228Z",
                         updated_at: "2020-08-26T09:53:41.228Z",
                     },
-                ];
+                ];*/
 
-                dispatch(fetchLiquidationsSuccess(liquidationsData));
+                dispatch(fetchLiquidationsSuccess(obj_data));
             }
         })
         .catch((error) => {
@@ -203,18 +203,6 @@ export const onLiquidateAction = ({
     assetBorrow,
     targetAccount,
 }) => async (dispatch) => {
-    console.log(
-        "called liquidate",
-        drizzle,
-        userWalletNetwork,
-        userWalletAddress,
-        symbol,
-        amount,
-        assetCollateral,
-        assetBorrow,
-        targetAccount
-    );
-
     dispatch(liquidatePending(symbol));
     handle_liquidate_click({
         drizzle,

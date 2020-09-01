@@ -175,22 +175,26 @@ const DrawerLiquidateWrapper = ({
     ] = React.useState({});
 
     const handleChooseSupplyCoin = (val) => {
+        if (!val) return;
+
         setSelectedSupplyAsset(val.symbol);
         setSelectedSupplyAssetData(val);
     };
 
     const handleChooseBorrowCoin = (val) => {
+        if (!val) return;
+
         setSelectedBorrowAsset(val.symbol);
         setSelectedBorrowAssetData(val);
     };
 
     // Choose first entry by default on load/data change
     useEffect(() => {
-        handleChooseSupplyCoin(supplyList[0]);
+        if (supplyList.legnth > 0) handleChooseSupplyCoin(supplyList[0]);
     }, [supplyList]);
 
     useEffect(() => {
-        handleChooseBorrowCoin(borrowList[0]);
+        if (borrowList.legnth > 0) handleChooseBorrowCoin(borrowList[0]);
     }, [borrowList]);
 
     const displayAssets = ({ list, selectedAsset, handleChooseCoin }) => {
@@ -252,8 +256,6 @@ const DrawerLiquidateWrapper = ({
             </>
         );
     };
-
-    console.log("supplyList: ", supplyList);
 
     // Section 5: Code Component
     return (
@@ -390,13 +392,14 @@ const DrawerLiquidateWrapper = ({
                                 variant="contained"
                                 color="primary"
                                 onClick={() => {
-                                    console.log(selectedSupplyAssetData);
-                                    console.log(selectedBorrowAssetData);
-                                    /*onButtonClick({
-                                        //symbol: dataAmount.symbol,
-                                        assetCollateral: dataAmount.asset,
-                                        assetBorrow: "?"
-                                    });*/
+                                    onButtonClick({
+                                        assetCollateral:
+                                            selectedSupplyAssetData.asset,
+                                        assetBorrow:
+                                            selectedBorrowAssetData.asset,
+
+                                        symbol: selectedSupplyAssetData.symbol,
+                                    });
                                     handleClose();
                                 }}
                                 size="large"
