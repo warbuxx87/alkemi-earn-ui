@@ -52,6 +52,7 @@ export const format_str_to_kmb = (str_num) => {
 
 export const format_str_to_percent = (str_num) => {
     // console.log(str_num)
+    str_num = str_num.toString();
     var index_num = str_num.indexOf(".") + 2;
     var cpmp_str = str_num.replace(/\./, "");
     var res_str =
