@@ -240,7 +240,7 @@ const DrawerLiquidateWrapper = ({
                                 className={classes.styleRadio}
                             />
                             <div>
-                                <span>{/*val.discount*/}?% </span>
+                                <span>10% </span>
                                 <span
                                     style={{
                                         opacity: "0.5",
@@ -294,9 +294,21 @@ const DrawerLiquidateWrapper = ({
                         </IconButton>
                     </Box>
                     <Divider />
+
                     <Box pt={5} p={2}>
                         <Grid container className={classes.amount}>
-                            Available Assets
+                            Outstanding Loans
+                        </Grid>
+                        {displayAssets({
+                            list: borrowList,
+                            selectedAsset: selectedBorrowAsset,
+                            handleChooseCoin: handleChooseBorrowCoin,
+                        })}
+                    </Box>
+
+                    <Box pt={5} p={2}>
+                        <Grid container className={classes.amount}>
+                            Available Collateral
                         </Grid>
                         {displayAssets({
                             list: supplyList,
@@ -305,16 +317,6 @@ const DrawerLiquidateWrapper = ({
                         })}
                     </Box>
 
-                    <Box pt={5} p={2}>
-                        <Grid container className={classes.amount}>
-                            Borrow Assets
-                        </Grid>
-                        {displayAssets({
-                            list: borrowList,
-                            selectedAsset: selectedBorrowAsset,
-                            handleChooseCoin: handleChooseBorrowCoin,
-                        })}
-                    </Box>
                     <Box p={2}>
                         <Grid container className={classes.amount}>
                             <Grid item md={6} xs>

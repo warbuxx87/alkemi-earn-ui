@@ -191,7 +191,10 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                                     variant="h6"
                                                     color="textPrimary"
                                                 >
-                                                    {item.shortfallETH} ETH
+                                                    {item.shortfallETH.toFixed(
+                                                        6
+                                                    )}{" "}
+                                                    ETH
                                                 </Typography>
                                                 <Typography
                                                     variant="body2"
@@ -222,7 +225,10 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                                     variant="h6"
                                                     color="textPrimary"
                                                 >
-                                                    {item.totalSupplyETH} ETH
+                                                    {item.totalSupplyETH.toFixed(
+                                                        6
+                                                    )}{" "}
+                                                    ETH
                                                 </Typography>
                                                 <Typography
                                                     variant="body2"
@@ -237,7 +243,7 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                         className="px-0 capitalize"
                                         align="left"
                                     >
-                                        {item.collateralRate}
+                                        {item.collateralRate.toFixed(4)}%
                                     </LiquidTableCell>
                                     <LiquidTableCell className="px-0 capitalize">
                                         {addressParser(item.address)}
