@@ -148,6 +148,11 @@ const DrawerLiquidateWrapper = ({
 
     enableButtonClick,
     isDoingAction,
+
+    selectedSupplyAsset,
+    setSelectedSupplyAsset,
+    selectedBorrowAsset,
+    setSelectedBorrowAsset,
 }) => {
     const classes = DrawerLiquidateClass();
 
@@ -161,9 +166,6 @@ const DrawerLiquidateWrapper = ({
     const handleClose = () => {
         setOpen(false);
     };
-
-    const [selectedSupplyAsset, setSelectedSupplyAsset] = React.useState("");
-    const [selectedBorrowAsset, setSelectedBorrowAsset] = React.useState("");
 
     const [
         selectedSupplyAssetData,
@@ -190,11 +192,13 @@ const DrawerLiquidateWrapper = ({
 
     // Choose first entry by default on load/data change
     useEffect(() => {
-        if (supplyList.legnth > 0) handleChooseSupplyCoin(supplyList[0]);
+        if (supplyList.length > 0) {
+            handleChooseSupplyCoin(supplyList[0]);
+        }
     }, [supplyList]);
 
     useEffect(() => {
-        if (borrowList.legnth > 0) handleChooseBorrowCoin(borrowList[0]);
+        if (borrowList.length > 0) handleChooseBorrowCoin(borrowList[0]);
     }, [borrowList]);
 
     const displayAssets = ({ list, selectedAsset, handleChooseCoin }) => {

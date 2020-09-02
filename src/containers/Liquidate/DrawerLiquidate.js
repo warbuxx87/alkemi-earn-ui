@@ -26,10 +26,13 @@ const LiquidateDrawerContainer = ({
 
     const [amount, setAmount] = React.useState("");
     const onSetMax = () => {
-        setAmount(-1); // TODO define max
+        setAmount(-1);
         //  setAmount(asset.safeBorrowToken.toString()); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
         //  this really should be set to -1
     };
+
+    const [selectedSupplyAsset, setSelectedSupplyAsset] = React.useState("");
+    const [selectedBorrowAsset, setSelectedBorrowAsset] = React.useState("");
 
     const [enableLiquidate, setEnableLiquidate] = React.useState(false);
 
@@ -37,10 +40,15 @@ const LiquidateDrawerContainer = ({
         if (amount) {
             // check that User Input Amount does not exceed maximum amount of tokens that user can liquidate for symbol and is not less than 0
             const isAmountValid =
-                amount <= 999999 && amount > -2 ? true : false;
+                amount <= 999999 &&
+                amount > -2 &&
+                selectedSupplyAsset &&
+                selectedBorrowAsset
+                    ? true
+                    : false;
             setEnableLiquidate(isAmountValid);
         }
-    }, [amount /*, symbol*/]);
+    }, [amount, selectedSupplyAsset, selectedBorrowAsset]);
 
     return (
         <DrawerLiquidate
@@ -65,6 +73,10 @@ const LiquidateDrawerContainer = ({
             setAmount={setAmount}
             enableButtonClick={enableLiquidate}
             isDoingAction={false /* TODO: define action being done */}
+            selectedSupplyAsset={selectedSupplyAsset}
+            setSelectedSupplyAsset={setSelectedSupplyAsset}
+            selectedBorrowAsset={selectedBorrowAsset}
+            setSelectedBorrowAsset={setSelectedBorrowAsset}
         />
     );
 };
