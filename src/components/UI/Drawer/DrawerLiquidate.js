@@ -363,36 +363,37 @@ const DrawerLiquidateWrapper = ({
                                 </Grid>
                             </Grid>
 
-                            <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
-                                    Price
-                                </Grid>
-                                <Grid
-                                    item
-                                    md={6}
-                                    xs
-                                    container
-                                    justify="flex-end"
-                                >
-                                    {selectedSupplyAssetData.discountValue | 0}{" "}
-                                    {selectedSupplyAssetData.symbol}
-                                </Grid>
-                            </Grid>
-                            <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
-                                    Balance
-                                </Grid>
-                                <Grid
-                                    item
-                                    md={6}
-                                    xs
-                                    container
-                                    justify="flex-end"
-                                >
-                                    {selectedSupplyAssetData.receive | 0}{" "}
-                                    {selectedSupplyAssetData.symbol}
-                                </Grid>
-                            </Grid>
+                            {/*<Grid container className={classes.rateRow}>
+                                        <Grid item md={6} xs>
+                                            Price
+                                        </Grid>
+                                        <Grid
+                                            item
+                                            md={6}
+                                            xs
+                                            container
+                                            justify="flex-end"
+                                        >
+                                            {selectedSupplyAssetData.discountValue | 0}{" "}
+                                            {selectedSupplyAssetData.symbol}
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container className={classes.rateRow}>
+                                        <Grid item md={6} xs>
+                                            Balance
+                                        </Grid>
+                                        <Grid
+                                            item
+                                            md={6}
+                                            xs
+                                            container
+                                            justify="flex-end"
+                                        >
+                                            {selectedSupplyAssetData.receive | 0}{" "}
+                                            {selectedSupplyAssetData.symbol}
+                                        </Grid>
+                                    </Grid>
+                                */}
                         </Grid>
                         <Box className={classes.sendButtonDiv} mt={4}>
                             <Button
