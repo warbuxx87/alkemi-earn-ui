@@ -25,10 +25,23 @@ const LiquidateDrawerContainer = ({
     const userWalletNetwork = useSelector(walletNetwork);
 
     const [amount, setAmount] = React.useState("");
+
+    // Controls the user input | TODO: enhance form management
+    const onSetAmount = (newAmount) => {
+        if (newAmount >= 0) {
+            setAmount(newAmount);
+        }
+    };
+
     const onSetMax = () => {
         setAmount(-1);
         //  setAmount(asset.safeBorrowToken.toString()); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
         //  this really should be set to -1
+    };
+
+    // resets amount to initial null value
+    const onResetAmount = () => {
+        setAmount("");
     };
 
     const [selectedSupplyAsset, setSelectedSupplyAsset] = React.useState("");
@@ -69,8 +82,9 @@ const LiquidateDrawerContainer = ({
                 });
             }}
             onSetMax={onSetMax}
+            onResetAmount={onResetAmount}
             amount={amount}
-            setAmount={setAmount}
+            onSetAmount={onSetAmount}
             enableButtonClick={enableLiquidate}
             isDoingAction={false /* TODO: define action being done */}
             selectedSupplyAsset={selectedSupplyAsset}

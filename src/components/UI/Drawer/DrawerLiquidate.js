@@ -143,8 +143,9 @@ const DrawerLiquidateWrapper = ({
     onButtonClick,
 
     onSetMax,
+    onResetAmount,
     amount,
-    setAmount,
+    onSetAmount,
 
     enableButtonClick,
     isDoingAction,
@@ -333,16 +334,17 @@ const DrawerLiquidateWrapper = ({
                                 disableUnderline={true}
                                 className={classes.input}
                                 placeholder="0.00"
-                                type="number"
-                                onChange={(e) => setAmount(e.target.value)}
-                                value={amount}
+                                type={amount < 0 ? "text" : "number"}
+                                onChange={(e) => onSetAmount(e.target.value)}
+                                value={amount < 0 ? "LIQUIDATE ALL" : amount}
                                 fullWidth={true}
+                                disabled={amount < 0}
                             />
                             <span
                                 className={classes.maxTips}
-                                onClick={onSetMax}
+                                onClick={amount < 0 ? onResetAmount : onSetMax}
                             >
-                                MAX
+                                {amount < 0 ? "CHANGE" : "MAX"}
                             </span>
                         </div>
                         <Grid className={classes.rateInfo}>
@@ -357,9 +359,10 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {shortfallETH} ETH
+                                    {shortfallETH.toFixed(6)} ETH
                                 </Grid>
                             </Grid>
+
                             <Grid container className={classes.rateRow}>
                                 <Grid item md={6} xs>
                                     Price
