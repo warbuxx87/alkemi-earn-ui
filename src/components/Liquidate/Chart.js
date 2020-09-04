@@ -79,7 +79,7 @@ export default function LiquidationChart({ borrowList }) {
             series: newSeries,
             options: { ...chartProps.options, labels: newLabels },
         });
-    }, [borrowList, chartProps, setChartProps]);
+    }, [borrowList]);
 
     return (
         <Box width={80} pr={1}>
