@@ -3,7 +3,6 @@
 // Section 1: React low level imports
 import React from "react";
 import clsx from "clsx";
-import { useState } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Section 2: Material-UI imports
@@ -15,7 +14,6 @@ import {
     TableBody,
     TableRow,
     TablePagination,
-    TextField,
     Typography,
     makeStyles,
 } from "@material-ui/core";
@@ -45,38 +43,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-/*
-const assetName = [
-    {
-        id: "ALL",
-        name: "All",
-    },
-    {
-        id: "DAI",
-        name: "DAI - Maker Dai",
-    },
-    {
-        id: "PAX",
-        name: "PAX - Paxos",
-    },
-    {
-        id: "USDC",
-        name: "USDC - USD Coin",
-    },
-    {
-        id: "USDT",
-        name: "USDT - Tether",
-    },
-    {
-        id: "WBTC",
-        name: "WBTC - Wrapped BTC",
-    },
-    {
-        id: "WETH",
-        name: "WETH - Ether",
-    },
-];*/
-
 const Liquidate = ({ className, liquidationsList, ...rest }) => {
     const classes = useStyles();
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
@@ -90,39 +56,9 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
         setRowsPerPage(+event.target.value);
     };
 
-    const [values, setValues] = useState({});
-    const handleChange = (field, value) => {
-        setValues({
-            ...values,
-            [field]: value,
-        });
-    };
-
     // Section 5: Code Component
     return (
         <Card className={clsx(classes.root, className)} {...rest}>
-            {/*<Box p={2} pt={3} display="flex">
-                <Box display="flex" alignItems="center">
-                    <TextField
-                        fullWidth
-                        label="Asset"
-                        name="asset"
-                        className={classes.assetField}
-                        onChange={handleChange}
-                        select
-                        SelectProps={{ native: true }}
-                        value={values.category}
-                        variant="outlined"
-                        color="secondary"
-                    >
-                        {assetName.map((category) => (
-                            <option key={category.id} value={category.id}>
-                                {category.name}
-                            </option>
-                        ))}
-                        </TextField>
-                </Box>
-            </Box>*/}
             <PerfectScrollbar>
                 <Table className="whitespace-pre">
                     <TableHead>

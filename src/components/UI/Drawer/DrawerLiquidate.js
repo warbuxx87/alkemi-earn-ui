@@ -1,7 +1,7 @@
 // Sub Component
 
 // Section 1: React low level imports
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
@@ -177,30 +177,36 @@ const DrawerLiquidateWrapper = ({
         setSelectedBorrowAssetData,
     ] = React.useState({});
 
-    const handleChooseSupplyCoin = (val) => {
-        if (!val) return;
+    const handleChooseSupplyCoin = useCallback(
+        (val) => {
+            if (!val) return;
 
-        setSelectedSupplyAsset(val.symbol);
-        setSelectedSupplyAssetData(val);
-    };
+            setSelectedSupplyAsset(val.symbol);
+            setSelectedSupplyAssetData(val);
+        },
+        [setSelectedSupplyAsset, setSelectedSupplyAssetData]
+    );
 
-    const handleChooseBorrowCoin = (val) => {
-        if (!val) return;
+    const handleChooseBorrowCoin = useCallback(
+        (val) => {
+            if (!val) return;
 
-        setSelectedBorrowAsset(val.symbol);
-        setSelectedBorrowAssetData(val);
-    };
+            setSelectedBorrowAsset(val.symbol);
+            setSelectedBorrowAssetData(val);
+        },
+        [setSelectedBorrowAsset, setSelectedBorrowAssetData]
+    );
 
     // Choose first entry by default on load/data change
     useEffect(() => {
         if (supplyList.length > 0) {
             handleChooseSupplyCoin(supplyList[0]);
         }
-    }, [supplyList]);
+    }, [supplyList, handleChooseSupplyCoin]);
 
     useEffect(() => {
         if (borrowList.length > 0) handleChooseBorrowCoin(borrowList[0]);
-    }, [borrowList]);
+    }, [borrowList, handleChooseBorrowCoin]);
 
     const displayAssets = ({ list, selectedAsset, handleChooseCoin }) => {
         return (

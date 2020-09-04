@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import { Box } from "@material-ui/core";
 
-export default function App(props) {
+export default function LiquidationChart({ borrowList }) {
     const [chartProps, setChartProps] = useState({
         options: {
             tooltip: {
@@ -57,13 +57,29 @@ export default function App(props) {
             stroke: {
                 show: false,
             },
-            labels: ["DAI", "WETH", "USDC"],
+            labels: [],
         },
-        series: [1634, 3743, 2744],
+        series: [],
         type: "donut",
         width: "100%",
         height: 60,
     });
+
+    // format data for display (could be moved to container)
+    useEffect(() => {
+        let newLabels = [];
+        let newSeries = [];
+        borrowList.forEach((borrow) => {
+            newLabels.push(borrow.symbol);
+            newSeries.push(parseFloat(borrow.valueETH));
+        });
+
+        setChartProps({
+            ...chartProps,
+            series: newSeries,
+            options: { ...chartProps.options, labels: newLabels },
+        });
+    }, [borrowList, chartProps, setChartProps]);
 
     return (
         <Box width={80} pr={1}>
