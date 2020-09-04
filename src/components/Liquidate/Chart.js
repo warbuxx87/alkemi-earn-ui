@@ -79,6 +79,9 @@ export default function LiquidationChart({ borrowList }) {
             series: newSeries,
             options: { ...chartProps.options, labels: newLabels },
         });
+
+        // TODO: remove the next line and replace it with a proper management
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [borrowList]);
 
     return (
