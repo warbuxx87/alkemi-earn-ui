@@ -97,6 +97,11 @@ const contractTXNotifier = (store) => (next) => (action) => {
             progress: undefined,
         };
 
+        // We have to dismiss last toast because material-ui snackbars don't support multiple stacked ones at once
+        // consider using notistack for example if the need for multiple notifications at the same time arise
+        // https://github.com/mui-org/material-ui/issues/1824
+        toast.dismiss();
+
         const display = (
             <Notify
                 variant={toastMessageVariant}
