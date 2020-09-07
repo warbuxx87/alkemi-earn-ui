@@ -208,7 +208,12 @@ const DrawerLiquidateWrapper = ({
         if (borrowList.length > 0) handleChooseBorrowCoin(borrowList[0]);
     }, [borrowList, handleChooseBorrowCoin]);
 
-    const displayAssets = ({ list, selectedAsset, handleChooseCoin }) => {
+    const displayAssets = ({
+        list,
+        selectedAsset,
+        handleChooseCoin,
+        showDiscount,
+    }) => {
         return (
             <>
                 {list.map((val) => (
@@ -250,17 +255,19 @@ const DrawerLiquidateWrapper = ({
                                 name="radio-button"
                                 className={classes.styleRadio}
                             />
-                            <div>
-                                <span>10% </span>
-                                <span
-                                    style={{
-                                        opacity: "0.5",
-                                        textTransform: "none",
-                                    }}
-                                >
-                                    Discount
-                                </span>
-                            </div>
+                            {showDiscount && (
+                                <div>
+                                    <span>10% </span>
+                                    <span
+                                        style={{
+                                            opacity: "0.5",
+                                            textTransform: "none",
+                                        }}
+                                    >
+                                        Discount
+                                    </span>
+                                </div>
+                            )}
                         </Grid>
                     </Grid>
                 ))}
@@ -314,6 +321,7 @@ const DrawerLiquidateWrapper = ({
                             list: borrowList,
                             selectedAsset: selectedBorrowAsset,
                             handleChooseCoin: handleChooseBorrowCoin,
+                            showDiscount: false,
                         })}
                     </Box>
 
@@ -325,6 +333,7 @@ const DrawerLiquidateWrapper = ({
                             list: supplyList,
                             selectedAsset: selectedSupplyAsset,
                             handleChooseCoin: handleChooseSupplyCoin,
+                            showDiscount: true,
                         })}
                     </Box>
 
