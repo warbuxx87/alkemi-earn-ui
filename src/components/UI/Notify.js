@@ -99,6 +99,7 @@ export default function PositionedSnackbar({
                                     size="small"
                                     href={`${ETHERSCAN_LINK}/tx/${txHash}`}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     Check
