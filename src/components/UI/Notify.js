@@ -14,6 +14,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 
+const ETHERSCAN_LINK = process.env.REACT_APP_ETHERSCAN_LINK;
+
 const useStyles = makeStyles((theme) => ({
     Icon: {
         marginTop: 12,
@@ -53,6 +55,7 @@ export default function PositionedSnackbar({
     variant,
     message,
     secondaryMessage,
+    txHash,
 }) {
     const classes = useStyles();
     const [state, setState] = React.useState({
@@ -94,13 +97,19 @@ export default function PositionedSnackbar({
                 <Alert
                     action={
                         <>
-                            <Button
-                                className={classes.Button}
-                                color="inherit"
-                                size="small"
-                            >
-                                Check
-                            </Button>
+                            {(variant === "processing" ||
+                                variant === "success") && (
+                                <a
+                                    className={classes.Button}
+                                    color="inherit"
+                                    size="small"
+                                    href={`${ETHERSCAN_LINK}/tx/${txHash}`}
+                                    target="_blank"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    Check
+                                </a>
+                            )}
                             <IconButton
                                 size="small"
                                 onClick={handleClose}

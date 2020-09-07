@@ -102,6 +102,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
                 variant={toastMessageVariant}
                 message={displayMessage}
                 secondaryMessage={displaySecondaryMessage}
+                txHash={action.txHash}
             />
         );
 
