@@ -61,6 +61,10 @@ const contractTXNotifier = (store) => (next) => (action) => {
                 displayMessage = "Borrow Repaid";
             }
 
+            if (action.receipt.events.BorrowLiquidated) {
+                displayMessage = "Borrow Liquidated";
+            }
+
             if (action.receipt.events.SupplyWithdrawn) {
                 displayMessage = "Supply Withdrawn";
             }

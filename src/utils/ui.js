@@ -203,3 +203,6 @@ export const openEtherScan = (hash) => {
 
     return url;
 };
+
+export const addressParser = (address) =>
+    `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
