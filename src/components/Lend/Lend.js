@@ -31,7 +31,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Lend({ className, activeLend, inactiveLend, onActivate, USDPrice }) {
+function Lend({
+    className,
+    activeLend,
+    inactiveLend,
+    onActivate,
+    USDPrice,
+    displayAllocateButton,
+}) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
@@ -58,6 +65,7 @@ function Lend({ className, activeLend, inactiveLend, onActivate, USDPrice }) {
                         <LendTable
                             data={inactiveLend}
                             onActivate={onActivate}
+                            displayAllocateButton={displayAllocateButton}
                         />
                     </Grid>
                 )}{" "}

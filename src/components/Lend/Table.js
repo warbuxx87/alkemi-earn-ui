@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const LendTable = ({ data = [], onActivate }) => {
+const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
     const classes = useStyles();
     return (
         <Box mt={1}>
@@ -188,16 +188,20 @@ const LendTable = ({ data = [], onActivate }) => {
                                         alignItems="center"
                                         justifyContent="flex-end"
                                     >
-                                        <Box mr={1}>
-                                            {row.allocating ? (
-                                                <CircularProgress
-                                                    size={20}
-                                                    color="inherit"
-                                                />
-                                            ) : (
-                                                <AllocateButton asset={row} />
-                                            )}
-                                        </Box>
+                                        {displayAllocateButton && (
+                                            <Box mr={1}>
+                                                {row.allocating ? (
+                                                    <CircularProgress
+                                                        size={20}
+                                                        color="inherit"
+                                                    />
+                                                ) : (
+                                                    <AllocateButton
+                                                        asset={row}
+                                                    />
+                                                )}
+                                            </Box>
+                                        )}
                                         {row.activated ? (
                                             <DepositButton asset={row} />
                                         ) : (
