@@ -1,4 +1,4 @@
-import { readyToTransact } from "utils/onboard";
+import { readyToTransact } from "utils/onboard"; // TODO: Should probably be replaced by checking if address is selected and such
 import { toWei } from "utils/ui";
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
@@ -160,4 +160,43 @@ export const handle_withdraw_click = async ({
         }
     );
     return sendWithdraw;
+};
+
+// Borrow Tokens from Lending Pool
+export const handle_liquidate_click = async ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    symbol,
+    amount,
+    assetCollateral,
+    assetBorrow,
+    targetAccount,
+}) => {
+    console.log("called here");
+    if (!(await readyToTransact())) throw new Error("not ready to transact");
+    const myAccount = userWalletAddress;
+    //const network = constants.network_type[userWalletNetwork];
+    const MoneyMarketContract = drizzle.contracts.MoneyMarket;
+    //const token_address = address[network][`address_${symbol}`];
+    let weiAmount = amount.toString();
+
+    if (weiAmount === "-1") {
+        weiAmount = -1;
+    } else {
+        weiAmount = toWei(amount, symbol);
+    }
+
+    const sendLiquidate = MoneyMarketContract.methods.liquidateBorrow.cacheSend(
+        targetAccount,
+        assetBorrow,
+        assetCollateral,
+        //token_address,
+        weiAmount,
+        {
+            from: myAccount,
+        }
+    );
+
+    return sendLiquidate;
 };

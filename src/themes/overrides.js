@@ -23,6 +23,17 @@ const overrides = {
         },
     },
 
+    MuiAlert: {
+        root: {
+            marginBottom: 48,
+        },
+        message: {
+            paddingTop: 10,
+            fontSize: 13,
+            textTransform: "uppercase",
+        },
+    },
+
     MuiAppBar: {
         root: {
             paddingTop: 22,

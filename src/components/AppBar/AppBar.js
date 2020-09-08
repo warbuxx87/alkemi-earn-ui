@@ -22,6 +22,8 @@ import Settings from "./Settings";
 import Notifications from "./Notifications";
 import MobileMenu from "./MobileMenu";
 
+import { addressParser } from "utils/ui";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     statusBadge: {
@@ -45,17 +47,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function AppBar({
-    title,
-    onConnect,
-    onReset,
-    accountAddress,
-    onMobileNavOpen,
-    ...rest
-}) {
+function AppBar({ title, onConnect, onReset, accountAddress }) {
     const classes = useStyles();
-    const addressParser = (address) =>
-        `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
+
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleOnConnect = (event) => {
@@ -98,7 +92,11 @@ function AppBar({
                             >
                                 OVERVIEW
                             </Typography>
-                            <Typography variant="h3" color="textPrimary">
+                            <Typography
+                                variant="h3"
+                                color="textPrimary"
+                                data-testid="title"
+                            >
                                 {title}
                             </Typography>
                         </Hidden>
@@ -128,7 +126,10 @@ function AppBar({
                                 }
                             >
                                 <Grid className={classes.statusBadge}></Grid>
-                                <Grid className={classes.price}>
+                                <Grid
+                                    className={classes.price}
+                                    data-testid="connectAddressButton"
+                                >
                                     {/* 0x121565...6456 */}
                                     {accountAddress
                                         ? addressParser(accountAddress)
@@ -161,7 +162,10 @@ function AppBar({
 
 // Section 6: Documentation with PropTypes
 AppBar.propTypes = {
-    onMobileNavOpen: PropTypes.func,
+    title: PropTypes.string,
+    onConnect: PropTypes.func,
+    onReset: PropTypes.func,
+    accountAddress: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export

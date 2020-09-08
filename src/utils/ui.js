@@ -168,7 +168,7 @@ export const checkAction = (address, toAddress, fromAddress, amount) => {
 
     // if from Address is Users Address
     if (fromAddress.toUpperCase() === myAddress) {
-        action = "Supply";
+        action = "Deposit";
         return action;
     }
 
@@ -203,3 +203,6 @@ export const openEtherScan = (hash) => {
 
     return url;
 };
+
+export const addressParser = (address) =>
+    `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;

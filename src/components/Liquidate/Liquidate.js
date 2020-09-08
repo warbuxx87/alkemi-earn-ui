@@ -1,177 +1,49 @@
+// Main Component
+
+// Section 1: React low level imports
 import React from "react";
-// import PropTypes from "prop-types";
-import {
-    IconButton,
-    Table,
-    TableHead,
-    TableBody,
-    TableRow,
-    TableCell,
-    Icon,
-    TablePagination,
-} from "@material-ui/core";
+import PropTypes from "prop-types";
 
-const liquidateList = [
-    {
-        shortfallWeth: "john doe",
-        address: "18 january, 2019",
-        Supply: 1000,
-        Borrow: "close",
-        collateralRate: "ABC Fintech LTD.",
-    },
-    {
-        shortfallWeth: "kessy bryan",
-        address: "10 january, 2019",
-        Supply: 9000,
-        Borrow: "open",
-        collateralRate: "My Fintech LTD.",
-    },
-    {
-        shortfallWeth: "kessy bryan",
-        address: "10 january, 2019",
-        Supply: 9000,
-        Borrow: "open",
-        collateralRate: "My Fintech LTD.",
-    },
-    {
-        shortfallWeth: "james cassegne",
-        address: "8 january, 2019",
-        Supply: 5000,
-        Borrow: "close",
-        collateralRate: "Collboy Tech LTD.",
-    },
-    {
-        shortfallWeth: "lucy brown",
-        address: "1 january, 2019",
-        Supply: 89000,
-        Borrow: "open",
-        collateralRate: "ABC Fintech LTD.",
-    },
-    {
-        shortfallWeth: "lucy brown",
-        address: "1 january, 2019",
-        Supply: 89000,
-        Borrow: "open",
-        collateralRate: "ABC Fintech LTD.",
-    },
-    {
-        shortfallWeth: "lucy brown",
-        address: "1 january, 2019",
-        Supply: 89000,
-        Borrow: "open",
-        collateralRate: "ABC Fintech LTD.",
-    },
-    {
-        shortfallWeth: "lucy brown",
-        address: "1 january, 2019",
-        Supply: 89000,
-        Borrow: "open",
-        collateralRate: "ABC Fintech LTD.",
-    },
-    {
-        shortfallWeth: "lucy brown",
-        address: "1 january, 2019",
-        Supply: 89000,
-        Borrow: "open",
-        collateralRate: "ABC Fintech LTD.",
-    },
-];
+// Section 2: Material-UI imports
+import { Container, Grid, makeStyles } from "@material-ui/core";
 
-const Liquidate = () => {
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    const [page, setPage] = React.useState(0);
+// Section 3: Components & Containers import from the application
+import LiquidateTable from "./Table";
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+// Section 4: Define Styles function taking theme as argument and returning an object
+const useStyles = makeStyles((theme) => ({
+    root: {
+        backgroundColor: theme.palette.background.dark,
+        minHeight: "100%",
+        paddingTop: theme.spacing(3),
+        paddingBottom: theme.spacing(3),
+    },
+    container: {
+        [theme.breakpoints.up("lg")]: {
+            paddingLeft: 0,
+            paddingRight: 0,
+        },
+    },
+}));
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-    };
-
+// Section 5: Code Component
+function Liquidate({ liquidationsList }) {
+    const classes = useStyles();
     return (
-        <div className="w-full overflow-auto">
-            <Table className="whitespace-pre">
-                <TableHead>
-                    <TableRow>
-                        <TableCell className="px-0">Deficit (ETH)</TableCell>
-                        <TableCell className="px-0">Account</TableCell>
-                        <TableCell className="px-0">
-                            Supply Balance($)
-                        </TableCell>
-                        <TableCell className="px-0">
-                            Borrow Balance($)
-                        </TableCell>
-                        <TableCell className="px-0">
-                            Collateralization Ratio
-                        </TableCell>
-                        <TableCell className="px-0">Action</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {liquidateList
-                        .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                        )
-                        .map((item, index) => (
-                            <TableRow key={index}>
-                                <TableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    {item.shortfallWeth}
-                                </TableCell>
-                                <TableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    {item.address}
-                                </TableCell>
-                                <TableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    {item.Supply}
-                                </TableCell>
-                                <TableCell className="px-0 capitalize">
-                                    {item.Borrow}
-                                </TableCell>
-                                <TableCell className="px-0 capitalize">
-                                    ${item.collateralRate}
-                                </TableCell>
-                                <TableCell className="px-0">
-                                    <IconButton>
-                                        <Icon color="error">close</Icon>
-                                    </IconButton>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                </TableBody>
-            </Table>
-
-            <TablePagination
-                className="px-4"
-                rowsPerPageOptions={[5, 10, 25]}
-                component="div"
-                count={liquidateList.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                backIconButtonProps={{
-                    "aria-label": "Previous Page",
-                }}
-                nextIconButtonProps={{
-                    "aria-label": "Next Page",
-                }}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
-        </div>
+        <Container maxWidth={false} className={classes.container}>
+            <Grid container spacing={3}>
+                <Grid item lg={12} xs={12}>
+                    <LiquidateTable liquidationsList={liquidationsList} />
+                </Grid>
+            </Grid>
+        </Container>
     );
+}
+
+// Section 6: Documentation with PropTypes
+Liquidate.propTypes = {
+    className: PropTypes.string,
 };
 
-// Liquidate.propTypes = {
-//     classes: PropTypes.object.isRequired
-// };
-
+// Section 7:  Connect styles and export
 export default Liquidate;

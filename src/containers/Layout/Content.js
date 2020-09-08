@@ -9,7 +9,7 @@ import Lend from "containers/Lend/Lend";
 import Borrow from "containers/Borrow/Borrow";
 import Markets from "containers/Markets/Markets";
 import History from "containers/History/History";
-import Liquidate from "components/Liquidate/Liquidate";
+import Liquidate from "containers/Liquidate/Liquidate";
 import NoWhere from "components/NoWhere/NoWhere";
 
 import {

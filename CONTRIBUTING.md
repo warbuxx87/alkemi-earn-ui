@@ -156,6 +156,12 @@ Run test
 npm test
 ```
 
+Display more DOM lines when a test fails
+
+```bash
+DEBUG_PRINT_LIMIT=10000 npm test
+```
+
 Run coverage
 
 ```bash
@@ -168,7 +174,7 @@ npm test -- --coverage
 
 We use [Jest](https://facebook.github.io/jest/docs/en/getting-started.html) test framework (directly packed into [create-react-app](https://github.com/facebookincubator/create-react-app)
 
-We use [Enzyme Shallow rendering](http://airbnb.io/enzyme/) to test component
+We use [React testing library](https://testing-library.com/docs/react-testing-library/intro) to test components
 
 **Requirements**
 
@@ -190,9 +196,36 @@ src/
 :
 ```
 
-### Test Utilities
+### Testing guidelines
 
-TODO: complete this section
+Here are some useful reading to help you write tests:
+* https://kentcdodds.com/blog/how-to-know-what-to-test
+* https://kentcdodds.com/blog/common-mistakes-with-react-testing-library
+* Anything displayed here: https://kentcdodds.com/testing/
+
+**Test example**
+
+```javascript
+// Section 1: Imports (Low level & from application)
+import React from "react";
+import TheComponent from "../TheComponent";
+
+import {render, screen} from '@testing-library/react'
+
+// Section 2: Constants & Helper functions
+const FAKE_CONSTANT = 'FAKE_CONSTANT'
+
+// Implement "reducer" function with initial state as default state
+describe("TheComponent component", () => {
+    it('renders without crashing', () => {
+      render(<TheComponent></TheComponent>)
+    })
+
+    it('does this when..', () => {
+      // ...
+    })
+})
+```
 
 ## Code linting
 
@@ -342,7 +375,7 @@ const initialState = {
 };
 
 // Implement "reducer" function with initial state as default state
-cexport default (state = initialState, { type }) => {
+export default (state = initialState, { type }) => {
     switch (type) {
         case OPEN_SIDEBAR:
             return {

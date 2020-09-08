@@ -278,6 +278,7 @@ const DrawerWrapper = ({
     );
 };
 
+// Section 6: Documentation with PropTypes
 DrawerWrapper.propTypes = {
     asset: PropTypes.object.isRequired,
     enableButtonClick: PropTypes.bool.isRequired,
@@ -295,4 +296,5 @@ DrawerWrapper.propTypes = {
     amountValue: PropTypes.string.isRequired,
 };
 
+// Section 7:  Connect styles and export
 export default DrawerWrapper;
