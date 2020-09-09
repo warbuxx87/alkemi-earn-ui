@@ -24,7 +24,7 @@ export const handle_approve_click = async ({
     });
     const sendApprove = tokenContract.methods.approve.cacheSend(
         address_MoneyMarket,
-        -1,
+        constants.max_uint,
         {
             from: myAccount,
         }
@@ -121,7 +121,7 @@ export const handle_repay_click = async ({
     let weiAmount = toWei(amount, unit);
     // ensures that accrued interest is also repaid by passing -1 to protocol.
     if (weiAmount === asset.balance) {
-        weiAmount = -1;
+        weiAmount = constants.max_uint;
     }
     const sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
         token_address,
@@ -150,7 +150,7 @@ export const handle_withdraw_click = async ({
     let weiAmount = toWei(amount, unit);
     // ensures that accrued interest is also redeemed by passing -1 to protocol.
     if (weiAmount === asset.balance) {
-        weiAmount = -1;
+        weiAmount = constants.max_uint;
     }
     const sendWithdraw = MoneyMarketContract.methods.withdraw.cacheSend(
         token_address,
@@ -174,24 +174,26 @@ export const handle_liquidate_click = async ({
     targetAccount,
 }) => {
     console.log("called here");
+    console.log("amount is:", amount);
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     //const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     //const token_address = address[network][`address_${symbol}`];
     let weiAmount = amount.toString();
+    console.log("weiAmount", weiAmount);
 
     if (weiAmount === "-1") {
-        weiAmount = -1;
+        weiAmount = constants.max_uint;
     } else {
         weiAmount = toWei(amount, symbol);
     }
 
+    console.log("weiAmount2", weiAmount);
     const sendLiquidate = MoneyMarketContract.methods.liquidateBorrow.cacheSend(
         targetAccount,
         assetBorrow,
         assetCollateral,
-        //token_address,
         weiAmount,
         {
             from: myAccount,
