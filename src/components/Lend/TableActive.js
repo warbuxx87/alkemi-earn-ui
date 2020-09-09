@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     imageSize: {
         width: "34px",
         height: "34px",
+        marginTop: "2px",
     },
     label: {
         fontFamily: theme.typography.fontFamily,
@@ -90,12 +91,12 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     className={classes.startcell}
                                     component="th"
                                     scope="row"
-                                    style={{ width: "16%" }}
+                                    style={{ width: "18%" }}
                                 >
                                     <Box
                                         minWidth={150}
                                         display="flex"
-                                        alignItems="center"
+                                        alignItems="right"
                                     >
                                         <img
                                             className={classes.imageSize}
@@ -119,8 +120,8 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     </Box>
                                 </LendTableCell>
                                 <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
@@ -136,19 +137,20 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     </Typography>
                                 </LendTableCell>
                                 <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {calculateEarnings(
+                                        {/*}{calculateEarnings(
                                             row.balance,
                                             row.principal,
                                             row.unit,
                                             USDPrice
-                                        )}
+                                        )}*/}
+                                        TBD
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -158,8 +160,8 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     </Typography>
                                 </LendTableCell>
                                 <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
@@ -175,20 +177,20 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                         APR
                                     </Typography>
                                 </LendTableCell>
-                                <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                {/*}<LendTableCell
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Switch name="checkedB" color="primary" />
-                                </LendTableCell>
+                                </LendTableCell>*/}
                                 <LendTableCell
-                                    align="center"
+                                    align="right"
                                     className={classes.endcell}
                                 >
                                     <Box
                                         minWidth={208}
                                         display="flex"
-                                        alignItems="center"
+                                        alignItems="right"
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={1}>
