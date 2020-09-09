@@ -70,7 +70,7 @@ const TableMarkets = ({ marketsData }) => {
 
     return (
         <Card>
-            <CardHeader title="MArket Liquidity" className={classes.header} />
+            <CardHeader title="Market Liquidity" className={classes.header} />
             <Divider />
             <PerfectScrollbar>
                 <TableContainer component={Paper}>
