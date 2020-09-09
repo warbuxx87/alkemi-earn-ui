@@ -149,32 +149,32 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
                 return item.topic === values.action;
             });
         }
-        if (values.sortBy) {
-            switch (values.sortBy) {
-                case "lowamount|asc":
-                    data = data.sort(
-                        (a, b) => parseFloat(a.amount) - parseFloat(b.amount)
-                    );
-                    break;
-                case "highamount|desc":
-                    data = data.sort(
-                        (a, b) => parseFloat(b.amount) - parseFloat(a.amount)
-                    );
-                    break;
-                case "latest|desc":
-                    data = data.sort(
-                        (a, b) =>
-                            parseFloat(b.timestamp) - parseFloat(a.timestamp)
-                    );
-                    break;
-                case "oldest|asc":
-                    data = data.sort(
-                        (a, b) =>
-                            parseFloat(a.timestamp) - parseFloat(b.timestamp)
-                    );
-                    break;
-                default:
-            }
+
+        switch (values.sortBy) {
+            case "lowamount|asc":
+                data = data.sort(
+                    (a, b) => parseFloat(a.amount) - parseFloat(b.amount)
+                );
+                break;
+            case "highamount|desc":
+                data = data.sort(
+                    (a, b) => parseFloat(b.amount) - parseFloat(a.amount)
+                );
+                break;
+            case "latest|desc":
+                data = data.sort(
+                    (a, b) => parseFloat(b.timestamp) - parseFloat(a.timestamp)
+                );
+                break;
+            case "oldest|asc":
+                data = data.sort(
+                    (a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp)
+                );
+                break;
+            default:
+                data = data.sort(
+                    (a, b) => parseFloat(b.timestamp) - parseFloat(a.timestamp)
+                );
         }
 
         setPage(0);
