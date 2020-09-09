@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     imageSize: {
         width: "34px",
         height: "34px",
+        marginTop: "2px",
     },
     label: {
         fontFamily: theme.typography.fontFamily,
@@ -91,12 +92,12 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                     className={classes.startcell}
                                     component="th"
                                     scope="Row"
-                                    style={{ width: "16%" }}
+                                    style={{ width: "18%" }}
                                 >
                                     <Box
                                         minWidth={150}
                                         display="flex"
-                                        alignItems="center"
+                                        alignItems="right"
                                     >
                                         <img
                                             className={classes.imageSize}
@@ -120,8 +121,8 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                     </Box>
                                 </BorrowTableCell>
                                 <BorrowTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
@@ -137,8 +138,8 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                     </Typography>
                                 </BorrowTableCell>
                                 <BorrowTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
@@ -154,8 +155,8 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                     </Typography>
                                 </BorrowTableCell>
                                 <BorrowTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
@@ -171,8 +172,8 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                         APR
                                     </Typography>
                                 </BorrowTableCell>
-                                <BorrowTableCell
-                                    align="center"
+                                {/*<BorrowTableCell
+                                    align="right"
                                     style={{ width: "16%" }}
                                 >
                                     <Switch
@@ -181,7 +182,7 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                         name="checkedB"
                                         color="primary"
                                     />
-                                </BorrowTableCell>
+                                </BorrowTableCell>-*/}
                                 <BorrowTableCell
                                     align="right"
                                     className={classes.endcell}
@@ -189,7 +190,7 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                     <Box
                                         minWidth={208}
                                         display="flex"
-                                        alignItems="center"
+                                        alignItems="right"
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={2}></Box>
