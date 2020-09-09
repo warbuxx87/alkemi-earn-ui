@@ -3,8 +3,9 @@ import React from "react";
 
 // 2. Libraries imports
 import { toast } from "react-toastify";
-import { ToastMessage } from "rimble-ui";
 import "react-toastify/dist/ReactToastify.css";
+
+import Notify from "components/UI/Notify";
 
 // 3. constants imports
 import errorMessage from "constants/error_code";
@@ -27,11 +28,9 @@ const contractTXNotifier = (store) => (next) => (action) => {
         let displaySecondaryMessage;
         let toastMessageVariant;
         let errorCode;
-        let toastIcon;
         // the transaction is still processing
         if (action.type === actionTypeSend) {
             toastMessageVariant = "processing";
-            toastIcon = "InfoOutline";
             displayMessage = "Transaction pending...";
             displaySecondaryMessage = "This might take a few minutes";
             //console.log("Tx Send event fired", displayMessage);
@@ -42,7 +41,6 @@ const contractTXNotifier = (store) => (next) => (action) => {
 
             //console.log("Tx Receipt Object", action.receipt);
             toastMessageVariant = "success";
-            toastIcon = "CloudDone";
             displaySecondaryMessage = "Transaction Successful";
 
             if (action.receipt.events.Approval) {
@@ -79,14 +77,12 @@ const contractTXNotifier = (store) => (next) => (action) => {
             if (action.receipt.events.Failure) {
                 errorCode = action.receipt.events.Failure.returnValues.error;
                 toastMessageVariant = "failure";
-                toastIcon = "ErrorOutline";
                 displayMessage = errorMessage[errorCode];
                 displaySecondaryMessage = "Transaction Failed";
             }
         }
 
         if (action.type === actionTypeError) {
-            toastIcon = "ErrorOutline";
             toastMessageVariant = "failure";
             displayMessage = "Transaction failed";
             displaySecondaryMessage = "The Failure Message Would Go Here";
@@ -105,24 +101,22 @@ const contractTXNotifier = (store) => (next) => (action) => {
             progress: undefined,
         };
 
+        // We have to dismiss last toast because material-ui snackbars don't support multiple stacked ones at once
+        // consider using notistack for example if the need for multiple notifications at the same time arise
+        // https://github.com/mui-org/material-ui/issues/1824
+        toast.dismiss();
+
         const display = (
-            <ToastMessage
-                colorTheme={"dark"}
-                icon={toastIcon}
+            <Notify
                 variant={toastMessageVariant}
                 message={displayMessage}
                 secondaryMessage={displaySecondaryMessage}
+                txHash={action.txHash}
             />
         );
 
         toast(display, options);
-        //
-        // toast.onChange((numberOfToastDisplayed) => {
-        //     toast.dismiss();
-        // });
     }
-
-    ///
 
     return next(action);
 };
