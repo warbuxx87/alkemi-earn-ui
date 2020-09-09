@@ -143,9 +143,13 @@ function AppBar({ title, onConnect, onReset, accountAddress }) {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                <MenuItem onClick={handleOnConnect}>
-                                    Change Wallet
-                                </MenuItem>
+                                {
+                                    false && (
+                                        <MenuItem onClick={handleOnConnect}>
+                                            Change Wallet
+                                        </MenuItem>
+                                    ) /* TODO: show when using more than a single wallet */
+                                }
                                 {accountAddress ? (
                                     <MenuItem onClick={handleOnReset}>
                                         Disconnect Wallet

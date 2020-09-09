@@ -26,20 +26,8 @@ Object {
         <ul
           class="MuiList-root MuiMenu-list MuiList-padding"
           role="menu"
-          tabindex="-1"
-        >
-          <li
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
-            role="menuitem"
-            tabindex="0"
-          >
-            Change Wallet
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </li>
-        </ul>
+          tabindex="0"
+        />
       </div>
       <div
         data-test="sentinelEnd"
@@ -588,20 +576,8 @@ Object {
         <ul
           class="MuiList-root MuiMenu-list MuiList-padding"
           role="menu"
-          tabindex="-1"
-        >
-          <li
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
-            role="menuitem"
-            tabindex="0"
-          >
-            Change Wallet
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </li>
-        </ul>
+          tabindex="0"
+        />
       </div>
       <div
         data-test="sentinelEnd"
