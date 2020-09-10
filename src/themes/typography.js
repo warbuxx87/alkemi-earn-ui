@@ -2,23 +2,20 @@ export default {
     body1: {
         fontWeight: 400,
         fontSize: 14,
-        letterSpacing: "-0.05px",
-        textTransform: "capitalize",
     },
 
     body2: {
         fontWeight: 400,
         fontSize: 11,
-        letterSpacing: "-0.05px",
     },
 
     h1: {
         fontWeight: 500,
-        fontSize: 37,
+        fontSize: 38,
     },
     h2: {
-        fontWeight: 400,
-        fontSize: 31,
+        fontWeight: 500,
+        fontSize: 30,
     },
     h3: {
         fontWeight: 400,
@@ -55,5 +52,13 @@ export default {
         fontSize: 11,
         letterSpacing: "-0.05px",
         lineHeight: 1.3,
+    },
+
+    overline: {
+        fontWeight: 400,
+        fontSize: 11,
+        letterSpacing: "-0.05px",
+        lineHeight: 1.5,
+        textTransform: "capitalize",
     },
 };
