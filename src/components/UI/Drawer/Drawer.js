@@ -70,10 +70,7 @@ const DrawerClass = makeStyles((theme) =>
             paddingLeft: "10px",
             color: "white",
             fontSize: "18px",
-        },
-        amount: {
-            color: "white",
-            paddingBottom: "10px",
+            borderRadius: "4px"
         },
         rateInfo: {
             color: "white",
@@ -82,11 +79,18 @@ const DrawerClass = makeStyles((theme) =>
         },
         rateRow: {
             padding: "12px 0",
-            borderBottom: "1px dashed #a7a7a7",
+            borderBottom: "1px dashed #57595d",
         },
         walletBalance: {
             color: "#a7a7a7",
         },
+        aprBox: {
+          border: "solid #57595d 1px",
+          borderRadius: "4px"
+        },
+        amount: {
+          margin: "auto",
+        }
     })
 );
 
@@ -161,27 +165,24 @@ const DrawerWrapper = ({
                         </IconButton>
                     </Box>
                     <Divider />
-                    <Box p={2} bgcolor="background.dark">
-                        <div className={classes.supplyPercent}>
+                    <Box px={2} py={3} mx={2} mt={4}  className={classes.aprBox}>
+                          <Typography variant="h2" color="primary" align="center">
                             {formatPercent(asset.apr)} APR
-                        </div>
+                        </Typography>
 
-                        <Chart> </Chart>
+                        {/*<Chart> </Chart>*/}
                     </Box>
                     <Box p={2} mt={3}>
-                        <Grid container className={classes.amount}>
-                            <Grid item md={6} xs>
+                        <Grid container direction="row">
+                            <Grid item md={6} xs className={classes.amount}>
+                            <Typography variant="body1" color="textPrimary" >
                                 Amount
+                            </Typography>
                             </Grid>
-                            <Grid
-                                item
-                                md={6}
-                                xs
-                                container
-                                justify="flex-end"
-                                className={classes.walletBalance}
-                            >
+                            <Grid item md={6}>
+                            <Typography variant="subtitle1" color="textSecondary" align="right">
                                 {amountValue}
+                            </Typography>
                             </Grid>
                         </Grid>
                         <div className={classes.inputWrap}>

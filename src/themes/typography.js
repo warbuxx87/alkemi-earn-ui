@@ -6,7 +6,7 @@ export default {
 
     body2: {
         fontWeight: 400,
-        fontSize: 11,
+        fontSize: 12,
     },
 
     h1: {
@@ -42,9 +42,9 @@ export default {
 
     subtitle1: {
         fontWeight: 400,
-        fontSize: 11,
+        fontSize: 12,
         letterSpacing: "-0.05px",
-        lineHeight: 2.3,
+        lineHeight: 2.6,
     },
 
     subtitle2: {
