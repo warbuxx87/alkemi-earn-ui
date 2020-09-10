@@ -76,6 +76,9 @@ const DrawerLiquidateClass = makeStyles(
                 paddingLeft: "10px",
                 color: "white",
                 fontSize: "16px",
+                "& .MuiInputBase-input": {
+                    padding: "6px 0 6px",
+                },
             },
             select: {
                 background: "#1B1B1B 0% 0% no-repeat padding-box",
@@ -147,6 +150,17 @@ const DrawerLiquidateClass = makeStyles(
                 color: "#979797",
                 marginBottom: "5px",
                 textTransform: "none",
+            },
+            assetImg: {
+              marginRight: "12px",
+              width: "25px",
+              height: "25px",
+              paddingTop: "3px",
+            },
+            inputIcon: {
+              width: "25px",
+              height: "25px",
+              marginRight: "4px",
             },
         }),
     {
@@ -307,13 +321,14 @@ const DrawerLiquidateWrapper = ({
     const displayAssetsDropdown = ({ list }) => {
         return list.map((val) => (
             <MenuItem key={val.symbol} value={val.symbol}>
-                <img
+<Box display="flex" alignItems="center">
+                <Box><img
                     src={getTokenIcon(val.symbol)}
                     alt="asset"
-                    width="20px"
-                    className={classes.mr15}
-                />{" "}
-                {val.symbol}
+                    className={classes.assetImg}
+                />{" "}</Box>
+              <Box>  {val.symbol}</Box>
+              </Box>
             </MenuItem>
         ));
     };
@@ -411,8 +426,7 @@ const DrawerLiquidateWrapper = ({
                                                 selectedBorrowAssetData.symbol
                                             )}
                                             alt="asset"
-                                            width="20px"
-                                            className={classes.mr15}
+                                            className={classes.inputIcon}
                                         />
                                     </InputAdornment>
                                 }
