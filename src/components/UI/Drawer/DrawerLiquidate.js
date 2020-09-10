@@ -12,13 +12,13 @@ import {
     Drawer,
     IconButton,
     Input,
-    FormControl,
     Grid,
     MenuItem,
     Select,
     SvgIcon,
     Typography,
     Radio,
+    InputAdornment,
 } from "@material-ui/core";
 
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -218,10 +218,9 @@ const DrawerLiquidateWrapper = ({
                 (e) => e.symbol === val
             );
 
-            console.log("assetFromBorrowList: ", assetFromBorrowList);
             setSelectedBorrowAssetData(assetFromBorrowList);
         },
-        [setSelectedBorrowAsset, setSelectedBorrowAssetData]
+        [setSelectedBorrowAsset, setSelectedBorrowAssetData, borrowList]
     );
     const handleChangeDropdownBorrow = (event) => {
         handleChooseBorrowCoin(event.target.value);
@@ -308,6 +307,12 @@ const DrawerLiquidateWrapper = ({
     const displayAssetsDropdown = ({ list }) => {
         return list.map((val) => (
             <MenuItem key={val.symbol} value={val.symbol}>
+                <img
+                    src={getTokenIcon(val.symbol)}
+                    alt="asset"
+                    width="20px"
+                    className={classes.mr15}
+                />{" "}
                 {val.symbol}
             </MenuItem>
         ));
@@ -398,7 +403,21 @@ const DrawerLiquidateWrapper = ({
                                 value={amount < 0 ? "LIQUIDATE ALL" : amount}
                                 fullWidth={true}
                                 disabled={amount < 0}
+                                id="input-with-icon-adornment"
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <img
+                                            src={getTokenIcon(
+                                                selectedBorrowAssetData.symbol
+                                            )}
+                                            alt="asset"
+                                            width="20px"
+                                            className={classes.mr15}
+                                        />
+                                    </InputAdornment>
+                                }
                             />
+
                             <span
                                 className={classes.maxTips}
                                 onClick={amount < 0 ? onResetAmount : onSetMax}
