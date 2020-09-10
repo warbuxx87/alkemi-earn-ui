@@ -9,7 +9,6 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import {
     Box,
     fade,
-    Switch,
     Table,
     TableBody,
     TableRow,

@@ -10,7 +10,6 @@ import {
     Button,
     CircularProgress,
     fade,
-    Switch,
     Table,
     TableBody,
     TableRow,

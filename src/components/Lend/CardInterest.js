@@ -36,11 +36,11 @@ const useStyles = makeStyles((theme) => ({
 
 function CardValue({ className, ...rest }) {
     const classes = useStyles();
-    {/*const data = {
-        value: (0.0).toFixed(2),
-        currency: "$",
-        difference: 0,
-    };*/}
+  //const data = {
+  //      value: (0.0).toFixed(2),
+  //      currency: "$",
+  //      difference: 0,
+  //   };
 
     // Section 5: Code Component
     return (
