@@ -23,6 +23,7 @@ import SidebarLendItem from "containers/Sidebar/LendItem";
 import SidebarBorrowItem from "containers/Sidebar/BorrowItem";
 import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
 import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
+import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
 import SidebarHeader from "containers/Sidebar/Header";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -98,6 +99,7 @@ function Sidebar({ classes, width, variant, open }) {
                     <SidebarBorrowItem />
                     <SidebarMarketsItem />
                     <SidebarHistoryItem />
+                    <SidebarLiquidateItem />
                 </List>
             </Box>
             <Divider className={classes.divider} />

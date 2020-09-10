@@ -1,4 +1,4 @@
-// Section 1: React/Reduxd low level imports
+// Section 1: React/Redux low level imports
 import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";

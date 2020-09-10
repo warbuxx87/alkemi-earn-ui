@@ -22,6 +22,8 @@ import Settings from "./Settings";
 import Notifications from "./Notifications";
 import MobileMenu from "./MobileMenu";
 
+import { addressParser } from "utils/ui";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     statusBadge: {
@@ -47,8 +49,7 @@ const useStyles = makeStyles((theme) => ({
 // Section 5: Code Component
 function AppBar({ title, onConnect, onReset, accountAddress }) {
     const classes = useStyles();
-    const addressParser = (address) =>
-        `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
+
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleOnConnect = (event) => {
