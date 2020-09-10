@@ -10,7 +10,6 @@ import {
     Button,
     CircularProgress,
     fade,
-    Switch,
     Table,
     TableBody,
     TableRow,
@@ -42,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     imageSize: {
         width: "34px",
         height: "34px",
+        marginTop: "2px",
     },
     label: {
         fontFamily: theme.typography.fontFamily,
@@ -92,12 +92,12 @@ const LendTable = ({ data = [], onActivate }) => {
                                     className={classes.startcell}
                                     component="th"
                                     scope="row"
-                                    style={{ width: "16%" }}
+                                    style={{ width: "18%" }}
                                 >
                                     <Box
                                         minWidth={150}
                                         display="flex"
-                                        alignItems="center"
+                                        alignItems="right"
                                     >
                                         <img
                                             className={classes.imageSize}
@@ -121,8 +121,8 @@ const LendTable = ({ data = [], onActivate }) => {
                                     </Box>
                                 </LendTableCell>
                                 <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
@@ -138,14 +138,14 @@ const LendTable = ({ data = [], onActivate }) => {
                                     </Typography>
                                 </LendTableCell>
                                 <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        0
+                                        TBD
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -155,8 +155,8 @@ const LendTable = ({ data = [], onActivate }) => {
                                     </Typography>
                                 </LendTableCell>
                                 <LendTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
@@ -172,12 +172,12 @@ const LendTable = ({ data = [], onActivate }) => {
                                         APR
                                     </Typography>
                                 </LendTableCell>
-                                <LendTableCell
-                                    align="center"
+                                {/*}<LendTableCell
+                                    align="right"
                                     style={{ width: "16%" }}
                                 >
                                     <Switch name="checkedB" color="primary" />
-                                </LendTableCell>
+                                </LendTableCell>*/}
                                 <LendTableCell
                                     align="right"
                                     className={classes.endcell}
@@ -185,7 +185,7 @@ const LendTable = ({ data = [], onActivate }) => {
                                     <Box
                                         minWidth={208}
                                         display="flex"
-                                        alignItems="center"
+                                        alignItems="right"
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={1}>
