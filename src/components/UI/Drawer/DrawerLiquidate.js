@@ -86,15 +86,14 @@ const DrawerLiquidateClass = makeStyles(
                 color: "white",
                 fontSize: "16px",
                 "& .MuiSelect-selectMenu": {
-                padding: "6px 10px",
-              },
-              "& .MuiSelect-select:focus": {
-              background: "none",
-            },
-            "& .MuiSelect-icon": {
-            right: "10px",
-          },
-
+                    padding: "6px 10px",
+                },
+                "& .MuiSelect-select:focus": {
+                    background: "none",
+                },
+                "& .MuiSelect-icon": {
+                    right: "10px",
+                },
             },
             subtitle: {
                 paddingBottom: "12px",
@@ -213,16 +212,20 @@ const DrawerLiquidateWrapper = ({
         (val) => {
             if (!val) return;
 
-            setSelectedBorrowAsset(val.symbol);
-            setSelectedBorrowAssetData(val);
+            setSelectedBorrowAsset(val);
+
+            const assetFromBorrowList = borrowList.find(
+                (e) => e.symbol === val
+            );
+
+            console.log("assetFromBorrowList: ", assetFromBorrowList);
+            setSelectedBorrowAssetData(assetFromBorrowList);
         },
         [setSelectedBorrowAsset, setSelectedBorrowAssetData]
     );
-    const [receiveAsset, setAsset] = React.useState('');
-
-    const handleChange = (event) => {
-    setAsset(event.target.value);
-      };
+    const handleChangeDropdownBorrow = (event) => {
+        handleChooseBorrowCoin(event.target.value);
+    };
 
     // Choose first entry by default on load/data change
     useEffect(() => {
@@ -232,10 +235,10 @@ const DrawerLiquidateWrapper = ({
     }, [supplyList, handleChooseSupplyCoin]);
 
     useEffect(() => {
-        if (borrowList.length > 0) handleChooseBorrowCoin(borrowList[0]);
+        if (borrowList.length > 0) handleChooseBorrowCoin(borrowList[0].symbol);
     }, [borrowList, handleChooseBorrowCoin]);
 
-    const displayAssets = ({
+    const displayAssetsRadio = ({
         list,
         selectedAsset,
         handleChooseCoin,
@@ -302,6 +305,14 @@ const DrawerLiquidateWrapper = ({
         );
     };
 
+    const displayAssetsDropdown = ({ list }) => {
+        return list.map((val) => (
+            <MenuItem key={val.symbol} value={val.symbol}>
+                {val.symbol}
+            </MenuItem>
+        ));
+    };
+
     // Section 5: Code Component
     return (
         <>
@@ -340,11 +351,11 @@ const DrawerLiquidateWrapper = ({
                     </Box>
                     <Divider />
 
-                  {/*  <Box pt={5} p={2}>
+                    {/*  <Box pt={5} p={2}>
                         <Grid container className={classes.amount}>
                             Outstanding Loans
                         </Grid>
-                        {displayAssets({
+                        {displayAssetsRadio({
                             list: borrowList,
                             selectedAsset: selectedBorrowAsset,
                             handleChooseCoin: handleChooseBorrowCoin,
@@ -358,9 +369,9 @@ const DrawerLiquidateWrapper = ({
                             color="textSecondary"
                             className={classes.subtitle}
                         >
-                        Available Collateral
+                            Available Collateral
                         </Typography>
-                        {displayAssets({
+                        {displayAssetsRadio({
                             list: supplyList,
                             selectedAsset: selectedSupplyAsset,
                             handleChooseCoin: handleChooseSupplyCoin,
@@ -369,13 +380,13 @@ const DrawerLiquidateWrapper = ({
                     </Box>
 
                     <Box p={2}>
-                    <Typography
-                        variant="body1"
-                        color="textSecondary"
-                        className={classes.subtitle}
-                    >
-                    Amount
-                    </Typography>
+                        <Typography
+                            variant="body1"
+                            color="textSecondary"
+                            className={classes.subtitle}
+                        >
+                            Amount
+                        </Typography>
                         <Box className={classes.inputWrap}>
                             <Input
                                 autoFocus={true}
@@ -396,37 +407,35 @@ const DrawerLiquidateWrapper = ({
                             </span>
                         </Box>
                         <Box className={classes.inputWrap} pt={2}>
-                        <Typography
-                            variant="body1"
-                            color="textSecondary"
-                            className={classes.subtitle}
-                        >
-                        Receive Asset
-                        </Typography>
-                        <Select
+                            <Typography
+                                variant="body1"
+                                color="textSecondary"
+                                className={classes.subtitle}
+                            >
+                                Receive Asset
+                            </Typography>
+                            <Select
                                 className={classes.select}
                                 labelId="receive-asset"
                                 id="receive-asset"
-                                value={receiveAsset}
-                                onChange={handleChange}
+                                value={selectedBorrowAsset}
+                                onChange={handleChangeDropdownBorrow}
                                 label="Asset"
                                 fullWidth={true}
                                 autoFocus={true}
                                 disableUnderline={true}
                             >
-                            <MenuItem value={0}>ETH</MenuItem>
-                            <MenuItem value={1}>USDC</MenuItem>
-                            <MenuItem value={2}>USDT</MenuItem>
+                                {displayAssetsDropdown({ list: borrowList })}
                             </Select>
-                            </Box>
+                        </Box>
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
                                 <Grid item md={6} xs>
-                                <Typography
-                                    variant="body1"
-                                    color="textSecondary"
-                                >
-                                    Covering Debt
+                                    <Typography
+                                        variant="body1"
+                                        color="textSecondary"
+                                    >
+                                        Covering Debt
                                     </Typography>
                                 </Grid>
                                 <Grid
@@ -441,45 +450,45 @@ const DrawerLiquidateWrapper = ({
                             </Grid>
 
                             <Grid container className={classes.rateRow}>
-                                        <Grid item md={6} xs>
-                                        <Typography
-                                            variant="body1"
-                                            color="textSecondary"
-                                        >
-                                           Bonus
-                                        </Typography>
-                                        </Grid>
-                                        <Grid
-                                            item
-                                            md={6}
-                                            xs
-                                            container
-                                            justify="flex-end"
-                                        >
-                                            {selectedSupplyAssetData.discountValue | 0}{" "}
-                                            {selectedSupplyAssetData.symbol}
-                                        </Grid>
-                                    </Grid>
-                                    <Grid container className={classes.rateRow}>
-                                        <Grid item md={6} xs>
-                                        <Typography
-                                            variant="body1"
-                                            color="textSecondary"
-                                        >
-                                            Receive Total
-                                        </Typography>
-                                        </Grid>
-                                        <Grid
-                                            item
-                                            md={6}
-                                            xs
-                                            container
-                                            justify="flex-end"
-                                        >
-                                            {selectedSupplyAssetData.receive | 0}{" "}
-                                            {selectedSupplyAssetData.symbol}
-                                        </Grid>
-                                    </Grid>
+                                <Grid item md={6} xs>
+                                    <Typography
+                                        variant="body1"
+                                        color="textSecondary"
+                                    >
+                                        Bonus
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    container
+                                    justify="flex-end"
+                                >
+                                    {selectedSupplyAssetData.discountValue | 0}{" "}
+                                    {selectedSupplyAssetData.symbol}
+                                </Grid>
+                            </Grid>
+                            <Grid container className={classes.rateRow}>
+                                <Grid item md={6} xs>
+                                    <Typography
+                                        variant="body1"
+                                        color="textSecondary"
+                                    >
+                                        Receive Total
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    container
+                                    justify="flex-end"
+                                >
+                                    {selectedSupplyAssetData.receive | 0}{" "}
+                                    {selectedSupplyAssetData.symbol}
+                                </Grid>
+                            </Grid>
                         </Grid>
                         <Box className={classes.sendButtonDiv} mt={4}>
                             <Button
