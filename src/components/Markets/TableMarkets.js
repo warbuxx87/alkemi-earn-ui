@@ -23,7 +23,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Section 3: Components & Containers import from the application
 
-import { format_str_to_kmb, format_str_to_percent } from "utils/markets";
+import { format_str_to_kmb, format_str_to_percent } from "utils/ui";
 
 import MarketsTableCell from "components/UI/TableCell";
 

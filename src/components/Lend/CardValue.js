@@ -14,7 +14,7 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { formatMoney } from "utils/ui";
+import { fromWei, format_str_to_kmb } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
 
@@ -59,7 +59,7 @@ function TotalValue({
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {formatMoney(totalDeposit, currency)}
+                        ${format_str_to_kmb(fromWei(totalDeposit))}
                     </Typography>
                 </Box>
             </CardContent>
