@@ -9,7 +9,6 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import {
     Box,
     fade,
-    Switch,
     Table,
     TableBody,
     TableRow,
@@ -43,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     imageSize: {
         width: "34px",
         height: "34px",
+        marginTop: "2px",
     },
     label: {
         fontFamily: theme.typography.fontFamily,
@@ -93,12 +93,12 @@ const BorrowTableActive = ({ data = [] }) => {
                                     className={classes.startcell}
                                     component="th"
                                     scope="row"
-                                    style={{ width: "16%" }}
+                                    style={{ width: "18%" }}
                                 >
                                     <Box
                                         minWidth={150}
                                         display="flex"
-                                        alignItems="center"
+                                        alignItems="right"
                                     >
                                         <img
                                             className={classes.imageSize}
@@ -122,8 +122,8 @@ const BorrowTableActive = ({ data = [] }) => {
                                     </Box>
                                 </BorrowTableCell>
                                 <BorrowTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
@@ -139,8 +139,8 @@ const BorrowTableActive = ({ data = [] }) => {
                                     </Typography>
                                 </BorrowTableCell>
                                 <BorrowTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
@@ -156,8 +156,8 @@ const BorrowTableActive = ({ data = [] }) => {
                                     </Typography>
                                 </BorrowTableCell>
                                 <BorrowTableCell
-                                    align="center"
-                                    style={{ width: "16%" }}
+                                    align="right"
+                                    style={{ width: "18%" }}
                                 >
                                     <Typography
                                         variant="h6"
@@ -173,8 +173,8 @@ const BorrowTableActive = ({ data = [] }) => {
                                         APR
                                     </Typography>
                                 </BorrowTableCell>
-                                <BorrowTableCell
-                                    align="center"
+                                {/*}<BorrowTableCell
+                                    align="right"
                                     style={{ width: "16%" }}
                                 >
                                     <Switch
@@ -183,15 +183,15 @@ const BorrowTableActive = ({ data = [] }) => {
                                         name="checkedB"
                                         color="primary"
                                     />
-                                </BorrowTableCell>
+                                </BorrowTableCell>*/}
                                 <BorrowTableCell
-                                    align="center"
+                                    align="right"
                                     className={classes.endcell}
                                 >
                                     <Box
                                         minWidth={208}
                                         display="flex"
-                                        alignItems="center"
+                                        alignItems="right"
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={1}>
