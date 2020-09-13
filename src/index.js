@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
+// sentry libs
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
+
 // store provider set up
 import { Provider } from "react-redux";
 import store from "containers/Drizzle/drizzleStore.js";
@@ -18,6 +22,14 @@ import { history } from "redux/enhancers/middlewares/router";
 import Drizzle from "containers/Drizzle/drizzleContextProvider";
 
 import registerServiceWorker from "./utils/registerServiceWorker";
+
+// sentry config
+Sentry.init({
+    dsn:
+        "https://b333f7a9d2ef4c7582dec39e3eb529c7@o301678.ingest.sentry.io/5427094",
+    integrations: [new Integrations.BrowserTracing()],
+    tracesSampleRate: 1.0,
+});
 
 export class App extends Component {
     render() {
