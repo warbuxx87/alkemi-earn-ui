@@ -53,12 +53,17 @@ const lendBalanceSelector = (state) => {
 
 const lendAPRSelector = (state) => {
     const supplyAPR = {};
-    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
-        (apr) =>
-            (supplyAPR[apr.args[0]] = calculateInterest(
-                apr.value.supplyRateMantissa
-            ))
-    );
+
+    try {
+        Object.values(
+            _.get(state, "contracts.MoneyMarket.markets", {})
+        ).forEach(
+            (apr) =>
+                (supplyAPR[apr.args[0]] = calculateInterest(
+                    apr.value.supplyRateMantissa
+                ))
+        );
+    } catch (e) {}
     return supplyAPR;
 };
 
@@ -78,13 +83,17 @@ const lendPrincipalSelector = (state) => {
 
 const getUtilizationValues = (state) => {
     const utilizationRates = {};
-    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
-        (market) =>
-            (utilizationRates[market.args[0]] = calculateUtilization(
-                market.value[6],
-                market.value[3]
-            ))
-    );
+    try {
+        Object.values(
+            _.get(state, "contracts.MoneyMarket.markets", {})
+        ).forEach(
+            (market) =>
+                (utilizationRates[market.args[0]] = calculateUtilization(
+                    market.value[6],
+                    market.value[3]
+                ))
+        );
+    } catch (e) {}
     return utilizationRates;
 };
 
