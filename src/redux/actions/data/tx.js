@@ -53,36 +53,22 @@ const resetTxData = () => ({
 // Section 3: Action dispatch methods and async funcs
 const fetchTxCall = ({ currentNetworkName, address, dispatch }) => {
     if (!address) return;
-    if (!url_map[currentNetworkName].etherscan_url) return;
+    if (!url_map[currentNetworkName].history_url) return;
 
     dispatch(fetchTxPending());
 
-    fetch(url_map[currentNetworkName].etherscan_url)
+    const params = "?account=" + address.toUpperCase();
+
+    const accountURL = url_map[currentNetworkName].history_url + params;
+
+    fetch(accountURL)
         .then((res) => {
             return res.text();
         })
         .then((data) => {
             if (data) {
-                const obj_data = JSON.parse(data);
-                const myAddress = address.toUpperCase();
-
-                let txList = [];
-                let userTxList = [];
-                txList = obj_data.result;
-                let toAddress = "";
-                let fromAddress = "";
-
-                for (let i = 0; i < txList.length; i++) {
-                    toAddress = txList[i].to.toUpperCase();
-                    fromAddress = txList[i].from.toUpperCase();
-
-                    if (myAddress === toAddress) {
-                        userTxList.push(txList[i]);
-                    }
-                    if (myAddress === fromAddress) {
-                        userTxList.push(txList[i]);
-                    }
-                }
+                const userTxList = JSON.parse(data);
+                console.log("usertxlist: ", userTxList);
 
                 dispatch(fetchTxSuccess(userTxList));
             }

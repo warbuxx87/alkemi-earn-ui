@@ -15,8 +15,7 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { fromWei, formatPercent } from "utils/ui";
-import { format_str_to_kmb } from "utils/markets";
+import { fromWei, formatPercent, format_str_to_kmb } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
 

@@ -24,7 +24,7 @@ export const handle_approve_click = async ({
     });
     const sendApprove = tokenContract.methods.approve.cacheSend(
         address_MoneyMarket,
-        -1,
+        constants.max_uint,
         {
             from: myAccount,
         }
@@ -121,7 +121,7 @@ export const handle_repay_click = async ({
     let weiAmount = toWei(amount, unit);
     // ensures that accrued interest is also repaid by passing -1 to protocol.
     if (weiAmount === asset.balance) {
-        weiAmount = -1;
+        weiAmount = constants.max_uint;
     }
     const sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
         token_address,
@@ -150,7 +150,7 @@ export const handle_withdraw_click = async ({
     let weiAmount = toWei(amount, unit);
     // ensures that accrued interest is also redeemed by passing -1 to protocol.
     if (weiAmount === asset.balance) {
-        weiAmount = -1;
+        weiAmount = constants.max_uint;
     }
     const sendWithdraw = MoneyMarketContract.methods.withdraw.cacheSend(
         token_address,
@@ -173,7 +173,6 @@ export const handle_liquidate_click = async ({
     assetBorrow,
     targetAccount,
 }) => {
-    console.log("called here");
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     //const network = constants.network_type[userWalletNetwork];
@@ -182,7 +181,7 @@ export const handle_liquidate_click = async ({
     let weiAmount = amount.toString();
 
     if (weiAmount === "-1") {
-        weiAmount = -1;
+        weiAmount = constants.max_uint;
     } else {
         weiAmount = toWei(amount, symbol);
     }
@@ -191,7 +190,6 @@ export const handle_liquidate_click = async ({
         targetAccount,
         assetBorrow,
         assetCollateral,
-        //token_address,
         weiAmount,
         {
             from: myAccount,

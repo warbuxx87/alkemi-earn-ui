@@ -8,13 +8,14 @@ import { Box, LinearProgress, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Section 3: Components & Containers import from the application
-import USDT from "assets/images/USDT.svg";
 import WETH from "assets/images/WETH.svg";
 import WBTC from "assets/images/WBTC.svg";
 import DAI from "assets/images/DAI.svg";
 import USDC from "assets/images/USDC.svg";
+
+//import USDT from "assets/images/USDT.svg";
 // png
-import PAX from "assets/images/pax.png";
+//import PAX from "assets/images/pax.png";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = (theme) => ({
@@ -58,11 +59,12 @@ class Stats extends React.Component {
         this.state = {
             token: {
                 WETH: WETH,
-                USDT: USDT,
                 USDC: USDC,
-                PAX: PAX,
                 WBTC: WBTC,
                 DAI: DAI,
+
+                //PAX: PAX,
+                //USDT: USDT,
             },
         };
     }
