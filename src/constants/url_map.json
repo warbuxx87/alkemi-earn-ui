@@ -1,5 +1,6 @@
 {
     "rinkeby": {
+        "history_url": "https://api.alkemi.network/history",
         "etherscan_url": "https://api-rinkeby.etherscan.io/api?module=account&action=tokentx&address=0xe6a53f96ceca750ef8589c5b376872213aa4f230&startblock=0&endblock=99999999&sort=desc&apikey=***REMOVED***",
         "markets_url": "https://api.alkemi.network/markets",
         "accounts_url": "https://api.alkemi.network/accounts",

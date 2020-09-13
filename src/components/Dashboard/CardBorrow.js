@@ -15,8 +15,7 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { fromWei, formatPercent } from "utils/ui";
-import { format_str_to_kmb } from "utils/markets";
+import { fromWei, formatPercent, format_str_to_kmb } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({

@@ -75,6 +75,11 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `npm run distribute:prep`
+Prepared the app for being distributed via npm package. This command compiles the project using babel and outputs the compiled files in the `dist` folder.
+
+See the section [Publishing a NPM Package on Github](#publishing-a-npm-package-on-github) for more information.
+
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
@@ -110,6 +115,40 @@ This section has moved here: [Advanced Configuration](https://facebook.github.io
 ### Deployment
 
 This section has moved here: [Deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### Publishing a NPM Package on Github
+
+#### Setup
+**IMPORTANT: you must have a .npmrc file configured with your personal access token in the root folder (the same folder where package.json is located)**
+
+From the repo's root folder, you can run the command below to create a .npmrc file using the sample template:
+
+```sh
+cp .npmrc.example .npmrc
+```
+
+After running the command above, your newly created `.npmrc` file content should look like:
+
+    //npm.pkg.github.com/:_authToken={YOUR_GITHUB_ACCESS_TOKEN}
+    @project-alkemi:registry=https://npm.pkg.github.com
+
+Replace *{YOUR_GITHUB_ACCESS_TOKEN}* by your github token. Remember to remove the curly brackets "{ }".
+You can generate your github token in [Developer settings](https://github.com/settings/tokens). Make sure you check the options `write:packages` and `read:packages`.
+
+#### Publishing a New Package Version
+
+Before publishing a new package, make sure your repo is clean (all code is committed or stashed). Then, use the following commands to publish a new package to Github:
+
+```sh
+npm version {version-option}
+git push --follow-tags
+npm run distribute:prep
+npm publish
+```
+
+**NOTE**: In the command `npm version {version-option}`, make sure you replace `{version-option}` by the desired version option. The most typical ones are `major`, `minor`, `patch`, but any supported option can be used.
+
+For more details, see [npm version docs](https://docs.npmjs.com/cli/version).
 
 ### `npm run build` fails to minify
 

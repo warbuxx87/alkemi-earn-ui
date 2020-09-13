@@ -27,13 +27,7 @@ import { ExternalLink as LinkIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 
-import {
-    toDate,
-    openEtherScan,
-    formatNumber,
-    getTokenIcon,
-    checkAction,
-} from "utils/ui";
+import { openEtherScan, getTokenIcon } from "utils/ui";
 
 import HistoryTableCell from "components/UI/TableCell";
 
@@ -65,16 +59,8 @@ const assetName = [
         name: "DAI - Maker Dai",
     },
     {
-        id: "PAX",
-        name: "PAX - Paxos",
-    },
-    {
         id: "USDC",
         name: "USDC - USD Coin",
-    },
-    {
-        id: "USDT",
-        name: "USDT - Tether",
     },
     {
         id: "WBTC",
@@ -84,6 +70,15 @@ const assetName = [
         id: "WETH",
         name: "WETH - Ether",
     },
+
+    /*{
+        id: "USDT",
+        name: "USDT - Tether",
+    },*/
+    /*{
+        id: "PAX",
+        name: "PAX - Paxos",
+    },*/
 ];
 
 const eventAction = [
@@ -96,6 +91,10 @@ const eventAction = [
         name: "Deposit",
     },
     {
+        id: "Withdraw",
+        name: "Withdraw",
+    },
+    {
         id: "Borrow",
         name: "Borrow",
     },
@@ -104,8 +103,8 @@ const eventAction = [
         name: "Repay",
     },
     {
-        id: "Withdraw",
-        name: "Withdraw",
+        id: "Liquidate",
+        name: "Liquidate",
     },
 ];
 
@@ -119,12 +118,12 @@ const sortOptions = [
         label: "Oldest",
     },
     {
-        value: "highvalue|desc",
-        label: "Highest Value",
+        value: "highamount|desc",
+        label: "Highest Amount",
     },
     {
-        value: "lowvalue|asc",
-        label: "Lowest Value",
+        value: "lowamount|asc",
+        label: "Lowest Amount",
     },
 ];
 
@@ -135,8 +134,8 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
     const [page, setPage] = React.useState(0);
     const [txtListData, setTxtListData] = React.useState([]);
     const [values, setValues] = useState({
-        asset: "",
-        action: "",
+        symbol: "",
+        topic: "",
         sortBy: "",
     });
 
@@ -144,75 +143,44 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
     const filterData = useCallback(() => {
         let data = JSON.parse(JSON.stringify(txList));
         if (values.asset && values.asset !== "ALL") {
-            data = data.filter((item) => item.tokenSymbol === values.asset);
+            data = data.filter((item) => item.symbol === values.asset);
         }
         if (values.action && values.action !== "All") {
             data = data.filter((item) => {
-                return (
-                    checkAction(
-                        address,
-                        item.to,
-                        item.from,
-                        formatNumber(item.value, item.tokenSymbol)
-                    ) === values.action
-                );
+                return item.topic === values.action;
             });
         }
-        if (values.sortBy) {
-            switch (values.sortBy) {
-                case "lowvalue|asc":
-                    data = data.sort(
-                        (a, b) =>
-                            parseFloat(
-                                formatNumber(a.value, a.tokenSymbol).replace(
-                                    /\D/g,
-                                    ""
-                                )
-                            ) -
-                            parseFloat(
-                                formatNumber(b.value, b.tokenSymbol).replace(
-                                    /\D/g,
-                                    ""
-                                )
-                            )
-                    );
-                    break;
-                case "highvalue|desc":
-                    data = data.sort(
-                        (a, b) =>
-                            parseFloat(
-                                formatNumber(b.value, b.tokenSymbol).replace(
-                                    /\D/g,
-                                    ""
-                                )
-                            ) -
-                            parseFloat(
-                                formatNumber(a.value, a.tokenSymbol).replace(
-                                    /\D/g,
-                                    ""
-                                )
-                            )
-                    );
-                    break;
-                case "latest|desc":
-                    data = data.sort(
-                        (a, b) =>
-                            parseFloat(b.timeStamp) - parseFloat(a.timeStamp)
-                    );
-                    break;
-                case "oldest|asc":
-                    data = data.sort(
-                        (a, b) =>
-                            parseFloat(a.timeStamp) - parseFloat(b.timeStamp)
-                    );
-                    break;
-                default:
-            }
+
+        switch (values.sortBy) {
+            case "lowamount|asc":
+                data = data.sort(
+                    (a, b) => parseFloat(a.amount) - parseFloat(b.amount)
+                );
+                break;
+            case "highamount|desc":
+                data = data.sort(
+                    (a, b) => parseFloat(b.amount) - parseFloat(a.amount)
+                );
+                break;
+            case "latest|desc":
+                data = data.sort(
+                    (a, b) => parseFloat(b.timestamp) - parseFloat(a.timestamp)
+                );
+                break;
+            case "oldest|asc":
+                data = data.sort(
+                    (a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp)
+                );
+                break;
+            default:
+                data = data.sort(
+                    (a, b) => parseFloat(b.timestamp) - parseFloat(a.timestamp)
+                );
         }
 
         setPage(0);
         setTxtListData(data);
-    }, [address, txList, values.action, values.asset, values.sortBy]);
+    }, [txList, values.asset, values.action, values.sortBy]);
 
     React.useEffect(() => {
         filterData();
@@ -324,7 +292,7 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
                         </HistoryTableCell>
                         <HistoryTableCell className="px-0">
                             <Typography variant="body2" color="textSecondary">
-                                Value
+                                Balance
                             </Typography>
                         </HistoryTableCell>
                         <HistoryTableCell className="px-0" align="right">
@@ -350,7 +318,7 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {toDate(item.timeStamp)}
+                                        {item.date}
                                     </Typography>
                                 </HistoryTableCell>
                                 <HistoryTableCell
@@ -361,15 +329,7 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {checkAction(
-                                            address,
-                                            item.to,
-                                            item.from,
-                                            formatNumber(
-                                                item.value,
-                                                item.tokenSymbol
-                                            )
-                                        )}
+                                        {item.topic}
                                     </Typography>
                                 </HistoryTableCell>
                                 <HistoryTableCell
@@ -380,7 +340,7 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {item.tokenName}
+                                        {item.name}
                                     </Typography>
                                 </HistoryTableCell>
                                 <HistoryTableCell
@@ -389,8 +349,8 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
                                 >
                                     <img
                                         className={classes.imageSize}
-                                        src={getTokenIcon(item.tokenSymbol)}
-                                        alt={item.tokenName}
+                                        src={getTokenIcon(item.symbol)}
+                                        alt={item.name}
                                     />
                                 </HistoryTableCell>
                                 <HistoryTableCell
@@ -401,10 +361,7 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(
-                                            item.value,
-                                            item.tokenSymbol
-                                        )}
+                                        {item.amount}
                                     </Typography>
                                 </HistoryTableCell>
                                 <HistoryTableCell
@@ -415,14 +372,17 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        $
+                                        {item.newBalance}
                                     </Typography>
                                 </HistoryTableCell>
                                 <HistoryTableCell
                                     className="px-0 capitalize"
                                     align="right"
                                 >
-                                    <IconButton href={openEtherScan(item.hash)}>
+                                    <IconButton
+                                        href={openEtherScan(item.txHash)}
+                                        target="_blank"
+                                    >
                                         <SvgIcon fontSize="small">
                                             <LinkIcon />
                                         </SvgIcon>

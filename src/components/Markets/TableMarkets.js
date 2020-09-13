@@ -23,17 +23,18 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Section 3: Components & Containers import from the application
 
-import { format_str_to_kmb, format_str_to_percent } from "utils/markets";
+import { format_str_to_kmb, format_str_to_percent } from "utils/ui";
 
 import MarketsTableCell from "components/UI/TableCell";
 
 // tokens icons
 import WETH from "assets/images/WETH.svg";
-import USDT from "assets/images/USDT.svg";
 import WBTC from "assets/images/WBTC.svg";
 import DAI from "assets/images/DAI.svg";
 import USDC from "assets/images/USDC.svg";
-import PAX from "assets/images/pax.png";
+
+//import PAX from "assets/images/pax.png";
+//import USDT from "assets/images/USDT.svg";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -61,16 +62,17 @@ const TableMarkets = ({ marketsData }) => {
 
     const tokens = {
         WETH: WETH,
-        USDT: USDT,
         USDC: USDC,
-        PAX: PAX,
         WBTC: WBTC,
         DAI: DAI,
+
+        //USDT: USDT,
+        //PAX: PAX,
     };
 
     return (
         <Card>
-            <CardHeader title="MArket Liquidity" className={classes.header} />
+            <CardHeader title="Market Liquidity" className={classes.header} />
             <Divider />
             <PerfectScrollbar>
                 <TableContainer component={Paper}>
