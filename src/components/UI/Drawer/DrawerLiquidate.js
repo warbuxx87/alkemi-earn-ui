@@ -438,7 +438,7 @@ const DrawerLiquidateWrapper = ({
                     <Box px={2} className={classes.amount}>
                         <Box pb={1}>
                             <Typography variant="body1" color="textPrimary">
-                                Amount
+                                Amount (What you Pay)
                             </Typography>
                         </Box>
                         <Box className={classes.inputWrap}>
@@ -480,7 +480,7 @@ const DrawerLiquidateWrapper = ({
                                     color="textPrimary"
                                     className={classes.subtitle}
                                 >
-                                    Collateral (Receive Asset)
+                                    Collateral (What you Receive)
                                 </Typography>
                             </Box>
                             <Select
