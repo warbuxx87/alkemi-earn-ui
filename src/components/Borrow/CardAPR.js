@@ -41,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 20,
         padding: theme.spacing(0, 1),
         textTransform: "uppercase",
-        color: theme.palette.error.main,
-        backgroundColor: fade(theme.palette.error.main, 0.08),
+        color: theme.palette.warning.main,
+        backgroundColor: fade(theme.palette.warning.main, 0.08),
     },
     item: {
         textAlign: "center",
