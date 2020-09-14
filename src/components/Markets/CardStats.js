@@ -43,6 +43,9 @@ const useStyles = (theme) => ({
         height: 8,
         borderRadius: 5,
         background: "rgb(255 254 254 / 10%)",
+        "& .MuiLinearProgress-barColorPrimary": {
+            background: theme.palette.warning.main,
+        },
     },
     assetIcon: {
         width: 22,
@@ -112,7 +115,6 @@ class Stats extends React.Component {
                         <LinearProgress
                             className={classes.progressBorrows}
                             value={Number(this.props.percentage_borrow)}
-                            color="secondary"
                             variant="determinate"
                         />
                     )}
