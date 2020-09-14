@@ -1,0 +1,177 @@
+// Section 1: Utilities imports and low level imports
+
+import _ from "lodash";
+
+const url_map = require("constants/url_map.json");
+
+// Section 2: Action types declarations and action creators
+
+//                                      //
+// ------------ MARKETS ACTIONS -------- //
+//                                      //
+
+// Declare action type as a constant
+export const FETCH_MARKETS_PENDING = "FETCH_MARKETS_PENDING";
+
+// Declare action creator
+const fetchMarketsPending = () => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: FETCH_MARKETS_PENDING,
+});
+
+// Declare action type as a constant
+export const FETCH_MARKETS_SUCCESS = "FETCH_MARKETS_SUCCESS";
+
+// Declare action creator
+const fetchMarketsSuccess = (markets) => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: FETCH_MARKETS_SUCCESS,
+    payload: {
+        markets,
+    },
+});
+
+// Declare action type as a constant
+export const FETCH_MARKETS_ERROR = "FETCH_MARKETS_ERROR";
+
+// Declare action creator
+const fetchMarketsError = (error) => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: FETCH_MARKETS_ERROR,
+    payload: new Error(),
+    error: true,
+});
+
+//                                               //
+// ------------ MARKETS METHOD ACTIONS --------   //
+//                                               //
+
+const fetchMarketsCall = ({ currentNetworkName, address, dispatch }) => {
+    /*if (!url_map[currentNetworkName].markets_url) return;
+
+    dispatch(fetchMarketsPending());
+
+    fetch(url_map[currentNetworkName].markets_url)
+        .then((res) => {
+            return res.text();
+        })
+        .then((data) => {
+            if (data) {
+                const obj_data = JSON.parse(data);
+
+                const marketsData = obj_data.find((market) =>
+                    Object.prototype.hasOwnProperty.call(market, address)
+                );
+
+                dispatch(
+                    fetchMarketsSuccess(
+                        marketsData[address].oracleMarkets.slice(0, -12)
+                    )
+                ); // TODO: USDC decimals should be only 6 but returns 12 zeros
+            }
+        })
+        .catch((error) => {
+            dispatch(fetchMarketsError(error.message));
+        });*/
+    /*
+    if (!url_map[currentNetworkName].markets_url) return;
+    
+    dispatch(fetchMarketsPending());
+
+    const markets_api = url_map[currentNetworkName].markets_url;
+
+    fetch(markets_api)
+        .then((res) => {
+            return res.text();
+        })
+        .then((data) => {
+            if (data) {
+                let obj_data = JSON.parse(data);
+
+                let key_markets = Object.keys(obj_data);
+
+                const arr_markets = key_markets.map((e) => {
+                    return obj_data[e];
+                });
+
+                let totalSupplyBalanceUSD = 0;
+                let totalBorrowBalanceUSD = 0;
+
+                const arr_items = arr_markets.map((market) => {
+                    let key_items = Object.values(market);
+
+                    let asset = key_items[0];
+
+                    totalSupplyBalanceUSD += parseFloat(
+                        asset.totalSupplyUSD
+                    );
+                    totalBorrowBalanceUSD += parseFloat(
+                        asset.totalBorrowUSD
+                    );
+
+                    return asset;
+                });
+
+                let totalCollateralRatio =
+                    (totalSupplyBalanceUSD / totalBorrowBalanceUSD) *
+                    100;
+
+                let totals = {};
+
+                totals.totalSupplyBalanceUSD = totalSupplyBalanceUSD.toFixed(
+                    2
+                );
+                totals.totalBorrowBalanceUSD = totalBorrowBalanceUSD.toFixed(
+                    2
+                );
+                totals.totalCollateralRatio = totalCollateralRatio.toFixed(
+                    2
+                );
+
+                setMarketsData(arr_items);
+
+                let supply_array = _.cloneDeep(arr_items);
+                let borrow_array = _.cloneDeep(arr_items);
+
+                supply_array.sort(compare_supply);
+                borrow_array.sort(compare_borrow);
+
+                supply_array = supply_array.map((e) => {
+                    e.percentage_supply = Number(
+                        (e.totalSupplyUSD /
+                            totals.totalSupplyBalanceUSD) *
+                            100
+                    ).toFixed(1);
+
+                    return e;
+                });
+
+                borrow_array = borrow_array.map((e) => {
+                    e.percentage_borrow = Number(
+                        (e.totalBorrowUSD /
+                            totals.totalBorrowBalanceUSD) *
+                            100
+                    ).toFixed(1);
+
+                    return e;
+                });
+
+                setSupplyArray(supply_array);
+                setBorrowArray(borrow_array);
+                setCalculationsTotals(totals);
+            }
+        });*/
+};
+
+// This call may be fetched from multiple containers but only executes once every 15 seconds
+const throttledFetchMarkets = _.throttle(fetchMarketsCall, 15 * 1000, {
+    trailing: false,
+});
+
+// Section 3: Action dispatch methods and async funcs
+
+export const fetchMarkets = ({ currentNetworkName, address }) => async (
+    dispatch
+) => {
+    throttledFetchMarkets({ currentNetworkName, address, dispatch });
+};

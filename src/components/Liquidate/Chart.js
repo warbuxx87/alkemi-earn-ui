@@ -62,7 +62,7 @@ export default function LiquidationChart({ borrowList }) {
         series: [],
         type: "donut",
         width: "100%",
-        height: 60,
+        height: 55,
     });
 
     // format data for display (could be moved to container)

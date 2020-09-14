@@ -13,9 +13,12 @@ import {
     IconButton,
     Input,
     Grid,
+    MenuItem,
+    Select,
     SvgIcon,
     Typography,
     Radio,
+    InputAdornment,
 } from "@material-ui/core";
 
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -31,16 +34,6 @@ import { getTokenIcon } from "utils/ui";
 const DrawerLiquidateClass = makeStyles(
     (theme) =>
         createStyles({
-            supplyPercent: {
-                letterSpacing: "0px",
-                color: "#00A577",
-                opacity: 1,
-                fontSize: "28px",
-                fontWeight: "500",
-                textAlign: "center",
-                // backgroundColor:'#1B1B1B',
-                padding: "25px 0",
-            },
             drawer: {
                 width: "100%",
                 "@media (min-width: 780px)": {
@@ -67,15 +60,33 @@ const DrawerLiquidateClass = makeStyles(
             input: {
                 background: "#1B1B1B 0% 0% no-repeat padding-box",
                 border: "1px solid #000000",
+                borderRadius: "4px",
                 opacity: 1,
-                height: "54px",
+                height: "50px",
                 paddingLeft: "10px",
                 color: "white",
-                fontSize: "18px",
+                fontSize: "16px",
+                "& .MuiInputBase-input": {
+                    padding: "6px 0 6px",
+                },
             },
-            amount: {
+            select: {
+                background: "#1B1B1B 0% 0% no-repeat padding-box",
+                border: "1px solid #000000",
+                borderRadius: "4px",
+                opacity: 1,
+                height: "50px",
                 color: "white",
-                paddingBottom: "14px",
+                fontSize: "16px",
+                "& .MuiSelect-selectMenu": {
+                    padding: "6px 10px",
+                },
+                "& .MuiSelect-select:focus": {
+                    background: "none",
+                },
+                "& .MuiSelect-icon": {
+                    right: "10px",
+                },
             },
             rateInfo: {
                 color: "white",
@@ -86,24 +97,23 @@ const DrawerLiquidateClass = makeStyles(
                 padding: "12px 0",
                 borderBottom: "1px dashed #a7a7a7",
             },
-            walletBalance: {
-                color: "#a7a7a7",
-            },
-            title: {
+            cardTitle: {
                 fontSize: "16px",
                 marginTop: "0px",
-                marginBottom: "0px",
+                marginBottom: "3px",
+                fontWeight: 500,
             },
-            subtitle: {
+            cardSubtitle: {
                 fontSize: "12px",
+                color: "#979797",
                 margin: "0px",
-                fontWeight: "300",
+                fontWeight: "400",
             },
             wrapperRadio: {
                 padding: "10px",
                 border: "1px solid #000000",
                 borderRadius: "4px",
-                marginBottom: "10px",
+                marginBottom: "12px",
                 "&:hover": {
                     border: "1px solid rgba(240, 240, 240, 0.3)",
                     cursor: "pointer",
@@ -127,6 +137,26 @@ const DrawerLiquidateClass = makeStyles(
                 marginBottom: "5px",
                 textTransform: "none",
             },
+            bonusBox: {
+                paddingTop: 3,
+            },
+            assetImg: {
+                marginRight: "12px",
+                width: "25px",
+                height: "25px",
+                paddingTop: "3px",
+            },
+            inputIcon: {
+                width: "25px",
+                height: "25px",
+                marginRight: "4px",
+            },
+            vertCent: {
+                margin: "auto",
+            },
+            amount: {
+                paddingTop: "20px",
+            },
         }),
     {
         name: "drawerLiquidate",
@@ -135,9 +165,10 @@ const DrawerLiquidateClass = makeStyles(
 );
 
 const DrawerLiquidateWrapper = ({
+    loanList,
+    collateralAssetList,
+
     buttonsLabel,
-    supplyList,
-    borrowList,
 
     shortfallETH,
     onButtonClick,
@@ -150,10 +181,12 @@ const DrawerLiquidateWrapper = ({
     enableButtonClick,
     isDoingAction,
 
-    selectedSupplyAsset,
-    setSelectedSupplyAsset,
-    selectedBorrowAsset,
-    setSelectedBorrowAsset,
+    selectedLoanAsset,
+    setSelectedLoanAsset,
+    selectedCollateralAsset,
+    setSelectedCollateralAsset,
+
+    marketsData,
 }) => {
     const classes = DrawerLiquidateClass();
 
@@ -168,47 +201,59 @@ const DrawerLiquidateWrapper = ({
         setOpen(false);
     };
 
+    const [selectedLoanAssetData, setSelectedLoanAssetData] = React.useState(
+        {}
+    );
     const [
-        selectedSupplyAssetData,
-        setSelectedSupplyAssetData,
-    ] = React.useState({});
-    const [
-        selectedBorrowAssetData,
-        setSelectedBorrowAssetData,
+        selectedCollateralAssetData,
+        setSelectedCollateralAssetData,
     ] = React.useState({});
 
     const handleChooseSupplyCoin = useCallback(
         (val) => {
             if (!val) return;
 
-            setSelectedSupplyAsset(val.symbol);
-            setSelectedSupplyAssetData(val);
+            setSelectedLoanAsset(val.symbol);
+            setSelectedLoanAssetData(val);
         },
-        [setSelectedSupplyAsset, setSelectedSupplyAssetData]
+        [setSelectedLoanAsset, setSelectedLoanAssetData]
     );
 
     const handleChooseBorrowCoin = useCallback(
         (val) => {
             if (!val) return;
 
-            setSelectedBorrowAsset(val.symbol);
-            setSelectedBorrowAssetData(val);
+            setSelectedCollateralAsset(val);
+
+            const assetFromcollateralAssetList = collateralAssetList.find(
+                (e) => e.symbol === val
+            );
+
+            setSelectedCollateralAssetData(assetFromcollateralAssetList);
         },
-        [setSelectedBorrowAsset, setSelectedBorrowAssetData]
+        [
+            setSelectedCollateralAsset,
+            setSelectedCollateralAssetData,
+            collateralAssetList,
+        ]
     );
+    const handleChangeDropdownBorrow = (event) => {
+        handleChooseBorrowCoin(event.target.value);
+    };
 
     // Choose first entry by default on load/data change
     useEffect(() => {
-        if (supplyList.length > 0) {
-            handleChooseSupplyCoin(supplyList[0]);
+        if (loanList.length > 0) {
+            handleChooseSupplyCoin(loanList[0]);
         }
-    }, [supplyList, handleChooseSupplyCoin]);
+    }, [loanList, handleChooseSupplyCoin]);
 
     useEffect(() => {
-        if (borrowList.length > 0) handleChooseBorrowCoin(borrowList[0]);
-    }, [borrowList, handleChooseBorrowCoin]);
+        if (collateralAssetList.length > 0)
+            handleChooseBorrowCoin(collateralAssetList[0].symbol);
+    }, [collateralAssetList, handleChooseBorrowCoin]);
 
-    const displayAssets = ({
+    const displayAssetsRadio = ({
         list,
         selectedAsset,
         handleChooseCoin,
@@ -240,11 +285,21 @@ const DrawerLiquidateWrapper = ({
                                 className={classes.mr15}
                             />
                             <Grid>
-                                <h3 className={classes.title}>
-                                    {val.amountToken} {val.symbol}
+                                <h3 className={classes.cardTitle}>
+                                    {displayMaxAmountOfTokensForEachLoan(
+                                        val.symbol
+                                    ).toFixed(6)}{" "}
+                                    {val.symbol}
                                 </h3>
-                                <h5 className={classes.subtitle}>
-                                    ${val.valueUSD}
+                                <h5 className={classes.cardSubtitle}>
+                                    $
+                                    {
+                                        displayMaxAmountOfTokensForEachLoan(
+                                            "USDC"
+                                        ).toFixed(
+                                            2
+                                        ) /* using USDC calculation now for USD value */
+                                    }
                                 </h5>
                             </Grid>
                         </Grid>
@@ -254,25 +309,115 @@ const DrawerLiquidateWrapper = ({
                                 value={val.symbol}
                                 name="radio-button"
                                 className={classes.styleRadio}
+                                size="small"
                             />
                             {showDiscount && (
-                                <div>
+                                <Box className={classes.bonusBox}>
                                     <span>10% </span>
                                     <span
                                         style={{
-                                            opacity: "0.5",
+                                            color: "#a7a7a7",
                                             textTransform: "none",
                                         }}
                                     >
-                                        Discount
+                                        Bonus
                                     </span>
-                                </div>
+                                </Box>
                             )}
                         </Grid>
                     </Grid>
                 ))}
             </>
         );
+    };
+
+    const displayAssetsDropdown = ({ list }) => {
+        return list.map((val) => (
+            <MenuItem key={val.symbol} value={val.symbol}>
+                <Box display="flex" alignItems="center">
+                    <Box>
+                        <img
+                            src={getTokenIcon(val.symbol)}
+                            alt="asset"
+                            className={classes.assetImg}
+                        />{" "}
+                    </Box>
+                    <Box> {val.symbol}</Box>
+                </Box>
+            </MenuItem>
+        ));
+    };
+
+    const displayMaxAmountOfTokensForEachLoan = (symbol) => {
+        const assetMarketDataForSymbol = marketsData.find(
+            (e) => e.symbol === symbol
+        );
+
+        // shortFallETH / token Oracle Price
+        let calculatedValue = 0;
+
+        if (
+            assetMarketDataForSymbol !== undefined &&
+            assetMarketDataForSymbol &&
+            shortfallETH
+        )
+            calculatedValue =
+                shortfallETH / assetMarketDataForSymbol.oraclePrice;
+
+        return calculatedValue;
+    };
+
+    const getPercentage = (theValue, appliedPercentage) => {
+        return theValue * appliedPercentage;
+    };
+
+    const displayPayAmountofTokensforInput = (amount) => {
+        let youPay = 0;
+        if (amount) {
+            youPay = parseFloat(amount);
+        }
+        if (amount === -1) {
+            youPay = displayMaxAmountOfTokensForEachLoan(selectedLoanAsset);
+        }
+        return youPay.toFixed(6);
+    };
+
+    const displayReceiveAmountOfTokensForInput = (pay, receive) => {
+        // get Pay Asset Oracle Price
+        const assetMarketDataForPay = marketsData.find((e) => e.symbol === pay);
+
+        // get Receive Asset Oracle Price
+        const assetMarketDataForReceive = marketsData.find(
+            (e) => e.symbol === receive
+        );
+
+        let calculatedValue = 0;
+
+        if (
+            assetMarketDataForPay !== undefined &&
+            assetMarketDataForPay &&
+            assetMarketDataForReceive !== undefined &&
+            assetMarketDataForReceive
+        ) {
+            let payAmount = amount;
+
+            // if User Amount is Max
+            if (amount === -1) {
+                payAmount = displayMaxAmountOfTokensForEachLoan(
+                    selectedLoanAsset
+                );
+            }
+
+            // gets ETH amount for in put tokens
+            // inputAmount * loan token Oracle Price = Input ETH amount
+            calculatedValue = payAmount * assetMarketDataForPay.oraclePrice;
+
+            // ReceiveTokenAmount = Input ETH Amount / collateral token Oracle Price
+            calculatedValue =
+                calculatedValue / assetMarketDataForReceive.oraclePrice;
+
+            return calculatedValue.toFixed(6);
+        }
     };
 
     // Section 5: Code Component
@@ -313,37 +458,39 @@ const DrawerLiquidateWrapper = ({
                     </Box>
                     <Divider />
 
-                    <Box pt={5} p={2}>
+                    {/*  <Box pt={5} p={2}>
                         <Grid container className={classes.amount}>
                             Outstanding Loans
                         </Grid>
-                        {displayAssets({
-                            list: borrowList,
-                            selectedAsset: selectedBorrowAsset,
+                        {displayAssetsRadio({
+                            list: collateralAssetList,
+                            selectedAsset: selectedCollateralAsset,
                             handleChooseCoin: handleChooseBorrowCoin,
+                            showDiscount: false,
+                        })}
+                    </Box>*/}
+
+                    <Box pt={5} px={2}>
+                        <Box pb={1}>
+                            <Typography variant="body1" color="textPrimary">
+                                Outstanding Loan
+                            </Typography>
+                        </Box>
+                        {displayAssetsRadio({
+                            list: loanList,
+                            selectedAsset: selectedLoanAsset,
+                            handleChooseCoin: handleChooseSupplyCoin,
                             showDiscount: false,
                         })}
                     </Box>
 
-                    <Box pt={5} p={2}>
-                        <Grid container className={classes.amount}>
-                            Available Collateral
-                        </Grid>
-                        {displayAssets({
-                            list: supplyList,
-                            selectedAsset: selectedSupplyAsset,
-                            handleChooseCoin: handleChooseSupplyCoin,
-                            showDiscount: true,
-                        })}
-                    </Box>
-
-                    <Box p={2}>
-                        <Grid container className={classes.amount}>
-                            <Grid item md={6} xs>
-                                Amount
-                            </Grid>
-                        </Grid>
-                        <div className={classes.inputWrap}>
+                    <Box px={2} className={classes.amount}>
+                        <Box pb={1}>
+                            <Typography variant="body1" color="textPrimary">
+                                Amount (What you Pay)
+                            </Typography>
+                        </Box>
+                        <Box className={classes.inputWrap}>
                             <Input
                                 autoFocus={true}
                                 disableUnderline={true}
@@ -354,18 +501,67 @@ const DrawerLiquidateWrapper = ({
                                 value={amount < 0 ? "LIQUIDATE ALL" : amount}
                                 fullWidth={true}
                                 disabled={amount < 0}
+                                id="input-with-icon-adornment"
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <img
+                                            src={getTokenIcon(
+                                                selectedLoanAsset
+                                            )}
+                                            alt="asset"
+                                            className={classes.inputIcon}
+                                        />
+                                    </InputAdornment>
+                                }
                             />
+
                             <span
                                 className={classes.maxTips}
                                 onClick={amount < 0 ? onResetAmount : onSetMax}
                             >
                                 {amount < 0 ? "CHANGE" : "MAX"}
                             </span>
-                        </div>
+                        </Box>
+                        <Box className={classes.inputWrap} pt={2}>
+                            <Box pb={1}>
+                                <Typography
+                                    variant="body1"
+                                    color="textPrimary"
+                                    className={classes.subtitle}
+                                >
+                                    Collateral (What you Receive)
+                                </Typography>
+                            </Box>
+                            <Select
+                                className={classes.select}
+                                labelId="receive-asset"
+                                id="receive-asset"
+                                value={selectedCollateralAsset}
+                                onChange={handleChangeDropdownBorrow}
+                                label="Asset"
+                                fullWidth={true}
+                                autoFocus={true}
+                                disableUnderline={true}
+                            >
+                                {displayAssetsDropdown({
+                                    list: collateralAssetList,
+                                })}
+                            </Select>
+                        </Box>
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
-                                    Debt to cover
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        You Pay
+                                    </Typography>
                                 </Grid>
                                 <Grid
                                     item
@@ -374,41 +570,98 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {shortfallETH.toFixed(6)} ETH
+                                    {displayPayAmountofTokensforInput(amount)}{" "}
+                                    {selectedLoanAsset}
                                 </Grid>
                             </Grid>
 
-                            {/*<Grid container className={classes.rateRow}>
-                                        <Grid item md={6} xs>
-                                            Price
-                                        </Grid>
-                                        <Grid
-                                            item
-                                            md={6}
-                                            xs
-                                            container
-                                            justify="flex-end"
-                                        >
-                                            {selectedSupplyAssetData.discountValue | 0}{" "}
-                                            {selectedSupplyAssetData.symbol}
-                                        </Grid>
-                                    </Grid>
-                                    <Grid container className={classes.rateRow}>
-                                        <Grid item md={6} xs>
-                                            Balance
-                                        </Grid>
-                                        <Grid
-                                            item
-                                            md={6}
-                                            xs
-                                            container
-                                            justify="flex-end"
-                                        >
-                                            {selectedSupplyAssetData.receive | 0}{" "}
-                                            {selectedSupplyAssetData.symbol}
-                                        </Grid>
-                                    </Grid>
-                                */}
+                            <Grid container className={classes.rateRow}>
+                                <Grid item md={6} className={classes.vertCent}>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        You Receive
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    container
+                                    justify="flex-end"
+                                >
+                                    {displayReceiveAmountOfTokensForInput(
+                                        selectedLoanAsset,
+                                        selectedCollateralAsset
+                                    )}{" "}
+                                    {selectedCollateralAsset}
+                                </Grid>
+                            </Grid>
+
+                            <Grid container className={classes.rateRow}>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Bonus
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    container
+                                    justify="flex-end"
+                                >
+                                    {getPercentage(
+                                        displayReceiveAmountOfTokensForInput(
+                                            selectedLoanAsset,
+                                            selectedCollateralAsset
+                                        ),
+                                        0.1
+                                    ).toFixed(6)}{" "}
+                                    {selectedCollateralAsset}
+                                </Grid>
+                            </Grid>
+
+                            <Grid container className={classes.rateRow}>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Receive Total
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    container
+                                    justify="flex-end"
+                                >
+                                    {(
+                                        1.1 *
+                                        displayReceiveAmountOfTokensForInput(
+                                            selectedLoanAsset,
+                                            selectedCollateralAsset
+                                        )
+                                    ).toFixed(6)}{" "}
+                                    {selectedCollateralAsset}
+                                </Grid>
+                            </Grid>
                         </Grid>
                         <Box className={classes.sendButtonDiv} mt={4}>
                             <Button
@@ -419,11 +672,11 @@ const DrawerLiquidateWrapper = ({
                                 onClick={() => {
                                     onButtonClick({
                                         assetCollateral:
-                                            selectedSupplyAssetData.asset,
+                                            selectedCollateralAssetData.asset,
                                         assetBorrow:
-                                            selectedBorrowAssetData.asset,
+                                            selectedLoanAssetData.asset,
 
-                                        symbol: selectedSupplyAssetData.symbol,
+                                        symbol: selectedLoanAsset,
                                     });
                                     handleClose();
                                 }}
@@ -444,7 +697,7 @@ const DrawerLiquidateWrapper = ({
 // Section 6: Documentation with PropTypes
 DrawerLiquidateWrapper.propTypes = {
     buttonsLabel: PropTypes.string.isRequired,
-    supplyList: PropTypes.array.isRequired,
+    loanList: PropTypes.array.isRequired,
 };
 
 // Section 7:  Connect styles and export
