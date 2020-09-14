@@ -34,16 +34,6 @@ import { getTokenIcon } from "utils/ui";
 const DrawerLiquidateClass = makeStyles(
     (theme) =>
         createStyles({
-            supplyPercent: {
-                letterSpacing: "0px",
-                color: "#00A577",
-                opacity: 1,
-                fontSize: "28px",
-                fontWeight: "500",
-                textAlign: "center",
-                // backgroundColor:'#1B1B1B',
-                padding: "25px 0",
-            },
             drawer: {
                 width: "100%",
                 "@media (min-width: 780px)": {
@@ -98,10 +88,6 @@ const DrawerLiquidateClass = makeStyles(
                     right: "10px",
                 },
             },
-            subtitle: {
-                paddingBottom: "12px",
-                fontWeight: 500,
-            },
             rateInfo: {
                 color: "white",
                 fontSize: "14px",
@@ -114,7 +100,7 @@ const DrawerLiquidateClass = makeStyles(
             cardTitle: {
                 fontSize: "16px",
                 marginTop: "0px",
-                marginBottom: "0px",
+                marginBottom: "3px",
                 fontWeight: 500,
             },
             cardSubtitle: {
@@ -127,7 +113,7 @@ const DrawerLiquidateClass = makeStyles(
                 padding: "10px",
                 border: "1px solid #000000",
                 borderRadius: "4px",
-                marginBottom: "10px",
+                marginBottom: "12px",
                 "&:hover": {
                     border: "1px solid rgba(240, 240, 240, 0.3)",
                     cursor: "pointer",
@@ -151,6 +137,9 @@ const DrawerLiquidateClass = makeStyles(
                 marginBottom: "5px",
                 textTransform: "none",
             },
+            bonusBox: {
+                paddingTop: 3,
+            },
             assetImg: {
                 marginRight: "12px",
                 width: "25px",
@@ -161,6 +150,12 @@ const DrawerLiquidateClass = makeStyles(
                 width: "25px",
                 height: "25px",
                 marginRight: "4px",
+            },
+            vertCent: {
+                margin: "auto",
+            },
+            amount: {
+                paddingTop: "20px",
             },
         }),
     {
@@ -290,7 +285,7 @@ const DrawerLiquidateWrapper = ({
                                 <h3 className={classes.cardTitle}>
                                     {displayMaxAmountOfTokensForEachLoan(
                                         val.symbol
-                                    )}{" "}
+                                    ).toFixed(6)}{" "}
                                     {val.symbol}
                                 </h3>
                                 <h5 className={classes.cardSubtitle}>
@@ -311,13 +306,14 @@ const DrawerLiquidateWrapper = ({
                                 value={val.symbol}
                                 name="radio-button"
                                 className={classes.styleRadio}
+                                size="small"
                             />
                             {showDiscount && (
-                                <Box>
+                                <Box className={classes.bonusBox}>
                                     <span>10% </span>
                                     <span
                                         style={{
-                                            opacity: "1",
+                                            color: "#a7a7a7",
                                             textTransform: "none",
                                         }}
                                     >
@@ -422,14 +418,12 @@ const DrawerLiquidateWrapper = ({
                         })}
                     </Box>*/}
 
-                    <Box pt={5} p={2}>
-                        <Typography
-                            variant="body1"
-                            color="textSecondary"
-                            className={classes.subtitle}
-                        >
-                            Available Collateral
-                        </Typography>
+                    <Box pt={5} px={2}>
+                        <Box pb={1}>
+                            <Typography variant="body1" color="textPrimary">
+                                Available Collateral
+                            </Typography>
+                        </Box>
                         {displayAssetsRadio({
                             list: collateralList,
                             selectedAsset: selectedCollateralAsset,
@@ -438,14 +432,12 @@ const DrawerLiquidateWrapper = ({
                         })}
                     </Box>
 
-                    <Box p={2}>
-                        <Typography
-                            variant="body1"
-                            color="textSecondary"
-                            className={classes.subtitle}
-                        >
-                            Amount
-                        </Typography>
+                    <Box px={2} className={classes.amount}>
+                        <Box pb={1}>
+                            <Typography variant="body1" color="textPrimary">
+                                Amount
+                            </Typography>
+                        </Box>
                         <Box className={classes.inputWrap}>
                             <Input
                                 autoFocus={true}
@@ -479,13 +471,15 @@ const DrawerLiquidateWrapper = ({
                             </span>
                         </Box>
                         <Box className={classes.inputWrap} pt={2}>
-                            <Typography
-                                variant="body1"
-                                color="textSecondary"
-                                className={classes.subtitle}
-                            >
-                                Receive Asset
-                            </Typography>
+                            <Box pb={1}>
+                                <Typography
+                                    variant="body1"
+                                    color="textPrimary"
+                                    className={classes.subtitle}
+                                >
+                                    Receive Asset
+                                </Typography>
+                            </Box>
                             <Select
                                 className={classes.select}
                                 labelId="receive-asset"
@@ -504,9 +498,14 @@ const DrawerLiquidateWrapper = ({
                         </Box>
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
                                     <Typography
-                                        variant="body1"
+                                        variant="body2"
                                         color="textSecondary"
                                     >
                                         Covering Debt
@@ -524,9 +523,14 @@ const DrawerLiquidateWrapper = ({
                             </Grid>
 
                             <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
                                     <Typography
-                                        variant="body1"
+                                        variant="body2"
                                         color="textSecondary"
                                     >
                                         Bonus
@@ -550,9 +554,9 @@ const DrawerLiquidateWrapper = ({
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
+                                <Grid item md={6} className={classes.vertCent}>
                                     <Typography
-                                        variant="body1"
+                                        variant="body2"
                                         color="textSecondary"
                                     >
                                         Receive Total
