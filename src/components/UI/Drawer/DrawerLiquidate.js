@@ -586,12 +586,10 @@ const DrawerLiquidateWrapper = ({
                                 color="primary"
                                 onClick={() => {
                                     onButtonClick({
-                                        assetCollateral:
-                                            selectedLoanAssetData.asset,
-                                        assetBorrow:
-                                            selectedCollateralAssetData.asset,
+                                        assetCollateral: selectedCollateralAsset,
+                                        assetBorrow: selectedLoanAsset,
 
-                                        symbol: selectedLoanAssetData.symbol,
+                                        symbol: selectedLoanAsset,
                                     });
                                     handleClose();
                                 }}
