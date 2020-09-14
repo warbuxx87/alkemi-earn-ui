@@ -6,7 +6,7 @@ import Markets from "components/Markets/Markets";
 
 import useFetchMarkets from "hooks/useFetchMarkets";
 
-import { format_str_to_kmb } from "utils/markets";
+import { format_str_to_kmb } from "utils/ui";
 
 // Section 3: Selectors
 
