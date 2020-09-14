@@ -511,7 +511,7 @@ const DrawerLiquidateWrapper = ({
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Covering Debt (You Pay)
+                                        You're Paying
                                     </Typography>
                                 </Grid>
                                 <Grid
@@ -534,7 +534,7 @@ const DrawerLiquidateWrapper = ({
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Receive Total
+                                        You Receive
                                     </Typography>
                                 </Grid>
                                 <Grid
@@ -545,9 +545,9 @@ const DrawerLiquidateWrapper = ({
                                     justify="flex-end"
                                 >
                                     {displayMaxAmountOfTokensForEachLoan(
-                                        selectedLoanAsset
+                                        selectedCollateralAsset
                                     ).toFixed(6)}{" "}
-                                    {selectedLoanAsset}
+                                    {selectedCollateralAsset}
                                 </Grid>
                             </Grid>
 
@@ -574,11 +574,11 @@ const DrawerLiquidateWrapper = ({
                                 >
                                     {getPercentage(
                                         displayMaxAmountOfTokensForEachLoan(
-                                            selectedLoanAsset
+                                            selectedCollateralAsset
                                         ),
                                         0.1
                                     ).toFixed(6)}{" "}
-                                    {selectedLoanAsset}
+                                    {selectedCollateralAsset}
                                 </Grid>
                             </Grid>
                         </Grid>
