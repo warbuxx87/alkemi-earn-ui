@@ -190,6 +190,8 @@ const DrawerLiquidateWrapper = ({
     setSelectedCollateralAsset,
     selectedReceiveAsset,
     setSelectedReceiveAsset,
+
+    marketsData,
 }) => {
     const classes = DrawerLiquidateClass();
 
@@ -286,10 +288,20 @@ const DrawerLiquidateWrapper = ({
                             />
                             <Grid>
                                 <h3 className={classes.cardTitle}>
-                                    {val.amountToken} {val.symbol}
+                                    {displayMaxAmountOfTokensForEachLoan(
+                                        val.symbol
+                                    )}{" "}
+                                    {val.symbol}
                                 </h3>
                                 <h5 className={classes.cardSubtitle}>
-                                    ${val.valueUSD}
+                                    $
+                                    {
+                                        displayMaxAmountOfTokensForEachLoan(
+                                            "USDC"
+                                        ).toFixed(
+                                            2
+                                        ) /* using USDC calculation now for USD value */
+                                    }
                                 </h5>
                             </Grid>
                         </Grid>
@@ -335,6 +347,29 @@ const DrawerLiquidateWrapper = ({
                 </Box>
             </MenuItem>
         ));
+    };
+
+    const displayMaxAmountOfTokensForEachLoan = (symbol) => {
+        const assetMarketDataForSymbol = marketsData.find(
+            (e) => e.symbol === symbol
+        );
+
+        // shortFallETH / token Oracle Price
+        let calculatedValue = 0;
+
+        if (
+            assetMarketDataForSymbol !== undefined &&
+            assetMarketDataForSymbol &&
+            shortfallETH
+        )
+            calculatedValue =
+                shortfallETH / assetMarketDataForSymbol.oraclePrice;
+
+        return calculatedValue;
+    };
+
+    const getPercentage = (theValue, appliedPercentage) => {
+        return theValue * appliedPercentage;
     };
 
     // Section 5: Code Component
@@ -504,7 +539,13 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {selectedReceiveAssetData.discountValue | 0}{" "}
+                                    {
+                                        Number(
+                                            getPercentage(amount, 0.1).toFixed(
+                                                8
+                                            )
+                                        ) /* Must use toFixed because of division of floats */
+                                    }{" "}
                                     {selectedReceiveAsset}
                                 </Grid>
                             </Grid>
@@ -524,7 +565,12 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {selectedReceiveAssetData.receive | 0}{" "}
+                                    {Number(parseFloat(amount).toFixed(8)) +
+                                        Number(
+                                            getPercentage(amount, 0.1).toFixed(
+                                                8
+                                            )
+                                        ) || 0}{" "}
                                     {selectedReceiveAsset}
                                 </Grid>
                             </Grid>

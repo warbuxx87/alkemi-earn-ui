@@ -48,6 +48,31 @@ const fetchMarketsError = (error) => ({
 
 const fetchMarketsCall = ({ currentNetworkName, address, dispatch }) => {
     if (!url_map[currentNetworkName].markets_url) return;
+
+    dispatch(fetchMarketsPending());
+
+    fetch(url_map[currentNetworkName].markets_url)
+        .then((res) => {
+            return res.text();
+        })
+        .then((data) => {
+            if (data) {
+                const obj_data = JSON.parse(data);
+
+                const marketsData = obj_data.find((market) =>
+                    Object.prototype.hasOwnProperty.call(market, address)
+                );
+
+                dispatch(
+                    fetchMarketsSuccess(
+                        marketsData[address].oracleMarkets.slice(0, -12)
+                    )
+                ); // TODO: USDC decimals should be only 6 but returns 12 zeros
+            }
+        })
+        .catch((error) => {
+            dispatch(fetchMarketsError(error.message));
+        });
 };
 
 // This call may be fetched from multiple containers but only executes once every 15 seconds
