@@ -15,6 +15,7 @@ import {
     List,
     withWidth,
     withStyles,
+    Typography,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
@@ -73,6 +74,8 @@ const styles = (theme) => ({
     },
     drawerPaper: {
         // width: drawerWidth,
+        height: "calc(100% - 45px)",
+        borderRadius: 4,
         margin: "22px 0px 0px 24px",
         "@media (min-width:1550px)": {
             margin: "22px 0px 0px 35px",
@@ -84,26 +87,45 @@ const styles = (theme) => ({
     divider: {
         backgroundColor: theme.palette.common.black,
     },
+    bottomPush: {
+        position: "fixed",
+        bottom: 10,
+        paddingBottom: 10,
+        maxWidth: 280,
+        "@media (min-width:1550px)": {
+            maxWidth: 340,
+        },
+    },
 });
 
 // Section 5: Code Component
 function Sidebar({ classes, width, variant, open }) {
     const content = (
-        <div className={classes.drawerInner}>
+        <Box className={classes.drawerInner}>
             <SidebarHeader />
-            <Divider className={classes.divider} />
-            <Box pt={1} pb={1}>
-                <List className={classes.list}>
-                    <SidebarDashboardItem />
-                    <SidebarLendItem />
-                    <SidebarBorrowItem />
-                    <SidebarMarketsItem />
-                    <SidebarHistoryItem />
-                    <SidebarLiquidateItem />
-                </List>
+            <Box display="flex" flexDirection="column">
+                <Divider className={classes.divider} />
+                <Box pt={1} pb={1}>
+                    <List className={classes.list}>
+                        <SidebarDashboardItem />
+                        <SidebarLendItem />
+                        <SidebarBorrowItem />
+                        <SidebarMarketsItem />
+                        <SidebarHistoryItem />
+                        <SidebarLiquidateItem />
+                    </List>
+                </Box>
+                <Divider className={classes.divider} />
+                <Box width={1} className={classes.bottomPush}>
+                    <Divider className={classes.divider} />
+                    <Box py={2} px={2}>
+                        <Typography variant="body2" color="textSecondary">
+                            Version 1.0.0
+                        </Typography>
+                    </Box>
+                </Box>
             </Box>
-            <Divider className={classes.divider} />
-        </div>
+        </Box>
     );
 
     return (

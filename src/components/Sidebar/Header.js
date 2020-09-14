@@ -26,8 +26,7 @@ const styles = (theme) => ({
         marginRight: 20,
     },
     image: {
-        width: "163px",
-        height: "27px",
+        maxWidth: "150px",
     },
     menu: {
         width: 35,
