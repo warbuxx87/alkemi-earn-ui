@@ -36,9 +36,6 @@ export default {
         fontWeight: 400,
         fontSize: 15,
     },
-    overline: {
-        fontWeight: 500,
-    },
 
     subtitle1: {
         fontWeight: 400,

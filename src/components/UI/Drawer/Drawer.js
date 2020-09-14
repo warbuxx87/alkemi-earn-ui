@@ -23,7 +23,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { XCircle as XIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
-import Chart from "./ChartWrapper";
+// import Chart from "./ChartWrapper";
 import { formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
