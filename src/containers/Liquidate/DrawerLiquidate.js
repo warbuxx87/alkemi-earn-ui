@@ -11,6 +11,8 @@ import { onLiquidateAction } from "redux/actions/data/liquidations";
 
 import { walletAddress, walletNetwork } from "redux/selectors/onboard";
 
+import useFetchMarkets from "hooks/useFetchMarkets";
+
 const LiquidateDrawerContainer = ({
     supplyList,
     borrowList,
@@ -23,6 +25,8 @@ const LiquidateDrawerContainer = ({
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+
+    const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
 
     const [amount, setAmount] = React.useState("");
 
@@ -66,8 +70,6 @@ const LiquidateDrawerContainer = ({
     return (
         <DrawerLiquidate
             buttonsLabel="Liquidate"
-            supplyList={supplyList}
-            borrowList={borrowList}
             shortfallETH={shortfallETH}
             onButtonClick={({ symbol, assetCollateral, assetBorrow }) => {
                 onLiquidateAction({
@@ -87,10 +89,13 @@ const LiquidateDrawerContainer = ({
             onSetAmount={onSetAmount}
             enableButtonClick={enableLiquidate}
             isDoingAction={false /* TODO: define action being done */}
-            selectedSupplyAsset={selectedSupplyAsset}
-            setSelectedSupplyAsset={setSelectedSupplyAsset}
-            selectedBorrowAsset={selectedBorrowAsset}
-            setSelectedBorrowAsset={setSelectedBorrowAsset}
+            collateralList={supplyList}
+            selectedCollateralAsset={selectedSupplyAsset}
+            setSelectedCollateralAsset={setSelectedSupplyAsset}
+            receiveAssetList={borrowList}
+            selectedReceiveAsset={selectedBorrowAsset}
+            setSelectedReceiveAsset={setSelectedBorrowAsset}
+            marketsData={marketsData}
         />
     );
 };

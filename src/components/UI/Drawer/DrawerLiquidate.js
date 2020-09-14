@@ -152,15 +152,15 @@ const DrawerLiquidateClass = makeStyles(
                 textTransform: "none",
             },
             assetImg: {
-              marginRight: "12px",
-              width: "25px",
-              height: "25px",
-              paddingTop: "3px",
+                marginRight: "12px",
+                width: "25px",
+                height: "25px",
+                paddingTop: "3px",
             },
             inputIcon: {
-              width: "25px",
-              height: "25px",
-              marginRight: "4px",
+                width: "25px",
+                height: "25px",
+                marginRight: "4px",
             },
         }),
     {
@@ -170,9 +170,10 @@ const DrawerLiquidateClass = makeStyles(
 );
 
 const DrawerLiquidateWrapper = ({
+    collateralList,
+    receiveAssetList,
+
     buttonsLabel,
-    supplyList,
-    borrowList,
 
     shortfallETH,
     onButtonClick,
@@ -185,10 +186,10 @@ const DrawerLiquidateWrapper = ({
     enableButtonClick,
     isDoingAction,
 
-    selectedSupplyAsset,
-    setSelectedSupplyAsset,
-    selectedBorrowAsset,
-    setSelectedBorrowAsset,
+    selectedCollateralAsset,
+    setSelectedCollateralAsset,
+    selectedReceiveAsset,
+    setSelectedReceiveAsset,
 }) => {
     const classes = DrawerLiquidateClass();
 
@@ -204,37 +205,37 @@ const DrawerLiquidateWrapper = ({
     };
 
     const [
-        selectedSupplyAssetData,
-        setSelectedSupplyAssetData,
+        selectedCollateralAssetData,
+        setSelectedCollateralAssetData,
     ] = React.useState({});
     const [
-        selectedBorrowAssetData,
-        setSelectedBorrowAssetData,
+        selectedReceiveAssetData,
+        setSelectedReceiveAssetData,
     ] = React.useState({});
 
     const handleChooseSupplyCoin = useCallback(
         (val) => {
             if (!val) return;
 
-            setSelectedSupplyAsset(val.symbol);
-            setSelectedSupplyAssetData(val);
+            setSelectedCollateralAsset(val.symbol);
+            setSelectedCollateralAssetData(val);
         },
-        [setSelectedSupplyAsset, setSelectedSupplyAssetData]
+        [setSelectedCollateralAsset, setSelectedCollateralAssetData]
     );
 
     const handleChooseBorrowCoin = useCallback(
         (val) => {
             if (!val) return;
 
-            setSelectedBorrowAsset(val);
+            setSelectedReceiveAsset(val);
 
-            const assetFromBorrowList = borrowList.find(
+            const assetFromreceiveAssetList = receiveAssetList.find(
                 (e) => e.symbol === val
             );
 
-            setSelectedBorrowAssetData(assetFromBorrowList);
+            setSelectedReceiveAssetData(assetFromreceiveAssetList);
         },
-        [setSelectedBorrowAsset, setSelectedBorrowAssetData, borrowList]
+        [setSelectedReceiveAsset, setSelectedReceiveAssetData, receiveAssetList]
     );
     const handleChangeDropdownBorrow = (event) => {
         handleChooseBorrowCoin(event.target.value);
@@ -242,14 +243,15 @@ const DrawerLiquidateWrapper = ({
 
     // Choose first entry by default on load/data change
     useEffect(() => {
-        if (supplyList.length > 0) {
-            handleChooseSupplyCoin(supplyList[0]);
+        if (collateralList.length > 0) {
+            handleChooseSupplyCoin(collateralList[0]);
         }
-    }, [supplyList, handleChooseSupplyCoin]);
+    }, [collateralList, handleChooseSupplyCoin]);
 
     useEffect(() => {
-        if (borrowList.length > 0) handleChooseBorrowCoin(borrowList[0].symbol);
-    }, [borrowList, handleChooseBorrowCoin]);
+        if (receiveAssetList.length > 0)
+            handleChooseBorrowCoin(receiveAssetList[0].symbol);
+    }, [receiveAssetList, handleChooseBorrowCoin]);
 
     const displayAssetsRadio = ({
         list,
@@ -321,14 +323,16 @@ const DrawerLiquidateWrapper = ({
     const displayAssetsDropdown = ({ list }) => {
         return list.map((val) => (
             <MenuItem key={val.symbol} value={val.symbol}>
-<Box display="flex" alignItems="center">
-                <Box><img
-                    src={getTokenIcon(val.symbol)}
-                    alt="asset"
-                    className={classes.assetImg}
-                />{" "}</Box>
-              <Box>  {val.symbol}</Box>
-              </Box>
+                <Box display="flex" alignItems="center">
+                    <Box>
+                        <img
+                            src={getTokenIcon(val.symbol)}
+                            alt="asset"
+                            className={classes.assetImg}
+                        />{" "}
+                    </Box>
+                    <Box> {val.symbol}</Box>
+                </Box>
             </MenuItem>
         ));
     };
@@ -376,8 +380,8 @@ const DrawerLiquidateWrapper = ({
                             Outstanding Loans
                         </Grid>
                         {displayAssetsRadio({
-                            list: borrowList,
-                            selectedAsset: selectedBorrowAsset,
+                            list: receiveAssetList,
+                            selectedAsset: selectedReceiveAsset,
                             handleChooseCoin: handleChooseBorrowCoin,
                             showDiscount: false,
                         })}
@@ -392,8 +396,8 @@ const DrawerLiquidateWrapper = ({
                             Available Collateral
                         </Typography>
                         {displayAssetsRadio({
-                            list: supplyList,
-                            selectedAsset: selectedSupplyAsset,
+                            list: collateralList,
+                            selectedAsset: selectedCollateralAsset,
                             handleChooseCoin: handleChooseSupplyCoin,
                             showDiscount: true,
                         })}
@@ -423,7 +427,7 @@ const DrawerLiquidateWrapper = ({
                                     <InputAdornment position="start">
                                         <img
                                             src={getTokenIcon(
-                                                selectedBorrowAssetData.symbol
+                                                selectedCollateralAsset
                                             )}
                                             alt="asset"
                                             className={classes.inputIcon}
@@ -451,14 +455,16 @@ const DrawerLiquidateWrapper = ({
                                 className={classes.select}
                                 labelId="receive-asset"
                                 id="receive-asset"
-                                value={selectedBorrowAsset}
+                                value={selectedReceiveAsset}
                                 onChange={handleChangeDropdownBorrow}
                                 label="Asset"
                                 fullWidth={true}
                                 autoFocus={true}
                                 disableUnderline={true}
                             >
-                                {displayAssetsDropdown({ list: borrowList })}
+                                {displayAssetsDropdown({
+                                    list: receiveAssetList,
+                                })}
                             </Select>
                         </Box>
                         <Grid className={classes.rateInfo}>
@@ -498,8 +504,8 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {selectedSupplyAssetData.discountValue | 0}{" "}
-                                    {selectedSupplyAssetData.symbol}
+                                    {selectedReceiveAssetData.discountValue | 0}{" "}
+                                    {selectedReceiveAsset}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -518,8 +524,8 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {selectedSupplyAssetData.receive | 0}{" "}
-                                    {selectedSupplyAssetData.symbol}
+                                    {selectedReceiveAssetData.receive | 0}{" "}
+                                    {selectedReceiveAsset}
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -532,11 +538,12 @@ const DrawerLiquidateWrapper = ({
                                 onClick={() => {
                                     onButtonClick({
                                         assetCollateral:
-                                            selectedSupplyAssetData.asset,
+                                            selectedCollateralAssetData.asset,
                                         assetBorrow:
-                                            selectedBorrowAssetData.asset,
+                                            selectedReceiveAssetData.asset,
 
-                                        symbol: selectedSupplyAssetData.symbol,
+                                        symbol:
+                                            selectedCollateralAssetData.symbol,
                                     });
                                     handleClose();
                                 }}
@@ -557,7 +564,7 @@ const DrawerLiquidateWrapper = ({
 // Section 6: Documentation with PropTypes
 DrawerLiquidateWrapper.propTypes = {
     buttonsLabel: PropTypes.string.isRequired,
-    supplyList: PropTypes.array.isRequired,
+    collateralList: PropTypes.array.isRequired,
 };
 
 // Section 7:  Connect styles and export
