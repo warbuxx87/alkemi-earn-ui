@@ -70,7 +70,7 @@ const DrawerClass = makeStyles((theme) =>
             paddingLeft: "10px",
             color: "white",
             fontSize: "18px",
-            borderRadius: "4px"
+            borderRadius: "4px",
         },
         rateInfo: {
             color: "white",
@@ -85,12 +85,12 @@ const DrawerClass = makeStyles((theme) =>
             color: "#a7a7a7",
         },
         aprBox: {
-          border: "solid #57595d 1px",
-          borderRadius: "4px"
+            border: "solid #57595d 1px",
+            borderRadius: "4px",
         },
-        amount: {
-          margin: "auto",
-        }
+        vertCent: {
+            margin: "auto",
+        },
     })
 );
 
@@ -165,26 +165,35 @@ const DrawerWrapper = ({
                         </IconButton>
                     </Box>
                     <Divider />
-                    <Box px={2} py={3} mx={2} mt={4}  className={classes.aprBox}>
-                          <Typography variant="h2" color="primary" align="center">
+                    <Box px={2} py={3} mx={2} mt={5} className={classes.aprBox}>
+                        <Typography variant="h2" color="primary" align="center">
                             {formatPercent(asset.apr)} APR
                         </Typography>
 
                         {/*<Chart> </Chart>*/}
                     </Box>
                     <Box p={2} mt={3}>
-                        <Grid container direction="row">
-                            <Grid item md={6} xs className={classes.amount}>
-                            <Typography variant="body1" color="textPrimary" >
-                                Amount
-                            </Typography>
+                        <Box pb={1}>
+                            <Grid container direction="row">
+                                <Grid item md={6} xs className={classes.amount}>
+                                    <Typography
+                                        variant="body1"
+                                        color="textPrimary"
+                                    >
+                                        Amount
+                                    </Typography>
+                                </Grid>
+                                <Grid item md={6} className={classes.vertCent}>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                        align="right"
+                                    >
+                                        {amountValue}
+                                    </Typography>
+                                </Grid>
                             </Grid>
-                            <Grid item md={6}>
-                            <Typography variant="subtitle1" color="textSecondary" align="right">
-                                {amountValue}
-                            </Typography>
-                            </Grid>
-                        </Grid>
+                        </Box>
                         <div className={classes.inputWrap}>
                             <Input
                                 autoFocus={true}
@@ -206,8 +215,18 @@ const DrawerWrapper = ({
                         </div>
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
-                                    Market Utilization
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Market Utilization
+                                    </Typography>
                                 </Grid>
                                 <Grid
                                     item
@@ -220,8 +239,18 @@ const DrawerWrapper = ({
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
-                                    Price
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Asset Price
+                                    </Typography>
                                 </Grid>
                                 <Grid
                                     item
@@ -234,8 +263,18 @@ const DrawerWrapper = ({
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
-                                    Balance
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Deposit Balance
+                                    </Typography>
                                 </Grid>
                                 <Grid
                                     item
