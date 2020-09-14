@@ -511,7 +511,7 @@ const DrawerLiquidateWrapper = ({
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        You're Paying
+                                        You Pay
                                     </Typography>
                                 </Grid>
                                 <Grid
