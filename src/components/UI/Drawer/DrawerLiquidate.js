@@ -376,22 +376,20 @@ const DrawerLiquidateWrapper = ({
         if (amount) {
             youPay = parseFloat(amount);
         }
+        if (amount === -1) {
+            youPay = displayMaxAmountOfTokensForEachLoan(selectedLoanAsset);
+        }
         return youPay.toFixed(6);
     };
 
     const displayReceiveAmountOfTokensForInput = (pay, receive) => {
+        // get Pay Asset Oracle Price
         const assetMarketDataForPay = marketsData.find((e) => e.symbol === pay);
 
-        console.log("Pay", assetMarketDataForPay);
-
+        // get Receive Asset Oracle Price
         const assetMarketDataForReceive = marketsData.find(
             (e) => e.symbol === receive
         );
-
-        console.log("Receive", assetMarketDataForReceive);
-
-        // inputAmount * loan token Oracle Price = Input ETH amount
-        // Input ETH Amount / collateral token Oracle Price
 
         let calculatedValue = 0;
 
@@ -401,8 +399,20 @@ const DrawerLiquidateWrapper = ({
             assetMarketDataForReceive !== undefined &&
             assetMarketDataForReceive
         ) {
+            let payAmount = amount;
+
+            // if User Amount is Max
+            if (amount === -1) {
+                payAmount = displayMaxAmountOfTokensForEachLoan(
+                    selectedLoanAsset
+                );
+            }
+
             // gets ETH amount for in put tokens
-            calculatedValue = amount * assetMarketDataForPay.oraclePrice;
+            // inputAmount * loan token Oracle Price = Input ETH amount
+            calculatedValue = payAmount * assetMarketDataForPay.oraclePrice;
+
+            // ReceiveTokenAmount = Input ETH Amount / collateral token Oracle Price
             calculatedValue =
                 calculatedValue / assetMarketDataForReceive.oraclePrice;
 
@@ -642,10 +652,13 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {displayReceiveAmountOfTokensForInput(
-                                        selectedLoanAsset,
-                                        selectedCollateralAsset
-                                    ) * (1.1).toFixed(6)}{" "}
+                                    {(
+                                        1.1 *
+                                        displayReceiveAmountOfTokensForInput(
+                                            selectedLoanAsset,
+                                            selectedCollateralAsset
+                                        )
+                                    ).toFixed(6)}{" "}
                                     {selectedCollateralAsset}
                                 </Grid>
                             </Grid>
