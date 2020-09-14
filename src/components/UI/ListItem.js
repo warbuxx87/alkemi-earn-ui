@@ -16,8 +16,8 @@ import {
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     item: {
-        paddingLeft: 16,
-        paddingRight: 16,
+        paddingLeft: 23,
+        paddingRight: 23,
     },
     selected: {
         borderLeftStyle: "solid",
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.common.darkGrey,
     },
     itemIcon: {
-        minWidth: 34,
+        minWidth: 48,
     },
 }));
 
