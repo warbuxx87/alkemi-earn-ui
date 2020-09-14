@@ -48,6 +48,9 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             }
             errorLend={errorLend}
             USDPrice={USDPrice}
+            displayAllocateButton={
+                userWalletNetwork !== "1" && userWalletNetwork !== 1
+            }
         />
     );
 };

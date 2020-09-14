@@ -18,8 +18,8 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import Settings from "./Settings";
-import Notifications from "./Notifications";
+//import Settings from "./Settings";
+//import Notifications from "./Notifications";
 import MobileMenu from "./MobileMenu";
 
 import { addressParser } from "utils/ui";
@@ -108,8 +108,8 @@ function AppBar({ title, onConnect, onReset, accountAddress }) {
                         justify="flex-end"
                     >
                         <Grid item>
-                            <Settings />
-                            <Notifications />
+                            {/*<Settings />
+                            <Notifications />*/}
                         </Grid>
                         <Grid item>
                             <Button
@@ -143,9 +143,13 @@ function AppBar({ title, onConnect, onReset, accountAddress }) {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                <MenuItem onClick={handleOnConnect}>
-                                    Change Wallet
-                                </MenuItem>
+                                {
+                                    false && (
+                                        <MenuItem onClick={handleOnConnect}>
+                                            Change Wallet
+                                        </MenuItem>
+                                    ) /* TODO: show when using more than a single wallet */
+                                }
                                 {accountAddress ? (
                                     <MenuItem onClick={handleOnReset}>
                                         Disconnect Wallet

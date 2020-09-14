@@ -35,6 +35,11 @@ const useStyles = makeStyles((theme) => ({
             paddingRight: 0,
         },
     },
+    tabs: {
+        "& .MuiDivider-root": {
+            backgroundColor: "#00000",
+        },
+    },
 }));
 
 const tabs = [
@@ -63,7 +68,7 @@ function Dashboard() {
                     <DashCardBorrow />
                 </Grid>
                 <Grid item lg={12} sm={12} xs={12}>
-                    <Box>
+                    <Box className={classes.tabs}>
                         <Box mt={2}>
                             <Tabs
                                 onChange={handleTabsChange}
@@ -71,6 +76,7 @@ function Dashboard() {
                                 value={currentTab}
                                 textColor="secondary"
                                 variant="scrollable"
+                                className={classes.tabs}
                             >
                                 {tabs.map((tab) => (
                                     <Tab
@@ -82,7 +88,7 @@ function Dashboard() {
                             </Tabs>
                         </Box>
                         <Divider />
-                        <Box py={3} pb={6}>
+                        <Box py={1} pb={6}>
                             {currentTab === "tabledeposit" && <TableDeposit />}
                             {currentTab === "tableborrow" && <TableBorrow />}
                         </Box>

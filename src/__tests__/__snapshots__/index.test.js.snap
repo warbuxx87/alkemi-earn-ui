@@ -26,20 +26,8 @@ Object {
         <ul
           class="MuiList-root MuiMenu-list MuiList-padding"
           role="menu"
-          tabindex="-1"
-        >
-          <li
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
-            role="menuitem"
-            tabindex="0"
-          >
-            Change Wallet
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </li>
-        </ul>
+          tabindex="0"
+        />
       </div>
       <div
         data-test="sentinelEnd"
@@ -70,88 +58,7 @@ Object {
                 >
                   <div
                     class="MuiGrid-root MuiGrid-item"
-                  >
-                    <button
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
-                      tabindex="0"
-                      title="Settings"
-                      type="button"
-                    >
-                      <span
-                        class="MuiIconButton-label"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                        >
-                          <svg
-                            fill="none"
-                            height="24"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            viewBox="0 0 24 24"
-                            width="24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <circle
-                              cx="12"
-                              cy="12"
-                              r="3"
-                            />
-                            <path
-                              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-                            />
-                          </svg>
-                        </svg>
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                    <button
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
-                      tabindex="0"
-                      title="Notications"
-                      type="button"
-                    >
-                      <span
-                        class="MuiIconButton-label"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                        >
-                          <svg
-                            fill="none"
-                            height="24"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            viewBox="0 0 24 24"
-                            width="24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
-                            />
-                            <path
-                              d="M13.73 21a2 2 0 0 1-3.46 0"
-                            />
-                          </svg>
-                        </svg>
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                  </div>
+                  />
                   <div
                     class="MuiGrid-root MuiGrid-item"
                   >
@@ -185,7 +92,7 @@ Object {
             </div>
           </header>
           <div
-            class="MuiBox-root MuiBox-root-41"
+            class="MuiBox-root MuiBox-root-40"
           >
             <div>
               <div
@@ -260,7 +167,7 @@ Object {
               class="Toastify"
             />
             <div
-              class="MuiContainer-root makeStyles-container-12"
+              class="MuiContainer-root makeStyles-container-10"
             >
               <div
                 class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -288,10 +195,10 @@ Object {
                       class="MuiDivider-root"
                     />
                     <div
-                      class="MuiCardContent-root makeStyles-contentCard-16"
+                      class="MuiCardContent-root makeStyles-contentCard-15"
                     >
                       <div
-                        class="MuiBox-root MuiBox-root-42 makeStyles-item-15"
+                        class="MuiBox-root MuiBox-root-41 makeStyles-item-14"
                       >
                         <div
                           class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -337,7 +244,7 @@ Object {
                     class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
                   >
                     <div
-                      class="MuiCardHeader-root makeStyles-item-20"
+                      class="MuiCardHeader-root makeStyles-item-19"
                     >
                       <div
                         class="MuiCardHeader-content"
@@ -353,10 +260,10 @@ Object {
                       class="MuiDivider-root"
                     />
                     <div
-                      class="MuiCardContent-root makeStyles-contentCard-21"
+                      class="MuiCardContent-root makeStyles-contentCard-20"
                     >
                       <div
-                        class="MuiBox-root MuiBox-root-43 makeStyles-item-20"
+                        class="MuiBox-root MuiBox-root-42 makeStyles-item-19"
                       >
                         <div
                           class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -372,7 +279,8 @@ Object {
                             <h3
                               class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                             >
-                              $0.00
+                              $
+                              0
                             </h3>
                           </div>
                           <div
@@ -401,7 +309,7 @@ Object {
                     class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
                   >
                     <div
-                      class="MuiCardHeader-root makeStyles-item-25"
+                      class="MuiCardHeader-root makeStyles-item-24"
                     >
                       <div
                         class="MuiCardHeader-content"
@@ -417,10 +325,10 @@ Object {
                       class="MuiDivider-root"
                     />
                     <div
-                      class="MuiCardContent-root makeStyles-contentCard-26"
+                      class="MuiCardContent-root makeStyles-contentCard-25"
                     >
                       <div
-                        class="MuiBox-root MuiBox-root-44 makeStyles-item-25"
+                        class="MuiBox-root MuiBox-root-43 makeStyles-item-24"
                       >
                         <div
                           class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -463,13 +371,13 @@ Object {
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-45"
+                    class="MuiBox-root MuiBox-root-44 makeStyles-tabs-11"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-46"
+                      class="MuiBox-root MuiBox-root-45"
                     >
                       <div
-                        class="MuiTabs-root"
+                        class="MuiTabs-root makeStyles-tabs-11"
                       >
                         <div
                           class="MuiTabs-scrollable"
@@ -517,7 +425,7 @@ Object {
                             </button>
                           </div>
                           <span
-                            class="PrivateTabIndicator-root-30 PrivateTabIndicator-colorSecondary-32 MuiTabs-indicator"
+                            class="PrivateTabIndicator-root-29 PrivateTabIndicator-colorSecondary-31 MuiTabs-indicator"
                             style="left: 0px; width: 0px;"
                           />
                         </div>
@@ -527,13 +435,13 @@ Object {
                       class="MuiDivider-root"
                     />
                     <div
-                      class="MuiBox-root MuiBox-root-47"
+                      class="MuiBox-root MuiBox-root-46"
                     >
                       <div
                         class="scrollbar-container ps"
                       >
                         <table
-                          class="MuiTable-root makeStyles-root-35"
+                          class="MuiTable-root makeStyles-root-34"
                         >
                           <tbody
                             class="MuiTableBody-root"
@@ -588,20 +496,8 @@ Object {
         <ul
           class="MuiList-root MuiMenu-list MuiList-padding"
           role="menu"
-          tabindex="-1"
-        >
-          <li
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
-            role="menuitem"
-            tabindex="0"
-          >
-            Change Wallet
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </li>
-        </ul>
+          tabindex="0"
+        />
       </div>
       <div
         data-test="sentinelEnd"
@@ -633,88 +529,7 @@ Object {
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
-                    tabindex="0"
-                    title="Settings"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <svg
-                          fill="none"
-                          height="24"
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          viewBox="0 0 24 24"
-                          width="24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <circle
-                            cx="12"
-                            cy="12"
-                            r="3"
-                          />
-                          <path
-                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-                          />
-                        </svg>
-                      </svg>
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                  <button
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
-                    tabindex="0"
-                    title="Notications"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <svg
-                          fill="none"
-                          height="24"
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          viewBox="0 0 24 24"
-                          width="24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
-                          />
-                          <path
-                            d="M13.73 21a2 2 0 0 1-3.46 0"
-                          />
-                        </svg>
-                      </svg>
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 >
@@ -748,7 +563,7 @@ Object {
           </div>
         </header>
         <div
-          class="MuiBox-root MuiBox-root-41"
+          class="MuiBox-root MuiBox-root-40"
         >
           <div>
             <div
@@ -823,7 +638,7 @@ Object {
             class="Toastify"
           />
           <div
-            class="MuiContainer-root makeStyles-container-12"
+            class="MuiContainer-root makeStyles-container-10"
           >
             <div
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -851,10 +666,10 @@ Object {
                     class="MuiDivider-root"
                   />
                   <div
-                    class="MuiCardContent-root makeStyles-contentCard-16"
+                    class="MuiCardContent-root makeStyles-contentCard-15"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-42 makeStyles-item-15"
+                      class="MuiBox-root MuiBox-root-41 makeStyles-item-14"
                     >
                       <div
                         class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -900,7 +715,7 @@ Object {
                   class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
                 >
                   <div
-                    class="MuiCardHeader-root makeStyles-item-20"
+                    class="MuiCardHeader-root makeStyles-item-19"
                   >
                     <div
                       class="MuiCardHeader-content"
@@ -916,10 +731,10 @@ Object {
                     class="MuiDivider-root"
                   />
                   <div
-                    class="MuiCardContent-root makeStyles-contentCard-21"
+                    class="MuiCardContent-root makeStyles-contentCard-20"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-43 makeStyles-item-20"
+                      class="MuiBox-root MuiBox-root-42 makeStyles-item-19"
                     >
                       <div
                         class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -935,7 +750,8 @@ Object {
                           <h3
                             class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                           >
-                            $0.00
+                            $
+                            0
                           </h3>
                         </div>
                         <div
@@ -964,7 +780,7 @@ Object {
                   class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
                 >
                   <div
-                    class="MuiCardHeader-root makeStyles-item-25"
+                    class="MuiCardHeader-root makeStyles-item-24"
                   >
                     <div
                       class="MuiCardHeader-content"
@@ -980,10 +796,10 @@ Object {
                     class="MuiDivider-root"
                   />
                   <div
-                    class="MuiCardContent-root makeStyles-contentCard-26"
+                    class="MuiCardContent-root makeStyles-contentCard-25"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-44 makeStyles-item-25"
+                      class="MuiBox-root MuiBox-root-43 makeStyles-item-24"
                     >
                       <div
                         class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -1026,13 +842,13 @@ Object {
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
               >
                 <div
-                  class="MuiBox-root MuiBox-root-45"
+                  class="MuiBox-root MuiBox-root-44 makeStyles-tabs-11"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-46"
+                    class="MuiBox-root MuiBox-root-45"
                   >
                     <div
-                      class="MuiTabs-root"
+                      class="MuiTabs-root makeStyles-tabs-11"
                     >
                       <div
                         class="MuiTabs-scrollable"
@@ -1080,7 +896,7 @@ Object {
                           </button>
                         </div>
                         <span
-                          class="PrivateTabIndicator-root-30 PrivateTabIndicator-colorSecondary-32 MuiTabs-indicator"
+                          class="PrivateTabIndicator-root-29 PrivateTabIndicator-colorSecondary-31 MuiTabs-indicator"
                           style="left: 0px; width: 0px;"
                         />
                       </div>
@@ -1090,13 +906,13 @@ Object {
                     class="MuiDivider-root"
                   />
                   <div
-                    class="MuiBox-root MuiBox-root-47"
+                    class="MuiBox-root MuiBox-root-46"
                   >
                     <div
                       class="scrollbar-container ps"
                     >
                       <table
-                        class="MuiTable-root makeStyles-root-35"
+                        class="MuiTable-root makeStyles-root-34"
                       >
                         <tbody
                           class="MuiTableBody-root"

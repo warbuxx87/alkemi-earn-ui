@@ -219,7 +219,8 @@ export default () => {
     ]);
 
     const onConnect = async () => {
-        const isSelectWallet = await onboard.walletSelect();
+        // TODO: replace with const isSelectWallet = await onboard.walletSelect(); when using more than metamask
+        const isSelectWallet = await onboard.walletSelect("MetaMask");
 
         if (isSelectWallet) {
             deleteCurrentData();

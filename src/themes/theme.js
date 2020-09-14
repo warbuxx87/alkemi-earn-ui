@@ -21,31 +21,33 @@ const darkTheme = createMuiTheme({
         },
 
         primary: {
-            main: "#14BB7F", //Green
-            contrastText: "#000",
+            main: "#3cb34f", //Green
+            contrastText: "#fff",
         },
         secondary: {
             main: "#ffffff", //White
             contrastText: "#000",
         },
 
+        warning: {
+            main: "#ff6534", //orange
+            contrastText: "#fff",
+        },
+
         error: {
-            main: "#cb0f51", //red
+            main: "#F00640", //red
             contrastText: "#fff",
         },
 
         success: {
-            main: "#21DEAB", //green
+            main: "#3cb34f", //green
             contrastText: "#fff",
-        },
-        info: {
-            main: "#fff", //green
         },
 
         text: {
             primary: "#ffffff", // White
             secondary: "#979797", // Light Grey
-            success: "#21DEAB", //Green
+            success: "#3cb34f", //Green
             disabled: "rgba(255, 255, 255, 1)",
             hint: "rgba(184, 233, 134, 1)",
         },

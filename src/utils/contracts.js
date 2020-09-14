@@ -1,21 +1,24 @@
 import WETH_ABI from "constants/ABI/WETH_ABI.json";
 import DAI_ABI from "constants/ABI/DAI_ABI.json";
-import USDT_ABI from "constants/ABI/USDT_ABI.json";
 import USDC_ABI from "constants/ABI/USDC_ABI.json";
 import WBTC_ABI from "constants/ABI/WBTC_ABI.json";
-import PAX_ABI from "constants/ABI/PAX_ABI.json";
+
+//import PAX_ABI from "constants/ABI/PAX_ABI.json";
+//import USDT_ABI from "constants/ABI/USDT_ABI.json";
+
 import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
 
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
 
-const assets = ["PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
+const assets = [/*"PAX", "USDT",*/ "DAI", "USDC", "WBTC", "WETH"];
 
 const ABIs = {
-    PAX: PAX_ABI,
+    /*PAX: PAX_ABI,
+    USDT: USDT_ABI,*/
+
     WETH: WETH_ABI,
     DAI: DAI_ABI,
-    USDT: USDT_ABI,
     USDC: USDC_ABI,
     WBTC: WBTC_ABI,
 };
@@ -66,7 +69,7 @@ export const initMarketContract = ({
     const myAddress = userWalletAddress;
 
     const network = constants.network_type[userWalletNetwork];
-    const assets = ["PAX", "DAI", "USDT", "USDC", "WBTC", "WETH"];
+    const assets = [/*"PAX", "USDT",*/ "DAI", "USDC", "WBTC", "WETH"];
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
 

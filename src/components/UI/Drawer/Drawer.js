@@ -23,7 +23,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { XCircle as XIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
-import Chart from "./ChartWrapper";
+// import Chart from "./ChartWrapper";
 import { formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -70,10 +70,7 @@ const DrawerClass = makeStyles((theme) =>
             paddingLeft: "10px",
             color: "white",
             fontSize: "18px",
-        },
-        amount: {
-            color: "white",
-            paddingBottom: "10px",
+            borderRadius: "4px",
         },
         rateInfo: {
             color: "white",
@@ -82,10 +79,17 @@ const DrawerClass = makeStyles((theme) =>
         },
         rateRow: {
             padding: "12px 0",
-            borderBottom: "1px dashed #a7a7a7",
+            borderBottom: "1px dashed #57595d",
         },
         walletBalance: {
             color: "#a7a7a7",
+        },
+        aprBox: {
+            border: "solid #57595d 1px",
+            borderRadius: "4px",
+        },
+        vertCent: {
+            margin: "auto",
         },
     })
 );
@@ -161,29 +165,35 @@ const DrawerWrapper = ({
                         </IconButton>
                     </Box>
                     <Divider />
-                    <Box p={2} bgcolor="background.dark">
-                        <div className={classes.supplyPercent}>
+                    <Box px={2} py={3} mx={2} mt={5} className={classes.aprBox}>
+                        <Typography variant="h2" color="primary" align="center">
                             {formatPercent(asset.apr)} APR
-                        </div>
+                        </Typography>
 
-                        <Chart> </Chart>
+                        {/*<Chart> </Chart>*/}
                     </Box>
                     <Box p={2} mt={3}>
-                        <Grid container className={classes.amount}>
-                            <Grid item md={6} xs>
-                                Amount
+                        <Box pb={1}>
+                            <Grid container direction="row">
+                                <Grid item md={6} xs className={classes.amount}>
+                                    <Typography
+                                        variant="body1"
+                                        color="textPrimary"
+                                    >
+                                        Amount
+                                    </Typography>
+                                </Grid>
+                                <Grid item md={6} className={classes.vertCent}>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                        align="right"
+                                    >
+                                        {amountValue}
+                                    </Typography>
+                                </Grid>
                             </Grid>
-                            <Grid
-                                item
-                                md={6}
-                                xs
-                                container
-                                justify="flex-end"
-                                className={classes.walletBalance}
-                            >
-                                {amountValue}
-                            </Grid>
-                        </Grid>
+                        </Box>
                         <div className={classes.inputWrap}>
                             <Input
                                 autoFocus={true}
@@ -205,8 +215,18 @@ const DrawerWrapper = ({
                         </div>
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
-                                    Market Utilization
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Market Utilization
+                                    </Typography>
                                 </Grid>
                                 <Grid
                                     item
@@ -219,8 +239,18 @@ const DrawerWrapper = ({
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
-                                    Price
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Asset Price
+                                    </Typography>
                                 </Grid>
                                 <Grid
                                     item
@@ -233,8 +263,18 @@ const DrawerWrapper = ({
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
-                                <Grid item md={6} xs>
-                                    Balance
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Deposit Balance
+                                    </Typography>
                                 </Grid>
                                 <Grid
                                     item

@@ -54,45 +54,59 @@ exports[`<Drawer /> matches snapshot 1`] = `
       </Styled(MuiBox)>
       <WithStyles(ForwardRef(Divider)) />
       <Styled(MuiBox)
-        bgcolor="background.dark"
-        p={2}
+        className="makeStyles-aprBox-10"
+        mt={5}
+        mx={2}
+        px={2}
+        py={3}
       >
-        <div
-          className="makeStyles-supplyPercent-1"
+        <WithStyles(ForwardRef(Typography))
+          align="center"
+          color="primary"
+          variant="h2"
         >
           NaN%
            APR
-        </div>
-        <ChartWrapper>
-           
-        </ChartWrapper>
+        </WithStyles(ForwardRef(Typography))>
       </Styled(MuiBox)>
       <Styled(MuiBox)
         mt={3}
         p={2}
       >
-        <WithStyles(ForwardRef(Grid))
-          className="makeStyles-amount-7"
-          container={true}
+        <Styled(MuiBox)
+          pb={1}
         >
           <WithStyles(ForwardRef(Grid))
-            item={true}
-            md={6}
-            xs={true}
-          >
-            Amount
-          </WithStyles(ForwardRef(Grid))>
-          <WithStyles(ForwardRef(Grid))
-            className="makeStyles-walletBalance-10"
             container={true}
-            item={true}
-            justify="flex-end"
-            md={6}
-            xs={true}
+            direction="row"
           >
-            Amount value
+            <WithStyles(ForwardRef(Grid))
+              item={true}
+              md={6}
+              xs={true}
+            >
+              <WithStyles(ForwardRef(Typography))
+                color="textPrimary"
+                variant="body1"
+              >
+                Amount
+              </WithStyles(ForwardRef(Typography))>
+            </WithStyles(ForwardRef(Grid))>
+            <WithStyles(ForwardRef(Grid))
+              className="makeStyles-vertCent-11"
+              item={true}
+              md={6}
+            >
+              <WithStyles(ForwardRef(Typography))
+                align="right"
+                color="textSecondary"
+                variant="body2"
+              >
+                Amount value
+              </WithStyles(ForwardRef(Typography))>
+            </WithStyles(ForwardRef(Grid))>
           </WithStyles(ForwardRef(Grid))>
-        </WithStyles(ForwardRef(Grid))>
+        </Styled(MuiBox)>
         <div
           className="makeStyles-inputWrap-4"
         >
@@ -114,18 +128,24 @@ exports[`<Drawer /> matches snapshot 1`] = `
           </span>
         </div>
         <WithStyles(ForwardRef(Grid))
-          className="makeStyles-rateInfo-8"
+          className="makeStyles-rateInfo-7"
         >
           <WithStyles(ForwardRef(Grid))
-            className="makeStyles-rateRow-9"
+            className="makeStyles-rateRow-8"
             container={true}
           >
             <WithStyles(ForwardRef(Grid))
+              className="makeStyles-vertCent-11"
               item={true}
               md={6}
               xs={true}
             >
-              Market Utilization
+              <WithStyles(ForwardRef(Typography))
+                color="textSecondary"
+                variant="body2"
+              >
+                Market Utilization
+              </WithStyles(ForwardRef(Typography))>
             </WithStyles(ForwardRef(Grid))>
             <WithStyles(ForwardRef(Grid))
               container={true}
@@ -138,15 +158,21 @@ exports[`<Drawer /> matches snapshot 1`] = `
             </WithStyles(ForwardRef(Grid))>
           </WithStyles(ForwardRef(Grid))>
           <WithStyles(ForwardRef(Grid))
-            className="makeStyles-rateRow-9"
+            className="makeStyles-rateRow-8"
             container={true}
           >
             <WithStyles(ForwardRef(Grid))
+              className="makeStyles-vertCent-11"
               item={true}
               md={6}
               xs={true}
             >
-              Price
+              <WithStyles(ForwardRef(Typography))
+                color="textSecondary"
+                variant="body2"
+              >
+                Asset Price
+              </WithStyles(ForwardRef(Typography))>
             </WithStyles(ForwardRef(Grid))>
             <WithStyles(ForwardRef(Grid))
               container={true}
@@ -159,15 +185,21 @@ exports[`<Drawer /> matches snapshot 1`] = `
             </WithStyles(ForwardRef(Grid))>
           </WithStyles(ForwardRef(Grid))>
           <WithStyles(ForwardRef(Grid))
-            className="makeStyles-rateRow-9"
+            className="makeStyles-rateRow-8"
             container={true}
           >
             <WithStyles(ForwardRef(Grid))
+              className="makeStyles-vertCent-11"
               item={true}
               md={6}
               xs={true}
             >
-              Balance
+              <WithStyles(ForwardRef(Typography))
+                color="textSecondary"
+                variant="body2"
+              >
+                Deposit Balance
+              </WithStyles(ForwardRef(Typography))>
             </WithStyles(ForwardRef(Grid))>
             <WithStyles(ForwardRef(Grid))
               container={true}

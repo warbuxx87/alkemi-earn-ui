@@ -65,9 +65,11 @@ const fetchPriceCall = ({ currentNetworkName, address, dispatch }) => {
 
                 dispatch(
                     fetchPriceSuccess(
-                        marketsData[address].oraclePrice.slice(0, -12)
+                        marketsData[address].oraclePrice
+                            .toString()
+                            .replace(/\./g, "")
                     )
-                ); // TODO: USDC decimals should be only 6 but returns 12 zeros
+                );
             }
         })
         .catch((error) => {
