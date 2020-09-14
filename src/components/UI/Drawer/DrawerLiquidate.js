@@ -581,6 +581,42 @@ const DrawerLiquidateWrapper = ({
                                     {selectedCollateralAsset}
                                 </Grid>
                             </Grid>
+
+                            <Grid container className={classes.rateRow}>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Receive Total
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    container
+                                    justify="flex-end"
+                                >
+                                    {(
+                                        displayMaxAmountOfTokensForEachLoan(
+                                            selectedCollateralAsset
+                                        ) +
+                                        getPercentage(
+                                            displayMaxAmountOfTokensForEachLoan(
+                                                selectedCollateralAsset
+                                            ),
+                                            0.1
+                                        )
+                                    ).toFixed(6)}{" "}
+                                    {selectedCollateralAsset}
+                                </Grid>
+                            </Grid>
                         </Grid>
                         <Box className={classes.sendButtonDiv} mt={4}>
                             <Button
