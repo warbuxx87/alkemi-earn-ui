@@ -480,7 +480,7 @@ const DrawerLiquidateWrapper = ({
                                     color="textPrimary"
                                     className={classes.subtitle}
                                 >
-                                    Receive Asset
+                                    Collateral (Receive Asset)
                                 </Typography>
                             </Box>
                             <Select
