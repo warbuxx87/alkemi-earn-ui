@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     imageSize: {
         width: "34px",
         height: "34px",
-        marginTop: "2px",
+        marginTop: "3px",
     },
     label: {
         fontFamily: theme.typography.fontFamily,

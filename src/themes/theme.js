@@ -12,36 +12,36 @@ const darkTheme = createMuiTheme({
         common: {
             black: "#000",
             white: "rgba(255, 255, 255, 1)",
-            darkGrey: "#151617"
+            darkGrey: "#151617",
         },
         background: {
             default: "#000000", //Black
             dark: "#1B1B1B", // Dark Grey
-            paper: "#202123" // Light Grey
+            paper: "#202123", // Light Grey
         },
 
         primary: {
             main: "#3cb34f", //Green
-            contrastText: "#fff"
+            contrastText: "#fff",
         },
         secondary: {
             main: "#ffffff", //White
-            contrastText: "#000"
+            contrastText: "#000",
         },
 
         warning: {
-          main: "#ff6534",  //orange
-          contrastText: "#fff"
+            main: "#ff6534", //orange
+            contrastText: "#fff",
         },
 
         error: {
-            main: "rgb(255, 101, 52)", //red
-            contrastText: "#fff"
+            main: "#F00640", //red
+            contrastText: "#fff",
         },
 
         success: {
             main: "#3cb34f", //green
-            contrastText: "#fff"
+            contrastText: "#fff",
         },
 
         text: {
@@ -49,9 +49,9 @@ const darkTheme = createMuiTheme({
             secondary: "#979797", // Light Grey
             success: "#3cb34f", //Green
             disabled: "rgba(255, 255, 255, 1)",
-            hint: "rgba(184, 233, 134, 1)"
-        }
-    }
+            hint: "rgba(184, 233, 134, 1)",
+        },
+    },
 });
 
 // const lightTheme = createMuiTheme({
