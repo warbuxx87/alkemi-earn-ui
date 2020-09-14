@@ -431,7 +431,7 @@ const DrawerLiquidateWrapper = ({
                             list: loanList,
                             selectedAsset: selectedLoanAsset,
                             handleChooseCoin: handleChooseSupplyCoin,
-                            showDiscount: true,
+                            showDiscount: false,
                         })}
                     </Box>
 
