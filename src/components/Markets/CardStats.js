@@ -34,13 +34,13 @@ const useStyles = (theme) => ({
     },
     progressDeposits: {
         flexGrow: 1,
-        height: 8,
+        height: 7,
         borderRadius: 5,
         background: "rgb(255 254 254 / 10%)",
     },
     progressBorrows: {
         flexGrow: 1,
-        height: 8,
+        height: 7,
         borderRadius: 5,
         background: "rgb(255 254 254 / 10%)",
         "& .MuiLinearProgress-barColorPrimary": {

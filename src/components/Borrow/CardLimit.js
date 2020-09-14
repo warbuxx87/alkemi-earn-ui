@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(0, 1, 0, 3),
         flexGrow: 1,
         background: "rgb(255 254 254 / 10%)",
-        height: 8,
+        height: 7,
         borderRadius: 5,
     },
 }));
