@@ -120,7 +120,7 @@ function Sidebar({ classes, width, variant, open }) {
                     <Divider className={classes.divider} />
                     <Box py={2} px={2}>
                         <Typography variant="body2" color="textSecondary">
-                            Version 1.0.0
+                            v1.0.0
                         </Typography>
                     </Box>
                 </Box>
