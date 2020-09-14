@@ -74,7 +74,7 @@ export const toWei = (value, unit) => {
 export const formatNumber = (value, unit) => {
     if (!value) return 0;
     const wei = fromWei(value, unit);
-    return new Intl.NumberFormat("en-es", { maximumFractionDigits: 2 }).format(
+    return new Intl.NumberFormat("en-es", { maximumFractionDigits: 5 }).format(
         wei
     );
 };
