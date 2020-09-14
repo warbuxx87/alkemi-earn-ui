@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
         borderColor: theme.palette.common.white,
         backgroundColor: theme.palette.common.darkGrey,
     },
+    itemIcon: {
+        minWidth: 48,
+    },
 }));
 
 // Section 5: Code Component
@@ -37,7 +40,7 @@ const ListItem1 = ({ icon, text, onClick, selected, ...props }) => {
             {...props}
             className={clsx(classes.item, { [classes.selected]: selected })}
         >
-            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
             <ListItemText primary={text} />
         </ListItem>
     );

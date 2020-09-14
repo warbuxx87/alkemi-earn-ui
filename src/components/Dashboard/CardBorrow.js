@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     contentCard: {
-        borderBottom: `1px solid ${theme.palette.error.main}`,
+        borderBottom: `1px solid ${theme.palette.warning.main}`,
     },
 }));
 

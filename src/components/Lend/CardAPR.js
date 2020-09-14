@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
     },
     label: {
-        fontFamily: theme.typography.fontFamily,
         alignItems: "center",
         borderRadius: 4,
         display: "inline-flex",
@@ -37,11 +36,11 @@ const useStyles = makeStyles((theme) => ({
         whiteSpace: "nowrap",
         cursor: "default",
         flexShrink: 0,
-        height: 12,
+
         justifyContent: "center",
         letterSpacing: 0.5,
         minWidth: 20,
-        padding: theme.spacing(2, 1),
+        padding: theme.spacing(0, 1),
         textTransform: "uppercase",
         color: theme.palette.success.main,
         backgroundColor: fade(theme.palette.success.main, 0.08),

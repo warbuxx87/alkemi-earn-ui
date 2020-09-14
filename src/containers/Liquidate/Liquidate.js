@@ -11,7 +11,7 @@ import { getLiquidationsList } from "redux/selectors/data/liquidations";
 
 // Section 4: Container body
 const LiquidateContainer = () => {
-    useFetchLiquidations(); // retrieve liquidations
+    useFetchLiquidations(true); // retrieve liquidations
 
     const liquidationsList = useSelector(getLiquidationsList);
 

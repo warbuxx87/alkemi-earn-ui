@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     sortField: {
         flexBasis: 200,
     },
+    cell: {
+        paddingTop: "8px",
+        paddingBottom: "8px",
+    },
 }));
 
 const Liquidate = ({ className, liquidationsList, ...rest }) => {
@@ -114,13 +118,17 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                             )
                             .map((item, index) => (
                                 <TableRow key={index}>
-                                    <LiquidTableCell component="th" scope="row">
+                                    <LiquidTableCell
+                                        component="th"
+                                        scope="row"
+                                        className={classes.cell}
+                                    >
                                         <Box
                                             minWidth={150}
                                             display="flex"
                                             alignItems="center"
                                         >
-                                            <Box ml={2}>
+                                            <Box>
                                                 <Typography
                                                     variant="h6"
                                                     color="textPrimary"
@@ -139,9 +147,13 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                             </Box>
                                         </Box>
                                     </LiquidTableCell>
-                                    <LiquidTableCell component="th" scope="row">
+                                    <LiquidTableCell
+                                        component="th"
+                                        scope="row"
+                                        className={classes.cell}
+                                    >
                                         <Box
-                                            minWidth={150}
+                                            //minWidth={150}
                                             display="flex"
                                             alignItems="center"
                                         >
@@ -174,22 +186,22 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                         </Box>
                                     </LiquidTableCell>
                                     <LiquidTableCell
-                                        className="px-0 capitalize"
+                                        className={classes.cell}
                                         align="left"
                                     >
                                         {item.collateralRate.toFixed(4)}%
                                     </LiquidTableCell>
-                                    <LiquidTableCell className="px-0 capitalize">
+                                    <LiquidTableCell className={classes.cell}>
                                         {addressParser(item.address)}
                                     </LiquidTableCell>
-                                    <LiquidTableCell className="px-0 capitalize">
+                                    <LiquidTableCell className={classes.cell}>
                                         <LiquidationChart
                                             supplyList={item.supply}
                                             borrowList={item.borrow}
                                         />
                                     </LiquidTableCell>
                                     <LiquidTableCell
-                                        className="px-0"
+                                        className={classes.cell}
                                         align="right"
                                     >
                                         <LiquidateButton

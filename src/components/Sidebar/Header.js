@@ -11,7 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
 // Section 3: Components & Containers import from the application
-import logo from "assets/images/alkemi.png";
+import logo from "assets/images/logo-white.svg";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
@@ -26,8 +26,7 @@ const styles = (theme) => ({
         marginRight: 20,
     },
     image: {
-        width: "163px",
-        height: "27px",
+        maxWidth: "155px",
     },
     menu: {
         width: 35,

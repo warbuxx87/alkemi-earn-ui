@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     imageSize: {
         width: "34px",
         height: "34px",
-        marginTop: "2px",
+        marginTop: "3px",
     },
     label: {
         fontFamily: theme.typography.fontFamily,
@@ -57,8 +57,8 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 20,
         padding: theme.spacing(0.5, 0.5),
         textTransform: "uppercase",
-        color: theme.palette.error.main,
-        backgroundColor: fade(theme.palette.error.main, 0.1),
+        color: theme.palette.warning.main,
+        backgroundColor: fade(theme.palette.warning.main, 0.1),
     },
     btnActiveOutline: {
         minWidth: 100,
