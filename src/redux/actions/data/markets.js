@@ -47,7 +47,7 @@ const fetchMarketsError = (error) => ({
 //                                               //
 
 const fetchMarketsCall = ({ currentNetworkName, address, dispatch }) => {
-    if (!url_map[currentNetworkName].markets_url) return;
+    /*if (!url_map[currentNetworkName].markets_url) return;
 
     dispatch(fetchMarketsPending());
 
@@ -72,7 +72,95 @@ const fetchMarketsCall = ({ currentNetworkName, address, dispatch }) => {
         })
         .catch((error) => {
             dispatch(fetchMarketsError(error.message));
-        });
+        });*/
+    /*
+    if (!url_map[currentNetworkName].markets_url) return;
+    
+    dispatch(fetchMarketsPending());
+
+    const markets_api = url_map[currentNetworkName].markets_url;
+
+    fetch(markets_api)
+        .then((res) => {
+            return res.text();
+        })
+        .then((data) => {
+            if (data) {
+                let obj_data = JSON.parse(data);
+
+                let key_markets = Object.keys(obj_data);
+
+                const arr_markets = key_markets.map((e) => {
+                    return obj_data[e];
+                });
+
+                let totalSupplyBalanceUSD = 0;
+                let totalBorrowBalanceUSD = 0;
+
+                const arr_items = arr_markets.map((market) => {
+                    let key_items = Object.values(market);
+
+                    let asset = key_items[0];
+
+                    totalSupplyBalanceUSD += parseFloat(
+                        asset.totalSupplyUSD
+                    );
+                    totalBorrowBalanceUSD += parseFloat(
+                        asset.totalBorrowUSD
+                    );
+
+                    return asset;
+                });
+
+                let totalCollateralRatio =
+                    (totalSupplyBalanceUSD / totalBorrowBalanceUSD) *
+                    100;
+
+                let totals = {};
+
+                totals.totalSupplyBalanceUSD = totalSupplyBalanceUSD.toFixed(
+                    2
+                );
+                totals.totalBorrowBalanceUSD = totalBorrowBalanceUSD.toFixed(
+                    2
+                );
+                totals.totalCollateralRatio = totalCollateralRatio.toFixed(
+                    2
+                );
+
+                setMarketsData(arr_items);
+
+                let supply_array = _.cloneDeep(arr_items);
+                let borrow_array = _.cloneDeep(arr_items);
+
+                supply_array.sort(compare_supply);
+                borrow_array.sort(compare_borrow);
+
+                supply_array = supply_array.map((e) => {
+                    e.percentage_supply = Number(
+                        (e.totalSupplyUSD /
+                            totals.totalSupplyBalanceUSD) *
+                            100
+                    ).toFixed(1);
+
+                    return e;
+                });
+
+                borrow_array = borrow_array.map((e) => {
+                    e.percentage_borrow = Number(
+                        (e.totalBorrowUSD /
+                            totals.totalBorrowBalanceUSD) *
+                            100
+                    ).toFixed(1);
+
+                    return e;
+                });
+
+                setSupplyArray(supply_array);
+                setBorrowArray(borrow_array);
+                setCalculationsTotals(totals);
+            }
+        });*/
 };
 
 // This call may be fetched from multiple containers but only executes once every 15 seconds

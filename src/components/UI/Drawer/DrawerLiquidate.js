@@ -543,14 +543,13 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {
-                                        Number(
-                                            getPercentage(amount, 0.1).toFixed(
-                                                8
-                                            )
-                                        ) /* Must use toFixed because of division of floats */
-                                    }{" "}
-                                    {selectedReceiveAsset}
+                                    {getPercentage(
+                                        displayMaxAmountOfTokensForEachLoan(
+                                            selectedCollateralAsset
+                                        ),
+                                        0.1
+                                    ).toFixed(6)}{" "}
+                                    {selectedCollateralAsset}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -569,13 +568,10 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {Number(parseFloat(amount).toFixed(8)) +
-                                        Number(
-                                            getPercentage(amount, 0.1).toFixed(
-                                                8
-                                            )
-                                        ) || 0}{" "}
-                                    {selectedReceiveAsset}
+                                    {displayMaxAmountOfTokensForEachLoan(
+                                        selectedCollateralAsset
+                                    ).toFixed(6)}{" "}
+                                    {selectedCollateralAsset}
                                 </Grid>
                             </Grid>
                         </Grid>
