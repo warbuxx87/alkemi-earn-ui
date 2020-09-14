@@ -165,8 +165,8 @@ const DrawerLiquidateClass = makeStyles(
 );
 
 const DrawerLiquidateWrapper = ({
-    collateralList,
-    receiveAssetList,
+    loanList,
+    collateralAssetList,
 
     buttonsLabel,
 
@@ -181,10 +181,10 @@ const DrawerLiquidateWrapper = ({
     enableButtonClick,
     isDoingAction,
 
+    selectedLoanAsset,
+    setSelectedLoanAsset,
     selectedCollateralAsset,
     setSelectedCollateralAsset,
-    selectedReceiveAsset,
-    setSelectedReceiveAsset,
 
     marketsData,
 }) => {
@@ -201,38 +201,41 @@ const DrawerLiquidateWrapper = ({
         setOpen(false);
     };
 
+    const [selectedLoanAssetData, setSelectedLoanAssetData] = React.useState(
+        {}
+    );
     const [
         selectedCollateralAssetData,
         setSelectedCollateralAssetData,
-    ] = React.useState({});
-    const [
-        selectedReceiveAssetData,
-        setSelectedReceiveAssetData,
     ] = React.useState({});
 
     const handleChooseSupplyCoin = useCallback(
         (val) => {
             if (!val) return;
 
-            setSelectedCollateralAsset(val.symbol);
-            setSelectedCollateralAssetData(val);
+            setSelectedLoanAsset(val.symbol);
+            setSelectedLoanAssetData(val);
         },
-        [setSelectedCollateralAsset, setSelectedCollateralAssetData]
+        [setSelectedLoanAsset, setSelectedLoanAssetData]
     );
 
     const handleChooseBorrowCoin = useCallback(
         (val) => {
             if (!val) return;
 
-            setSelectedReceiveAsset(val);
+            setSelectedCollateralAsset(val);
 
-            const assetFromreceiveAssetList = receiveAssetList.find(
+            const assetFromcollateralAssetList = collateralAssetList.find(
                 (e) => e.symbol === val
             );
 
-            setSelectedReceiveAssetData(assetFromreceiveAssetList);
+            setSelectedCollateralAssetData(assetFromcollateralAssetList);
         },
-        [setSelectedReceiveAsset, setSelectedReceiveAssetData, receiveAssetList]
+        [
+            setSelectedCollateralAsset,
+            setSelectedCollateralAssetData,
+            collateralAssetList,
+        ]
     );
     const handleChangeDropdownBorrow = (event) => {
         handleChooseBorrowCoin(event.target.value);
@@ -240,15 +243,15 @@ const DrawerLiquidateWrapper = ({
 
     // Choose first entry by default on load/data change
     useEffect(() => {
-        if (collateralList.length > 0) {
-            handleChooseSupplyCoin(collateralList[0]);
+        if (loanList.length > 0) {
+            handleChooseSupplyCoin(loanList[0]);
         }
-    }, [collateralList, handleChooseSupplyCoin]);
+    }, [loanList, handleChooseSupplyCoin]);
 
     useEffect(() => {
-        if (receiveAssetList.length > 0)
-            handleChooseBorrowCoin(receiveAssetList[0].symbol);
-    }, [receiveAssetList, handleChooseBorrowCoin]);
+        if (collateralAssetList.length > 0)
+            handleChooseBorrowCoin(collateralAssetList[0].symbol);
+    }, [collateralAssetList, handleChooseBorrowCoin]);
 
     const displayAssetsRadio = ({
         list,
@@ -411,8 +414,8 @@ const DrawerLiquidateWrapper = ({
                             Outstanding Loans
                         </Grid>
                         {displayAssetsRadio({
-                            list: receiveAssetList,
-                            selectedAsset: selectedReceiveAsset,
+                            list: collateralAssetList,
+                            selectedAsset: selectedCollateralAsset,
                             handleChooseCoin: handleChooseBorrowCoin,
                             showDiscount: false,
                         })}
@@ -421,12 +424,12 @@ const DrawerLiquidateWrapper = ({
                     <Box pt={5} px={2}>
                         <Box pb={1}>
                             <Typography variant="body1" color="textPrimary">
-                                Available Collateral
+                                Outstanding Loan
                             </Typography>
                         </Box>
                         {displayAssetsRadio({
-                            list: collateralList,
-                            selectedAsset: selectedCollateralAsset,
+                            list: loanList,
+                            selectedAsset: selectedLoanAsset,
                             handleChooseCoin: handleChooseSupplyCoin,
                             showDiscount: true,
                         })}
@@ -454,7 +457,7 @@ const DrawerLiquidateWrapper = ({
                                     <InputAdornment position="start">
                                         <img
                                             src={getTokenIcon(
-                                                selectedCollateralAsset
+                                                selectedLoanAsset
                                             )}
                                             alt="asset"
                                             className={classes.inputIcon}
@@ -484,7 +487,7 @@ const DrawerLiquidateWrapper = ({
                                 className={classes.select}
                                 labelId="receive-asset"
                                 id="receive-asset"
-                                value={selectedReceiveAsset}
+                                value={selectedCollateralAsset}
                                 onChange={handleChangeDropdownBorrow}
                                 label="Asset"
                                 fullWidth={true}
@@ -492,7 +495,7 @@ const DrawerLiquidateWrapper = ({
                                 disableUnderline={true}
                             >
                                 {displayAssetsDropdown({
-                                    list: receiveAssetList,
+                                    list: collateralAssetList,
                                 })}
                             </Select>
                         </Box>
@@ -545,11 +548,11 @@ const DrawerLiquidateWrapper = ({
                                 >
                                     {getPercentage(
                                         displayMaxAmountOfTokensForEachLoan(
-                                            selectedCollateralAsset
+                                            selectedLoanAsset
                                         ),
                                         0.1
                                     ).toFixed(6)}{" "}
-                                    {selectedCollateralAsset}
+                                    {selectedLoanAsset}
                                 </Grid>
                             </Grid>
                             <Grid container className={classes.rateRow}>
@@ -569,9 +572,9 @@ const DrawerLiquidateWrapper = ({
                                     justify="flex-end"
                                 >
                                     {displayMaxAmountOfTokensForEachLoan(
-                                        selectedCollateralAsset
+                                        selectedLoanAsset
                                     ).toFixed(6)}{" "}
-                                    {selectedCollateralAsset}
+                                    {selectedLoanAsset}
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -584,12 +587,11 @@ const DrawerLiquidateWrapper = ({
                                 onClick={() => {
                                     onButtonClick({
                                         assetCollateral:
-                                            selectedCollateralAssetData.asset,
+                                            selectedLoanAssetData.asset,
                                         assetBorrow:
-                                            selectedReceiveAssetData.asset,
+                                            selectedCollateralAssetData.asset,
 
-                                        symbol:
-                                            selectedCollateralAssetData.symbol,
+                                        symbol: selectedLoanAssetData.symbol,
                                     });
                                     handleClose();
                                 }}
@@ -610,7 +612,7 @@ const DrawerLiquidateWrapper = ({
 // Section 6: Documentation with PropTypes
 DrawerLiquidateWrapper.propTypes = {
     buttonsLabel: PropTypes.string.isRequired,
-    collateralList: PropTypes.array.isRequired,
+    loanList: PropTypes.array.isRequired,
 };
 
 // Section 7:  Connect styles and export

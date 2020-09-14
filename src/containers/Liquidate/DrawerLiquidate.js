@@ -89,12 +89,12 @@ const LiquidateDrawerContainer = ({
             onSetAmount={onSetAmount}
             enableButtonClick={enableLiquidate}
             isDoingAction={false /* TODO: define action being done */}
-            collateralList={supplyList}
+            loanList={borrowList}
+            selectedLoanAsset={selectedBorrowAsset}
+            setSelectedLoanAsset={setSelectedBorrowAsset}
+            collateralAssetList={supplyList}
             selectedCollateralAsset={selectedSupplyAsset}
             setSelectedCollateralAsset={setSelectedSupplyAsset}
-            receiveAssetList={borrowList}
-            selectedReceiveAsset={selectedBorrowAsset}
-            setSelectedReceiveAsset={setSelectedBorrowAsset}
             marketsData={marketsData}
         />
     );
