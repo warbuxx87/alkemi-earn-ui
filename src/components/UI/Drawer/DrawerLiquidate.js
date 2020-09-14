@@ -511,7 +511,7 @@ const DrawerLiquidateWrapper = ({
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Covering Debt
+                                        Covering Debt (You Pay)
                                     </Typography>
                                 </Grid>
                                 <Grid
@@ -521,7 +521,33 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {shortfallETH.toFixed(6)} ETH
+                                    {displayMaxAmountOfTokensForEachLoan(
+                                        selectedLoanAsset
+                                    ).toFixed(6)}{" "}
+                                    {selectedLoanAsset}
+                                </Grid>
+                            </Grid>
+
+                            <Grid container className={classes.rateRow}>
+                                <Grid item md={6} className={classes.vertCent}>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Receive Total
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    container
+                                    justify="flex-end"
+                                >
+                                    {displayMaxAmountOfTokensForEachLoan(
+                                        selectedLoanAsset
+                                    ).toFixed(6)}{" "}
+                                    {selectedLoanAsset}
                                 </Grid>
                             </Grid>
 
@@ -551,28 +577,6 @@ const DrawerLiquidateWrapper = ({
                                             selectedLoanAsset
                                         ),
                                         0.1
-                                    ).toFixed(6)}{" "}
-                                    {selectedLoanAsset}
-                                </Grid>
-                            </Grid>
-                            <Grid container className={classes.rateRow}>
-                                <Grid item md={6} className={classes.vertCent}>
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                    >
-                                        Receive Total
-                                    </Typography>
-                                </Grid>
-                                <Grid
-                                    item
-                                    md={6}
-                                    xs
-                                    container
-                                    justify="flex-end"
-                                >
-                                    {displayMaxAmountOfTokensForEachLoan(
-                                        selectedLoanAsset
                                     ).toFixed(6)}{" "}
                                     {selectedLoanAsset}
                                 </Grid>
