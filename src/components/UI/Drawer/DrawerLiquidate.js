@@ -499,7 +499,13 @@ const DrawerLiquidateWrapper = ({
                                 placeholder="0.00"
                                 type={amount < 0 ? "text" : "number"}
                                 onChange={(e) => onSetAmount(e.target.value)}
-                                value={amount < 0 ? "LIQUIDATE ALL" : amount}
+                                value={
+                                    amount < 0
+                                        ? displayPayAmountofTokensforInput(
+                                              amount
+                                          )
+                                        : amount
+                                }
                                 fullWidth={true}
                                 disabled={amount < 0}
                                 id="input-with-icon-adornment"
