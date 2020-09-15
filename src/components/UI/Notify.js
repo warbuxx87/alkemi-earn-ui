@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { IconButton, Snackbar, Box, CircularProgress } from "@material-ui/core";
+import { IconButton, Box, CircularProgress } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import { AlertTitle } from "@material-ui/lab";
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     Alert: {
         width: 330,
         paddingTop: 8,
-        paddingBottom: 8,
+        paddingBottom: 2,
         backgroundColor: "rgb(17, 17, 17)",
     },
     Title: {
@@ -58,12 +58,7 @@ export default function PositionedSnackbar({
     txHash,
 }) {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        vertical: "top",
-        horizontal: "center",
-    });
-
-    const { vertical, horizontal } = state;
+    const [state, setState] = React.useState({});
 
     const handleClose = () => {
         setState({ ...state, open: false });
@@ -88,47 +83,38 @@ export default function PositionedSnackbar({
     };
 
     return (
-        <>
-            <Snackbar
-                anchorOrigin={{ vertical, horizontal }}
-                open={true}
-                key={vertical + horizontal}
-            >
-                <Alert
-                    action={
-                        <>
-                            {(variant === "processing" ||
-                                variant === "success") && (
-                                <a
-                                    className={classes.Button}
-                                    color="inherit"
-                                    size="small"
-                                    href={`${ETHERSCAN_LINK}/tx/${txHash}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    Check
-                                </a>
-                            )}
-                            <IconButton
-                                size="small"
-                                onClick={handleClose}
-                                className={classes.CloseButton}
-                                color="inherit"
-                            >
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                        </>
-                    }
-                    className={classes.Alert}
-                    icon={getIcon()}
-                    severity="info"
-                >
-                    <AlertTitle className={classes.Title}>{message}</AlertTitle>
-                    <Box className={classes.Message}> {secondaryMessage}</Box>
-                </Alert>
-            </Snackbar>
-        </>
+        <Alert
+            action={
+                <>
+                    {(variant === "processing" || variant === "success") && (
+                        <a
+                            className={classes.Button}
+                            color="inherit"
+                            size="small"
+                            href={`${ETHERSCAN_LINK}/tx/${txHash}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            Check
+                        </a>
+                    )}
+                    <IconButton
+                        size="small"
+                        onClick={handleClose}
+                        className={classes.CloseButton}
+                        color="inherit"
+                    >
+                        <CloseIcon fontSize="small" />
+                    </IconButton>
+                </>
+            }
+            className={classes.Alert}
+            icon={getIcon()}
+            severity="info"
+        >
+            <AlertTitle className={classes.Title}>{message}</AlertTitle>
+            <Box className={classes.Message}> {secondaryMessage}</Box>
+        </Alert>
     );
 }

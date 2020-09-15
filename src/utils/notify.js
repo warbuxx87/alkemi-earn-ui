@@ -93,7 +93,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
             closeButton: true,
             position: "top-right",
             // Automatically Close Notification after 15 seconds
-            autoClose: 7500,
+            autoClose: 20000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
@@ -104,7 +104,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
         // We have to dismiss last toast because material-ui snackbars don't support multiple stacked ones at once
         // consider using notistack for example if the need for multiple notifications at the same time arise
         // https://github.com/mui-org/material-ui/issues/1824
-        toast.dismiss();
+        //toast.dismiss();
 
         const display = (
             <Notify
