@@ -2,7 +2,7 @@
 import React from "react";
 
 // 2. Libraries imports
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Notify from "components/UI/Notify";
@@ -93,7 +93,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
             closeButton: true,
             position: "top-right",
             // Automatically Close Notification after 15 seconds
-            autoClose: 15000,
+            autoClose: 7500,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
@@ -115,7 +115,8 @@ const contractTXNotifier = (store) => (next) => (action) => {
             />
         );
 
-        toast(display, options);
+        // Ghost notification triggered, TODO: check the source of it
+        if (toastMessageVariant !== undefined) toast(display, options);
     }
 
     return next(action);
