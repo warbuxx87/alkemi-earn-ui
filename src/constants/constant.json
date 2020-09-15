@@ -4,6 +4,7 @@
     "collateral_rate": "1250000000000000000",
     "originationFee": "100000000000000",
     "network_type": {
+        "1": "main",
         "3": "ropsten",
         "4": "rinkeby",
         "42": "kovan"
