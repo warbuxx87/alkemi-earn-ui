@@ -85,7 +85,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
         if (action.type === actionTypeError) {
             toastMessageVariant = "failure";
             displayMessage = "Transaction failed";
-            displaySecondaryMessage = "The Failure Message Would Go Here";
+            displaySecondaryMessage = "Something went wrong";
             //console.log("Tx Error event fired", displayMessage);
         }
 
