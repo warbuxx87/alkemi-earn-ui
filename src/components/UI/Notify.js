@@ -39,6 +39,12 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 4,
         color: "#5a4fff",
     },
+    Message: {
+        textTransform: "capitalize",
+        fontWeight: 400,
+        fontSize: 12,
+        color: "#B8B8B8",
+    },
 }));
 
 function Alert(props) {
@@ -120,10 +126,7 @@ export default function PositionedSnackbar({
                     severity="info"
                 >
                     <AlertTitle className={classes.Title}>{message}</AlertTitle>
-                    <Box fontWeight={400} color="#b8b8b8">
-                        {" "}
-                        {secondaryMessage}
-                    </Box>
+                    <Box className={classes.Message}> {secondaryMessage}</Box>
                 </Alert>
             </Snackbar>
         </>
