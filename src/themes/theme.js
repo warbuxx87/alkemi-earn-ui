@@ -35,7 +35,7 @@ const darkTheme = createMuiTheme({
         },
 
         error: {
-            main: "#F00640", //red
+            main: "#B6244F", //red
             contrastText: "#fff",
         },
 

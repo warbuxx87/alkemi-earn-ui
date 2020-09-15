@@ -85,7 +85,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
         if (action.type === actionTypeError) {
             toastMessageVariant = "failure";
             displayMessage = "Transaction failed";
-            displaySecondaryMessage = "Something went wrong";
+            displaySecondaryMessage = "Transaction was cancelled";
             //console.log("Tx Error event fired", displayMessage);
         }
 
@@ -93,7 +93,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
             closeButton: true,
             position: "top-right",
             // Automatically Close Notification after 15 seconds
-            autoClose: 7500,
+            autoClose: 50000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,

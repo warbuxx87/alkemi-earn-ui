@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: 8,
         backgroundColor: "#0f0f10",
         border: "solid 1px #262628",
+        marginBottom: 8,
     },
     Title: {
         marginBottom: 0,
@@ -44,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
     },
     Circle: {
         margin: "auto 0",
-        color: "#5a4fff",
+        marginRight: 2,
+        color: "#6E44FF",
     },
     Message: {
         textTransform: "capitalize",
@@ -76,7 +78,11 @@ export default function PositionedSnackbar({
         switch (variant) {
             case "processing":
                 return (
-                    <CircularProgress size={25} className={classes.Circle} />
+                    <CircularProgress
+                        thickness={5}
+                        size={27}
+                        className={classes.Circle}
+                    />
                 );
             case "success":
                 return (
