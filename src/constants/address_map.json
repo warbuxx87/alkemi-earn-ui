@@ -1,4 +1,11 @@
 {
+    "main": {
+        "address_MoneyMarket": "0x",
+        "address_USDC": "0x",
+        "address_WBTC": "0x",
+        "address_WETH": "0x",
+        "address_DAI": "0x"
+    },
     "rinkeby": {
         "address_MoneyMarket": "0xe6a53F96ceCA750ef8589c5b376872213aa4f230",
         "address_DSR": "0x8a5C1BD4D75e168a4f65eB902c289400B90FD980",
@@ -8,5 +15,19 @@
         "address_WBTC": "0x577d296678535e4903d59a4c929b718e1d575e0a",
         "address_WETH": "0xC8b1a5ef2e19937dd6c0f804DF2e3efE9F093B1e",
         "address_DAI": "0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa"
+    },
+    "ropsten": {
+        "address_MoneyMarket": "0x",
+        "address_USDC": "0x",
+        "address_WBTC": "0x",
+        "address_WETH": "0x",
+        "address_DAI": "0x"
+    },
+    "kovan": {
+        "address_MoneyMarket": "0x",
+        "address_USDC": "0x",
+        "address_WBTC": "0x",
+        "address_WETH": "0x",
+        "address_DAI": "0x"
     }
 }
