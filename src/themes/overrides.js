@@ -17,6 +17,17 @@ const overrides = {
             },
         },
     },
+    MuiTooltip: {
+        tooltip: {
+            fontSize: "12px",
+            color: "#fff",
+            backgroundColor: "#000",
+            fontWeight: 400,
+        },
+        arrow: {
+            color: "#000",
+        },
+    },
     MuiButton: {
         root: {
             textTransform: "capitalize",
