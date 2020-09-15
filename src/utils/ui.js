@@ -180,9 +180,8 @@ export const checkAction = (address, toAddress, fromAddress, amount) => {
     return action;
 };
 
-export const openEtherScan = (hash) => {
-    //TODO: grab network id from state https://[network].etherscan.io/tx/"
-    const urlBase = "https://rinkeby.etherscan.io/tx/";
+export const openEtherScan = (hash, currentNetworkName) => {
+    const urlBase = `https://${currentNetworkName}.etherscan.io/tx/`;
     const url = urlBase + hash;
 
     return url;
