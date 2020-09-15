@@ -77,8 +77,11 @@ Object {
       },
     },
     "MuiTooltip": Object {
-      "arrow": Object {},
+      "arrow": Object {
+        "color": "#000",
+      },
       "tooltip": Object {
+        "backgroundColor": "#000",
         "color": "#fff",
         "fontSize": "12px",
         "fontWeight": 400,
