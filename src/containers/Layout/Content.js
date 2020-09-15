@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router";
 
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.minimal.css";
+// import "react-toastify/dist/ReactToastify.minimal.css";
 
 import Dashboard from "containers/Dashboard/Dashboard";
 import Lend from "containers/Lend/Lend";
