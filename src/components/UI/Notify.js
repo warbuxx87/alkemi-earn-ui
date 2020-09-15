@@ -11,14 +11,22 @@ import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlin
 const ETHERSCAN_LINK = process.env.REACT_APP_ETHERSCAN_LINK;
 
 const useStyles = makeStyles((theme) => ({
-    Icon: {
-        marginTop: 12,
+    Success: {
+        color: theme.palette.success.main,
+        margin: "auto 0",
+        fontSize: "2rem",
+    },
+    Error: {
+        color: theme.palette.error.main,
+        margin: "auto 0",
+        fontSize: "2rem",
     },
     Alert: {
         width: 330,
         paddingTop: 8,
         paddingBottom: 8,
-        backgroundColor: "rgb(17, 17, 17)",
+        backgroundColor: "#0f0f10",
+        border: "solid 1px #262628",
     },
     Title: {
         marginBottom: 0,
@@ -29,14 +37,13 @@ const useStyles = makeStyles((theme) => ({
         right: 0,
     },
     Button: {
-        marginRight: 14,
+        marginRight: 24,
         textTransform: "capitalize",
         color: "#ffffff",
         fontSize: 12,
     },
-    circle: {
-        marginTop: 4,
-        marginRight: 4,
+    Circle: {
+        margin: "auto 0",
         color: "#5a4fff",
     },
     Message: {
@@ -74,14 +81,16 @@ export default function PositionedSnackbar({
         switch (variant) {
             case "processing":
                 return (
-                    <CircularProgress size={25} className={classes.circle} />
+                    <CircularProgress size={25} className={classes.Circle} />
                 );
             case "success":
                 return (
-                    <CheckCircleOutlineOutlinedIcon className={classes.Icon} />
+                    <CheckCircleOutlineOutlinedIcon
+                        className={classes.Success}
+                    />
                 );
             case "failure":
-                return <ErrorOutlineOutlinedIcon className={classes.Icon} />;
+                return <ErrorOutlineOutlinedIcon className={classes.Error} />;
             default:
                 return null;
         }
