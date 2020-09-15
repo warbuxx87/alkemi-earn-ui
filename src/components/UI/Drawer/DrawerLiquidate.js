@@ -492,6 +492,7 @@ const DrawerLiquidateWrapper = ({
                         </Box>
                         <Box className={classes.inputWrap}>
                             <Input
+                                autoComplete="off"
                                 autoFocus={true}
                                 disableUnderline={true}
                                 className={classes.input}
