@@ -27,7 +27,7 @@ export default (fetchPeriodically = false) => {
 
         // move this async call to redux if needs to be called from more than one place
         const get_markets_data = () => {
-            const markets_api = url_map[currentNetworkName].markets_url; // TODO: update with automatic network selection when other networks than rinkeby are available
+            const markets_api = url_map[currentNetworkName].markets_url;
 
             fetch(markets_api)
                 .then((res) => {
