@@ -85,7 +85,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
         if (action.type === actionTypeError) {
             toastMessageVariant = "failure";
             displayMessage = "Transaction failed";
-            displaySecondaryMessage = "The Failure Message Would Go Here";
+            displaySecondaryMessage = "Transaction was cancelled";
             //console.log("Tx Error event fired", displayMessage);
         }
 
@@ -101,10 +101,8 @@ const contractTXNotifier = (store) => (next) => (action) => {
             progress: undefined,
         };
 
-        // We have to dismiss last toast because material-ui snackbars don't support multiple stacked ones at once
-        // consider using notistack for example if the need for multiple notifications at the same time arise
-        // https://github.com/mui-org/material-ui/issues/1824
-        toast.dismiss();
+        // Enable if we want to dismiss older toasts
+        // toast.dismiss();
 
         const display = (
             <Notify
