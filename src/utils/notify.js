@@ -93,7 +93,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
             closeButton: true,
             position: "top-right",
             // Automatically Close Notification after 15 seconds
-            autoClose: 50000,
+            autoClose: 7500,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
