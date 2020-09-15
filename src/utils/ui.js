@@ -180,22 +180,6 @@ export const checkAction = (address, toAddress, fromAddress, amount) => {
     return action;
 };
 
-export const checkAddress = (address, toAddress, fromAddress) => {
-    // get MoneyMarket Address from constants
-    const mMarket = "0xe6a53f96ceca750ef8589c5b376872213aa4f230";
-
-    // if from Address is Users Address
-    if (fromAddress === address) {
-        //  action = "Sent";
-        return toAddress;
-    }
-
-    if (fromAddress === mMarket) {
-        //  action = "Received";
-        return fromAddress;
-    }
-};
-
 export const openEtherScan = (hash) => {
     //TODO: grab network id from state https://[network].etherscan.io/tx/"
     const urlBase = "https://rinkeby.etherscan.io/tx/";
