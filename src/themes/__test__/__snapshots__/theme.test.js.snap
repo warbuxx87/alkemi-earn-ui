@@ -106,9 +106,9 @@ Object {
     "divider": "rgba(255, 255, 255, 0.12)",
     "error": Object {
       "contrastText": "#fff",
-      "dark": "rgb(168, 4, 44)",
-      "light": "rgb(243, 55, 102)",
-      "main": "#F00640",
+      "dark": "rgb(127, 25, 55)",
+      "light": "rgb(196, 79, 114)",
+      "main": "#B6244F",
     },
     "getContrastText": [Function],
     "grey": Object {
