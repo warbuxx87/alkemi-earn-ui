@@ -168,9 +168,14 @@ const getBorrowAsset = createSelector(
                     ethBalance / web3.utils.fromWei(totalBorrowed)
                 ).toString();
 
-                USDprice =
+                // TODO clean up: old value that always returned 0
+
+                /*USDprice =
                     assetPrices["0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"] ||
-                    "0";
+                    "0";*/
+
+                // Replaced now with address_USDC
+                USDprice = assetPrices[address[network][`address_USDC`]] || "0";
             }
 
             if (network && accountLiquidity && price && price > 0) {
