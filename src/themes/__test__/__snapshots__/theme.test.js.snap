@@ -76,6 +76,17 @@ Object {
         "disableGutters": "true",
       },
     },
+    "MuiTooltip": Object {
+      "arrow": Object {
+        "color": "#000",
+      },
+      "tooltip": Object {
+        "backgroundColor": "#000",
+        "color": "#fff",
+        "fontSize": "12px",
+        "fontWeight": 400,
+      },
+    },
   },
   "palette": Object {
     "action": Object {
@@ -106,9 +117,9 @@ Object {
     "divider": "rgba(255, 255, 255, 0.12)",
     "error": Object {
       "contrastText": "#fff",
-      "dark": "rgb(168, 4, 44)",
-      "light": "rgb(243, 55, 102)",
-      "main": "#F00640",
+      "dark": "rgb(127, 25, 55)",
+      "light": "rgb(196, 79, 114)",
+      "main": "#B6244F",
     },
     "getContrastText": [Function],
     "grey": Object {
@@ -156,7 +167,7 @@ Object {
       "hint": "rgba(184, 233, 134, 1)",
       "icon": "rgba(255, 255, 255, 0.5)",
       "primary": "#ffffff",
-      "secondary": "#979797",
+      "secondary": "#a7a7a7",
       "success": "#3cb34f",
     },
     "tonalOffset": 0.2,

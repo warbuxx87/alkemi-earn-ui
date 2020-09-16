@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { IconButton, Snackbar, Box, CircularProgress } from "@material-ui/core";
+import { IconButton, Box, CircularProgress } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import { AlertTitle } from "@material-ui/lab";
 
@@ -8,17 +8,24 @@ import CloseIcon from "@material-ui/icons/Close";
 import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 
-const ETHERSCAN_LINK = process.env.REACT_APP_ETHERSCAN_LINK;
-
 const useStyles = makeStyles((theme) => ({
-    Icon: {
-        marginTop: 12,
+    Success: {
+        color: theme.palette.success.main,
+        margin: "auto 0",
+        fontSize: "2rem",
+    },
+    Error: {
+        color: theme.palette.error.main,
+        margin: "auto 0",
+        fontSize: "2rem",
     },
     Alert: {
         width: 330,
         paddingTop: 8,
         paddingBottom: 8,
-        backgroundColor: "rgb(17, 17, 17)",
+        backgroundColor: "#0f0f10",
+        border: "solid 1px #262628",
+        marginBottom: 8,
     },
     Title: {
         marginBottom: 0,
@@ -29,15 +36,21 @@ const useStyles = makeStyles((theme) => ({
         right: 0,
     },
     Button: {
-        marginRight: 14,
+        marginRight: 24,
         textTransform: "capitalize",
         color: "#ffffff",
         fontSize: 12,
     },
-    circle: {
-        marginTop: 4,
-        marginRight: 4,
-        color: "#5a4fff",
+    Circle: {
+        margin: "auto 0",
+        marginRight: 2,
+        color: "#6E44FF",
+    },
+    Message: {
+        textTransform: "capitalize",
+        fontWeight: 400,
+        fontSize: 12,
+        color: "#B8B8B8",
     },
 }));
 
@@ -50,14 +63,10 @@ export default function PositionedSnackbar({
     message,
     secondaryMessage,
     txHash,
+    currentNetworkName,
 }) {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        vertical: "top",
-        horizontal: "center",
-    });
-
-    const { vertical, horizontal } = state;
+    const [state, setState] = React.useState({});
 
     const handleClose = () => {
         setState({ ...state, open: false });
@@ -68,64 +77,58 @@ export default function PositionedSnackbar({
         switch (variant) {
             case "processing":
                 return (
-                    <CircularProgress size={25} className={classes.circle} />
+                    <CircularProgress
+                        thickness={5}
+                        size={27}
+                        className={classes.Circle}
+                    />
                 );
             case "success":
                 return (
-                    <CheckCircleOutlineOutlinedIcon className={classes.Icon} />
+                    <CheckCircleOutlineOutlinedIcon
+                        className={classes.Success}
+                    />
                 );
             case "failure":
-                return <ErrorOutlineOutlinedIcon className={classes.Icon} />;
+                return <ErrorOutlineOutlinedIcon className={classes.Error} />;
             default:
                 return null;
         }
     };
 
     return (
-        <>
-            <Snackbar
-                anchorOrigin={{ vertical, horizontal }}
-                open={true}
-                key={vertical + horizontal}
-            >
-                <Alert
-                    action={
-                        <>
-                            {(variant === "processing" ||
-                                variant === "success") && (
-                                <a
-                                    className={classes.Button}
-                                    color="inherit"
-                                    size="small"
-                                    href={`${ETHERSCAN_LINK}/tx/${txHash}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    Check
-                                </a>
-                            )}
-                            <IconButton
-                                size="small"
-                                onClick={handleClose}
-                                className={classes.CloseButton}
-                                color="inherit"
-                            >
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                        </>
-                    }
-                    className={classes.Alert}
-                    icon={getIcon()}
-                    severity="info"
-                >
-                    <AlertTitle className={classes.Title}>{message}</AlertTitle>
-                    <Box fontWeight={400} color="#b8b8b8">
-                        {" "}
-                        {secondaryMessage}
-                    </Box>
-                </Alert>
-            </Snackbar>
-        </>
+        <Alert
+            action={
+                <>
+                    {(variant === "processing" || variant === "success") && (
+                        <a
+                            className={classes.Button}
+                            color="inherit"
+                            size="small"
+                            href={`https://${currentNetworkName}.etherscan.io/tx/${txHash}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            Check
+                        </a>
+                    )}
+                    <IconButton
+                        size="small"
+                        onClick={handleClose}
+                        className={classes.CloseButton}
+                        color="inherit"
+                    >
+                        <CloseIcon fontSize="small" />
+                    </IconButton>
+                </>
+            }
+            className={classes.Alert}
+            icon={getIcon()}
+            severity="info"
+        >
+            <AlertTitle className={classes.Title}>{message}</AlertTitle>
+            <Box className={classes.Message}> {secondaryMessage}</Box>
+        </Alert>
     );
 }

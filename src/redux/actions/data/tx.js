@@ -68,7 +68,7 @@ const fetchTxCall = ({ currentNetworkName, address, dispatch }) => {
         .then((data) => {
             if (data) {
                 const userTxList = JSON.parse(data);
-                console.log("usertxlist: ", userTxList);
+                //console.log("usertxlist: ", userTxList);
 
                 dispatch(fetchTxSuccess(userTxList));
             }

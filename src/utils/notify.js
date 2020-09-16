@@ -9,6 +9,7 @@ import Notify from "components/UI/Notify";
 
 // 3. constants imports
 import errorMessage from "constants/error_code";
+import constants from "constants/constant.json";
 
 const contractTXNotifier = (store) => (next) => (action) => {
     if (!action) next(action); // could be replaced with a simple return since we don't really have an action
@@ -85,7 +86,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
         if (action.type === actionTypeError) {
             toastMessageVariant = "failure";
             displayMessage = "Transaction failed";
-            displaySecondaryMessage = "The Failure Message Would Go Here";
+            displaySecondaryMessage = "Transaction was cancelled";
             //console.log("Tx Error event fired", displayMessage);
         }
 
@@ -93,7 +94,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
             closeButton: true,
             position: "top-right",
             // Automatically Close Notification after 15 seconds
-            autoClose: 15000,
+            autoClose: 7500,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
@@ -101,10 +102,13 @@ const contractTXNotifier = (store) => (next) => (action) => {
             progress: undefined,
         };
 
-        // We have to dismiss last toast because material-ui snackbars don't support multiple stacked ones at once
-        // consider using notistack for example if the need for multiple notifications at the same time arise
-        // https://github.com/mui-org/material-ui/issues/1824
-        toast.dismiss();
+        // Enable if we want to dismiss older toasts
+        // toast.dismiss();
+
+        const currentNetworkName =
+            constants.network_type[
+                store.getState().status.onboard.walletNetwork
+            ];
 
         const display = (
             <Notify
@@ -112,10 +116,12 @@ const contractTXNotifier = (store) => (next) => (action) => {
                 message={displayMessage}
                 secondaryMessage={displaySecondaryMessage}
                 txHash={action.txHash}
+                currentNetworkName={currentNetworkName}
             />
         );
 
-        toast(display, options);
+        // Ghost notification triggered, TODO: check the source of it
+        if (toastMessageVariant !== undefined) toast(display, options);
     }
 
     return next(action);

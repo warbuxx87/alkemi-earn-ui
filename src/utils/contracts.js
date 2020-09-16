@@ -78,7 +78,8 @@ export const initMarketContract = ({
 
     const contractAddress = address[network][`address_MoneyMarket`];
 
-    if (!contractAddress) return false;
+    // avoids undefined contract address/or 0x values set for now, could be improved with a check for valid eth address
+    if (!contractAddress || contractAddress.length < 3) return false;
 
     const MoneyMarketContract = new drizzle.web3.eth.Contract(
         MoneyMarket_ABI,
