@@ -16,6 +16,7 @@ import {
     MenuItem,
     Select,
     SvgIcon,
+    Tooltip,
     Typography,
     Radio,
     InputAdornment,
@@ -24,6 +25,7 @@ import {
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { XCircle as XIcon } from "react-feather";
+import { HelpCircle as HelpIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 import clsx from "clsx";
@@ -156,6 +158,11 @@ const DrawerLiquidateClass = makeStyles(
             },
             amount: {
                 paddingTop: "20px",
+            },
+            helpIcon: {
+                width: ".8rem",
+                marginLeft: "8px",
+                color: "#979797",
             },
         }),
     {
@@ -485,10 +492,21 @@ const DrawerLiquidateWrapper = ({
                     </Box>
 
                     <Box px={2} className={classes.amount}>
-                        <Box pb={1}>
+                        <Box display="flex" alignItems="center" pb={1}>
                             <Typography variant="body1" color="textPrimary">
-                                Amount (What you Pay)
+                                Amount
                             </Typography>
+                            <Tooltip
+                                title="What you pay"
+                                placement="right"
+                                arrow
+                                className={classes.toolTip}
+                            >
+                                <HelpIcon
+                                    fontSize="small"
+                                    className={classes.helpIcon}
+                                />
+                            </Tooltip>
                         </Box>
                         <Box className={classes.inputWrap}>
                             <Input
@@ -530,14 +548,21 @@ const DrawerLiquidateWrapper = ({
                             </span>
                         </Box>
                         <Box className={classes.inputWrap} pt={2}>
-                            <Box pb={1}>
-                                <Typography
-                                    variant="body1"
-                                    color="textPrimary"
-                                    className={classes.subtitle}
-                                >
-                                    Collateral (What you Receive)
+                            <Box display="flex" alignItems="center" pb={1}>
+                                <Typography variant="body1" color="textPrimary">
+                                    Collateral
                                 </Typography>
+                                <Tooltip
+                                    title="What you receive"
+                                    placement="right"
+                                    arrow
+                                    className={classes.toolTip}
+                                >
+                                    <HelpIcon
+                                        fontSize="small"
+                                        className={classes.helpIcon}
+                                    />
+                                </Tooltip>
                             </Box>
                             <Select
                                 className={classes.select}
