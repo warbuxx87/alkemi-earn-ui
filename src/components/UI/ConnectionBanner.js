@@ -8,6 +8,8 @@ import CloseIcon from "@material-ui/icons/Close";
 
 // Section 3: Components & Containers import from the application
 
+import constants from "constants/constant.json";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 
 function ConnectionBanner({
@@ -67,7 +69,7 @@ function ConnectionBanner({
                         }
                     >
                         Incorrect Network! Please connect to the{" "}
-                        {currentNetworkName} Test Network
+                        {constants.network_type[DEFAULT_NETWORK]} network.
                     </Alert>
                 </Collapse>
             </div>

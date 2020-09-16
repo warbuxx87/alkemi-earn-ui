@@ -9,6 +9,7 @@ import Notify from "components/UI/Notify";
 
 // 3. constants imports
 import errorMessage from "constants/error_code";
+import constants from "constants/constant.json";
 
 const contractTXNotifier = (store) => (next) => (action) => {
     if (!action) next(action); // could be replaced with a simple return since we don't really have an action
@@ -104,12 +105,18 @@ const contractTXNotifier = (store) => (next) => (action) => {
         // Enable if we want to dismiss older toasts
         // toast.dismiss();
 
+        const currentNetworkName =
+            constants.network_type[
+                store.getState().status.onboard.walletNetwork
+            ];
+
         const display = (
             <Notify
                 variant={toastMessageVariant}
                 message={displayMessage}
                 secondaryMessage={displaySecondaryMessage}
                 txHash={action.txHash}
+                currentNetworkName={currentNetworkName}
             />
         );
 

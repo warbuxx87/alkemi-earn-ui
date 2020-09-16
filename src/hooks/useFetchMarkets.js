@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import _ from "lodash";
 
 import { compare_supply, compare_borrow } from "utils/markets";
+
+import { walletNetworkName } from "redux/selectors/onboard";
 
 const url_map = require("constants/url_map.json");
 
 // Retrieve the USD price every 15 seconds
 export default (fetchPeriodically = false) => {
     const dispatch = useDispatch();
+
+    const currentNetworkName = useSelector(walletNetworkName);
 
     const [marketsData, setMarketsData] = useState([]);
 
@@ -23,7 +27,7 @@ export default (fetchPeriodically = false) => {
 
         // move this async call to redux if needs to be called from more than one place
         const get_markets_data = () => {
-            const markets_api = url_map["rinkeby"].markets_url; // TODO: update with automatic network selection when other networks than rinkeby are available
+            const markets_api = url_map[currentNetworkName].markets_url;
 
             fetch(markets_api)
                 .then((res) => {
@@ -109,19 +113,19 @@ export default (fetchPeriodically = false) => {
         };
 
         const getMarketsData = () => {
-            get_markets_data();
+            if (currentNetworkName !== undefined) get_markets_data();
 
             if (fetchPeriodically === true) {
                 timer = setTimeout(getMarketsData, 15 * 1000);
             }
         };
 
-        getMarketsData();
+        if (currentNetworkName !== undefined) getMarketsData();
 
         return () => {
             if (timer) clearTimeout(timer);
         };
-    }, [dispatch, fetchPeriodically]);
+    }, [dispatch, fetchPeriodically, currentNetworkName]);
 
     return { marketsData, supplyArray, borrowArray, calculationsTotals };
 };

@@ -8,8 +8,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 
-const ETHERSCAN_LINK = process.env.REACT_APP_ETHERSCAN_LINK;
-
 const useStyles = makeStyles((theme) => ({
     Success: {
         color: theme.palette.success.main,
@@ -65,6 +63,7 @@ export default function PositionedSnackbar({
     message,
     secondaryMessage,
     txHash,
+    currentNetworkName,
 }) {
     const classes = useStyles();
     const [state, setState] = React.useState({});
@@ -106,7 +105,7 @@ export default function PositionedSnackbar({
                             className={classes.Button}
                             color="inherit"
                             size="small"
-                            href={`${ETHERSCAN_LINK}/tx/${txHash}`}
+                            href={`https://${currentNetworkName}.etherscan.io/tx/${txHash}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}

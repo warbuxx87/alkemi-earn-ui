@@ -128,7 +128,15 @@ const sortOptions = [
 ];
 
 // Section 5: Code Component
-const History = ({ address, className, txList, txPending, error, ...rest }) => {
+const History = ({
+    address,
+    className,
+    txList,
+    txPending,
+    error,
+    currentNetworkName,
+    ...rest
+}) => {
     const classes = useStyles();
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
     const [page, setPage] = React.useState(0);
@@ -380,7 +388,10 @@ const History = ({ address, className, txList, txPending, error, ...rest }) => {
                                     align="right"
                                 >
                                     <IconButton
-                                        href={openEtherScan(item.txHash)}
+                                        href={openEtherScan(
+                                            item.txHash,
+                                            currentNetworkName
+                                        )}
                                         target="_blank"
                                     >
                                         <SvgIcon fontSize="small">
