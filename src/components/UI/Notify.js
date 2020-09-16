@@ -105,7 +105,7 @@ export default function PositionedSnackbar({
                             className={classes.Button}
                             color="inherit"
                             size="small"
-                            href={`${ETHERSCAN_LINK}/tx/${txHash}`}
+                            href={`https://${currentNetworkName}.etherscan.io/tx/${txHash}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
