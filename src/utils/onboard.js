@@ -11,7 +11,7 @@ const DAPP_ID = process.env.REACT_APP_DAPP_ID;
 // const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
 // const APP_URL = process.env.REACT_APP_APP_URL
 // const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL:
-// const APP_URL = "https://dapp.alkemi.network";
+const APP_URL = "https://dapp.alkemi.network";
 // const RPC_URL = "https://rinkeby.infura.io/v3/" + INFURA_KEY;
 // const CONTACT_EMAIL = "dev@alkemi.ai";
 
@@ -19,7 +19,7 @@ const walletChecks = [
     { checkName: "derivationPath" },
     { checkName: "accounts" },
     { checkName: "connect" },
-    // { checkName: "network" }, // connects to any network
+    { checkName: "network" }, // connects to any network
     // { checkName: "balance", minimumBalance: "1000000" },
 ];
 
