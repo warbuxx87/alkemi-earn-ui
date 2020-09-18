@@ -146,7 +146,7 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                         "USD",
                                         row.unit,
                                         USDPrice,
-                                        row.wallet
+                                        row.balance
                                     )}
                                 </Typography>
                                 <Typography
