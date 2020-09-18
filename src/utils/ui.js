@@ -124,10 +124,18 @@ export const formatPriceForUSDValue = (
     usdPrice,
     wallet
 ) => {
-    return parseFloat(
-        formatETHMoney(price, currency, unit, usdPrice).substring(1) *
-            parseFloat(formatNumber(wallet, unit)).toFixed(2)
+    const calculation = parseFloat(
+        parseFloat(
+            formatETHMoney(price, currency, unit, usdPrice)
+                .substring(1)
+                .replace(/,/g, "")
+        ) * parseFloat(formatNumber(wallet, unit)).toFixed(2)
     );
+
+    return new Intl.NumberFormat("en-es", {
+        style: "currency",
+        currency,
+    }).format(calculation);
 };
 
 // Format a price number with proper symbol (ex: $1.01)
