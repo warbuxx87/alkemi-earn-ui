@@ -17,12 +17,7 @@ import {
 
 //import { useHistory } from "react-router-dom";
 import DepositTableCell from "components/UI/TableCell";
-import {
-    formatNumber,
-    formatPercent,
-    //    formatMoney,
-    calculateEarnings,
-} from "utils/ui";
+import { formatNumber, formatPercent, formatPriceForUSDValue } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -146,18 +141,19 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                 className={classes.endcell}
                             >
                                 <Typography variant="h6" color="textPrimary">
-                                    {calculateEarnings(
-                                        row.balance,
-                                        row.principal,
+                                    {formatPriceForUSDValue(
+                                        row.price,
+                                        "USD",
                                         row.unit,
-                                        USDPrice
+                                        USDPrice,
+                                        row.wallet
                                     )}
                                 </Typography>
                                 <Typography
                                     variant="body2"
                                     color="textSecondary"
                                 >
-                                    Earnings
+                                    EST. USD VALUE
                                 </Typography>
                             </DepositTableCell>
                         </TableRow>
