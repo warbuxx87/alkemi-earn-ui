@@ -117,33 +117,6 @@ export const formatETHMoney = (value, currency, unit, usdPrice) => {
     }).format(calculation);
 };
 
-export const formatETHMoneyAlt = (value, currency, unit, usdPrice) => {
-    if (usdPrice === null || usdPrice === undefined) {
-        usdPrice = "4131207138725935";
-    }
-    let calculation = web3.utils
-        .toBN(value)
-        .div(web3.utils.toBN(usdPrice))
-        .toString();
-    switch (unit) {
-        case "WBTC":
-            calculation = calculation / 1e10;
-            break;
-        case "USDC":
-        case "USDT":
-            calculation = calculation / 1e12;
-            break;
-        default:
-        // code block
-    }
-    return new Intl.NumberFormat("en-es", {
-        style: "currency",
-        currency,
-    })
-        .format(calculation)
-        .substring(1);
-};
-
 export const formatPriceForUSDValue = (
     price,
     currency,
@@ -152,7 +125,7 @@ export const formatPriceForUSDValue = (
     wallet
 ) => {
     return parseFloat(
-        formatETHMoneyAlt(price, currency, unit, usdPrice) *
+        formatETHMoney(price, currency, unit, usdPrice).substring(1) *
             parseFloat(formatNumber(wallet, unit)).toFixed(2)
     );
 };
