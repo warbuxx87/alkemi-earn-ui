@@ -1,7 +1,7 @@
 // Section 1: Utilities imports and low level imports
 
 import { handle_approve_click } from "utils/drizzle";
-import notify from "utils/notify";
+// import notify from "utils/notify";
 
 // Section 2: Action types declarations and action creators
 
