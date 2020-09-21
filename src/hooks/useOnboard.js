@@ -165,7 +165,7 @@ export default () => {
                             "accountsChanged"
                         );
                         drizzle.web3.currentProvider.removeAllListeners(
-                            "chainChanged"
+                            "networkChanged" // "chainChanged" doesn't seem to be working.. TODO: investigate
                         );
 
                         drizzle.web3.currentProvider.on(
@@ -197,6 +197,10 @@ export default () => {
                                             : DEFAULT_NETWORK
                                     )
                                 );
+
+                                onboard.config({
+                                    networkId: parseInt(newNetworkId, 10),
+                                });
 
                                 initDrizzleData(true);
                             }
