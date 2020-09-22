@@ -64,13 +64,10 @@ export const initMarketContract = ({
     userWalletNetwork,
     forceUpdate,
 }) => {
-    console.log("----------------------------");
-    console.log("forceUpdate: ", forceUpdate);
     if (drizzle.contracts.MoneyMarket && !forceUpdate)
         return drizzle.contracts.MoneyMarket;
     const myAddress = userWalletAddress;
 
-    console.log("userWalletNetwork: ", userWalletNetwork);
     const network = constants.network_type[userWalletNetwork];
     const assets = [/*"PAX", "USDT",*/ "DAI", "USDC", "WBTC", "WETH"];
     if (!network) return; // drizzle not fetched
@@ -84,8 +81,6 @@ export const initMarketContract = ({
     // avoids undefined contract address/or 0x values set for now, could be improved with a check for valid eth address
     if (!contractAddress || contractAddress.length < 3) return false;
 
-    console.log("contractAddress: ", contractAddress);
-
     const MoneyMarketContract = new drizzle.web3.eth.Contract(
         MoneyMarket_ABI,
         contractAddress
@@ -95,7 +90,6 @@ export const initMarketContract = ({
         if (forceUpdate) drizzle.deleteContract("MoneyMarket");
     } catch (e) {
         // catches error
-        console.log("Cannot remove MoneyMarket: ", e);
     }
 
     drizzle.addContract({
