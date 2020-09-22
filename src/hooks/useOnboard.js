@@ -165,7 +165,7 @@ export default () => {
                             "accountsChanged"
                         );
                         drizzle.web3.currentProvider.removeAllListeners(
-                            "networkChanged" // "chainChanged" doesn't seem to be working.. TODO: investigate
+                            "chainChanged"
                         );
 
                         drizzle.web3.currentProvider.on(
@@ -184,25 +184,28 @@ export default () => {
                         );
 
                         drizzle.web3.currentProvider.on(
-                            "networkChanged",
-                            (newNetworkId) => {
-                                resetStoreData();
+                            "chainChanged",
+                            (_chainId) => {
+                                window.location.reload();
+
+                                // TODO: check the use of the following code, maybe use with other wallets
+                                /*resetStoreData();
 
                                 deleteAllContracts(drizzle);
 
                                 dispatch(
                                     setWalletNetwork(
-                                        newNetworkId
-                                            ? newNetworkId
+                                        _chainId
+                                            ? _chainId
                                             : DEFAULT_NETWORK
                                     )
                                 );
 
                                 onboard.config({
-                                    networkId: parseInt(newNetworkId, 10),
+                                    networkId: parseInt(_chainId, 10),
                                 });
 
-                                initDrizzleData(true);
+                                initDrizzleData(true);*/
                             }
                         );
                     } catch (e) {
