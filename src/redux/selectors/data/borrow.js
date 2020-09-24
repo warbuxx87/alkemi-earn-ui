@@ -95,12 +95,18 @@ const borrowBalanceSelector = (state) => {
 
 const borrowAPRSelector = (state) => {
     const borrowAPR = {};
-    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
-        (apr) =>
-            (borrowAPR[apr.args[0]] = calculateInterest(
-                apr.value.borrowRateMantissa
-            ))
-    );
+
+    try {
+        Object.values(
+            _.get(state, "contracts.MoneyMarket.markets", {})
+        ).forEach(
+            (apr) =>
+                (borrowAPR[apr.args[0]] = calculateInterest(
+                    apr.value.borrowRateMantissa
+                ))
+        );
+    } catch (e) {}
+
     return borrowAPR;
 };
 
