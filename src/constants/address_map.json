@@ -17,11 +17,11 @@
         "address_DAI": "0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa"
     },
     "ropsten": {
-        "address_MoneyMarket": "0x",
-        "address_USDC": "0x",
-        "address_WBTC": "0x",
-        "address_WETH": "0x",
-        "address_DAI": "0x"
+        "address_MoneyMarket": "0x63273b1C6e241E22Fc94A539Cdd3ecf669209Ad5",
+        "address_USDC": "0x0D9C8723B343A8368BebE0B5E89273fF8D712e3C",
+        "address_WBTC": "0xBde8bB00A7eF67007A96945B3a3621177B615C44",
+        "address_WETH": "0xc778417e063141139fce010982780140aa0cd5ab",
+        "address_DAI": "0x31f42841c2db5173425b5223809cf3a38fede360"
     },
     "kovan": {
         "address_MoneyMarket": "0xB4Ea11c7d3fF80384209f105c0e430ec01371F20",
