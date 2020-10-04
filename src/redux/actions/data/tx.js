@@ -57,7 +57,7 @@ const fetchTxCall = ({ currentNetworkName, address, dispatch }) => {
 
     dispatch(fetchTxPending());
 
-    const params = "?account=" + address.toUpperCase();
+    const params = "?account=" + address.toLowerCase();
 
     const accountURL = url_map[currentNetworkName].history_url + params;
 
