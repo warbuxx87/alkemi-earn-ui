@@ -191,8 +191,9 @@ export const addressParser = (address) =>
     `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
 
 export const format_str_to_kmb = (str_num) => {
-    var t_num = Number(str_num);
-    var out_a, out_b, t_index;
+    str_num = str_num.toString();
+    let t_num = Number(str_num);
+    let out_a, out_b, t_index;
 
     if (t_num >= 1e9) {
         out_a = Math.floor(t_num / 1e9);
@@ -251,6 +252,7 @@ export const format_str_to_percent = (str_num) => {
 };
 
 export const format_str_to_K = (str_num) => {
+    str_num = str_num.toString();
     var reg = /\d{1,3}(?=(\d{3})+$)/g;
 
     if (str_num.indexOf(".") > 0) {
