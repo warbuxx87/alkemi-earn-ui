@@ -1,3 +1,13 @@
+<a name="1.0.4-3"></a>
+## [1.0.4-3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.0.4...v1.0.4-3) (2020-10-08)
+
+
+### Features
+
+* :sparkles: export source files ([75aabe7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/75aabe7))
+
+
+
 <a name="1.0.4"></a>
 ## 1.0.4 (2020-10-08)
 
