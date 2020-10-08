@@ -55,3 +55,6 @@ ReactDOM.render(
     document.getElementById("root") || document.createElement("div")
 );
 registerServiceWorker();
+
+// Export all the source files to be easily imported from another project
+export * from "./exports";
