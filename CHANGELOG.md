@@ -1,3 +1,8 @@
+<a name="1.0.5"></a>
+## [1.0.5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.0.4-3...v1.0.5) (2020-10-08)
+
+
+
 <a name="1.0.4-3"></a>
 ## [1.0.4-3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.0.4...v1.0.4-3) (2020-10-08)
 
