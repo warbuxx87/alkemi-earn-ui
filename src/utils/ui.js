@@ -60,7 +60,7 @@ export const fromWei = (value, unit) => {
 
 export const toWei = (value, unit) => {
     if (unit === "WBTC") {
-        let amount = web3.utils.toWei(value, "lovelace");
+        let amount = web3.utils.toWei(value, "gwei");
         amount = amount * 100;
         return amount.toString();
     } else {
