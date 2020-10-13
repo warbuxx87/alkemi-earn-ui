@@ -171,7 +171,10 @@ export default () => {
                         drizzle.web3.currentProvider.on(
                             "accountsChanged",
                             (accounts) => {
-                                resetStoreData();
+                                window.location.reload();
+
+                                // TODO: check the use of the following code, maybe use with other wallets
+                                /*resetStoreData();
 
                                 // Could be commented out in the current state as try/catch in contracts.js will catch it anyway
                                 // (or the current clean up in contracts can be kept as it is)
@@ -179,7 +182,7 @@ export default () => {
 
                                 dispatch(setWalletAddress(accounts[0]));
 
-                                initDrizzleData(true);
+                                initDrizzleData(true);*/
                             }
                         );
 
