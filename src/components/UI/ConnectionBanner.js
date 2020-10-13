@@ -53,8 +53,8 @@ function ConnectionBanner({
             <div>
                 <Collapse in={open}>
                     <Alert
-                        severity="warning"
-                        color="warning"
+                        severity="info"
+                        color="info"
                         action={
                             <IconButton
                                 aria-label="close"
@@ -68,8 +68,8 @@ function ConnectionBanner({
                             </IconButton>
                         }
                     >
-                        Incorrect Network! Please connect to the{" "}
-                        {constants.network_type[DEFAULT_NETWORK]} network.
+                        You are connected to the{" "}
+                        {constants.network_type[userWalletNetwork]} network.
                     </Alert>
                 </Collapse>
             </div>

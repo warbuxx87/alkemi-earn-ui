@@ -172,17 +172,20 @@ const History = ({
                 break;
             case "latest|desc":
                 data = data.sort(
-                    (a, b) => parseFloat(b.timestamp) - parseFloat(a.timestamp)
+                    (a, b) =>
+                        parseFloat(b.blockNumber) - parseFloat(a.blockNumber)
                 );
                 break;
             case "oldest|asc":
                 data = data.sort(
-                    (a, b) => parseFloat(a.timestamp) - parseFloat(b.timestamp)
+                    (a, b) =>
+                        parseFloat(a.blockNumber) - parseFloat(b.blockNumber)
                 );
                 break;
             default:
                 data = data.sort(
-                    (a, b) => parseFloat(b.timestamp) - parseFloat(a.timestamp)
+                    (a, b) =>
+                        parseFloat(b.blockNumber) - parseFloat(a.blockNumber)
                 );
         }
 
@@ -275,7 +278,7 @@ const History = ({
                     <TableRow>
                         <HistoryTableCell className="px-0">
                             <Typography variant="body2" color="textSecondary">
-                                Date
+                                Block
                             </Typography>
                         </HistoryTableCell>
                         <HistoryTableCell className="px-0">
@@ -326,7 +329,7 @@ const History = ({
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {item.date}
+                                        {item.blockNumber}
                                     </Typography>
                                 </HistoryTableCell>
                                 <HistoryTableCell

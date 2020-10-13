@@ -1,6 +1,7 @@
 // Section 1: Utilities imports and low level imports
 
 import _ from "lodash";
+import web3 from "web3";
 
 const url_map = require("constants/url_map.json");
 
@@ -65,9 +66,9 @@ const fetchPriceCall = ({ currentNetworkName, address, dispatch }) => {
 
                 dispatch(
                     fetchPriceSuccess(
-                        marketsData[address].oraclePrice
-                            .toString()
-                            .replace(/\./g, "")
+                        web3.utils.toWei(
+                            marketsData[address].oraclePrice.toString()
+                        )
                     )
                 );
             }

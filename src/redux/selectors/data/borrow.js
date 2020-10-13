@@ -187,9 +187,6 @@ const getBorrowAsset = createSelector(
             if (network && accountLiquidity && price && price > 0) {
                 let mantissaPrice;
                 switch (asset.unit) {
-                    case "USDT":
-                        mantissaPrice = price / 1e12;
-                        break;
                     case "USDC":
                         mantissaPrice = price / 1e12;
                         break;
@@ -205,6 +202,17 @@ const getBorrowAsset = createSelector(
                     .div(web3.utils.toBN(parseInt(mantissaPrice))); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
 
                 maxBorrowToken = maxBorrowToken * 0.7999; // Maximum Borrow Amount with collateralRatio + Originatio Fee factored
+
+                switch (asset.unit) {
+                    case "WBTC":
+                        maxBorrowToken = parseFloat(maxBorrowToken).toFixed(8);
+                        break;
+                    case "USDC":
+                        maxBorrowToken = parseFloat(maxBorrowToken).toFixed(6);
+                        break;
+                    default:
+                        maxBorrowToken = parseFloat(maxBorrowToken).toFixed(18);
+                }
 
                 safeBorrowToken = maxBorrowToken * 0.8; // 80% of Maximum Borrow Amount
             }
