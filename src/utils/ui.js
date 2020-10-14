@@ -159,7 +159,7 @@ export const toDate = (timeStamp) => {
 };
 
 export const checkAction = (address, toAddress, fromAddress, amount) => {
-    const myAddress = address.toUpperCase();
+    const myAddress = address.toLowerCase();
     let action;
     if (amount === "0") {
         action = "Mint";
@@ -167,12 +167,12 @@ export const checkAction = (address, toAddress, fromAddress, amount) => {
     }
 
     // if from Address is Users Address
-    if (fromAddress.toUpperCase() === myAddress) {
+    if (fromAddress.toLowerCase() === myAddress) {
         action = "Deposit";
         return action;
     }
 
-    if (toAddress.toUpperCase() === myAddress) {
+    if (toAddress.toLowerCase() === myAddress) {
         action = "Borrow";
         return action;
     }
@@ -192,8 +192,8 @@ export const addressParser = (address) =>
 
 export const format_str_to_kmb = (str_num) => {
     str_num = str_num.toString();
-    var t_num = Number(str_num);
-    var out_a, out_b, t_index;
+    let t_num = Number(str_num);
+    let out_a, out_b, t_index;
 
     if (t_num >= 1e9) {
         out_a = Math.floor(t_num / 1e9);
