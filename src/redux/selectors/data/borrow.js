@@ -29,6 +29,16 @@ const getAllowances = (state) => {
     return allowances;
 };
 
+const getMarketLiquidity = (state) => {
+    const assetLiquidity = {};
+    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
+        (market) =>
+            (assetLiquidity[market.args[0]] = market.value["totalSupply"]) -
+            market.value["totalBorrows"]
+    );
+    return assetLiquidity;
+};
+
 const getUtilizationValues = (state) => {
     const utilizationRates = {};
     Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
@@ -135,6 +145,7 @@ const getBorrowAsset = createSelector(
     getAssetPrices,
     getAccountLiquidity,
     getBorrowAccountValue,
+    getMarketLiquidity,
     (
         assets,
         network,
@@ -144,7 +155,8 @@ const getBorrowAsset = createSelector(
         marketUtilization,
         assetPrices,
         accountLiquidity,
-        accountTotalBorrow
+        accountTotalBorrow,
+        marketLiquidity
     ) =>
         Object.values(assets).map((asset) => {
             let balance = "0";
@@ -158,6 +170,7 @@ const getBorrowAsset = createSelector(
             let maxBorrowToken = "0";
             let safeBorrowToken = "0";
             let totalBorrowed = "0";
+            let liquidity = "0";
             if (network && address[network]) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
@@ -166,6 +179,7 @@ const getBorrowAsset = createSelector(
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
                 totalBorrowed = accountTotalBorrow || "0";
+                liquidity = marketLiquidity[token_address] || "0";
                 ethBalance = web3.utils
                     .toBN(balance)
                     .mul(web3.utils.toBN(price))
@@ -229,6 +243,7 @@ const getBorrowAsset = createSelector(
                 USDprice,
                 maxBorrowToken,
                 safeBorrowToken,
+                liquidity,
             };
         })
 );

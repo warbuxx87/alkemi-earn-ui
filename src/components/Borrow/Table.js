@@ -144,7 +144,7 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(Row.balance, Row.unit)}
+                                        {formatNumber(Row.liquidity, Row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
