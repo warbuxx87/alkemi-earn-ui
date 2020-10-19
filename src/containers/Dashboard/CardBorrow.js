@@ -5,16 +5,12 @@ import { useSelector } from "react-redux";
 // Section 2: internal imports
 import CardBorrow from "components/Dashboard/CardBorrow";
 
-import useFetchPrice from "hooks/useFetchPrice";
-
 // Section 3: Selectors
 import { getTotalBorrow } from "redux/selectors/totalBalance";
 import { getAggregatedBorrowAPR } from "redux/selectors/data/borrow";
 
 // Section 4: Code Component
 const CardValueContainer = () => {
-    useFetchPrice(); // gets current USD price
-
     const totalBorrow = useSelector(getTotalBorrow);
 
     const totalBorrowAPR = useSelector(getAggregatedBorrowAPR); // combined portfolio APR rate

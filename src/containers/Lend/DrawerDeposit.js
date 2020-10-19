@@ -8,8 +8,6 @@ import web3 from "web3";
 // Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
 
-import useFetchPrice from "hooks/useFetchPrice";
-
 import DrizzleContext from "utils/DrizzleContext";
 
 import { onDepositAction } from "redux/actions/data/lend";
@@ -25,7 +23,6 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
-    useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
