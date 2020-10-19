@@ -21,7 +21,7 @@
         "address_USDC": "0x0d9c8723b343a8368bebe0b5e89273ff8d712e3c",
         "address_WBTC": "0xbde8bb00a7ef67007a96945b3a3621177b615c44",
         "address_WETH": "0xc778417e063141139fce010982780140aa0cd5ab",
-        "address_DAI": "0xf34bbebf549f67423941dfb4cc5036acc12bfd06"
+        "address_DAI": "0xe8ef14a5cbaada1542d0341ec4a76b611ba209af"
     },
     "kovan": {
         "address_MoneyMarket": "0xb4ea11c7d3ff80384209f105c0e430ec01371f20",
