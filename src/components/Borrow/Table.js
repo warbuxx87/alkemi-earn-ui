@@ -133,7 +133,7 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Available
+                                        Wallet
                                     </Typography>
                                 </BorrowTableCell>
                                 <BorrowTableCell
@@ -144,13 +144,13 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(Row.balance, Row.unit)}
+                                        {formatNumber(Row.liquidity, Row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Borrowed
+                                        Liquidity
                                     </Typography>
                                 </BorrowTableCell>
                                 <BorrowTableCell
@@ -168,7 +168,7 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        APR
+                                        APY
                                     </Typography>
                                 </BorrowTableCell>
                                 {/*<BorrowTableCell
