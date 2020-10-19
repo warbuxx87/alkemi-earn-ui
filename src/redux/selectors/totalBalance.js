@@ -135,3 +135,13 @@ export const getAggregatedBalance = createSelector(
                   .toString()
             : "0"
 );
+
+export const getMarketLiquidity = (state) => {
+    const assetLiquidity = {};
+    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
+        (market) =>
+            (assetLiquidity[market.args[0]] = market.value["totalSupply"]) -
+            market.value["totalBorrows"]
+    );
+    return assetLiquidity;
+};

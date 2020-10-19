@@ -167,7 +167,7 @@ const DrawerWrapper = ({
                     <Divider />
                     <Box px={2} py={3} mx={2} mt={5} className={classes.aprBox}>
                         <Typography variant="h2" color="primary" align="center">
-                            {formatPercent(asset.apr)} APR
+                            {formatPercent(asset.apr)} APY
                         </Typography>
 
                         {/*<Chart> </Chart>*/}
@@ -273,7 +273,7 @@ const DrawerWrapper = ({
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Deposit Balance
+                                        Contract Balance
                                     </Typography>
                                 </Grid>
                                 <Grid
