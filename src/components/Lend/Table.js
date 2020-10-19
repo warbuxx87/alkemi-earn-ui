@@ -145,7 +145,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {row.contractBalance}
+                                        {formatNumber(row.liquidity, row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"

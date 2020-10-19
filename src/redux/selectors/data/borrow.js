@@ -3,6 +3,7 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "constants/address_map.json";
 import { walletNetworkName } from "redux/selectors/onboard";
+import { getMarketLiquidity } from "redux/selectors/totalBalance";
 import web3 from "web3";
 
 // Helpers
@@ -27,16 +28,6 @@ const getAllowances = (state) => {
         }
     });
     return allowances;
-};
-
-const getMarketLiquidity = (state) => {
-    const assetLiquidity = {};
-    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
-        (market) =>
-            (assetLiquidity[market.args[0]] = market.value["totalSupply"]) -
-            market.value["totalBorrows"]
-    );
-    return assetLiquidity;
 };
 
 const getUtilizationValues = (state) => {
