@@ -8,11 +8,7 @@ import {
     getCollateralRatio,
 } from "redux/selectors/totalBalance";
 
-import useFetchPrice from "hooks/useFetchPrice";
-
 const CardLimitContainer = () => {
-    useFetchPrice(); // gets current USD price
-
     const totalBorrowed = useSelector(getTotalBorrow);
     const totalDeposited = useSelector(getTotalDeposit);
     const collateralRatio = useSelector(getCollateralRatio) / 1e18;

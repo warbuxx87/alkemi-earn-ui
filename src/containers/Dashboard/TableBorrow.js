@@ -6,15 +6,12 @@ import { compose } from "redux";
 // Section 2: internal imports
 import TableBorrow from "components/Dashboard/TableBorrow";
 
-import useFetchPrice from "hooks/useFetchPrice";
-
 // Section 3: Selectors
 import { getBorrowActive } from "redux/selectors/data/borrow";
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
 const TableBorrowContainer = ({ activeReserves }) => {
-    useFetchPrice(); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     return (

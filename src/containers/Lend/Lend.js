@@ -8,8 +8,6 @@ import { bindActionCreators, compose } from "redux";
 // Section 2: internal imports
 import Lend from "components/Lend/Lend";
 
-import useFetchPrice from "hooks/useFetchPrice";
-
 import DrizzleContext from "utils/DrizzleContext";
 
 import { onLendActivate } from "redux/actions/status/lend";
@@ -27,7 +25,6 @@ import { walletAddress, walletNetwork } from "redux/selectors/onboard";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
-    useFetchPrice(); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const drizzle = useContext(DrizzleContext);

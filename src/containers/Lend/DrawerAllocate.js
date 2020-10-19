@@ -6,8 +6,6 @@ import { bindActionCreators, compose } from "redux";
 // Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
 
-import useFetchPrice from "hooks/useFetchPrice";
-
 import DrizzleContext from "utils/DrizzleContext";
 
 import { onAllocateAction } from "redux/actions/data/lend";
@@ -22,7 +20,6 @@ const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
 
-    useFetchPrice(true); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");

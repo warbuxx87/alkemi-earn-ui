@@ -12,15 +12,12 @@ import { compose } from "redux";
 
 import TableSupply from "components/Dashboard/TableDeposit";
 
-import useFetchPrice from "hooks/useFetchPrice";
-
 // Section 3: Selectors
 import { getLendActive } from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/totalBalance";
 
 const TableDepositContainer = ({ activeReserves }) => {
-    useFetchPrice(); // gets current USD price
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     return (
