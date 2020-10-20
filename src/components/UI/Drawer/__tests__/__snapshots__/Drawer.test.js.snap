@@ -66,7 +66,7 @@ exports[`<Drawer /> matches snapshot 1`] = `
           variant="h2"
         >
           NaN%
-           APR
+           APY
         </WithStyles(ForwardRef(Typography))>
       </Styled(MuiBox)>
       <Styled(MuiBox)
@@ -198,7 +198,7 @@ exports[`<Drawer /> matches snapshot 1`] = `
                 color="textSecondary"
                 variant="body2"
               >
-                Deposit Balance
+                Contract Balance
               </WithStyles(ForwardRef(Typography))>
             </WithStyles(ForwardRef(Grid))>
             <WithStyles(ForwardRef(Grid))

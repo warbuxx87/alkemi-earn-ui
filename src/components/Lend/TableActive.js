@@ -149,7 +149,6 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                             row.unit,
                                             USDPrice
                                         )}*/}
-                                        TBD
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -173,7 +172,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        APR
+                                        APY
                                     </Typography>
                                 </LendTableCell>
                                 {/*}<LendTableCell

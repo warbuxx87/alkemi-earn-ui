@@ -1,7 +1,7 @@
 // Section 1: Utilities imports and low level imports
 
 import { handle_approve_click } from "utils/drizzle";
-import notify from "utils/notify";
+import { triggerToastDisplay } from "utils/notify";
 
 // Section 2: Action types declarations and action creators
 
@@ -59,12 +59,12 @@ export const onLendActivate = ({
     handle_approve_click({ drizzle, userWalletNetwork, asset, myAccount })
         .then(() => dispatch(fetchLendSuccess(asset)))
         .catch((error) => {
-            notify.notification({
-                eventCode: "fetchLendError",
-                type: "error",
-                message: error.message,
-                autoDismiss: 5000,
+            triggerToastDisplay({
+                toastMessageVariant: "failure",
+                displayMessage: "Something went wrong",
+                displaySecondaryMessage: error.message,
             });
+
             dispatch(fetchLendError(asset, error.message));
         });
 };

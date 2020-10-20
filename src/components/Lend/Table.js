@@ -134,7 +134,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Available
+                                        Wallet
                                     </Typography>
                                 </LendTableCell>
                                 <LendTableCell
@@ -145,13 +145,13 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        TBD
+                                        {formatNumber(row.liquidity, row.unit)}
                                     </Typography>
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Earnings
+                                        Liquidity
                                     </Typography>
                                 </LendTableCell>
                                 <LendTableCell
@@ -169,7 +169,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        APR
+                                        APY
                                     </Typography>
                                 </LendTableCell>
                                 {/*}<LendTableCell

@@ -5,6 +5,8 @@ import address from "constants/address_map.json";
 import { walletNetworkName } from "redux/selectors/onboard";
 import web3 from "web3";
 
+import { getMarketLiquidity } from "redux/selectors/totalBalance";
+
 // Helpers
 function calculateInterest(rateMantissa) {
     const total_blocks_per_year = (3600 * 24 * 365) / 15;
@@ -129,6 +131,7 @@ const getLendAsset = createSelector(
     getUtilizationValues,
     getAssetPrices,
     getSupplyAccountValue, // TODO: refactor this to getLendAccountValue for consistency
+    getMarketLiquidity,
     (
         assets,
         network,
@@ -138,7 +141,8 @@ const getLendAsset = createSelector(
         lendPrincipal,
         marketUtilization,
         assetPrices,
-        accountTotalSupply
+        accountTotalSupply,
+        marketLiquidity
     ) =>
         Object.values(assets).map((asset) => {
             // supply wallet
@@ -151,8 +155,9 @@ const getLendAsset = createSelector(
             let totalSupplied = "0";
             let ethBalance = "0";
             let weight = "0";
-
             let USDprice = "0";
+            let liquidity = "0";
+
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = lendBalances[token_address] || "0";
@@ -162,6 +167,7 @@ const getLendAsset = createSelector(
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
                 totalSupplied = accountTotalSupply || "0";
+                liquidity = marketLiquidity[token_address] || "0";
                 ethBalance = web3.utils
                     .toBN(balance)
                     .mul(web3.utils.toBN(price))
@@ -190,6 +196,7 @@ const getLendAsset = createSelector(
                 utilization,
                 price,
                 USDprice,
+                liquidity,
             };
         })
 );

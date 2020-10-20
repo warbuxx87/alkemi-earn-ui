@@ -5,7 +5,8 @@ import {
     handle_deposit_click,
     handle_withdraw_click,
 } from "utils/drizzle";
-import notify from "utils/notify";
+
+import { triggerToastDisplay } from "utils/notify";
 
 // Section 2: Action types declarations and action creators
 
@@ -148,12 +149,12 @@ export const onAllocateAction = ({
     handle_allocate_click({ drizzle, userWalletAddress, asset, amount })
         .then(() => dispatch(allocateSuccess(asset)))
         .catch((error) => {
-            notify.notification({
-                eventCode: "allocateError",
-                type: "error",
-                message: error.message,
-                autoDismiss: 5000,
+            triggerToastDisplay({
+                toastMessageVariant: "failure",
+                displayMessage: "Something went wrong",
+                displaySecondaryMessage: error.message,
             });
+
             dispatch(allocateError(asset, error.message));
         });
 };
@@ -175,16 +176,11 @@ export const onDepositAction = ({
     })
         .then(() => dispatch(depositSuccess(asset.unit)))
         .catch((error) => {
-            // TODO: check notify crashing
-
-            /*notify.notification({
-                eventCode: "depositError",
-                type: "error",
-                message: error.message,
-                autoDismiss: 5000,
-            });*/
-
-            console.log("error: ", error);
+            triggerToastDisplay({
+                toastMessageVariant: "failure",
+                displayMessage: "Something went wrong",
+                displaySecondaryMessage: error.message,
+            });
 
             dispatch(depositError(asset.unit, error.message));
         });
@@ -207,12 +203,12 @@ export const onWithdrawAction = ({
     })
         .then(() => dispatch(withdrawSuccess(asset.unit)))
         .catch((error) => {
-            notify.notification({
-                eventCode: "withdrawError",
-                type: "error",
-                message: error.message,
-                autoDismiss: 5000,
+            triggerToastDisplay({
+                toastMessageVariant: "failure",
+                displayMessage: "Something went wrong",
+                displaySecondaryMessage: error.message,
             });
+
             dispatch(withdrawError(asset.unit, error.message));
         });
 };

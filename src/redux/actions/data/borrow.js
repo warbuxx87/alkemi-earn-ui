@@ -1,7 +1,7 @@
 // Section 1: Utilities imports and low level imports
 
 import { handle_borrow_click, handle_repay_click } from "utils/drizzle";
-import notify from "utils/notify";
+import { triggerToastDisplay } from "utils/notify";
 
 // Section 2: Action types declarations and action creators
 
@@ -95,6 +95,7 @@ export const onBorrowAction = ({
     asset,
 }) => async (dispatch) => {
     dispatch(borrowPending(asset.unit));
+
     handle_borrow_click({
         drizzle,
         userWalletNetwork,
@@ -104,12 +105,12 @@ export const onBorrowAction = ({
     })
         .then(() => dispatch(borrowSuccess(asset.unit)))
         .catch((error) => {
-            notify.notification({
-                eventCode: "borrowError",
-                type: "error",
-                message: error.message,
-                autoDismiss: 5000,
+            triggerToastDisplay({
+                toastMessageVariant: "failure",
+                displayMessage: "Something went wrong",
+                displaySecondaryMessage: error.message,
             });
+
             dispatch(borrowError(asset.unit, error.message));
         });
 };
@@ -122,6 +123,7 @@ export const onRepayAction = ({
     asset,
 }) => async (dispatch) => {
     dispatch(repayPending(asset.unit));
+
     handle_repay_click({
         drizzle,
         userWalletNetwork,
@@ -131,12 +133,12 @@ export const onRepayAction = ({
     })
         .then(() => dispatch(repaySuccess(asset.unit)))
         .catch((error) => {
-            notify.notification({
-                eventCode: "repayError",
-                type: "error",
-                message: error.message,
-                autoDismiss: 5000,
+            triggerToastDisplay({
+                toastMessageVariant: "failure",
+                displayMessage: "Something went wrong",
+                displaySecondaryMessage: error.message,
             });
+
             dispatch(repayError(asset.unit, error.message));
         });
 };
