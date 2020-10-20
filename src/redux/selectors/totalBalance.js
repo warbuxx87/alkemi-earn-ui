@@ -2,6 +2,10 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 import web3 from "web3";
 
+import address from "constants/address_map.json";
+
+import { walletNetworkName } from "./onboard";
+
 const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
@@ -69,9 +73,29 @@ export const getUserCollateralRatio = (state) => {
 };
 
 export const getUSDPrice = (state) => {
-    if (state.data.price.usdPrice && state.data.price.usdPrice !== "0")
-        return state.data.price.usdPrice;
-    else return null;
+    const currentNetworkName = walletNetworkName(state);
+
+    if (currentNetworkName) {
+        const contractAddress = address[currentNetworkName][`address_USDC`];
+
+        const assetPrices = Object.values(
+            _.get(state, "contracts.MoneyMarket.assetPrices", {})
+        );
+
+        if (
+            assetPrices &&
+            Array.isArray(assetPrices) &&
+            assetPrices.length > 0
+        ) {
+            const USDCData = assetPrices.find(
+                (asset) => asset.args[0] === contractAddress
+            );
+
+            if (USDCData) return USDCData.value.slice(0, -12); // USDC has 12 trailling zeros
+        }
+    }
+
+    return null;
 };
 
 export const getTotalDeposit = createSelector(
@@ -111,3 +135,13 @@ export const getAggregatedBalance = createSelector(
                   .toString()
             : "0"
 );
+
+export const getMarketLiquidity = (state) => {
+    const assetLiquidity = {};
+    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
+        (market) =>
+            (assetLiquidity[market.args[0]] = market.value["totalSupply"]) -
+            market.value["totalBorrows"]
+    );
+    return assetLiquidity;
+};

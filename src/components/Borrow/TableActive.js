@@ -129,23 +129,6 @@ const BorrowTableActive = ({ data = [] }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(row.wallet, row.unit)}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                    >
-                                        Available
-                                    </Typography>
-                                </BorrowTableCell>
-                                <BorrowTableCell
-                                    align="right"
-                                    style={{ width: "18%" }}
-                                >
-                                    <Typography
-                                        variant="h6"
-                                        color="textPrimary"
-                                    >
                                         {formatNumber(row.balance, row.unit)}
                                     </Typography>
                                     <Typography
@@ -162,6 +145,24 @@ const BorrowTableActive = ({ data = [] }) => {
                                     <Typography
                                         variant="h6"
                                         color="textPrimary"
+                                    >
+                                        0 {row.fees}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Fees
+                                    </Typography>
+                                </BorrowTableCell>
+
+                                <BorrowTableCell
+                                    align="right"
+                                    style={{ width: "18%" }}
+                                >
+                                    <Typography
+                                        variant="h6"
+                                        color="textPrimary"
                                         className={classes.label}
                                     >
                                         {formatPercent(row.apr)}
@@ -170,7 +171,7 @@ const BorrowTableActive = ({ data = [] }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        APR
+                                        APY
                                     </Typography>
                                 </BorrowTableCell>
                                 {/*}<BorrowTableCell

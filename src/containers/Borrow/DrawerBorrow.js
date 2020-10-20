@@ -9,7 +9,6 @@ import { formatNumber, formatETHMoney } from "utils/ui";
 import DrizzleContext from "utils/DrizzleContext";
 
 // Section 3: Selectors, Hooks & Action Listeners
-import useFetchPrice from "hooks/useFetchPrice";
 import { getUSDPrice } from "redux/selectors/totalBalance";
 import { onBorrowAction } from "redux/actions/data/borrow";
 
@@ -23,8 +22,6 @@ const BorrowDrawerContainer = ({ asset, onBorrowAction }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
-
-    useFetchPrice(true); // gets current USD price
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
