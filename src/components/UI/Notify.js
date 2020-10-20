@@ -100,19 +100,21 @@ export default function PositionedSnackbar({
         <Alert
             action={
                 <>
-                    {(variant === "processing" || variant === "success") && (
-                        <a
-                            className={classes.Button}
-                            color="inherit"
-                            size="small"
-                            href={`https://${currentNetworkName}.etherscan.io/tx/${txHash}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            Check
-                        </a>
-                    )}
+                    {(variant === "processing" || variant === "success") &&
+                        txHash !== undefined &&
+                        currentNetworkName !== undefined && (
+                            <a
+                                className={classes.Button}
+                                color="inherit"
+                                size="small"
+                                href={`https://${currentNetworkName}.etherscan.io/tx/${txHash}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                Check
+                            </a>
+                        )}
                     <IconButton
                         size="small"
                         onClick={handleClose}
