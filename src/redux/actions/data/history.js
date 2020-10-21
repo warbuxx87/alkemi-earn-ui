@@ -1,7 +1,5 @@
 // Section 1: Utilities imports and low level imports
 
-import _ from "lodash";
-
 // Section 2: Action types declarations and action creators
 
 //                                       //
@@ -40,8 +38,8 @@ export const FETCH_BLOCK_TIMESTAMP_ERROR = "FETCH_BLOCK_TIMESTAMP_ERROR";
 const fetchBlockTimestampError = (error, blockNumber) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_BLOCK_TIMESTAMP_ERROR,
-    payload: { blockNumber, error: error },
-    error: error,
+    payload: { blockNumber },
+    error: error, // Not used
 });
 
 //                                               //
@@ -73,7 +71,9 @@ export const fetchTimestampsOfBlocks = ({
                     // 1) The app reloads on wallet & network change (store data discarded automatically)
                     // 2) We are not expecting the user to change the wallet and network often during a session
                 })
-                .catch(() => {});
+                .catch((e) => {
+                    dispatch(fetchBlockTimestampError(e, element));
+                });
         } else {
             // element undefined, to be investigated why TXs returns timestamp instead of block numbers on first call
             // or defined but already pulled the data
