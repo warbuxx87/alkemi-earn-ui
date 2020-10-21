@@ -69,6 +69,9 @@ export const fetchTimestampsOfBlocks = ({
                     dispatch(
                         fetchBlockTimestampSuccess(element, result.timestamp)
                     );
+                    // Not saving block's timestamp by network and wallet address (as in blocks: {rinkeby: {0x...: {timestamp: ...}}, ...}), this is okay for now for two reasons:
+                    // 1) The app reloads on wallet & network change (store data discarded automatically)
+                    // 2) We are not expecting the user to change the wallet and network often during a session
                 })
                 .catch(() => {});
         } else {
