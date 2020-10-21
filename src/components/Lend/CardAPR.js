@@ -57,7 +57,7 @@ function CardAPR({ className, totalAPR, ...rest }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Earning APR%" className={classes.item} />
+            <CardHeader title="Earning APY%" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box

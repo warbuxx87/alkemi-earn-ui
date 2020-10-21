@@ -56,7 +56,7 @@ const assetName = [
     },
     {
         id: "DAI",
-        name: "DAI - Maker Dai",
+        name: "DAI - Dai Stablecoin",
     },
     {
         id: "USDC",
@@ -70,15 +70,6 @@ const assetName = [
         id: "WETH",
         name: "WETH - Ether",
     },
-
-    /*{
-        id: "USDT",
-        name: "USDT - Tether",
-    },*/
-    /*{
-        id: "PAX",
-        name: "PAX - Paxos",
-    },*/
 ];
 
 const eventAction = [

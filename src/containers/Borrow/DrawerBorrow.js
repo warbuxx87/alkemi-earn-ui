@@ -35,8 +35,8 @@ const BorrowDrawerContainer = ({ asset, onBorrowAction }) => {
     React.useEffect(() => {
         if (amount) {
             // check that User Input Amount does not exceed maximum amount of tokens that user can borrow for asset and is not less than 0
-            const isAmountLTmaxBorrow =
-                amount <= asset.maxBorrowToken && amount > 0 ? true : false;
+            const isAmountLTmaxBorrow = amount > 0 ? true : false;
+            //      amount <= asset.maxBorrowToken && amount > 0 ? true : false;
             setEnableBorrow(isAmountLTmaxBorrow);
         }
     }, [amount, asset.balance, asset.maxBorrowToken, asset.unit, asset.wallet]);

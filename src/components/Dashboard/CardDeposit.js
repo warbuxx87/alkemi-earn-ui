@@ -81,7 +81,7 @@ function DepositBalance({ totalDeposit, currency, apr }) {
                                 color="textSecondary"
                                 align="right"
                             >
-                                Earning APR
+                                Earning APY
                             </Typography>
                             <Typography
                                 variant="h3"

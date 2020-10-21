@@ -31,9 +31,10 @@ const DrawerWithdrawContainer = ({ asset, onWithdrawAction }) => {
 
     React.useEffect(() => {
         if (amount) {
-            const isAmountLTBalance = web3.utils
-                .toBN(toWei(amount, asset.unit))
-                .lte(web3.utils.toBN(asset.balance));
+            const isAmountLTBalance = amount > 0 ? true : false;
+            // web3.utils
+            //     .toBN(toWei(amount, asset.unit))
+            //     .lte(web3.utils.toBN(asset.balance));
             setEnableWithdraw(isAmountLTBalance);
         }
     }, [amount, asset.balance, asset.unit]);

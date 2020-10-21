@@ -32,9 +32,10 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
 
     React.useEffect(() => {
         if (amount) {
-            const isAmountLTBalance = web3.utils
-                .toBN(toWei(amount, asset.unit))
-                .lte(web3.utils.toBN(asset.wallet));
+            const isAmountLTBalance = amount > 0 ? true : false;
+            // web3.utils
+            //     .toBN(toWei(amount, asset.unit))
+            //     .lte(web3.utils.toBN(asset.wallet));
             setEnableDeposit(isAmountLTBalance);
         }
     }, [amount, asset.wallet, asset.unit]);
