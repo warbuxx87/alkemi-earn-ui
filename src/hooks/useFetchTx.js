@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+// Section 1: React/Redux low level imports
+import { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// Section 2: internal imports
 import { walletNetworkName } from "redux/selectors/onboard";
+
+import DrizzleContext from "utils/DrizzleContext";
 
 import { fetchTx } from "redux/actions/data/tx";
 
@@ -9,6 +13,7 @@ import { walletAddress } from "redux/selectors/onboard";
 
 // Retrieve the tx List every 60 seconds from EtherScan
 export default (fetchPeriodically = false) => {
+    const drizzle = useContext(DrizzleContext);
     const dispatch = useDispatch();
 
     const currentNetworkName = useSelector(walletNetworkName);
@@ -19,7 +24,7 @@ export default (fetchPeriodically = false) => {
             let timer;
 
             const getTxList = (fetchPeriodically) => {
-                dispatch(fetchTx({ currentNetworkName, address }));
+                dispatch(fetchTx({ currentNetworkName, address, drizzle }));
 
                 if (fetchPeriodically === true) {
                     timer = setTimeout(getTxList, 60 * 1000);

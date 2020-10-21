@@ -23,6 +23,8 @@ import {
     MenuItem,
 } from "@material-ui/core";
 
+import { Skeleton } from "@material-ui/lab"; // Skeleton is still in lab and not in core (or atleast no export yet, seems that they forgot to do so)
+
 import { ExternalLink as LinkIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
@@ -135,6 +137,7 @@ const History = ({
     txPending,
     error,
     currentNetworkName,
+    blocksData,
     ...rest
 }) => {
     const classes = useStyles();
@@ -192,6 +195,33 @@ const History = ({
         setPage(0);
         setTxtListData(data);
     }, [txList, values.asset, values.action, values.sortBy]);
+
+    // filter the data displayed by type and sorting selected
+    const getDateFromBlockNumber = useCallback(
+        (blockNumber) => {
+            if (blocksData[blockNumber] !== undefined) {
+                if (blocksData[blockNumber].pending === false) {
+                    return (
+                        <span>
+                            {new Date(
+                                blocksData[blockNumber].timestamp * 1000
+                            ).toLocaleString()}
+                        </span>
+                    );
+                }
+            }
+
+            return (
+                <Skeleton
+                    variant="rect"
+                    width={137}
+                    height={20}
+                    animation="wave"
+                />
+            );
+        },
+        [blocksData]
+    );
 
     React.useEffect(() => {
         filterData();
@@ -278,7 +308,7 @@ const History = ({
                     <TableRow>
                         <HistoryTableCell className="px-0">
                             <Typography variant="body2" color="textSecondary">
-                                Block
+                                Date
                             </Typography>
                         </HistoryTableCell>
                         <HistoryTableCell className="px-0">
@@ -329,7 +359,9 @@ const History = ({
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {item.blockNumber}
+                                        {getDateFromBlockNumber(
+                                            item.blockNumber
+                                        )}
                                     </Typography>
                                 </HistoryTableCell>
                                 <HistoryTableCell
@@ -431,6 +463,7 @@ History.propTypes = {
     txList: PropTypes.array.isRequired,
     txPending: PropTypes.bool.isRequired,
     address: PropTypes.string.isRequired,
+    blocksData: PropTypes.object.isRequired,
 };
 
 // Section 7:  Connect styles and export

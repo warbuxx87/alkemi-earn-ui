@@ -11,6 +11,7 @@ import History from "components/History/History";
 // Section 3: Selectors
 import useFetchTx from "hooks/useFetchTx";
 import { getTxList, getTxPending, getTxError } from "redux/selectors/data/tx";
+import { getBlocksData } from "redux/selectors/data/history";
 
 import { walletAddress, walletNetworkName } from "redux/selectors/onboard";
 
@@ -23,11 +24,13 @@ const HistoryContainer = ({ txPending, txError }) => {
     const currentNetworkName = useSelector(walletNetworkName);
 
     const txList = useSelector(getTxList);
+    const blocksData = useSelector(getBlocksData); // blocks TXs above were fired on (and their timestamp)
 
     return (
         <div className="history-list-wrapper">
             <History
                 txList={txList}
+                blocksData={blocksData}
                 txPending={txPending}
                 txError={txError}
                 address={currentAddress}
