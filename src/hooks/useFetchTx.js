@@ -8,6 +8,7 @@ import { walletNetworkName } from "redux/selectors/onboard";
 import DrizzleContext from "utils/DrizzleContext";
 
 import { fetchTx } from "redux/actions/data/tx";
+import { getBlocksData } from "redux/selectors/data/history";
 
 import { walletAddress } from "redux/selectors/onboard";
 
@@ -19,12 +20,21 @@ export default (fetchPeriodically = false) => {
     const currentNetworkName = useSelector(walletNetworkName);
     const address = useSelector(walletAddress);
 
+    const blocksData = useSelector(getBlocksData); // blocks TXs above were fired on (and their timestamp)
+
     useEffect(
         (fetchPeriodically) => {
             let timer;
 
             const getTxList = (fetchPeriodically) => {
-                dispatch(fetchTx({ currentNetworkName, address, drizzle }));
+                dispatch(
+                    fetchTx({
+                        currentNetworkName,
+                        address,
+                        drizzle,
+                        blocksData,
+                    })
+                );
 
                 if (fetchPeriodically === true) {
                     timer = setTimeout(getTxList, 60 * 1000);

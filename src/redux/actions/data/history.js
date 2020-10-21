@@ -50,30 +50,30 @@ const fetchBlockTimestampError = (error, blockNumber) => ({
 
 // Section 3: Action dispatch methods and async funcs
 
-export const fetchTimestampsOfBlocks = ({ blocks, drizzle }) => async (
-    dispatch
-) => {
+export const fetchTimestampsOfBlocks = ({
+    blocks,
+    blocksData,
+    drizzle,
+}) => async (dispatch) => {
     blocks.forEach((element) => {
-        if (element !== undefined) {
+        if (
+            element !== undefined &&
+            (blocksData[element] === undefined ||
+                blocksData[element].error === true)
+        ) {
             dispatch(fetchBlockTimestampPending(element));
 
-            {
-                drizzle.web3.eth
-                    .getBlock(element)
-                    .then((result) => {
-                        dispatch(
-                            fetchBlockTimestampSuccess(
-                                element,
-                                result.timestamp
-                            )
-                        );
-                    })
-                    .catch(() => {
-                        console.log("error");
-                    });
-            }
+            drizzle.web3.eth
+                .getBlock(element)
+                .then((result) => {
+                    dispatch(
+                        fetchBlockTimestampSuccess(element, result.timestamp)
+                    );
+                })
+                .catch(() => {});
         } else {
             // element undefined, to be investigated why TXs returns timestamp instead of block numbers on first call
+            // or defined but already pulled the data
         }
     });
 };
