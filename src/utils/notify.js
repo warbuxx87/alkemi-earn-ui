@@ -90,41 +90,59 @@ const contractTXNotifier = (store) => (next) => (action) => {
             //console.log("Tx Error event fired", displayMessage);
         }
 
-        const options = {
-            closeButton: true,
-            position: "top-right",
-            // Automatically Close Notification after 15 seconds
-            autoClose: 7500,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: false,
-            progress: undefined,
-        };
-
-        // Enable if we want to dismiss older toasts
-        // toast.dismiss();
-
         const currentNetworkName =
             constants.network_type[
                 store.getState().status.onboard.walletNetwork
             ];
 
-        const display = (
-            <Notify
-                variant={toastMessageVariant}
-                message={displayMessage}
-                secondaryMessage={displaySecondaryMessage}
-                txHash={action.txHash}
-                currentNetworkName={currentNetworkName}
-            />
-        );
-
         // Ghost notification triggered, TODO: check the source of it
-        if (toastMessageVariant !== undefined) toast(display, options);
+        if (toastMessageVariant !== undefined)
+            triggerToastDisplay({
+                toastMessageVariant,
+                displayMessage,
+                displaySecondaryMessage,
+                txHash: action.txHash,
+                currentNetworkName,
+            });
     }
 
     return next(action);
+};
+
+// display notification / show toast
+export const triggerToastDisplay = ({
+    toastMessageVariant,
+    displayMessage,
+    displaySecondaryMessage,
+    txHash,
+    currentNetworkName,
+}) => {
+    const options = {
+        closeButton: true,
+        position: "top-right",
+        // Automatically Close Notification after 15 seconds
+        autoClose: 7500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+    };
+
+    const display = (
+        <Notify
+            variant={toastMessageVariant}
+            message={displayMessage}
+            secondaryMessage={displaySecondaryMessage}
+            txHash={txHash}
+            currentNetworkName={currentNetworkName}
+        />
+    );
+
+    // Uncomment if we want to dismiss older toasts
+    // toast.dismiss();
+
+    toast(display, options);
 };
 
 export default contractTXNotifier;

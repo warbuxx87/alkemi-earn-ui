@@ -3,7 +3,7 @@
 import _ from "lodash";
 
 import { handle_liquidate_click } from "utils/drizzle";
-import notify from "utils/notify";
+import { triggerToastDisplay } from "utils/notify";
 
 const url_map = require("constants/url_map.json");
 
@@ -36,9 +36,9 @@ const fetchLiquidationsSuccess = (liquidations) => ({
     },
 });
 
-//                                               //
+//                                                  //
 // -------------- LIQUIDATE ACTIONS --------------  //
-//                                               //
+//                                                  //
 
 // track the smart contract calls
 
@@ -149,12 +149,12 @@ export const onLiquidateAction = ({
     })
         .then(() => dispatch(liquidateSuccess(symbol)))
         .catch((error) => {
-            notify.notification({
-                eventCode: "liquidateError",
-                type: "error",
-                message: error.message,
-                autoDismiss: 5000,
+            triggerToastDisplay({
+                toastMessageVariant: "failure",
+                displayMessage: "Something went wrong",
+                displaySecondaryMessage: error.message,
             });
+
             dispatch(liquidateError(symbol, error.message));
         });
 };

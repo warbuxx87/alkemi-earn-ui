@@ -74,9 +74,20 @@ export const toWei = (value, unit) => {
 export const formatNumber = (value, unit) => {
     if (!value) return 0;
     const wei = fromWei(value, unit);
-    return new Intl.NumberFormat("en-es", { maximumFractionDigits: 5 }).format(
-        wei
-    );
+    switch (unit) {
+        case "USDC":
+            return new Intl.NumberFormat("en-es", {
+                maximumFractionDigits: 6,
+            }).format(wei);
+        case "WBTC":
+            return new Intl.NumberFormat("en-es", {
+                maximumFractionDigits: 8,
+            }).format(wei);
+        default:
+            return new Intl.NumberFormat("en-es", {
+                maximumFractionDigits: 18,
+            }).format(wei);
+    }
 };
 
 // value in USDx

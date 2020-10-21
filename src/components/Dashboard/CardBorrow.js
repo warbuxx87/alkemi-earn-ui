@@ -80,7 +80,7 @@ function BorrowBalance({ totalBorrow, currency, apr }) {
                                 color="textSecondary"
                                 align="right"
                             >
-                                Borrow APR
+                                Borrow APY
                             </Typography>
                             <Typography
                                 variant="h3"

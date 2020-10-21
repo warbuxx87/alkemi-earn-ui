@@ -69,6 +69,20 @@ const lendAPRSelector = (state) => {
     return supplyAPR;
 };
 
+const lendRateMantissaSelector = (state) => {
+    const supplyMantissa = {};
+
+    try {
+        Object.values(
+            _.get(state, "contracts.MoneyMarket.markets", {})
+        ).forEach(
+            (rate) =>
+                (supplyMantissa[rate.args[0]] = rate.value.supplyRateMantissa)
+        );
+    } catch (e) {}
+    return supplyMantissa;
+};
+
 const lendPrincipalSelector = (state) => {
     const supplyPrincipal = {};
 
@@ -112,6 +126,7 @@ const getLendAsset = createSelector(
     walletNetworkName,
     lendBalanceSelector,
     lendAPRSelector,
+    lendRateMantissaSelector,
     lendPrincipalSelector,
     getUtilizationValues,
     getAssetPrices,
@@ -122,6 +137,7 @@ const getLendAsset = createSelector(
         network,
         lendBalances,
         lendAPR,
+        lendMantissa,
         lendPrincipal,
         marketUtilization,
         assetPrices,
@@ -132,6 +148,7 @@ const getLendAsset = createSelector(
             // supply wallet
             let balance = "0";
             let apr = "0";
+            let mantissa = "0";
             let principal = "0";
             let utilization = "0";
             let price = "0";
@@ -145,6 +162,7 @@ const getLendAsset = createSelector(
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = lendBalances[token_address] || "0";
                 apr = lendAPR[token_address] || "0";
+                mantissa = lendMantissa[token_address] || "0";
                 principal = lendPrincipal[token_address] || "0";
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
@@ -174,6 +192,7 @@ const getLendAsset = createSelector(
                 weight,
                 apr,
                 principal,
+                mantissa,
                 utilization,
                 price,
                 USDprice,

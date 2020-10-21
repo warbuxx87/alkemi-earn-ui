@@ -30,7 +30,7 @@ export const drizzleOptions = {
     polls: {
         blocks: 6000,
     },
-    syncAlways: false,
+    syncAlways: true,
     appMiddlewares,
     appReducers,
     disableReduxDevTools: false, // enable ReduxDevTools!
