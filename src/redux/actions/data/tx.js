@@ -80,7 +80,6 @@ const fetchTxCall = ({
 
                 dispatch(fetchTxSuccess(userTxList));
 
-                console.log("userTxList: ", userTxList);
                 dispatch(
                     fetchTimestampsOfBlocks({
                         blocks: userTxList.map(
