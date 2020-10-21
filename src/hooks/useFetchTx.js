@@ -3,12 +3,11 @@ import { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Section 2: internal imports
-import { walletNetworkName } from "redux/selectors/onboard";
+import { walletNetworkName, isWalletConnected } from "redux/selectors/onboard";
 
 import DrizzleContext from "utils/DrizzleContext";
 
 import { fetchTx } from "redux/actions/data/tx";
-import { getBlocksData } from "redux/selectors/data/history";
 
 import { walletAddress } from "redux/selectors/onboard";
 
@@ -17,10 +16,9 @@ export default (fetchPeriodically = false) => {
     const drizzle = useContext(DrizzleContext);
     const dispatch = useDispatch();
 
+    const walletConnected = useSelector(isWalletConnected); // Kind of useless to use here but won't hurt (hopefully)
     const currentNetworkName = useSelector(walletNetworkName);
     const address = useSelector(walletAddress);
-
-    const blocksData = useSelector(getBlocksData); // blocks TXs above were fired on (and their timestamp)
 
     useEffect(
         (fetchPeriodically) => {
@@ -32,7 +30,6 @@ export default (fetchPeriodically = false) => {
                         currentNetworkName,
                         address,
                         drizzle,
-                        blocksData,
                     })
                 );
 
@@ -41,7 +38,7 @@ export default (fetchPeriodically = false) => {
                 }
             };
 
-            if (currentNetworkName !== undefined) {
+            if (walletConnected && currentNetworkName !== undefined) {
                 getTxList(fetchPeriodically); // if fetchPeriodically is false, it will trigger the fetch right away (unlike in the other useFetch in the app)
             }
 
@@ -49,6 +46,13 @@ export default (fetchPeriodically = false) => {
                 if (timer) clearTimeout(timer);
             };
         },
-        [address, currentNetworkName, dispatch, fetchPeriodically]
+        [
+            address,
+            currentNetworkName,
+            walletConnected,
+            drizzle,
+            fetchPeriodically,
+            dispatch,
+        ] // TODO check blocksData constant refresh
     );
 };

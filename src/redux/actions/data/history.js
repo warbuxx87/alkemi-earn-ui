@@ -1,4 +1,5 @@
 // Section 1: Utilities imports and low level imports
+import { getBlocksData } from "redux/selectors/data/history";
 
 // Section 2: Action types declarations and action creators
 
@@ -48,11 +49,12 @@ const fetchBlockTimestampError = (error, blockNumber) => ({
 
 // Section 3: Action dispatch methods and async funcs
 
-export const fetchTimestampsOfBlocks = ({
-    blocks,
-    blocksData,
-    drizzle,
-}) => async (dispatch) => {
+export const fetchTimestampsOfBlocks = ({ blocks, drizzle }) => async (
+    dispatch,
+    getState
+) => {
+    const blocksData = getBlocksData(getState()); // blocks TXs above were fired on (and their timestamp)
+
     blocks.forEach((element) => {
         if (
             element !== undefined &&

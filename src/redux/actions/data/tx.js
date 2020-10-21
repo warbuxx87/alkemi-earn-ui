@@ -54,13 +54,7 @@ const resetTxData = () => ({
 });
 
 // Section 3: Action dispatch methods and async funcs
-const fetchTxCall = ({
-    currentNetworkName,
-    address,
-    drizzle,
-    blocksData,
-    dispatch,
-}) => {
+const fetchTxCall = ({ currentNetworkName, address, drizzle, dispatch }) => {
     if (!address) return;
     if (!url_map[currentNetworkName].history_url) return;
 
@@ -85,7 +79,6 @@ const fetchTxCall = ({
                         blocks: userTxList.map(
                             ({ blockNumber }) => blockNumber
                         ),
-                        blocksData,
                         drizzle,
                     })
                 );
@@ -105,7 +98,6 @@ export const fetchTx = ({
     currentNetworkName,
     address,
     drizzle,
-    blocksData,
     fetchPeriodically,
 }) => async (dispatch) => {
     if (fetchPeriodically)
@@ -114,7 +106,6 @@ export const fetchTx = ({
             currentNetworkName,
             address,
             drizzle,
-            blocksData,
             dispatch,
         });
     // if not, it will call on fetch directly no matter what
@@ -123,7 +114,6 @@ export const fetchTx = ({
             currentNetworkName,
             address,
             drizzle,
-            blocksData,
             dispatch,
         });
 
