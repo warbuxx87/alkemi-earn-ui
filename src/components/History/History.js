@@ -135,7 +135,7 @@ const History = ({
     className,
     txList,
     txPending,
-    error,
+    txError,
     currentNetworkName,
     blocksData,
     ...rest
@@ -462,7 +462,7 @@ const History = ({
 History.propTypes = {
     txList: PropTypes.array.isRequired,
     txPending: PropTypes.bool.isRequired,
-    address: PropTypes.string.isRequired,
+    address: PropTypes.string,
     blocksData: PropTypes.object.isRequired,
 };
 
