@@ -3,13 +3,13 @@ import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import web3 from "web3";
+// import web3 from "web3";
 
 // Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
 import { onWithdrawAction } from "redux/actions/data/lend";
 
-import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
+import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
 import DrizzleContext from "utils/DrizzleContext";
 
