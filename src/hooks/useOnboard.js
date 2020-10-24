@@ -60,21 +60,24 @@ export default () => {
                         // set current address from chosen provider in onboard
                         // For Metamask: selectedAddress
                         // For Fortmatic: account
-                        dispatch(
-                            setWalletAddress(
-                                window.currentlyUsedProvider.selectedAddress
-                                    ? window.currentlyUsedProvider
-                                          .selectedAddress
-                                    : window.currentlyUsedProvider.account
-                            )
-                        );
 
+                        // The order matters here
+                        // As the network is always set(with the default one at least), must set address last so anything else that rely on it being null (example fetchTx) fire only when the correct data is set
                         dispatch(
                             setWalletNetwork(
                                 window.currentlyUsedProvider.networkVersion
                                     ? window.currentlyUsedProvider
                                           .networkVersion
                                     : DEFAULT_NETWORK
+                            )
+                        );
+
+                        dispatch(
+                            setWalletAddress(
+                                window.currentlyUsedProvider.selectedAddress
+                                    ? window.currentlyUsedProvider
+                                          .selectedAddress
+                                    : window.currentlyUsedProvider.account
                             )
                         );
                     }
@@ -146,9 +149,9 @@ export default () => {
                         ? drizzle.web3.currentProvider.networkVersion
                         : DEFAULT_NETWORK;
 
-                    dispatch(setWalletAddress(currentWalletAddress));
-
+                    // The order matters here
                     dispatch(setWalletNetwork(currentWalletNetwork));
+                    dispatch(setWalletAddress(currentWalletAddress));
                 }
 
                 // account connected
