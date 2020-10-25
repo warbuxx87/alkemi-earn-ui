@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         justifyContent: "center",
     },
-    contentCard: {
-        borderBottom: `1px solid ${theme.palette.success.main}`,
-    },
+    //  contentCard: {
+    //      borderBottom: `1px solid ${theme.palette.success.main}`,
+    //  },
 }));
 
 function DepositBalance({ totalDeposit, currency, apr }) {
@@ -43,8 +43,6 @@ function DepositBalance({ totalDeposit, currency, apr }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Total Deposits" className={classes.item} />
-
             <Divider />
             <CardContent className={classes.contentCard}>
                 <Box

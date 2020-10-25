@@ -9,6 +9,9 @@ import {
     Box,
     Card,
     CardContent,
+    CardHeader,
+    Divider,
+    Grid,
     LinearProgress,
     Typography,
     makeStyles,
@@ -21,47 +24,55 @@ const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(3),
         display: "flex",
-        alignItems: "right",
+        alignItems: "center",
         justifyContent: "space-between",
     },
     item: {
-        textAlign: "left",
+        textAlign: "center",
         justifyContent: "center",
     },
     progress: {
-        margin: theme.spacing(0, 1, 0, 3),
+        margin: theme.spacing(0, 0, 0, 1),
         flexGrow: 1,
-        background: "#414244",
+        background: "rgb(255 254 254 / 10%)",
+        height: 7,
+        borderRadius: 5,
+        "& .MuiLinearProgress-bar": {
+            borderRadius: 5,
+        },
     },
 }));
 
-function Limit({ aggregatedBalance, currency, collateralRatio }) {
+function BorrowLimit({ borrowLimit }) {
     const classes = useStyles();
-    const data = {
-        value: 50,
-    };
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardContent className={classes.contentCard}>
-                <Typography
-                    variant="subtitle1"
-                    color="textSecondary"
-                    align="left"
-                >
-                    Borrow Limit
-                </Typography>
-                <Box display="flex" alignItems="center" flexWrap="wrap">
-                    <Typography variant="h3" color="textPrimary">
-                        {data.value}%
-                    </Typography>
-                    <LinearProgress
-                        className={classes.progress}
-                        value={data.value}
-                        color="primary"
-                        variant="determinate"
-                    />
+            <CardContent>
+                <Box>
+                    <Grid alignItems="center" container spacing={3}>
+                        <Grid item xs={12}>
+                            <Typography
+                                variant="subtitle1"
+                                color="textSecondary"
+                                align="left"
+                            >
+                                Total USD
+                            </Typography>
+                            <Box display="flex" alignItems="center">
+                                <Typography variant="h3" color="textPrimary">
+                                    {borrowLimit.toFixed(2)}%
+                                </Typography>
+                                <LinearProgress
+                                    className={classes.progress}
+                                    value={borrowLimit}
+                                    color="secondary"
+                                    variant="determinate"
+                                />
+                            </Box>
+                        </Grid>
+                    </Grid>
                 </Box>
             </CardContent>
         </Card>
@@ -69,9 +80,10 @@ function Limit({ aggregatedBalance, currency, collateralRatio }) {
 }
 
 // Section 6: Documentation with PropTypes
-Limit.propTypes = {
+BorrowLimit.propTypes = {
     className: PropTypes.string,
+    borrowLimit: PropTypes.number,
 };
 
 // Section 7:  Connect styles and export
-export default Limit;
+export default BorrowLimit;

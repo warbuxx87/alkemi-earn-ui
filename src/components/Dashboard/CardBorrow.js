@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         justifyContent: "center",
     },
-    contentCard: {
-        borderBottom: `1px solid ${theme.palette.warning.main}`,
-    },
+    //contentCard: {
+    //    borderBottom: `1px solid ${theme.palette.warning.main}`,
+    //  },
 }));
 
 function BorrowBalance({ totalBorrow, currency, apr }) {
@@ -43,8 +43,6 @@ function BorrowBalance({ totalBorrow, currency, apr }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Total Borrowed" className={classes.item} />
-            <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
                     className={classes.item}

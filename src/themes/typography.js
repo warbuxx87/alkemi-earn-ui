@@ -10,8 +10,8 @@ export default {
     },
 
     h1: {
-        fontWeight: 500,
-        fontSize: 38,
+        fontWeight: 400,
+        fontSize: 46,
     },
     h2: {
         fontWeight: 500,
@@ -19,9 +19,9 @@ export default {
     },
     h3: {
         fontWeight: 400,
-        fontSize: 22,
+        fontSize: 20,
         "@media (min-width:1550px)": {
-            fontSize: 26,
+            fontSize: 22,
         },
     },
     h4: {

@@ -15,11 +15,12 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import DashCardValue from "containers/Dashboard/CardValue";
+import TableLimit from "containers/Dashboard/CardLimit";
 import DashCardDeposit from "containers/Dashboard/CardDeposit";
 import DashCardBorrow from "containers/Dashboard/CardBorrow";
 import TableDeposit from "containers/Dashboard/TableDeposit";
 import TableBorrow from "containers/Dashboard/TableBorrow";
+import Overview from "components/Dashboard/Overview";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -58,8 +59,8 @@ function Dashboard() {
     return (
         <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
-                <Grid item lg={4} sm={6} xs={12}>
-                    <DashCardValue />
+                <Grid item lg={12} sm={12} xs={12}>
+                    <Overview />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
                     <DashCardDeposit />
@@ -67,9 +68,12 @@ function Dashboard() {
                 <Grid item lg={4} sm={6} xs={12}>
                     <DashCardBorrow />
                 </Grid>
+                <Grid item lg={4} sm={6} xs={12}>
+                    <TableLimit />
+                </Grid>
                 <Grid item lg={12} sm={12} xs={12}>
                     <Box className={classes.tabs}>
-                        <Box mt={2}>
+                        <Box mt={3}>
                             <Tabs
                                 onChange={handleTabsChange}
                                 scrollButtons="auto"
