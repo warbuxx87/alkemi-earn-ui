@@ -47,8 +47,9 @@ export const fromWei = (value, unit) => {
     value = value.toString();
 
     if (unit === "WBTC") {
-        let amount = web3.utils.fromWei(value, "lovelace");
-        amount = amount / 100;
+        //wbtc has 8 decimals
+        let amount = value / 1e8;
+
         return amount.toString();
     } else {
         return web3.utils.fromWei(
@@ -60,8 +61,8 @@ export const fromWei = (value, unit) => {
 
 export const toWei = (value, unit) => {
     if (unit === "WBTC") {
-        let amount = web3.utils.toWei(value, "gwei");
-        amount = amount * 100;
+        //wbtc has 8 decimals
+        let amount = value * 1e8;
         return amount.toString();
     } else {
         return web3.utils.toWei(
