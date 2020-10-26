@@ -5,6 +5,7 @@ import web3 from "web3";
 import address from "constants/address_map.json";
 
 import { walletNetworkName } from "./onboard";
+// import { getAggregatedDepositAPY } from './data/lend' // Hitting: https://github.com/reduxjs/reselect/issues/169
 
 const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(
@@ -71,6 +72,13 @@ export const getUserCollateralRatio = (state) => {
     }
     return collateralRatio;
 };
+
+export const getCombinedAPY = createSelector(
+    getBorrowAccountValue,
+    getDepositAccountValue,
+    //(state) => getAggregatedDepositAPY(state),
+    (totalBorrowValue, totalDepositValue /*, totalDepositAPY*/) => {}
+);
 
 export const getUSDPrice = (state) => {
     const currentNetworkName = walletNetworkName(state);

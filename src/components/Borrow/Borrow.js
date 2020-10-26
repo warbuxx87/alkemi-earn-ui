@@ -12,7 +12,7 @@ import BorrowTable from "./Table";
 import BorrowTableActive from "./TableActive";
 import BorrowCardValue from "containers/Borrow/CardValue";
 import BorrowCardLimit from "containers/Borrow/CardLimit";
-import BorrowCardAPR from "containers/Borrow/CardAPR";
+import BorrowCardAPY from "containers/Borrow/CardAPY";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +43,7 @@ function Borrow({ className, activeBorrow, inactiveBorrow, onActivate }) {
                     <BorrowCardLimit />
                 </Grid>
                 <Grid item lg={4} sm={6} xs={12}>
-                    <BorrowCardAPR />
+                    <BorrowCardAPY />
                 </Grid>
                 {!!activeBorrow.length && (
                     <Grid item lg={12} xs={12}>

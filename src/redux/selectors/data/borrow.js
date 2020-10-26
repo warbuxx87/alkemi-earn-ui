@@ -74,7 +74,7 @@ export const getCollateralRatio = (state) => {
 };
 
 // Borrow Selectors
-const getBorrowAccountValue = (state) => {
+export const getBorrowAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );

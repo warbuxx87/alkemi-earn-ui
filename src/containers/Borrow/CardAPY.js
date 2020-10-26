@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import CardAPR from "components/Borrow/CardAPR";
+import CardAPY from "components/Borrow/CardAPY";
 
 import { getAggregatedBorrowAPR } from "redux/selectors/data/borrow";
 
-const CardAPRContainer = () => {
+const CardAPYContainer = () => {
     const totalBorrowAPR = useSelector(getAggregatedBorrowAPR);
 
-    return <CardAPR totalAPR={totalBorrowAPR} />;
+    return <CardAPY totalAPR={totalBorrowAPR} />;
 };
 
-export default CardAPRContainer;
+export default CardAPYContainer;

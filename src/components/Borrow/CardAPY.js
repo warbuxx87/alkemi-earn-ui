@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function CardAPR({ className, totalAPR, ...rest }) {
+function CardAPY({ className, totalAPR, ...rest }) {
     const classes = useStyles();
 
     // Section 5: Code Component
@@ -81,10 +81,10 @@ function CardAPR({ className, totalAPR, ...rest }) {
 }
 
 // Section 6: Documentation with PropTypes
-CardAPR.propTypes = {
+CardAPY.propTypes = {
     className: PropTypes.string,
     totalAPR: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
-export default CardAPR;
+export default CardAPY;

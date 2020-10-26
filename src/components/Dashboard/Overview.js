@@ -68,7 +68,6 @@ function Overview({ aggregatedBalance, currency, combinedAPY }) {
                 </Typography>
                 <Typography variant="h1" color="textPrimary" align="left">
                     ${formatNumber(aggregatedBalance.toString(), "ETH")}
-                    {/* <span className={classes.cents}>.000000</span> */}
                 </Typography>
             </Grid>
             <Grid item>

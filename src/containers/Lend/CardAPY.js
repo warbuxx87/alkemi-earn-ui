@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 
 import CardAPY from "components/Lend/CardAPY";
 
-import { getAggregatedLendAPY } from "redux/selectors/data/lend";
+import { getAggregatedDepositAPY } from "redux/selectors/data/lend";
 
 const CardAPRContainer = () => {
-    const totalDepositAPY = useSelector(getAggregatedLendAPY);
+    const totalDepositAPY = useSelector(getAggregatedDepositAPY);
 
     return <CardAPY totalAPY={totalDepositAPY} />;
 };

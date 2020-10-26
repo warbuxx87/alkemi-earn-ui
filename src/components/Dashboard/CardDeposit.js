@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     //  },
 }));
 
-function DepositBalance({ totalDeposit, currency, apr }) {
+function DepositBalance({ totalDeposit, currency, apy }) {
     const classes = useStyles();
 
     // Section 5: Code Component
@@ -86,7 +86,7 @@ function DepositBalance({ totalDeposit, currency, apr }) {
                                 color="textPrimary"
                                 align="right"
                             >
-                                {formatPercent(apr)}
+                                {formatPercent(apy)}
                             </Typography>
                         </Grid>
                     </Grid>
