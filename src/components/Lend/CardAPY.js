@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function CardAPR({ className, totalAPR, ...rest }) {
+function CardAPR({ className, totalAPY, ...rest }) {
     const classes = useStyles();
 
     // Section 5: Code Component
@@ -73,7 +73,7 @@ function CardAPR({ className, totalAPR, ...rest }) {
                         color="textPrimary"
                         className={classes.label}
                     >
-                        {formatPercent(totalAPR)}
+                        {formatPercent(totalAPY)}
                     </Typography>
                 </Box>
             </CardContent>
@@ -84,7 +84,7 @@ function CardAPR({ className, totalAPR, ...rest }) {
 // Section 6: Documentation with PropTypes
 CardAPR.propTypes = {
     className: PropTypes.string,
-    totalAPR: PropTypes.string,
+    totalAPY: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export

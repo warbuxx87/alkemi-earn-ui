@@ -206,24 +206,24 @@ export const getLendActive = createSelector(getLendAsset, (assets) => {
     return assets.filter((asset) => asset.balance !== "0");
 });
 
-export const getAggregatedLendAPR = createSelector(
+export const getAggregatedLendAPY = createSelector(
     getLendActive,
     walletNetworkName,
     (activeAssets, network) => {
-        let totalAPR = 0;
+        let totalAPY = 0;
         if (network) {
             // checks that web3 wallet is connected
             activeAssets.forEach(function (asset) {
-                totalAPR += asset.weight * asset.apr;
-                totalAPR = parseInt(totalAPR);
+                totalAPY += asset.weight * asset.apr;
+                totalAPY = parseInt(totalAPY);
             });
         }
 
-        if (isFinite(totalAPR)) {
-            totalAPR = web3.utils.fromWei(totalAPR.toString()); // formats for WEI to decimal
+        if (isFinite(totalAPY)) {
+            totalAPY = web3.utils.fromWei(totalAPY.toString()); // formats for WEI to decimal
         }
 
-        return totalAPR.toString();
+        return totalAPY.toString();
     }
 );
 
