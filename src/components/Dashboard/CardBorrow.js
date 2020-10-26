@@ -62,7 +62,7 @@ function BorrowBalance({ totalBorrow, currency, apr }) {
                                 color="textSecondary"
                                 align="left"
                             >
-                                Total USD
+                                Borrowing Overview
                             </Typography>
                             <Typography
                                 variant="h3"

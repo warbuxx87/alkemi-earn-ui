@@ -18,7 +18,12 @@ import {
 } from "@material-ui/core";
 
 import { ArrowUp as Upicon } from "react-feather";
-import { fromWei, formatPercent, format_str_to_kmb } from "utils/ui";
+import {
+    fromWei,
+    formatPercent,
+    formatNumber,
+    format_str_to_kmb,
+} from "utils/ui";
 
 // Section 3: Components & Containers import from the application
 
@@ -48,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Overview({ aggregatedBalance, currency, collateralRatio }) {
+function Overview({ aggregatedBalance, currency, combinedAPY }) {
     const classes = useStyles();
     // Section 5: Code Component
     return (
@@ -59,10 +64,11 @@ function Overview({ aggregatedBalance, currency, collateralRatio }) {
                     color="textSecondary"
                     align="left"
                 >
-                    Account Liquidity
+                    Aggregated Value
                 </Typography>
                 <Typography variant="h1" color="textPrimary" align="left">
-                    $3,125,566<span className={classes.cents}>.000000</span>
+                    ${formatNumber(aggregatedBalance.toString(), "ETH")}
+                    {/* <span className={classes.cents}>.000000</span> */}
                 </Typography>
             </Grid>
             <Grid item>
@@ -84,7 +90,7 @@ function Overview({ aggregatedBalance, currency, collateralRatio }) {
                             color="textPrimary"
                             align="right"
                         >
-                            4.56%
+                            {formatPercent(combinedAPY)}
                         </Typography>
                     </Box>
                     <Box>

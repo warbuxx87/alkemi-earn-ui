@@ -58,7 +58,7 @@ function BorrowLimit({ borrowLimit }) {
                                 color="textSecondary"
                                 align="left"
                             >
-                                Total USD
+                                Borrow Limit
                             </Typography>
                             <Box display="flex" alignItems="center">
                                 <Typography variant="h3" color="textPrimary">
