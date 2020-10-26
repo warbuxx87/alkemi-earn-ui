@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import web3 from "web3";
+// import web3 from "web3";
 
 // Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
@@ -12,7 +12,7 @@ import DrizzleContext from "utils/DrizzleContext";
 
 import { onDepositAction } from "redux/actions/data/lend";
 
-import { formatNumber, fromWei, toWei, formatETHMoney } from "utils/ui";
+import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/totalBalance";
@@ -32,9 +32,10 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
 
     React.useEffect(() => {
         if (amount) {
-            const isAmountLTBalance = web3.utils
-                .toBN(toWei(amount, asset.unit))
-                .lte(web3.utils.toBN(asset.wallet));
+            const isAmountLTBalance = amount > 0 ? true : false;
+            // web3.utils
+            //     .toBN(toWei(amount, asset.unit))
+            //     .lte(web3.utils.toBN(asset.wallet));
             setEnableDeposit(isAmountLTBalance);
         }
     }, [amount, asset.wallet, asset.unit]);

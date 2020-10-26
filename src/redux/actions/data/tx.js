@@ -1,5 +1,8 @@
 // Section 1: Utilities imports and low level imports
 import _ from "lodash";
+
+import { fetchTimestampsOfBlocks } from "./history";
+
 const url_map = require("constants/url_map.json");
 
 // Section 2: Action types declarations and action creators
@@ -51,7 +54,7 @@ const resetTxData = () => ({
 });
 
 // Section 3: Action dispatch methods and async funcs
-const fetchTxCall = ({ currentNetworkName, address, dispatch }) => {
+const fetchTxCall = ({ currentNetworkName, address, drizzle, dispatch }) => {
     if (!address) return;
     if (!url_map[currentNetworkName].history_url) return;
 
@@ -68,9 +71,17 @@ const fetchTxCall = ({ currentNetworkName, address, dispatch }) => {
         .then((data) => {
             if (data) {
                 const userTxList = JSON.parse(data);
-                //console.log("usertxlist: ", userTxList);
 
                 dispatch(fetchTxSuccess(userTxList));
+
+                dispatch(
+                    fetchTimestampsOfBlocks({
+                        blocks: userTxList.map(
+                            ({ blockNumber }) => blockNumber
+                        ),
+                        drizzle,
+                    })
+                );
             }
         })
         .catch((error) => {
@@ -86,13 +97,25 @@ const throttledFetchTx = _.throttle(fetchTxCall, 60 * 1000, {
 export const fetchTx = ({
     currentNetworkName,
     address,
+    drizzle,
     fetchPeriodically,
 }) => async (dispatch) => {
     if (fetchPeriodically)
         // if fetchPeriodically set to true it will go through the throttled method
-        throttledFetchTx({ currentNetworkName, address, dispatch });
+        throttledFetchTx({
+            currentNetworkName,
+            address,
+            drizzle,
+            dispatch,
+        });
     // if not, it will call on fetch directly no matter what
-    else fetchTxCall({ currentNetworkName, address, dispatch });
+    else
+        fetchTxCall({
+            currentNetworkName,
+            address,
+            drizzle,
+            dispatch,
+        });
 
     // this is to avoid the throttle to block the call when the user reconnects their wallet.
     // Of course as it is now, the call is triggered whenever the user opens the page, which good in a sense that the user wants fresh data each time

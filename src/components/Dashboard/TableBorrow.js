@@ -138,7 +138,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                     variant="body2"
                                     color="textSecondary"
                                 >
-                                    APR
+                                    APY
                                 </Typography>
                             </BorrowTableCell>
                             <BorrowTableCell
@@ -157,7 +157,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                     variant="body2"
                                     color="textSecondary"
                                 >
-                                    EARNINGS
+                                    Fees
                                 </Typography>
                             </BorrowTableCell>
                         </TableRow>

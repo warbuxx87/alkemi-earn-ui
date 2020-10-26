@@ -138,7 +138,7 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                     variant="body2"
                                     color="textSecondary"
                                 >
-                                    APR
+                                    APY
                                 </Typography>
                             </DepositTableCell>
                             <DepositTableCell
