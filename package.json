@@ -111,7 +111,10 @@
         "@commitlint/cli": "^8.3.5",
         "@commitlint/config-conventional": "^11.0.0",
         "@semantic-release/changelog": "^5.0.1",
+        "@semantic-release/commit-analyzer": "^8.0.1",
         "@semantic-release/git": "^9.0.0",
+        "@semantic-release/npm": "^7.0.6",
+        "@semantic-release/release-notes-generator": "^9.0.1",
         "@testing-library/react": "^10.4.7",
         "babel-loader": "^8.1.0",
         "babel-plugin-module-resolver": "^4.0.0",
@@ -160,5 +163,15 @@
                 }
             ]
         ]
-    }
+    },
+    "release": {
+        "repositoryUrl": "https://devzl@bitbucket.org/project-alkemi/alkemi-earn-ui.git",
+        "plugins": [
+          "@semantic-release/commit-analyzer",
+          "@semantic-release/release-notes-generator",
+          "@semantic-release/npm",
+          "@semantic-release/changelog",
+          "@semantic-release/git"
+        ]
+      }
 }
