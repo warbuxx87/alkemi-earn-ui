@@ -63,7 +63,7 @@ function DepositBalance({ totalDeposit, currency, apr }) {
                                 color="textSecondary"
                                 align="left"
                             >
-                                Total USD
+                                Lending Overview
                             </Typography>
                             <Typography
                                 variant="h3"
