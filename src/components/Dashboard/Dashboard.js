@@ -20,7 +20,7 @@ import DashCardDeposit from "containers/Dashboard/CardDeposit";
 import DashCardBorrow from "containers/Dashboard/CardBorrow";
 import TableDeposit from "containers/Dashboard/TableDeposit";
 import TableBorrow from "containers/Dashboard/TableBorrow";
-import Overview from "components/Dashboard/Overview";
+import Overview from "containers/Dashboard/Overview";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
