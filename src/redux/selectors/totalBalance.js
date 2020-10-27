@@ -80,6 +80,17 @@ export const getCombinedAPY = createSelector(
     (state) => getAggregatedDepositAPY(state),
     (state) => getAggregatedBorrowAPY(state),
     (totalBorrowValue, totalDepositValue, totalDepositAPY, totalBorrowAPY) => {
+        if (
+            !(
+                totalBorrowValue &&
+                totalDepositValue &&
+                totalDepositAPY &&
+                totalBorrowAPY
+            )
+        )
+            return null;
+
+        // might need to consider using BN, but there will be an issue with decimal values in totalCombinedAPY values
         const totalCombinedValue =
             parseInt(totalBorrowValue, 10) + parseInt(totalDepositValue, 10);
 

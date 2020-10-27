@@ -23,6 +23,7 @@ import {
     formatPercent,
     formatNumber,
     format_str_to_kmb,
+    formattedNumberToSplitNumber,
 } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
@@ -53,6 +54,22 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const displayAggregatedBalance = (aggregatedBalance, classes) => {
+    const {
+        leftOfDecimalPoint,
+        rightOfDecimalPoint,
+    } = formattedNumberToSplitNumber(
+        formatNumber(aggregatedBalance.toString(), "ETH")
+    );
+
+    return (
+        <span>
+            {leftOfDecimalPoint}
+            <span className={classes.cents}>.{rightOfDecimalPoint}</span>
+        </span>
+    );
+};
+
 function Overview({ aggregatedBalance, currency, combinedAPY }) {
     const classes = useStyles();
     // Section 5: Code Component
@@ -67,7 +84,7 @@ function Overview({ aggregatedBalance, currency, combinedAPY }) {
                     Aggregated Value
                 </Typography>
                 <Typography variant="h1" color="textPrimary" align="left">
-                    ${formatNumber(aggregatedBalance.toString(), "ETH")}
+                    ${displayAggregatedBalance(aggregatedBalance, classes)}
                 </Typography>
             </Grid>
             <Grid item>

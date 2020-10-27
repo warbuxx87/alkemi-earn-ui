@@ -91,6 +91,15 @@ export const formatNumber = (value, unit) => {
     }
 };
 
+export const formattedNumberToSplitNumber = (formattedNumber) => {
+    const splitNumber = formattedNumber.split(".");
+
+    return {
+        leftOfDecimalPoint: splitNumber[0] ? splitNumber[0] : "0",
+        rightOfDecimalPoint: splitNumber[1] ? splitNumber[1] : "0",
+    };
+};
+
 // value in USDx
 export const formatMoney = (value, currency) => {
     const wei = fromWei(value);
