@@ -62,10 +62,23 @@ const displayAggregatedBalance = (aggregatedBalance, classes) => {
         formatNumber(aggregatedBalance.toString(), "ETH")
     );
 
+    const numbersOnLeft = leftOfDecimalPoint.replace("-", "");
+    let numberOnRightToDisplay = rightOfDecimalPoint;
+
+    if (numbersOnLeft.length <= 4) {
+        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 8);
+    } else if (numbersOnLeft.length <= 5) {
+        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 6);
+    } else if (numbersOnLeft.length <= 7) {
+        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 4);
+    } else {
+        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 2);
+    }
+
     return (
         <span>
             {leftOfDecimalPoint}
-            <span className={classes.cents}>.{rightOfDecimalPoint}</span>
+            <span className={classes.cents}>.{numberOnRightToDisplay}</span>
         </span>
     );
 };
