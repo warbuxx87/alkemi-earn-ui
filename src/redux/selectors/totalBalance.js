@@ -3,9 +3,10 @@ import _ from "lodash";
 import web3 from "web3";
 
 import address from "constants/address_map.json";
+import { getAggregatedDepositAPY } from "./data/lend"; // Hiting: https://github.com/reduxjs/reselect/issues/169
+import { getAggregatedBorrowAPY } from "./data/borrow"; // Hiting: https://github.com/reduxjs/reselect/issues/169
 
 import { walletNetworkName } from "./onboard";
-// import { getAggregatedDepositAPY } from './data/lend' // Hitting: https://github.com/reduxjs/reselect/issues/169
 
 const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(
@@ -76,8 +77,23 @@ export const getUserCollateralRatio = (state) => {
 export const getCombinedAPY = createSelector(
     getBorrowAccountValue,
     getDepositAccountValue,
-    //(state) => getAggregatedDepositAPY(state),
-    (totalBorrowValue, totalDepositValue /*, totalDepositAPY*/) => {}
+    (state) => getAggregatedDepositAPY(state),
+    (state) => getAggregatedBorrowAPY(state),
+    (totalBorrowValue, totalDepositValue, totalDepositAPY, totalBorrowAPY) => {
+        const totalCombinedValue =
+            parseInt(totalBorrowValue, 10) + parseInt(totalDepositValue, 10);
+
+        // calculate Weight
+        const totalBorrowWeight = totalBorrowValue / totalCombinedValue;
+        const totalDepositWeight = totalDepositValue / totalCombinedValue;
+
+        // calculate combined or net APY% position for user
+        const totalCombinedAPY =
+            totalDepositAPY * totalDepositWeight -
+            totalBorrowAPY * totalBorrowWeight;
+
+        return totalCombinedAPY;
+    }
 );
 
 export const getUSDPrice = (state) => {

@@ -7,13 +7,13 @@ import CardBorrow from "components/Dashboard/CardBorrow";
 
 // Section 3: Selectors
 import { getTotalBorrow } from "redux/selectors/totalBalance";
-import { getAggregatedBorrowAPR } from "redux/selectors/data/borrow";
+import { getAggregatedBorrowAPY } from "redux/selectors/data/borrow";
 
 // Section 4: Code Component
 const CardValueContainer = () => {
     const totalBorrow = useSelector(getTotalBorrow);
 
-    const totalBorrowAPR = useSelector(getAggregatedBorrowAPR); // combined portfolio APR rate
+    const totalBorrowAPR = useSelector(getAggregatedBorrowAPY); // combined portfolio APR rate
 
     return (
         <CardBorrow

@@ -122,16 +122,16 @@ const getAssetPrices = (state) => {
 };
 
 const getLendAsset = createSelector(
-    lendAssetSelector,
-    walletNetworkName,
-    lendBalanceSelector,
-    lendAPYSelector,
-    lendRateMantissaSelector,
-    lendPrincipalSelector,
-    getUtilizationValues,
-    getAssetPrices,
-    getSupplyAccountValue, // TODO: refactor this to getLendAccountValue for consistency
-    getMarketLiquidity,
+    (state) => lendAssetSelector(state),
+    (state) => walletNetworkName(state),
+    (state) => lendBalanceSelector(state),
+    (state) => lendAPYSelector(state),
+    (state) => lendRateMantissaSelector(state),
+    (state) => lendPrincipalSelector(state),
+    (state) => getUtilizationValues(state),
+    (state) => getAssetPrices(state),
+    (state) => getSupplyAccountValue(state), // TODO: refactor this to getLendAccountValue for consistency
+    (state) => getMarketLiquidity(state),
     (
         assets,
         network,

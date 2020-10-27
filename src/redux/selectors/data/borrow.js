@@ -127,16 +127,16 @@ const borrowPrincipalSelector = (state) => {
 // Create Borrow Selectors
 
 const getBorrowAsset = createSelector(
-    borrowAssetSelector,
-    walletNetworkName,
-    borrowBalanceSelector,
-    borrowAPRSelector,
-    borrowPrincipalSelector,
-    getUtilizationValues,
-    getAssetPrices,
-    getAccountLiquidity,
-    getBorrowAccountValue,
-    getMarketLiquidity,
+    (state) => borrowAssetSelector(state),
+    (state) => walletNetworkName(state),
+    (state) => borrowBalanceSelector(state),
+    (state) => borrowAPRSelector(state),
+    (state) => borrowPrincipalSelector(state),
+    (state) => getUtilizationValues(state),
+    (state) => getAssetPrices(state),
+    (state) => getAccountLiquidity(state),
+    (state) => getBorrowAccountValue(state),
+    (state) => getMarketLiquidity(state),
     (
         assets,
         network,
@@ -257,7 +257,7 @@ export const getBorrowInactive = createSelector(
 
 export const getBorrowError = (state) => state.data.borrow.error;
 
-export const getAggregatedBorrowAPR = createSelector(
+export const getAggregatedBorrowAPY = createSelector(
     getBorrowActive,
     walletNetworkName,
     (activeAssets, network) => {
