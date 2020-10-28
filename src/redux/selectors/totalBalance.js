@@ -165,7 +165,7 @@ export const getMarketLiquidity = (state) => {
                 });
             }
         });
-        console.log("liquidity payload", assetLiquidity);
+        // console.log("liquidity payload", assetLiquidity);
         return assetLiquidity;
     }
 };
