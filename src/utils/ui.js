@@ -114,9 +114,9 @@ export const breakNumberFromDecimalPoint = (theNumber, classes) => {
 
     if (numbersOnLeft.length <= 4) {
         numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 8);
-    } else if (numbersOnLeft.length <= 5) {
+    } else if (numbersOnLeft.length <= 6) {
         numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 6);
-    } else if (numbersOnLeft.length <= 7) {
+    } else if (numbersOnLeft.length <= 9) {
         numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 4);
     } else {
         numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 2);
