@@ -6,9 +6,9 @@ import CardAPY from "components/Borrow/CardAPY";
 import { getAggregatedBorrowAPY } from "redux/selectors/data/borrow";
 
 const CardAPYContainer = () => {
-    const totalBorrowAPR = useSelector(getAggregatedBorrowAPY);
+    const totalBorrowAPY = useSelector(getAggregatedBorrowAPY);
 
-    return <CardAPY totalAPR={totalBorrowAPR} />;
+    return <CardAPY totalAPY={totalBorrowAPY} />;
 };
 
 export default CardAPYContainer;

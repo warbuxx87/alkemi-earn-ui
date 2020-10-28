@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 // Section 2: Material-UI imports
 import { Box, Grid, SvgIcon, Typography, makeStyles } from "@material-ui/core";
 
-import { ArrowUp as Upicon } from "react-feather";
+import { ArrowUp as UpIcon, ArrowDown as DownIcon } from "react-feather";
 import { formatPercent } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
@@ -36,7 +36,30 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 2,
         color: theme.palette.success.main,
     },
+    downicon: {
+        fontSize: "3.1rem",
+        marginLeft: 5,
+        marginTop: 2,
+        color: theme.palette.warning.main,
+    },
 }));
+
+const displayAPYIcon = (classes, combinedAPY) => {
+    if (combinedAPY >= 0) {
+        // Could add an icon for 0, but for now the green up one will be used
+        return (
+            <SvgIcon fontSize="small" className={classes.upicon}>
+                <UpIcon />
+            </SvgIcon>
+        );
+    } else {
+        return (
+            <SvgIcon fontSize="small" className={classes.downicon}>
+                <DownIcon />
+            </SvgIcon>
+        );
+    }
+};
 
 function Overview({ aggregatedBalance, currency, combinedAPY }) {
     const classes = useStyles();
@@ -81,11 +104,7 @@ function Overview({ aggregatedBalance, currency, combinedAPY }) {
                             {formatPercent(combinedAPY)}
                         </Typography>
                     </Box>
-                    <Box>
-                        <SvgIcon fontSize="small" className={classes.upicon}>
-                            <Upicon />
-                        </SvgIcon>
-                    </Box>
+                    <Box>{displayAPYIcon(classes, combinedAPY)}</Box>
                 </Box>
             </Grid>
         </Grid>

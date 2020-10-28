@@ -13,8 +13,6 @@ import { breakNumberFromDecimalPoint } from "utils/ui";
 
 // Number formatted to have the color of left part of the decimal point and the cents different
 const SplitNumber = ({ theNumber, centsClassName }) => {
-    console.log("theNumber: ", theNumber, typeof theNumber);
-
     const {
         leftOfDecimalPoint,
         numberOnRightToDisplay,

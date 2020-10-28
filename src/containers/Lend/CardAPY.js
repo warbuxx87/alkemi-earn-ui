@@ -5,10 +5,10 @@ import CardAPY from "components/Lend/CardAPY";
 
 import { getAggregatedDepositAPY } from "redux/selectors/data/lend";
 
-const CardAPRContainer = () => {
+const CardAPYContainer = () => {
     const totalDepositAPY = useSelector(getAggregatedDepositAPY);
 
     return <CardAPY totalAPY={totalDepositAPY} />;
 };
 
-export default CardAPRContainer;
+export default CardAPYContainer;
