@@ -17,6 +17,9 @@ import {
 } from "@material-ui/core";
 import { fromWei, formatPercent, format_str_to_kmb } from "utils/ui";
 
+// Section 3: Components & Containers import from the application
+import SplitNumber from "components/UI/SplitNumber";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     //contentCard: {
     //    borderBottom: `1px solid ${theme.palette.warning.main}`,
     //  },
+    cents: {
+        color: "#5e6266",
+    },
 }));
 
 function BorrowBalance({ totalBorrow, currency, apr }) {
@@ -69,7 +75,11 @@ function BorrowBalance({ totalBorrow, currency, apr }) {
                                 color="textPrimary"
                                 align="left"
                             >
-                                ${format_str_to_kmb(fromWei(totalBorrow))}
+                                $
+                                <SplitNumber
+                                    theNumber={totalBorrow}
+                                    centsClassName={classes.cents}
+                                />
                             </Typography>
                         </Grid>
                         <Grid item>

@@ -15,7 +15,10 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { formatPercent, fromWei, format_str_to_kmb } from "utils/ui";
+import { formatPercent } from "utils/ui";
+
+// Section 3: Components & Containers import from the application
+import SplitNumber from "components/UI/SplitNumber";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     //  contentCard: {
     //      borderBottom: `1px solid ${theme.palette.success.main}`,
     //  },
+    cents: {
+        color: "#5e6266",
+    },
 }));
 
 function DepositBalance({ totalDeposit, currency, apy }) {
@@ -70,7 +76,11 @@ function DepositBalance({ totalDeposit, currency, apy }) {
                                 color="textPrimary"
                                 align="left"
                             >
-                                ${format_str_to_kmb(fromWei(totalDeposit))}
+                                $
+                                <SplitNumber
+                                    theNumber={totalDeposit}
+                                    centsClassName={classes.cents}
+                                />
                             </Typography>
                         </Grid>
                         <Grid item>

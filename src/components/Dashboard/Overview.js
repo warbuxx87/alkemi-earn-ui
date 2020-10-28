@@ -62,6 +62,7 @@ function Overview({ aggregatedBalance, currency, combinedAPY }) {
                     Aggregated Value
                 </Typography>
                 <Typography variant="h1" color="textPrimary" align="left">
+                    $
                     <SplitNumber
                         theNumber={aggregatedBalance}
                         centsClassName={classes.cents}
