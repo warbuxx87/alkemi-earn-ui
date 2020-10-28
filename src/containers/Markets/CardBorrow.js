@@ -13,14 +13,14 @@ import { getAggregatedBorrowAPY } from "redux/selectors/data/borrow";
 const CardValueContainer = () => {
     const totalBorrow = useSelector(getTotalBorrow);
 
-    const totalBorrowAPR = useSelector(getAggregatedBorrowAPY); // combined portfolio APR rate
+    const totalBorrowAPY = useSelector(getAggregatedBorrowAPY); // combined portfolio APY rate
 
     return (
         <CardBorrow
             totalBorrow={totalBorrow}
             currency="USD"
             difference={0}
-            apr={totalBorrowAPR}
+            apy={totalBorrowAPY}
         />
     );
 };

@@ -3,8 +3,8 @@ import _ from "lodash";
 import web3 from "web3";
 
 import address from "constants/address_map.json";
-import { getAggregatedDepositAPY } from "./data/lend"; // Hiting: https://github.com/reduxjs/reselect/issues/169
-import { getAggregatedBorrowAPY } from "./data/borrow"; // Hiting: https://github.com/reduxjs/reselect/issues/169
+import { getAggregatedDepositAPY } from "./data/lend";
+import { getAggregatedBorrowAPY } from "./data/borrow";
 
 import { walletNetworkName } from "./onboard";
 
