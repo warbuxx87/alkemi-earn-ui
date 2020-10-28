@@ -106,7 +106,7 @@ Object {
     "background": Object {
       "dark": "#1B1B1B",
       "default": "#000000",
-      "paper": "#202123",
+      "paper": "#121316",
     },
     "common": Object {
       "black": "#000",
@@ -268,8 +268,8 @@ Object {
     "fontWeightRegular": 400,
     "h1": Object {
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-      "fontSize": 38,
-      "fontWeight": 500,
+      "fontSize": 46,
+      "fontWeight": 400,
       "letterSpacing": "-0.01562em",
       "lineHeight": 1.167,
     },
@@ -282,10 +282,10 @@ Object {
     },
     "h3": Object {
       "@media (min-width:1550px)": Object {
-        "fontSize": 26,
+        "fontSize": 22,
       },
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-      "fontSize": 22,
+      "fontSize": 20,
       "fontWeight": 400,
       "letterSpacing": "0em",
       "lineHeight": 1.167,
