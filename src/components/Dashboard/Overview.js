@@ -5,17 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import {
-    Box,
-    Card,
-    CardContent,
-    CardHeader,
-    Divider,
-    Grid,
-    SvgIcon,
-    Typography,
-    makeStyles,
-} from "@material-ui/core";
+import { Box, Grid, SvgIcon, Typography, makeStyles } from "@material-ui/core";
 
 import { ArrowUp as Upicon } from "react-feather";
 import { formatPercent } from "utils/ui";

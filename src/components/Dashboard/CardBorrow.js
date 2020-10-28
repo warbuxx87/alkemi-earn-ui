@@ -9,13 +9,11 @@ import {
     Box,
     Card,
     CardContent,
-    CardHeader,
-    Divider,
     Grid,
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { fromWei, formatPercent, format_str_to_kmb } from "utils/ui";
+import { formatPercent } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
 import SplitNumber from "components/UI/SplitNumber";
