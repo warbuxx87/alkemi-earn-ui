@@ -3,20 +3,14 @@ import DAI_ABI from "constants/ABI/DAI_ABI.json";
 import USDC_ABI from "constants/ABI/USDC_ABI.json";
 import WBTC_ABI from "constants/ABI/WBTC_ABI.json";
 
-//import PAX_ABI from "constants/ABI/PAX_ABI.json";
-//import USDT_ABI from "constants/ABI/USDT_ABI.json";
-
 import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
 
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
 
-const assets = [/*"PAX", "USDT",*/ "DAI", "USDC", "WBTC", "WETH"];
+const assets = ["DAI", "USDC", "WBTC", "WETH"];
 
 const ABIs = {
-    /*PAX: PAX_ABI,
-    USDT: USDT_ABI,*/
-
     WETH: WETH_ABI,
     DAI: DAI_ABI,
     USDC: USDC_ABI,
@@ -69,7 +63,7 @@ export const initMarketContract = ({
     const myAddress = userWalletAddress;
 
     const network = constants.network_type[userWalletNetwork];
-    const assets = [/*"PAX", "USDT",*/ "DAI", "USDC", "WBTC", "WETH"];
+    const assets = ["DAI", "USDC", "WBTC", "WETH"];
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
 
@@ -200,7 +194,12 @@ export const initAssetContract = ({
         address[network].address_MoneyMarket
     );
 
-    // get balance
+    // get token balance for connected user wallet
     tokenContract.methods.balanceOf.cacheCall(myAddress);
+
+    // get token balance for main MoneyMarket Contract --> used for Available Liquidity Selectors
+    tokenContract.methods.balanceOf.cacheCall(
+        address[network].address_MoneyMarket
+    );
     return drizzle.contracts[asset];
 };
