@@ -17,6 +17,7 @@ import {
 import { fromWei, format_str_to_kmb } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
+import SplitNumber from "components/UI/SplitNumber";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
     item: {
         textAlign: "center",
         justifyContent: "center",
+    },
+    cents: {
+        color: "#5e6266",
     },
 }));
 
@@ -53,7 +57,11 @@ function TotalValue({ className, totalBorrow, currency, difference, ...rest }) {
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        ${format_str_to_kmb(fromWei(totalBorrow))}
+                        $
+                        <SplitNumber
+                            theNumber={totalBorrow}
+                            centsClassName={classes.cents}
+                        />
                     </Typography>
                 </Box>
             </CardContent>
