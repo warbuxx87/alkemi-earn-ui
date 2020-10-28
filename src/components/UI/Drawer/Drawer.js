@@ -167,7 +167,7 @@ const DrawerWrapper = ({
                     <Divider />
                     <Box px={2} py={3} mx={2} mt={5} className={classes.aprBox}>
                         <Typography variant="h2" color="primary" align="center">
-                            {formatPercent(asset.apr)} APY
+                            {formatPercent(asset.apy)} APY
                         </Typography>
 
                         {/*<Chart> </Chart>*/}
