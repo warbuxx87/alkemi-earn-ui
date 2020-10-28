@@ -10,6 +10,7 @@ import {
     Card,
     CardContent,
     Grid,
+    Paper,
     Typography,
     makeStyles,
 } from "@material-ui/core";
@@ -39,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
     cents: {
         color: "#5e6266",
     },
+    cardtitle: {
+        lineHeight: 1.4,
+        paddingBottom: 8,
+    },
 }));
 
 function BorrowBalance({ totalBorrow, currency, apy }) {
@@ -46,60 +51,61 @@ function BorrowBalance({ totalBorrow, currency, apy }) {
 
     // Section 5: Code Component
     return (
-        <Card>
-            <CardContent className={classes.contentCard}>
-                <Box
-                    className={classes.item}
-                    display="flex"
+        <Paper>
+            <Box
+                className={classes.item}
+                display="flex"
+                alignItems="center"
+                flexWrap="wrap"
+                p={2}
+            >
+                <Grid
                     alignItems="center"
-                    flexWrap="wrap"
+                    container
+                    justify="space-between"
+                    spacing={3}
                 >
-                    <Grid
-                        alignItems="center"
-                        container
-                        justify="space-between"
-                        spacing={3}
-                    >
-                        <Grid item>
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                                align="left"
-                            >
-                                Borrowing Overview
-                            </Typography>
-                            <Typography
-                                variant="h3"
-                                color="textPrimary"
-                                align="left"
-                            >
-                                $
-                                <SplitNumber
-                                    theNumber={totalBorrow}
-                                    centsClassName={classes.cents}
-                                />
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                                align="right"
-                            >
-                                Borrow APY
-                            </Typography>
-                            <Typography
-                                variant="h3"
-                                color="textPrimary"
-                                align="right"
-                            >
-                                {formatPercent(apy)}
-                            </Typography>
-                        </Grid>
+                    <Grid item>
+                        <Typography
+                            variant="subtitle1"
+                            color="textSecondary"
+                            align="left"
+                            className={classes.cardtitle}
+                        >
+                            Borrowing Overview
+                        </Typography>
+                        <Typography
+                            variant="h3"
+                            color="textPrimary"
+                            align="left"
+                        >
+                            $
+                            <SplitNumber
+                                theNumber={totalBorrow}
+                                centsClassName={classes.cents}
+                            />
+                        </Typography>
                     </Grid>
-                </Box>
-            </CardContent>
-        </Card>
+                    <Grid item>
+                        <Typography
+                            variant="subtitle1"
+                            color="textSecondary"
+                            align="right"
+                            className={classes.cardtitle}
+                        >
+                            Borrow APY
+                        </Typography>
+                        <Typography
+                            variant="h3"
+                            color="textPrimary"
+                            align="right"
+                        >
+                            {formatPercent(apy)}
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </Box>
+        </Paper>
     );
 }
 

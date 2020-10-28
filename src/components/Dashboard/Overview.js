@@ -65,49 +65,56 @@ function Overview({ aggregatedBalance, currency, combinedAPY }) {
     const classes = useStyles();
     // Section 5: Code Component
     return (
-        <Grid alignItems="center" container justify="space-between" spacing={3}>
-            <Grid item>
-                <Typography
-                    variant="subtitle1"
-                    color="textSecondary"
-                    align="left"
-                >
-                    Aggregated Value
-                </Typography>
-                <Typography variant="h1" color="textPrimary" align="left">
-                    $
-                    <SplitNumber
-                        theNumber={aggregatedBalance}
-                        centsClassName={classes.cents}
-                    />
-                </Typography>
-            </Grid>
-            <Grid item>
-                <Typography
-                    variant="subtitle1"
-                    color="textSecondary"
-                    align="right"
-                >
-                    Combined APY
-                </Typography>
-                <Box
-                    display="flex"
-                    justifyContent="flex-end"
-                    alignItems="center"
-                >
-                    <Box>
-                        <Typography
-                            variant="h1"
-                            color="textPrimary"
-                            align="right"
-                        >
-                            {formatPercent(combinedAPY)}
-                        </Typography>
+        <Box my={1}>
+            <Grid
+                alignItems="center"
+                container
+                justify="space-between"
+                spacing={3}
+            >
+                <Grid item>
+                    <Typography
+                        variant="subtitle1"
+                        color="textSecondary"
+                        align="left"
+                    >
+                        Aggregated Value
+                    </Typography>
+                    <Typography variant="h1" color="textPrimary" align="left">
+                        $
+                        <SplitNumber
+                            theNumber={aggregatedBalance}
+                            centsClassName={classes.cents}
+                        />
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography
+                        variant="subtitle1"
+                        color="textSecondary"
+                        align="right"
+                    >
+                        Combined APY
+                    </Typography>
+                    <Box
+                        display="flex"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                    >
+                        <Box>
+                            <Typography
+                                variant="h1"
+                                color="textPrimary"
+                                align="right"
+                            >
+                                {formatPercent(combinedAPY)}
+                            </Typography>
+                        </Box>
+                        <Box>{displayAPYIcon(classes, combinedAPY)}</Box>
                     </Box>
-                    <Box>{displayAPYIcon(classes, combinedAPY)}</Box>
-                </Box>
+                </Grid>
             </Grid>
-        </Grid>
+        </Box>
     );
 }
 

@@ -11,6 +11,7 @@ import {
     CardContent,
     Grid,
     LinearProgress,
+    Paper,
     Typography,
     makeStyles,
 } from "@material-ui/core";
@@ -39,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
             borderRadius: 5,
         },
     },
+    cardtitle: {
+        lineHeight: 1.4,
+        paddingBottom: 8,
+    },
 }));
 
 function BorrowLimit({ borrowLimit }) {
@@ -46,34 +51,39 @@ function BorrowLimit({ borrowLimit }) {
 
     // Section 5: Code Component
     return (
-        <Card>
-            <CardContent>
-                <Box>
-                    <Grid alignItems="center" container spacing={3}>
-                        <Grid item xs={12}>
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                                align="left"
-                            >
-                                Borrow Limit
+        <Paper>
+            <Box
+                className={classes.item}
+                display="flex"
+                alignItems="center"
+                flexWrap="wrap"
+                p={2}
+            >
+                <Grid alignItems="center" container spacing={3}>
+                    <Grid item xs={12}>
+                        <Typography
+                            variant="subtitle1"
+                            color="textSecondary"
+                            align="left"
+                            className={classes.cardtitle}
+                        >
+                            Borrow Limit
+                        </Typography>
+                        <Box display="flex" alignItems="center">
+                            <Typography variant="h3" color="textPrimary">
+                                {borrowLimit.toFixed(2)}%
                             </Typography>
-                            <Box display="flex" alignItems="center">
-                                <Typography variant="h3" color="textPrimary">
-                                    {borrowLimit.toFixed(2)}%
-                                </Typography>
-                                <LinearProgress
-                                    className={classes.progress}
-                                    value={borrowLimit}
-                                    color="secondary"
-                                    variant="determinate"
-                                />
-                            </Box>
-                        </Grid>
+                            <LinearProgress
+                                className={classes.progress}
+                                value={borrowLimit}
+                                color="secondary"
+                                variant="determinate"
+                            />
+                        </Box>
                     </Grid>
-                </Box>
-            </CardContent>
-        </Card>
+                </Grid>
+            </Box>
+        </Paper>
     );
 }
 

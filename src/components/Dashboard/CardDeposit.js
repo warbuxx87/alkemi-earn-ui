@@ -11,6 +11,7 @@ import {
     CardContent,
     Divider,
     Grid,
+    Paper,
     Typography,
     makeStyles,
 } from "@material-ui/core";
@@ -40,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     cents: {
         color: "#5e6266",
     },
+    cardtitle: {
+        lineHeight: 1.4,
+        paddingBottom: 8,
+    },
 }));
 
 function DepositBalance({ totalDeposit, currency, apy }) {
@@ -47,61 +52,61 @@ function DepositBalance({ totalDeposit, currency, apy }) {
 
     // Section 5: Code Component
     return (
-        <Card>
-            <Divider />
-            <CardContent className={classes.contentCard}>
-                <Box
-                    className={classes.item}
-                    display="flex"
+        <Paper>
+            <Box
+                className={classes.item}
+                display="flex"
+                alignItems="center"
+                flexWrap="wrap"
+                p={2}
+            >
+                <Grid
                     alignItems="center"
-                    flexWrap="wrap"
+                    container
+                    justify="space-between"
+                    spacing={3}
                 >
-                    <Grid
-                        alignItems="center"
-                        container
-                        justify="space-between"
-                        spacing={3}
-                    >
-                        <Grid item>
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                                align="left"
-                            >
-                                Lending Overview
-                            </Typography>
-                            <Typography
-                                variant="h3"
-                                color="textPrimary"
-                                align="left"
-                            >
-                                $
-                                <SplitNumber
-                                    theNumber={totalDeposit}
-                                    centsClassName={classes.cents}
-                                />
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                                align="right"
-                            >
-                                Earning APY
-                            </Typography>
-                            <Typography
-                                variant="h3"
-                                color="textPrimary"
-                                align="right"
-                            >
-                                {formatPercent(apy)}
-                            </Typography>
-                        </Grid>
+                    <Grid item>
+                        <Typography
+                            variant="subtitle1"
+                            color="textSecondary"
+                            align="left"
+                            className={classes.cardtitle}
+                        >
+                            Lending Overview
+                        </Typography>
+                        <Typography
+                            variant="h3"
+                            color="textPrimary"
+                            align="left"
+                        >
+                            $
+                            <SplitNumber
+                                theNumber={totalDeposit}
+                                centsClassName={classes.cents}
+                            />
+                        </Typography>
                     </Grid>
-                </Box>
-            </CardContent>
-        </Card>
+                    <Grid item>
+                        <Typography
+                            variant="subtitle1"
+                            color="textSecondary"
+                            align="right"
+                            className={classes.cardtitle}
+                        >
+                            Earning APY
+                        </Typography>
+                        <Typography
+                            variant="h3"
+                            color="textPrimary"
+                            align="right"
+                        >
+                            {formatPercent(apy)}
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </Box>
+        </Paper>
     );
 }
 
