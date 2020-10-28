@@ -18,16 +18,10 @@ import {
 } from "@material-ui/core";
 
 import { ArrowUp as Upicon } from "react-feather";
-import {
-    fromWei,
-    formatPercent,
-    formatNumber,
-    format_str_to_kmb,
-    formattedNumberToSplitNumber,
-} from "utils/ui";
+import { formatPercent } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
-
+import SplitNumber from "components/UI/SplitNumber";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,35 +48,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const displayAggregatedBalance = (aggregatedBalance, classes) => {
-    const {
-        leftOfDecimalPoint,
-        rightOfDecimalPoint,
-    } = formattedNumberToSplitNumber(
-        formatNumber(aggregatedBalance.toString(), "ETH")
-    );
-
-    const numbersOnLeft = leftOfDecimalPoint.replace("-", "");
-    let numberOnRightToDisplay = rightOfDecimalPoint;
-
-    if (numbersOnLeft.length <= 4) {
-        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 8);
-    } else if (numbersOnLeft.length <= 5) {
-        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 6);
-    } else if (numbersOnLeft.length <= 7) {
-        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 4);
-    } else {
-        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 2);
-    }
-
-    return (
-        <span>
-            {leftOfDecimalPoint}
-            <span className={classes.cents}>.{numberOnRightToDisplay}</span>
-        </span>
-    );
-};
-
 function Overview({ aggregatedBalance, currency, combinedAPY }) {
     const classes = useStyles();
     // Section 5: Code Component
@@ -97,7 +62,10 @@ function Overview({ aggregatedBalance, currency, combinedAPY }) {
                     Aggregated Value
                 </Typography>
                 <Typography variant="h1" color="textPrimary" align="left">
-                    ${displayAggregatedBalance(aggregatedBalance, classes)}
+                    <SplitNumber
+                        theNumber={aggregatedBalance}
+                        centsClassName={classes.cents}
+                    />
                 </Typography>
             </Grid>
             <Grid item>
