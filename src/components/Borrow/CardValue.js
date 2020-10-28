@@ -14,7 +14,6 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { fromWei, format_str_to_kmb } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
 import SplitNumber from "components/UI/SplitNumber";
