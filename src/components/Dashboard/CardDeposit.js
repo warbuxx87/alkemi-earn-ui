@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     cents: {
         color: "#969696",
     },
+    apy: {
+        color: theme.palette.success.main,
+    },
     cardtitle: {
         lineHeight: 1.4,
         paddingBottom: 8,
@@ -98,8 +101,9 @@ function DepositBalance({ totalDeposit, currency, apy }) {
                         </Typography>
                         <Typography
                             variant="h3"
-                            color="textPrimary"
+                            color="success"
                             align="right"
+                            className={classes.apy}
                         >
                             {formatPercent(apy)}
                         </Typography>

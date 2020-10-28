@@ -34,11 +34,14 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         justifyContent: "center",
     },
+    apy: {
+        color: theme.palette.warning.main,
+    },
     //contentCard: {
     //    borderBottom: `1px solid ${theme.palette.warning.main}`,
     //  },
     cents: {
-        color: "#5e6266",
+        color: "#969696",
     },
     cardtitle: {
         lineHeight: 1.4,
@@ -99,6 +102,7 @@ function BorrowBalance({ totalBorrow, currency, apy }) {
                             variant="h3"
                             color="textPrimary"
                             align="right"
+                            className={classes.apy}
                         >
                             {formatPercent(apy)}
                         </Typography>
