@@ -159,13 +159,13 @@ export const getMarketLiquidity = (state) => {
                     ) {
                         //  console.log(balance);
                         let value = _.get(balance, "value");
-                        //  console.log(value);
+                        console.log(value);
                         assetLiquidity[assetAddress] = value;
                     }
                 });
             }
         });
-        console.log("liquidity payload", assetLiquidity);
+        // console.log("liquidity payload", assetLiquidity);
         return assetLiquidity;
     }
 };
