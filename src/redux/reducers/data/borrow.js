@@ -9,14 +9,13 @@ import {
     RESET_BORROW_DATA,
 } from "redux/actions/data/borrow";
 
+import address from "constants/address_map.json";
+
 // import internal assets
 import dai from "assets/images/DAI.svg";
 import usdc from "assets/images/USDC.svg";
 import wbtc from "assets/images/WBTC.svg";
 import eth from "assets/images/WETH.svg";
-
-//import pax from "assets/images/pax.png";
-//import usdt from "assets/images/USDT.svg";
 
 function createData(name, unit, image, wallet) {
     return {
@@ -34,12 +33,9 @@ function createData(name, unit, image, wallet) {
 
 const assets = {
     WETH: createData("Ether", "WETH", eth, "0"),
-    DAI: createData("Maker DAI", "DAI", dai, "0"),
+    DAI: createData("Dai Stablecoin", "DAI", dai, "0"),
     USDC: createData("USD Coin", "USDC", usdc, "0"),
     WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0"),
-
-    //USDT: createData("Tether", "USDT", usdt, "0"),
-    //PAX: createData("Paxos", "PAX", pax, "0"),
 };
 
 // Define initial state
@@ -54,19 +50,33 @@ export default (state = initialState, action) => {
         case "GOT_CONTRACT_VAR": {
             switch (action.variable) {
                 case "balanceOf":
-                    return {
-                        ...state,
-                        assets: {
-                            ...state.assets,
-                            [action.name]: {
-                                ...state.assets[action.name],
-                                wallet: action.value,
+                    // don't update wallet balance of the main smartContract -- need this filter so that main contracts liquidity is not returned as the user's local wallet balance
+                    if (
+                        action.args[0] !==
+                            address["ropsten"].address_MoneyMarket &&
+                        action.args[0] !==
+                            address["rinkeby"].address_MoneyMarket &&
+                        action.args[0] !==
+                            address["main"].address_MoneyMarket &&
+                        action.args[0] !== address["kovan"].address_MoneyMarket
+                    ) {
+                        return {
+                            ...state,
+                            assets: {
+                                ...state.assets,
+                                [action.name]: {
+                                    ...state.assets[action.name],
+                                    wallet: action.value,
+                                },
                             },
-                        },
-                    };
+                        };
+                    }
+                    break;
+
                 default:
                     return state;
             }
+            break;
         }
         case BORROW_PENDING:
             return {
