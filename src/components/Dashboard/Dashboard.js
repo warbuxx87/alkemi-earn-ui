@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
     tabs: {
         "& .MuiDivider-root": {
-            backgroundColor: "#00000",
+            backgroundColor: "#121316",
         },
     },
 }));
@@ -73,7 +73,7 @@ function Dashboard() {
                 </Grid>
                 <Grid item lg={12} sm={12} xs={12}>
                     <Box className={classes.tabs}>
-                        <Box mt={3}>
+                        <Box mt={5}>
                             <Tabs
                                 onChange={handleTabsChange}
                                 scrollButtons="auto"

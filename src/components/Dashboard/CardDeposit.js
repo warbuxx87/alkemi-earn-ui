@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     //      borderBottom: `1px solid ${theme.palette.success.main}`,
     //  },
     cents: {
-        color: "#5e6266",
+        color: "#969696",
     },
     cardtitle: {
         lineHeight: 1.4,

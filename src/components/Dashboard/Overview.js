@@ -65,7 +65,7 @@ function Overview({ aggregatedBalance, currency, combinedAPY }) {
     const classes = useStyles();
     // Section 5: Code Component
     return (
-        <Box my={1}>
+        <Box mt={2}>
             <Grid
                 alignItems="center"
                 container
