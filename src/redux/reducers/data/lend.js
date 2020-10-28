@@ -80,10 +80,12 @@ export default (state = initialState, action) => {
                             },
                         };
                     }
+                    break;
 
                 default:
                     return state;
             }
+            break;
         }
         case DEPOSIT_PENDING:
             return {
