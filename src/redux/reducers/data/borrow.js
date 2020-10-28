@@ -71,12 +71,10 @@ export default (state = initialState, action) => {
                             },
                         };
                     }
-                    break;
-
+                // falls through
                 default:
                     return state;
             }
-            break;
         }
         case BORROW_PENDING:
             return {
