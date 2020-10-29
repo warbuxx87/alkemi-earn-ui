@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     cents: {
-        color: "#5e6266",
+        color: theme.palette.text.secondary,
     },
 }));
 

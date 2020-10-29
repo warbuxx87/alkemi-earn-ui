@@ -14,9 +14,7 @@ const styles = (theme) => ({
         borderBottom: "1px solid #000000",
     },
     body: {
-        fontSize: 14,
-        color: theme.palette.common.white,
-        borderBottom: "1px solid #000000",
+        borderBottom: "none",
     },
 });
 

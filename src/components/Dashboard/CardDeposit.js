@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     //      borderBottom: `1px solid ${theme.palette.success.main}`,
     //  },
     cents: {
-        color: "#969696",
+        color: theme.palette.text.secondary,
     },
     apy: {
         color: theme.palette.success.main,
