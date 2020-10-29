@@ -52,72 +52,84 @@ const Markets = ({
 
     return (
         <Container maxWidth={false} className={classes.container}>
-            <Grid container spacing={3}>
-                <Grid item lg={4} sm={6} xs={12}>
-                    <MarketsCard
-                        title="Total Deposits"
-                        cardContent={totalDepositsContent}
-                    />
-                </Grid>
-                <Grid item lg={4} sm={6} xs={12}>
-                    <MarketsCard
-                        title="Total Borrowed"
-                        cardContent={totalBorrowedContent}
-                    />
-                </Grid>
-                <Grid item lg={4} sm={6} xs={12}>
-                    <MarketsCard
-                        title="Collateral Ratio"
-                        cardContent={collateralRatioContent}
-                    />
-                </Grid>
-                <Grid item lg={6} sm={6} xs={12}>
-                    <Card>
-                        <CardHeader title="Deposits" />
-                        <Divider />
-                        <CardContent>
-                            <Box height="180px" overflow="auto" pr={3} pt={1}>
-                                {supplyArray &&
-                                    supplyArray.length > 0 &&
-                                    supplyArray.map((supply_item) => {
-                                        return (
-                                            <Stats
-                                                {...supply_item}
-                                                key={supply_item.symbol}
-                                                type={"supply"}
-                                            />
-                                        );
-                                    })}
-                            </Box>
-                        </CardContent>
-                    </Card>
-                </Grid>
+            <Box mt={3}>
+                <Grid container spacing={3}>
+                    <Grid item lg={4} sm={6} xs={12}>
+                        <MarketsCard
+                            title="Total Deposits"
+                            cardContent={totalDepositsContent}
+                        />
+                    </Grid>
+                    <Grid item lg={4} sm={6} xs={12}>
+                        <MarketsCard
+                            title="Total Borrowed"
+                            cardContent={totalBorrowedContent}
+                        />
+                    </Grid>
+                    <Grid item lg={4} sm={6} xs={12}>
+                        <MarketsCard
+                            title="Collateral Ratio"
+                            cardContent={collateralRatioContent}
+                        />
+                    </Grid>
+                    <Grid item lg={6} sm={6} xs={12}>
+                        <Card>
+                            <CardHeader title="Deposits" />
+                            <Divider />
+                            <CardContent>
+                                <Box
+                                    height="180px"
+                                    overflow="auto"
+                                    pr={3}
+                                    pt={1}
+                                >
+                                    {supplyArray &&
+                                        supplyArray.length > 0 &&
+                                        supplyArray.map((supply_item) => {
+                                            return (
+                                                <Stats
+                                                    {...supply_item}
+                                                    key={supply_item.symbol}
+                                                    type={"supply"}
+                                                />
+                                            );
+                                        })}
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
 
-                <Grid item lg={6} sm={6} xs={12}>
-                    <Card>
-                        <CardHeader title="Borrowed" />
-                        <Divider />
-                        <CardContent>
-                            <Box height="180px" overflow="auto" pr={3} pt={1}>
-                                {borrowArray &&
-                                    borrowArray.length > 0 &&
-                                    borrowArray.map((borrow_item) => {
-                                        return (
-                                            <Stats
-                                                {...borrow_item}
-                                                key={borrow_item.symbol}
-                                                type={"borrow"}
-                                            />
-                                        );
-                                    })}
-                            </Box>
-                        </CardContent>
-                    </Card>
+                    <Grid item lg={6} sm={6} xs={12}>
+                        <Card>
+                            <CardHeader title="Borrowed" />
+                            <Divider />
+                            <CardContent>
+                                <Box
+                                    height="180px"
+                                    overflow="auto"
+                                    pr={3}
+                                    pt={1}
+                                >
+                                    {borrowArray &&
+                                        borrowArray.length > 0 &&
+                                        borrowArray.map((borrow_item) => {
+                                            return (
+                                                <Stats
+                                                    {...borrow_item}
+                                                    key={borrow_item.symbol}
+                                                    type={"borrow"}
+                                                />
+                                            );
+                                        })}
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item lg={12} sm={12} xs={12}>
+                        <MarketsTable marketsData={marketsData} />
+                    </Grid>
                 </Grid>
-                <Grid item lg={12} sm={12} xs={12}>
-                    <MarketsTable marketsData={marketsData} />
-                </Grid>
-            </Grid>
+            </Box>
         </Container>
     );
 };

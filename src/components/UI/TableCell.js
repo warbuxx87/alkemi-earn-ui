@@ -14,7 +14,7 @@ const styles = (theme) => ({
         borderBottom: "1px solid #000000",
     },
     body: {
-        borderBottom: "none",
+        borderBottom: "1px solid #000000",
     },
 });
 

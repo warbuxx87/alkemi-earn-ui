@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Container, Grid, makeStyles } from "@material-ui/core";
+import { Box, Container, Grid, makeStyles } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import BorrowTable from "./Table";
@@ -35,30 +35,32 @@ function Borrow({ className, activeBorrow, inactiveBorrow, onActivate }) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
-            <Grid container spacing={3}>
-                <Grid item lg={4} sm={6} xs={12}>
-                    <BorrowCardValue />
-                </Grid>
-                <Grid item lg={4} sm={6} xs={12}>
-                    <BorrowCardLimit />
-                </Grid>
-                <Grid item lg={4} sm={6} xs={12}>
-                    <BorrowCardAPY />
-                </Grid>
-                {!!activeBorrow.length && (
-                    <Grid item lg={12} xs={12}>
-                        <BorrowTableActive data={activeBorrow} />
+            <Box mt={3}>
+                <Grid container spacing={3}>
+                    <Grid item lg={4} sm={6} xs={12}>
+                        <BorrowCardValue />
                     </Grid>
-                )}
-                {!!inactiveBorrow.length && (
-                    <Grid item lg={12} xs={12}>
-                        <BorrowTable
-                            data={inactiveBorrow}
-                            onActivate={onActivate}
-                        />
+                    <Grid item lg={4} sm={6} xs={12}>
+                        <BorrowCardLimit />
                     </Grid>
-                )}
-            </Grid>
+                    <Grid item lg={4} sm={6} xs={12}>
+                        <BorrowCardAPY />
+                    </Grid>
+                    {!!activeBorrow.length && (
+                        <Grid item lg={12} xs={12}>
+                            <BorrowTableActive data={activeBorrow} />
+                        </Grid>
+                    )}
+                    {!!inactiveBorrow.length && (
+                        <Grid item lg={12} xs={12}>
+                            <BorrowTable
+                                data={inactiveBorrow}
+                                onActivate={onActivate}
+                            />
+                        </Grid>
+                    )}
+                </Grid>
+            </Box>
         </Container>
     );
 }

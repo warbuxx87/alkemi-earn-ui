@@ -233,219 +233,242 @@ const History = ({
         });
     };
     return (
-        <Card className={clsx(classes.root, className)} {...rest}>
-            {" "}
-            <Box p={2} pt={3}>
-                <Box display="flex" alignItems="center">
-                    <TextField
-                        fullWidth
-                        label="Asset"
-                        name="asset"
-                        className={classes.assetField}
-                        onChange={handleChange}
-                        select
-                        value={values.asset}
-                        variant="outlined"
-                        color="secondary"
-                    >
-                        {assetName.map((category) => (
-                            <MenuItem key={category.id} value={category.id}>
-                                {category.name}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                    <TextField
-                        fullWidth
-                        label="Action"
-                        name="action"
-                        className={classes.eventField}
-                        onChange={handleChange}
-                        select
-                        value={values.action}
-                        variant="outlined"
-                        color="secondary"
-                    >
-                        {eventAction.map((category) => (
-                            <MenuItem key={category.id} value={category.id}>
-                                {category.name}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                    <Box flexGrow={1} />
-                    <TextField
-                        fullWidth
-                        label="Sort By"
-                        name="sortBy"
-                        className={classes.sortField}
-                        onChange={handleChange}
-                        select
-                        value={values.sortBy}
-                        variant="outlined"
-                        color="secondary"
-                    >
-                        {sortOptions.map((category) => (
-                            <MenuItem
-                                key={category.value}
-                                value={category.value}
-                            >
-                                {category.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
+        <Box mt={3}>
+            <Card className={clsx(classes.root, className)} {...rest}>
+                {" "}
+                <Box p={2} pt={3}>
+                    <Box display="flex" alignItems="center">
+                        <TextField
+                            fullWidth
+                            label="Asset"
+                            name="asset"
+                            className={classes.assetField}
+                            onChange={handleChange}
+                            select
+                            value={values.asset}
+                            variant="outlined"
+                            color="secondary"
+                        >
+                            {assetName.map((category) => (
+                                <MenuItem key={category.id} value={category.id}>
+                                    {category.name}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                        <TextField
+                            fullWidth
+                            label="Action"
+                            name="action"
+                            className={classes.eventField}
+                            onChange={handleChange}
+                            select
+                            value={values.action}
+                            variant="outlined"
+                            color="secondary"
+                        >
+                            {eventAction.map((category) => (
+                                <MenuItem key={category.id} value={category.id}>
+                                    {category.name}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                        <Box flexGrow={1} />
+                        <TextField
+                            fullWidth
+                            label="Sort By"
+                            name="sortBy"
+                            className={classes.sortField}
+                            onChange={handleChange}
+                            select
+                            value={values.sortBy}
+                            variant="outlined"
+                            color="secondary"
+                        >
+                            {sortOptions.map((category) => (
+                                <MenuItem
+                                    key={category.value}
+                                    value={category.value}
+                                >
+                                    {category.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    </Box>
                 </Box>
-            </Box>
-            <Table className="whitespace-pre">
-                <TableHead>
-                    <TableRow>
-                        <HistoryTableCell className="px-0">
-                            <Typography variant="body2" color="textSecondary">
-                                Date
-                            </Typography>
-                        </HistoryTableCell>
-                        <HistoryTableCell className="px-0">
-                            <Typography variant="body2" color="textSecondary">
-                                Action
-                            </Typography>
-                        </HistoryTableCell>
-                        <HistoryTableCell className="px-0">
-                            <Typography variant="body2" color="textSecondary">
-                                Asset
-                            </Typography>
-                        </HistoryTableCell>
-                        <HistoryTableCell className="px-0">
-                            <Typography variant="body2" color="textSecondary">
-                                Symbol
-                            </Typography>
-                        </HistoryTableCell>
-                        <HistoryTableCell className="px-0">
-                            <Typography variant="body2" color="textSecondary">
-                                Amount
-                            </Typography>
-                        </HistoryTableCell>
-                        <HistoryTableCell className="px-0">
-                            <Typography variant="body2" color="textSecondary">
-                                Balance
-                            </Typography>
-                        </HistoryTableCell>
-                        <HistoryTableCell className="px-0" align="right">
-                            <Typography variant="body2" color="textSecondary">
-                                View TX
-                            </Typography>
-                        </HistoryTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {txtListData
-                        .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                        )
-                        .map((item, index) => (
-                            <TableRow key={index}>
-                                <HistoryTableCell
-                                    className="px-0 capitalize"
-                                    align="left"
+                <Table className="whitespace-pre">
+                    <TableHead>
+                        <TableRow>
+                            <HistoryTableCell className="px-0">
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
                                 >
-                                    <Typography
-                                        variant="body1"
-                                        color="textPrimary"
+                                    Date
+                                </Typography>
+                            </HistoryTableCell>
+                            <HistoryTableCell className="px-0">
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Action
+                                </Typography>
+                            </HistoryTableCell>
+                            <HistoryTableCell className="px-0">
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Asset
+                                </Typography>
+                            </HistoryTableCell>
+                            <HistoryTableCell className="px-0">
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Symbol
+                                </Typography>
+                            </HistoryTableCell>
+                            <HistoryTableCell className="px-0">
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Amount
+                                </Typography>
+                            </HistoryTableCell>
+                            <HistoryTableCell className="px-0">
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Balance
+                                </Typography>
+                            </HistoryTableCell>
+                            <HistoryTableCell className="px-0" align="right">
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    View TX
+                                </Typography>
+                            </HistoryTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {txtListData
+                            .slice(
+                                page * rowsPerPage,
+                                page * rowsPerPage + rowsPerPage
+                            )
+                            .map((item, index) => (
+                                <TableRow key={index}>
+                                    <HistoryTableCell
+                                        className="px-0 capitalize"
+                                        align="left"
                                     >
-                                        {getDateFromBlockNumber(
-                                            item.blockNumber
-                                        )}
-                                    </Typography>
-                                </HistoryTableCell>
-                                <HistoryTableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    <Typography
-                                        variant="body1"
-                                        color="textPrimary"
+                                        <Typography
+                                            variant="body1"
+                                            color="textPrimary"
+                                        >
+                                            {getDateFromBlockNumber(
+                                                item.blockNumber
+                                            )}
+                                        </Typography>
+                                    </HistoryTableCell>
+                                    <HistoryTableCell
+                                        className="px-0 capitalize"
+                                        align="left"
                                     >
-                                        {item.topic}
-                                    </Typography>
-                                </HistoryTableCell>
-                                <HistoryTableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    <Typography
-                                        variant="body1"
-                                        color="textPrimary"
+                                        <Typography
+                                            variant="body1"
+                                            color="textPrimary"
+                                        >
+                                            {item.topic}
+                                        </Typography>
+                                    </HistoryTableCell>
+                                    <HistoryTableCell
+                                        className="px-0 capitalize"
+                                        align="left"
                                     >
-                                        {item.name}
-                                    </Typography>
-                                </HistoryTableCell>
-                                <HistoryTableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    <img
-                                        className={classes.imageSize}
-                                        src={getTokenIcon(item.symbol)}
-                                        alt={item.name}
-                                    />
-                                </HistoryTableCell>
-                                <HistoryTableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    <Typography
-                                        variant="body1"
-                                        color="textPrimary"
+                                        <Typography
+                                            variant="body1"
+                                            color="textPrimary"
+                                        >
+                                            {item.name}
+                                        </Typography>
+                                    </HistoryTableCell>
+                                    <HistoryTableCell
+                                        className="px-0 capitalize"
+                                        align="left"
                                     >
-                                        {item.amount}
-                                    </Typography>
-                                </HistoryTableCell>
-                                <HistoryTableCell
-                                    className="px-0 capitalize"
-                                    align="left"
-                                >
-                                    <Typography
-                                        variant="body1"
-                                        color="textPrimary"
+                                        <img
+                                            className={classes.imageSize}
+                                            src={getTokenIcon(item.symbol)}
+                                            alt={item.name}
+                                        />
+                                    </HistoryTableCell>
+                                    <HistoryTableCell
+                                        className="px-0 capitalize"
+                                        align="left"
                                     >
-                                        {item.newBalance}
-                                    </Typography>
-                                </HistoryTableCell>
-                                <HistoryTableCell
-                                    className="px-0 capitalize"
-                                    align="right"
-                                >
-                                    <IconButton
-                                        href={openEtherScan(
-                                            item.txHash,
-                                            currentNetworkName
-                                        )}
-                                        target="_blank"
+                                        <Typography
+                                            variant="body1"
+                                            color="textPrimary"
+                                        >
+                                            {item.amount}
+                                        </Typography>
+                                    </HistoryTableCell>
+                                    <HistoryTableCell
+                                        className="px-0 capitalize"
+                                        align="left"
                                     >
-                                        <SvgIcon fontSize="small">
-                                            <LinkIcon />
-                                        </SvgIcon>
-                                    </IconButton>
-                                </HistoryTableCell>
-                            </TableRow>
-                        ))}
-                </TableBody>
-            </Table>
-            <TablePagination
-                className="px-4"
-                rowsPerPageOptions={[8, 25, 50, 100]}
-                component="div"
-                count={txtListData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                backIconButtonProps={{
-                    "aria-label": "Previous Page",
-                }}
-                nextIconButtonProps={{
-                    "aria-label": "Next Page",
-                }}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
-        </Card>
+                                        <Typography
+                                            variant="body1"
+                                            color="textPrimary"
+                                        >
+                                            {item.newBalance}
+                                        </Typography>
+                                    </HistoryTableCell>
+                                    <HistoryTableCell
+                                        className="px-0 capitalize"
+                                        align="right"
+                                    >
+                                        <IconButton
+                                            href={openEtherScan(
+                                                item.txHash,
+                                                currentNetworkName
+                                            )}
+                                            target="_blank"
+                                        >
+                                            <SvgIcon fontSize="small">
+                                                <LinkIcon />
+                                            </SvgIcon>
+                                        </IconButton>
+                                    </HistoryTableCell>
+                                </TableRow>
+                            ))}
+                    </TableBody>
+                </Table>
+                <TablePagination
+                    className="px-4"
+                    rowsPerPageOptions={[8, 25, 50, 100]}
+                    component="div"
+                    count={txtListData.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    backIconButtonProps={{
+                        "aria-label": "Previous Page",
+                    }}
+                    nextIconButtonProps={{
+                        "aria-label": "Next Page",
+                    }}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                />
+            </Card>
+        </Box>
     );
 };
 
