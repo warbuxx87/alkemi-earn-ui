@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cardtitle: {
         lineHeight: 1.4,
-        paddingBottom: 8,
+        paddingBottom: 10,
     },
 }));
 
