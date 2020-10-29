@@ -7,8 +7,6 @@ import PropTypes from "prop-types";
 // Section 2: Material-UI imports
 import {
     Box,
-    Card,
-    CardContent,
     Grid,
     LinearProgress,
     Paper,

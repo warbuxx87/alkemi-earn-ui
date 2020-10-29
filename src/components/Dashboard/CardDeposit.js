@@ -5,16 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import {
-    Box,
-    Card,
-    CardContent,
-    Divider,
-    Grid,
-    Paper,
-    Typography,
-    makeStyles,
-} from "@material-ui/core";
+import { Box, Grid, Paper, Typography, makeStyles } from "@material-ui/core";
 import { formatPercent } from "utils/ui";
 
 // Section 3: Components & Containers import from the application

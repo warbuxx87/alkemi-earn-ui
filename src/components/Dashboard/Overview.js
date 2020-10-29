@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     cents: {
-        color: "#5e6266",
+        color: "#969696",
     },
     upicon: {
         fontSize: "3.1rem",
