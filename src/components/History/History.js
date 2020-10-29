@@ -295,7 +295,7 @@ const History = ({
                         </TextField>
                     </Box>
                 </Box>
-                <Table className="whitespace-pre">
+                <Table size="small" className="whitespace-pre">
                     <TableHead>
                         <TableRow>
                             <HistoryTableCell className="px-0">
