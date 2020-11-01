@@ -92,7 +92,7 @@ function DepositBalance({ totalDeposit, currency, apy }) {
                         </Typography>
                         <Typography
                             variant="h3"
-                            color="success"
+                            color="textPrimary"
                             align="right"
                             className={classes.apy}
                         >

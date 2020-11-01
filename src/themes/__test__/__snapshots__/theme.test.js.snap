@@ -44,7 +44,8 @@ Object {
         "textTransform": "uppercase",
       },
       "root": Object {
-        "marginBottom": 48,
+        "marginBottom": 32,
+        "marginTop": 8,
       },
     },
     "MuiAppBar": Object {
@@ -106,7 +107,7 @@ Object {
     "background": Object {
       "dark": "#1B1B1B",
       "default": "#000000",
-      "paper": "#121316",
+      "paper": "#0d0e10",
     },
     "common": Object {
       "black": "#000",
@@ -167,7 +168,7 @@ Object {
       "hint": "rgba(184, 233, 134, 1)",
       "icon": "rgba(255, 255, 255, 0.5)",
       "primary": "#ffffff",
-      "secondary": "#a7a7a7",
+      "secondary": "#8c8c8c",
       "success": "#3cb34f",
     },
     "tonalOffset": 0.2,
