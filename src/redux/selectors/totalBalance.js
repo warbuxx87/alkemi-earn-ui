@@ -172,11 +172,35 @@ export const getAggregatedBalance = createSelector(
 );
 
 export const getMarketLiquidity = (state) => {
-    const assetLiquidity = {};
-    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
-        (market) =>
-            (assetLiquidity[market.args[0]] = market.value["totalSupply"]) -
-            market.value["totalBorrows"]
-    );
-    return assetLiquidity;
+    const currentNetworkName = walletNetworkName(state);
+
+    if (currentNetworkName) {
+        const assetLiquidity = {};
+
+        Object.keys(state.contracts).forEach((asset) => {
+            if (asset !== "MoneyMarket") {
+                let assetName = "address_" + asset;
+                const assetAddress = address[currentNetworkName][assetName];
+                //  console.log(assetAddress);
+                const liquidity = Object.values(
+                    state.contracts[asset].balanceOf
+                );
+
+                liquidity.forEach((balance) => {
+                    // only want to grab balanceOf each tokenContract for MoneyMarket Contract
+                    if (
+                        balance.args[0] ===
+                        address[currentNetworkName].address_MoneyMarket
+                    ) {
+                        //  console.log(balance);
+                        let value = _.get(balance, "value");
+                        console.log(value);
+                        assetLiquidity[assetAddress] = value;
+                    }
+                });
+            }
+        });
+        // console.log("liquidity payload", assetLiquidity);
+        return assetLiquidity;
+    }
 };
