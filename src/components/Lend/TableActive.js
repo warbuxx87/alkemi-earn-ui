@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
 // Section 5: Code Component
 const LendTableActive = ({ data = [], USDPrice }) => {
     const classes = useStyles();
+
     return (
         <Box mt={2}>
             <Typography
@@ -166,7 +167,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                         color="textPrimary"
                                         className={classes.label}
                                     >
-                                        {formatPercent(row.apr)}
+                                        {formatPercent(row.apy)}
                                     </Typography>
                                     <Typography
                                         variant="body2"

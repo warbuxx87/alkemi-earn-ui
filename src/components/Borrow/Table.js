@@ -162,7 +162,7 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                         color="textPrimary"
                                         className={classes.label}
                                     >
-                                        {formatPercent(Row.apr)}
+                                        {formatPercent(Row.apy)}
                                     </Typography>
                                     <Typography
                                         variant="body2"

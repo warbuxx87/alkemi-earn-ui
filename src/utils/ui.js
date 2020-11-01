@@ -72,6 +72,7 @@ export const toWei = (value, unit) => {
     }
 };
 
+// Turns a number from wei value to one with a decimal point, also returns a certain number of fraction digits depending on the asset/token
 export const formatNumber = (value, unit) => {
     if (!value) return 0;
     const wei = fromWei(value, unit);
@@ -89,6 +90,39 @@ export const formatNumber = (value, unit) => {
                 maximumFractionDigits: 18,
             }).format(wei);
     }
+};
+
+// Breaks a number (in string format) to the main number & fraction
+export const formattedNumberToSplitNumber = (formattedNumber) => {
+    const splitNumber = formattedNumber.split(".");
+
+    return {
+        leftOfDecimalPoint: splitNumber[0] ? splitNumber[0] : "0",
+        rightOfDecimalPoint: splitNumber[1] ? splitNumber[1] : "0",
+    };
+};
+
+// Takes a split number (from the decimal point), and returns a certain amount of fraction digits depending on the length of the left side of the decimal point
+export const breakNumberFromDecimalPoint = (theNumber, classes) => {
+    const {
+        leftOfDecimalPoint,
+        rightOfDecimalPoint,
+    } = formattedNumberToSplitNumber(formatNumber(theNumber.toString(), "ETH"));
+
+    const numbersOnLeft = leftOfDecimalPoint.replace("-", ""); // remove negative
+    let numberOnRightToDisplay = rightOfDecimalPoint;
+
+    if (numbersOnLeft.length <= 4) {
+        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 8);
+    } else if (numbersOnLeft.length <= 6) {
+        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 6);
+    } else if (numbersOnLeft.length <= 9) {
+        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 4);
+    } else {
+        numberOnRightToDisplay = numberOnRightToDisplay.substring(0, 2);
+    }
+
+    return { leftOfDecimalPoint, numberOnRightToDisplay };
 };
 
 // value in USDx

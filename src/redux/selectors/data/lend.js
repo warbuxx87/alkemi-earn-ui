@@ -10,8 +10,8 @@ import { getMarketLiquidity } from "redux/selectors/totalBalance";
 // Helpers
 function calculateInterest(rateMantissa) {
     const total_blocks_per_year = (3600 * 24 * 365) / 15;
-    let rateAPR = (rateMantissa * total_blocks_per_year) / 1e18;
-    return rateAPR;
+    let rateAPY = (rateMantissa * total_blocks_per_year) / 1e18;
+    return rateAPY;
 }
 
 function calculateUtilization(totalBorrow, totalSupply) {
@@ -53,20 +53,20 @@ const lendBalanceSelector = (state) => {
     return supplyBalance;
 };
 
-const lendAPRSelector = (state) => {
-    const supplyAPR = {};
+const lendAPYSelector = (state) => {
+    const supplyAPY = {};
 
     try {
         Object.values(
             _.get(state, "contracts.MoneyMarket.markets", {})
         ).forEach(
-            (apr) =>
-                (supplyAPR[apr.args[0]] = calculateInterest(
-                    apr.value.supplyRateMantissa
+            (apy) =>
+                (supplyAPY[apy.args[0]] = calculateInterest(
+                    apy.value.supplyRateMantissa
                 ))
         );
     } catch (e) {}
-    return supplyAPR;
+    return supplyAPY;
 };
 
 const lendRateMantissaSelector = (state) => {
@@ -122,21 +122,21 @@ const getAssetPrices = (state) => {
 };
 
 const getLendAsset = createSelector(
-    lendAssetSelector,
-    walletNetworkName,
-    lendBalanceSelector,
-    lendAPRSelector,
-    lendRateMantissaSelector,
-    lendPrincipalSelector,
-    getUtilizationValues,
-    getAssetPrices,
-    getSupplyAccountValue, // TODO: refactor this to getLendAccountValue for consistency
-    getMarketLiquidity,
+    (state) => lendAssetSelector(state),
+    (state) => walletNetworkName(state),
+    (state) => lendBalanceSelector(state),
+    (state) => lendAPYSelector(state),
+    (state) => lendRateMantissaSelector(state),
+    (state) => lendPrincipalSelector(state),
+    (state) => getUtilizationValues(state),
+    (state) => getAssetPrices(state),
+    (state) => getSupplyAccountValue(state), // TODO: refactor this to getLendAccountValue for consistency
+    (state) => getMarketLiquidity(state),
     (
         assets,
         network,
         lendBalances,
-        lendAPR,
+        lendAPY,
         lendMantissa,
         lendPrincipal,
         marketUtilization,
@@ -147,7 +147,7 @@ const getLendAsset = createSelector(
         Object.values(assets).map((asset) => {
             // supply wallet
             let balance = "0";
-            let apr = "0";
+            let apy = "0";
             let mantissa = "0";
             let principal = "0";
             let utilization = "0";
@@ -161,7 +161,7 @@ const getLendAsset = createSelector(
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = lendBalances[token_address] || "0";
-                apr = lendAPR[token_address] || "0";
+                apy = lendAPY[token_address] || "0";
                 mantissa = lendMantissa[token_address] || "0";
                 principal = lendPrincipal[token_address] || "0";
                 utilization = marketUtilization[token_address] || "0";
@@ -190,7 +190,7 @@ const getLendAsset = createSelector(
                 balance,
                 ethBalance,
                 weight,
-                apr,
+                apy,
                 principal,
                 mantissa,
                 utilization,
@@ -206,24 +206,24 @@ export const getLendActive = createSelector(getLendAsset, (assets) => {
     return assets.filter((asset) => asset.balance !== "0");
 });
 
-export const getAggregatedLendAPR = createSelector(
+export const getAggregatedDepositAPY = createSelector(
     getLendActive,
     walletNetworkName,
     (activeAssets, network) => {
-        let totalAPR = 0;
+        let totalAPY = 0;
         if (network) {
             // checks that web3 wallet is connected
             activeAssets.forEach(function (asset) {
-                totalAPR += asset.weight * asset.apr;
-                totalAPR = parseInt(totalAPR);
+                totalAPY += asset.weight * asset.apy;
+                totalAPY = parseInt(totalAPY);
             });
         }
 
-        if (isFinite(totalAPR)) {
-            totalAPR = web3.utils.fromWei(totalAPR.toString()); // formats for WEI to decimal
+        if (isFinite(totalAPY)) {
+            totalAPY = web3.utils.fromWei(totalAPY.toString()); // formats for WEI to decimal
         }
 
-        return totalAPR.toString();
+        return totalAPY.toString();
     }
 );
 
