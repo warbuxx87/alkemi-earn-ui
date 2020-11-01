@@ -36,7 +36,8 @@ const overrides = {
 
     MuiAlert: {
         root: {
-            marginBottom: 48,
+            marginBottom: 32,
+            marginTop: 8,
         },
         message: {
             paddingTop: 10,

@@ -92,7 +92,7 @@ Object {
             </div>
           </header>
           <div
-            class="MuiBox-root MuiBox-root-40"
+            class="MuiBox-root MuiBox-root-55"
           >
             <div>
               <div
@@ -173,64 +173,88 @@ Object {
                 class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-4"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
                 >
                   <div
-                    class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+                    class="MuiBox-root MuiBox-root-56"
                   >
                     <div
-                      class="MuiCardHeader-root"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
                     >
                       <div
-                        class="MuiCardHeader-content"
+                        class="MuiGrid-root MuiGrid-item"
                       >
-                        <span
-                          class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                        <h6
+                          class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                         >
-                          Account Liquidity
-                        </span>
-                      </div>
-                    </div>
-                    <hr
-                      class="MuiDivider-root"
-                    />
-                    <div
-                      class="MuiCardContent-root makeStyles-contentCard-15"
-                    >
-                      <div
-                        class="MuiBox-root MuiBox-root-41 makeStyles-item-14"
-                      >
-                        <div
-                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                          Aggregated Value
+                        </h6>
+                        <h1
+                          class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                         >
-                          <div
-                            class="MuiGrid-root MuiGrid-item"
-                          >
-                            <h6
-                              class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                          $
+                          <span>
+                            0
+                            <span
+                              class="makeStyles-cents-15"
                             >
-                              Total USD
-                            </h6>
-                            <h3
-                              class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
-                            >
-                              $
+                              .
                               0
-                            </h3>
-                          </div>
+                            </span>
+                          </span>
+                        </h1>
+                      </div>
+                      <div
+                        class="MuiGrid-root MuiGrid-item"
+                      >
+                        <h6
+                          class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
+                        >
+                          Combined APY
+                        </h6>
+                        <div
+                          class="MuiBox-root MuiBox-root-57"
+                        >
                           <div
-                            class="MuiGrid-root MuiGrid-item"
+                            class="MuiBox-root MuiBox-root-58"
                           >
-                            <h6
-                              class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
-                            >
-                              Collateral Ratio
-                            </h6>
-                            <h3
-                              class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                            <h1
+                              class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignRight"
                             >
                               0.00%
-                            </h3>
+                            </h1>
+                          </div>
+                          <div
+                            class="MuiBox-root MuiBox-root-59"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="MuiSvgIcon-root makeStyles-upicon-16 MuiSvgIcon-fontSizeSmall"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                            >
+                              <svg
+                                fill="none"
+                                height="24"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                                width="24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <line
+                                  x1="12"
+                                  x2="12"
+                                  y1="19"
+                                  y2="5"
+                                />
+                                <polyline
+                                  points="5 12 12 5 19 12"
+                                />
+                              </svg>
+                            </svg>
                           </div>
                         </div>
                       </div>
@@ -241,62 +265,50 @@ Object {
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-4"
                 >
                   <div
-                    class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+                    class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
                   >
                     <div
-                      class="MuiCardHeader-root makeStyles-item-19"
+                      class="MuiBox-root MuiBox-root-60 makeStyles-item-24"
                     >
                       <div
-                        class="MuiCardHeader-content"
-                      >
-                        <span
-                          class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
-                        >
-                          Total Deposits
-                        </span>
-                      </div>
-                    </div>
-                    <hr
-                      class="MuiDivider-root"
-                    />
-                    <div
-                      class="MuiCardContent-root makeStyles-contentCard-20"
-                    >
-                      <div
-                        class="MuiBox-root MuiBox-root-42 makeStyles-item-19"
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
                       >
                         <div
-                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                          class="MuiGrid-root MuiGrid-item"
                         >
-                          <div
-                            class="MuiGrid-root MuiGrid-item"
+                          <h6
+                            class="MuiTypography-root makeStyles-cardtitle-27 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                           >
-                            <h6
-                              class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
-                            >
-                              Total USD
-                            </h6>
-                            <h3
-                              class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
-                            >
-                              $
+                            Lending Overview
+                          </h6>
+                          <h3
+                            class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                          >
+                            $
+                            <span>
                               0
-                            </h3>
-                          </div>
-                          <div
-                            class="MuiGrid-root MuiGrid-item"
+                              <span
+                                class="makeStyles-cents-25"
+                              >
+                                .
+                                0
+                              </span>
+                            </span>
+                          </h3>
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-item"
+                        >
+                          <h6
+                            class="MuiTypography-root makeStyles-cardtitle-27 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
                           >
-                            <h6
-                              class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
-                            >
-                              Earning APY
-                            </h6>
-                            <h3
-                              class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
-                            >
-                              0.00%
-                            </h3>
-                          </div>
+                            Earning APY
+                          </h6>
+                          <h3
+                            class="MuiTypography-root makeStyles-apy-26 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                          >
+                            0.00%
+                          </h3>
                         </div>
                       </div>
                     </div>
@@ -306,61 +318,96 @@ Object {
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-4"
                 >
                   <div
-                    class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+                    class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
                   >
                     <div
-                      class="MuiCardHeader-root makeStyles-item-24"
+                      class="MuiBox-root MuiBox-root-61 makeStyles-item-31"
                     >
                       <div
-                        class="MuiCardHeader-content"
-                      >
-                        <span
-                          class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
-                        >
-                          Total Borrowed
-                        </span>
-                      </div>
-                    </div>
-                    <hr
-                      class="MuiDivider-root"
-                    />
-                    <div
-                      class="MuiCardContent-root makeStyles-contentCard-25"
-                    >
-                      <div
-                        class="MuiBox-root MuiBox-root-43 makeStyles-item-24"
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
                       >
                         <div
-                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                          class="MuiGrid-root MuiGrid-item"
                         >
-                          <div
-                            class="MuiGrid-root MuiGrid-item"
+                          <h6
+                            class="MuiTypography-root makeStyles-cardtitle-34 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                           >
-                            <h6
-                              class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
-                            >
-                              Total USD
-                            </h6>
-                            <h3
-                              class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
-                            >
-                              $
+                            Borrowing Overview
+                          </h6>
+                          <h3
+                            class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                          >
+                            $
+                            <span>
                               0
-                            </h3>
-                          </div>
-                          <div
-                            class="MuiGrid-root MuiGrid-item"
+                              <span
+                                class="makeStyles-cents-33"
+                              >
+                                .
+                                0
+                              </span>
+                            </span>
+                          </h3>
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-item"
+                        >
+                          <h6
+                            class="MuiTypography-root makeStyles-cardtitle-34 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
                           >
-                            <h6
-                              class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
-                            >
-                              Borrow APY
-                            </h6>
+                            Borrow APY
+                          </h6>
+                          <h3
+                            class="MuiTypography-root makeStyles-apy-32 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                          >
+                            0.00%
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-4"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+                  >
+                    <div
+                      class="MuiBox-root MuiBox-root-62 makeStyles-item-37"
+                    >
+                      <div
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center"
+                      >
+                        <div
+                          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+                        >
+                          <h6
+                            class="MuiTypography-root makeStyles-cardtitle-39 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                          >
+                            Borrow Limit
+                          </h6>
+                          <div
+                            class="MuiBox-root MuiBox-root-63"
+                          >
                             <h3
-                              class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                              class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary"
                             >
-                              0.00%
+                              0.00
+                              %
                             </h3>
+                            <div
+                              aria-valuemax="100"
+                              aria-valuemin="0"
+                              aria-valuenow="0"
+                              class="MuiLinearProgress-root MuiLinearProgress-colorSecondary makeStyles-progress-38 MuiLinearProgress-determinate"
+                              role="progressbar"
+                            >
+                              <div
+                                class="MuiLinearProgress-bar MuiLinearProgress-barColorSecondary MuiLinearProgress-bar1Determinate"
+                                style="transform: translateX(-100%);"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -371,10 +418,10 @@ Object {
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-44 makeStyles-tabs-11"
+                    class="MuiBox-root MuiBox-root-64 makeStyles-tabs-11"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-45"
+                      class="MuiBox-root MuiBox-root-65"
                     >
                       <div
                         class="MuiTabs-root makeStyles-tabs-11"
@@ -425,7 +472,7 @@ Object {
                             </button>
                           </div>
                           <span
-                            class="PrivateTabIndicator-root-29 PrivateTabIndicator-colorSecondary-31 MuiTabs-indicator"
+                            class="PrivateTabIndicator-root-44 PrivateTabIndicator-colorSecondary-46 MuiTabs-indicator"
                             style="left: 0px; width: 0px;"
                           />
                         </div>
@@ -435,13 +482,13 @@ Object {
                       class="MuiDivider-root"
                     />
                     <div
-                      class="MuiBox-root MuiBox-root-46"
+                      class="MuiBox-root MuiBox-root-66"
                     >
                       <div
                         class="scrollbar-container ps"
                       >
                         <table
-                          class="MuiTable-root makeStyles-root-34"
+                          class="MuiTable-root makeStyles-root-49"
                         >
                           <tbody
                             class="MuiTableBody-root"
@@ -563,7 +610,7 @@ Object {
           </div>
         </header>
         <div
-          class="MuiBox-root MuiBox-root-40"
+          class="MuiBox-root MuiBox-root-55"
         >
           <div>
             <div
@@ -644,64 +691,88 @@ Object {
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
             >
               <div
-                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-4"
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
               >
                 <div
-                  class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+                  class="MuiBox-root MuiBox-root-56"
                 >
                   <div
-                    class="MuiCardHeader-root"
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
                   >
                     <div
-                      class="MuiCardHeader-content"
+                      class="MuiGrid-root MuiGrid-item"
                     >
-                      <span
-                        class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+                      <h6
+                        class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                       >
-                        Account Liquidity
-                      </span>
-                    </div>
-                  </div>
-                  <hr
-                    class="MuiDivider-root"
-                  />
-                  <div
-                    class="MuiCardContent-root makeStyles-contentCard-15"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root-41 makeStyles-item-14"
-                    >
-                      <div
-                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                        Aggregated Value
+                      </h6>
+                      <h1
+                        class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                       >
-                        <div
-                          class="MuiGrid-root MuiGrid-item"
-                        >
-                          <h6
-                            class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                        $
+                        <span>
+                          0
+                          <span
+                            class="makeStyles-cents-15"
                           >
-                            Total USD
-                          </h6>
-                          <h3
-                            class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
-                          >
-                            $
+                            .
                             0
-                          </h3>
-                        </div>
+                          </span>
+                        </span>
+                      </h1>
+                    </div>
+                    <div
+                      class="MuiGrid-root MuiGrid-item"
+                    >
+                      <h6
+                        class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
+                      >
+                        Combined APY
+                      </h6>
+                      <div
+                        class="MuiBox-root MuiBox-root-57"
+                      >
                         <div
-                          class="MuiGrid-root MuiGrid-item"
+                          class="MuiBox-root MuiBox-root-58"
                         >
-                          <h6
-                            class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
-                          >
-                            Collateral Ratio
-                          </h6>
-                          <h3
-                            class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                          <h1
+                            class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignRight"
                           >
                             0.00%
-                          </h3>
+                          </h1>
+                        </div>
+                        <div
+                          class="MuiBox-root MuiBox-root-59"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root makeStyles-upicon-16 MuiSvgIcon-fontSizeSmall"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <svg
+                              fill="none"
+                              height="24"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              viewBox="0 0 24 24"
+                              width="24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <line
+                                x1="12"
+                                x2="12"
+                                y1="19"
+                                y2="5"
+                              />
+                              <polyline
+                                points="5 12 12 5 19 12"
+                              />
+                            </svg>
+                          </svg>
                         </div>
                       </div>
                     </div>
@@ -712,62 +783,50 @@ Object {
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-4"
               >
                 <div
-                  class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+                  class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
                 >
                   <div
-                    class="MuiCardHeader-root makeStyles-item-19"
+                    class="MuiBox-root MuiBox-root-60 makeStyles-item-24"
                   >
                     <div
-                      class="MuiCardHeader-content"
-                    >
-                      <span
-                        class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
-                      >
-                        Total Deposits
-                      </span>
-                    </div>
-                  </div>
-                  <hr
-                    class="MuiDivider-root"
-                  />
-                  <div
-                    class="MuiCardContent-root makeStyles-contentCard-20"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root-42 makeStyles-item-19"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
                     >
                       <div
-                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                        class="MuiGrid-root MuiGrid-item"
                       >
-                        <div
-                          class="MuiGrid-root MuiGrid-item"
+                        <h6
+                          class="MuiTypography-root makeStyles-cardtitle-27 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                         >
-                          <h6
-                            class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
-                          >
-                            Total USD
-                          </h6>
-                          <h3
-                            class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
-                          >
-                            $
+                          Lending Overview
+                        </h6>
+                        <h3
+                          class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                        >
+                          $
+                          <span>
                             0
-                          </h3>
-                        </div>
-                        <div
-                          class="MuiGrid-root MuiGrid-item"
+                            <span
+                              class="makeStyles-cents-25"
+                            >
+                              .
+                              0
+                            </span>
+                          </span>
+                        </h3>
+                      </div>
+                      <div
+                        class="MuiGrid-root MuiGrid-item"
+                      >
+                        <h6
+                          class="MuiTypography-root makeStyles-cardtitle-27 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
                         >
-                          <h6
-                            class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
-                          >
-                            Earning APY
-                          </h6>
-                          <h3
-                            class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
-                          >
-                            0.00%
-                          </h3>
-                        </div>
+                          Earning APY
+                        </h6>
+                        <h3
+                          class="MuiTypography-root makeStyles-apy-26 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                        >
+                          0.00%
+                        </h3>
                       </div>
                     </div>
                   </div>
@@ -777,61 +836,96 @@ Object {
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-4"
               >
                 <div
-                  class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+                  class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
                 >
                   <div
-                    class="MuiCardHeader-root makeStyles-item-24"
+                    class="MuiBox-root MuiBox-root-61 makeStyles-item-31"
                   >
                     <div
-                      class="MuiCardHeader-content"
-                    >
-                      <span
-                        class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
-                      >
-                        Total Borrowed
-                      </span>
-                    </div>
-                  </div>
-                  <hr
-                    class="MuiDivider-root"
-                  />
-                  <div
-                    class="MuiCardContent-root makeStyles-contentCard-25"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root-43 makeStyles-item-24"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
                     >
                       <div
-                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                        class="MuiGrid-root MuiGrid-item"
                       >
-                        <div
-                          class="MuiGrid-root MuiGrid-item"
+                        <h6
+                          class="MuiTypography-root makeStyles-cardtitle-34 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                         >
-                          <h6
-                            class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
-                          >
-                            Total USD
-                          </h6>
-                          <h3
-                            class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
-                          >
-                            $
+                          Borrowing Overview
+                        </h6>
+                        <h3
+                          class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                        >
+                          $
+                          <span>
                             0
-                          </h3>
-                        </div>
-                        <div
-                          class="MuiGrid-root MuiGrid-item"
+                            <span
+                              class="makeStyles-cents-33"
+                            >
+                              .
+                              0
+                            </span>
+                          </span>
+                        </h3>
+                      </div>
+                      <div
+                        class="MuiGrid-root MuiGrid-item"
+                      >
+                        <h6
+                          class="MuiTypography-root makeStyles-cardtitle-34 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
                         >
-                          <h6
-                            class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
-                          >
-                            Borrow APY
-                          </h6>
+                          Borrow APY
+                        </h6>
+                        <h3
+                          class="MuiTypography-root makeStyles-apy-32 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                        >
+                          0.00%
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-lg-4"
+              >
+                <div
+                  class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+                >
+                  <div
+                    class="MuiBox-root MuiBox-root-62 makeStyles-item-37"
+                  >
+                    <div
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center"
+                    >
+                      <div
+                        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+                      >
+                        <h6
+                          class="MuiTypography-root makeStyles-cardtitle-39 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                        >
+                          Borrow Limit
+                        </h6>
+                        <div
+                          class="MuiBox-root MuiBox-root-63"
+                        >
                           <h3
-                            class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                            class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary"
                           >
-                            0.00%
+                            0.00
+                            %
                           </h3>
+                          <div
+                            aria-valuemax="100"
+                            aria-valuemin="0"
+                            aria-valuenow="0"
+                            class="MuiLinearProgress-root MuiLinearProgress-colorSecondary makeStyles-progress-38 MuiLinearProgress-determinate"
+                            role="progressbar"
+                          >
+                            <div
+                              class="MuiLinearProgress-bar MuiLinearProgress-barColorSecondary MuiLinearProgress-bar1Determinate"
+                              style="transform: translateX(-100%);"
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -842,10 +936,10 @@ Object {
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
               >
                 <div
-                  class="MuiBox-root MuiBox-root-44 makeStyles-tabs-11"
+                  class="MuiBox-root MuiBox-root-64 makeStyles-tabs-11"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-45"
+                    class="MuiBox-root MuiBox-root-65"
                   >
                     <div
                       class="MuiTabs-root makeStyles-tabs-11"
@@ -896,7 +990,7 @@ Object {
                           </button>
                         </div>
                         <span
-                          class="PrivateTabIndicator-root-29 PrivateTabIndicator-colorSecondary-31 MuiTabs-indicator"
+                          class="PrivateTabIndicator-root-44 PrivateTabIndicator-colorSecondary-46 MuiTabs-indicator"
                           style="left: 0px; width: 0px;"
                         />
                       </div>
@@ -906,13 +1000,13 @@ Object {
                     class="MuiDivider-root"
                   />
                   <div
-                    class="MuiBox-root MuiBox-root-46"
+                    class="MuiBox-root MuiBox-root-66"
                   >
                     <div
                       class="scrollbar-container ps"
                     >
                       <table
-                        class="MuiTable-root makeStyles-root-34"
+                        class="MuiTable-root makeStyles-root-49"
                       >
                         <tbody
                           class="MuiTableBody-root"

@@ -3,6 +3,8 @@ import _ from "lodash";
 import web3 from "web3";
 
 import address from "constants/address_map.json";
+import { getAggregatedDepositAPY } from "./data/lend";
+import { getAggregatedBorrowAPY } from "./data/borrow";
 
 import { walletNetworkName } from "./onboard";
 
@@ -71,6 +73,39 @@ export const getUserCollateralRatio = (state) => {
     }
     return collateralRatio;
 };
+
+export const getCombinedAPY = createSelector(
+    getBorrowAccountValue,
+    getDepositAccountValue,
+    (state) => getAggregatedDepositAPY(state),
+    (state) => getAggregatedBorrowAPY(state),
+    (totalBorrowValue, totalDepositValue, totalDepositAPY, totalBorrowAPY) => {
+        if (
+            !(
+                totalBorrowValue &&
+                totalDepositValue &&
+                totalDepositAPY &&
+                totalBorrowAPY
+            )
+        )
+            return null;
+
+        // might need to consider using BN, but there will be an issue with decimal values in totalCombinedAPY values
+        const totalCombinedValue =
+            parseInt(totalBorrowValue, 10) + parseInt(totalDepositValue, 10);
+
+        // calculate Weight
+        const totalBorrowWeight = totalBorrowValue / totalCombinedValue;
+        const totalDepositWeight = totalDepositValue / totalCombinedValue;
+
+        // calculate combined or net APY% position for user
+        const totalCombinedAPY =
+            totalDepositAPY * totalDepositWeight -
+            totalBorrowAPY * totalBorrowWeight;
+
+        return totalCombinedAPY;
+    }
+);
 
 export const getUSDPrice = (state) => {
     const currentNetworkName = walletNetworkName(state);

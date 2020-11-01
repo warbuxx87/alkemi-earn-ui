@@ -132,7 +132,7 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                     variant="h6"
                                     className={classes.label}
                                 >
-                                    {formatPercent(row.apr)}
+                                    {formatPercent(row.apy)}
                                 </Typography>
                                 <Typography
                                     variant="body2"

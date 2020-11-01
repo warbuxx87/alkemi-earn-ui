@@ -9,8 +9,8 @@ import web3 from "web3";
 // Helpers
 function calculateInterest(rateMantissa) {
     const total_blocks_per_year = (3600 * 24 * 365) / 15;
-    let rateAPR = (rateMantissa * total_blocks_per_year) / 1e18;
-    return rateAPR;
+    let rateAPY = (rateMantissa * total_blocks_per_year) / 1e18;
+    return rateAPY;
 }
 
 function calculateUtilization(totalBorrow, totalSupply) {
@@ -74,7 +74,7 @@ export const getCollateralRatio = (state) => {
 };
 
 // Borrow Selectors
-const getBorrowAccountValue = (state) => {
+export const getBorrowAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );
@@ -94,21 +94,21 @@ const borrowBalanceSelector = (state) => {
     return borrowBalance;
 };
 
-const borrowAPRSelector = (state) => {
-    const borrowAPR = {};
+const borrowAPYSelector = (state) => {
+    const borrowAPY = {};
 
     try {
         Object.values(
             _.get(state, "contracts.MoneyMarket.markets", {})
         ).forEach(
-            (apr) =>
-                (borrowAPR[apr.args[0]] = calculateInterest(
-                    apr.value.borrowRateMantissa
+            (apy) =>
+                (borrowAPY[apy.args[0]] = calculateInterest(
+                    apy.value.borrowRateMantissa
                 ))
         );
     } catch (e) {}
 
-    return borrowAPR;
+    return borrowAPY;
 };
 
 const borrowPrincipalSelector = (state) => {
@@ -127,21 +127,21 @@ const borrowPrincipalSelector = (state) => {
 // Create Borrow Selectors
 
 const getBorrowAsset = createSelector(
-    borrowAssetSelector,
-    walletNetworkName,
-    borrowBalanceSelector,
-    borrowAPRSelector,
-    borrowPrincipalSelector,
-    getUtilizationValues,
-    getAssetPrices,
-    getAccountLiquidity,
-    getBorrowAccountValue,
-    getMarketLiquidity,
+    (state) => borrowAssetSelector(state),
+    (state) => walletNetworkName(state),
+    (state) => borrowBalanceSelector(state),
+    (state) => borrowAPYSelector(state),
+    (state) => borrowPrincipalSelector(state),
+    (state) => getUtilizationValues(state),
+    (state) => getAssetPrices(state),
+    (state) => getAccountLiquidity(state),
+    (state) => getBorrowAccountValue(state),
+    (state) => getMarketLiquidity(state),
     (
         assets,
         network,
         borrowBalances,
-        borrowAPR,
+        borrowAPY,
         borrowPrincipal,
         marketUtilization,
         assetPrices,
@@ -153,7 +153,7 @@ const getBorrowAsset = createSelector(
             let balance = "0";
             let ethBalance = "0";
             let weight = "0";
-            let apr = "0";
+            let apy = "0";
             let principal = "0";
             let utilization = "0";
             let price = "0";
@@ -165,7 +165,7 @@ const getBorrowAsset = createSelector(
             if (network && address[network]) {
                 const token_address = address[network][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
-                apr = borrowAPR[token_address] || "0";
+                apy = borrowAPY[token_address] || "0";
                 principal = borrowPrincipal[token_address] || "0";
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
@@ -226,7 +226,7 @@ const getBorrowAsset = createSelector(
                 ...asset,
                 balance,
                 ethBalance,
-                apr,
+                apy,
                 weight,
                 principal,
                 utilization,
@@ -257,23 +257,23 @@ export const getBorrowInactive = createSelector(
 
 export const getBorrowError = (state) => state.data.borrow.error;
 
-export const getAggregatedBorrowAPR = createSelector(
+export const getAggregatedBorrowAPY = createSelector(
     getBorrowActive,
     walletNetworkName,
     (activeAssets, network) => {
-        let totalAPR = 0;
+        let totalAPY = 0;
         if (network) {
             // checks that web3 wallet is connected
             activeAssets.forEach(function (asset) {
-                totalAPR += asset.weight * asset.apr;
-                totalAPR = parseInt(totalAPR);
+                totalAPY += asset.weight * asset.apy;
+                totalAPY = parseInt(totalAPY);
             });
         }
 
-        if (isFinite(totalAPR)) {
-            totalAPR = web3.utils.fromWei(totalAPR.toString()); // formats for WEI to decimal
+        if (isFinite(totalAPY)) {
+            totalAPY = web3.utils.fromWei(totalAPY.toString()); // formats for WEI to decimal
         }
 
-        return totalAPR.toString();
+        return totalAPY.toString();
     }
 );

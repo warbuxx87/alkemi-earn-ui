@@ -60,7 +60,7 @@ const DrawerLiquidateClass = makeStyles(
                 fontSize: "14px",
             },
             input: {
-                background: "#1B1B1B 0% 0% no-repeat padding-box",
+                background: "#0a0a0a 0% 0% no-repeat padding-box",
                 border: "1px solid #000000",
                 borderRadius: "4px",
                 opacity: 1,

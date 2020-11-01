@@ -14,9 +14,9 @@ import {
     Typography,
     makeStyles,
 } from "@material-ui/core";
-import { fromWei, format_str_to_kmb } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
+import SplitNumber from "components/UI/SplitNumber";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     item: {
         textAlign: "center",
         justifyContent: "center",
+    },
+    cents: {
+        color: theme.palette.text.secondary,
     },
 }));
 
@@ -59,7 +62,11 @@ function TotalValue({
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        ${format_str_to_kmb(fromWei(totalDeposit))}
+                        $
+                        <SplitNumber
+                            theNumber={totalDeposit}
+                            centsClassName={classes.cents}
+                        />
                     </Typography>
                 </Box>
             </CardContent>

@@ -17,6 +17,7 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
+
 import { formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -28,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
     },
     label: {
-        fontFamily: theme.typography.fontFamily,
         alignItems: "center",
         borderRadius: 4,
         display: "inline-flex",
@@ -36,13 +36,14 @@ const useStyles = makeStyles((theme) => ({
         whiteSpace: "nowrap",
         cursor: "default",
         flexShrink: 0,
+
         justifyContent: "center",
         letterSpacing: 0.5,
         minWidth: 20,
         padding: theme.spacing(0, 1),
         textTransform: "uppercase",
-        color: theme.palette.warning.main,
-        backgroundColor: fade(theme.palette.warning.main, 0.08),
+        color: theme.palette.success.main,
+        backgroundColor: fade(theme.palette.success.main, 0.08),
     },
     item: {
         textAlign: "center",
@@ -50,13 +51,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function CardAPR({ className, totalAPR, ...rest }) {
+function CardAPY({ className, totalAPY, ...rest }) {
     const classes = useStyles();
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Loan APY%" className={classes.item} />
+            <CardHeader title="Earning APY%" className={classes.item} />
             <Divider />
             <CardContent>
                 <Box
@@ -72,7 +73,7 @@ function CardAPR({ className, totalAPR, ...rest }) {
                         color="textPrimary"
                         className={classes.label}
                     >
-                        {formatPercent(totalAPR)}
+                        {formatPercent(totalAPY)}
                     </Typography>
                 </Box>
             </CardContent>
@@ -81,10 +82,10 @@ function CardAPR({ className, totalAPR, ...rest }) {
 }
 
 // Section 6: Documentation with PropTypes
-CardAPR.propTypes = {
+CardAPY.propTypes = {
     className: PropTypes.string,
-    totalAPR: PropTypes.string,
+    totalAPY: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
-export default CardAPR;
+export default CardAPY;

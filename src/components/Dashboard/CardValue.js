@@ -34,9 +34,9 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         justifyContent: "center",
     },
-    contentCard: {
-        borderBottom: `1px solid ${theme.palette.common.white}`,
-    },
+    //    contentCard: {
+    //        borderBottom: `1px solid ${theme.palette.common.white}`,
+    //    },
 }));
 
 function Balance({ aggregatedBalance, currency, collateralRatio }) {
@@ -44,8 +44,6 @@ function Balance({ aggregatedBalance, currency, collateralRatio }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Account Liquidity" className={classes.header} />
-            <Divider />
             <CardContent className={classes.contentCard}>
                 <Box
                     className={classes.item}

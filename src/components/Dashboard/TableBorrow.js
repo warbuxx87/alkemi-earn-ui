@@ -132,7 +132,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                     color="textPrimary"
                                     className={classes.label}
                                 >
-                                    {formatPercent(row.apr)}
+                                    {formatPercent(row.apy)}
                                 </Typography>
                                 <Typography
                                     variant="body2"

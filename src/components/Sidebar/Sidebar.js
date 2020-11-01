@@ -80,7 +80,6 @@ const styles = (theme) => ({
         "@media (min-width:1550px)": {
             margin: "22px 0px 0px 35px",
         },
-        background: "#202123",
         color: "white",
         border: "none",
     },
