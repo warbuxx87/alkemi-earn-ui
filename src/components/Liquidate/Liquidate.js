@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Container, Grid, makeStyles } from "@material-ui/core";
+import { Box, Container, Grid, makeStyles } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import LiquidateTable from "./Table";
@@ -31,11 +31,13 @@ function Liquidate({ liquidationsList }) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
-            <Grid container spacing={3}>
-                <Grid item lg={12} xs={12}>
-                    <LiquidateTable liquidationsList={liquidationsList} />
+            <Box mt={3}>
+                <Grid container spacing={3}>
+                    <Grid item lg={12} xs={12}>
+                        <LiquidateTable liquidationsList={liquidationsList} />
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Box>
         </Container>
     );
 }

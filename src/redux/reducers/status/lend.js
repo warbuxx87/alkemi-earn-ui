@@ -29,7 +29,7 @@ function createData(name, unit, image, wallet) {
 
 const assets = {
     WETH: createData("Ether", "WETH", eth, "0"),
-    DAI: createData("Maker DAI", "DAI", dai, "0"),
+    DAI: createData("Dai Stablecoin", "DAI", dai, "0"),
     USDC: createData("USD Coin", "USDC", usdc, "0"),
     WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0"),
 

@@ -3,6 +3,8 @@ import _ from "lodash";
 import web3 from "web3";
 
 import address from "constants/address_map.json";
+import { getAggregatedDepositAPY } from "./data/lend";
+import { getAggregatedBorrowAPY } from "./data/borrow";
 
 import { walletNetworkName } from "./onboard";
 
@@ -72,6 +74,39 @@ export const getUserCollateralRatio = (state) => {
     return collateralRatio;
 };
 
+export const getCombinedAPY = createSelector(
+    getBorrowAccountValue,
+    getDepositAccountValue,
+    (state) => getAggregatedDepositAPY(state),
+    (state) => getAggregatedBorrowAPY(state),
+    (totalBorrowValue, totalDepositValue, totalDepositAPY, totalBorrowAPY) => {
+        if (
+            !(
+                totalBorrowValue &&
+                totalDepositValue &&
+                totalDepositAPY &&
+                totalBorrowAPY
+            )
+        )
+            return null;
+
+        // might need to consider using BN, but there will be an issue with decimal values in totalCombinedAPY values
+        const totalCombinedValue =
+            parseInt(totalBorrowValue, 10) + parseInt(totalDepositValue, 10);
+
+        // calculate Weight
+        const totalBorrowWeight = totalBorrowValue / totalCombinedValue;
+        const totalDepositWeight = totalDepositValue / totalCombinedValue;
+
+        // calculate combined or net APY% position for user
+        const totalCombinedAPY =
+            totalDepositAPY * totalDepositWeight -
+            totalBorrowAPY * totalBorrowWeight;
+
+        return totalCombinedAPY;
+    }
+);
+
 export const getUSDPrice = (state) => {
     const currentNetworkName = walletNetworkName(state);
 
@@ -137,11 +172,35 @@ export const getAggregatedBalance = createSelector(
 );
 
 export const getMarketLiquidity = (state) => {
-    const assetLiquidity = {};
-    Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
-        (market) =>
-            (assetLiquidity[market.args[0]] = market.value["totalSupply"]) -
-            market.value["totalBorrows"]
-    );
-    return assetLiquidity;
+    const currentNetworkName = walletNetworkName(state);
+
+    if (currentNetworkName) {
+        const assetLiquidity = {};
+
+        Object.keys(state.contracts).forEach((asset) => {
+            if (asset !== "MoneyMarket") {
+                let assetName = "address_" + asset;
+                const assetAddress = address[currentNetworkName][assetName];
+                //  console.log(assetAddress);
+                const liquidity = Object.values(
+                    state.contracts[asset].balanceOf
+                );
+
+                liquidity.forEach((balance) => {
+                    // only want to grab balanceOf each tokenContract for MoneyMarket Contract
+                    if (
+                        balance.args[0] ===
+                        address[currentNetworkName].address_MoneyMarket
+                    ) {
+                        //  console.log(balance);
+                        let value = _.get(balance, "value");
+                        console.log(value);
+                        assetLiquidity[assetAddress] = value;
+                    }
+                });
+            }
+        });
+        // console.log("liquidity payload", assetLiquidity);
+        return assetLiquidity;
+    }
 };

@@ -63,7 +63,7 @@ const DrawerClass = makeStyles((theme) =>
             fontSize: "14px",
         },
         input: {
-            background: "#1B1B1B 0% 0% no-repeat padding-box",
+            background: "#0a0a0a 0% 0% no-repeat padding-box",
             border: "1px solid #000000",
             opacity: 1,
             height: "54px",
@@ -167,7 +167,7 @@ const DrawerWrapper = ({
                     <Divider />
                     <Box px={2} py={3} mx={2} mt={5} className={classes.aprBox}>
                         <Typography variant="h2" color="primary" align="center">
-                            {formatPercent(asset.apr)} APY
+                            {formatPercent(asset.apy)} APY
                         </Typography>
 
                         {/*<Chart> </Chart>*/}
