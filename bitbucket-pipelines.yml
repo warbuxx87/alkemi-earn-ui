@@ -160,7 +160,7 @@ definitions:
                 - rm -rf ./build && npm run build
             # if you have test script in your package.json
                 - npm run test
-                - npx semantic-release --debug
+                - npx semantic-release --dry-run --debug
 
 pipelines:
     default:
