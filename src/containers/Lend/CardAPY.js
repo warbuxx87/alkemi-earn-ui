@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import CardAPY from "components/UI/CardAPY";
+import CardAPY from "components/UI/Cards/CardAPY";
 
 import { getAggregatedDepositAPY } from "redux/selectors/data/lend";
 
