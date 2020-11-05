@@ -63,14 +63,14 @@ function Lend({
     };
     return (
         <Container maxWidth={false} className={classes.container}>
-            <Box mt={3}>
+            <Box>
                 <Grid container spacing={3}>
                     <Grid item lg={12} sm={12} xs={12}>
                         <Overview />
                     </Grid>
                     <Grid item lg={12} sm={12} xs={12}>
                         <Box className={classes.tabs}>
-                            <Box mt={5}>
+                            <Box mt={1}>
                                 <Tabs
                                     onChange={handleTabsChange}
                                     scrollButtons="auto"
@@ -91,10 +91,12 @@ function Lend({
                             <Divider />
                             <Box py={1} pb={6}>
                                 {currentTab === "depositsAssets" && (
-                                    <LendTableActive
-                                        data={activeLend}
-                                        USDPrice={USDPrice}
-                                    />
+                                    <Box>
+                                        <LendTableActive
+                                            data={activeLend}
+                                            USDPrice={USDPrice}
+                                        />
+                                    </Box>
                                 )}
                                 {currentTab === "transactionHistory" && (
                                     <Box p={3}>
