@@ -13,6 +13,7 @@ import LendTableActive from "./TableActive";
 import LendCardValue from "containers/Lend/CardValue";
 import LendCardInterest from "./CardInterest";
 import LendCardAPY from "containers/Lend/CardAPY";
+import Overview from "containers/Dashboard/Overview";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -44,14 +45,8 @@ function Lend({
         <Container maxWidth={false} className={classes.container}>
             <Box mt={3}>
                 <Grid container spacing={3}>
-                    <Grid item lg={4} sm={6} xs={12}>
-                        <LendCardValue />
-                    </Grid>
-                    <Grid item lg={4} sm={6} xs={12}>
-                        <LendCardInterest />
-                    </Grid>
-                    <Grid item lg={4} sm={6} xs={12}>
-                        <LendCardAPY />
+                    <Grid item lg={12} sm={12} xs={12}>
+                        <Overview />
                     </Grid>
                     {!!activeLend.length && (
                         <Grid item lg={12} xs={12}>
