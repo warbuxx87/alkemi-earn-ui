@@ -40,7 +40,7 @@ const DrawerRepayContainer = ({ asset, onRepayAction }) => {
     return (
         <Drawer
             asset={asset}
-            buttonsLabel="Repay *****"
+            buttonsLabel="Repay"
             triggerButtonVariant="outlined"
             triggerButtonColor="secondary"
             enableButtonClick={enableRepay}
