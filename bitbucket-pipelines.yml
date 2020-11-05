@@ -1,4 +1,4 @@
-image: node:10
+image: node:12
 
 clone:
     depth: full # SonarCloud scanner needs the full history to assign issues properly
@@ -42,13 +42,13 @@ definitions:
                   - export NODE_OPTIONS=--max_old_space_size=2048
                   - npm install --quiet
                   - npm run test
-                  - pipe: sonarsource/sonarcloud-scan:1.0.1
+                  - pipe: sonarsource/sonarcloud-scan:1.2.1
 
         # DEFINE Code Quality Gate
         - step: &quality-gate
               name: Code Quality Enforcement
               script:
-                  - pipe: sonarsource/sonarcloud-quality-gate:0.1.3
+                  - pipe: sonarsource/sonarcloud-quality-gate:0.1.4
                   # If the quality requirements aren't passed as defined in Sonar, Build will Fail
 
         # DEFINE Build Step
@@ -144,6 +144,18 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-production"
                         WAIT: "true"
+        # DEFINE RELEASE and bump VERSION
+        - step: &release
+              name: "Release and bump version"
+              caches:
+                  - node
+              script:
+                  # Get an oauth access token using the client credentials, parsing out the token with jq.
+                  - npm install --quiet
+                  # Run Test
+                  - npm run test
+                  # Do Release w/ debug on
+                  - npx semantic-release --debug
 
 pipelines:
     default:
@@ -162,8 +174,9 @@ pipelines:
     branches:
         master:
             # Runs only on Master Branch
-            - step: *github
             - step: *analyze
+            - step: *release
+            - step: *github
             #  - step: *quality-gate
             - step: *build
             - step: *upload
