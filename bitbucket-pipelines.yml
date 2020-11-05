@@ -150,7 +150,7 @@ definitions:
               caches:
                   - node
               script:
-                  # Get an oauth access token using the client credentials, parsing out the token with jq.
+                  # Install quietly
                   - npm install --quiet
                   # Run Test
                   - npm run test
