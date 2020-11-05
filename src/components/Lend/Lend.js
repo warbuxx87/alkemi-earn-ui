@@ -20,6 +20,7 @@ import {
 import LendTable from "./Table";
 import LendTableActive from "./TableActive";
 import Overview from "containers/Dashboard/Overview";
+import AssetCard from "components/UI/CardAsset";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -33,11 +34,6 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up("lg")]: {
             paddingLeft: 0,
             paddingRight: 0,
-        },
-    },
-    tabs: {
-        "& .MuiDivider-root": {
-            backgroundColor: "#121316",
         },
     },
 }));
@@ -77,7 +73,6 @@ function Lend({
                                     value={currentTab}
                                     textColor="secondary"
                                     variant="scrollable"
-                                    className={classes.tabs}
                                 >
                                     {tabs.map((tab) => (
                                         <Tab
@@ -88,15 +83,20 @@ function Lend({
                                     ))}
                                 </Tabs>
                             </Box>
-                            <Divider />
+                            <Divider light={true} />
                             <Box py={1} pb={6}>
                                 {currentTab === "depositsAssets" && (
-                                    <Box>
-                                        <LendTableActive
-                                            data={activeLend}
-                                            USDPrice={USDPrice}
-                                        />
-                                    </Box>
+                                    <>
+                                        <Box mt={5} mb={3}>
+                                            <Typography
+                                                variant="h5"
+                                                color="textPrimary"
+                                            >
+                                                Active Deposits
+                                            </Typography>
+                                        </Box>
+                                        <AssetCard />
+                                    </>
                                 )}
                                 {currentTab === "transactionHistory" && (
                                     <Box p={3}>
