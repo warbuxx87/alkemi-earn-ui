@@ -144,23 +144,18 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-production"
                         WAIT: "true"
-        # DEFINE BUMP SEMANTIC VERSION
-        - step: &semantic-release
-              name: "Bump semantic release"
+        # DEFINE RELEASE and bump VERSION
+        - step: &release
+              name: "Release and bump version"
               caches:
                   - node
               script:
                   # Get an oauth access token using the client credentials, parsing out the token with jq.
-                  - apt-get update && apt-get install -y curl jq
-                  - export BB_TOKEN=$(curl -s -X POST -u "${CLIENT_ID}:${CLIENT_SECRET}" \
-                    https://bitbucket.org/site/oauth2/access_token \
-                    -d grant_type=client_credentials -d scopes="repository"| jq --raw-output '.access_token')
-                  # Configure git to use the oauth token. This well happen when setting env variable BB_TOKEN
-                  - npm install
-                  - rm -rf ./build && npm run build
-                  # if you have test script in your package.json
+                  - npm install --quiet
+                  # Run Test
                   - npm run test
-                  - npx semantic-release --dry-run --debug
+                  # Do Release w/ debug on
+                  - npx semantic-release --debug
 
 pipelines:
     default:
@@ -180,7 +175,7 @@ pipelines:
         master:
             # Runs only on Master Branch
             - step: *analyze
-            - step: *semantic-release
+            - step: *release
             - step: *github
             #  - step: *quality-gate
             - step: *build
