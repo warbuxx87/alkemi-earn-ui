@@ -166,11 +166,11 @@
     "release": {
         "repositoryUrl": "https://devzl@bitbucket.org/project-alkemi/alkemi-earn-ui.git",
         "plugins": [
-          "@semantic-release/commit-analyzer",
-          "@semantic-release/release-notes-generator",
-          "@semantic-release/npm",
-          "@semantic-release/changelog",
-          "@semantic-release/git"
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            "@semantic-release/npm",
+            "@semantic-release/changelog",
+            "@semantic-release/git"
         ]
     }
 }
