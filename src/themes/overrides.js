@@ -5,6 +5,19 @@ const overrides = {
         },
     },
 
+    MuiTab: {
+        root: {
+            padding: "6px 20px 6px 0px",
+            marginRight: 20,
+            "@media (min-width: 600px)": {
+                minWidth: "60px",
+            },
+        },
+        wrapper: {
+            alignItems: "flex-start",
+        },
+    },
+
     MuiToolbar: {
         root: {
             disableGutters: "true",

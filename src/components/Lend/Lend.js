@@ -43,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tabs = [
-    { value: "tabledeposit", label: "Active Deposits" },
-    { value: "tableborrow", label: "Active Borrowed" },
+    { value: "depositsAssets", label: "Deposits" },
+    { value: "transactionHistory", label: "History" },
 ];
 
 // Section 5: Code Component
@@ -57,7 +57,7 @@ function Lend({
     displayAllocateButton,
 }) {
     const classes = useStyles();
-    const [currentTab, setCurrentTab] = useState("tabledeposit");
+    const [currentTab, setCurrentTab] = useState("depositsAssets");
     const handleTabsChange = (event, value) => {
         setCurrentTab(value);
     };
@@ -90,17 +90,18 @@ function Lend({
                             </Box>
                             <Divider />
                             <Box py={1} pb={6}>
-                                {currentTab === "tabledeposit" && (
+                                {currentTab === "depositsAssets" && (
                                     <LendTableActive
                                         data={activeLend}
                                         USDPrice={USDPrice}
                                     />
                                 )}
-                                {currentTab === "tableborrow" && (
-                                    <LendTableActive
-                                        data={activeLend}
-                                        USDPrice={USDPrice}
-                                    />
+                                {currentTab === "transactionHistory" && (
+                                    <Box p={3}>
+                                        <Typography>
+                                            Transaction History
+                                        </Typography>
+                                    </Box>
                                 )}
                             </Box>
                         </Box>
