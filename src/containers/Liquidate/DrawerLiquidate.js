@@ -9,7 +9,7 @@ import DrizzleContext from "utils/DrizzleContext";
 
 import { onLiquidateAction } from "redux/actions/data/liquidations";
 
-import { walletAddress, walletNetwork } from "redux/selectors/onboard";
+import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import useFetchMarkets from "hooks/useFetchMarkets";
 

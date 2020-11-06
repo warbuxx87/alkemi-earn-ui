@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 // Section 2: internal imports
 
 // Section 3: Selectors
-import { isWalletConnected, walletAddress } from "redux/selectors/onboard";
+import { isWalletConnected, walletAddress } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd } from "redux/selectors/status";
 

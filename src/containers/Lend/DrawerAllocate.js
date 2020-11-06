@@ -14,7 +14,7 @@ import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
-import { walletAddress } from "redux/selectors/onboard";
+import { walletAddress } from "redux/selectors/data/onboard";
 
 const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
     const drizzle = useContext(DrizzleContext);

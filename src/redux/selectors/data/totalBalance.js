@@ -6,7 +6,7 @@ import address from "constants/address_map.json";
 import { getAggregatedDepositAPY } from "./lend";
 import { getAggregatedBorrowAPY } from "./borrow";
 
-import { walletNetworkName } from "../onboard";
+import { walletNetworkName } from "./onboard";
 
 const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(

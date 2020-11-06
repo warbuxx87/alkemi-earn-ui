@@ -16,7 +16,7 @@ import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
-import { walletAddress, walletNetwork } from "redux/selectors/onboard";
+import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 const DepositDrawerContainer = ({ asset, onDepositAction }) => {
     const drizzle = useContext(DrizzleContext);

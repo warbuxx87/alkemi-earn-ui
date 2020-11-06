@@ -2,7 +2,7 @@
 import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "constants/address_map.json";
-import { walletNetworkName } from "redux/selectors/onboard";
+import { walletNetworkName } from "redux/selectors/data/onboard";
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
 import web3 from "web3";
 
