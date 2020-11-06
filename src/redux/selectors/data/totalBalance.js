@@ -3,10 +3,10 @@ import _ from "lodash";
 import web3 from "web3";
 
 import address from "constants/address_map.json";
-import { getAggregatedDepositAPY } from "./data/lend";
-import { getAggregatedBorrowAPY } from "./data/borrow";
+import { getAggregatedDepositAPY } from "./lend";
+import { getAggregatedBorrowAPY } from "./borrow";
 
-import { walletNetworkName } from "./onboard";
+import { walletNetworkName } from "../onboard";
 
 const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(

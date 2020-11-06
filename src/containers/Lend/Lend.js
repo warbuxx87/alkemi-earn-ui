@@ -19,7 +19,7 @@ import {
     getLendInactive,
 } from "redux/selectors/data/lend";
 
-import { getUSDPrice } from "redux/selectors/totalBalance";
+import { getUSDPrice } from "redux/selectors/data/totalBalance";
 
 import { walletAddress, walletNetwork } from "redux/selectors/onboard";
 

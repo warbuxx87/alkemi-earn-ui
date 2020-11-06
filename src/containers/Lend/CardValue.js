@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import CardValue from "components/Lend/CardValue";
 
-import { getTotalDeposit } from "redux/selectors/totalBalance";
+import { getTotalDeposit } from "redux/selectors/data/totalBalance";
 
 const CardValueContainer = () => {
     const totalDeposit = useSelector(getTotalDeposit);

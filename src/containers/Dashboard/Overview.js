@@ -5,7 +5,7 @@ import Overview from "components/Dashboard/Overview";
 import {
     getAggregatedBalance,
     getCombinedAPY,
-} from "redux/selectors/totalBalance";
+} from "redux/selectors/data/totalBalance";
 
 const OverviewContainer = () => {
     const aggregatedBalance = useSelector(getAggregatedBalance);

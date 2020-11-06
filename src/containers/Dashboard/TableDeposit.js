@@ -15,7 +15,7 @@ import TableSupply from "components/Dashboard/TableDeposit";
 // Section 3: Selectors
 import { getLendActive } from "redux/selectors/data/lend";
 
-import { getUSDPrice } from "redux/selectors/totalBalance";
+import { getUSDPrice } from "redux/selectors/data/totalBalance";
 
 const TableDepositContainer = ({ activeReserves }) => {
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store

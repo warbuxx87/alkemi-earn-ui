@@ -5,7 +5,7 @@ import CardCollateral from "components/Markets/CardCollateral";
 import {
     getAggregatedBalance,
     getUserCollateralRatio,
-} from "redux/selectors/totalBalance";
+} from "redux/selectors/data/totalBalance";
 
 const CardCollateralContainer = () => {
     const aggregatedBalance = useSelector(getAggregatedBalance);
