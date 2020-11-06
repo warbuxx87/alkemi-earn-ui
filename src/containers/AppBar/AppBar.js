@@ -10,6 +10,8 @@ import { useLocation } from "react-router-dom";
 // Section 3: Selectors
 import { isWalletConnected, walletAddress } from "redux/selectors/onboard";
 
+import { isWalletKYCd } from "redux/selectors/status";
+
 // Section 4: components
 import AppBar from "components/AppBar/AppBar";
 import useOnboard from "hooks/useOnboard";
@@ -30,6 +32,7 @@ const AppBarContainer = () => {
 
     const walletConnected = useSelector(isWalletConnected);
     const currentAddress = useSelector(walletAddress);
+    const walletIsKYCd = useSelector(isWalletKYCd);
 
     let location = useLocation();
     // update Appbar title whenever location change
@@ -47,6 +50,7 @@ const AppBarContainer = () => {
             onConnect={onConnect}
             onReset={onReset}
             accountAddress={walletConnected ? currentAddress : null}
+            walletIsKYCd={walletIsKYCd}
         />
     );
 };

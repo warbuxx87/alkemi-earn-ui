@@ -21,6 +21,7 @@ import {
 //import Settings from "./Settings";
 //import Notifications from "./Notifications";
 import MobileMenu from "./MobileMenu";
+import KYCDisplay from "./KYCDisplay";
 
 import { addressParser } from "utils/ui";
 
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function AppBar({ title, onConnect, onReset, accountAddress }) {
+function AppBar({ title, onConnect, onReset, accountAddress, walletIsKYCd }) {
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -67,6 +68,13 @@ function AppBar({ title, onConnect, onReset, accountAddress }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const displayKYC = (walletIsKYCd) => {
+        if (walletIsKYCd)
+            return <KYCDisplay color="success" walletIsKYCd={walletIsKYCd} />;
+        return <KYCDisplay color="warning" walletIsKYCd={walletIsKYCd} />;
+    };
+
     return (
         <MuiAppBar
             color="transparent"
@@ -135,6 +143,9 @@ function AppBar({ title, onConnect, onReset, accountAddress }) {
                                         ? addressParser(accountAddress)
                                         : "Connect"}
                                 </Grid>
+                                {accountAddress
+                                    ? displayKYC(walletIsKYCd)
+                                    : null}
                             </Button>
                             <Menu
                                 id="simple-menu"
