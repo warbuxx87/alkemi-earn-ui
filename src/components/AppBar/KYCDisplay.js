@@ -41,7 +41,7 @@ function KYCDisplay({ walletIsKYCd, ...props }) {
 
 // Section 6: Documentation with PropTypes
 KYCDisplay.propTypes = {
-    walletIsKYCd: PropTypes.bool.isRequired,
+    walletIsKYCd: PropTypes.bool,
     color: PropTypes.string.isRequired,
 };
 
