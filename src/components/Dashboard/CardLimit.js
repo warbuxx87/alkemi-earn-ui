@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     progress: {
-        margin: theme.spacing(0, 0, 0, 1),
+        margin: theme.spacing(0, 0, 0, 3),
         flexGrow: 1,
         background: "rgb(255 254 254 / 10%)",
         height: 7,
