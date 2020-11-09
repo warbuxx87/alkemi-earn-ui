@@ -67,7 +67,6 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     boxCenter: {
-        marginLeft: 40,
         [theme.breakpoints.down("sm")]: {
             marginLeft: 0,
         },
@@ -119,8 +118,8 @@ function CardAsset({ className }) {
                     </Button>
                 </Box>
                 <Divider />
-                <Box px={2} py={3}>
-                    <Grid container>
+                <Box px={2} py={2}>
+                    <Grid container spacing={5}>
                         <Grid item xl={2} lg={2} md={2} sm={4} xs={4}>
                             <Typography variant="h6" color="textPrimary">
                                 2,445,656.8345
@@ -135,7 +134,6 @@ function CardAsset({ className }) {
                             lg={2}
                             md={2}
                             sm={4}
-                            xs={4}
                             className={classes.smCenter}
                         >
                             <Typography variant="h6" color="textPrimary">
