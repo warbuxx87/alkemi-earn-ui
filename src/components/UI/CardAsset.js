@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     assetName: {
         marginLeft: theme.spacing(2),
         paddingTop: 1,
+        [theme.breakpoints.down("xs")]: {
+            display: "none",
+        },
     },
     iconFont: {
         fontSize: 12,
@@ -55,20 +58,11 @@ const useStyles = makeStyles((theme) => ({
         position: "relative",
         display: "grid",
     },
-    smCenter: {
-        [theme.breakpoints.down("sm")]: {
-            textAlign: "center",
-        },
-    },
+
     smRight: {
         [theme.breakpoints.down("sm")]: {
             textAlign: "right",
             marginBottom: 20,
-        },
-    },
-    boxCenter: {
-        [theme.breakpoints.down("sm")]: {
-            marginLeft: 0,
         },
     },
     textApy: {
@@ -119,8 +113,8 @@ function CardAsset({ className }) {
                 </Box>
                 <Divider />
                 <Box px={2} py={2}>
-                    <Grid container spacing={5}>
-                        <Grid item xl={2} lg={2} md={2} sm={4} xs={4}>
+                    <Grid container spacing={1}>
+                        <Grid item xl={2} lg={2} md={2} sm={4} xs={6}>
                             <Typography variant="h6" color="textPrimary">
                                 2,445,656.8345
                             </Typography>
@@ -134,7 +128,8 @@ function CardAsset({ className }) {
                             lg={2}
                             md={2}
                             sm={4}
-                            className={classes.smCenter}
+                            xs={6}
+                            className={classes.smRight}
                         >
                             <Typography variant="h6" color="textPrimary">
                                 134,423.2465
@@ -143,15 +138,7 @@ function CardAsset({ className }) {
                                 Wallet
                             </Typography>
                         </Grid>
-                        <Grid
-                            item
-                            xl={2}
-                            lg={2}
-                            md={2}
-                            sm={4}
-                            xs={4}
-                            className={classes.smRight}
-                        >
+                        <Grid item xl={2} lg={2} md={2} sm={4} xs={6}>
                             <Typography variant="h6" color="textPrimary">
                                 344,438.9384 DAI
                             </Typography>
@@ -159,8 +146,8 @@ function CardAsset({ className }) {
                                 Deposit
                             </Typography>
                         </Grid>
-                        <Grid item xl={2} lg={2} md={2} sm={4} xs={4}>
-                            <Box className={classes.boxCenter}>
+                        <Grid item xl={2} lg={2} md={2} sm={4} xs={6}>
+                            <Box className={classes.smRight}>
                                 <Typography variant="h6" color="textPrimary">
                                     $345,455.1223
                                 </Typography>
@@ -178,7 +165,7 @@ function CardAsset({ className }) {
                             lg={2}
                             md={2}
                             sm={4}
-                            xs={4}
+                            xs={6}
                             className={classes.smCenter}
                         >
                             <Typography variant="h6" color="textPrimary">
@@ -194,7 +181,7 @@ function CardAsset({ className }) {
                             lg={2}
                             md={2}
                             sm={4}
-                            xs={4}
+                            xs={6}
                             className={classes.smRight}
                         >
                             <Box
