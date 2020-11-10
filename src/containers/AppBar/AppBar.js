@@ -6,13 +6,13 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 // Section 2: internal imports
+import useOnboard from "hooks/useOnboard";
 
 // Section 3: Selectors
 import { isWalletConnected, walletAddress } from "redux/selectors/onboard";
 
 // Section 4: components
 import AppBar from "components/AppBar/AppBar";
-import useOnboard from "hooks/useOnboard";
 
 const locationToTitles = {
     "/dashboard": "Dashboard",
@@ -24,7 +24,7 @@ const locationToTitles = {
     "/connect": "Connect",
 };
 
-// Section 5: Code Component
+// Section 5: Code Container
 const AppBarContainer = () => {
     const { onConnect, onReset } = useOnboard();
 
