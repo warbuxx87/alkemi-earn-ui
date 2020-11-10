@@ -3,13 +3,16 @@ import { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Section 2: internal imports
-import { walletNetworkName, isWalletConnected } from "redux/selectors/onboard";
+import {
+    walletNetworkName,
+    isWalletConnected,
+} from "redux/selectors/data/onboard";
 
 import DrizzleContext from "utils/DrizzleContext";
 
 import { fetchTx } from "redux/actions/data/tx";
 
-import { walletAddress } from "redux/selectors/onboard";
+import { walletAddress } from "redux/selectors/data/onboard";
 
 // Retrieve the tx List every 60 seconds from EtherScan
 export default (fetchPeriodically = false) => {

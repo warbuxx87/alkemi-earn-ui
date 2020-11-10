@@ -20,7 +20,7 @@ import {
     //  getBorrowPending
 } from "redux/selectors/data/borrow";
 
-import { walletAddress, walletNetwork } from "redux/selectors/onboard";
+import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
     const drizzle = useContext(DrizzleContext);

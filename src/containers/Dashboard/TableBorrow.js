@@ -9,7 +9,7 @@ import TableBorrow from "components/Dashboard/TableBorrow";
 // Section 3: Selectors
 import { getBorrowActive } from "redux/selectors/data/borrow";
 
-import { getUSDPrice } from "redux/selectors/totalBalance";
+import { getUSDPrice } from "redux/selectors/data/totalBalance";
 
 const TableBorrowContainer = ({ activeReserves }) => {
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
