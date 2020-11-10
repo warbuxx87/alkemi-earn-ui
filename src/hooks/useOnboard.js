@@ -21,7 +21,7 @@ import {
     isWalletConnected,
     walletAddress,
     walletNetwork,
-} from "redux/selectors/onboard";
+} from "redux/selectors/data/onboard";
 
 import DrizzleContext from "utils/DrizzleContext";
 

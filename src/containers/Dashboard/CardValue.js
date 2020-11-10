@@ -5,7 +5,7 @@ import CardValue from "components/Dashboard/CardValue";
 import {
     getAggregatedBalance,
     getUserCollateralRatio,
-} from "redux/selectors/totalBalance";
+} from "redux/selectors/data/totalBalance";
 
 const CardValueContainer = () => {
     const aggregatedBalance = useSelector(getAggregatedBalance);

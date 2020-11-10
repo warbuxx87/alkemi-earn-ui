@@ -3,8 +3,8 @@ import _ from "lodash";
 import web3 from "web3";
 
 import address from "constants/address_map.json";
-import { getAggregatedDepositAPY } from "./data/lend";
-import { getAggregatedBorrowAPY } from "./data/borrow";
+import { getAggregatedDepositAPY } from "./lend";
+import { getAggregatedBorrowAPY } from "./borrow";
 
 import { walletNetworkName } from "./onboard";
 
@@ -194,7 +194,7 @@ export const getMarketLiquidity = (state) => {
                     ) {
                         //  console.log(balance);
                         let value = _.get(balance, "value");
-                        console.log(value);
+                        // console.log(value);
                         assetLiquidity[assetAddress] = value;
                     }
                 });

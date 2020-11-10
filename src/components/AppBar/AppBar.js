@@ -8,7 +8,9 @@ import PropTypes from "prop-types";
 import MuiAppBar from "@material-ui/core/AppBar";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+
 import {
+    Box,
     Button,
     Grid,
     Hidden,
@@ -21,20 +23,15 @@ import {
 //import Settings from "./Settings";
 //import Notifications from "./Notifications";
 import MobileMenu from "./MobileMenu";
+import KYCDisplay from "./KYCDisplay";
 
 import { addressParser } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
-    statusBadge: {
-        backgroundColor: theme.palette.success.main,
-        width: "9px",
-        height: "9px",
-        borderRadius: "5px",
-        marginRight: "12px",
-    },
     connectWallet: {
         minWidth: 130,
+        padding: "4px 0",
     },
     appBar: {
         paddingLeft: "16px",
@@ -47,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function AppBar({ title, onConnect, onReset, accountAddress }) {
+function AppBar({ title, onConnect, onReset, accountAddress, walletIsKYCd }) {
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -67,6 +64,13 @@ function AppBar({ title, onConnect, onReset, accountAddress }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const displayKYC = (walletIsKYCd) => {
+        if (walletIsKYCd)
+            return <KYCDisplay color="success" walletIsKYCd={walletIsKYCd} />;
+        return <KYCDisplay color="warning" walletIsKYCd={walletIsKYCd} />;
+    };
+
     return (
         <MuiAppBar
             color="transparent"
@@ -125,16 +129,24 @@ function AppBar({ title, onConnect, onReset, accountAddress }) {
                                         : handleOnConnect
                                 }
                             >
-                                <Grid className={classes.statusBadge}></Grid>
-                                <Grid
-                                    className={classes.price}
-                                    data-testid="connectAddressButton"
+                                <Box
+                                    display="flex"
+                                    justifyContent="space-between"
+                                    alignItems="center"
                                 >
-                                    {/* 0x121565...6456 */}
                                     {accountAddress
-                                        ? addressParser(accountAddress)
-                                        : "Connect"}
-                                </Grid>
+                                        ? displayKYC(walletIsKYCd)
+                                        : null}
+                                    <Box
+                                        className={classes.price}
+                                        data-testid="connectAddressButton"
+                                    >
+                                        {/* 0x121565...6456 */}
+                                        {accountAddress
+                                            ? addressParser(accountAddress)
+                                            : "Connect"}
+                                    </Box>
+                                </Box>
                             </Button>
                             <Menu
                                 id="simple-menu"

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { walletNetworkName } from "redux/selectors/onboard";
+import { walletNetworkName } from "redux/selectors/data/onboard";
 
 import { fetchLiquidations } from "redux/actions/data/liquidations";
 

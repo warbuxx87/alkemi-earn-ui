@@ -13,7 +13,7 @@ import useFetchTx from "hooks/useFetchTx";
 import { getTxList, getTxPending, getTxError } from "redux/selectors/data/tx";
 import { getBlocksData } from "redux/selectors/data/history";
 
-import { walletAddress, walletNetworkName } from "redux/selectors/onboard";
+import { walletAddress, walletNetworkName } from "redux/selectors/data/onboard";
 
 // Section 4: Container Code
 
