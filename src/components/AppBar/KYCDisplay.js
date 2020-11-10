@@ -5,8 +5,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Grid, makeStyles } from "@material-ui/core";
-import { CheckCircle, XCircle } from "react-feather";
+import { Box, makeStyles, withStyles, Tooltip } from "@material-ui/core";
+import Status from "@material-ui/icons/Lens";
 
 // Section 3: Components & Containers import from the application
 
@@ -17,25 +17,56 @@ const useStyles = (props) =>
             //color: theme.palette[props.color].main,
         },
         KYCIcon: {
-            width: "15px",
-            height: "15px",
-            marginLeft: "12px",
+            width: "14px",
+            height: "14px",
             color: theme.palette[props.color].main,
         },
+        Tooltip: {
+            "& .MuiTooltip-tooltip": {
+                backgroundColor: "#ffffff",
+            },
+        },
     }));
+
+const CustomTooltip = withStyles((theme) => ({
+    tooltipPlacementLeft: {
+        backgroundColor: theme.palette.background.paper,
+        color: "#ffffff",
+        boxShadow: theme.shadows[1],
+        fontSize: 11,
+        marginRight: 25,
+    },
+    arrow: {
+        color: theme.palette.background.paper,
+    },
+}))(Tooltip);
 
 function KYCDisplay({ walletIsKYCd, ...props }) {
     const classes = useStyles(props)();
 
     // Section 5: Code Component
     return (
-        <Grid>
+        <Box mr={1} pt={0.5}>
             {walletIsKYCd ? (
-                <CheckCircle fontSize="small" className={classes.KYCIcon} />
+                <CustomTooltip
+                    className={classes.Tooltip}
+                    title="KYC Authorized"
+                    placement="left"
+                    arrow
+                >
+                    <Status fontSize="small" className={classes.KYCIcon} />
+                </CustomTooltip>
             ) : (
-                <XCircle fontSize="small" className={classes.KYCIcon} />
+                <CustomTooltip
+                    className={classes.Tooltip}
+                    title="Not KYC Authorized"
+                    placement="left"
+                    arrow
+                >
+                    <Status fontSize="small" className={classes.KYCIcon} />
+                </CustomTooltip>
             )}
-        </Grid>
+        </Box>
     );
 }
 

@@ -8,7 +8,9 @@ import PropTypes from "prop-types";
 import MuiAppBar from "@material-ui/core/AppBar";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+
 import {
+    Box,
     Button,
     Grid,
     Hidden,
@@ -27,15 +29,9 @@ import { addressParser } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
-    statusBadge: {
-        backgroundColor: theme.palette.success.main,
-        width: "9px",
-        height: "9px",
-        borderRadius: "5px",
-        marginRight: "12px",
-    },
     connectWallet: {
         minWidth: 130,
+        padding: "4px 0",
     },
     appBar: {
         paddingLeft: "16px",
@@ -133,19 +129,24 @@ function AppBar({ title, onConnect, onReset, accountAddress, walletIsKYCd }) {
                                         : handleOnConnect
                                 }
                             >
-                                <Grid className={classes.statusBadge}></Grid>
-                                <Grid
-                                    className={classes.price}
-                                    data-testid="connectAddressButton"
+                                <Box
+                                    display="flex"
+                                    justifyContent="space-between"
+                                    alignItems="center"
                                 >
-                                    {/* 0x121565...6456 */}
                                     {accountAddress
-                                        ? addressParser(accountAddress)
-                                        : "Connect"}
-                                </Grid>
-                                {accountAddress
-                                    ? displayKYC(walletIsKYCd)
-                                    : null}
+                                        ? displayKYC(walletIsKYCd)
+                                        : null}
+                                    <Box
+                                        className={classes.price}
+                                        data-testid="connectAddressButton"
+                                    >
+                                        {/* 0x121565...6456 */}
+                                        {accountAddress
+                                            ? addressParser(accountAddress)
+                                            : "Connect"}
+                                    </Box>
+                                </Box>
                             </Button>
                             <Menu
                                 id="simple-menu"
