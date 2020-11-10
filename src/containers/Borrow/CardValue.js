@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import CardValue from "components/Borrow/CardValue";
+import CardValue from "components/UI/Cards/CardValue";
 import { getTotalBorrow } from "redux/selectors/data/totalBalance";
 
 const CardValueContainer = () => {
