@@ -173,7 +173,11 @@ export const formatPriceWithCurrency = (price, currency) => {
 
 // value in Percent
 export const formatPercent = (num) => {
-    return (num * 100).toFixed(2) + "%";
+    if (!isNaN(num)) {
+        return (num * 100).toFixed(2) + "%";
+    } else {
+        return "0.00%";
+    }
 };
 
 export function calculateEarnings(balance, principal, unit, USDPrice) {

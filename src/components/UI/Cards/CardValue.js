@@ -38,19 +38,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function TotalValue({
-    className,
-    totalDeposit,
-    currency,
-    difference,
-    ...rest
-}) {
+function TotalValue({ title, totalValue, currency, difference, ...rest }) {
     const classes = useStyles();
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Total Deposits" className={classes.item} />
+            <CardHeader title={title} className={classes.item} />
             <Divider />
             <CardContent>
                 <Box
@@ -64,7 +58,7 @@ function TotalValue({
                     <Typography variant="h3" color="textPrimary">
                         $
                         <SplitNumber
-                            theNumber={totalDeposit}
+                            theNumber={totalValue}
                             centsClassName={classes.cents}
                         />
                     </Typography>
@@ -76,7 +70,7 @@ function TotalValue({
 
 // Section 6: Documentation with PropTypes
 TotalValue.propTypes = {
-    className: PropTypes.string,
+    totalValue: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
