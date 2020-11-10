@@ -16,7 +16,6 @@ const OverviewContainer = () => {
         <Overview
             aggregatedBalance={aggregatedBalance}
             combinedAPY={combinedAPY}
-            currency="USD"
             difference={0}
         />
     );

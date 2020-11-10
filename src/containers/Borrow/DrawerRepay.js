@@ -30,13 +30,11 @@ const DrawerRepayContainer = ({ asset, onRepayAction }) => {
 
     const [enableRepay, setEnableRepay] = React.useState(false);
     React.useEffect(() => {
-        if (amount) {
-            const isAmountLTBalance = amount > 0 ? true : false;
-            // web3.utils
-            //     .toBN(toWei(amount, asset.unit))
-            //     .lte(web3.utils.toBN(asset.balance));
-            setEnableRepay(isAmountLTBalance);
-        }
+        const isAmountLTBalance = amount > 0 && amount !== "" ? true : false;
+        // web3.utils
+        //     .toBN(toWei(amount, asset.unit))
+        //     .lte(web3.utils.toBN(asset.balance));
+        setEnableRepay(isAmountLTBalance);
     }, [amount, asset.balance, asset.unit]);
 
     return (

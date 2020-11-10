@@ -17,46 +17,49 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
+
 import { formatPercent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
-const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: theme.spacing(3),
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-    },
-    label: {
-        fontFamily: theme.typography.fontFamily,
-        alignItems: "center",
-        borderRadius: 4,
-        display: "inline-flex",
-        flexGrow: 0,
-        whiteSpace: "nowrap",
-        cursor: "default",
-        flexShrink: 0,
-        justifyContent: "center",
-        letterSpacing: 0.5,
-        minWidth: 20,
-        padding: theme.spacing(0, 1),
-        textTransform: "uppercase",
-        color: theme.palette.warning.main,
-        backgroundColor: fade(theme.palette.warning.main, 0.08),
-    },
-    item: {
-        textAlign: "center",
-        justifyContent: "center",
-    },
-}));
+const useStyles = (props) =>
+    makeStyles((theme) => ({
+        root: {
+            padding: theme.spacing(3),
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+        },
+        label: {
+            // fontFamily: theme.typography.fontFamily,
+            alignItems: "center",
+            borderRadius: 4,
+            display: "inline-flex",
+            flexGrow: 0,
+            whiteSpace: "nowrap",
+            cursor: "default",
+            flexShrink: 0,
 
-function CardAPY({ className, totalAPY, ...rest }) {
-    const classes = useStyles();
+            justifyContent: "center",
+            letterSpacing: 0.5,
+            minWidth: 20,
+            padding: theme.spacing(0, 1),
+            textTransform: "uppercase",
+            color: theme.palette[props.color].main,
+            backgroundColor: fade(theme.palette[props.color].main, 0.08),
+        },
+        item: {
+            textAlign: "center",
+            justifyContent: "center",
+        },
+    }));
+
+function CardAPY({ totalAPY, ...props }) {
+    const classes = useStyles(props)();
 
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Loan APY%" className={classes.item} />
+            <CardHeader title={props.title} className={classes.item} />
             <Divider />
             <CardContent>
                 <Box
@@ -82,7 +85,6 @@ function CardAPY({ className, totalAPY, ...rest }) {
 
 // Section 6: Documentation with PropTypes
 CardAPY.propTypes = {
-    className: PropTypes.string,
     totalAPY: PropTypes.string,
 };
 
