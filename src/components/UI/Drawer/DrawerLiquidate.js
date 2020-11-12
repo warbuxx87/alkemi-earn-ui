@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React, { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
+import clsx from "clsx";
 
 // Section 2: Material-UI imports
 import {
@@ -28,7 +29,7 @@ import { XCircle as XIcon } from "react-feather";
 import { HelpCircle as HelpIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
-import clsx from "clsx";
+import ToolTipWrapper from "./ToolTipWrapper";
 
 import { getTokenIcon } from "utils/ui";
 
@@ -432,16 +433,21 @@ const DrawerLiquidateWrapper = ({
     // Section 5: Code Component
     return (
         <>
-            <Button
-                type="button"
-                className={classes.btnDrawer}
-                variant="contained"
-                size="small"
-                onClick={handleOpen}
-                disabled={walletIsKYCd !== true}
+            <ToolTipWrapper
+                walletIsKYCd={walletIsKYCd}
+                toolTipTitle="You are not KYC authorized"
             >
-                View
-            </Button>
+                <Button
+                    type="button"
+                    className={classes.btnDrawer}
+                    variant="contained"
+                    size="small"
+                    onClick={handleOpen}
+                    disabled={walletIsKYCd !== true}
+                >
+                    View
+                </Button>
+            </ToolTipWrapper>
             <Drawer
                 anchor="right"
                 classes={{ paper: classes.drawer }}

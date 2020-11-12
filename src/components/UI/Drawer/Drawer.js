@@ -25,6 +25,7 @@ import { XCircle as XIcon } from "react-feather";
 // Section 3: Components & Containers import from the application
 // import Chart from "./ChartWrapper";
 import { formatPercent } from "utils/ui";
+import ToolTipWrapper from "./ToolTipWrapper";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const DrawerClass = makeStyles((theme) =>
@@ -127,21 +128,27 @@ const DrawerWrapper = ({
     // Section 5: Code Component
     return (
         <>
-            <Button
-                type="button"
-                className={classes.btnDrawer}
-                variant={triggerButtonVariant}
-                size="small"
-                color={triggerButtonColor}
-                onClick={handleOpen}
-                disabled={walletIsKYCd !== true}
+            <ToolTipWrapper
+                walletIsKYCd={walletIsKYCd}
+                toolTipTitle="You are not KYC authorized"
             >
-                {isDoingAction ? (
-                    <CircularProgress size={20} color="inherit" />
-                ) : (
-                    buttonsLabel
-                )}
-            </Button>
+                <Button
+                    type="button"
+                    className={classes.btnDrawer}
+                    variant={triggerButtonVariant}
+                    size="small"
+                    color={triggerButtonColor}
+                    onClick={handleOpen}
+                    disabled={walletIsKYCd !== true}
+                >
+                    {isDoingAction ? (
+                        <CircularProgress size={20} color="inherit" />
+                    ) : (
+                        buttonsLabel
+                    )}
+                </Button>
+            </ToolTipWrapper>
+
             <Drawer
                 anchor="right"
                 classes={{ paper: classes.drawer }}
