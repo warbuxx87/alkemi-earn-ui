@@ -51,6 +51,7 @@ const AppBarContainer = () => {
             onReset={onReset}
             accountAddress={walletConnected ? currentAddress : null}
             walletIsKYCd={walletIsKYCd}
+            walletConnected={walletConnected}
         />
     );
 };

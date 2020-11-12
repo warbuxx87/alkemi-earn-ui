@@ -41,40 +41,29 @@ const CustomTooltip = withStyles((theme) => ({
     },
 }))(Tooltip);
 
-function KYCDisplay({ walletIsKYCd, ...props }) {
+function StatusDisplay({ walletIsKYCd, tooltipTitle, ...props }) {
     const classes = useStyles(props)();
 
     // Section 5: Code Component
     return (
         <Box mr={1} pt={0.5}>
-            {walletIsKYCd ? (
-                <CustomTooltip
-                    className={classes.Tooltip}
-                    title="KYC Authorized"
-                    placement="left"
-                    arrow
-                >
-                    <Status fontSize="small" className={classes.KYCIcon} />
-                </CustomTooltip>
-            ) : (
-                <CustomTooltip
-                    className={classes.Tooltip}
-                    title="Not KYC Authorized"
-                    placement="left"
-                    arrow
-                >
-                    <Status fontSize="small" className={classes.KYCIcon} />
-                </CustomTooltip>
-            )}
+            <CustomTooltip
+                className={classes.Tooltip}
+                title={tooltipTitle}
+                placement="left"
+                arrow
+            >
+                <Status fontSize="small" className={classes.KYCIcon} />
+            </CustomTooltip>
         </Box>
     );
 }
 
 // Section 6: Documentation with PropTypes
-KYCDisplay.propTypes = {
+StatusDisplay.propTypes = {
     walletIsKYCd: PropTypes.bool,
     color: PropTypes.string.isRequired,
 };
 
 // Section 7:  Connect styles and export
-export default KYCDisplay;
+export default StatusDisplay;
