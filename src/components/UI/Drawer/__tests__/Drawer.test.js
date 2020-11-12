@@ -29,6 +29,7 @@ describe("<Drawer />", () => {
                 mainTitle={`Drawer title`}
                 balanceValue={"$1.00"}
                 amountValue={`Amount value`}
+                walletIsKYCd={true}
             />
         );
     });

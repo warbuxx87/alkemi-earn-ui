@@ -4,6 +4,7 @@ exports[`<Drawer /> matches snapshot 1`] = `
 <Fragment>
   <WithStyles(ForwardRef(Button))
     className="makeStyles-btnDrawer-3"
+    disabled={false}
     onClick={[Function]}
     size="small"
     type="button"
