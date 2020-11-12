@@ -17,10 +17,14 @@ import DrizzleContext from "utils/DrizzleContext";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
+import { isWalletKYCd } from "redux/selectors/status";
+
 const DrawerWithdrawContainer = ({ asset, onWithdrawAction }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+
+    const walletIsKYCd = useSelector(isWalletKYCd);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -63,6 +67,7 @@ const DrawerWithdrawContainer = ({ asset, onWithdrawAction }) => {
             mainTitle={`Redeem ${asset.unit}`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Supplied: ${formatNumber(asset.balance, asset.unit)}`}
+            walletIsKYCd={walletIsKYCd}
         />
     );
 };

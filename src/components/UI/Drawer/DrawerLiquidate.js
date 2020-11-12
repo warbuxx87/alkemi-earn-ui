@@ -194,6 +194,8 @@ const DrawerLiquidateWrapper = ({
     setSelectedCollateralAsset,
 
     marketsData,
+
+    walletIsKYCd,
 }) => {
     const classes = DrawerLiquidateClass();
 
@@ -433,9 +435,10 @@ const DrawerLiquidateWrapper = ({
             <Button
                 type="button"
                 className={classes.btnDrawer}
+                variant="contained"
                 size="small"
                 onClick={handleOpen}
-                style={{ background: "#e0e0e0", color: "rgba(0, 0, 0, 0.87)" }}
+                disabled={walletIsKYCd !== true}
             >
                 View
             </Button>

@@ -9,9 +9,11 @@ import DrizzleContext from "utils/DrizzleContext";
 
 import { onLiquidateAction } from "redux/actions/data/liquidations";
 
-import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
-
 import useFetchMarkets from "hooks/useFetchMarkets";
+
+// Section 3: Selectors
+import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
+import { isWalletKYCd } from "redux/selectors/status";
 
 const LiquidateDrawerContainer = ({
     supplyList,
@@ -25,6 +27,8 @@ const LiquidateDrawerContainer = ({
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+
+    const walletIsKYCd = useSelector(isWalletKYCd);
 
     const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
 
@@ -96,6 +100,7 @@ const LiquidateDrawerContainer = ({
             selectedCollateralAsset={selectedSupplyAsset}
             setSelectedCollateralAsset={setSelectedSupplyAsset}
             marketsData={marketsData}
+            walletIsKYCd={walletIsKYCd}
         />
     );
 };

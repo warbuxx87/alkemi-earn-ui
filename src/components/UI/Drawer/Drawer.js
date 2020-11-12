@@ -109,6 +109,7 @@ const DrawerWrapper = ({
     triggerButtonColor,
     triggerButtonVariant,
     amountValue,
+    walletIsKYCd,
 }) => {
     const classes = DrawerClass();
 
@@ -133,6 +134,7 @@ const DrawerWrapper = ({
                 size="small"
                 color={triggerButtonColor}
                 onClick={handleOpen}
+                disabled={walletIsKYCd !== true}
             >
                 {isDoingAction ? (
                     <CircularProgress size={20} color="inherit" />
@@ -334,6 +336,7 @@ DrawerWrapper.propTypes = {
     triggerButtonColor: PropTypes.string, // not required
     triggerButtonVariant: PropTypes.string,
     amountValue: PropTypes.string.isRequired,
+    walletIsKYCd: PropTypes.bool.isRequired,
 };
 
 // Section 7:  Connect styles and export
