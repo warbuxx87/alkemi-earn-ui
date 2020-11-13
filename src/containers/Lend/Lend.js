@@ -27,7 +27,7 @@ import {
     isWalletConnected,
     walletAddress,
     walletNetwork,
-} from "redux/selectors/onboard";
+} from "redux/selectors/data/onboard";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
