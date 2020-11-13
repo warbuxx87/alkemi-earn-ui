@@ -12,7 +12,7 @@ const ToolTipWrapper = ({ children, walletIsKYCd, toolTipTitle }) => {
     return (
         <>
             {walletIsKYCd !== true ? (
-                <Tooltip title={toolTipTitle} placement="left" arrow>
+                <Tooltip title={toolTipTitle} placement="bottom" arrow>
                     <span>{children}</span>
                 </Tooltip>
             ) : (
