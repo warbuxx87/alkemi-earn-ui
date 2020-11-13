@@ -23,7 +23,19 @@ const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
-    const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
+    const [shouldSendMax, setShouldSendMax] = React.useState(false);
+
+    const onSetAmount = (newValue) => {
+        setShouldSendMax(false);
+
+        setAmount(newValue);
+    };
+
+    const onSetMax = () => {
+        setShouldSendMax(true);
+
+        setAmount(fromWei(asset.wallet, asset.unit));
+    };
 
     const [enableAllocate, setEnableAllocate] = React.useState(false);
 
@@ -42,13 +54,19 @@ const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
             triggerButtonVariant="outlined"
             enableButtonClick={enableAllocate}
             onButtonClick={() =>
-                onAllocateAction({ drizzle, userWalletAddress, asset, amount })
+                onAllocateAction({
+                    drizzle,
+                    userWalletAddress,
+                    asset,
+                    amount,
+                    shouldSendMax,
+                })
             }
             isDoingAction={asset.allocating}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
-            setAmount={setAmount}
+            setAmount={onSetAmount}
             mainTitle={`Mint New ${asset.unit} Tokens`}
             balanceValue={`0.00`}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}

@@ -127,14 +127,18 @@ export const onRepayAction = ({
     userWalletAddress,
     amount,
     asset,
+    shouldSendMax,
 }) => async (dispatch) => {
+    const amountToSend =
+        shouldSendMax === true ? constants["max_uint"] : amount;
+
     dispatch(repayPending(asset.unit));
 
     handle_repay_click({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        amount,
+        amountToSend,
         asset,
     })
         .then(() => dispatch(repaySuccess(asset.unit)))
