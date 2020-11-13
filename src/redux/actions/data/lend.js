@@ -202,13 +202,17 @@ export const onWithdrawAction = ({
     userWalletAddress,
     amount,
     asset,
+    shouldSendMax,
 }) => async (dispatch) => {
+    const amountToSend =
+        shouldSendMax === true ? constants["max_uint"] : amount;
+
     dispatch(withdrawPending(asset.unit));
     handle_withdraw_click({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        amount,
+        amountToSend,
         asset,
     })
         .then(() => dispatch(withdrawSuccess(asset.unit)))
