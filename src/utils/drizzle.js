@@ -164,7 +164,6 @@ export const handle_withdraw_click = async ({
     let weiAmount = amount;
     if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
 
-    console.log("weiAmount: ", weiAmount, typeof weiAmount);
     const sendWithdraw = MoneyMarketContract.methods.withdraw.cacheSend(
         token_address,
         weiAmount,
