@@ -106,8 +106,9 @@ export const onBorrowAction = ({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        amountToSend,
+        amount: amountToSend,
         asset,
+        shouldSendMax,
     })
         .then(() => dispatch(borrowSuccess(asset.unit)))
         .catch((error) => {
@@ -138,8 +139,9 @@ export const onRepayAction = ({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        amountToSend,
+        amount: amountToSend,
         asset,
+        shouldSendMax,
     })
         .then(() => dispatch(repaySuccess(asset.unit)))
         .catch((error) => {

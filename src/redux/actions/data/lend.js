@@ -152,7 +152,13 @@ export const onAllocateAction = ({
         shouldSendMax === true ? constants["max_uint"] : amount;
 
     dispatch(allocatePending(asset));
-    handle_allocate_click({ drizzle, userWalletAddress, asset, amountToSend })
+    handle_allocate_click({
+        drizzle,
+        userWalletAddress,
+        asset,
+        amount: amountToSend,
+        shouldSendMax,
+    })
         .then(() => dispatch(allocateSuccess(asset)))
         .catch((error) => {
             triggerToastDisplay({
@@ -181,8 +187,9 @@ export const onDepositAction = ({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        amountToSend,
+        amount: amountToSend,
         asset,
+        shouldSendMax,
     })
         .then(() => dispatch(depositSuccess(asset.unit)))
         .catch((error) => {
@@ -212,8 +219,9 @@ export const onWithdrawAction = ({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        amountToSend,
+        amount: amountToSend,
         asset,
+        shouldSendMax,
     })
         .then(() => dispatch(withdrawSuccess(asset.unit)))
         .catch((error) => {

@@ -38,12 +38,16 @@ export const handle_allocate_click = async ({
     userWalletAddress,
     asset,
     amount,
+    shouldSendMax,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     const unit = asset.unit;
     const tokenContract = drizzle.contracts[unit];
-    const weiAmount = toWei(amount, unit);
+
+    let weiAmount = amount;
+    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
+
     const sendAllocate = tokenContract.methods.allocateTo.cacheSend(
         myAccount,
         weiAmount,
@@ -61,6 +65,7 @@ export const handle_deposit_click = async ({
     userWalletAddress,
     amount,
     asset,
+    shouldSendMax,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
@@ -68,7 +73,10 @@ export const handle_deposit_click = async ({
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
-    const weiAmount = toWei(amount, unit);
+
+    let weiAmount = amount;
+    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
+
     const sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
         token_address,
         weiAmount,
@@ -86,6 +94,7 @@ export const handle_borrow_click = async ({
     userWalletAddress,
     amount,
     asset,
+    shouldSendMax,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
@@ -93,7 +102,10 @@ export const handle_borrow_click = async ({
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
-    const weiAmount = toWei(amount, unit);
+
+    let weiAmount = amount;
+    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
+
     const sendBorrow = MoneyMarketContract.methods.borrow.cacheSend(
         token_address,
         weiAmount,
@@ -111,6 +123,7 @@ export const handle_repay_click = async ({
     userWalletAddress,
     amount,
     asset,
+    shouldSendMax,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
@@ -118,7 +131,10 @@ export const handle_repay_click = async ({
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
-    let weiAmount = toWei(amount, unit);
+
+    let weiAmount = amount;
+    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
+
     // ensures that accrued interest is also repaid by passing -1 to protocol.
     if (weiAmount === asset.balance) {
         weiAmount = constants.max_uint;
@@ -140,6 +156,7 @@ export const handle_withdraw_click = async ({
     userWalletAddress,
     amount,
     asset,
+    shouldSendMax,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
@@ -147,11 +164,16 @@ export const handle_withdraw_click = async ({
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
-    let weiAmount = toWei(amount, unit);
+
+    let weiAmount = amount;
+    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
+
     // ensures that accrued interest is also redeemed by passing -1 to protocol.
-    if (weiAmount === asset.balance) {
+    /*if (weiAmount === asset.balance) {
         weiAmount = constants.max_uint;
-    }
+    }*/
+
+    console.log("weiAmount: ", weiAmount, typeof weiAmount);
     const sendWithdraw = MoneyMarketContract.methods.withdraw.cacheSend(
         token_address,
         weiAmount,
