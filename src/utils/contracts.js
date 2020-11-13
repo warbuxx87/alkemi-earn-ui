@@ -134,6 +134,9 @@ export const initMarketContract = ({
     // get account balance
     MoneyMarketContract.methods.calculateAccountValues.cacheCall(myAddress);
 
+    // get account balance
+    MoneyMarketContract.methods.verifyKYC.cacheCall(myAddress);
+
     // get collateralRatio
     MoneyMarketContract.methods.collateralRatio.cacheCall();
 

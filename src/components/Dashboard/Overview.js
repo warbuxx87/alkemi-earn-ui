@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const displayAPYIcon = (classes, combinedAPY) => {
-    if (combinedAPY >= 0) {
+    if (combinedAPY >= 0 || isNaN(combinedAPY)) {
         // Could add an icon for 0, but for now the green up one will be used
         return (
             <SvgIcon fontSize="small" className={classes.upicon}>
@@ -61,11 +61,11 @@ const displayAPYIcon = (classes, combinedAPY) => {
     }
 };
 
-function Overview({ aggregatedBalance, currency, combinedAPY }) {
+function Overview({ aggregatedBalance, combinedAPY }) {
     const classes = useStyles();
     // Section 5: Code Component
     return (
-        <Box mt={2}>
+        <Box mt={3} mb={1}>
             <Grid
                 alignItems="center"
                 container

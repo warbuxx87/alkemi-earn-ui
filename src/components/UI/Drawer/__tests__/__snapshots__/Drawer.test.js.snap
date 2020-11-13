@@ -65,7 +65,7 @@ exports[`<Drawer /> matches snapshot 1`] = `
           color="primary"
           variant="h2"
         >
-          NaN%
+          0.00%
            APY
         </WithStyles(ForwardRef(Typography))>
       </Styled(MuiBox)>
@@ -154,7 +154,7 @@ exports[`<Drawer /> matches snapshot 1`] = `
               md={6}
               xs={true}
             >
-              NaN%
+              0.00%
             </WithStyles(ForwardRef(Grid))>
           </WithStyles(ForwardRef(Grid))>
           <WithStyles(ForwardRef(Grid))

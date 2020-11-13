@@ -9,10 +9,10 @@ import { formatNumber, formatETHMoney } from "utils/ui";
 import DrizzleContext from "utils/DrizzleContext";
 
 // Section 3: Selectors, Hooks & Action Listeners
-import { getUSDPrice } from "redux/selectors/totalBalance";
+import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { onBorrowAction } from "redux/actions/data/borrow";
 
-import { walletAddress, walletNetwork } from "redux/selectors/onboard";
+import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 // Section 4: Import Underlying Components / Containers
 import Drawer from "components/UI/Drawer/Drawer";

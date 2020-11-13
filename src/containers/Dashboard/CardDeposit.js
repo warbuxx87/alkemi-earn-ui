@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import CardDeposit from "components/Dashboard/CardDeposit";
 
 // Section 3: Selectors / hooks
-import { getTotalDeposit } from "redux/selectors/totalBalance";
+import { getTotalDeposit } from "redux/selectors/data/totalBalance";
 import { getAggregatedDepositAPY } from "redux/selectors/data/lend";
 
 // Section 4: Code Component

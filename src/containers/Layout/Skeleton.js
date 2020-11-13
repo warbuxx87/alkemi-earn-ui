@@ -9,7 +9,7 @@ import {
     walletAddress,
     walletNetwork,
     walletNetworkName,
-} from "redux/selectors/onboard";
+} from "redux/selectors/data/onboard";
 
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 

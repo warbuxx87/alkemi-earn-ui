@@ -5,7 +5,7 @@ import _ from "lodash";
 
 import { compare_supply, compare_borrow } from "utils/markets";
 
-import { walletNetworkName } from "redux/selectors/onboard";
+import { walletNetworkName } from "redux/selectors/data/onboard";
 
 const url_map = require("constants/url_map.json");
 

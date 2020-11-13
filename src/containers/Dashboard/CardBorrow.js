@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import CardBorrow from "components/Dashboard/CardBorrow";
 
 // Section 3: Selectors
-import { getTotalBorrow } from "redux/selectors/totalBalance";
+import { getTotalBorrow } from "redux/selectors/data/totalBalance";
 import { getAggregatedBorrowAPY } from "redux/selectors/data/borrow";
 
 // Section 4: Code Component

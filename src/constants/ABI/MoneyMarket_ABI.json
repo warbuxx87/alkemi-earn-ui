@@ -16,6 +16,20 @@
     {
         "constant": true,
         "inputs": [],
+        "name": "wethAddress",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
         "name": "paused",
         "outputs": [
             {
@@ -100,6 +114,20 @@
             {
                 "name": "borrowIndex",
                 "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "WETHContract",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
             }
         ],
         "payable": false,
@@ -617,6 +645,90 @@
         "inputs": [
             {
                 "indexed": false,
+                "name": "KYCAdmin",
+                "type": "address"
+            }
+        ],
+        "name": "KYCAdminAdded",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "KYCAdmin",
+                "type": "address"
+            }
+        ],
+        "name": "KYCAdminRemoved",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "KYCCustomer",
+                "type": "address"
+            }
+        ],
+        "name": "KYCCustomerAdded",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "KYCCustomer",
+                "type": "address"
+            }
+        ],
+        "name": "KYCCustomerRemoved",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "Liquidator",
+                "type": "address"
+            }
+        ],
+        "name": "LiquidatorAdded",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "Liquidator",
+                "type": "address"
+            }
+        ],
+        "name": "LiquidatorRemoved",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "wethAddress",
+                "type": "address"
+            }
+        ],
+        "name": "WETHAddressSet",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
                 "name": "error",
                 "type": "uint256"
             },
@@ -633,6 +745,177 @@
         ],
         "name": "Failure",
         "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "KYCAdmin",
+                "type": "address"
+            }
+        ],
+        "name": "addKYCAdmin",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "KYCAdmin",
+                "type": "address"
+            }
+        ],
+        "name": "removeKYCAdmin",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "customer",
+                "type": "address"
+            }
+        ],
+        "name": "addCustomerKYC",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "customer",
+                "type": "address"
+            }
+        ],
+        "name": "removeCustomerKYC",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "customer",
+                "type": "address"
+            }
+        ],
+        "name": "verifyKYC",
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "_KYCAdmin",
+                "type": "address"
+            }
+        ],
+        "name": "checkKYCAdmin",
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "liquidator",
+                "type": "address"
+            }
+        ],
+        "name": "addLiquidator",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "liquidator",
+                "type": "address"
+            }
+        ],
+        "name": "removeLiquidator",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "liquidator",
+                "type": "address"
+            }
+        ],
+        "name": "verifyLiquidator",
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
     },
     {
         "constant": true,
@@ -937,6 +1220,25 @@
         "constant": false,
         "inputs": [
             {
+                "name": "wethContractAddress",
+                "type": "address"
+            }
+        ],
+        "name": "setWethAddress",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
                 "name": "asset",
                 "type": "address"
             },
@@ -946,6 +1248,29 @@
             }
         ],
         "name": "supply",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "sendEtherToUser",
         "outputs": [
             {
                 "name": "",
@@ -1025,8 +1350,8 @@
                 "type": "uint256"
             }
         ],
-        "payable": false,
-        "stateMutability": "nonpayable",
+        "payable": true,
+        "stateMutability": "payable",
         "type": "function"
     },
     {

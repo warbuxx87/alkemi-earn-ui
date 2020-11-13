@@ -6,7 +6,7 @@ import {
     getTotalBorrow,
     getTotalDeposit,
     getCollateralRatio,
-} from "redux/selectors/totalBalance";
+} from "redux/selectors/data/totalBalance";
 
 const CardLimitContainer = () => {
     const totalBorrowed = useSelector(getTotalBorrow);

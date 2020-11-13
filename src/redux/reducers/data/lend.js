@@ -59,15 +59,12 @@ export default (state = initialState, action) => {
         case "GOT_CONTRACT_VAR": {
             switch (action.variable) {
                 case "balanceOf":
-                    // don't update wallet balance of the main smartContract -- need this filter so that main contracts liquidity is not returned as the user's local wallet balance
+                    // don't update wallet balance of the main smartContract
+                    // need this filter so that main contracts liquidity is not returned as the user's local wallet balance
                     if (
-                        action.args[0] !==
-                            address["ropsten"].address_MoneyMarket &&
-                        action.args[0] !==
-                            address["rinkeby"].address_MoneyMarket &&
-                        action.args[0] !==
-                            address["main"].address_MoneyMarket &&
-                        action.args[0] !== address["kovan"].address_MoneyMarket
+                        !Object.values(address)
+                            .map((net) => net.address_MoneyMarket)
+                            .includes(action.args[0]) // check if the contract address linked to the action is not the address of moneyMarket (in any of the networks)
                     ) {
                         return {
                             ...state,
