@@ -135,10 +135,6 @@ export const handle_repay_click = async ({
     let weiAmount = amount;
     if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
 
-    // ensures that accrued interest is also repaid by passing -1 to protocol.
-    if (weiAmount === asset.balance) {
-        weiAmount = constants.max_uint;
-    }
     const sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
         token_address,
         weiAmount,
@@ -167,11 +163,6 @@ export const handle_withdraw_click = async ({
 
     let weiAmount = amount;
     if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
-
-    // ensures that accrued interest is also redeemed by passing -1 to protocol.
-    /*if (weiAmount === asset.balance) {
-        weiAmount = constants.max_uint;
-    }*/
 
     console.log("weiAmount: ", weiAmount, typeof weiAmount);
     const sendWithdraw = MoneyMarketContract.methods.withdraw.cacheSend(
