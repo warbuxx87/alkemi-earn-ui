@@ -3,6 +3,8 @@
 import { handle_borrow_click, handle_repay_click } from "utils/drizzle";
 import { triggerToastDisplay } from "utils/notify";
 
+import constants from "constants/constant.json";
+
 // Section 2: Action types declarations and action creators
 
 //                                               //
@@ -93,14 +95,18 @@ export const onBorrowAction = ({
     userWalletAddress,
     amount,
     asset,
+    shouldSendMax,
 }) => async (dispatch) => {
+    const amountToSend =
+        shouldSendMax === true ? constants["max_uint"] : amount;
+
     dispatch(borrowPending(asset.unit));
 
     handle_borrow_click({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        amount,
+        amountToSend,
         asset,
     })
         .then(() => dispatch(borrowSuccess(asset.unit)))
