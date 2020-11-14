@@ -6,11 +6,11 @@ import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
-import Borrow from "components/Borrow/Borrow";
-
 import DrizzleContext from "utils/DrizzleContext";
 
 import { onBorrowActivate } from "redux/actions/status/borrow";
+
+import useOnboard from "hooks/useOnboard";
 
 // Section 3: Selectors
 import {
@@ -20,25 +20,37 @@ import {
     //  getBorrowPending
 } from "redux/selectors/data/borrow";
 
-import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
+import {
+    isWalletConnected,
+    walletAddress,
+    walletNetwork,
+} from "redux/selectors/data/onboard";
 
+// Section 4: components
+import Borrow from "components/Borrow/Borrow";
+
+// Section 5: Code Container
 const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
+    const walletConnected = useSelector(isWalletConnected);
+    const { onConnect } = useOnboard();
+
+    const activateAsset = (asset) =>
+        onActivate({
+            drizzle,
+            userWalletNetwork,
+            userWalletAddress,
+            asset,
+        });
+
     return (
         <Borrow
             inactiveBorrow={inactiveBorrow}
             activeBorrow={activeBorrow}
-            onActivate={(asset) =>
-                onActivate({
-                    drizzle,
-                    userWalletNetwork,
-                    userWalletAddress,
-                    asset,
-                })
-            }
+            onActivate={walletConnected ? activateAsset : onConnect}
         />
     );
 };

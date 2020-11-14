@@ -182,22 +182,27 @@ export const getMarketLiquidity = (state) => {
                 let assetName = "address_" + asset;
                 const assetAddress = address[currentNetworkName][assetName];
                 //  console.log(assetAddress);
-                const liquidity = Object.values(
-                    state.contracts[asset].balanceOf
-                );
 
-                liquidity.forEach((balance) => {
-                    // only want to grab balanceOf each tokenContract for MoneyMarket Contract
-                    if (
-                        balance.args[0] ===
-                        address[currentNetworkName].address_MoneyMarket
-                    ) {
-                        //  console.log(balance);
-                        let value = _.get(balance, "value");
-                        // console.log(value);
-                        assetLiquidity[assetAddress] = value;
-                    }
-                });
+                try {
+                    const liquidity = Object.values(
+                        state.contracts[asset].balanceOf
+                    );
+
+                    liquidity.forEach((balance) => {
+                        // only want to grab balanceOf each tokenContract for MoneyMarket Contract
+                        if (
+                            balance.args[0] ===
+                            address[currentNetworkName].address_MoneyMarket
+                        ) {
+                            //  console.log(balance);
+                            let value = _.get(balance, "value");
+                            // console.log(value);
+                            assetLiquidity[assetAddress] = value;
+                        }
+                    });
+                } catch (e) {
+                    console.log("Error: ", e);
+                }
             }
         });
         // console.log("liquidity payload", assetLiquidity);
