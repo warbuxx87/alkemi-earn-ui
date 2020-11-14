@@ -30,7 +30,19 @@ const DrawerRepayContainer = ({ asset, onRepayAction }) => {
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
-    const onSetMax = () => setAmount(fromWei(asset.balance, asset.unit));
+    const [shouldSendMax, setShouldSendMax] = React.useState(false);
+
+    const onSetAmount = (newValue) => {
+        setShouldSendMax(false);
+
+        setAmount(newValue);
+    };
+
+    const onSetMax = () => {
+        setShouldSendMax(true);
+
+        setAmount(fromWei(asset.balance, asset.unit));
+    };
 
     const [enableRepay, setEnableRepay] = React.useState(false);
     React.useEffect(() => {
@@ -55,13 +67,14 @@ const DrawerRepayContainer = ({ asset, onRepayAction }) => {
                     userWalletAddress,
                     asset,
                     amount,
+                    shouldSendMax,
                 })
             }
             isDoingAction={asset.repaying}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
-            setAmount={setAmount}
+            setAmount={onSetAmount}
             mainTitle={`Repay ${asset.unit}`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Borrowed: ${formatNumber(asset.balance, asset.unit)}`}

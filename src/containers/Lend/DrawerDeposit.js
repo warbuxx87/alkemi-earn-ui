@@ -30,7 +30,19 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
-    const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
+    const [shouldSendMax, setShouldSendMax] = React.useState(false);
+
+    const onSetAmount = (newValue) => {
+        setShouldSendMax(false);
+
+        setAmount(newValue);
+    };
+
+    const onSetMax = () => {
+        setShouldSendMax(true);
+
+        setAmount(fromWei(asset.wallet, asset.unit));
+    };
 
     const [enableDeposit, setEnableDeposit] = React.useState(false);
 
@@ -57,13 +69,14 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
                     userWalletAddress,
                     asset,
                     amount,
+                    shouldSendMax,
                 })
             }
             isDoingAction={asset.depositing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
-            setAmount={setAmount}
+            setAmount={onSetAmount}
             mainTitle={`Deposit ${asset.unit}`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
