@@ -23,7 +23,7 @@ import {
 //import Settings from "./Settings";
 //import Notifications from "./Notifications";
 import MobileMenu from "./MobileMenu";
-import KYCDisplay from "./KYCDisplay";
+import StatusDisplay from "./StatusDisplay";
 
 import { addressParser } from "utils/ui";
 
@@ -44,7 +44,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function AppBar({ title, onConnect, onReset, accountAddress, walletIsKYCd }) {
+function AppBar({
+    title,
+    onConnect,
+    onReset,
+    accountAddress,
+    walletConnected,
+    walletIsKYCd,
+}) {
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -65,10 +72,33 @@ function AppBar({ title, onConnect, onReset, accountAddress, walletIsKYCd }) {
         setAnchorEl(null);
     };
 
-    const displayKYC = (walletIsKYCd) => {
-        if (walletIsKYCd)
-            return <KYCDisplay color="success" walletIsKYCd={walletIsKYCd} />;
-        return <KYCDisplay color="warning" walletIsKYCd={walletIsKYCd} />;
+    const displayWalletStatus = (walletConnected, walletIsKYCd) => {
+        if (!walletConnected)
+            return (
+                <StatusDisplay
+                    color="secondary"
+                    walletIsKYCd={walletIsKYCd}
+                    tooltipTitle="Not connected"
+                />
+            );
+        else {
+            if (walletIsKYCd)
+                return (
+                    <StatusDisplay
+                        color="success"
+                        walletIsKYCd={walletIsKYCd}
+                        tooltipTitle="KYC Authorized"
+                    />
+                );
+            else
+                return (
+                    <StatusDisplay
+                        color="warning"
+                        walletIsKYCd={walletIsKYCd}
+                        tooltipTitle="Not KYC Authorized"
+                    />
+                );
+        }
     };
 
     return (
@@ -134,9 +164,10 @@ function AppBar({ title, onConnect, onReset, accountAddress, walletIsKYCd }) {
                                     justifyContent="space-between"
                                     alignItems="center"
                                 >
-                                    {accountAddress
-                                        ? displayKYC(walletIsKYCd)
-                                        : null}
+                                    {displayWalletStatus(
+                                        walletConnected,
+                                        walletIsKYCd
+                                    )}
                                     <Box
                                         className={classes.price}
                                         data-testid="connectAddressButton"

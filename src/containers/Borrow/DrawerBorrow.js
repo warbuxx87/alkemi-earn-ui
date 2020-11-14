@@ -14,6 +14,8 @@ import { onBorrowAction } from "redux/actions/data/borrow";
 
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
+import { isWalletKYCd } from "redux/selectors/status";
+
 // Section 4: Import Underlying Components / Containers
 import Drawer from "components/UI/Drawer/Drawer";
 
@@ -22,6 +24,8 @@ const BorrowDrawerContainer = ({ asset, onBorrowAction }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+
+    const walletIsKYCd = useSelector(isWalletKYCd);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -64,6 +68,7 @@ const BorrowDrawerContainer = ({ asset, onBorrowAction }) => {
             mainTitle={`Borrow ${asset.unit}`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
+            walletIsKYCd={walletIsKYCd}
         />
     );
 };

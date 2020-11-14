@@ -18,10 +18,14 @@ import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
+import { isWalletKYCd } from "redux/selectors/status";
+
 const DepositDrawerContainer = ({ asset, onDepositAction }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+
+    const walletIsKYCd = useSelector(isWalletKYCd);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -63,6 +67,7 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
             mainTitle={`Deposit ${asset.unit}`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
+            walletIsKYCd={walletIsKYCd}
         />
     );
 };

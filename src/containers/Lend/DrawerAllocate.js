@@ -16,11 +16,15 @@ import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress } from "redux/selectors/data/onboard";
 
+import { isWalletKYCd } from "redux/selectors/status";
+
 const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
+    const walletIsKYCd = useSelector(isWalletKYCd);
 
     const [amount, setAmount] = React.useState("");
     const onSetMax = () => setAmount(fromWei(asset.wallet, asset.unit));
@@ -52,6 +56,7 @@ const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
             mainTitle={`Mint New ${asset.unit} Tokens`}
             balanceValue={`0.00`}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
+            walletIsKYCd={walletIsKYCd}
         />
     );
 };
