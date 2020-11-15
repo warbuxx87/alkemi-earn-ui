@@ -11,10 +11,9 @@ const styles = (theme) => ({
         opacity: "1",
         lineHeight: "1px",
         letterSpacing: 0,
-        borderBottom: "1px solid #000000",
     },
     body: {
-        borderBottom: "1px solid #000000",
+        borderBottom: "1px solid #ffffff",
     },
 });
 

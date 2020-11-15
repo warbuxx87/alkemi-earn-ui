@@ -15,13 +15,13 @@ const darkTheme = createMuiTheme({
             darkGrey: "#151617",
         },
         background: {
-            default: "#000000", //Black
+            default: "#f8f9fd", //Black
             dark: "#1B1B1B", // Dark Grey
-            paper: "#0d0e10", // Light Grey
+            paper: "#FFFFFF", // Light Grey
         },
 
         primary: {
-            main: "#3cb34f", //Green
+            main: "#4343FF", //Green
             contrastText: "#fff",
         },
         secondary: {
@@ -45,8 +45,8 @@ const darkTheme = createMuiTheme({
         },
 
         text: {
-            primary: "#ffffff", // White
-            secondary: "#8c8c8c", // Light Grey
+            primary: "#12263f", // White
+            secondary: "#95aac9", // Light Grey
             success: "#3cb34f", //Green
             disabled: "rgba(255, 255, 255, 1)",
             hint: "rgba(184, 233, 134, 1)",

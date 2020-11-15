@@ -1,7 +1,7 @@
 const overrides = {
     MuiDivider: {
         root: {
-            backgroundColor: "#000000",
+            backgroundColor: "#e3ebf6",
         },
     },
 
@@ -45,12 +45,24 @@ const overrides = {
             textTransform: "uppercase",
         },
     },
-
+    MuiPaper: {
+        elevation1: {
+            boxShadow:
+                "0px 2px 4px 0px rgba(0,0,0,.04), 0px 1px 2px 0 rgba(15,89,209,.08)",
+        },
+    },
     MuiAppBar: {
         root: {
             paddingTop: 22,
             boxShadow: "none",
             paddingBottom: 30,
+        },
+    },
+    MuiTableRow: {
+        root: {
+            boxShadow:
+                "0px 2px 4px 0px rgba(0,0,0,.04), 0px 1px 2px 0 rgba(15,89,209,.08)",
+            borderRadius: "4px",
         },
     },
 };

@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
     tabs: {
         "& .MuiDivider-root": {
-            backgroundColor: "#121316",
+            backgroundColor: "#d9dfe8",
         },
     },
 }));
