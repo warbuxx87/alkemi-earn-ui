@@ -11,9 +11,12 @@ const styles = (theme) => ({
         opacity: "1",
         lineHeight: "1px",
         letterSpacing: 0,
+        borderBottom: "1px solid #e3ebf6",
+        paddingTop: 12,
+        paddingBottom: 10,
     },
     body: {
-        borderBottom: "1px solid #ffffff",
+        borderBottom: "none",
     },
 });
 

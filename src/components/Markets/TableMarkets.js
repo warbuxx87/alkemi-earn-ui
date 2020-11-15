@@ -77,7 +77,7 @@ const TableMarkets = ({ marketsData }) => {
             <PerfectScrollbar>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
+                        <TableHead className={classes.tableHead}>
                             <TableRow>
                                 <MarketsTableCell>
                                     {" "}

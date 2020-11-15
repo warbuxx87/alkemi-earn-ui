@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     },
     row: {
         backgroundColor: theme.palette.background.paper,
+        boxShadow:
+            "0px 2px 4px 0px rgba(0,0,0,.04), 0px 1px 2px 0 rgba(15,89,209,.08)",
+        borderRadius: "4px",
     },
     imageSize: {
         width: "34px",
