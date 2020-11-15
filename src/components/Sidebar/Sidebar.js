@@ -83,9 +83,7 @@ const styles = (theme) => ({
         color: "white",
         border: "none",
     },
-    divider: {
-        backgroundColor: theme.palette.common.black,
-    },
+
     bottomPush: {
         position: "fixed",
         bottom: 10,

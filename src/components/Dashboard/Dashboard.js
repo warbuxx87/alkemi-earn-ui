@@ -78,9 +78,9 @@ function Dashboard() {
                                 onChange={handleTabsChange}
                                 scrollButtons="auto"
                                 value={currentTab}
-                                textColor="secondary"
                                 variant="scrollable"
                                 className={classes.tabs}
+                                indicatorColor="primary"
                             >
                                 {tabs.map((tab) => (
                                     <Tab

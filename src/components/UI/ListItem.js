@@ -18,12 +18,14 @@ const useStyles = makeStyles((theme) => ({
     item: {
         paddingLeft: 23,
         paddingRight: 23,
+        color: theme.palette.text.secondary,
     },
     selected: {
         borderLeftStyle: "solid",
         borderWidth: 2,
-        borderColor: theme.palette.common.white,
+        borderColor: theme.palette.common.black,
         backgroundColor: theme.palette.common.darkGrey,
+        color: theme.palette.text.primary,
     },
     itemIcon: {
         minWidth: 48,
