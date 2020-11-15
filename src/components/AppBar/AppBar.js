@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
     connectWallet: {
         minWidth: 130,
         padding: "4px 0",
+        backgroundColor: "#ffffff",
+        color: "#000000",
     },
     appBar: {
         paddingLeft: "16px",

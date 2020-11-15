@@ -11,7 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
 // Section 3: Components & Containers import from the application
-import logo from "assets/images/logodisc.svg";
+import logo from "assets/images/logo-white.svg";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
