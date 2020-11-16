@@ -164,7 +164,9 @@
         ]
     },
     "release": {
-        "branches": ["development"],
+        "branches": [
+            "development"
+        ],
         "repositoryUrl": "git@bitbucket.org:project-alkemi/alkemi-earn-ui.git",
         "plugins": [
             "@semantic-release/commit-analyzer",
