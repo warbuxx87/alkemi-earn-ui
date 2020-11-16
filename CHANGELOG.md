@@ -1,3 +1,24 @@
+# [1.1.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.0.0...v1.1.0) (2020-11-10)
+
+
+### Bug Fixes
+
+* :bug: make DrawerRepay disable button when amount is undefined ([ea46722](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ea46722ea0efa7f9fc885ee5fd3eb515e65a792b))
+* :fire: remove debug characters ([51d38c2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/51d38c2411a7f07167c2ee9bd6d69f0e17193316))
+* :zap: hide NaN value from combined APY ([de560e9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/de560e90406f67b4d705faad5da3ad98d36b8478))
+
+
+### Features
+
+* :art: refactor CardAPY and unify it ([6990305](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6990305a74139192736c61a401ba77e19fafc211))
+* :art: refactor check on moneyMarket balance ([b03c910](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b03c9105b5b86be3b78d14a461a0c7d4580d5c0e))
+* :sparkles: add KYC indicator logic ([88da455](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/88da4559b65ac48fad307c553b628bd8cc11e045))
+
+
+### Performance Improvements
+
+* :fire: removed console.log ([46886f9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/46886f9e6f0fe202e33f695d265b10c207ea8a07))
+
 # 1.0.0 (2020-11-05)
 
 
