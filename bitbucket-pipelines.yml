@@ -109,7 +109,6 @@ definitions:
         - step: &deploy-staging-1
               name: "Deploy to Staging 1"
               deployment: staging
-              trigger: manual
               script:
                   - echo "$VERSION Deployment to Staging 1!"
                   - apt-get update
@@ -128,7 +127,6 @@ definitions:
         - step: &deploy-staging-2
               name: "Deploy to Staging 2"
               deployment: staging
-              trigger: manual
               script:
                   - echo "$VERSION Deployment to Staging 2!"
                   - apt-get update
@@ -147,7 +145,6 @@ definitions:
         - step: &deploy-staging-3
               name: "Deploy to Staging 3"
               deployment: staging
-              trigger: manual
               script:
                   - echo "$VERSION Deployment to Staging 3!"
                   - apt-get update
