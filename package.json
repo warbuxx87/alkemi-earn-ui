@@ -2,6 +2,11 @@
     "name": "@project-alkemi/alkemi-earn-ui",
     "version": "1.1.0",
     "homepage": "https://dapp.alkemi.network",
+    "repository": {
+        "type": "git",
+        "url": "git@bitbucket.org:project-alkemi/alkemi-earn-ui.git"
+    },
+    "private": true,
     "files": [
         "dist"
     ],

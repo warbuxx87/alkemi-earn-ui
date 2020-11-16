@@ -214,6 +214,17 @@ definitions:
                   - npx semantic-release --debug
 
 pipelines:
+    custom: # defines that this can only be triggered manually or by a schedule
+        # RUN Staging CHOOSE TO MANUALLY DEPLOY TO Staging 1/2/3
+        staging1:
+            - step: *upload
+            - step: *deploy-staging-1
+        staging2:
+            - step: *upload
+            - step: *deploy-staging-2
+        staging3:
+            - step: *upload
+            - step: *deploy-staging-3
     default:
         # This runs on every single push
         - step: *test
@@ -222,13 +233,8 @@ pipelines:
         # Runs on all pull requests
         "**":
             - step: *analyze
-            - step: *build
             - step: *upload
-            # RUN TEST DEPLOYMENT STEPS IN PARRALEL SO USER CAN CHOOSE TO MANUALLY DEPLOY TO Staging 1/2/3
-            - parallel:
-                  - step: *deploy-staging-1
-                  - step: *deploy-staging-2
-                  - step: *deploy-staging-3
+
     branches:
         development:
             # Runs only on Development Branch
