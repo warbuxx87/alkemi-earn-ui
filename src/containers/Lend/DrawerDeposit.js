@@ -64,7 +64,7 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
                     userWalletAddress,
                     asset,
                     amount,
-                    shouldSendMax: false,
+                    shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
                 })
             }
             isDoingAction={asset.depositing}
