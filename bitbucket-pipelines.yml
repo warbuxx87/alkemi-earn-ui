@@ -85,7 +85,7 @@ definitions:
                   # Zip BITBUCKET_CLONE_DIR
                   - zip -r application.zip .
                   # Docker Pipe gets 2GB of Memory
-                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
+                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.7
                     variables:
                         AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                         AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
@@ -105,16 +105,17 @@ definitions:
                   - tar -xzvf markdown2confluence_3.0.2_linux_x86_64.tar.gz -C /usr/local/bin/ markdown2confluence
                   - markdown2confluence -u $CONFLUENCE_USER -p $CONFLUENCE_PASSWORD -e $CONFLUENCE_ENDPOINT -s 'ARCH' --parent 'Repositories' -t 'alkemi-debt-ui' -d README.md
 
-        # DEFINE DEPLOY TO STAGING step
-        - step: &deploy-staging
-              name: "Deploy to Staging"
+        # DEFINE DEPLOY TO STAGING 1 step
+        - step: &deploy-staging-1
+              name: "Deploy to Staging 1"
               deployment: staging
+              trigger: manual
               script:
-                  - echo "$VERSION Deployment to Staging!"
+                  - echo "$VERSION Deployment to Staging 1!"
                   - apt-get update
                   - apt-get install jq -y
                   - declare -x VERSION=$(jq -r '.version' package.json)
-                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
+                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.7
                     variables:
                         AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                         AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
@@ -122,19 +123,74 @@ definitions:
                         APPLICATION_NAME: "$APPLICATION_NAME"
                         COMMAND: "deploy-only"
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
-                        ENVIRONMENT_NAME: "$APPLICATION_NAME-dev"
+                        ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-1"
+        # DEFINE DEPLOY TO Staging 2 step
+        - step: &deploy-staging-2
+              name: "Deploy to Staging 2"
+              deployment: staging
+              trigger: manual
+              script:
+                  - echo "$VERSION Deployment to Staging 2!"
+                  - apt-get update
+                  - apt-get install jq -y
+                  - declare -x VERSION=$(jq -r '.version' package.json)
+                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.7
+                    variables:
+                        AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                        AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                        AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                        APPLICATION_NAME: "$APPLICATION_NAME"
+                        COMMAND: "deploy-only"
+                        VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
+                        ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-2"
+        # DEFINE DEPLOY TO Staging 3 step
+        - step: &deploy-staging-3
+              name: "Deploy to Staging 3"
+              deployment: staging
+              trigger: manual
+              script:
+                  - echo "$VERSION Deployment to Staging 3!"
+                  - apt-get update
+                  - apt-get install jq -y
+                  - declare -x VERSION=$(jq -r '.version' package.json)
+                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.7
+                    variables:
+                        AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                        AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                        AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                        APPLICATION_NAME: "$APPLICATION_NAME"
+                        COMMAND: "deploy-only"
+                        VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
+                        ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-3"
+        # DEFINE DEPLOY TO DEVELOPMENT step
+        - step: &deploy-development
+              name: "Deploy to Development"
+              deployment: development
+              script:
+                  - echo "$VERSION Deployment to Development!"
+                  - apt-get update
+                  - apt-get install jq -y
+                  - declare -x VERSION=$(jq -r '.version' package.json)
+                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.7
+                    variables:
+                        AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                        AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                        AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                        APPLICATION_NAME: "$APPLICATION_NAME"
+                        COMMAND: "deploy-only"
+                        VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
+                        ENVIRONMENT_NAME: "$APPLICATION_NAME-development"
                         WAIT: "true"
         # DEFINE DEPLOY TO PRODUCTION STEP
         - step: &deploy-production
               name: "Deploy to Production"
               deployment: production
-              trigger: manual
               script:
                   - echo "Deployment to Production!"
                   - apt-get update
                   - apt-get install jq -y
                   - declare -x VERSION=$(jq -r '.version' package.json)
-                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.5
+                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.7
                     variables:
                         AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                         AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
@@ -158,28 +214,41 @@ definitions:
                   - npx semantic-release --debug
 
 pipelines:
+    custom: # defines that this can only be triggered manually or by a schedule
+        # RUN Staging CHOOSE TO MANUALLY DEPLOY TO Staging 1/2/3
+        staging1:
+            - step: *upload
+            - step: *deploy-staging-1
+        staging2:
+            - step: *upload
+            - step: *deploy-staging-2
+        staging3:
+            - step: *upload
+            - step: *deploy-staging-3
     default:
         # This runs on every single push
         - step: *test
-        # - step: *github
 
     pull-requests:
         # Runs on all pull requests
         "**":
-            #    - step: *github
             - step: *analyze
-            - step: *build
-            #  - step: *quality-gate
+            - step: *upload
 
     branches:
+        development:
+            # Runs only on Development Branch
+            - step: *analyze
+            - step: *build
+            - step: *release
+            - step: *upload
+            - step: *deploy-development
         master:
             # Runs only on Master Branch
             - step: *analyze
-            - step: *release
             - step: *github
             #  - step: *quality-gate
             - step: *build
             - step: *upload
             - step: *docs
-            - step: *deploy-staging
             - step: *deploy-production

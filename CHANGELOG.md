@@ -1,3 +1,42 @@
+# [1.2.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.1.0...v1.2.0) (2020-11-16)
+
+
+### Bug Fixes
+
+* :art: add uint max int selection to withdraw ([2e0599d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2e0599d50fac3a5a94bb17f7c5c5f8f1d7bf05b7))
+* :art: add uint max on max click for repay allocate and deposit ([b11d904](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b11d904337b3743b76b106d45998e5ff838ff830))
+* :art: send max uint when max is set on borrow ([7771c66](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7771c66ec6341db4d2693df1c8c85322e11eafd7))
+* :bug: fix double bug on max uint action ([a5122c2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a5122c28d26a066c4fc695df9228444ceb8950f7))
+* :bug: fix merge overwrite ([269e9fb](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/269e9fb06385a5fb88afd8a797eddfef00a67039))
+
+
+### Features
+
+* :art: add status display for connected/KYC'd ([a88cab0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a88cab0de1e63dbc5a4ced291b75e1384d48f4e9))
+* :art: disable action drawer buttons when not KYC'd ([7a3beb0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7a3beb00534b58277f84b2ddd7739bea49da9a33))
+* :sparkles: add tooltip for disabled button due to no KYC ([a393037](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a393037e75fb43b67466fff0356bd8a3ec8c106e))
+
+# [1.1.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.0.0...v1.1.0) (2020-11-10)
+
+
+### Bug Fixes
+
+* :bug: make DrawerRepay disable button when amount is undefined ([ea46722](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ea46722ea0efa7f9fc885ee5fd3eb515e65a792b))
+* :fire: remove debug characters ([51d38c2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/51d38c2411a7f07167c2ee9bd6d69f0e17193316))
+* :zap: hide NaN value from combined APY ([de560e9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/de560e90406f67b4d705faad5da3ad98d36b8478))
+
+
+### Features
+
+* :art: refactor CardAPY and unify it ([6990305](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6990305a74139192736c61a401ba77e19fafc211))
+* :art: refactor check on moneyMarket balance ([b03c910](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b03c9105b5b86be3b78d14a461a0c7d4580d5c0e))
+* :sparkles: add KYC indicator logic ([88da455](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/88da4559b65ac48fad307c553b628bd8cc11e045))
+
+
+### Performance Improvements
+
+* :fire: removed console.log ([46886f9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/46886f9e6f0fe202e33f695d265b10c207ea8a07))
+
 # 1.0.0 (2020-11-05)
 
 
