@@ -123,6 +123,7 @@ definitions:
                         COMMAND: "deploy-only"
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-1"
+                        WAIT: "true"
         # DEFINE DEPLOY TO Staging 2 step
         - step: &deploy-staging-2
               name: "Deploy to Staging 2"
@@ -141,6 +142,7 @@ definitions:
                         COMMAND: "deploy-only"
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-2"
+                        WAIT: "true"
         # DEFINE DEPLOY TO Staging 3 step
         - step: &deploy-staging-3
               name: "Deploy to Staging 3"
@@ -159,6 +161,7 @@ definitions:
                         COMMAND: "deploy-only"
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-3"
+                        WAIT: "true"
         # DEFINE DEPLOY TO DEVELOPMENT step
         - step: &deploy-development
               name: "Deploy to Development"
