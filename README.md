@@ -1,6 +1,6 @@
 # Alkemi Earn | User Interface
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000) [![Built with React](https://img.shields.io/badge/React-black?style=flat&logo=react)](https://docs.alkemi.network) [![Built on Ethereum](https://img.shields.io/badge/web3.js-blue?style=flat&logo=ethereum)](https://alkemi.atlassian.net/wiki/spaces/ARCH/pages/42139840/Switchboard) [![Twitter: AlkemiOfficial](https://img.shields.io/twitter/follow/AlkemiOfficial.svg?style=social)](https://twitter.com/AlkemiOfficial)
+![Version](https://img.shields.io/badge/version-1.2.0-blue.svg?cacheSeconds=2592000) [![Built with React](https://img.shields.io/badge/React-black?style=flat&logo=react)](https://docs.alkemi.network) [![Built on Ethereum](https://img.shields.io/badge/web3.js-blue?style=flat&logo=ethereum)](https://web3js.readthedocs.io/en/v1.3.0/) [![Twitter: AlkemiOfficial](https://img.shields.io/twitter/follow/AlkemiOfficial.svg?style=social)](https://twitter.com/AlkemiOfficial)
 
 > Web3 User Interface for Alkemi EARN
 
@@ -76,6 +76,7 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run distribute:prep`
+
 Prepared the app for being distributed via npm package. This command compiles the project using babel and outputs the compiled files in the `dist` folder.
 
 See the section [Publishing a NPM Package on Github](#publishing-a-npm-package-on-github) for more information.
@@ -119,6 +120,7 @@ This section has moved here: [Deployment](https://facebook.github.io/create-reac
 ### Publishing a NPM Package on Github
 
 #### Setup
+
 **IMPORTANT: you must have a .npmrc file configured with your personal access token in the root folder (the same folder where package.json is located)**
 
 From the repo's root folder, you can run the command below to create a .npmrc file using the sample template:
@@ -132,7 +134,7 @@ After running the command above, your newly created `.npmrc` file content should
     //npm.pkg.github.com/:_authToken={YOUR_GITHUB_ACCESS_TOKEN}
     @project-alkemi:registry=https://npm.pkg.github.com
 
-Replace *{YOUR_GITHUB_ACCESS_TOKEN}* by your github token. Remember to remove the curly brackets "{ }".
+Replace _{YOUR_GITHUB_ACCESS_TOKEN}_ by your github token. Remember to remove the curly brackets "{ }".
 You can generate your github token in [Developer settings](https://github.com/settings/tokens). Make sure you check the options `write:packages` and `read:packages`.
 
 #### Publishing a New Package Version
