@@ -8,6 +8,8 @@ import {
 
 import { triggerToastDisplay } from "utils/notify";
 
+import constants from "constants/constant.json";
+
 // Section 2: Action types declarations and action creators
 
 //                                            //
@@ -144,9 +146,19 @@ export const onAllocateAction = ({
     userWalletAddress,
     asset,
     amount,
+    shouldSendMax,
 }) => async (dispatch) => {
+    const amountToSend =
+        shouldSendMax === true ? constants["max_uint"] : amount;
+
     dispatch(allocatePending(asset));
-    handle_allocate_click({ drizzle, userWalletAddress, asset, amount })
+    handle_allocate_click({
+        drizzle,
+        userWalletAddress,
+        asset,
+        amount: amountToSend,
+        shouldSendMax,
+    })
         .then(() => dispatch(allocateSuccess(asset)))
         .catch((error) => {
             triggerToastDisplay({
@@ -165,14 +177,19 @@ export const onDepositAction = ({
     userWalletAddress,
     amount,
     asset,
+    shouldSendMax,
 }) => async (dispatch) => {
+    const amountToSend =
+        shouldSendMax === true ? constants["max_uint"] : amount;
+
     dispatch(depositPending(asset.unit));
     handle_deposit_click({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        amount,
+        amount: amountToSend,
         asset,
+        shouldSendMax,
     })
         .then(() => dispatch(depositSuccess(asset.unit)))
         .catch((error) => {
@@ -192,14 +209,19 @@ export const onWithdrawAction = ({
     userWalletAddress,
     amount,
     asset,
+    shouldSendMax,
 }) => async (dispatch) => {
+    const amountToSend =
+        shouldSendMax === true ? constants["max_uint"] : amount;
+
     dispatch(withdrawPending(asset.unit));
     handle_withdraw_click({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        amount,
+        amount: amountToSend,
         asset,
+        shouldSendMax,
     })
         .then(() => dispatch(withdrawSuccess(asset.unit)))
         .catch((error) => {

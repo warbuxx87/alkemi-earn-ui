@@ -2,15 +2,21 @@
 
 exports[`<Drawer /> matches snapshot 1`] = `
 <Fragment>
-  <WithStyles(ForwardRef(Button))
-    className="makeStyles-btnDrawer-3"
-    onClick={[Function]}
-    size="small"
-    type="button"
-    variant="contained"
+  <ToolTipWrapper
+    toolTipTitle="You are not KYC authorized"
+    walletIsKYCd={true}
   >
-    Borrow
-  </WithStyles(ForwardRef(Button))>
+    <WithStyles(ForwardRef(Button))
+      className="makeStyles-btnDrawer-3"
+      disabled={false}
+      onClick={[Function]}
+      size="small"
+      type="button"
+      variant="contained"
+    >
+      Borrow
+    </WithStyles(ForwardRef(Button))>
+  </ToolTipWrapper>
   <WithStyles(ForwardRef(Drawer))
     ModalProps={
       Object {

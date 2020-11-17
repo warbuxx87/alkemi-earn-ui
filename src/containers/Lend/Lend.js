@@ -12,6 +12,8 @@ import DrizzleContext from "utils/DrizzleContext";
 
 import { onLendActivate } from "redux/actions/status/lend";
 
+import useOnboard from "hooks/useOnboard";
+
 // Section 3: Selectors
 import {
     getLendError,
@@ -21,7 +23,11 @@ import {
 
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 
-import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
+import {
+    isWalletConnected,
+    walletAddress,
+    walletNetwork,
+} from "redux/selectors/data/onboard";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
@@ -31,18 +37,22 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
+    const walletConnected = useSelector(isWalletConnected);
+    const { onConnect } = useOnboard();
+
+    const activateAsset = (asset) =>
+        onActivate({
+            drizzle,
+            userWalletNetwork,
+            userWalletAddress,
+            asset,
+        });
+
     return (
         <Lend
             inactiveLend={inactiveLend}
             activeLend={activeLend}
-            onActivate={(asset) =>
-                onActivate({
-                    drizzle,
-                    userWalletNetwork,
-                    userWalletAddress,
-                    asset,
-                })
-            }
+            onActivate={walletConnected ? activateAsset : onConnect}
             errorLend={errorLend}
             USDPrice={USDPrice}
             displayAllocateButton={

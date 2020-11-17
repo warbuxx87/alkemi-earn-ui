@@ -6,8 +6,10 @@ export const isWalletKYCd = (state) => {
     const verifyKYC = Object.values(
         _.get(state, "contracts.MoneyMarket.verifyKYC", {})
     );
+
     if (verifyKYC[0]) {
-        return verifyKYC[0].value;
+        const isKYCd = verifyKYC[0].value ? verifyKYC[0].value : false;
+        return isKYCd;
     }
     return false;
 };
