@@ -84,6 +84,7 @@ export const handle_deposit_click = async ({
             from: myAccount,
         }
     );
+
     return sendDeposit;
 };
 

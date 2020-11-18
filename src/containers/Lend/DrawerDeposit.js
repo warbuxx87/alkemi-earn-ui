@@ -10,7 +10,7 @@ import Drawer from "components/UI/Drawer/Drawer";
 
 import DrizzleContext from "utils/DrizzleContext";
 
-import { onDepositAction } from "redux/actions/data/lend";
+import { onTx } from "redux/actions/status/transactions";
 
 import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
@@ -20,7 +20,7 @@ import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd } from "redux/selectors/status";
 
-const DepositDrawerContainer = ({ asset, onDepositAction }) => {
+const DepositDrawerContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
@@ -63,7 +63,7 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
             triggerButtonVariant="contained"
             enableButtonClick={enableDeposit}
             onButtonClick={() =>
-                onDepositAction({
+                onTx({
                     drizzle,
                     userWalletNetwork,
                     userWalletAddress,
@@ -87,8 +87,7 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onDepositAction }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ onTx }, dispatch);
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(
     DepositDrawerContainer
