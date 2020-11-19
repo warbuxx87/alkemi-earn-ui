@@ -61,10 +61,15 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
 
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
-            return aTx.asset === asset.unit && aTx.type === "deposit";
+            return (
+                aTx.asset === asset.unit &&
+                aTx.type === "deposit" &&
+                aTx.processing === true
+            );
         });
 
         if (tx && tx.length > 0) setIsProcessing(tx[0].processing);
+        else setIsProcessing(false);
     }, [txs]);
 
     return (

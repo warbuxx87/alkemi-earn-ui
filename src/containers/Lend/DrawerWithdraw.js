@@ -7,7 +7,7 @@ import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
-import { onWithdrawAction } from "redux/actions/data/lend";
+import { onTx } from "redux/actions/status/transactions";
 
 import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
@@ -17,14 +17,15 @@ import DrizzleContext from "utils/DrizzleContext";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
-const DrawerWithdrawContainer = ({ asset, onWithdrawAction }) => {
+const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
     const walletIsKYCd = useSelector(isWalletKYCd);
+    const txs = useSelector(getTransactions);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -45,6 +46,21 @@ const DrawerWithdrawContainer = ({ asset, onWithdrawAction }) => {
 
     const [enableWithdraw, setEnableWithdraw] = React.useState(false);
 
+    const [isProcessing, setIsProcessing] = React.useState(false);
+
+    React.useEffect(() => {
+        const tx = Object.values(txs).filter((aTx) => {
+            return (
+                aTx.asset === asset.unit &&
+                aTx.type === "withdraw" &&
+                aTx.processing === true
+            );
+        });
+
+        if (tx && tx.length > 0) setIsProcessing(tx[0].processing);
+        else setIsProcessing(false);
+    }, [txs]);
+
     React.useEffect(() => {
         if (amount) {
             const isAmountLTBalance = amount > 0 ? true : false;
@@ -63,16 +79,17 @@ const DrawerWithdrawContainer = ({ asset, onWithdrawAction }) => {
             triggerButtonVariant="outlined"
             enableButtonClick={enableWithdraw}
             onButtonClick={() =>
-                onWithdrawAction({
+                onTx({
                     drizzle,
                     userWalletNetwork,
                     userWalletAddress,
                     asset,
                     amount,
                     shouldSendMax,
+                    type: "withdraw",
                 })
             }
-            isDoingAction={asset.withdrawing}
+            isDoingAction={isProcessing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
@@ -87,8 +104,7 @@ const DrawerWithdrawContainer = ({ asset, onWithdrawAction }) => {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onWithdrawAction }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ onTx }, dispatch);
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(
     DrawerWithdrawContainer
