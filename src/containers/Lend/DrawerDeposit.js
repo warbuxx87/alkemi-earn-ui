@@ -18,7 +18,7 @@ import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
 const DepositDrawerContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
@@ -26,6 +26,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     const userWalletNetwork = useSelector(walletNetwork);
 
     const walletIsKYCd = useSelector(isWalletKYCd);
+    const txs = useSelector(getTransactions);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -46,6 +47,8 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
 
     const [enableDeposit, setEnableDeposit] = React.useState(false);
 
+    const [isProcessing, setIsProcessing] = React.useState(false);
+
     React.useEffect(() => {
         if (amount) {
             const isAmountLTBalance = amount > 0 ? true : false;
@@ -55,6 +58,14 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
             setEnableDeposit(isAmountLTBalance);
         }
     }, [amount, asset.wallet, asset.unit]);
+
+    React.useEffect(() => {
+        const tx = Object.values(txs).filter((aTx) => {
+            return aTx.asset === asset.unit && aTx.type === "deposit";
+        });
+
+        if (tx && tx.length > 0) setIsProcessing(tx[0].processing);
+    }, [txs]);
 
     return (
         <Drawer
@@ -70,9 +81,10 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                     asset,
                     amount,
                     shouldSendMax,
+                    type: "deposit",
                 })
             }
-            isDoingAction={asset.depositing}
+            isDoingAction={isProcessing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}

@@ -4,6 +4,8 @@ import {
     handle_allocate_click,
     handle_deposit_click,
     handle_withdraw_click,
+    handle_repay_click,
+    handle_borrow_click,
 } from "utils/drizzle";
 
 import constants from "constants/constant.json";
@@ -48,7 +50,14 @@ export const transactionResolved = (txHash) => ({
 
 // Section 3: Action dispatch methods and async funcs
 
-// TODO: Make generic
+const actionToCall = {
+    deposit: handle_deposit_click,
+    allocate: handle_allocate_click,
+    withdraw: handle_withdraw_click,
+    repay: handle_repay_click,
+    borrow: handle_borrow_click,
+};
+
 export const onTx = ({
     drizzle,
     userWalletNetwork,
@@ -56,11 +65,12 @@ export const onTx = ({
     amount,
     asset,
     shouldSendMax,
+    type,
 }) => async (dispatch) => {
     const amountToSend =
         shouldSendMax === true ? constants["max_uint"] : amount;
 
-    handle_deposit_click({
+    actionToCall[type]({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
@@ -69,16 +79,14 @@ export const onTx = ({
         shouldSendMax,
     })
         .then((stackId) => {
-            dispatch(transactionTriggered(asset.unit, stackId, "deposit"));
+            dispatch(transactionTriggered(asset.unit, stackId, type));
         })
         .catch((error) => {
-            console.log("eerror in deposit: ", error);
             triggerToastDisplay({
                 toastMessageVariant: "failure",
                 displayMessage: "Something went wrong",
                 displaySecondaryMessage: error.message,
             });
-
             //dispatch(depositError(asset.unit, error.message));
         });
 };

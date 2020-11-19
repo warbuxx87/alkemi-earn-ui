@@ -13,3 +13,7 @@ export const isWalletKYCd = (state) => {
     }
     return false;
 };
+
+export const getTransactions = (state) => {
+    return state.status.transactions.txs;
+};
