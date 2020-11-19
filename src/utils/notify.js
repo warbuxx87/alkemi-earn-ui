@@ -118,17 +118,15 @@ export const triggerToastDisplay = ({
     currentNetworkName,
 }) => {
     const options = {
-        closeButton: true,
         position: "top-right",
         // Automatically Close Notification after 15 seconds
-        autoClose: 97500,
-        hideProgressBar: true,
+        autoClose: 7500,
         closeOnClick: true,
         pauseOnHover: true,
-        draggable: true,
+        draggable: false,
         progress: undefined,
-        hideProgressBar: true,
         closeButton: false,
+        hideProgressBar: true,
     };
 
     const display = (
