@@ -60,6 +60,8 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
 
         if (tx && tx.length > 0) setIsProcessing(tx[0].processing);
         else setIsProcessing(false);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [txs]);
 
     React.useEffect(() => {
