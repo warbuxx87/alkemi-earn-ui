@@ -1,3 +1,10 @@
+# [1.3.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.2.0...v1.3.0) (2020-11-19)
+
+
+### Features
+
+* add utilization rate fields to markets page ([f6442c6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f6442c6e83ce1b6f0282ea71b28a3d3734f3ef8e))
+
 # [1.2.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.1.0...v1.2.0) (2020-11-16)
 
 
