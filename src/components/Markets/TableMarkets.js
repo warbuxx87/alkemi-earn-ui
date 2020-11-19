@@ -33,9 +33,6 @@ import WBTC from "assets/images/WBTC.svg";
 import DAI from "assets/images/DAI.svg";
 import USDC from "assets/images/USDC.svg";
 
-//import PAX from "assets/images/pax.png";
-//import USDT from "assets/images/USDT.svg";
-
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -65,9 +62,6 @@ const TableMarkets = ({ marketsData }) => {
         USDC: USDC,
         WBTC: WBTC,
         DAI: DAI,
-
-        //USDT: USDT,
-        //PAX: PAX,
     };
 
     return (
@@ -95,7 +89,7 @@ const TableMarkets = ({ marketsData }) => {
                                         color="textSecondary"
                                     >
                                         {" "}
-                                        Gross Supply{" "}
+                                        Total Supply{" "}
                                     </Typography>
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
@@ -103,7 +97,7 @@ const TableMarkets = ({ marketsData }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Deposit APR{" "}
+                                        Total Borrow
                                     </Typography>
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
@@ -111,7 +105,16 @@ const TableMarkets = ({ marketsData }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Gross Borrow
+                                        Deposit APY{" "}
+                                    </Typography>
+                                </MarketsTableCell>
+
+                                <MarketsTableCell align="right">
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Borrow APY
                                     </Typography>
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
@@ -119,7 +122,7 @@ const TableMarkets = ({ marketsData }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Borrow APR
+                                        Market Utilization
                                     </Typography>
                                 </MarketsTableCell>
                             </TableRow>
@@ -174,17 +177,7 @@ const TableMarkets = ({ marketsData }) => {
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>
-                                        <MarketsTableCell align="right">
-                                            {" "}
-                                            <Typography
-                                                variant="h6"
-                                                color="textPrimary"
-                                            >
-                                                {format_str_to_percent(
-                                                    item.supplyAPR
-                                                )}
-                                            </Typography>
-                                        </MarketsTableCell>
+
                                         <MarketsTableCell align="right">
                                             {" "}
                                             <Typography
@@ -205,8 +198,28 @@ const TableMarkets = ({ marketsData }) => {
                                                 color="textPrimary"
                                             >
                                                 {format_str_to_percent(
+                                                    item.supplyAPR
+                                                )}
+                                            </Typography>
+                                        </MarketsTableCell>
+                                        <MarketsTableCell align="right">
+                                            {" "}
+                                            <Typography
+                                                variant="h6"
+                                                color="textPrimary"
+                                            >
+                                                {format_str_to_percent(
                                                     item.borrowAPR
                                                 )}
+                                            </Typography>
+                                        </MarketsTableCell>
+                                        <MarketsTableCell align="right">
+                                            {" "}
+                                            <Typography
+                                                variant="h6"
+                                                color="textPrimary"
+                                            >
+                                                {item.utilizationRate * 100}%
                                             </Typography>
                                         </MarketsTableCell>
                                     </TableRow>
