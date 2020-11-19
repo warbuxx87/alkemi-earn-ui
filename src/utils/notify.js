@@ -121,12 +121,13 @@ export const triggerToastDisplay = ({
         closeButton: true,
         position: "top-right",
         // Automatically Close Notification after 15 seconds
-        autoClose: 7500,
-        hideProgressBar: true,
+        autoClose: 500,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: false,
         progress: undefined,
+        hideProgressBar: true,
+        closeButton: false,
     };
 
     const display = (
