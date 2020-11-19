@@ -112,7 +112,7 @@
 // Toastify
 .Toastify__toast--default {
     background: transparent !important;
-    margin-bottom: 0px !important;
+    margin-bottom: 8px !important;
 }
 .fMyqQI {
     &:nth-child(1) {
@@ -121,10 +121,14 @@
     }
 }
 .Toastify__toast-container {
-    width: 350px !important;
+    width: 340px !important;
     padding-top: 0px !important;
 }
 
 .Toastify__toast {
-  padding-top: 0px !important;
+  padding: 0px !important;
+}
+
+.Toastify__progress-bar {
+  display: none !important;
 }
