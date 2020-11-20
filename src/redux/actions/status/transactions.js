@@ -46,7 +46,14 @@ export const transactionResolved = (txHash) => ({
     },
 });
 
-// No way of figuring out for sure if the tx has been rejected
+// No way of figuring out for sure if the tx has been canceled
+export const TRANSACTION_CANCELED = "TRANSACTION_CANCELED";
+export const transactionCanceled = (txHash) => ({
+    type: TRANSACTION_CANCELED,
+    payload: {
+        txHash,
+    },
+});
 
 // Section 3: Action dispatch methods and async funcs
 

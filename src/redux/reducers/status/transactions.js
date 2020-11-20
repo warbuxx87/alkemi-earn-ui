@@ -3,6 +3,7 @@ import {
     TRANSACTION_TRIGGERED,
     TRANSACTION_SENT,
     TRANSACTION_RESOLVED,
+    TRANSACTION_CANCELED,
 } from "redux/actions/status/transactions";
 
 // Define initial state
@@ -55,7 +56,25 @@ export default (state = initialState, action) => {
                     [tx[0].stackId]: {
                         ...state.txs[tx[0].stackId],
                         processing: false,
-                        resolved: true,
+                        resolved: true, // unused for now
+                    },
+                },
+            };
+        }
+
+        case TRANSACTION_CANCELED: {
+            const tx = Object.values(state.txs).filter((aTx) => {
+                return aTx.txHash === action.payload.txHash;
+            });
+
+            return {
+                ...state,
+                txs: {
+                    ...state.txs,
+                    [tx[0].stackId]: {
+                        ...state.txs[tx[0].stackId],
+                        processing: false,
+                        errored: true, // unused for now
                     },
                 },
             };

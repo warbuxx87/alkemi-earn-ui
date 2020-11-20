@@ -3,6 +3,7 @@
 import {
     transactionSent,
     transactionResolved,
+    transactionCanceled,
 } from "redux/actions/status/transactions";
 // 2. Libraries imports
 
@@ -14,11 +15,11 @@ const txHandler = (store) => (next) => (action) => {
     // const actionTypeConfirmation = "TX_CONFIRMATION";
     const actionTypeSend = "TX_BROADCASTED";
     const actionTypeSuccess = "TX_SUCCESSFUL";
-    // const actionTypeError = "TX_ERROR";
+    const actionTypeError = "TX_ERROR";
 
     if (
         // action.type === actionTypeConfirmation ||
-        // action.type === actionTypeError ||
+        action.type === actionTypeError ||
         action.type === actionTypeSuccess ||
         action.type === actionTypeSend
     ) {
@@ -31,9 +32,9 @@ const txHandler = (store) => (next) => (action) => {
             store.dispatch(transactionResolved(action.txHash));
         }
 
-        // if (action.type === actionTypeError) {
-        //     console.log("Received actionTypeError", action);
-        // }
+        if (action.type === actionTypeError) {
+            store.dispatch(transactionCanceled(action.txHash));
+        }
 
         // if (action.type === actionTypeConfirmation) {
         //     console.log("Received actionTypeConfirmation", action);
