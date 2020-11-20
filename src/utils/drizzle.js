@@ -9,10 +9,10 @@ export const handle_approve_click = async ({
     drizzle,
     userWalletNetwork,
     asset,
-    myAccount,
+    userWalletAddress,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transaction");
-
+    const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
 
     const address_MoneyMarket = address[network].address_MoneyMarket;

@@ -70,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const checkActivating = (Row) => {
+    // console.log('called row.pending display: ', Row)
+    return Row.pending;
+};
+
 // Section 5: Code Component
 const BorrowTable = ({ data = [], onActivate }) => {
     const classes = useStyles();
@@ -210,7 +215,7 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                                     onActivate(Row.unit)
                                                 }
                                             >
-                                                {Row.pending ? (
+                                                {checkActivating(Row) ? (
                                                     <CircularProgress
                                                         size={20}
                                                         color="inherit"

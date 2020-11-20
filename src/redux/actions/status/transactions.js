@@ -6,6 +6,7 @@ import {
     handle_withdraw_click,
     handle_repay_click,
     handle_borrow_click,
+    handle_approve_click,
 } from "utils/drizzle";
 
 import constants from "constants/constant.json";
@@ -63,6 +64,7 @@ const actionToCall = {
     withdraw: handle_withdraw_click,
     repay: handle_repay_click,
     borrow: handle_borrow_click,
+    approve: handle_approve_click,
 };
 
 export const onTx = ({
