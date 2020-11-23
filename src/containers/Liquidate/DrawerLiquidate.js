@@ -78,7 +78,7 @@ const LiquidateDrawerContainer = ({
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.asset === liquidationId &&
+                aTx.transactionLocalId === liquidationId && // using liquidationId as ID instead of asset for this transaction
                 aTx.type === "liquidate" &&
                 aTx.processing === true
             );

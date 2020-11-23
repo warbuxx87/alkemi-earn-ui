@@ -56,7 +56,7 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.asset === asset.unit &&
+                aTx.transactionLocalId === asset.unit &&
                 aTx.type === "allocate" &&
                 aTx.processing === true
             );

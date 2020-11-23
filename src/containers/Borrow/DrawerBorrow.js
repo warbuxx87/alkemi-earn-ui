@@ -52,7 +52,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.asset === asset.unit &&
+                aTx.transactionLocalId === asset.unit &&
                 aTx.type === "borrow" &&
                 aTx.processing === true
             );

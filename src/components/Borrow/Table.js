@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 const checkActivating = (Row, txs) => {
     const tx = Object.values(txs).filter((aTx) => {
         return (
-            aTx.asset === Row.unit &&
+            aTx.transactionLocalId === Row.unit &&
             aTx.type === "approve" &&
             aTx.processing === true
         );

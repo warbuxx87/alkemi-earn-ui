@@ -19,11 +19,11 @@ import { triggerToastDisplay } from "utils/notify";
 //                                            //
 
 export const TRANSACTION_TRIGGERED = "TRANSACTION_TRIGGERED";
-export const transactionTriggered = (asset, stackId, type) => ({
+export const transactionTriggered = (transactionLocalId, stackId, type) => ({
     type: TRANSACTION_TRIGGERED,
     payload: {
         stackId,
-        asset,
+        transactionLocalId, // this is NOT the tx hash on the blockchain, just a unique identifier locally (the type also helps as a second id when checking)
         type,
     },
 });

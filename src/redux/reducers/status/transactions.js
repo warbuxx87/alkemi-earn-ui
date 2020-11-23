@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
                     ...state.txs,
                     [action.payload.stackId]: {
                         ...state.txs[action.payload.stackId],
-                        asset: action.payload.asset,
+                        transactionLocalId: action.payload.transactionLocalId,
                         type: action.payload.type,
                         processing: false,
                         stackId: action.payload.stackId,
