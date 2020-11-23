@@ -38,43 +38,6 @@ const fetchLiquidationsSuccess = (liquidations) => ({
     },
 });
 
-//                                                  //
-// -------------- LIQUIDATE ACTIONS --------------  //
-//                                                  //
-
-// track the smart contract calls
-
-// Declare action type as a constant
-export const LIQUIDATE_PENDING = "LIQUIDATE_PENDING";
-
-const liquidatePending = (asset) => ({
-    type: LIQUIDATE_PENDING,
-    payload: {
-        asset,
-    },
-});
-
-// Declare action type as a constant
-export const LIQUIDATE_SUCCESS = "LIQUIDATE_SUCCESS";
-
-const liquidateSuccess = (asset) => ({
-    type: LIQUIDATE_SUCCESS,
-    payload: {
-        asset,
-    },
-});
-
-// Declare action type as a constant
-export const LIQUIDATE_ERROR = "LIQUIDATE_ERROR";
-
-const liquidateError = (symbol, error) => ({
-    type: LIQUIDATE_ERROR,
-    payload: {
-        symbol,
-    },
-    error,
-});
-
 // Declare action type as a constant
 export const FETCH_LIQUIDATIONS_ERROR = "FETCH_LIQUIDATIONS_ERROR";
 
