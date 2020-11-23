@@ -1,3 +1,35 @@
+## [1.3.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.0...v1.3.1) (2020-11-23)
+
+
+### Bug Fixes
+
+* :fire: remove sending max UINT where it doesn't apply ([a34bf1e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a34bf1ee716b051626a49cfe8355362dafd1f334))
+
+# [1.3.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.2.0...v1.3.0) (2020-11-19)
+
+
+### Features
+
+* add utilization rate fields to markets page ([f6442c6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f6442c6e83ce1b6f0282ea71b28a3d3734f3ef8e))
+
+# [1.2.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.1.0...v1.2.0) (2020-11-16)
+
+
+### Bug Fixes
+
+* :art: add uint max int selection to withdraw ([2e0599d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2e0599d50fac3a5a94bb17f7c5c5f8f1d7bf05b7))
+* :art: add uint max on max click for repay allocate and deposit ([b11d904](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b11d904337b3743b76b106d45998e5ff838ff830))
+* :art: send max uint when max is set on borrow ([7771c66](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7771c66ec6341db4d2693df1c8c85322e11eafd7))
+* :bug: fix double bug on max uint action ([a5122c2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a5122c28d26a066c4fc695df9228444ceb8950f7))
+* :bug: fix merge overwrite ([269e9fb](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/269e9fb06385a5fb88afd8a797eddfef00a67039))
+
+
+### Features
+
+* :art: add status display for connected/KYC'd ([a88cab0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a88cab0de1e63dbc5a4ced291b75e1384d48f4e9))
+* :art: disable action drawer buttons when not KYC'd ([7a3beb0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7a3beb00534b58277f84b2ddd7739bea49da9a33))
+* :sparkles: add tooltip for disabled button due to no KYC ([a393037](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a393037e75fb43b67466fff0356bd8a3ec8c106e))
+
 # [1.1.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.0.0...v1.1.0) (2020-11-10)
 
 

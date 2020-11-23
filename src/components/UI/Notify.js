@@ -20,12 +20,11 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "2rem",
     },
     Alert: {
-        width: 330,
         paddingTop: 8,
         paddingBottom: 8,
         backgroundColor: "#0f0f10",
         border: "solid 1px #262628",
-        marginBottom: 8,
+        margin: "0px",
     },
     Title: {
         marginBottom: 0,
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         right: 0,
     },
     Button: {
-        marginRight: 24,
+        marginRight: 36,
         textTransform: "capitalize",
         color: "#ffffff",
         fontSize: 12,
@@ -51,13 +50,13 @@ const useStyles = makeStyles((theme) => ({
     Message: {
         textTransform: "capitalize",
         fontWeight: 400,
-        fontSize: 12,
+        fontSize: 11,
         color: "#B8B8B8",
     },
 }));
 
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert variant="filled" {...props} />;
 }
 
 export default function PositionedSnackbar({
