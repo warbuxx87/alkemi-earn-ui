@@ -217,12 +217,15 @@ pipelines:
     custom: # defines that this can only be triggered manually or by a schedule
         # RUN Staging CHOOSE TO MANUALLY DEPLOY TO Staging 1/2/3
         staging1:
+            - step: *build
             - step: *upload
             - step: *deploy-staging-1
         staging2:
+            - step: *build
             - step: *upload
             - step: *deploy-staging-2
         staging3:
+            - step: *build
             - step: *upload
             - step: *deploy-staging-3
     default:
