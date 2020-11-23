@@ -20,7 +20,7 @@ export const handle_approve_click = async ({
     const tokenContract = initAssetContract({
         drizzle,
         userWalletAddress: myAccount,
-        asset,
+        asset: asset.unit,
     });
     const sendApprove = tokenContract.methods.approve.cacheSend(
         address_MoneyMarket,

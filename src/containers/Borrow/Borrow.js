@@ -26,17 +26,22 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 
+import { getTransactions } from "redux/selectors/status";
+
 // Section 4: components
 import Borrow from "components/Borrow/Borrow";
 
 // Section 5: Code Container
 const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
+    const { onConnect } = useOnboard();
+
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
     const walletConnected = useSelector(isWalletConnected);
-    const { onConnect } = useOnboard();
+
+    const txs = useSelector(getTransactions);
 
     const activateAsset = (asset) =>
         onActivate({
@@ -52,6 +57,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
             inactiveBorrow={inactiveBorrow}
             activeBorrow={activeBorrow}
             onActivate={walletConnected ? activateAsset : onConnect}
+            txs={txs}
         />
     );
 };

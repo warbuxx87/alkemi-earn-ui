@@ -70,13 +70,21 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const checkActivating = (Row) => {
-    // console.log('called row.pending display: ', Row)
-    return Row.pending;
+const checkActivating = (Row, txs) => {
+    const tx = Object.values(txs).filter((aTx) => {
+        return (
+            aTx.asset === Row.unit &&
+            aTx.type === "approve" &&
+            aTx.processing === true
+        );
+    });
+
+    if (tx && tx.length > 0) return true;
+    else return false;
 };
 
 // Section 5: Code Component
-const BorrowTable = ({ data = [], onActivate }) => {
+const BorrowTable = ({ data = [], onActivate, txs }) => {
     const classes = useStyles();
     return (
         <Box mt={1}>
@@ -211,11 +219,9 @@ const BorrowTable = ({ data = [], onActivate }) => {
                                                 variant="outlined"
                                                 color="secondary"
                                                 disable={Row.pending.toString()}
-                                                onClick={() =>
-                                                    onActivate(Row.unit)
-                                                }
+                                                onClick={() => onActivate(Row)}
                                             >
-                                                {checkActivating(Row) ? (
+                                                {checkActivating(Row, txs) ? (
                                                     <CircularProgress
                                                         size={20}
                                                         color="inherit"
