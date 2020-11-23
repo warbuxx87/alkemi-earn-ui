@@ -71,8 +71,21 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const checkActivating = (row, txs) => {
+    const tx = Object.values(txs).filter((aTx) => {
+        return (
+            aTx.transactionLocalId === row.unit &&
+            aTx.type === "approve" &&
+            aTx.processing === true
+        );
+    });
+
+    if (tx && tx.length > 0) return true;
+    else return false;
+};
+
 // Section 5: Code Component
-const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
+const LendTable = ({ data = [], onActivate, displayAllocateButton, txs }) => {
     const classes = useStyles();
     return (
         <Box mt={1}>
@@ -213,12 +226,13 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
                                                 variant="outlined"
                                                 size="small"
                                                 color="secondary"
-                                                disable={row.activating.toString()}
-                                                onClick={() =>
-                                                    onActivate(row.unit)
-                                                }
+                                                disable={checkActivating(
+                                                    row,
+                                                    txs
+                                                )}
+                                                onClick={() => onActivate(row)}
                                             >
-                                                {row.activating ? (
+                                                {checkActivating(row, txs) ? (
                                                     <CircularProgress
                                                         size={20}
                                                         color="inherit"

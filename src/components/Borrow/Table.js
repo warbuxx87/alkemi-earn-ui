@@ -218,7 +218,10 @@ const BorrowTable = ({ data = [], onActivate, txs }) => {
                                                 }
                                                 variant="outlined"
                                                 color="secondary"
-                                                disable={Row.pending.toString()}
+                                                disable={checkActivating(
+                                                    Row,
+                                                    txs
+                                                )}
                                                 onClick={() => onActivate(Row)}
                                             >
                                                 {checkActivating(Row, txs) ? (
