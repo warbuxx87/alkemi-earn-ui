@@ -218,7 +218,7 @@ const BorrowTable = ({ data = [], onActivate, txs }) => {
                                                 }
                                                 variant="outlined"
                                                 color="secondary"
-                                                disable={checkActivating(
+                                                disabled={checkActivating(
                                                     Row,
                                                     txs
                                                 )}

@@ -226,7 +226,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton, txs }) => {
                                                 variant="outlined"
                                                 size="small"
                                                 color="secondary"
-                                                disable={checkActivating(
+                                                disabled={checkActivating(
                                                     row,
                                                     txs
                                                 )}
