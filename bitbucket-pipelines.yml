@@ -233,7 +233,6 @@ pipelines:
         # Runs on all pull requests
         "**":
             - step: *analyze
-            - step: *upload
 
     branches:
         development:
