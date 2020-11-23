@@ -1,3 +1,10 @@
+## [1.3.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.0...v1.3.1) (2020-11-23)
+
+
+### Bug Fixes
+
+* :fire: remove sending max UINT where it doesn't apply ([a34bf1e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a34bf1ee716b051626a49cfe8355362dafd1f334))
+
 # [1.3.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.2.0...v1.3.0) (2020-11-19)
 
 
