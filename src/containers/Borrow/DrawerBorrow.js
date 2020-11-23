@@ -30,17 +30,12 @@ const BorrowDrawerContainer = ({ asset, onBorrowAction }) => {
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const [amount, setAmount] = React.useState("");
-    const [shouldSendMax, setShouldSendMax] = React.useState(false);
 
     const onSetAmount = (newValue) => {
-        setShouldSendMax(false);
-
         setAmount(newValue);
     };
 
     const onSetMax = () => {
-        setShouldSendMax(true);
-
         setAmount(asset.maxBorrowToken.toString()); // retrieves Maximum Token Borrow Amount
         //  setAmount(asset.safeBorrowToken.toString()); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
     };
@@ -68,7 +63,7 @@ const BorrowDrawerContainer = ({ asset, onBorrowAction }) => {
                     userWalletAddress,
                     asset,
                     amount,
-                    shouldSendMax,
+                    shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
                 })
             }
             isDoingAction={asset.borrowing}
