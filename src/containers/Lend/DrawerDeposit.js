@@ -10,7 +10,7 @@ import Drawer from "components/UI/Drawer/Drawer";
 
 import DrizzleContext from "utils/DrizzleContext";
 
-import { onDepositAction } from "redux/actions/data/lend";
+import { onTx } from "redux/actions/status/transactions";
 
 import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
@@ -18,14 +18,15 @@ import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
-const DepositDrawerContainer = ({ asset, onDepositAction }) => {
+const DepositDrawerContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
     const walletIsKYCd = useSelector(isWalletKYCd);
+    const txs = useSelector(getTransactions);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -41,6 +42,8 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
 
     const [enableDeposit, setEnableDeposit] = React.useState(false);
 
+    const [isProcessing, setIsProcessing] = React.useState(false);
+
     React.useEffect(() => {
         if (amount) {
             const isAmountLTBalance = amount > 0 ? true : false;
@@ -51,6 +54,21 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
         }
     }, [amount, asset.wallet, asset.unit]);
 
+    React.useEffect(() => {
+        const tx = Object.values(txs).filter((aTx) => {
+            return (
+                aTx.transactionLocalId === asset.unit &&
+                aTx.type === "deposit" &&
+                aTx.processing === true
+            );
+        });
+
+        if (tx && tx.length > 0) setIsProcessing(tx[0].processing);
+        else setIsProcessing(false);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [txs]);
+
     return (
         <Drawer
             asset={asset}
@@ -58,16 +76,17 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
             triggerButtonVariant="contained"
             enableButtonClick={enableDeposit}
             onButtonClick={() =>
-                onDepositAction({
+                onTx({
                     drizzle,
                     userWalletNetwork,
                     userWalletAddress,
                     asset,
                     amount,
                     shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
+                    type: "deposit",
                 })
             }
-            isDoingAction={asset.depositing}
+            isDoingAction={isProcessing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
@@ -82,8 +101,7 @@ const DepositDrawerContainer = ({ asset, onDepositAction }) => {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onDepositAction }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ onTx }, dispatch);
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(
     DepositDrawerContainer

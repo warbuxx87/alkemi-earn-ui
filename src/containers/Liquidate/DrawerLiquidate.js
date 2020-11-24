@@ -13,7 +13,7 @@ import useFetchMarkets from "hooks/useFetchMarkets";
 
 // Section 3: Selectors
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
-import { isWalletKYCd } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
 const LiquidateDrawerContainer = ({
     supplyList,
@@ -23,16 +23,20 @@ const LiquidateDrawerContainer = ({
     targetAccount,
 
     onLiquidateAction,
+
+    liquidationId,
 }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
     const walletIsKYCd = useSelector(isWalletKYCd);
+    const txs = useSelector(getTransactions);
 
     const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
 
     const [amount, setAmount] = React.useState("");
+    const [isProcessing, setIsProcessing] = React.useState(false);
 
     // Controls the user input | TODO: enhance form management
     const onSetAmount = (newAmount) => {
@@ -71,6 +75,21 @@ const LiquidateDrawerContainer = ({
         }
     }, [amount, selectedSupplyAsset, selectedBorrowAsset]);
 
+    React.useEffect(() => {
+        const tx = Object.values(txs).filter((aTx) => {
+            return (
+                aTx.transactionLocalId === liquidationId && // using liquidationId as ID instead of asset for this transaction
+                aTx.type === "liquidate" &&
+                aTx.processing === true
+            );
+        });
+
+        if (tx && tx.length > 0) setIsProcessing(tx[0].processing);
+        else setIsProcessing(false);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [txs]);
+
     return (
         <DrawerLiquidate
             buttonsLabel="Liquidate"
@@ -85,6 +104,9 @@ const LiquidateDrawerContainer = ({
                     assetCollateral,
                     assetBorrow,
                     targetAccount,
+                    type: "liquidate",
+
+                    liquidationId,
                 });
             }}
             onSetMax={onSetMax}
@@ -92,7 +114,7 @@ const LiquidateDrawerContainer = ({
             amount={amount}
             onSetAmount={onSetAmount}
             enableButtonClick={enableLiquidate}
-            isDoingAction={false /* TODO: define action being done */}
+            isDoingAction={isProcessing}
             loanList={borrowList}
             selectedLoanAsset={selectedBorrowAsset}
             setSelectedLoanAsset={setSelectedBorrowAsset}

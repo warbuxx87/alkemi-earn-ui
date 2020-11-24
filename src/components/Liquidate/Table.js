@@ -209,6 +209,10 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                             borrowList={item.borrow}
                                             shortfallETH={item.shortfallETH}
                                             targetAccount={item.address}
+                                            liquidationId={
+                                                item._id ||
+                                                item.shortfallETH /* In case _id gets removed from API data */
+                                            }
                                         />
                                     </LiquidTableCell>
                                 </TableRow>

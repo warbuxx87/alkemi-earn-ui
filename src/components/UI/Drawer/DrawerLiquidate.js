@@ -21,6 +21,7 @@ import {
     Typography,
     Radio,
     InputAdornment,
+    CircularProgress,
 } from "@material-ui/core";
 
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -445,7 +446,11 @@ const DrawerLiquidateWrapper = ({
                     onClick={handleOpen}
                     disabled={walletIsKYCd !== true}
                 >
-                    View
+                    {isDoingAction ? (
+                        <CircularProgress size={20} color="inherit" />
+                    ) : (
+                        "View"
+                    )}
                 </Button>
             </ToolTipWrapper>
             <Drawer
@@ -725,7 +730,14 @@ const DrawerLiquidateWrapper = ({
                                 fullWidth={true}
                                 disabled={!enableButtonClick || isDoingAction}
                             >
-                                {buttonsLabel}
+                                {isDoingAction ? (
+                                    <CircularProgress
+                                        size={20}
+                                        color="inherit"
+                                    />
+                                ) : (
+                                    buttonsLabel
+                                )}
                             </Button>
                         </Box>
                     </Box>

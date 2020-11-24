@@ -8,7 +8,7 @@ import { bindActionCreators, compose } from "redux";
 // Section 2: internal imports
 import DrizzleContext from "utils/DrizzleContext";
 
-import { onBorrowActivate } from "redux/actions/status/borrow";
+import { onTx } from "redux/actions/status/transactions";
 
 import useOnboard from "hooks/useOnboard";
 
@@ -26,17 +26,22 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 
+import { getTransactions } from "redux/selectors/status";
+
 // Section 4: components
 import Borrow from "components/Borrow/Borrow";
 
 // Section 5: Code Container
 const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
+    const { onConnect } = useOnboard();
+
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
     const walletConnected = useSelector(isWalletConnected);
-    const { onConnect } = useOnboard();
+
+    const txs = useSelector(getTransactions);
 
     const activateAsset = (asset) =>
         onActivate({
@@ -44,6 +49,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
             userWalletNetwork,
             userWalletAddress,
             asset,
+            type: "approve",
         });
 
     return (
@@ -51,6 +57,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
             inactiveBorrow={inactiveBorrow}
             activeBorrow={activeBorrow}
             onActivate={walletConnected ? activateAsset : onConnect}
+            txs={txs}
         />
     );
 };
@@ -61,7 +68,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onActivate: onBorrowActivate }, dispatch);
+    bindActionCreators({ onActivate: onTx }, dispatch);
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(
     BorrowContainer

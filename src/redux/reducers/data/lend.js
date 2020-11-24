@@ -1,17 +1,8 @@
 // Import action of interest as constants
 import {
-    ALLOCATE_PENDING,
-    ALLOCATE_SUCCESS,
-    ALLOCATE_ERROR,
     APPROVE_PENDING,
     APPROVE_SUCCESS,
     APPROVE_ERROR,
-    DEPOSIT_PENDING,
-    DEPOSIT_SUCCESS,
-    DEPOSIT_ERROR,
-    WITHDRAW_PENDING,
-    WITHDRAW_SUCCESS,
-    WITHDRAW_ERROR,
     RESET_LEND_DATA,
 } from "redux/actions/data/lend";
 // import internal assets
@@ -32,11 +23,6 @@ function createData(name, unit, image, wallet) {
         activating: false,
         approving: false,
         pending: false,
-        allocating: false,
-        depositing: false,
-        borrowing: false,
-        repaying: false,
-        withdrawing: false,
     };
 }
 
@@ -82,81 +68,7 @@ export default (state = initialState, action) => {
                     return state;
             }
         }
-        case DEPOSIT_PENDING:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        depositing: true,
-                        activating: true,
-                    },
-                },
-            };
-        case DEPOSIT_SUCCESS:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        depositing: false,
-                        activated: true,
-                    },
-                },
-            };
 
-        case DEPOSIT_ERROR:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        depositing: false,
-                        activating: false,
-                        error: action.error,
-                    },
-                },
-            };
-
-        case WITHDRAW_PENDING:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        withdrawing: true,
-                    },
-                },
-            };
-        case WITHDRAW_SUCCESS:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        withdrawing: false,
-                        activated: true,
-                    },
-                },
-            };
-
-        case WITHDRAW_ERROR:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        withdrawing: false,
-                        error: action.error,
-                    },
-                },
-            };
         case APPROVE_PENDING:
             return {
                 ...state,
@@ -189,48 +101,6 @@ export default (state = initialState, action) => {
                     [action.payload.asset]: {
                         ...state.assets[action.payload.asset],
                         approving: false,
-                        error: action.error,
-                    },
-                },
-            };
-        case ALLOCATE_PENDING: {
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset.unit]: {
-                        ...state.assets[action.payload.asset.unit],
-                        allocating: true,
-                        activating: false,
-                    },
-                },
-            };
-        }
-
-        case ALLOCATE_SUCCESS: {
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset.unit]: {
-                        ...state.assets[action.payload.asset.unit],
-                        allocating: false,
-                        activated: false,
-                        pending: false,
-                    },
-                },
-            };
-        }
-
-        case ALLOCATE_ERROR:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        allocating: false,
-                        activating: false,
                         error: action.error,
                     },
                 },

@@ -8,7 +8,7 @@ import Drawer from "components/UI/Drawer/Drawer";
 
 import DrizzleContext from "utils/DrizzleContext";
 
-import { onAllocateAction } from "redux/actions/data/lend";
+import { onTx } from "redux/actions/status/transactions";
 
 import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 
@@ -16,15 +16,16 @@ import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
-const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
+const DrawerAllocateContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const walletIsKYCd = useSelector(isWalletKYCd);
+    const txs = useSelector(getTransactions);
 
     const [amount, setAmount] = React.useState("");
 
@@ -38,12 +39,29 @@ const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
 
     const [enableAllocate, setEnableAllocate] = React.useState(false);
 
+    const [isProcessing, setIsProcessing] = React.useState(false);
+
     React.useEffect(() => {
         if (amount) {
             // Will eventually crash if fed a NaN, TODO: fix in DF-184
             setEnableAllocate(true);
         }
     }, [amount, asset.wallet, asset.unit]);
+
+    React.useEffect(() => {
+        const tx = Object.values(txs).filter((aTx) => {
+            return (
+                aTx.transactionLocalId === asset.unit &&
+                aTx.type === "allocate" &&
+                aTx.processing === true
+            );
+        });
+
+        if (tx && tx.length > 0) setIsProcessing(tx[0].processing);
+        else setIsProcessing(false);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [txs]);
 
     return (
         <Drawer
@@ -53,15 +71,16 @@ const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
             triggerButtonVariant="outlined"
             enableButtonClick={enableAllocate}
             onButtonClick={() =>
-                onAllocateAction({
+                onTx({
                     drizzle,
                     userWalletAddress,
                     asset,
                     amount,
+                    type: "allocate",
                     shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
                 })
             }
-            isDoingAction={asset.allocating}
+            isDoingAction={isProcessing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
@@ -76,8 +95,7 @@ const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onAllocateAction }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ onTx }, dispatch);
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(
     DrawerAllocateContainer
