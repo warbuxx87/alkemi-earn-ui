@@ -13,6 +13,7 @@ const styles = (theme) => ({
         borderBottom: "1px solid #000000",
         backgroundColor: "#09090a",
         padding: "12px 16px 10px 16px",
+        borderTop: "1px solid #000000",
     },
     body: {
         borderBottom: "1px solid #000000",

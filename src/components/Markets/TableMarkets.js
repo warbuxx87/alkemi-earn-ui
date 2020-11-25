@@ -25,7 +25,11 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Section 3: Components & Containers import from the application
 
-import { format_str_to_kmb, format_str_to_percent } from "utils/ui";
+import {
+    format_str_to_kmb,
+    format_str_to_percent,
+    formatPercent,
+} from "utils/ui";
 
 import MarketsTableCell from "components/UI/TableCell";
 
@@ -92,7 +96,6 @@ const TableMarkets = ({ marketsData }) => {
                     />
                 }
             />
-            <Divider />
             <PerfectScrollbar>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
@@ -244,7 +247,9 @@ const TableMarkets = ({ marketsData }) => {
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {item.utilizationRate * 100}%
+                                                {format_str_to_percent(
+                                                    item.utilizationRate * 1
+                                                )}
                                             </Typography>
                                         </MarketsTableCell>
                                     </TableRow>
