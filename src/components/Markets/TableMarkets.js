@@ -59,6 +59,11 @@ const useStyles = makeStyles((theme) => ({
             margin: 0,
         },
     },
+    switch: {
+        "& .MuiTypography-body1": {
+            fontSize: 12,
+        },
+    },
 }));
 
 // Section 5: Code Component
@@ -91,12 +96,12 @@ const TableMarkets = ({ marketsData }) => {
             <PerfectScrollbar>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
+                        <TableHead className={classes.tablehead}>
                             <TableRow>
                                 <MarketsTableCell>
                                     {" "}
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         {" "}
@@ -105,7 +110,7 @@ const TableMarkets = ({ marketsData }) => {
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         {" "}
@@ -114,7 +119,7 @@ const TableMarkets = ({ marketsData }) => {
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle22"
                                         color="textSecondary"
                                     >
                                         Total Borrow
@@ -122,7 +127,7 @@ const TableMarkets = ({ marketsData }) => {
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         Deposit APY{" "}
@@ -131,7 +136,7 @@ const TableMarkets = ({ marketsData }) => {
 
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         Borrow APY
@@ -139,7 +144,7 @@ const TableMarkets = ({ marketsData }) => {
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         Market Utilization
