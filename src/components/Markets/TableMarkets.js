@@ -9,7 +9,9 @@ import {
     Card,
     CardHeader,
     Divider,
+    FormControlLabel,
     Paper,
+    Switch,
     Table,
     TableBody,
     TableContainer,
@@ -51,6 +53,12 @@ const useStyles = makeStyles((theme) => ({
     assetImage: {
         width: 34,
     },
+    header: {
+        padding: "10px 16px",
+        "& .MuiCardHeader-action": {
+            margin: 0,
+        },
+    },
 }));
 
 // Section 5: Code Component
@@ -66,7 +74,19 @@ const TableMarkets = ({ marketsData }) => {
 
     return (
         <Card>
-            <CardHeader title="Market Liquidity" className={classes.header} />
+            <CardHeader
+                title="Market Liquidity"
+                className={classes.header}
+                action={
+                    <FormControlLabel
+                        value="usd"
+                        className={classes.switch}
+                        control={<Switch color="secondary" />}
+                        label="Display USD"
+                        labelPlacement="start"
+                    />
+                }
+            />
             <Divider />
             <PerfectScrollbar>
                 <TableContainer component={Paper}>
