@@ -79,15 +79,23 @@ export const formatNumber = (value, unit) => {
     switch (unit) {
         case "USDC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 6,
+                maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
+            }).format(wei);
+        case "WETH":
+            return new Intl.NumberFormat("en-es", {
+                maximumFractionDigits: 4,
+                minimumFractionDigits: 4,
             }).format(wei);
         case "WBTC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 8,
+                maximumFractionDigits: 4,
+                minimumFractionDigits: 4,
             }).format(wei);
         default:
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 18,
+                maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
             }).format(wei);
     }
 };
