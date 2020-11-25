@@ -1,13 +1,5 @@
 // Import action of interest as constants
-import {
-    BORROW_PENDING,
-    BORROW_SUCCESS,
-    BORROW_ERROR,
-    REPAY_PENDING,
-    REPAY_SUCCESS,
-    REPAY_ERROR,
-    RESET_BORROW_DATA,
-} from "redux/actions/data/borrow";
+import { RESET_BORROW_DATA } from "redux/actions/data/borrow";
 
 import address from "constants/address_map.json";
 
@@ -25,8 +17,6 @@ function createData(name, unit, image, wallet) {
         wallet,
         activated: false,
         pending: false,
-        borrowing: false,
-        repaying: false,
         redeeming: false,
     };
 }
@@ -73,79 +63,6 @@ export default (state = initialState, action) => {
                     return state;
             }
         }
-        case BORROW_PENDING:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        borrowing: true,
-                    },
-                },
-            };
-        case BORROW_SUCCESS:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        borrowing: false,
-                        activated: true,
-                    },
-                },
-            };
-
-        case BORROW_ERROR:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        borrowing: false,
-                        error: action.error,
-                    },
-                },
-            };
-
-        case REPAY_PENDING:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        repaying: true,
-                    },
-                },
-            };
-        case REPAY_SUCCESS:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        repaying: false,
-                        activated: true,
-                    },
-                },
-            };
-
-        case REPAY_ERROR:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        repaying: false,
-                        error: action.error,
-                    },
-                },
-            };
 
         case RESET_BORROW_DATA:
             return initialState;

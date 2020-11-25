@@ -7,9 +7,10 @@ import { generateStore } from "@drizzle/store";
 // 3. internal imports
 import appReducers from "redux/reducers";
 import contractTXNotifier from "utils/notify";
+import txHandler from "utils/txHandler";
 import MoneyMarket from "contracts/MoneyMarket.json";
 
-const appMiddlewares = [thunk, contractTXNotifier];
+const appMiddlewares = [thunk, txHandler, contractTXNotifier];
 
 export const drizzleOptions = {
     drizzleOptions: {

@@ -9,10 +9,10 @@ export const handle_approve_click = async ({
     drizzle,
     userWalletNetwork,
     asset,
-    myAccount,
+    userWalletAddress,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transaction");
-
+    const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
 
     const address_MoneyMarket = address[network].address_MoneyMarket;
@@ -20,7 +20,7 @@ export const handle_approve_click = async ({
     const tokenContract = initAssetContract({
         drizzle,
         userWalletAddress: myAccount,
-        asset,
+        asset: asset.unit,
     });
     const sendApprove = tokenContract.methods.approve.cacheSend(
         address_MoneyMarket,
@@ -84,6 +84,7 @@ export const handle_deposit_click = async ({
             from: myAccount,
         }
     );
+
     return sendDeposit;
 };
 

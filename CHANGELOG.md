@@ -1,3 +1,23 @@
+## [1.3.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.1...v1.3.2) (2020-11-24)
+
+
+### Bug Fixes
+
+* :art: add spinner to liquidate ([428cdd2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/428cdd299d4d9ad818e41573f31c381f6d23c696))
+* :art: fix disabled tag to proper naming ([c5ab0d8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c5ab0d8d5a1f59113db63c28feecc32944a9e456))
+* :art: fix spinner for activate ([1a2ae13](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1a2ae1343fde8c1b69bd48bddf673d188f528131))
+* :art: fix spinner for activate in lend table ([975dce8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/975dce825e6051a87ed7defeadf8cb3fe4f60b0f))
+* :art: make spinner work for deposit ([b405ee6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b405ee6930a3494d421dccf90873a45d2731049e))
+* :art: stop spinner when transaction errors out ([c6735f9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c6735f96398561f446dad670b2ed14d1c9c7b47f))
+* :sparkles: fixed spinners for all drawers ([7aadc86](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7aadc8698b08c9a243d6d6b32a22066068971518))
+
+## [1.3.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.0...v1.3.1) (2020-11-23)
+
+
+### Bug Fixes
+
+* :fire: remove sending max UINT where it doesn't apply ([a34bf1e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a34bf1ee716b051626a49cfe8355362dafd1f334))
+
 # [1.3.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.2.0...v1.3.0) (2020-11-19)
 
 
