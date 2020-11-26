@@ -8,7 +8,6 @@ import {
     Box,
     Card,
     CardHeader,
-    Divider,
     FormControlLabel,
     Paper,
     Switch,
@@ -25,11 +24,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Section 3: Components & Containers import from the application
 
-import {
-    format_str_to_kmb,
-    format_str_to_percent,
-    formatPercent,
-} from "utils/ui";
+import { format_str_to_kmb, format_str_to_percent } from "utils/ui";
 
 import MarketsTableCell from "components/UI/TableCell";
 
@@ -74,6 +69,21 @@ const useStyles = makeStyles((theme) => ({
 const TableMarkets = ({ marketsData }) => {
     const classes = useStyles();
 
+    const [toggleUSD, setToggleUSD] = React.useState(false);
+
+    const displayUSDOrNativeValue = (usdValue, nativeValue, nativeUnit) => {
+        if (toggleUSD === true) {
+            return <>${format_str_to_kmb(usdValue)}</>;
+        } else {
+            return (
+                <>
+                    {format_str_to_kmb(nativeValue)}
+                    {" " + nativeUnit}
+                </>
+            );
+        }
+    };
+
     const tokens = {
         WETH: WETH,
         USDC: USDC,
@@ -90,7 +100,15 @@ const TableMarkets = ({ marketsData }) => {
                     <FormControlLabel
                         value="usd"
                         className={classes.switch}
-                        control={<Switch color="secondary" />}
+                        control={
+                            <Switch
+                                color="secondary"
+                                checked={toggleUSD}
+                                onChange={() => {
+                                    setToggleUSD(!toggleUSD);
+                                }}
+                            />
+                        }
                         label="Display USD"
                         labelPlacement="start"
                     />
@@ -198,10 +216,10 @@ const TableMarkets = ({ marketsData }) => {
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {" "}
-                                                $
-                                                {format_str_to_kmb(
-                                                    item.totalSupplyUSD
+                                                {displayUSDOrNativeValue(
+                                                    item.totalSupplyUSD,
+                                                    item.totalSupply,
+                                                    item.symbol
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>
@@ -212,10 +230,10 @@ const TableMarkets = ({ marketsData }) => {
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {" "}
-                                                $
-                                                {format_str_to_kmb(
-                                                    item.totalBorrowUSD
+                                                {displayUSDOrNativeValue(
+                                                    item.totalBorrowUSD,
+                                                    item.totalBorrow,
+                                                    item.symbol
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>
