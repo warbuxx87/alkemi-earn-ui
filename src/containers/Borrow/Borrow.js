@@ -20,6 +20,8 @@ import {
     //  getBorrowPending
 } from "redux/selectors/data/borrow";
 
+import { getUSDPrice } from "redux/selectors/data/totalBalance";
+
 import {
     isWalletConnected,
     walletAddress,
@@ -34,6 +36,8 @@ import Borrow from "components/Borrow/Borrow";
 // Section 5: Code Container
 const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
     const { onConnect } = useOnboard();
+
+    const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
@@ -58,6 +62,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
             activeBorrow={activeBorrow}
             onActivate={walletConnected ? activateAsset : onConnect}
             txs={txs}
+            USDPrice={USDPrice}
         />
     );
 };
