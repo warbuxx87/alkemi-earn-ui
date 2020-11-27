@@ -3,7 +3,8 @@ import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-// import web3 from "web3";
+import web3 from "web3";
+import * as yup from "yup";
 
 // Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
@@ -12,7 +13,7 @@ import DrizzleContext from "utils/DrizzleContext";
 
 import { onTx } from "redux/actions/status/transactions";
 
-import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
+import { formatNumber, fromWei, formatETHMoney, toWei } from "utils/ui";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -45,13 +46,20 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     const [isProcessing, setIsProcessing] = React.useState(false);
 
     React.useEffect(() => {
-        if (amount) {
-            const isAmountLTBalance = amount > 0 ? true : false;
-            // web3.utils
-            //     .toBN(toWei(amount, asset.unit))
-            //     .lte(web3.utils.toBN(asset.wallet));
-            setEnableDeposit(isAmountLTBalance);
-        }
+        const checkValidity = async () => {
+            let schema = yup
+                .number()
+                .required()
+                .positive()
+                .test("maxValueTest", "You can't deposit this amount", () => {
+                    return web3.utils
+                        .toBN(toWei(amount, asset.unit))
+                        .lte(web3.utils.toBN(asset.wallet));
+                });
+            setEnableDeposit(await schema.isValid(amount));
+        };
+
+        checkValidity();
     }, [amount, asset.wallet, asset.unit]);
 
     React.useEffect(() => {
@@ -70,32 +78,42 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     }, [txs]);
 
     return (
-        <Drawer
-            asset={asset}
-            buttonsLabel="Deposit"
-            triggerButtonVariant="contained"
-            enableButtonClick={enableDeposit}
-            onButtonClick={() =>
-                onTx({
-                    drizzle,
-                    userWalletNetwork,
-                    userWalletAddress,
-                    asset,
-                    amount,
-                    shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
-                    type: "deposit",
-                })
-            }
-            isDoingAction={isProcessing}
-            usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
-            onSetMax={onSetMax}
-            amount={amount}
-            setAmount={onSetAmount}
-            mainTitle={`Deposit ${asset.unit}`}
-            balanceValue={formatNumber(asset.balance, asset.unit)}
-            amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
-            walletIsKYCd={walletIsKYCd}
-        />
+        <>
+            <Drawer
+                asset={asset}
+                buttonsLabel="Deposit"
+                triggerButtonVariant="contained"
+                enableButtonClick={enableDeposit}
+                onButtonClick={() =>
+                    onTx({
+                        drizzle,
+                        userWalletNetwork,
+                        userWalletAddress,
+                        asset,
+                        amount,
+                        shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
+                        type: "deposit",
+                    })
+                }
+                isDoingAction={isProcessing}
+                usdPrice={formatETHMoney(
+                    asset.price,
+                    "USD",
+                    asset.unit,
+                    USDPrice
+                )}
+                onSetMax={onSetMax}
+                amount={amount}
+                setAmount={onSetAmount}
+                mainTitle={`Deposit ${asset.unit}`}
+                balanceValue={formatNumber(asset.balance, asset.unit)}
+                amountValue={`Wallet: ${formatNumber(
+                    asset.wallet,
+                    asset.unit
+                )}`}
+                walletIsKYCd={walletIsKYCd}
+            />
+        </>
     );
 };
 

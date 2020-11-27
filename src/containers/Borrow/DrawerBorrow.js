@@ -3,8 +3,11 @@ import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
+import web3 from "web3";
+import * as yup from "yup";
+
 // Section 2: internal imports
-import { formatNumber, formatETHMoney } from "utils/ui";
+import { formatNumber, formatETHMoney, toWei } from "utils/ui";
 
 import DrizzleContext from "utils/DrizzleContext";
 
@@ -60,12 +63,29 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     }, [txs]);
 
     React.useEffect(() => {
-        if (amount) {
-            // check that User Input Amount does not exceed maximum amount of tokens that user can borrow for asset and is not less than 0
-            const isAmountLTmaxBorrow = amount > 0 ? true : false;
-            //      amount <= asset.maxBorrowToken && amount > 0 ? true : false;
-            setEnableBorrow(isAmountLTmaxBorrow);
-        }
+        const checkValidity = async () => {
+            let schema = yup
+                .number()
+                .required()
+                .positive()
+                .test("maxValueTest", "You can't borrow this amount", () => {
+                    return (
+                        web3.utils
+                            .toBN(toWei(amount, asset.unit))
+                            .lte(
+                                web3.utils.toBN(
+                                    toWei(asset.maxBorrowToken, asset.unit)
+                                )
+                            ) && // checks amount against maxBorrow amount
+                        web3.utils
+                            .toBN(toWei(amount, asset.unit))
+                            .lte(web3.utils.toBN(asset.liquidity))
+                    ); // checks amount against protocol liquidity
+                });
+            setEnableBorrow(await schema.isValid(amount));
+        };
+
+        checkValidity();
     }, [amount, asset.balance, asset.maxBorrowToken, asset.unit, asset.wallet]);
 
     return (

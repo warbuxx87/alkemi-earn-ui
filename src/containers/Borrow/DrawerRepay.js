@@ -3,7 +3,8 @@ import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-// import web3 from "web3";
+import web3 from "web3";
+import * as yup from "yup";
 
 // Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
@@ -12,7 +13,7 @@ import DrizzleContext from "utils/DrizzleContext";
 
 import { onTx } from "redux/actions/status/transactions";
 
-import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
+import { formatNumber, fromWei, formatETHMoney, toWei } from "utils/ui";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -47,11 +48,20 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
 
     const [enableRepay, setEnableRepay] = React.useState(false);
     React.useEffect(() => {
-        const isAmountLTBalance = amount > 0 && amount !== "" ? true : false;
-        // web3.utils
-        //     .toBN(toWei(amount, asset.unit))
-        //     .lte(web3.utils.toBN(asset.balance));
-        setEnableRepay(isAmountLTBalance);
+        const checkValidity = async () => {
+            let schema = yup
+                .number()
+                .required()
+                .positive()
+                .test("maxValueTest", "You can't repay this amount", () => {
+                    return web3.utils
+                        .toBN(toWei(amount, asset.unit))
+                        .lte(web3.utils.toBN(asset.balance));
+                });
+            setEnableRepay(await schema.isValid(amount));
+        };
+
+        checkValidity();
     }, [amount, asset.balance, asset.unit]);
 
     const [isProcessing, setIsProcessing] = React.useState(false);
