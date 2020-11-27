@@ -1,5 +1,5 @@
 // Section 1: React/Redux low level imports
-import React, { useContext } from "react";
+import React, { useContext, useCallback } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
@@ -64,13 +64,35 @@ const LiquidateDrawerContainer = ({
 
     const [enableLiquidate, setEnableLiquidate] = React.useState(false);
 
+    const maxAmountForToken = useCallback(
+        (symbol) => {
+            const assetMarketDataForSymbol = marketsData.find(
+                (e) => e.symbol === symbol
+            );
+
+            // shortFallETH / token Oracle Price
+            let calculatedValue = 0;
+
+            if (
+                assetMarketDataForSymbol !== undefined &&
+                assetMarketDataForSymbol &&
+                shortfallETH
+            )
+                calculatedValue =
+                    shortfallETH / assetMarketDataForSymbol.oraclePrice;
+
+            return calculatedValue;
+        },
+        [marketsData, shortfallETH]
+    );
+
     React.useEffect(() => {
         const checkValidity = async () => {
             let schema = yup
                 .number()
                 .required()
                 .positive()
-                .test("maxValueTest", "You can't withdraw this amount", () => {
+                .test("maxValueTest", "You can't liquidate this amount", () => {
                     return (
                         web3.utils
                             .toBN(toWei(amount))
@@ -99,7 +121,7 @@ const LiquidateDrawerContainer = ({
 
         if (amount !== -1) checkValidity();
         else setEnableLiquidate(true);
-    }, [amount, selectedSupplyAsset, selectedBorrowAsset]);
+    }, [amount, selectedSupplyAsset, selectedBorrowAsset, maxAmountForToken]);
 
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
@@ -115,25 +137,6 @@ const LiquidateDrawerContainer = ({
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [txs]);
-
-    const maxAmountForToken = (symbol) => {
-        const assetMarketDataForSymbol = marketsData.find(
-            (e) => e.symbol === symbol
-        );
-
-        // shortFallETH / token Oracle Price
-        let calculatedValue = 0;
-
-        if (
-            assetMarketDataForSymbol !== undefined &&
-            assetMarketDataForSymbol &&
-            shortfallETH
-        )
-            calculatedValue =
-                shortfallETH / assetMarketDataForSymbol.oraclePrice;
-
-        return calculatedValue;
-    };
 
     return (
         <DrawerLiquidate

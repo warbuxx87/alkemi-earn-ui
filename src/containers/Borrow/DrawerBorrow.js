@@ -86,7 +86,14 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
         };
 
         checkValidity();
-    }, [amount, asset.balance, asset.maxBorrowToken, asset.unit, asset.wallet]);
+    }, [
+        amount,
+        asset.balance,
+        asset.maxBorrowToken,
+        asset.unit,
+        asset.wallet,
+        asset.liquidity,
+    ]);
 
     return (
         <Drawer
