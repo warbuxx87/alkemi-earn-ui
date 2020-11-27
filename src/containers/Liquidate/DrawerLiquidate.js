@@ -3,6 +3,9 @@ import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
+import web3 from "web3";
+import * as yup from "yup";
+
 // Section 2: internal imports
 import DrawerLiquidate from "components/UI/Drawer/DrawerLiquidate";
 import DrizzleContext from "utils/DrizzleContext";
@@ -10,6 +13,8 @@ import DrizzleContext from "utils/DrizzleContext";
 import { onLiquidateAction } from "redux/actions/data/liquidations";
 
 import useFetchMarkets from "hooks/useFetchMarkets";
+
+import { toWei } from "utils/ui";
 
 // Section 3: Selectors
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
@@ -46,9 +51,7 @@ const LiquidateDrawerContainer = ({
     };
 
     const onSetMax = () => {
-        setAmount(-1);
-        //  setAmount(asset.safeBorrowToken.toString()); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
-        //  this really should be set to -1
+        setAmount(-1); // Sending -1 means sending UINT to the smart contract (altough this value is checked before being sent to the protocol and replaced by max_uint if amount equals -1)
     };
 
     // resets amount to initial null value
@@ -62,17 +65,40 @@ const LiquidateDrawerContainer = ({
     const [enableLiquidate, setEnableLiquidate] = React.useState(false);
 
     React.useEffect(() => {
-        if (amount) {
-            // check that User Input Amount does not exceed maximum amount of tokens that user can liquidate for symbol and is not less than 0
-            const isAmountValid =
-                amount <= 999999 &&
-                amount > -2 &&
-                selectedSupplyAsset &&
-                selectedBorrowAsset
+        const checkValidity = async () => {
+            let schema = yup
+                .number()
+                .required()
+                .positive()
+                .test("maxValueTest", "You can't withdraw this amount", () => {
+                    return (
+                        web3.utils
+                            .toBN(toWei(amount))
+                            // Should normally send selectedBorrowAsset as second parameter, but since 18 decimals points work with WBTC in this instance instead of 8 (1e8) as stated in the toWei function, left like this and to be monitored
+                            .lte(
+                                web3.utils.toBN(
+                                    toWei(
+                                        maxAmountForToken(
+                                            selectedBorrowAsset
+                                        ).toString()
+                                    )
+                                )
+                            )
+                    );
+                    // Also note that the value being validated here is slightly different from the one shown on the UI since that one is rounded and this one is more precise to the last decimal value
+                });
+
+            setEnableLiquidate(
+                (await schema.isValid(amount)) &&
+                    selectedSupplyAsset &&
+                    selectedBorrowAsset
                     ? true
-                    : false;
-            setEnableLiquidate(isAmountValid);
-        }
+                    : false
+            );
+        };
+
+        if (amount !== -1) checkValidity();
+        else setEnableLiquidate(true);
     }, [amount, selectedSupplyAsset, selectedBorrowAsset]);
 
     React.useEffect(() => {
@@ -89,6 +115,25 @@ const LiquidateDrawerContainer = ({
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [txs]);
+
+    const maxAmountForToken = (symbol) => {
+        const assetMarketDataForSymbol = marketsData.find(
+            (e) => e.symbol === symbol
+        );
+
+        // shortFallETH / token Oracle Price
+        let calculatedValue = 0;
+
+        if (
+            assetMarketDataForSymbol !== undefined &&
+            assetMarketDataForSymbol &&
+            shortfallETH
+        )
+            calculatedValue =
+                shortfallETH / assetMarketDataForSymbol.oraclePrice;
+
+        return calculatedValue;
+    };
 
     return (
         <DrawerLiquidate
@@ -123,6 +168,7 @@ const LiquidateDrawerContainer = ({
             setSelectedCollateralAsset={setSelectedSupplyAsset}
             marketsData={marketsData}
             walletIsKYCd={walletIsKYCd}
+            maxAmountForToken={maxAmountForToken}
         />
     );
 };

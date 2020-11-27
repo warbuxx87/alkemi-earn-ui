@@ -75,6 +75,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
                         .toBN(toWei(amount, asset.unit))
                         .lte(web3.utils.toBN(asset.balance));
                 });
+
             setEnableWithdraw(await schema.isValid(amount));
         };
 
