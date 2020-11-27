@@ -212,6 +212,9 @@ definitions:
                   - npm run test
                   # Do Release w/ debug on
                   - npx semantic-release --debug
+              artifacts: # defining the artifacts to be passed to each future step.
+                  - CHANGELOG.md
+                  - package.json
 
 pipelines:
     custom: # defines that this can only be triggered manually or by a schedule
