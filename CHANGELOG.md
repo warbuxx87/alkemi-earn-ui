@@ -1,3 +1,11 @@
+# [1.4.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.3...v1.4.0) (2020-11-27)
+
+
+### Features
+
+* :sparkles: display usd value for markets on toggle switch ([969b002](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/969b002c358999dccff0ebf6d2ff4a75f7bcb51d))
+* add toggle switch to markets table ([15ea0aa](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/15ea0aaaa045bfdb949f7c83507017a94c0d5156))
+
 ## [1.3.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.2...v1.3.3) (2020-11-27)
 
 
