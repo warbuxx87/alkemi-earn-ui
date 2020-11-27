@@ -241,8 +241,8 @@ pipelines:
         development:
             # Runs only on Development Branch
             - step: *analyze
-            - step: *build
             - step: *release
+            - step: *build
             - step: *upload
             - step: *deploy-development
         master:
