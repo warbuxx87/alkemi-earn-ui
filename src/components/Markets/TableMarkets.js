@@ -8,8 +8,9 @@ import {
     Box,
     Card,
     CardHeader,
-    Divider,
+    FormControlLabel,
     Paper,
+    Switch,
     Table,
     TableBody,
     TableContainer,
@@ -51,11 +52,37 @@ const useStyles = makeStyles((theme) => ({
     assetImage: {
         width: 34,
     },
+    header: {
+        padding: "10px 16px",
+        "& .MuiCardHeader-action": {
+            margin: 0,
+        },
+    },
+    switch: {
+        "& .MuiTypography-body1": {
+            fontSize: 12,
+        },
+    },
 }));
 
 // Section 5: Code Component
 const TableMarkets = ({ marketsData }) => {
     const classes = useStyles();
+
+    const [toggleUSD, setToggleUSD] = React.useState(false);
+
+    const displayUSDOrNativeValue = (usdValue, nativeValue, nativeUnit) => {
+        if (toggleUSD === true) {
+            return <>${format_str_to_kmb(usdValue)}</>;
+        } else {
+            return (
+                <>
+                    {format_str_to_kmb(nativeValue)}
+                    {" " + nativeUnit}
+                </>
+            );
+        }
+    };
 
     const tokens = {
         WETH: WETH,
@@ -66,17 +93,36 @@ const TableMarkets = ({ marketsData }) => {
 
     return (
         <Card>
-            <CardHeader title="Market Liquidity" className={classes.header} />
-            <Divider />
+            <CardHeader
+                title="Market Liquidity"
+                className={classes.header}
+                action={
+                    <FormControlLabel
+                        value="usd"
+                        className={classes.switch}
+                        control={
+                            <Switch
+                                color="secondary"
+                                checked={toggleUSD}
+                                onChange={() => {
+                                    setToggleUSD(!toggleUSD);
+                                }}
+                            />
+                        }
+                        label="Display USD"
+                        labelPlacement="start"
+                    />
+                }
+            />
             <PerfectScrollbar>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
+                        <TableHead className={classes.tablehead}>
                             <TableRow>
                                 <MarketsTableCell>
                                     {" "}
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         {" "}
@@ -85,7 +131,7 @@ const TableMarkets = ({ marketsData }) => {
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         {" "}
@@ -94,7 +140,7 @@ const TableMarkets = ({ marketsData }) => {
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle22"
                                         color="textSecondary"
                                     >
                                         Total Borrow
@@ -102,7 +148,7 @@ const TableMarkets = ({ marketsData }) => {
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         Deposit APY{" "}
@@ -111,7 +157,7 @@ const TableMarkets = ({ marketsData }) => {
 
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         Borrow APY
@@ -119,7 +165,7 @@ const TableMarkets = ({ marketsData }) => {
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         Market Utilization
@@ -170,10 +216,10 @@ const TableMarkets = ({ marketsData }) => {
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {" "}
-                                                $
-                                                {format_str_to_kmb(
-                                                    item.totalSupplyUSD
+                                                {displayUSDOrNativeValue(
+                                                    item.totalSupplyUSD,
+                                                    item.totalSupply,
+                                                    item.symbol
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>
@@ -184,10 +230,10 @@ const TableMarkets = ({ marketsData }) => {
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {" "}
-                                                $
-                                                {format_str_to_kmb(
-                                                    item.totalBorrowUSD
+                                                {displayUSDOrNativeValue(
+                                                    item.totalBorrowUSD,
+                                                    item.totalBorrow,
+                                                    item.symbol
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>
@@ -219,7 +265,9 @@ const TableMarkets = ({ marketsData }) => {
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {item.utilizationRate * 100}%
+                                                {format_str_to_percent(
+                                                    item.utilizationRate * 1
+                                                )}
                                             </Typography>
                                         </MarketsTableCell>
                                     </TableRow>
