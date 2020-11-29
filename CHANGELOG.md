@@ -11,12 +11,6 @@
 
 -   automatic semantic version update package UI-356 ([b91c11a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b91c11a2347c43bf9c4c42c5fa7513d78951a404))
 
-## [1.3.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.2...v1.3.3) (2020-11-27)
-
-### Bug Fixes
-
--   automatic semantic version update package UI-356 ([b91c11a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b91c11a2347c43bf9c4c42c5fa7513d78951a404))
-
 ## [1.3.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.1...v1.3.2) (2020-11-24)
 
 ### Bug Fixes
