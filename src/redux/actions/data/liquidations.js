@@ -66,7 +66,24 @@ const fetchLiquidationsCall = ({ currentNetworkName, address, dispatch }) => {
             if (data) {
                 const obj_data = JSON.parse(data);
 
-                dispatch(fetchLiquidationsSuccess(obj_data));
+                // Adding ETH as alternative label to WETH
+                const liquidationsData = obj_data.map((liquidation) => {
+                    liquidation.borrow = liquidation.borrow.map((entry) => {
+                        if (entry.symbol === "WETH")
+                            entry.alternativeUnitLabel = "ETH";
+                        return entry;
+                    });
+
+                    liquidation.supply = liquidation.supply.map((entry) => {
+                        if (entry.symbol === "WETH")
+                            entry.alternativeUnitLabel = "ETH";
+                        return entry;
+                    });
+
+                    return liquidation;
+                });
+
+                dispatch(fetchLiquidationsSuccess(liquidationsData));
             }
         })
         .catch((error) => {
