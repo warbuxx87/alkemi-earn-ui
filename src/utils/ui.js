@@ -299,7 +299,7 @@ export const format_str_to_percent = (str_num) => {
     var index_num = str_num.indexOf(".") + 2;
     var cpmp_str = str_num.replace(/\./, "");
     var res_str =
-        cpmp_str.slice(0, index_num) + "." + cpmp_str.substr(index_num, 18);
+        cpmp_str.slice(0, index_num) + "." + cpmp_str.substr(index_num, 2);
     // console.log(Number(res_str))
 
     if (Number(res_str) === 0) {
