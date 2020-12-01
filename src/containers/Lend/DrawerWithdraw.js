@@ -71,16 +71,21 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
                 .required()
                 .positive()
                 .test("maxValueTest", "You can't withdraw this amount", () => {
-                    return web3.utils
-                        .toBN(toWei(amount, asset.unit))
-                        .lte(web3.utils.toBN(asset.balance));
+                    return (
+                        web3.utils
+                            .toBN(toWei(amount, asset.unit))
+                            .lte(web3.utils.toBN(asset.balance)) &&
+                        web3.utils
+                            .toBN(toWei(amount, asset.unit))
+                            .lte(web3.utils.toBN(asset.liquidity)) // checks amount against protocol liquidity
+                    );
                 });
 
             setEnableWithdraw(await schema.isValid(amount));
         };
 
         checkValidity();
-    }, [amount, asset.balance, asset.unit]);
+    }, [amount, asset.balance, asset.unit, asset.liquidity]);
 
     return (
         <Drawer

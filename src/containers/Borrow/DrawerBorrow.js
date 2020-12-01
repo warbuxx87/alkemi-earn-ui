@@ -70,17 +70,15 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
                 .positive()
                 .test("maxValueTest", "You can't borrow this amount", () => {
                     return (
+                        web3.utils.toBN(toWei(amount, asset.unit)).lte(
+                            web3.utils.toBN(
+                                toWei(asset.maxBorrowToken, asset.unit) // checks amount against maxBorrow amount
+                            )
+                        ) &&
                         web3.utils
                             .toBN(toWei(amount, asset.unit))
-                            .lte(
-                                web3.utils.toBN(
-                                    toWei(asset.maxBorrowToken, asset.unit)
-                                )
-                            ) && // checks amount against maxBorrow amount
-                        web3.utils
-                            .toBN(toWei(amount, asset.unit))
-                            .lte(web3.utils.toBN(asset.liquidity))
-                    ); // checks amount against protocol liquidity
+                            .lte(web3.utils.toBN(asset.liquidity)) // checks amount against protocol liquidity
+                    );
                 });
             setEnableBorrow(await schema.isValid(amount));
         };
