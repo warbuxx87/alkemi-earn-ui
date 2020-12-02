@@ -14,7 +14,7 @@ import { onLiquidateAction } from "redux/actions/data/liquidations";
 
 import useFetchMarkets from "hooks/useFetchMarkets";
 
-import { toWei } from "utils/ui";
+import { toWei, assetToDecimals } from "utils/ui";
 
 // Section 3: Selectors
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
@@ -43,11 +43,18 @@ const LiquidateDrawerContainer = ({
     const [amount, setAmount] = React.useState("");
     const [isProcessing, setIsProcessing] = React.useState(false);
 
-    // Controls the user input | TODO: enhance form management
     const onSetAmount = (newAmount) => {
-        if (newAmount >= 0) {
+        // Note that for WBTC normally it should only allow 8 decimal points, but for some reason it converts (see below comment) properly with 18, left this proper check for safety reasons
+        const numberOfDecimalsForAsset = assetToDecimals[selectedBorrowAsset]
+            ? assetToDecimals[selectedBorrowAsset].toString()
+            : "18"; // chose 18 as default, arbitrary choice here
+        const regex = new RegExp(
+            "^(?:\\d*\\.\\d{0," + numberOfDecimalsForAsset + "}|\\d+)$"
+        );
+
+        if (newAmount === "" || (newAmount + "").match(regex))
+            // limiting inputting more decimal places than the asset supports
             setAmount(newAmount);
-        }
     };
 
     const onSetMax = () => {

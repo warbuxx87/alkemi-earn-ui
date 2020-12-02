@@ -13,7 +13,13 @@ import DrizzleContext from "utils/DrizzleContext";
 
 import { onTx } from "redux/actions/status/transactions";
 
-import { formatNumber, fromWei, formatETHMoney, toWei } from "utils/ui";
+import {
+    formatNumber,
+    fromWei,
+    formatETHMoney,
+    toWei,
+    assetToDecimals,
+} from "utils/ui";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -34,7 +40,16 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     const [amount, setAmount] = React.useState("");
 
     const onSetAmount = (newValue) => {
-        setAmount(newValue);
+        const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
+            ? assetToDecimals[asset.unit].toString()
+            : "18"; // chose 18 as default, arbitrary choice here
+        const regex = new RegExp(
+            "^(?:\\d*\\.\\d{0," + numberOfDecimalsForAsset + "}|\\d+)$"
+        );
+
+        if (newValue === "" || (newValue + "").match(regex))
+            // limiting inputting more decimal places than the asset supports
+            setAmount(newValue);
     };
 
     const onSetMax = () => {

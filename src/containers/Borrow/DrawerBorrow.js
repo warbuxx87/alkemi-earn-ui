@@ -7,7 +7,7 @@ import web3 from "web3";
 import * as yup from "yup";
 
 // Section 2: internal imports
-import { formatNumber, formatETHMoney, toWei } from "utils/ui";
+import { formatNumber, formatETHMoney, toWei, assetToDecimals } from "utils/ui";
 
 import DrizzleContext from "utils/DrizzleContext";
 
@@ -36,7 +36,16 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     const [amount, setAmount] = React.useState("");
 
     const onSetAmount = (newValue) => {
-        setAmount(newValue);
+        const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
+            ? assetToDecimals[asset.unit].toString()
+            : "18"; // chose 18 as default, arbitrary choice here
+        const regex = new RegExp(
+            "^(?:\\d*\\.\\d{0," + numberOfDecimalsForAsset + "}|\\d+)$"
+        );
+
+        if (newValue === "" || (newValue + "").match(regex))
+            // limiting inputting more decimal places than the asset supports
+            setAmount(newValue);
     };
 
     const onSetMax = () => {
