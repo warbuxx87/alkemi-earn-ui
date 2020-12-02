@@ -87,6 +87,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
                 .positive()
                 .test("maxValueTest", "You can't withdraw this amount", () => {
                     return (
+                        // We could replace web3's BN with big.js to use decimal points comfortably, but for now it's better to use web3 tooling
                         web3.utils
                             .toBN(toWei(amount, asset.unit))
                             .lte(web3.utils.toBN(asset.balance)) &&
