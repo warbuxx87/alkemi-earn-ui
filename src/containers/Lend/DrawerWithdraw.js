@@ -10,7 +10,13 @@ import * as yup from "yup";
 import Drawer from "components/UI/Drawer/Drawer";
 import { onTx } from "redux/actions/status/transactions";
 
-import { formatNumber, fromWei, formatETHMoney, toWei } from "utils/ui";
+import {
+    formatNumber,
+    fromWei,
+    formatETHMoney,
+    toWei,
+    assetToDecimals,
+} from "utils/ui";
 
 import DrizzleContext from "utils/DrizzleContext";
 
@@ -36,7 +42,16 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const onSetAmount = (newValue) => {
         setShouldSendMax(false);
 
-        setAmount(newValue);
+        const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
+            ? assetToDecimals[asset.unit].toString()
+            : "18"; // chose 18 as default, arbitrary choice here
+        const regex = new RegExp(
+            "^(?:\\d*\\.\\d{0," + numberOfDecimalsForAsset + "}|\\d+)$"
+        );
+
+        if (newValue === "" || (newValue + "").match(regex))
+            // limiting inputting more decimal places than the asset supports
+            setAmount(newValue);
     };
 
     const onSetMax = () => {

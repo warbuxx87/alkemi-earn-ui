@@ -18,7 +18,7 @@ const decimalsToUnit = {
 };
 
 // decimals is constant, default will be 12
-const assetToDecimals = {
+export const assetToDecimals = {
     USDx: 18,
     WETH: 18,
     DAI: 18,
