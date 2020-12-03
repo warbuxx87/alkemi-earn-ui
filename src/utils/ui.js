@@ -1,4 +1,6 @@
 import web3 from "web3";
+
+import Big from "big.js";
 // import internal assets
 import DAI from "assets/images/DAI.svg";
 import USDC from "assets/images/USDC.svg";
@@ -16,7 +18,7 @@ const decimalsToUnit = {
 };
 
 // decimals is constant, default will be 12
-const assetToDecimals = {
+export const assetToDecimals = {
     USDx: 18,
     WETH: 18,
     DAI: 18,
@@ -62,7 +64,9 @@ export const fromWei = (value, unit) => {
 export const toWei = (value, unit) => {
     if (unit === "WBTC") {
         //wbtc has 8 decimals
-        let amount = value * 1e8;
+        let amount = Big(value);
+        amount = amount.times(1e8); // This fix might be useful for other coins that are not set to have the defined decimal points like ether (6, 9...), a good idea would be to refactor everything to this
+
         return amount.toString();
     } else {
         return web3.utils.toWei(

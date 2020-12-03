@@ -198,6 +198,8 @@ const DrawerLiquidateWrapper = ({
     marketsData,
 
     walletIsKYCd,
+
+    maxAmountForToken,
 }) => {
     const classes = DrawerLiquidateClass();
 
@@ -297,9 +299,7 @@ const DrawerLiquidateWrapper = ({
                             />
                             <Grid>
                                 <h3 className={classes.cardTitle}>
-                                    {displayMaxAmountOfTokensForEachLoan(
-                                        val.symbol
-                                    ).toFixed(6)}{" "}
+                                    {maxAmountForToken(val.symbol).toFixed(6)}{" "}
                                     {
                                         val.symbol === "WETH"
                                             ? "ETH"
@@ -309,9 +309,7 @@ const DrawerLiquidateWrapper = ({
                                 <h5 className={classes.cardSubtitle}>
                                     $
                                     {
-                                        displayMaxAmountOfTokensForEachLoan(
-                                            "USDC"
-                                        ).toFixed(
+                                        maxAmountForToken("USDC").toFixed(
                                             2
                                         ) /* using USDC calculation now for USD value */
                                     }
@@ -370,25 +368,6 @@ const DrawerLiquidateWrapper = ({
         ));
     };
 
-    const displayMaxAmountOfTokensForEachLoan = (symbol) => {
-        const assetMarketDataForSymbol = marketsData.find(
-            (e) => e.symbol === symbol
-        );
-
-        // shortFallETH / token Oracle Price
-        let calculatedValue = 0;
-
-        if (
-            assetMarketDataForSymbol !== undefined &&
-            assetMarketDataForSymbol &&
-            shortfallETH
-        )
-            calculatedValue =
-                shortfallETH / assetMarketDataForSymbol.oraclePrice;
-
-        return calculatedValue;
-    };
-
     const getPercentage = (theValue, appliedPercentage) => {
         return theValue * appliedPercentage;
     };
@@ -399,7 +378,7 @@ const DrawerLiquidateWrapper = ({
             youPay = parseFloat(amount);
         }
         if (amount === -1) {
-            youPay = displayMaxAmountOfTokensForEachLoan(selectedLoanAsset);
+            youPay = maxAmountForToken(selectedLoanAsset);
         }
         return youPay.toFixed(6);
     };
@@ -425,9 +404,7 @@ const DrawerLiquidateWrapper = ({
 
             // if User Amount is Max
             if (amount === -1) {
-                payAmount = displayMaxAmountOfTokensForEachLoan(
-                    selectedLoanAsset
-                );
+                payAmount = maxAmountForToken(selectedLoanAsset);
             }
 
             // gets ETH amount for in put tokens
