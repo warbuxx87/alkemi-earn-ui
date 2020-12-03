@@ -1,3 +1,19 @@
+# [1.5.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.1...v1.5.0) (2020-12-03)
+
+
+### Bug Fixes
+
+* :art: fix liquidate validation ([89d51cc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/89d51cc86ffec5866ba42f24dcb6f805b3674270))
+* improve WBTC value conversion ([81e2962](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/81e2962577854f995fa327e9e52d64b75b932f65))
+* limit number of inputed decimals on withdraw ([9be0e17](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9be0e17eb3d076d5cfc3214c9f3fa3754adcf4ea))
+* limited the number of decimals inputted for all drawers ([b42eae8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b42eae84961e97e4bbe7e7e8cf202d4260e7fc15))
+
+
+### Features
+
+* :art: add proper validation to drawers and liquidity cap check ([a7a74fe](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a7a74fea007e155ced50f5c828b0d73c31162a2e))
+* add available liquidity check for withdraw and borrow ([9030861](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/90308610f78f6aee349497bcf537accd5d51485d))
+
 ## [1.4.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.0...v1.4.1) (2020-11-30)
 
 

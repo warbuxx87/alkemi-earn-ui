@@ -3,13 +3,20 @@ import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-// import web3 from "web3";
+import web3 from "web3";
+import * as yup from "yup";
 
 // Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
 import { onTx } from "redux/actions/status/transactions";
 
-import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
+import {
+    formatNumber,
+    fromWei,
+    formatETHMoney,
+    toWei,
+    assetToDecimals,
+} from "utils/ui";
 
 import DrizzleContext from "utils/DrizzleContext";
 
@@ -35,7 +42,16 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const onSetAmount = (newValue) => {
         setShouldSendMax(false);
 
-        setAmount(newValue);
+        const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
+            ? assetToDecimals[asset.unit].toString()
+            : "18"; // chose 18 as default, arbitrary choice here
+        const regex = new RegExp(
+            "^(?:\\d*\\.\\d{0," + numberOfDecimalsForAsset + "}|\\d+)$"
+        );
+
+        if (newValue === "" || (newValue + "").match(regex))
+            // limiting inputting more decimal places than the asset supports
+            setAmount(newValue);
     };
 
     const onSetMax = () => {
@@ -64,14 +80,28 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
     }, [txs]);
 
     React.useEffect(() => {
-        if (amount) {
-            const isAmountLTBalance = amount > 0 ? true : false;
-            // web3.utils
-            //     .toBN(toWei(amount, asset.unit))
-            //     .lte(web3.utils.toBN(asset.balance));
-            setEnableWithdraw(isAmountLTBalance);
-        }
-    }, [amount, asset.balance, asset.unit]);
+        const checkValidity = async () => {
+            let schema = yup
+                .number()
+                .required()
+                .positive()
+                .test("maxValueTest", "You can't withdraw this amount", () => {
+                    return (
+                        // We could replace web3's BN with big.js to use decimal points comfortably, but for now it's better to use web3 tooling
+                        web3.utils
+                            .toBN(toWei(amount, asset.unit))
+                            .lte(web3.utils.toBN(asset.balance)) &&
+                        web3.utils
+                            .toBN(toWei(amount, asset.unit))
+                            .lte(web3.utils.toBN(asset.liquidity)) // checks amount against protocol liquidity
+                    );
+                });
+
+            setEnableWithdraw(await schema.isValid(amount));
+        };
+
+        checkValidity();
+    }, [amount, asset.balance, asset.unit, asset.liquidity]);
 
     return (
         <Drawer
