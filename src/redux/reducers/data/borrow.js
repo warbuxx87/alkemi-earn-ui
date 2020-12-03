@@ -71,9 +71,9 @@ export default (state = initialState, action) => {
                 ...state,
                 assets: {
                     ...state.assets,
-                    ["WETH"]: {
+                    WETH: {
                         ...state.assets["WETH"],
-                        wallet: action.accountBalance,
+                        wallet: action.accountBalance, // expecting that only one account is used at the same time, and thus only one value is retrieved
                     },
                 },
             };

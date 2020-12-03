@@ -93,7 +93,7 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
             mainTitle={`Mint New ${asset.unit} Tokens`}
             balanceValue={`0.00`}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
-            walletIsKYCd={true}
+            walletIsKYCd={walletIsKYCd}
         />
     );
 };
