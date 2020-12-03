@@ -90,7 +90,11 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
             onSetMax={onSetMax}
             amount={amount}
             setAmount={onSetAmount}
-            mainTitle={`Borrow ${asset.unit}`}
+            mainTitle={`Borrow ${
+                asset.alternativeUnitLabel
+                    ? asset.alternativeUnitLabel
+                    : asset.unit
+            }`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
             walletIsKYCd={walletIsKYCd}

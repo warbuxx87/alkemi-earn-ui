@@ -300,7 +300,11 @@ const DrawerLiquidateWrapper = ({
                                     {displayMaxAmountOfTokensForEachLoan(
                                         val.symbol
                                     ).toFixed(6)}{" "}
-                                    {val.symbol}
+                                    {
+                                        val.symbol === "WETH"
+                                            ? "ETH"
+                                            : val.symbol /* Re-labeling WETH to ETH only */
+                                    }
                                 </h3>
                                 <h5 className={classes.cardSubtitle}>
                                     $
@@ -353,7 +357,14 @@ const DrawerLiquidateWrapper = ({
                             className={classes.assetImg}
                         />{" "}
                     </Box>
-                    <Box> {val.symbol}</Box>
+                    <Box>
+                        {" "}
+                        {
+                            val.symbol === "WETH"
+                                ? "ETH"
+                                : val.symbol /* Re-labeling WETH to ETH only */
+                        }
+                    </Box>
                 </Box>
             </MenuItem>
         ));
@@ -617,7 +628,11 @@ const DrawerLiquidateWrapper = ({
                                     justify="flex-end"
                                 >
                                     {displayPayAmountofTokensforInput(amount)}{" "}
-                                    {selectedLoanAsset}
+                                    {
+                                        selectedLoanAsset === "WETH"
+                                            ? "ETH"
+                                            : selectedLoanAsset /* Re-labeling WETH to ETH only */
+                                    }
                                 </Grid>
                             </Grid>
 
@@ -641,7 +656,11 @@ const DrawerLiquidateWrapper = ({
                                         selectedLoanAsset,
                                         selectedCollateralAsset
                                     )}{" "}
-                                    {selectedCollateralAsset}
+                                    {
+                                        selectedCollateralAsset === "WETH"
+                                            ? "ETH"
+                                            : selectedCollateralAsset /* Re-labeling WETH to ETH only */
+                                    }
                                 </Grid>
                             </Grid>
 
@@ -673,7 +692,11 @@ const DrawerLiquidateWrapper = ({
                                         ),
                                         0.1
                                     ).toFixed(6)}{" "}
-                                    {selectedCollateralAsset}
+                                    {
+                                        selectedCollateralAsset === "WETH"
+                                            ? "ETH"
+                                            : selectedCollateralAsset /* Re-labeling WETH to ETH only */
+                                    }
                                 </Grid>
                             </Grid>
 
@@ -705,7 +728,11 @@ const DrawerLiquidateWrapper = ({
                                             selectedCollateralAsset
                                         )
                                     ).toFixed(6)}{" "}
-                                    {selectedCollateralAsset}
+                                    {
+                                        selectedCollateralAsset === "WETH"
+                                            ? "ETH"
+                                            : selectedCollateralAsset /* Re-labeling WETH to ETH only */
+                                    }
                                 </Grid>
                             </Grid>
                         </Grid>

@@ -91,7 +91,11 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
             onSetMax={onSetMax}
             amount={amount}
             setAmount={onSetAmount}
-            mainTitle={`Deposit ${asset.unit}`}
+            mainTitle={`Deposit ${
+                asset.alternativeUnitLabel
+                    ? asset.alternativeUnitLabel
+                    : asset.unit
+            }`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
             walletIsKYCd={walletIsKYCd}

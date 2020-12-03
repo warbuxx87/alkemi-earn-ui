@@ -70,7 +70,7 @@ const assetName = [
     },
     {
         id: "WETH",
-        name: "WETH - Ether",
+        name: "ETH - Ether",
     },
 ];
 
@@ -396,7 +396,11 @@ const History = ({
                                             variant="body1"
                                             color="textPrimary"
                                         >
-                                            {item.name}
+                                            {
+                                                item.name === "Wrapped Ether"
+                                                    ? "Ether"
+                                                    : item.name /* Re-labeling WETH to ETH only */
+                                            }
                                         </Typography>
                                     </HistoryTableCell>
                                     <HistoryTableCell
