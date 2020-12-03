@@ -57,7 +57,13 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const onSetMax = () => {
         setShouldSendMax(true);
 
-        setAmount(fromWei(asset.balance, asset.unit));
+        if (
+            web3.utils.toBN(asset.balance).lte(web3.utils.toBN(asset.liquidity))
+        ) {
+            setAmount(fromWei(asset.balance, asset.unit));
+        } else {
+            setAmount(fromWei(asset.liquidity, asset.unit));
+        }
     };
 
     const [enableWithdraw, setEnableWithdraw] = React.useState(false);
