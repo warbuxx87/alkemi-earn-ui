@@ -1,3 +1,10 @@
+## [1.4.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.0...v1.4.1) (2020-11-30)
+
+
+### Bug Fixes
+
+* add changelog link to version number ([7b21948](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7b2194896d4908a87bbb90c79293fdaeaa04cea7))
+
 # [1.4.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.3...v1.4.0) (2020-11-27)
 
 ### Features
