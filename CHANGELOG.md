@@ -1,25 +1,29 @@
-# [1.5.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.1...v1.5.0) (2020-12-03)
-
+## [1.5.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.0...v1.5.1) (2020-12-04)
 
 ### Bug Fixes
 
-* :art: fix liquidate validation ([89d51cc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/89d51cc86ffec5866ba42f24dcb6f805b3674270))
-* improve WBTC value conversion ([81e2962](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/81e2962577854f995fa327e9e52d64b75b932f65))
-* limit number of inputed decimals on withdraw ([9be0e17](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9be0e17eb3d076d5cfc3214c9f3fa3754adcf4ea))
-* limited the number of decimals inputted for all drawers ([b42eae8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b42eae84961e97e4bbe7e7e8cf202d4260e7fc15))
+-   add proper max value to withdraw ([f893d8d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f893d8d823548b99236100169739fb4eac6117af))
+-   fix calculated max value for borrow amount ([0bcef3f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0bcef3f29c52a48cc464349c762d4d79e3d711ff))
 
+# [1.5.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.1...v1.5.0) (2020-12-03)
+
+### Bug Fixes
+
+-   fix liquidate validation ([89d51cc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/89d51cc86ffec5866ba42f24dcb6f805b3674270))
+-   improve WBTC value conversion ([81e2962](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/81e2962577854f995fa327e9e52d64b75b932f65))
+-   limit number of inputed decimals on withdraw ([9be0e17](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9be0e17eb3d076d5cfc3214c9f3fa3754adcf4ea))
+-   limited the number of decimals inputted for all drawers ([b42eae8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b42eae84961e97e4bbe7e7e8cf202d4260e7fc15))
 
 ### Features
 
-* :art: add proper validation to drawers and liquidity cap check ([a7a74fe](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a7a74fea007e155ced50f5c828b0d73c31162a2e))
-* add available liquidity check for withdraw and borrow ([9030861](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/90308610f78f6aee349497bcf537accd5d51485d))
+-   add proper validation to drawers and liquidity cap check ([a7a74fe](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a7a74fea007e155ced50f5c828b0d73c31162a2e))
+-   add available liquidity check for withdraw and borrow ([9030861](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/90308610f78f6aee349497bcf537accd5d51485d))
 
 ## [1.4.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.0...v1.4.1) (2020-11-30)
 
-
 ### Bug Fixes
 
-* add changelog link to version number ([7b21948](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7b2194896d4908a87bbb90c79293fdaeaa04cea7))
+-   add changelog link to version number ([7b21948](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7b2194896d4908a87bbb90c79293fdaeaa04cea7))
 
 # [1.4.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.3...v1.4.0) (2020-11-27)
 
@@ -283,8 +287,8 @@
 -   enable minimum balance wallet check ([7b495ab](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7b495ab7c44eb4e6da7625838bdc39ec79f8a960))
 -   history page defaults sort tx by most recent ([0358c73](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0358c7317de5aa7148306927f362e4fe3b042794))
 -   history page now updates from alkemi api instead of etherscan ([c508d14](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c508d14a5203242ac76a46c36188f5c308a9ac04))
--   **liquidate:** dynamically calculate token amounts from user inputs ([bdf4479](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bdf4479fb180a30c4e1ab24075b34279be34ecd2))
--   improve lend and borrow table lableing for consistency ([6b358a5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6b358a5060bde8491c192db1617cf5a207cb671e))
+-   liquidate dynamically calculate token amounts from user inputs ([bdf4479](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bdf4479fb180a30c4e1ab24075b34279be34ecd2))
+-   improve lend and borrow table labeling for consistency ([6b358a5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6b358a5060bde8491c192db1617cf5a207cb671e))
 -   update Kovan Contract UI-237 ([7033063](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/703306317444b8a3d94379a30045a3ef11d30a54))
 -   use real data for liquidations (real list + smart contract call) ([7f4f70d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7f4f70d3e3034a28a037c3ea0eff53bedab0c212))
 -   wrapped liquidations + fetching accounts ([db50677](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/db506775cf1688d38095d66b08fe6861123f5141))
@@ -297,11 +301,9 @@
 
 -   Revert "edits to market page layout and styling" ([83dbd5e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/83dbd5eb5114c788dd7b06cfd5075320080db249))
 
-# Versions
+# Pre-Release Versions
 
-## 0.4.0
-
-###### _April 20th 2020_
+# 0.4.0 (2020-04-20)
 
 ### Features
 
@@ -316,41 +318,39 @@
     -   Fortmatic
     -   Squarelink
 
-*   Fixed alignment/spacing of appbar, content, sidebar
-*   Updated render one appbar for all router
-*   Fixed dashboard/lending table alignment
-*   Updated lending Component Active Lending Reserves table alignment
-*   Updated Markets Page
-*   Fixed registerServiceWorker
-*   Update README add Contributing Guidelines
-*   Added feature toggle side bar
-*   Updated imports across app to use absolute path
-*   Fixed theme import error
-*   Updated sidebar styling
-*   Fixed app bar
-*   Updated MUI Theme palette
-*   Removed unnecessary color imports
-*   Fixed bad color secondary.dark
-*   Updated revamp of history page using MUI
-*   Removed unnecessary theme settings
-*   Updated to history page, add link to etherscan
-*   Fixed table cell alignments on history page
-*   Fixed Selected Icon highlighting
-*   Added Custom Material SVG icons for sidebar items
-*   Fixed Squarelink
-*   Fixed css import for build
-*   Added menu icon to toggle side bar
-*   Fixed sidebar item styling
-*   Fixed add side bar divider
-*   Updated theme into a themes folder which related styling files. Updated theme js to reflect changes. Made layout edits to lending page and broke down components into cards and grid structure. Other minor styling issues corrected.
-*   Fixed values to values instead of strings with 2 place decimal formatting.
-*   Updated Changelog
+-   Fixed alignment/spacing of appbar, content, sidebar
+-   Updated render one appbar for all router
+-   Fixed dashboard/lending table alignment
+-   Updated lending Component Active Lending Reserves table alignment
+-   Updated Markets Page
+-   Fixed registerServiceWorker
+-   Update README add Contributing Guidelines
+-   Added feature toggle side bar
+-   Updated imports across app to use absolute path
+-   Fixed theme import error
+-   Updated sidebar styling
+-   Fixed app bar
+-   Updated MUI Theme palette
+-   Removed unnecessary color imports
+-   Fixed bad color secondary.dark
+-   Updated revamp of history page using MUI
+-   Removed unnecessary theme settings
+-   Updated to history page, add link to etherscan
+-   Fixed table cell alignments on history page
+-   Fixed Selected Icon highlighting
+-   Added Custom Material SVG icons for sidebar items
+-   Fixed Squarelink
+-   Fixed css import for build
+-   Added menu icon to toggle side bar
+-   Fixed sidebar item styling
+-   Fixed add side bar divider
+-   Updated theme into a themes folder which related styling files. Updated theme js to reflect changes. Made layout edits to lending page and broke down components into cards and grid structure. Other minor styling issues corrected.
+-   Fixed values to values instead of strings with 2 place decimal formatting.
+-   Updated Changelog
 
 ---
 
-## 0.3.0
-
-###### _April 13th 2020_
+# 0.3.0 (2020-04-13)
 
 ### Features
 
@@ -384,9 +384,7 @@
 
 ---
 
-## 0.2.0
-
-###### _April 6th 2020_
+# 0.2.0 (2020-04-06)
 
 ### Features
 
@@ -406,9 +404,7 @@
 
 ---
 
-## 0.1.0
-
-###### _March 21st 2020_
+# 0.1.0 (2020-03-21)
 
 ### Features
 
@@ -451,5 +447,5 @@
 ### Doc
 
 -   [CONTRIBUTING.md] Add contributing guidelines
--   [CHANGES.md] Add changelog
+-   [CHANGELOG.md] Add changelog
 -   [README.md] Add readme with badges

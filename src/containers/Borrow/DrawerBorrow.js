@@ -7,7 +7,13 @@ import web3 from "web3";
 import * as yup from "yup";
 
 // Section 2: internal imports
-import { formatNumber, formatETHMoney, toWei, assetToDecimals } from "utils/ui";
+import {
+    formatNumber,
+    formatETHMoney,
+    toWei,
+    fromWei,
+    assetToDecimals,
+} from "utils/ui";
 
 import DrizzleContext from "utils/DrizzleContext";
 
@@ -49,8 +55,17 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     };
 
     const onSetMax = () => {
-        setAmount(asset.maxBorrowToken.toString()); // retrieves Maximum Token Borrow Amount
         //  setAmount(asset.safeBorrowToken.toString()); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
+
+        if (
+            web3.utils
+                .toBN(toWei(asset.maxBorrowToken, asset.unit))
+                .lte(web3.utils.toBN(asset.liquidity))
+        ) {
+            setAmount(asset.maxBorrowToken);
+        } else {
+            setAmount(fromWei(asset.liquidity, asset.unit));
+        }
     };
     const [enableBorrow, setEnableBorrow] = React.useState(false);
 
@@ -124,7 +139,11 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
             onSetMax={onSetMax}
             amount={amount}
             setAmount={onSetAmount}
-            mainTitle={`Borrow ${asset.unit}`}
+            mainTitle={`Borrow ${
+                asset.alternativeUnitLabel
+                    ? asset.alternativeUnitLabel
+                    : asset.unit
+            }`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
             walletIsKYCd={walletIsKYCd}

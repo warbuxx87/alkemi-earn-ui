@@ -122,7 +122,9 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton, txs }) => {
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {row.unit}
+                                                {row.alternativeUnitLabel
+                                                    ? row.alternativeUnitLabel
+                                                    : row.unit}
                                             </Typography>
                                             <Typography
                                                 variant="body2"

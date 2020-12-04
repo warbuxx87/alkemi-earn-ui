@@ -118,7 +118,11 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
             onSetMax={onSetMax}
             amount={amount}
             setAmount={onSetAmount}
-            mainTitle={`Repay ${asset.unit}`}
+            mainTitle={`Repay ${
+                asset.alternativeUnitLabel
+                    ? asset.alternativeUnitLabel
+                    : asset.unit
+            }`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Borrowed: ${formatNumber(asset.balance, asset.unit)}`}
             walletIsKYCd={walletIsKYCd}

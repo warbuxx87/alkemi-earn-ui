@@ -83,7 +83,12 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
             buttonsLabel="Allocate"
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
-            enableButtonClick={enableAllocate}
+            enableButtonClick={
+                enableAllocate &&
+                (asset.alternativeUnitLabel === "ETH"
+                    ? false
+                    : true) /* Disabled allocating for ETH */
+            }
             onButtonClick={() =>
                 onTx({
                     drizzle,
