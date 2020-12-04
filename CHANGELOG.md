@@ -1,3 +1,11 @@
+## [1.5.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.0...v1.5.1) (2020-12-04)
+
+
+### Bug Fixes
+
+* add proper max value to withdraw ([f893d8d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f893d8d823548b99236100169739fb4eac6117af))
+* fix calculated max value for borrow amount ([0bcef3f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0bcef3f29c52a48cc464349c762d4d79e3d711ff))
+
 # [1.5.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.1...v1.5.0) (2020-12-03)
 
 
