@@ -199,13 +199,23 @@ const TableMarkets = ({ marketsData }) => {
                                                         variant="h6"
                                                         color="textPrimary"
                                                     >
-                                                        {item.name}
+                                                        {
+                                                            item.name ===
+                                                            "Wrapped Ether"
+                                                                ? "Ether"
+                                                                : item.name /* Re-labeling WETH to ETH only */
+                                                        }
                                                     </Typography>
                                                     <Typography
                                                         variant="body2"
                                                         color="textSecondary"
                                                     >
-                                                        {item.symbol}
+                                                        {
+                                                            item.symbol ===
+                                                            "WETH"
+                                                                ? "ETH"
+                                                                : item.symbol /* Re-labeling WETH to ETH only */
+                                                        }
                                                     </Typography>
                                                 </Box>
                                             </Box>
@@ -219,7 +229,9 @@ const TableMarkets = ({ marketsData }) => {
                                                 {displayUSDOrNativeValue(
                                                     item.totalSupplyUSD,
                                                     item.totalSupply,
-                                                    item.symbol
+                                                    item.symbol === "WETH"
+                                                        ? "ETH"
+                                                        : item.symbol /* Re-labeling WETH to ETH only */
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>
@@ -233,7 +245,9 @@ const TableMarkets = ({ marketsData }) => {
                                                 {displayUSDOrNativeValue(
                                                     item.totalBorrowUSD,
                                                     item.totalBorrow,
-                                                    item.symbol
+                                                    item.symbol === "WETH"
+                                                        ? "ETH"
+                                                        : item.symbol /* Re-labeling WETH to ETH only */
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>

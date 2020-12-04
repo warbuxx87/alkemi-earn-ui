@@ -77,13 +77,25 @@ export const handle_deposit_click = async ({
     let weiAmount = amount;
     if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
 
-    const sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
-        token_address,
-        weiAmount,
-        {
-            from: myAccount,
-        }
-    );
+    let sendDeposit;
+    if (unit === "WETH" || unit === "ETH") {
+        sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
+            token_address,
+            weiAmount,
+            {
+                from: myAccount,
+                value: weiAmount,
+            }
+        );
+    } else {
+        sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
+            token_address,
+            weiAmount,
+            {
+                from: myAccount,
+            }
+        );
+    }
 
     return sendDeposit;
 };

@@ -93,8 +93,9 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                             variant="h6"
                                             color="textPrimary"
                                         >
-                                            {row.symbol}
-                                            {row.unit}
+                                            {row.alternativeUnitLabel
+                                                ? row.alternativeUnitLabel
+                                                : row.unit}
                                         </Typography>
                                         <Typography
                                             variant="body2"
