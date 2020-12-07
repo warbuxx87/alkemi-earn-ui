@@ -148,13 +148,26 @@ export const handle_repay_click = async ({
     let weiAmount = amount;
     if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
 
-    const sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
-        token_address,
-        weiAmount,
-        {
-            from: myAccount,
-        }
-    );
+    let sendRepay;
+
+    if (unit === "WETH" || unit === "ETH") {
+        sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
+            token_address,
+            weiAmount,
+            {
+                from: myAccount,
+                value: weiAmount,
+            }
+        );
+    } else {
+        sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
+            token_address,
+            weiAmount,
+            {
+                from: myAccount,
+            }
+        );
+    }
     return sendRepay;
 };
 
