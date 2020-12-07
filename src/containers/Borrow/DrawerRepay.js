@@ -21,6 +21,8 @@ import {
     assetToDecimals,
 } from "utils/ui";
 
+import { estimateGasForMethod } from "utils/drizzle";
+
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
@@ -40,6 +42,90 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
     const [amount, setAmount] = React.useState("");
     const [shouldSendMax, setShouldSendMax] = React.useState(false);
 
+    const [estimationOfGasPrice, setEstimationOfGasPrice] = React.useState(
+        "3000000000"
+    ); // defaults to 3 gwei
+    const [
+        estimationOfRepayMethodCall,
+        setEstimationOfRepayMethodCall,
+    ] = React.useState("1050000000000000"); // defaults to 3 gwei * 350000
+
+    const onSetMax = () => {
+        if (asset.unit === "ETH" || asset.unit === "WETH") {
+            // Cannot send MAX_UINT on repays for ETH, (means risk of dust)
+
+            // If user sets all their ether, they cannot make the transaction, choice here is to limit what they can repay from a calculated gas fee originating from past gas cost * (gas price estimation + 2 gwei)
+            const calculatedDifference = web3.utils
+                .toBN(asset.wallet)
+                .sub(
+                    web3.utils
+                        .toBN(estimationOfRepayMethodCall)
+                        .add(web3.utils.toBN(asset.balance))
+                ); // user's ether - (estimation of gas + borrowed amount)
+
+            if (calculatedDifference.gte(web3.utils.toBN("0"))) {
+                // user has on their wallet enough to pay for borrowed balance and gas
+                setAmount(fromWei(asset.balance, asset.unit));
+            } else {
+                const calculatedMax = web3.utils
+                    .toBN(asset.wallet)
+                    .sub(web3.utils.toBN(estimationOfRepayMethodCall)); // user available ether - gas estimation
+
+                if (calculatedMax.gte(web3.utils.toBN("0"))) {
+                    // user has some wei to spare for the repay
+                    setAmount(fromWei(calculatedMax.toString(), asset.unit));
+                } else {
+                    setAmount(fromWei("0", asset.unit)); // user DOESN'T have on their wallet enough to pay for borrowed balance and gas
+                }
+            }
+        } else {
+            setShouldSendMax(true);
+
+            setAmount(fromWei(asset.balance, asset.unit));
+        }
+    };
+
+    React.useEffect(() => {
+        // Retrieves an estimation of gas price and adds 2 gwei to it on starts
+        drizzle.web3.eth.getGasPrice().then((result) => {
+            const calculatedResult = web3.utils
+                .toBN("2000000000") // adds 2 gwei to the result estimation of gasPrice from the last blocks
+                .add(web3.utils.toBN(result));
+
+            setEstimationOfGasPrice(calculatedResult.toString());
+        });
+    }, [drizzle.web3.eth]);
+
+    React.useEffect(() => {
+        const runEstimateOfMethodCall = () => {
+            estimateGasForMethod({
+                drizzle,
+                userWalletNetwork,
+                userWalletAddress,
+                estimationOfGasPrice,
+                method: "repay",
+            })
+                .then((result) => {
+                    const calculatedResult = web3.utils
+                        .toBN(estimationOfGasPrice)
+                        .mul(web3.utils.toBN(result.toString()));
+
+                    setEstimationOfRepayMethodCall(calculatedResult.toString());
+                })
+                .catch((/* e */) => {
+                    //console.log('Something went wrong: ', e)
+                });
+        };
+
+        runEstimateOfMethodCall();
+    }, [
+        estimationOfGasPrice,
+        userWalletNetwork,
+        userWalletAddress,
+        drizzle,
+        drizzle.web3.eth,
+    ]);
+
     const onSetAmount = (newValue) => {
         setShouldSendMax(false);
 
@@ -53,12 +139,6 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
         if (newValue === "" || (newValue + "").match(regex))
             // limiting inputting more decimal places than the asset supports
             setAmount(newValue);
-    };
-
-    const onSetMax = () => {
-        setShouldSendMax(true);
-
-        setAmount(fromWei(asset.balance, asset.unit));
     };
 
     const [enableRepay, setEnableRepay] = React.useState(false);

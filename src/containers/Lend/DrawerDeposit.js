@@ -21,7 +21,7 @@ import {
     assetToDecimals,
 } from "utils/ui";
 
-import { estimateDeposit } from "utils/drizzle";
+import { estimateGasForMethod } from "utils/drizzle";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -87,12 +87,13 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     }, [drizzle.web3.eth]);
 
     React.useEffect(() => {
-        const runEstimateOfDeposit = () => {
-            estimateDeposit({
+        const runEstimateOfMethodCall = () => {
+            estimateGasForMethod({
                 drizzle,
                 userWalletNetwork,
                 userWalletAddress,
                 estimationOfGasPrice,
+                method: "supply",
             })
                 .then((result) => {
                     const calculatedResult = web3.utils
@@ -108,7 +109,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 });
         };
 
-        runEstimateOfDeposit();
+        runEstimateOfMethodCall();
     }, [
         estimationOfGasPrice,
         userWalletNetwork,

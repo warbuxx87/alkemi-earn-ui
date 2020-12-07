@@ -237,26 +237,30 @@ export const handle_liquidate_click = async ({
     return sendLiquidate;
 };
 
-// Estimate deposit gas, NOT very reliable, since I noticed different values on metamask, but does the trick for the most part
-export const estimateDeposit = async ({
+// Estimate method gas, NOT very reliable, since I noticed different values on metamask, but does the trick for the most part
+export const estimateGasForMethod = async ({
     drizzle,
     userWalletNetwork,
     userWalletAddress,
     estimationOfGasPrice,
+    method,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
+    if (!method) throw new Error("Must select a method");
+
     const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_WETH`];
 
-    const estimateDeposit = await MoneyMarketContract.methods
-        .supply(token_address, "1")
-        .estimateGas({
-            from: myAccount,
-            gasPrice: estimationOfGasPrice,
-            value: "1", // making the estimation if the user wants to send 1 wei, not great, but a value is better than none, and as the call is async, we cannot set an amount dynamically, it won't resolve in time to be properly responsive
-        });
+    const estimateMethodCall = await MoneyMarketContract.methods[method](
+        token_address,
+        "1"
+    ).estimateGas({
+        from: myAccount,
+        gasPrice: estimationOfGasPrice,
+        value: "1", // making the estimation if the user wants to send 1 wei, not great, but a value is better than none, and as the call is async, we cannot set an amount dynamically, it won't resolve in time to be properly responsive
+    });
 
-    return estimateDeposit; // if
+    return estimateMethodCall;
 };
