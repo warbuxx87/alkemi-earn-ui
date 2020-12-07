@@ -128,15 +128,30 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 .required()
                 .positive()
                 .test("maxValueTest", "You can't deposit this amount", () => {
+                    let allowedAmount = web3.utils.toBN(asset.wallet);
+
+                    if (asset.unit === "ETH" || asset.unit === "WETH") {
+                        // If user sets all their ether, they cannot make the transaction, choice here is to limit what they can deposit from a calculated gas fee originating from past gas cost * (gas price estimation + 2 gwei)
+                        const calculatedMax = web3.utils
+                            .toBN(asset.wallet)
+                            .sub(
+                                web3.utils.toBN(estimationOfDepositMethodCall)
+                            );
+
+                        allowedAmount = web3.utils.toBN(
+                            calculatedMax.toString()
+                        );
+                    }
+
                     return web3.utils
                         .toBN(toWei(amount, asset.unit))
-                        .lte(web3.utils.toBN(asset.wallet));
+                        .lte(allowedAmount);
                 });
             setEnableDeposit(await schema.isValid(amount));
         };
 
         checkValidity();
-    }, [amount, asset.wallet, asset.unit]);
+    }, [amount, asset.wallet, asset.unit, estimationOfDepositMethodCall]);
 
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
