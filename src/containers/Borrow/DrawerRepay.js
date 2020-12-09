@@ -103,7 +103,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                 userWalletNetwork,
                 userWalletAddress,
                 estimationOfGasPrice,
-                method: "repay",
+                method: "repayBorrow",
             })
                 .then((result) => {
                     const calculatedResult = web3.utils
