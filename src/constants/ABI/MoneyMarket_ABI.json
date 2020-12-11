@@ -43,6 +43,29 @@
     },
     {
         "constant": true,
+        "inputs": [
+            {
+                "name": "",
+                "type": "address"
+            },
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "originationFeeBalance",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
         "inputs": [],
         "name": "oracle",
         "outputs": [
@@ -250,15 +273,59 @@
         "type": "function"
     },
     {
+        "constant": true,
         "inputs": [],
+        "name": "initializationDone",
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool"
+            }
+        ],
         "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "constructor"
+        "stateMutability": "view",
+        "type": "function"
     },
     {
         "payable": true,
         "stateMutability": "payable",
         "type": "fallback"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "wethAddress",
+                "type": "address"
+            }
+        ],
+        "name": "WETHAddressSet",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "Liquidator",
+                "type": "address"
+            }
+        ],
+        "name": "LiquidatorAdded",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "Liquidator",
+                "type": "address"
+            }
+        ],
+        "name": "LiquidatorRemoved",
+        "type": "event"
     },
     {
         "anonymous": false,
@@ -290,6 +357,38 @@
             }
         ],
         "name": "SupplyReceived",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "name": "asset",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "name": "startingBalance",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "name": "newBalance",
+                "type": "uint256"
+            }
+        ],
+        "name": "SupplyOrgFeeAsAdmin",
         "type": "event"
     },
     {
@@ -693,42 +792,6 @@
         "inputs": [
             {
                 "indexed": false,
-                "name": "Liquidator",
-                "type": "address"
-            }
-        ],
-        "name": "LiquidatorAdded",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "name": "Liquidator",
-                "type": "address"
-            }
-        ],
-        "name": "LiquidatorRemoved",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "name": "wethAddress",
-                "type": "address"
-            }
-        ],
-        "name": "WETHAddressSet",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
                 "name": "error",
                 "type": "uint256"
             },
@@ -745,6 +808,15 @@
         ],
         "name": "Failure",
         "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "initializer",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
     },
     {
         "constant": false,
