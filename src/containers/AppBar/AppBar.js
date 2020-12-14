@@ -24,6 +24,7 @@ const locationToTitles = {
     "/history": "History",
     "/liquidate": "Liquidate",
     "/connect": "Connect",
+    "/swap": "Swap Tokens",
 };
 
 // Section 5: Code Container

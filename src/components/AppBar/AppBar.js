@@ -130,6 +130,7 @@ function AppBar({
                                 variant="h3"
                                 color="textPrimary"
                                 data-testid="title"
+                                noWrap
                             >
                                 {title}
                             </Typography>
