@@ -8,6 +8,7 @@ import WBTC from "assets/images/WBTC.svg";
 import USDT from "assets/images/USDT.svg";
 import WETH from "assets/images/WETH.svg";
 import PAX from "assets/images/pax.png";
+import ETH from "assets/images/eth.png";
 
 const decimalsToUnit = {
     6: "mwei",
@@ -35,6 +36,7 @@ const token2icon = {
     PAX: PAX,
     WBTC: WBTC,
     DAI: DAI,
+    ETH: ETH,
 };
 
 export const getTokenIcon = (symbol) => {
@@ -173,6 +175,13 @@ export const formatETHMoney = (value, currency, unit, usdPrice) => {
         style: "currency",
         currency,
     }).format(calculation);
+};
+
+// eth balance value in USD
+export const ETHBalanceToUSD = (ethBalance, USDPrice) => {
+    return ethBalance && USDPrice
+        ? web3.utils.toBN(ethBalance).div(web3.utils.toBN(USDPrice)).toString()
+        : "0";
 };
 
 // Format a price number with proper symbol (ex: $1.01)
