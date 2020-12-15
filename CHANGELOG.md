@@ -1,3 +1,20 @@
+## [1.5.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.2...v1.5.3) (2020-12-15)
+
+
+### Bug Fixes
+
+* use correct eth icon on history page ([4194a95](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4194a9529a6125c0cb6403c03c9d4328a7ba3640))
+
+## [1.5.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.1...v1.5.2) (2020-12-11)
+
+
+### Bug Fixes
+
+* limit deposit amount for ETH ([be6b15c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/be6b15c466d16d22fd8e764f1f819bb314ece068))
+* send proper value when repay in ETH ([fd7db0d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/fd7db0dfa6640cf076e176bd35a7013c9ee8c1f2))
+* set calculated max for ETH repay ([b6f33aa](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b6f33aabf316305ce2eb95d132cfe719180903f4))
+* use proper repay method name for estimation of gas ([cfb3f75](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/cfb3f7597e29b82b91abfe74d82fedf5682ebd41))
+
 ## [1.5.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.0...v1.5.1) (2020-12-04)
 
 ### Bug Fixes

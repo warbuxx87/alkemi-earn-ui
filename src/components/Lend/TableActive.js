@@ -20,7 +20,7 @@ import {
 import DepositButton from "containers/Lend/DrawerDeposit";
 import WithdrawButton from "containers/Lend/DrawerWithdraw";
 import LendTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent } from "utils/ui";
+import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -146,18 +146,19 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                         variant="h6"
                                         color="textPrimary"
                                     >
-                                        {/*}{calculateEarnings(
-                                            row.balance,
-                                            row.principal,
-                                            row.unit,
-                                            USDPrice
-                                        )}*/}
+                                        $
+                                        {formatNumber(
+                                            ETHBalanceToUSD(
+                                                row.ethBalance,
+                                                USDPrice
+                                            )
+                                        )}
                                     </Typography>
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Earnings
+                                        USD Value
                                     </Typography>
                                 </LendTableCell>
                                 <LendTableCell
