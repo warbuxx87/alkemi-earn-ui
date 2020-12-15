@@ -83,22 +83,22 @@ export const formatNumber = (value, unit) => {
     switch (unit) {
         case "USDC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 2,
+                maximumFractionDigits: 8,
                 minimumFractionDigits: 2,
             }).format(wei);
         case "WETH":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 4,
+                maximumFractionDigits: 8,
                 minimumFractionDigits: 4,
             }).format(wei);
         case "WBTC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 4,
+                maximumFractionDigits: 8,
                 minimumFractionDigits: 4,
             }).format(wei);
         default:
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 2,
+                maximumFractionDigits: 18,
                 minimumFractionDigits: 2,
             }).format(wei);
     }
@@ -303,7 +303,7 @@ export const format_str_to_percent = (str_num) => {
     var index_num = str_num.indexOf(".") + 2;
     var cpmp_str = str_num.replace(/\./, "");
     var res_str =
-        cpmp_str.slice(0, index_num) + "." + cpmp_str.substr(index_num, 2);
+        cpmp_str.slice(0, index_num) + "." + cpmp_str.substr(index_num, 18);
     // console.log(Number(res_str))
 
     if (Number(res_str) === 0) {
