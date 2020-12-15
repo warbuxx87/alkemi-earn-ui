@@ -3,8 +3,17 @@ import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
+import web3 from "web3";
+import * as yup from "yup";
+
 // Section 2: internal imports
-import { formatNumber, formatETHMoney } from "utils/ui";
+import {
+    formatNumber,
+    formatETHMoney,
+    toWei,
+    fromWei,
+    assetToDecimals,
+} from "utils/ui";
 
 import DrizzleContext from "utils/DrizzleContext";
 
@@ -33,12 +42,30 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     const [amount, setAmount] = React.useState("");
 
     const onSetAmount = (newValue) => {
-        setAmount(newValue);
+        const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
+            ? assetToDecimals[asset.unit].toString()
+            : "18"; // chose 18 as default, arbitrary choice here
+        const regex = new RegExp(
+            "^(?:\\d*\\.\\d{0," + numberOfDecimalsForAsset + "}|\\d+)$"
+        );
+
+        if (newValue === "" || (newValue + "").match(regex))
+            // limiting inputting more decimal places than the asset supports
+            setAmount(newValue);
     };
 
     const onSetMax = () => {
-        setAmount(asset.maxBorrowToken.toString()); // retrieves Maximum Token Borrow Amount
         //  setAmount(asset.safeBorrowToken.toString()); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
+
+        if (
+            web3.utils
+                .toBN(toWei(asset.maxBorrowToken, asset.unit))
+                .lte(web3.utils.toBN(asset.liquidity))
+        ) {
+            setAmount(asset.maxBorrowToken);
+        } else {
+            setAmount(fromWei(asset.liquidity, asset.unit));
+        }
     };
     const [enableBorrow, setEnableBorrow] = React.useState(false);
 
@@ -60,13 +87,35 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     }, [txs]);
 
     React.useEffect(() => {
-        if (amount) {
-            // check that User Input Amount does not exceed maximum amount of tokens that user can borrow for asset and is not less than 0
-            const isAmountLTmaxBorrow = amount > 0 ? true : false;
-            //      amount <= asset.maxBorrowToken && amount > 0 ? true : false;
-            setEnableBorrow(isAmountLTmaxBorrow);
-        }
-    }, [amount, asset.balance, asset.maxBorrowToken, asset.unit, asset.wallet]);
+        const checkValidity = async () => {
+            let schema = yup
+                .number()
+                .required()
+                .positive()
+                .test("maxValueTest", "You can't borrow this amount", () => {
+                    return (
+                        web3.utils.toBN(toWei(amount, asset.unit)).lte(
+                            web3.utils.toBN(
+                                toWei(asset.maxBorrowToken, asset.unit) // checks amount against maxBorrow amount
+                            )
+                        ) &&
+                        web3.utils
+                            .toBN(toWei(amount, asset.unit))
+                            .lte(web3.utils.toBN(asset.liquidity)) // checks amount against protocol liquidity
+                    );
+                });
+            setEnableBorrow(await schema.isValid(amount));
+        };
+
+        checkValidity();
+    }, [
+        amount,
+        asset.balance,
+        asset.maxBorrowToken,
+        asset.unit,
+        asset.wallet,
+        asset.liquidity,
+    ]);
 
     return (
         <Drawer
@@ -90,7 +139,11 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
             onSetMax={onSetMax}
             amount={amount}
             setAmount={onSetAmount}
-            mainTitle={`Borrow ${asset.unit}`}
+            mainTitle={`Borrow ${
+                asset.alternativeUnitLabel
+                    ? asset.alternativeUnitLabel
+                    : asset.unit
+            }`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
             amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
             walletIsKYCd={walletIsKYCd}

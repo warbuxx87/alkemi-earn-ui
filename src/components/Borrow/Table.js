@@ -121,7 +121,9 @@ const BorrowTable = ({ data = [], onActivate, txs }) => {
                                                 variant="h6"
                                                 color="textPrimary"
                                             >
-                                                {Row.unit}
+                                                {Row.alternativeUnitLabel
+                                                    ? Row.alternativeUnitLabel
+                                                    : Row.unit}
                                             </Typography>
                                             <Typography
                                                 variant="body2"

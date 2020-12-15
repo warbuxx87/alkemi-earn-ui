@@ -198,6 +198,8 @@ const DrawerLiquidateWrapper = ({
     marketsData,
 
     walletIsKYCd,
+
+    maxAmountForToken,
 }) => {
     const classes = DrawerLiquidateClass();
 
@@ -297,17 +299,17 @@ const DrawerLiquidateWrapper = ({
                             />
                             <Grid>
                                 <h3 className={classes.cardTitle}>
-                                    {displayMaxAmountOfTokensForEachLoan(
-                                        val.symbol
-                                    ).toFixed(6)}{" "}
-                                    {val.symbol}
+                                    {maxAmountForToken(val.symbol).toFixed(6)}{" "}
+                                    {
+                                        val.symbol === "WETH"
+                                            ? "ETH"
+                                            : val.symbol /* Re-labeling WETH to ETH only */
+                                    }
                                 </h3>
                                 <h5 className={classes.cardSubtitle}>
                                     $
                                     {
-                                        displayMaxAmountOfTokensForEachLoan(
-                                            "USDC"
-                                        ).toFixed(
+                                        maxAmountForToken("USDC").toFixed(
                                             2
                                         ) /* using USDC calculation now for USD value */
                                     }
@@ -353,29 +355,17 @@ const DrawerLiquidateWrapper = ({
                             className={classes.assetImg}
                         />{" "}
                     </Box>
-                    <Box> {val.symbol}</Box>
+                    <Box>
+                        {" "}
+                        {
+                            val.symbol === "WETH"
+                                ? "ETH"
+                                : val.symbol /* Re-labeling WETH to ETH only */
+                        }
+                    </Box>
                 </Box>
             </MenuItem>
         ));
-    };
-
-    const displayMaxAmountOfTokensForEachLoan = (symbol) => {
-        const assetMarketDataForSymbol = marketsData.find(
-            (e) => e.symbol === symbol
-        );
-
-        // shortFallETH / token Oracle Price
-        let calculatedValue = 0;
-
-        if (
-            assetMarketDataForSymbol !== undefined &&
-            assetMarketDataForSymbol &&
-            shortfallETH
-        )
-            calculatedValue =
-                shortfallETH / assetMarketDataForSymbol.oraclePrice;
-
-        return calculatedValue;
     };
 
     const getPercentage = (theValue, appliedPercentage) => {
@@ -388,7 +378,7 @@ const DrawerLiquidateWrapper = ({
             youPay = parseFloat(amount);
         }
         if (amount === -1) {
-            youPay = displayMaxAmountOfTokensForEachLoan(selectedLoanAsset);
+            youPay = maxAmountForToken(selectedLoanAsset);
         }
         return youPay.toFixed(6);
     };
@@ -414,9 +404,7 @@ const DrawerLiquidateWrapper = ({
 
             // if User Amount is Max
             if (amount === -1) {
-                payAmount = displayMaxAmountOfTokensForEachLoan(
-                    selectedLoanAsset
-                );
+                payAmount = maxAmountForToken(selectedLoanAsset);
             }
 
             // gets ETH amount for in put tokens
@@ -617,7 +605,11 @@ const DrawerLiquidateWrapper = ({
                                     justify="flex-end"
                                 >
                                     {displayPayAmountofTokensforInput(amount)}{" "}
-                                    {selectedLoanAsset}
+                                    {
+                                        selectedLoanAsset === "WETH"
+                                            ? "ETH"
+                                            : selectedLoanAsset /* Re-labeling WETH to ETH only */
+                                    }
                                 </Grid>
                             </Grid>
 
@@ -641,7 +633,11 @@ const DrawerLiquidateWrapper = ({
                                         selectedLoanAsset,
                                         selectedCollateralAsset
                                     )}{" "}
-                                    {selectedCollateralAsset}
+                                    {
+                                        selectedCollateralAsset === "WETH"
+                                            ? "ETH"
+                                            : selectedCollateralAsset /* Re-labeling WETH to ETH only */
+                                    }
                                 </Grid>
                             </Grid>
 
@@ -673,7 +669,11 @@ const DrawerLiquidateWrapper = ({
                                         ),
                                         0.1
                                     ).toFixed(6)}{" "}
-                                    {selectedCollateralAsset}
+                                    {
+                                        selectedCollateralAsset === "WETH"
+                                            ? "ETH"
+                                            : selectedCollateralAsset /* Re-labeling WETH to ETH only */
+                                    }
                                 </Grid>
                             </Grid>
 
@@ -705,7 +705,11 @@ const DrawerLiquidateWrapper = ({
                                             selectedCollateralAsset
                                         )
                                     ).toFixed(6)}{" "}
-                                    {selectedCollateralAsset}
+                                    {
+                                        selectedCollateralAsset === "WETH"
+                                            ? "ETH"
+                                            : selectedCollateralAsset /* Re-labeling WETH to ETH only */
+                                    }
                                 </Grid>
                             </Grid>
                         </Grid>

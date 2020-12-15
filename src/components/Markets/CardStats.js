@@ -88,7 +88,12 @@ class Stats extends React.Component {
                         variant="h6"
                         color="textPrimary"
                     >
-                        {this.props.symbol}
+                        {
+                            this.props.symbol === "WETH"
+                                ? "ETH"
+                                : this.props
+                                      .symbol /* Re-labeling WETH to ETH only */
+                        }
                     </Typography>
                     <Box flexGrow={1}>
                         <Typography
