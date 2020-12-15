@@ -1,3 +1,10 @@
+## [1.5.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.2...v1.5.3) (2020-12-15)
+
+
+### Bug Fixes
+
+* use correct eth icon on history page ([4194a95](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4194a9529a6125c0cb6403c03c9d4328a7ba3640))
+
 ## [1.5.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.1...v1.5.2) (2020-12-11)
 
 
