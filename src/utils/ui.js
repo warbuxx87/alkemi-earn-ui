@@ -177,6 +177,13 @@ export const formatETHMoney = (value, currency, unit, usdPrice) => {
     }).format(calculation);
 };
 
+// eth balance value in USD
+export const ETHBalanceToUSD = (ethBalance, USDPrice) => {
+    return ethBalance && USDPrice
+        ? web3.utils.toBN(ethBalance).div(web3.utils.toBN(USDPrice)).toString()
+        : "0";
+};
+
 // Format a price number with proper symbol (ex: $1.01)
 export const formatPriceWithCurrency = (price, currency) => {
     return new Intl.NumberFormat("en-es", {
