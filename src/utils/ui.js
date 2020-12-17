@@ -8,6 +8,7 @@ import WBTC from "assets/images/WBTC.svg";
 import USDT from "assets/images/USDT.svg";
 import WETH from "assets/images/WETH.svg";
 import PAX from "assets/images/pax.png";
+import ETH from "assets/images/eth.png";
 
 const decimalsToUnit = {
     6: "mwei",
@@ -35,6 +36,7 @@ const token2icon = {
     PAX: PAX,
     WBTC: WBTC,
     DAI: DAI,
+    ETH: ETH,
 };
 
 export const getTokenIcon = (symbol) => {
@@ -83,22 +85,22 @@ export const formatNumber = (value, unit) => {
     switch (unit) {
         case "USDC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 2,
+                maximumFractionDigits: 8,
                 minimumFractionDigits: 2,
             }).format(wei);
         case "WETH":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 4,
+                maximumFractionDigits: 8,
                 minimumFractionDigits: 4,
             }).format(wei);
         case "WBTC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 4,
+                maximumFractionDigits: 8,
                 minimumFractionDigits: 4,
             }).format(wei);
         default:
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 2,
+                maximumFractionDigits: 18,
                 minimumFractionDigits: 2,
             }).format(wei);
     }
@@ -173,6 +175,13 @@ export const formatETHMoney = (value, currency, unit, usdPrice) => {
         style: "currency",
         currency,
     }).format(calculation);
+};
+
+// eth balance value in USD
+export const ETHBalanceToUSD = (ethBalance, USDPrice) => {
+    return ethBalance && USDPrice
+        ? web3.utils.toBN(ethBalance).div(web3.utils.toBN(USDPrice)).toString()
+        : "0";
 };
 
 // Format a price number with proper symbol (ex: $1.01)
@@ -303,7 +312,7 @@ export const format_str_to_percent = (str_num) => {
     var index_num = str_num.indexOf(".") + 2;
     var cpmp_str = str_num.replace(/\./, "");
     var res_str =
-        cpmp_str.slice(0, index_num) + "." + cpmp_str.substr(index_num, 2);
+        cpmp_str.slice(0, index_num) + "." + cpmp_str.substr(index_num, 18);
     // console.log(Number(res_str))
 
     if (Number(res_str) === 0) {

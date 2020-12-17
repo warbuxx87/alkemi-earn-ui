@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Borrow({ activeBorrow, inactiveBorrow, onActivate, txs }) {
+function Borrow({ activeBorrow, inactiveBorrow, onActivate, USDPrice, txs }) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
@@ -48,7 +48,10 @@ function Borrow({ activeBorrow, inactiveBorrow, onActivate, txs }) {
                     </Grid>
                     {!!activeBorrow.length && (
                         <Grid item lg={12} xs={12}>
-                            <BorrowTableActive data={activeBorrow} />
+                            <BorrowTableActive
+                                data={activeBorrow}
+                                USDPrice={USDPrice}
+                            />
                         </Grid>
                     )}
                     {!!inactiveBorrow.length && (

@@ -409,8 +409,16 @@ const History = ({
                                     >
                                         <img
                                             className={classes.imageSize}
-                                            src={getTokenIcon(item.symbol)}
-                                            alt={item.name}
+                                            src={
+                                                item.symbol === "WETH"
+                                                    ? getTokenIcon("ETH")
+                                                    : getTokenIcon(item.symbol)
+                                            }
+                                            alt={
+                                                item.name === "Wrapped Ether"
+                                                    ? "Ether"
+                                                    : item.name /* Re-labeling WETH to ETH only */
+                                            }
                                         />
                                     </HistoryTableCell>
                                     <HistoryTableCell
