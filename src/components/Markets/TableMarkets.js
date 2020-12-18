@@ -200,10 +200,10 @@ const TableMarkets = ({ marketsData }) => {
                                                         color="textPrimary"
                                                     >
                                                         {
-                                                            item.name ===
-                                                            "Wrapped Ether"
-                                                                ? "Ether"
-                                                                : item.name /* Re-labeling WETH to ETH only */
+                                                            item.symbol ===
+                                                            "WETH"
+                                                                ? "ETH"
+                                                                : item.symbol /* Re-labeling WETH to ETH only */
                                                         }
                                                     </Typography>
                                                     <Typography
@@ -211,10 +211,10 @@ const TableMarkets = ({ marketsData }) => {
                                                         color="textSecondary"
                                                     >
                                                         {
-                                                            item.symbol ===
-                                                            "WETH"
-                                                                ? "ETH"
-                                                                : item.symbol /* Re-labeling WETH to ETH only */
+                                                            item.name ===
+                                                            "Wrapped Ether"
+                                                                ? "Ether"
+                                                                : item.name /* Re-labeling WETH to ETH only */
                                                         }
                                                     </Typography>
                                                 </Box>
