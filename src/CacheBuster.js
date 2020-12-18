@@ -39,7 +39,7 @@ const CacheBuster = ({ ...props }) => {
             fetch("/meta.json")
                 .then((response) => response.json())
                 .then((meta) => {
-                    const latestVersion = meta.version;
+                    const latestVersion = meta.version; // in case the meta version is ever buggy (as in displays a version that does not exists), we could think of persisting the updated version to avoid infinite reloads, but since this is will all be automatically generated, that scenario should normally never happen
                     const currentVersion = global.appVersion;
 
                     const shouldForceRefresh = semverGreaterThan(
