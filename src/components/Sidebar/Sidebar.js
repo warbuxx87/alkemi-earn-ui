@@ -12,6 +12,7 @@ import {
     Divider,
     Drawer,
     Hidden,
+    Link,
     List,
     withWidth,
     withStyles,
@@ -119,13 +120,15 @@ function Sidebar({ classes, width, variant, open }) {
                     <Divider className={classes.divider} />
                     <Box py={2} px={2}>
                         <Typography variant="body2" color="textSecondary">
-                            <a
+                            <Link
                                 href="https://docs.alkemi.network/earn-ui/changelog"
+                                variant="body2"
+                                color="inherit"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                {process.env.REACT_APP_VERSION}
-                            </a>
+                                ver.{process.env.REACT_APP_VERSION}
+                            </Link>
                         </Typography>
                     </Box>
                 </Box>

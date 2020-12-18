@@ -61,16 +61,16 @@ const assetName = [
         name: "DAI - Dai Stablecoin",
     },
     {
+        id: "WETH",
+        name: "ETH - Ether",
+    },
+    {
         id: "USDC",
         name: "USDC - USD Coin",
     },
     {
         id: "WBTC",
         name: "WBTC - Wrapped BTC",
-    },
-    {
-        id: "WETH",
-        name: "ETH - Ether",
     },
 ];
 
