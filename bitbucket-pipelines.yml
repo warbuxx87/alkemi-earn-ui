@@ -64,6 +64,7 @@ definitions:
                   - export NODE_OPTIONS=--max_old_space_size=7168
                   - echo "Build"
                   - npm install --quiet
+                  - npm run generate-build-version
                   - npm run build
               artifacts:
                   # keep all files from this build step and make available for next step
