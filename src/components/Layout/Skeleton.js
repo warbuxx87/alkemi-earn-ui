@@ -21,6 +21,8 @@ const styles = (theme) => ({
         display: "flex",
         width: "100%",
         minHeight: "100%",
+        overflow: "auto",
+        height: "calc(100vh - 10px)",
     },
     alert: {
         backgroundColor: fade(theme.palette.background.paper, 0.5),

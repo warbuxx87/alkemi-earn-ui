@@ -1,3 +1,17 @@
+# [1.6.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.4...v1.6.0) (2020-12-21)
+
+
+### Features
+
+* introduce cache busting ([7f4a6c5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7f4a6c58ca98e9350b9a998bb942eae03e92efd9))
+
+## [1.5.4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.3...v1.5.4) (2020-12-21)
+
+
+### Bug Fixes
+
+* scrollbar now displaying on smaller screen resolutions ([5002002](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/50020029f2e9b7b79286f46e4addd18591c628dc))
+
 ## [1.5.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.2...v1.5.3) (2020-12-15)
 
 
