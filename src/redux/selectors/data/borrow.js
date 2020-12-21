@@ -5,6 +5,7 @@ import address from "constants/address_map.json";
 import { walletNetworkName } from "redux/selectors/data/onboard";
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
 import web3 from "web3";
+import Big from "big.js";
 
 // Helpers
 function calculateInterest(rateMantissa) {
@@ -202,21 +203,22 @@ const getBorrowAsset = createSelector(
                         mantissaPrice = price;
                 }
 
-                maxBorrowToken = web3.utils
-                    .toBN(accountLiquidity) // Amount of User Liquidity in ETH scaled by 10e18
-                    .div(web3.utils.toBN(parseInt(mantissaPrice))); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
+                let maxBorrowTokenBig = Big(accountLiquidity); // Amount of User Liquidity in ETH scaled by 10e18
+                maxBorrowTokenBig = maxBorrowTokenBig.div(
+                    mantissaPrice.toString()
+                ); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
 
-                maxBorrowToken = maxBorrowToken * 0.7999; // Maximum Borrow Amount with collateralRatio + Originatio Fee factored
+                maxBorrowTokenBig = maxBorrowTokenBig.times(0.7999); // Maximum Borrow Amount with collateralRatio + Origination Fee factored
 
                 switch (asset.unit) {
                     case "WBTC":
-                        maxBorrowToken = parseFloat(maxBorrowToken).toFixed(8);
+                        maxBorrowToken = maxBorrowTokenBig.toFixed(8);
                         break;
                     case "USDC":
-                        maxBorrowToken = parseFloat(maxBorrowToken).toFixed(6);
+                        maxBorrowToken = maxBorrowTokenBig.toFixed(6);
                         break;
                     default:
-                        maxBorrowToken = parseFloat(maxBorrowToken).toFixed(18);
+                        maxBorrowToken = maxBorrowTokenBig.toFixed(18);
                 }
 
                 safeBorrowToken = maxBorrowToken * 0.8; // 80% of Maximum Borrow Amount
