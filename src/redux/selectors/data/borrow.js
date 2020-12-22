@@ -74,6 +74,14 @@ export const getCollateralRatio = (state) => {
     return null;
 };
 
+export const getOriginationFee = (state) => {
+    const originationFee = _.get(state, "contracts.MoneyMarket.originationFee");
+    if (originationFee["0x0"]) {
+        return _.get(originationFee, "['0x0'].value");
+    }
+    return null;
+};
+
 // Borrow Selectors
 export const getBorrowAccountValue = (state) => {
     const calculateAccountValues = Object.values(
@@ -138,6 +146,8 @@ const getBorrowAsset = createSelector(
     (state) => getAccountLiquidity(state),
     (state) => getBorrowAccountValue(state),
     (state) => getMarketLiquidity(state),
+    (state) => getCollateralRatio(state),
+    (state) => getOriginationFee(state),
     (
         assets,
         network,
@@ -148,7 +158,9 @@ const getBorrowAsset = createSelector(
         assetPrices,
         accountLiquidity,
         accountTotalBorrow,
-        marketLiquidity
+        marketLiquidity,
+        collateralRatio,
+        originationFee
     ) =>
         Object.values(assets).map((asset) => {
             let balance = "0";
@@ -180,12 +192,6 @@ const getBorrowAsset = createSelector(
                     ethBalance / web3.utils.fromWei(totalBorrowed)
                 ).toString();
 
-                // TODO clean up: old value that always returned 0
-
-                /*USDprice =
-                    assetPrices["0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"] ||
-                    "0";*/
-
                 // Replaced now with address_USDC
                 USDprice = assetPrices[address[network][`address_USDC`]] || "0";
             }
@@ -208,7 +214,28 @@ const getBorrowAsset = createSelector(
                     mantissaPrice.toString()
                 ); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
 
-                maxBorrowTokenBig = maxBorrowTokenBig.times(0.7999); // Maximum Borrow Amount with collateralRatio + Origination Fee factored
+                let maxBorrowRate = 0.7999; // default value set to 0.7999
+                if (collateralRatio != null && originationFee !== null) {
+                    // collateralRatio / 1e18 = x ( ex 1.25 or 125%)
+                    let collateralRatioBig = Big(collateralRatio);
+                    collateralRatioBig = collateralRatioBig.div(1e18); // x
+
+                    // originationFee / 1e18 = y (ex .001 or .1%)
+                    let originationFeeBig = Big(originationFee);
+                    originationFeeBig = originationFeeBig.div(1e18); // y
+
+                    // 1/x = loanToValue  ( ex .8 or 80% )
+                    let loanToValueBig = Big(1);
+                    loanToValueBig = loanToValueBig.div(collateralRatioBig);
+
+                    // multiplier = loanToValue - y
+                    let multiplierBig = loanToValueBig;
+                    multiplierBig = multiplierBig.sub(originationFeeBig);
+
+                    maxBorrowRate = parseFloat(multiplierBig.toString());
+                }
+
+                maxBorrowTokenBig = maxBorrowTokenBig.times(maxBorrowRate); // Maximum Borrow Amount with collateralRatio & Origination Fee factored
 
                 switch (asset.unit) {
                     case "WBTC":
@@ -221,7 +248,10 @@ const getBorrowAsset = createSelector(
                         maxBorrowToken = maxBorrowTokenBig.toFixed(18);
                 }
 
-                safeBorrowToken = maxBorrowToken * 0.8; // 80% of Maximum Borrow Amount
+                let safeBorrowTokenBig = Big(maxBorrowToken);
+                safeBorrowTokenBig = safeBorrowTokenBig.times(0.8);
+
+                safeBorrowToken = safeBorrowTokenBig.toString();
             }
 
             return {
