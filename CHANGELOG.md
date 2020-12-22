@@ -1,3 +1,10 @@
+# [1.7.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.6.0...v1.7.0) (2020-12-22)
+
+
+### Features
+
+* add history page account filtering by savings or credit type ([3a6e4a9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3a6e4a9888f483f3d01090c6094c798fbb3c8bd8))
+
 # [1.6.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.4...v1.6.0) (2020-12-21)
 
 
