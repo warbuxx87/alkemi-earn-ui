@@ -55,7 +55,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     };
 
     const onSetMax = () => {
-        //  setAmount(asset.safeBorrowToken.toString()); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
+        //  setAmount(asset.safeBorrowToken); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
 
         if (
             web3.utils

@@ -1,3 +1,12 @@
+## [1.7.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.0...v1.7.1) (2020-12-22)
+
+
+### Bug Fixes
+
+* have fromWei math to use big.js for division ([6493ea7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6493ea79900159b140b089d198a387b477ffbe83))
+* replace bn with bigjs for max borrow math ([b5f094c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b5f094c59d699eab3efa9ba5ba6ef6685099ac6e))
+* retrieve  max borrow mulitiplier from smart contract ([f7940ea](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f7940ea215b4045a31b3b815bca99ac7492ee255))
+
 # [1.7.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.6.0...v1.7.0) (2020-12-22)
 
 

@@ -52,9 +52,18 @@ export const fromWei = (value, unit) => {
 
     if (unit === "WBTC") {
         //wbtc has 8 decimals
-        let amount = value / 1e8;
+        let amount = Big(value);
+        amount = amount.div(1e8);
 
-        return amount.toString();
+        // Commented out the next part because the "value" would and should never have decimal places, so it doesn't make sense for the calculated amount to have more than 8 decimal places ever
+        // let returnAmount = amount.toString()
+
+        // const amountSplit = amount.toString().split(".");
+        // if(amountSplit[1] && amountSplit[1].length > 8) { // making very sure the number doesn't have more than 8 decimal places
+        //     returnAmount = amount.toFixed(8)
+        // }
+
+        return amount.toString(); // returnAmount
     } else {
         return web3.utils.fromWei(
             value,
