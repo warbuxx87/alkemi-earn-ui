@@ -7,7 +7,7 @@
         "address_DAI": "0x6b175474e89094c44da98b954eedeac495271d0f"
     },
     "rinkeby": {
-        "address_MoneyMarket": "0x21C11666CF85A249509f597194efF8D0FB6938df",
+        "address_MoneyMarket": "0x094Aa82872c43031810470317d4D8e3CA9214087",
         "address_USDC": "0x4dbcdf9b62e891a7cec5a2568c3f4faf9e8abe2b",
         "address_WBTC": "0x577d296678535e4903d59a4c929b718e1d575e0a",
         "address_WETH": "0x9e3865F0A681F2356BcF5Cf6b978F0a773716886",
@@ -21,10 +21,10 @@
         "address_DAI": "0xe8ef14a5cbaada1542d0341ec4a76b611ba209af"
     },
     "kovan": {
-        "address_MoneyMarket": "0xADd3f62F5cDDE4cB6aE31E2e86d04381574D5a92",
+        "address_MoneyMarket": "0x87F8D2fDeFD6Ebd0D4d03719C1DE10f4aDE2C7f5",
         "address_USDC": "0xb7a4f3e9097c08da09517b5ab877f7a917224ede",
         "address_WBTC": "0xd3a691c852cdb01e281545a27064741f0b7f6825",
-        "address_WETH": "0x5eca15b12d959dfcf9c71c59f8b467eb8c6efd0b",
+        "address_WETH": "0x22f0596d9Ac79b85BdA6723E3192BA258346C3d5",
         "address_DAI": "0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa"
     }
 }

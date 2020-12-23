@@ -1,3 +1,40 @@
+## [1.7.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.1...v1.7.2) (2020-12-23)
+
+
+### Bug Fixes
+
+* point WETH to correct contract on kovan ([056d291](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/056d291d1aebf1e38814ee4a0b57cf15a53374a4))
+
+## [1.7.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.0...v1.7.1) (2020-12-22)
+
+
+### Bug Fixes
+
+* have fromWei math to use big.js for division ([6493ea7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6493ea79900159b140b089d198a387b477ffbe83))
+* replace bn with bigjs for max borrow math ([b5f094c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b5f094c59d699eab3efa9ba5ba6ef6685099ac6e))
+* retrieve  max borrow mulitiplier from smart contract ([f7940ea](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f7940ea215b4045a31b3b815bca99ac7492ee255))
+
+# [1.7.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.6.0...v1.7.0) (2020-12-22)
+
+
+### Features
+
+* add history page account filtering by savings or credit type ([3a6e4a9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3a6e4a9888f483f3d01090c6094c798fbb3c8bd8))
+
+# [1.6.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.4...v1.6.0) (2020-12-21)
+
+
+### Features
+
+* introduce cache busting ([7f4a6c5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7f4a6c58ca98e9350b9a998bb942eae03e92efd9))
+
+## [1.5.4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.3...v1.5.4) (2020-12-21)
+
+
+### Bug Fixes
+
+* scrollbar now displaying on smaller screen resolutions ([5002002](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/50020029f2e9b7b79286f46e4addd18591c628dc))
+
 ## [1.5.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.2...v1.5.3) (2020-12-15)
 
 

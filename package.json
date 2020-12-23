@@ -1,6 +1,6 @@
 {
     "name": "@project-alkemi/alkemi-earn-ui",
-    "version": "1.5.3",
+    "version": "1.7.2",
     "homepage": "https://dapp.alkemi.network",
     "repository": {
         "type": "git",
@@ -52,6 +52,7 @@
         "yup": "^0.31.0"
     },
     "scripts": {
+        "generate-build-version": "node generate-build-version",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "build:staging": "env-cmd -f .env.staging npm run build",
