@@ -126,14 +126,6 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-1"
                         WAIT: "true"
-                  - pipe: sentryio/sentry-new-release:0.3.0
-                    variables:
-                        SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
-                        SENTRY_ORG: "alkemi-ai-inc"
-                        SENTRY_PROJECT: "alkemi-earn-ui"
-                        ENVIRONMENT: "staging1" # Optional.
-                        FINALIZE: "false" # Optional.
-                        DEBUG: "true" # Optional.
 
         # DEFINE DEPLOY TO Staging 2 step
         - step: &deploy-staging-2
@@ -154,14 +146,6 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-2"
                         WAIT: "true"
-                  - pipe: sentryio/sentry-new-release:0.3.0
-                    variables:
-                        SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
-                        SENTRY_ORG: "alkemi-ai-inc"
-                        SENTRY_PROJECT: "alkemi-earn-ui"
-                        ENVIRONMENT: "staging2" # Optional.
-                        FINALIZE: "false" # Optional.
-                        DEBUG: "true" # Optional.
 
         # DEFINE DEPLOY TO Staging 3 step
         - step: &deploy-staging-3
@@ -182,14 +166,6 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-3"
                         WAIT: "true"
-                  - pipe: sentryio/sentry-new-release:0.3.0
-                    variables:
-                        SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
-                        SENTRY_ORG: "alkemi-ai-inc"
-                        SENTRY_PROJECT: "alkemi-earn-ui"
-                        ENVIRONMENT: "staging3" # Optional.
-                        FINALIZE: "false" # Optional.
-                        DEBUG: "true" # Optional.
 
         # DEFINE DEPLOY TO DEVELOPMENT step
         - step: &deploy-development
@@ -210,14 +186,6 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-development"
                         WAIT: "true"
-                  - pipe: sentryio/sentry-new-release:0.3.0
-                    variables:
-                        SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
-                        SENTRY_ORG: "alkemi-ai-inc"
-                        SENTRY_PROJECT: "alkemi-earn-ui"
-                        ENVIRONMENT: "development" # Optional.
-                        FINALIZE: "false" # Optional.
-                        DEBUG: "true" # Optional.
 
         # DEFINE DEPLOY TO PRODUCTION STEP
         - step: &deploy-production
@@ -238,14 +206,6 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-production"
                         WAIT: "true"
-                  - pipe: sentryio/sentry-new-release:0.3.0
-                    variables:
-                        SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
-                        SENTRY_ORG: "alkemi-ai-inc"
-                        SENTRY_PROJECT: "alkemi-earn-ui"
-                        ENVIRONMENT: "production" # Optional.
-                        FINALIZE: "true" # Optional.
-                        # DEBUG: '<boolean>' # Optional.
 
         # DEFINE RELEASE and bump VERSION
         - step: &release
@@ -304,3 +264,13 @@ pipelines:
             - step: *upload
             - step: *docs
             - step: *deploy-production
+
+            #                  SAVING THIS FOR LATER
+            #                  - pipe: sentryio/sentry-new-release:0.3.0
+            #                    variables:
+            #                        SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
+            #                        SENTRY_ORG: "alkemi-ai-inc"
+            #                        SENTRY_PROJECT: "alkemi-earn-ui"
+            #                        ENVIRONMENT: "staging2" # Optional.
+            #                        FINALIZE: "false" # Optional.
+            #
