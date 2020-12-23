@@ -89,7 +89,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                     />
                                     <Box ml={2}>
                                         <Typography
-                                            variant="h6"
+                                            variant="body1"
                                             color="textPrimary"
                                         >
                                             {row.alternativeUnitLabel
@@ -106,7 +106,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                 </Box>
                             </BorrowTableCell>
                             <BorrowTableCell align="right">
-                                <Typography variant="h6" color="textPrimary">
+                                <Typography variant="body1" color="textPrimary">
                                     {formatNumber(row.wallet, row.unit)}
                                 </Typography>
                                 <Typography
@@ -117,7 +117,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                 </Typography>
                             </BorrowTableCell>
                             <BorrowTableCell align="right">
-                                <Typography variant="h6" color="textPrimary">
+                                <Typography variant="body1" color="textPrimary">
                                     {formatNumber(row.balance, row.unit)}
                                 </Typography>
                                 <Typography
@@ -129,7 +129,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                             </BorrowTableCell>
                             <BorrowTableCell align="right">
                                 <Typography
-                                    variant="h6"
+                                    variant="body1"
                                     color="textPrimary"
                                     className={classes.label}
                                 >
@@ -146,7 +146,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                 align="right"
                                 className={classes.endcell}
                             >
-                                <Typography variant="h6" color="textPrimary">
+                                <Typography variant="body1" color="textPrimary">
                                     {calculateEarnings(
                                         row.balance,
                                         row.principal,

@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
             paddingRight: "0px",
         },
     },
+    title: {
+        textTransform: "uppercase",
+    },
 }));
 
 // Section 5: Code Component
@@ -121,15 +124,16 @@ function AppBar({
                         </Hidden>
                         <Hidden mdDown>
                             <Typography
-                                variant="subtitle2"
+                                variant="subtitle1"
                                 color="textSecondary"
                             >
-                                OVERVIEW
+                                Overview
                             </Typography>
                             <Typography
-                                variant="h3"
+                                variant="h4"
                                 color="textPrimary"
                                 data-testid="title"
+                                className={classes.title}
                             >
                                 {title}
                             </Typography>

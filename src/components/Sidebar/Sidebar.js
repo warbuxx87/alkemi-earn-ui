@@ -127,7 +127,7 @@ function Sidebar({ classes, width, variant, open }) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                ver.{process.env.REACT_APP_VERSION}
+                                {process.env.REACT_APP_VERSION}
                             </Link>
                         </Typography>
                     </Box>

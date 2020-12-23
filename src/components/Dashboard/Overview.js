@@ -65,7 +65,7 @@ function Overview({ aggregatedBalance, combinedAPY }) {
     const classes = useStyles();
     // Section 5: Code Component
     return (
-        <Box mt={3} mb={1}>
+        <Box mt={1} mb={1}>
             <Grid
                 alignItems="center"
                 container
@@ -77,6 +77,7 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                         variant="subtitle1"
                         color="textSecondary"
                         align="left"
+                        style={{ paddingBottom: "8px" }}
                     >
                         Aggregated Value
                     </Typography>
@@ -93,6 +94,7 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                         variant="subtitle1"
                         color="textSecondary"
                         align="right"
+                        style={{ paddingBottom: "8px" }}
                     >
                         Combined APY
                     </Typography>

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cardtitle: {
         lineHeight: 1.4,
-        paddingBottom: 10,
+        paddingBottom: 8,
     },
 }));
 

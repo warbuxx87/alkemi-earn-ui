@@ -90,7 +90,7 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                     />
                                     <Box ml={2}>
                                         <Typography
-                                            variant="h6"
+                                            variant="body1"
                                             color="textPrimary"
                                         >
                                             {row.alternativeUnitLabel
@@ -107,7 +107,7 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                 </Box>
                             </DepositTableCell>
                             <DepositTableCell align="right">
-                                <Typography variant="h6" color="textPrimary">
+                                <Typography variant="body1" color="textPrimary">
                                     {formatNumber(row.wallet, row.unit)}
                                 </Typography>
                                 <Typography
@@ -118,7 +118,7 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                 </Typography>
                             </DepositTableCell>
                             <DepositTableCell align="right">
-                                <Typography variant="h6" color="textPrimary">
+                                <Typography variant="body1" color="textPrimary">
                                     {formatNumber(row.balance, row.unit)}
                                 </Typography>
                                 <Typography
@@ -130,7 +130,7 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                             </DepositTableCell>
                             <DepositTableCell align="right">
                                 <Typography
-                                    variant="h6"
+                                    variant="body1"
                                     className={classes.label}
                                 >
                                     {formatPercent(row.apy)}
@@ -146,7 +146,7 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                 align="right"
                                 className={classes.endcell}
                             >
-                                <Typography variant="h6" color="textPrimary">
+                                <Typography variant="body1" color="textPrimary">
                                     {calculateEarnings(
                                         row.balance,
                                         row.principal,

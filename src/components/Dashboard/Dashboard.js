@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     tabs: {
+        "& .MuiTab-root": {
+            textTransform: "capitalize",
+        },
         "& .MuiDivider-root": {
             backgroundColor: "#121316",
         },
