@@ -1,3 +1,10 @@
+## [1.7.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.1...v1.7.2) (2020-12-23)
+
+
+### Bug Fixes
+
+* point WETH to correct contract on kovan ([056d291](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/056d291d1aebf1e38814ee4a0b57cf15a53374a4))
+
 ## [1.7.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.0...v1.7.1) (2020-12-22)
 
 
