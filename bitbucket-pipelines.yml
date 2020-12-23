@@ -110,7 +110,7 @@ definitions:
         # DEFINE DEPLOY TO STAGING 1 step
         - step: &deploy-staging-1
               name: "Deploy to Staging 1"
-              deployment: staging
+              deployment: staging1
               script:
                   - echo "$VERSION Deployment to Staging 1!"
                   - apt-get update
@@ -126,10 +126,11 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-1"
                         WAIT: "true"
+
         # DEFINE DEPLOY TO Staging 2 step
         - step: &deploy-staging-2
               name: "Deploy to Staging 2"
-              deployment: staging
+              deployment: staging2
               script:
                   - echo "$VERSION Deployment to Staging 2!"
                   - apt-get update
@@ -145,10 +146,11 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-2"
                         WAIT: "true"
+
         # DEFINE DEPLOY TO Staging 3 step
         - step: &deploy-staging-3
               name: "Deploy to Staging 3"
-              deployment: staging
+              deployment: staging3
               script:
                   - echo "$VERSION Deployment to Staging 3!"
                   - apt-get update
@@ -164,6 +166,7 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-3"
                         WAIT: "true"
+
         # DEFINE DEPLOY TO DEVELOPMENT step
         - step: &deploy-development
               name: "Deploy to Development"
@@ -183,6 +186,7 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-development"
                         WAIT: "true"
+
         # DEFINE DEPLOY TO PRODUCTION STEP
         - step: &deploy-production
               name: "Deploy to Production"
@@ -202,6 +206,7 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-production"
                         WAIT: "true"
+
         # DEFINE RELEASE and bump VERSION
         - step: &release
               name: "Release and bump version"
@@ -259,3 +264,13 @@ pipelines:
             - step: *upload
             - step: *docs
             - step: *deploy-production
+
+            #                  SAVING THIS FOR LATER
+            #                  - pipe: sentryio/sentry-new-release:0.3.0
+            #                    variables:
+            #                        SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
+            #                        SENTRY_ORG: "alkemi-ai-inc"
+            #                        SENTRY_PROJECT: "alkemi-earn-ui"
+            #                        ENVIRONMENT: "staging2" # Optional.
+            #                        FINALIZE: "false" # Optional.
+            #
