@@ -110,7 +110,7 @@ definitions:
         # DEFINE DEPLOY TO STAGING 1 step
         - step: &deploy-staging-1
               name: "Deploy to Staging 1"
-              deployment: staging
+              deployment: staging1
               script:
                   - echo "$VERSION Deployment to Staging 1!"
                   - apt-get update
@@ -129,7 +129,7 @@ definitions:
         # DEFINE DEPLOY TO Staging 2 step
         - step: &deploy-staging-2
               name: "Deploy to Staging 2"
-              deployment: staging
+              deployment: staging2
               script:
                   - echo "$VERSION Deployment to Staging 2!"
                   - apt-get update
@@ -148,7 +148,7 @@ definitions:
         # DEFINE DEPLOY TO Staging 3 step
         - step: &deploy-staging-3
               name: "Deploy to Staging 3"
-              deployment: staging
+              deployment: staging3
               script:
                   - echo "$VERSION Deployment to Staging 3!"
                   - apt-get update
