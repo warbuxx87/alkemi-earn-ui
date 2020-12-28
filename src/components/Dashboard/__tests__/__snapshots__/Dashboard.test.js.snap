@@ -32,20 +32,24 @@ Object {
                   >
                     Aggregated Value
                   </h6>
-                  <h1
-                    class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                  <div
+                    class="MuiBox-root MuiBox-root-11"
                   >
-                    $
-                    <span>
-                      0
-                      <span
-                        class="makeStyles-cents-7"
-                      >
-                        .
-                        00
+                    <h1
+                      class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                    >
+                      $
+                      <span>
+                        0
+                        <span
+                          class="makeStyles-cents-7"
+                        >
+                          .
+                          00
+                        </span>
                       </span>
-                    </span>
-                  </h1>
+                    </h1>
+                  </div>
                 </div>
                 <div
                   class="MuiGrid-root MuiGrid-item"
@@ -57,17 +61,13 @@ Object {
                     Combined APY
                   </h6>
                   <div
-                    class="MuiBox-root MuiBox-root-11"
+                    class="MuiBox-root MuiBox-root-12"
                   >
-                    <div
-                      class="MuiBox-root MuiBox-root-12"
+                    <h1
+                      class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignRight"
                     >
-                      <h1
-                        class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignRight"
-                      >
-                        0.00%
-                      </h1>
-                    </div>
+                      0.00%
+                    </h1>
                     <div
                       class="MuiBox-root MuiBox-root-13"
                     >
@@ -391,20 +391,24 @@ Object {
                 >
                   Aggregated Value
                 </h6>
-                <h1
-                  class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                <div
+                  class="MuiBox-root MuiBox-root-11"
                 >
-                  $
-                  <span>
-                    0
-                    <span
-                      class="makeStyles-cents-7"
-                    >
-                      .
-                      00
+                  <h1
+                    class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                  >
+                    $
+                    <span>
+                      0
+                      <span
+                        class="makeStyles-cents-7"
+                      >
+                        .
+                        00
+                      </span>
                     </span>
-                  </span>
-                </h1>
+                  </h1>
+                </div>
               </div>
               <div
                 class="MuiGrid-root MuiGrid-item"
@@ -416,17 +420,13 @@ Object {
                   Combined APY
                 </h6>
                 <div
-                  class="MuiBox-root MuiBox-root-11"
+                  class="MuiBox-root MuiBox-root-12"
                 >
-                  <div
-                    class="MuiBox-root MuiBox-root-12"
+                  <h1
+                    class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignRight"
                   >
-                    <h1
-                      class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignRight"
-                    >
-                      0.00%
-                    </h1>
-                  </div>
+                    0.00%
+                  </h1>
                   <div
                     class="MuiBox-root MuiBox-root-13"
                   >
