@@ -34,12 +34,8 @@ const useStyles = makeStyles((theme) => ({
         padding: "4px 0",
     },
     appBar: {
-        paddingLeft: "16px",
-        paddingRight: "16px",
-        "@media (min-width:1550px)": {
-            paddingLeft: "0px",
-            paddingRight: "0px",
-        },
+        paddingLeft: "0px",
+        paddingRight: "0px",
     },
     title: {
         textTransform: "uppercase",

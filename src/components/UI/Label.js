@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         fontFamily: theme.typography.fontFamily,
         alignItems: "center",
-        borderRadius: 2,
+        borderRadius: 4,
         display: "inline-flex",
         flexGrow: 0,
         whiteSpace: "nowrap",

@@ -20,6 +20,7 @@ import {
 import DepositButton from "containers/Lend/DrawerDeposit";
 import WithdrawButton from "containers/Lend/DrawerWithdraw";
 import LendTableCell from "components/UI/TableCell";
+
 import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({

@@ -31,15 +31,23 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
     },
     upicon: {
-        fontSize: "3.1rem",
+        fontSize: "3rem",
+        "@media (min-width:1940px)": {
+            fontSize: "3.1rem",
+            marginTop: 2,
+        },
         marginLeft: 5,
-        marginTop: 2,
+        marginTop: 2.4,
         color: theme.palette.success.main,
     },
     downicon: {
-        fontSize: "3.1rem",
+        fontSize: "3rem",
+        "@media (min-width:1940px)": {
+            fontSize: "3.1rem",
+            marginTop: 2,
+        },
         marginLeft: 5,
-        marginTop: 2,
+        marginTop: 2.4,
         color: theme.palette.warning.main,
     },
 }));
@@ -81,13 +89,19 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                     >
                         Aggregated Value
                     </Typography>
-                    <Typography variant="h1" color="textPrimary" align="left">
-                        $
-                        <SplitNumber
-                            theNumber={aggregatedBalance}
-                            centsClassName={classes.cents}
-                        />
-                    </Typography>
+                    <Box>
+                        <Typography
+                            variant="h1"
+                            color="textPrimary"
+                            align="left"
+                        >
+                            $
+                            <SplitNumber
+                                theNumber={aggregatedBalance}
+                                centsClassName={classes.cents}
+                            />
+                        </Typography>
+                    </Box>
                 </Grid>
                 <Grid item>
                     <Typography
@@ -103,15 +117,13 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                         justifyContent="flex-end"
                         alignItems="center"
                     >
-                        <Box>
-                            <Typography
-                                variant="h1"
-                                color="textPrimary"
-                                align="right"
-                            >
-                                {formatPercent(combinedAPY)}
-                            </Typography>
-                        </Box>
+                        <Typography
+                            variant="h1"
+                            color="textPrimary"
+                            align="right"
+                        >
+                            {formatPercent(combinedAPY)}
+                        </Typography>
                         <Box>{displayAPYIcon(classes, combinedAPY)}</Box>
                     </Box>
                 </Grid>

@@ -31,10 +31,10 @@ import SidebarHeader from "containers/Sidebar/Header";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
     drawer: {
-        width: 280,
+        width: 290,
         marginLeft: 24,
         flexShrink: 0,
-        "@media (min-width:1550px)": {
+        "@media (min-width:1940px)": {
             marginLeft: 35,
             width: 340,
         },
@@ -43,8 +43,8 @@ const styles = (theme) => ({
         overflowX: "hidden",
     },
     drawerOpen: {
-        width: 280,
-        "@media (min-width:1550px)": {
+        width: 290,
+        "@media (min-width:1940px)": {
             width: 340,
         },
         transition: theme.transitions.create("width", {
@@ -63,8 +63,8 @@ const styles = (theme) => ({
             width: 70,
         },
         "&:hover": {
-            width: 280,
-            "@media (min-width:1550px)": {
+            width: 290,
+            "@media (min-width:1940px)": {
                 width: 340,
             },
             transition: theme.transitions.create("width", {

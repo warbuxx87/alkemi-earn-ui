@@ -43,6 +43,9 @@ const DrawerClass = makeStyles((theme) =>
         drawer: {
             width: "100%",
             "@media (min-width: 780px)": {
+                width: 320,
+            },
+            "@media (min-width: 1940px)": {
                 width: 380,
             },
         },
@@ -61,7 +64,7 @@ const DrawerClass = makeStyles((theme) =>
             top: "17px",
             cursor: "pointer",
             color: "#ffffff",
-            fontSize: "14px",
+            fontSize: "0.875rem",
         },
         input: {
             background: "#0a0a0a 0% 0% no-repeat padding-box",
@@ -75,7 +78,7 @@ const DrawerClass = makeStyles((theme) =>
         },
         rateInfo: {
             color: "white",
-            fontSize: "14px",
+            fontSize: "0.875rem",
             marginTop: "20px",
         },
         rateRow: {
@@ -186,7 +189,7 @@ const DrawerWrapper = ({
                             <Grid container direction="row">
                                 <Grid item md={6} xs className={classes.amount}>
                                     <Typography
-                                        variant="body1"
+                                        variant="h6"
                                         color="textPrimary"
                                     >
                                         Amount
@@ -282,7 +285,7 @@ const DrawerWrapper = ({
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Contract Balance
+                                        Current Balance
                                     </Typography>
                                 </Grid>
                                 <Grid
