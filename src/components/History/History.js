@@ -74,30 +74,18 @@ const assetName = [
     },
 ];
 
-const eventAction = [
+const accountType = [
     {
         id: "All",
         name: "All",
     },
     {
-        id: "Deposit",
-        name: "Deposit",
+        id: "savings",
+        name: "Savings",
     },
     {
-        id: "Withdraw",
-        name: "Withdraw",
-    },
-    {
-        id: "Borrow",
-        name: "Borrow",
-    },
-    {
-        id: "Repay",
-        name: "Repay",
-    },
-    {
-        id: "Liquidate",
-        name: "Liquidate",
+        id: "credit",
+        name: "Credit",
     },
 ];
 
@@ -147,9 +135,9 @@ const History = ({
         if (values.asset && values.asset !== "ALL") {
             data = data.filter((item) => item.symbol === values.asset);
         }
-        if (values.action && values.action !== "All") {
+        if (values.account && values.account !== "All") {
             data = data.filter((item) => {
-                return item.topic === values.action;
+                return item.type === values.account;
             });
         }
 
@@ -185,7 +173,7 @@ const History = ({
 
         setPage(0);
         setTxtListData(data);
-    }, [txList, values.asset, values.action, values.sortBy]);
+    }, [txList, values.asset, values.account, values.sortBy]);
 
     // filter the data displayed by type and sorting selected
     const getDateFromBlockNumber = useCallback(
@@ -257,8 +245,8 @@ const History = ({
                         </TextField>
                         <TextField
                             fullWidth
-                            label="Action"
-                            name="action"
+                            label="Account"
+                            name="account"
                             className={classes.eventField}
                             onChange={handleChange}
                             select
@@ -266,7 +254,7 @@ const History = ({
                             variant="outlined"
                             color="secondary"
                         >
-                            {eventAction.map((category) => (
+                            {accountType.map((category) => (
                                 <MenuItem key={category.id} value={category.id}>
                                     {category.name}
                                 </MenuItem>

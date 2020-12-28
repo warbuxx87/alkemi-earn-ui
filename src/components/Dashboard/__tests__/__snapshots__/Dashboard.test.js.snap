@@ -28,6 +28,7 @@ Object {
                 >
                   <h6
                     class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                    style="padding-bottom: 8px;"
                   >
                     Aggregated Value
                   </h6>
@@ -51,6 +52,7 @@ Object {
                 >
                   <h6
                     class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
+                    style="padding-bottom: 8px;"
                   >
                     Combined APY
                   </h6>
@@ -385,6 +387,7 @@ Object {
               >
                 <h6
                   class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                  style="padding-bottom: 8px;"
                 >
                   Aggregated Value
                 </h6>
@@ -408,6 +411,7 @@ Object {
               >
                 <h6
                   class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
+                  style="padding-bottom: 8px;"
                 >
                   Combined APY
                 </h6>
