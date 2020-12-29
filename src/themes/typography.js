@@ -18,7 +18,7 @@ export default {
 
     h1: {
         fontWeight: 400,
-        fontSize: "2.375rem",
+        fontSize: "2.25rem",
         "@media (min-width:1940px)": {
             fontSize: "2.625rem",
         },

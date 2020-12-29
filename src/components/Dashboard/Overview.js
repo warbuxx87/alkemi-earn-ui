@@ -31,24 +31,30 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
     },
     upicon: {
-        fontSize: "3rem",
+        fontSize: "2.55rem",
         "@media (min-width:1940px)": {
             fontSize: "3.1rem",
             marginTop: 2,
         },
         marginLeft: 5,
-        marginTop: 2.4,
+        marginTop: 2,
         color: theme.palette.success.main,
     },
     downicon: {
-        fontSize: "3rem",
+        fontSize: "2.55rem",
         "@media (min-width:1940px)": {
             fontSize: "3.1rem",
             marginTop: 2,
         },
         marginLeft: 5,
-        marginTop: 2.4,
+        marginTop: 2,
         color: theme.palette.warning.main,
+    },
+    combinedApy: {
+        textAlign: "left",
+        "@media (min-width: 520px)": {
+            textAlign: "right",
+        },
     },
 }));
 
@@ -107,8 +113,8 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                     <Typography
                         variant="subtitle1"
                         color="textSecondary"
-                        align="right"
-                        style={{ paddingBottom: "8px" }}
+                        className={classes.combinedApy}
+                        style={{ paddingTop: "4px", paddingBottom: "4px" }}
                     >
                         Combined APY
                     </Typography>
@@ -117,11 +123,7 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                         justifyContent="flex-end"
                         alignItems="center"
                     >
-                        <Typography
-                            variant="h1"
-                            color="textPrimary"
-                            align="right"
-                        >
+                        <Typography variant="h1" color="textPrimary">
                             {formatPercent(combinedAPY)}
                         </Typography>
                         <Box>{displayAPYIcon(classes, combinedAPY)}</Box>

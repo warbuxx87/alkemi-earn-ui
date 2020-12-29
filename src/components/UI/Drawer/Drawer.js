@@ -43,7 +43,7 @@ const DrawerClass = makeStyles((theme) =>
         drawer: {
             width: "100%",
             "@media (min-width: 780px)": {
-                width: 320,
+                width: 330,
             },
             "@media (min-width: 1940px)": {
                 width: 380,
