@@ -1,3 +1,10 @@
+# [1.8.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.2...v1.8.0) (2020-12-31)
+
+
+### Features
+
+* enable mainnet contracts ([a553d79](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a553d79f9d9303f82fec31d6ad63ab1ad2e55fb8))
+
 ## [1.7.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.1...v1.7.2) (2020-12-23)
 
 
