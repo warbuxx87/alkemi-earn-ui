@@ -1,6 +1,6 @@
 # Alkemi Earn | User Interface
 
-![Version](https://img.shields.io/badge/version-1.5.1-blue.svg?cacheSeconds=2592000) [![Built with React](https://img.shields.io/badge/React-black?style=flat&logo=react)](https://docs.alkemi.network/earn-ui) [![Built on Ethereum](https://img.shields.io/badge/web3.js-blue?style=flat&logo=ethereum)](https://web3js.readthedocs.io/en/v1.3.0/) [![Twitter: AlkemiOfficial](https://img.shields.io/twitter/follow/AlkemiOfficial.svg?style=social)](https://twitter.com/AlkemiOfficial)
+![Version](https://img.shields.io/badge/version-1.8.0-blue.svg?cacheSeconds=2592000) [![Built with React](https://img.shields.io/badge/React-black?style=flat&logo=react)](https://docs.alkemi.network/earn-ui) [![Built on Ethereum](https://img.shields.io/badge/web3.js-blue?style=flat&logo=ethereum)](https://web3js.readthedocs.io/en/v1.3.0/) [![Twitter: AlkemiOfficial](https://img.shields.io/twitter/follow/AlkemiOfficial.svg?style=social)](https://twitter.com/AlkemiOfficial)
 
 > Web3 User Interface for Alkemi EARN
 
