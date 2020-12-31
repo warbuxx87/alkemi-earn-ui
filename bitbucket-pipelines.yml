@@ -70,6 +70,7 @@ definitions:
               artifacts:
                   # keep all files from this build step and make available for next step
                   - build/**
+                  - public/meta.json
 
         # DEFINE Upload to AWS Step
         - step: &upload
