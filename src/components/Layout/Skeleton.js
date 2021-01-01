@@ -33,9 +33,14 @@ const styles = (theme) => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         minHeight: "calc(100% - 56px)",
-        marginLeft: 32,
-        marginRight: 32,
-        "@media (min-width: 1720px)": {
+        marginLeft: 36,
+        marginRight: 36,
+        "@media (min-width: 1680px)": {
+            maxWidth: "1180px",
+            margin: "0 auto",
+        },
+
+        "@media (min-width: 1940px)": {
             maxWidth: "1280px",
             margin: "0 auto",
         },

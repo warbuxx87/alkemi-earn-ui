@@ -91,7 +91,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton, txs }) => {
         <Box mt={1}>
             <Typography
                 className={classes.heading}
-                variant="h6"
+                variant="body1"
                 color="textPrimary"
             >
                 Available Markets
@@ -119,7 +119,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton, txs }) => {
                                         />
                                         <Box ml={2}>
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
                                                 {row.alternativeUnitLabel
@@ -140,7 +140,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton, txs }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                     >
                                         {formatNumber(row.wallet, row.unit)}
@@ -157,7 +157,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton, txs }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                     >
                                         {formatNumber(row.liquidity, row.unit)}
@@ -174,7 +174,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton, txs }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                         className={classes.label}
                                     >

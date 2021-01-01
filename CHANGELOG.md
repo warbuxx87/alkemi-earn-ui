@@ -1,3 +1,17 @@
+## [1.9.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.0...v1.9.1) (2021-01-01)
+
+
+### Bug Fixes
+
+* history page tx link to etherscan UI-174 ([e9e2653](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e9e2653de09648c0a19519f9c0943b72659b75f7))
+
+# [1.9.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.8.0...v1.9.0) (2021-01-01)
+
+
+### Features
+
+* add bug reporting form ([b9d158d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b9d158d0af22724e4970aff10e28521e903e7e3d))
+
 # [1.8.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.2...v1.8.0) (2020-12-31)
 
 

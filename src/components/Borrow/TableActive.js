@@ -79,7 +79,7 @@ const BorrowTableActive = ({ data = [], USDPrice }) => {
         <Box mt={2}>
             <Typography
                 className={classes.heading}
-                variant="h6"
+                variant="body1"
                 color="textPrimary"
             >
                 Active Borrowed
@@ -107,7 +107,7 @@ const BorrowTableActive = ({ data = [], USDPrice }) => {
                                         />
                                         <Box ml={2}>
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
                                                 {row.alternativeUnitLabel
@@ -128,7 +128,7 @@ const BorrowTableActive = ({ data = [], USDPrice }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                     >
                                         {formatNumber(row.balance, row.unit)}
@@ -145,7 +145,7 @@ const BorrowTableActive = ({ data = [], USDPrice }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                     >
                                         $
@@ -169,7 +169,7 @@ const BorrowTableActive = ({ data = [], USDPrice }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                         className={classes.label}
                                     >

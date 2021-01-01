@@ -85,7 +85,7 @@ class Stats extends React.Component {
                     />
                     <Typography
                         className={classes.assetName}
-                        variant="h6"
+                        variant="body1"
                         color="textPrimary"
                     >
                         {
@@ -97,7 +97,7 @@ class Stats extends React.Component {
                     </Typography>
                     <Box flexGrow={1}>
                         <Typography
-                            variant="h6"
+                            variant="body1"
                             color="textPrimary"
                             align="right"
                         >

@@ -20,7 +20,6 @@ const decimalsToUnit = {
 
 // decimals is constant, default will be 12
 export const assetToDecimals = {
-    USDx: 18,
     WETH: 18,
     DAI: 18,
     PAX: 18,
@@ -261,7 +260,11 @@ export const checkAction = (address, toAddress, fromAddress, amount) => {
 };
 
 export const openEtherScan = (hash, currentNetworkName) => {
-    const urlBase = `https://${currentNetworkName}.etherscan.io/tx/`;
+    let urlBase = `https://${currentNetworkName}.etherscan.io/tx/`;
+    // mainnet does not resolve main.etherscan.io change to root etherscan.io
+    if (currentNetworkName === "main") {
+        urlBase = `https://etherscan.io/tx/`;
+    }
     const url = urlBase + hash;
 
     return url;

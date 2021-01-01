@@ -93,7 +93,7 @@ exports[`<Drawer /> matches snapshot 1`] = `
             >
               <WithStyles(ForwardRef(Typography))
                 color="textPrimary"
-                variant="body1"
+                variant="h6"
               >
                 Amount
               </WithStyles(ForwardRef(Typography))>
@@ -204,7 +204,7 @@ exports[`<Drawer /> matches snapshot 1`] = `
                 color="textSecondary"
                 variant="body2"
               >
-                Contract Balance
+                Current Balance
               </WithStyles(ForwardRef(Typography))>
             </WithStyles(ForwardRef(Grid))>
             <WithStyles(ForwardRef(Grid))

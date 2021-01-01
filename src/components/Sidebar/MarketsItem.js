@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
 import SvgIcon from "@material-ui/core/SvgIcon";
+import { Typography } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import ListItem from "../UI/ListItem";
@@ -41,7 +42,14 @@ function MarketsIcon(props) {
 const SidebarMarketsItem = ({ onClick, selected }) => (
     <ListItem
         icon={<MarketsIcon />}
-        text="Markets"
+        text={
+            <Typography
+                variant="subtitle2"
+                style={{ fontSize: "0.875rem", lineHeight: 1.6 }}
+            >
+                Markets
+            </Typography>
+        }
         onClick={onClick}
         selected={selected}
     />
