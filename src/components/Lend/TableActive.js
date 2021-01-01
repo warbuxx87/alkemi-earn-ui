@@ -20,6 +20,7 @@ import {
 import DepositButton from "containers/Lend/DrawerDeposit";
 import WithdrawButton from "containers/Lend/DrawerWithdraw";
 import LendTableCell from "components/UI/TableCell";
+
 import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -77,7 +78,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
         <Box mt={2}>
             <Typography
                 className={classes.heading}
-                variant="h6"
+                variant="body1"
                 color="textPrimary"
             >
                 Active Deposits
@@ -105,7 +106,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                         />
                                         <Box ml={2}>
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
                                                 {row.alternativeUnitLabel
@@ -126,7 +127,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                     >
                                         {formatNumber(row.balance, row.unit)}
@@ -143,7 +144,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                     >
                                         $
@@ -166,7 +167,7 @@ const LendTableActive = ({ data = [], USDPrice }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                         className={classes.label}
                                     >

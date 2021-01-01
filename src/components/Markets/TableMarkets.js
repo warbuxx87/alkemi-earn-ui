@@ -196,7 +196,7 @@ const TableMarkets = ({ marketsData }) => {
                                                 />
                                                 <Box ml={2}>
                                                     <Typography
-                                                        variant="h6"
+                                                        variant="body1"
                                                         color="textPrimary"
                                                     >
                                                         {
@@ -223,7 +223,7 @@ const TableMarkets = ({ marketsData }) => {
                                         <MarketsTableCell align="right">
                                             {" "}
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
                                                 {displayUSDOrNativeValue(
@@ -239,7 +239,7 @@ const TableMarkets = ({ marketsData }) => {
                                         <MarketsTableCell align="right">
                                             {" "}
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
                                                 {displayUSDOrNativeValue(
@@ -254,7 +254,7 @@ const TableMarkets = ({ marketsData }) => {
                                         <MarketsTableCell align="right">
                                             {" "}
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
                                                 {format_str_to_percent(
@@ -265,7 +265,7 @@ const TableMarkets = ({ marketsData }) => {
                                         <MarketsTableCell align="right">
                                             {" "}
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
                                                 {format_str_to_percent(
@@ -276,7 +276,7 @@ const TableMarkets = ({ marketsData }) => {
                                         <MarketsTableCell align="right">
                                             {" "}
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
                                                 {format_str_to_percent(

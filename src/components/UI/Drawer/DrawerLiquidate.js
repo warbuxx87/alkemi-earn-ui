@@ -41,6 +41,9 @@ const DrawerLiquidateClass = makeStyles(
             drawer: {
                 width: "100%",
                 "@media (min-width: 780px)": {
+                    width: 330,
+                },
+                "@media (min-width: 1940px)": {
                     width: 380,
                 },
             },
