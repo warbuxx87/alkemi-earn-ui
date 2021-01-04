@@ -31,6 +31,8 @@ export default () => {
     const dispatch = useDispatch();
 
     const drizzle = useContext(DrizzleContext);
+    const currentState = onboard.getState();
+    console.log("onboard currentstate", currentState);
 
     const walletConnected = useSelector(isWalletConnected);
 
@@ -60,26 +62,13 @@ export default () => {
                         // set current address from chosen provider in onboard
                         // For Metamask: selectedAddress
                         // For Fortmatic: account
+                        // For Wallet Connect: accounts[0]
 
                         // The order matters here
                         // As the network is always set(with the default one at least), must set address last so anything else that rely on it being null (example fetchTx) fire only when the correct data is set
-                        dispatch(
-                            setWalletNetwork(
-                                window.currentlyUsedProvider.networkVersion
-                                    ? window.currentlyUsedProvider
-                                          .networkVersion
-                                    : DEFAULT_NETWORK
-                            )
-                        );
+                        dispatch(setWalletNetwork(currentState.network));
 
-                        dispatch(
-                            setWalletAddress(
-                                window.currentlyUsedProvider.selectedAddress
-                                    ? window.currentlyUsedProvider
-                                          .selectedAddress
-                                    : window.currentlyUsedProvider.account
-                            )
-                        );
+                        dispatch(setWalletAddress(currentState.address));
                     }
 
                     dispatch(setWalletConnected(readyToTransact));
@@ -92,7 +81,7 @@ export default () => {
         };
 
         checkIfPreviouslySelectedWallet();
-    }, [dispatch]);
+    }, [currentState.address, currentState.network, dispatch]);
 
     const resetStoreData = useCallback(() => {
         dispatch(resetLendData());
@@ -126,6 +115,7 @@ export default () => {
         window.localStorage.removeItem("selectedWallet");
 
         deleteCurrentData();
+        window.location.reload();
     }, [deleteCurrentData]);
 
     useEffect(() => {
@@ -140,14 +130,9 @@ export default () => {
                     drizzle.web3 = web3; // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
 
                     // set it in sync vars as redux stores data async here it seems
-                    currentWalletAddress = drizzle.web3.currentProvider
-                        .selectedAddress
-                        ? drizzle.web3.currentProvider.selectedAddress
-                        : drizzle.web3.currentProvider.account;
-                    currentWalletNetwork = drizzle.web3.currentProvider
-                        .networkVersion
-                        ? drizzle.web3.currentProvider.networkVersion
-                        : DEFAULT_NETWORK;
+                    currentWalletAddress = currentState.address;
+
+                    currentWalletNetwork = currentState.network;
 
                     // The order matters here
                     dispatch(setWalletNetwork(currentWalletNetwork));
@@ -176,8 +161,11 @@ export default () => {
                             (accounts) => {
                                 window.location.reload();
 
+                                resetStoreData();
+                                dispatch(setWalletAddress(accounts[0]));
+
                                 // TODO: check the use of the following code, maybe use with other wallets
-                                /*resetStoreData();
+                                /*
 
                                 // Could be commented out in the current state as try/catch in contracts.js will catch it anyway
                                 // (or the current clean up in contracts can be kept as it is)
@@ -229,16 +217,19 @@ export default () => {
         userWalletNetwork,
         resetStoreData,
         dispatch,
+        currentState.address,
+        currentState.network,
     ]);
 
     const onConnect = async () => {
-        // TODO: replace with const isSelectWallet = await onboard.walletSelect(); when using more than metamask
-        const isSelectWallet = await onboard.walletSelect("MetaMask");
-
+        const isSelectWallet = await onboard.walletSelect();
+        deleteCurrentData();
         if (isSelectWallet) {
             deleteCurrentData();
 
             const readyToTransact = await onboard.walletCheck();
+            dispatch(setWalletNetwork(currentState.network));
+            dispatch(setWalletAddress(currentState.address));
 
             dispatch(setWalletConnected(readyToTransact));
 
