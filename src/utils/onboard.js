@@ -3,17 +3,14 @@ import Onboard from "bnc-onboard";
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
 const DAPP_ID = process.env.REACT_APP_DAPP_ID;
-// const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
-// const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
-// const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
-// const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
-// const INFURA_ID = process.env.REACT_APP_INFURA_ID;
-// const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
-// const APP_URL = process.env.REACT_APP_APP_URL
-// const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL:
-// const APP_URL = "https://dapp.alkemi.network";
-// const RPC_URL = "https://rinkeby.infura.io/v3/" + INFURA_KEY;
-// const CONTACT_EMAIL = "dev@alkemi.ai";
+const INFURA_ID = process.env.REACT_APP_INFURA_ID;
+const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
+const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
+const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
+const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
+const APP_URL = process.env.REACT_APP_APP_URL;
+const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL;
+const RPC_URL = "https://rinkeby.infura.io/v3/" + INFURA_ID;
 
 const walletChecks = [
     { checkName: "derivationPath" },
@@ -25,22 +22,6 @@ const walletChecks = [
 
 const wallets = [
     { walletName: "metamask", preferred: true },
-
-    /*{
-        walletName: "fortmatic",
-        apiKey: DEFAULT_NETWORK === "4" ? FORTMATIC_TEST_KEY : FORTMATIC_KEY,
-        preferred: true,
-    },
-
-    {
-        walletName: "ledger",
-        rpcUrl: RPC_URL,
-        preferred: true,
-    },*/
-
-    /*{ walletName: "coinbase", preferred: true },
-    { walletName: "trust", preferred: true, rpcUrl: RPC_URL },
-    { walletName: "dapper", preferred: true },
     {
         walletName: "ledger",
         rpcUrl: RPC_URL,
@@ -53,18 +34,25 @@ const wallets = [
         rpcUrl: RPC_URL,
         preferred: true,
     },
+    { walletName: "trust", preferred: true },
+    { walletName: "coinbase", preferred: true },
+    {
+        walletName: "walletConnect",
+        preferred: true,
+        infuraKey: INFURA_ID, // your infura id [String][Optional if rpc is provided instead]
+    },
+    {
+        walletName: "fortmatic",
+        apiKey: DEFAULT_NETWORK === "4" ? FORTMATIC_TEST_KEY : FORTMATIC_KEY,
+        preferred: true,
+    },
     {
         walletName: "portis",
         apiKey: PORTIS_KEY,
         preferred: true,
         label: "Portis",
     },
-    {
-        walletName: "squarelink",
-        apiKey: SQUARELINK_KEY,
-        preferred: true,
-        label: "SquareLink",
-    },*/
+    { walletName: "dapper", preferred: true },
 ];
 
 const onboard = Onboard({
@@ -76,7 +64,7 @@ const onboard = Onboard({
     },
     subscriptions: {
         wallet: (wallet) => {
-            window.localStorage.setItem("selectedWallet", wallet.name);
+            //    window.localStorage.setItem("selectedWallet", wallet.name);
 
             switch (wallet.name) {
                 case "Fortmatic": {
