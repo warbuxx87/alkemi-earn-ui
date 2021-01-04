@@ -1,7 +1,7 @@
 {
     "name": "@project-alkemi/alkemi-earn-ui",
     "version": "1.9.1",
-    "homepage": "https://dapp.alkemi.network",
+    "homepage": "https://earn.alkemi.network",
     "repository": {
         "type": "git",
         "url": "git@bitbucket.org:project-alkemi/alkemi-earn-ui.git"
