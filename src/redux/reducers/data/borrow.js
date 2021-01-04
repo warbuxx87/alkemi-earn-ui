@@ -1,5 +1,8 @@
 // Import action of interest as constants
-import { RESET_BORROW_DATA } from "redux/actions/data/borrow";
+import {
+    RESET_BORROW_DATA,
+    SET_ETH_BORROW_BALANCE,
+} from "redux/actions/data/borrow";
 
 import address from "constants/address_map.json";
 
@@ -66,14 +69,14 @@ export default (state = initialState, action) => {
             }
         }
 
-        case "ACCOUNT_BALANCE_FETCHED": {
+        case SET_ETH_BORROW_BALANCE: {
             return {
                 ...state,
                 assets: {
                     ...state.assets,
                     WETH: {
                         ...state.assets["WETH"],
-                        wallet: action.accountBalance, // expecting that only one account is used at the same time, and thus only one value is retrieved
+                        wallet: action.payload.walletETHBalance, // expecting that only one account is used at the same time, and thus only one value is retrieved
                     },
                 },
             };

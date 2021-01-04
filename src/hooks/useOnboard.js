@@ -13,7 +13,11 @@ import {
     setWalletConnected,
     setWalletAddress,
     setWalletNetwork,
+    setWalletBalance,
 } from "redux/actions/status/onboard";
+
+import { setEthLendBalance } from "redux/actions/data/lend";
+import { setEthBorrowBalance } from "redux/actions/data/borrow";
 
 import Web3 from "web3";
 
@@ -21,6 +25,7 @@ import {
     isWalletConnected,
     walletAddress,
     walletNetwork,
+    walletBalance,
 } from "redux/selectors/data/onboard";
 
 import DrizzleContext from "utils/DrizzleContext";
@@ -32,12 +37,13 @@ export default () => {
 
     const drizzle = useContext(DrizzleContext);
     const currentState = onboard.getState();
-    console.log("onboard currentstate", currentState);
+    //  console.log("onboard currentstate", currentState);
 
     const walletConnected = useSelector(isWalletConnected);
 
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+    const userWalletBalance = useSelector(walletBalance);
 
     // get previous selected wallet
     useEffect(() => {
@@ -95,7 +101,9 @@ export default () => {
 
         dispatch(setWalletConnected(false));
         dispatch(setWalletAddress(null));
-
+        dispatch(setWalletBalance(0));
+        dispatch(setEthLendBalance(0));
+        dispatch(setEthBorrowBalance(0));
         dispatch(setWalletNetwork(DEFAULT_NETWORK));
 
         resetStoreData();
@@ -123,6 +131,7 @@ export default () => {
             if (walletConnected === true) {
                 let currentWalletAddress = userWalletAddress;
                 let currentWalletNetwork = userWalletNetwork;
+                let currentWalletBalance = userWalletBalance;
 
                 if (drizzle && !forceUpdate) {
                     const web3 = new Web3(window.currentlyUsedProvider);
@@ -134,9 +143,20 @@ export default () => {
 
                     currentWalletNetwork = currentState.network;
 
+                    currentWalletBalance = currentState.balance;
+
+                    // if (currentWalletBalance !== undefined) {
+                    //     currentWalletBalance = currentWalletBalance.toNumber;
+                    // }
+
+                    console.log("eth_balance", currentWalletBalance);
+
                     // The order matters here
                     dispatch(setWalletNetwork(currentWalletNetwork));
                     dispatch(setWalletAddress(currentWalletAddress));
+                    dispatch(setWalletBalance(currentWalletBalance));
+                    dispatch(setEthLendBalance(currentWalletBalance));
+                    dispatch(setEthBorrowBalance(currentWalletBalance));
                 }
 
                 // account connected
@@ -144,6 +164,7 @@ export default () => {
                     drizzle,
                     currentWalletAddress,
                     currentWalletNetwork,
+                    currentWalletBalance,
                     forceUpdate
                 );
 
@@ -219,6 +240,8 @@ export default () => {
         dispatch,
         currentState.address,
         currentState.network,
+        currentState.balance,
+        userWalletBalance,
     ]);
 
     const onConnect = async () => {
@@ -230,7 +253,9 @@ export default () => {
             const readyToTransact = await onboard.walletCheck();
             dispatch(setWalletNetwork(currentState.network));
             dispatch(setWalletAddress(currentState.address));
-
+            dispatch(setWalletBalance(currentState.balance));
+            dispatch(setEthLendBalance(currentState.balance));
+            dispatch(setEthBorrowBalance(currentState.balance));
             dispatch(setWalletConnected(readyToTransact));
 
             if (!readyToTransact) {
