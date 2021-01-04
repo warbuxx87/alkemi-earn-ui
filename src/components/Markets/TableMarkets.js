@@ -140,7 +140,7 @@ const TableMarkets = ({ marketsData }) => {
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="subtitle22"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         Total Borrow
