@@ -8,8 +8,8 @@ const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
 const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
 const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
 // const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
-const APP_URL = process.env.REACT_APP_APP_URL;
-const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL;
+// const APP_URL = process.env.REACT_APP_APP_URL;
+// const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL;
 const RPC_URL = "https://rinkeby.infura.io/v3/" + INFURA_ID;
 
 const walletChecks = [
@@ -22,18 +22,6 @@ const walletChecks = [
 
 const wallets = [
     { walletName: "metamask", preferred: true },
-    {
-        walletName: "ledger",
-        rpcUrl: RPC_URL,
-        preferred: true,
-    },
-    {
-        walletName: "trezor",
-        appUrl: APP_URL,
-        email: CONTACT_EMAIL,
-        rpcUrl: RPC_URL,
-        preferred: true,
-    },
     { walletName: "trust", preferred: true },
     { walletName: "coinbase", preferred: true },
     {
@@ -42,17 +30,20 @@ const wallets = [
         infuraKey: INFURA_ID, // your infura id [String][Optional if rpc is provided instead]
     },
     {
-        walletName: "fortmatic",
-        apiKey: DEFAULT_NETWORK === "4" ? FORTMATIC_TEST_KEY : FORTMATIC_KEY,
-        preferred: true,
-    },
-    {
         walletName: "portis",
         apiKey: PORTIS_KEY,
         preferred: true,
         label: "Portis",
     },
-    { walletName: "dapper", preferred: true },
+    {
+        walletName: "ledger",
+        rpcUrl: RPC_URL,
+        preferred: true,
+    },
+    {
+        walletName: "fortmatic",
+        apiKey: DEFAULT_NETWORK === "4" ? FORTMATIC_TEST_KEY : FORTMATIC_KEY,
+    },
 ];
 
 const onboard = Onboard({
