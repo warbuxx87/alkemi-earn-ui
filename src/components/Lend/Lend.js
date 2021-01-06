@@ -13,6 +13,7 @@ import LendTableActive from "./TableActive";
 import LendCardValue from "containers/Lend/CardValue";
 import LendCardInterest from "./CardInterest";
 import LendCardAPY from "containers/Lend/CardAPY";
+import GnosisNotification from "components/UI/Dialog";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -72,6 +73,7 @@ function Lend({
                         </Grid>
                     )}{" "}
                 </Grid>
+                <GnosisNotification />
             </Box>
         </Container>
     );
