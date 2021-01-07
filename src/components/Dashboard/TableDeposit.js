@@ -22,6 +22,7 @@ import {
     formatPercent,
     //    formatMoney,
     calculateEarnings,
+    ETHBalanceToUSD,
 } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -129,6 +130,23 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                 </Typography>
                             </DepositTableCell>
                             <DepositTableCell align="right">
+                                <Typography variant="body1" color="textPrimary">
+                                    $
+                                    {formatNumber(
+                                        ETHBalanceToUSD(
+                                            row.ethBalance,
+                                            USDPrice
+                                        )
+                                    )}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    USD Value
+                                </Typography>
+                            </DepositTableCell>
+                            <DepositTableCell align="right">
                                 <Typography
                                     variant="body1"
                                     className={classes.label}
@@ -140,25 +158,6 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                     color="textSecondary"
                                 >
                                     APY
-                                </Typography>
-                            </DepositTableCell>
-                            <DepositTableCell
-                                align="right"
-                                className={classes.endcell}
-                            >
-                                <Typography variant="body1" color="textPrimary">
-                                    {calculateEarnings(
-                                        row.balance,
-                                        row.principal,
-                                        row.unit,
-                                        USDPrice
-                                    )}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                >
-                                    Earnings
                                 </Typography>
                             </DepositTableCell>
                         </TableRow>
