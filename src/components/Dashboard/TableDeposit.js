@@ -17,13 +17,7 @@ import {
 
 //import { useHistory } from "react-router-dom";
 import DepositTableCell from "components/UI/TableCell";
-import {
-    formatNumber,
-    formatPercent,
-    //    formatMoney,
-    calculateEarnings,
-    ETHBalanceToUSD,
-} from "utils/ui";
+import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
