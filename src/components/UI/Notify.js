@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
     Title: {
         marginBottom: 0,
+        fontSize: "0.8125rem",
     },
     CloseButton: {
         position: "absolute",

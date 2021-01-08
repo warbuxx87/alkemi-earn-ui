@@ -19,7 +19,7 @@ import {
 
 //import { useHistory } from "react-router-dom";
 import BorrowTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent, calculateEarnings } from "utils/ui";
+import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -128,6 +128,23 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                 </Typography>
                             </BorrowTableCell>
                             <BorrowTableCell align="right">
+                                <Typography variant="body1" color="textPrimary">
+                                    $
+                                    {formatNumber(
+                                        ETHBalanceToUSD(
+                                            row.ethBalance,
+                                            USDPrice
+                                        )
+                                    )}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    USD Value
+                                </Typography>
+                            </BorrowTableCell>
+                            <BorrowTableCell align="right">
                                 <Typography
                                     variant="body1"
                                     color="textPrimary"
@@ -140,25 +157,6 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                     color="textSecondary"
                                 >
                                     APY
-                                </Typography>
-                            </BorrowTableCell>
-                            <BorrowTableCell
-                                align="right"
-                                className={classes.endcell}
-                            >
-                                <Typography variant="body1" color="textPrimary">
-                                    {calculateEarnings(
-                                        row.balance,
-                                        row.principal,
-                                        row.unit,
-                                        USDPrice
-                                    )}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                >
-                                    Fees
                                 </Typography>
                             </BorrowTableCell>
                         </TableRow>

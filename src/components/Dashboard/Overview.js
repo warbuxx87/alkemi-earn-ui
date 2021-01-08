@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     upicon: {
         fontSize: "2.55rem",
         "@media (min-width:1940px)": {
-            fontSize: "3.1rem",
+            fontSize: "2.8rem",
             marginTop: 2,
         },
         marginLeft: 5,
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     downicon: {
         fontSize: "2.55rem",
         "@media (min-width:1940px)": {
-            fontSize: "3.1rem",
+            fontSize: "2.8rem",
             marginTop: 2,
         },
         marginLeft: 5,
