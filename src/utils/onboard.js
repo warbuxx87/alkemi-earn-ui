@@ -35,15 +35,15 @@ const wallets = [
         preferred: true,
         label: "Portis",
     },
-    {
-        walletName: "ledger",
-        rpcUrl: RPC_URL,
-        preferred: true,
-    },
-    {
-        walletName: "fortmatic",
-        apiKey: DEFAULT_NETWORK === "4" ? FORTMATIC_TEST_KEY : FORTMATIC_KEY,
-    },
+    // {
+    //     walletName: "ledger",
+    //     rpcUrl: RPC_URL,
+    //     preferred: true,
+    // },
+    // {
+    //     walletName: "fortmatic",
+    //     apiKey: DEFAULT_NETWORK === "4" ? FORTMATIC_TEST_KEY : FORTMATIC_KEY,
+    // },
 ];
 
 const onboard = Onboard({
