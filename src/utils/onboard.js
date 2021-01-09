@@ -50,12 +50,13 @@ const onboard = Onboard({
     dappId: DAPP_ID, // [String] The API key created by step one above
     networkId: parseInt(DEFAULT_NETWORK, 10), // [Integer] The Ethereum network ID your Dapp uses.
     darkMode: true,
+    blockPollingInterval: 15000, // Change the rate at which blocks are polled by provider, default is set to 4 seconds.
     walletSelect: {
         wallets: wallets,
     },
     subscriptions: {
         wallet: (wallet) => {
-            //    window.localStorage.setItem("selectedWallet", wallet.name);
+            //  window.localStorage.setItem("selectedWallet", wallet.name);
 
             switch (wallet.name) {
                 case "Fortmatic": {

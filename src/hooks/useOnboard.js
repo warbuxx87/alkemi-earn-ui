@@ -66,9 +66,6 @@ export default () => {
 
                     if (window.currentlyUsedProvider) {
                         // set current address from chosen provider in onboard
-                        // For Metamask: selectedAddress
-                        // For Fortmatic: account
-                        // For Wallet Connect: accounts[0]
 
                         // The order matters here
                         // As the network is always set(with the default one at least), must set address last so anything else that rely on it being null (example fetchTx) fire only when the correct data is set
@@ -149,7 +146,7 @@ export default () => {
                     //     currentWalletBalance = currentWalletBalance.toNumber;
                     // }
 
-                    console.log("eth_balance", currentWalletBalance);
+                    // console.log("eth_balance", currentWalletBalance);
 
                     // The order matters here
                     dispatch(setWalletNetwork(currentWalletNetwork));
