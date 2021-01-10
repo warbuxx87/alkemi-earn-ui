@@ -1,3 +1,16 @@
+## [1.9.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.1...v1.9.2) (2021-01-10)
+
+
+### Bug Fixes
+
+* additional wallet providers won't connect ([25c6c1b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/25c6c1b61c271db8e6b6a9d85b26248dc70bfebb))
+* crash when user disconnects wallet ([2b963dc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2b963dcf4479a51566f439960feafb233deaa48f))
+* disable squarelink service not currently working ([277f4f4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/277f4f42839c4898073efc1fde4ebcc2c00c7146))
+* enable additional wallet providers ([078806c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/078806c4c4af29d143f377dcff969f0bd95d34d5))
+* ether balance not auto updating on user wallet UI-385 ([3ce231f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3ce231fcc3bcae49cc69fe5ed298124339f7bd60))
+* failed prop type variant subtitle22 on TableMarkets ([bcae653](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bcae6534e4343652bcf159ce0ad5ba701ee0db27))
+* failed prop_type warning object set as type string on ListItem ([31cd513](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/31cd513ffd4a3e2b957be417f05a66b09b794bf9))
+
 ## [1.9.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.0...v1.9.1) (2021-01-01)
 
 ### Bug Fixes
