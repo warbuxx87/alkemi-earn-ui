@@ -54,19 +54,21 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
             setAmount(newValue);
     };
 
-    const onSetMax = () => {
-        //  setAmount(asset.safeBorrowToken); // @Ben retrieves Safe Maximum Token Borrow Amount 80% of max
-
+    const getMaxBorrow = () => {
         if (
             web3.utils
                 .toBN(toWei(asset.maxBorrowToken, asset.unit))
                 .lte(web3.utils.toBN(asset.liquidity))
         ) {
-            setAmount(asset.maxBorrowToken);
+            return asset.maxBorrowToken;
         } else {
-            setAmount(fromWei(asset.liquidity, asset.unit));
+            return fromWei(asset.liquidity, asset.unit);
         }
     };
+    const onSetMax = () => {
+        setAmount(getMaxBorrow());
+    };
+
     const [enableBorrow, setEnableBorrow] = React.useState(false);
 
     const [isProcessing, setIsProcessing] = React.useState(false);
@@ -145,7 +147,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
                     : asset.unit
             }`}
             balanceValue={formatNumber(asset.balance, asset.unit)}
-            amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
+            amountValue={`Available: ${getMaxBorrow()}`}
             walletIsKYCd={walletIsKYCd}
         />
     );

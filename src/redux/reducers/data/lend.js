@@ -1,5 +1,5 @@
 // Import action of interest as constants
-import { RESET_LEND_DATA } from "redux/actions/data/lend";
+import { RESET_LEND_DATA, SET_ETH_LEND_BALANCE } from "redux/actions/data/lend";
 // import internal assets
 import dai from "assets/images/DAI.svg";
 import usdc from "assets/images/USDC.svg";
@@ -66,14 +66,14 @@ export default (state = initialState, action) => {
             }
         }
 
-        case "ACCOUNT_BALANCE_FETCHED": {
+        case SET_ETH_LEND_BALANCE: {
             return {
                 ...state,
                 assets: {
                     ...state.assets,
                     WETH: {
                         ...state.assets["WETH"],
-                        wallet: action.accountBalance, // expecting that only one account is used at the same time, and thus only one value is retrieved
+                        wallet: action.payload.walletETHBalance, // expecting that only one account is used at the same time, and thus only one value is retrieved
                     },
                 },
             };

@@ -11,6 +11,10 @@ export const walletAddress = (state) => {
     return state.status.onboard.walletAddress;
 };
 
+// Returns walletBalance in wei (Example: "14994502059642643129")
+export const walletBalance = (state) =>
+    constants.network_type[state.status.onboard.walletBalance];
+
 // Returns walletNetwork ID (Example: 4)
 export const walletNetwork = (state) => {
     return state.status.onboard.walletNetwork;
