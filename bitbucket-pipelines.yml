@@ -246,24 +246,29 @@ pipelines:
     pull-requests:
         # Runs on all pull requests
         "**":
-            - step: *analyze
+            - parallel:
+                  - step: *test
+                  - step: *analyze
 
     branches:
         development:
             # Runs only on Development Branch
-            - step: *analyze
+            - parallel:
+                  - step: *test
+                  - step: *analyze
             - step: *release
             - step: *build
             - step: *upload
             - step: *deploy-development
         master:
             # Runs only on Master Branch
-            - step: *analyze
-            - step: *github
-            #  - step: *quality-gate
+            - parallel:
+                  - step: *test
+                  - step: *analyze
+                  - step: *github
+                  - step: *docs
             - step: *build
             - step: *upload
-            - step: *docs
             - step: *deploy-production
 
             #                  SAVING THIS FOR LATER
