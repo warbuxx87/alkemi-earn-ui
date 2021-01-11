@@ -1,3 +1,10 @@
+## [1.9.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.2...v1.9.3) (2021-01-11)
+
+
+### Bug Fixes
+
+* disable portis wallet provider ([7ba597e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7ba597e5ed2c5e40bcde1ad50f53df124ab4b0f9))
+
 ## [1.9.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.1...v1.9.2) (2021-01-10)
 
 
