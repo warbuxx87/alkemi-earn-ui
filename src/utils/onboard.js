@@ -29,12 +29,12 @@ const wallets = [
         preferred: true,
         infuraKey: INFURA_ID, // your infura id [String][Optional if rpc is provided instead]
     },
-    {
-        walletName: "portis",
-        apiKey: PORTIS_KEY,
-        preferred: true,
-        label: "Portis",
-    },
+    // {
+    //     walletName: "portis",
+    //     apiKey: PORTIS_KEY,
+    //     preferred: true,
+    //     label: "Portis",
+    // },
     // {
     //     walletName: "ledger",
     //     rpcUrl: RPC_URL,
