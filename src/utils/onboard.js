@@ -6,7 +6,7 @@ const DAPP_ID = process.env.REACT_APP_DAPP_ID;
 const INFURA_ID = process.env.REACT_APP_INFURA_ID;
 // const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
 // const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
-const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
+// const PORTIS_KEY = process.env.REACT_APP_PORTIS_KEY;
 // const SQUARELINK_KEY = process.env.REACT_APP_SQUARELINK_KEY;
 // const APP_URL = process.env.REACT_APP_APP_URL;
 // const CONTACT_EMAIL = process.env.REACT_APP_CONTACT_EMAIL;
@@ -29,12 +29,12 @@ const wallets = [
         preferred: true,
         infuraKey: INFURA_ID, // your infura id [String][Optional if rpc is provided instead]
     },
-    {
-        walletName: "portis",
-        apiKey: PORTIS_KEY,
-        preferred: true,
-        label: "Portis",
-    },
+    // {
+    //     walletName: "portis",
+    //     apiKey: PORTIS_KEY,
+    //     preferred: true,
+    //     label: "Portis",
+    // },
     // {
     //     walletName: "ledger",
     //     rpcUrl: RPC_URL,
