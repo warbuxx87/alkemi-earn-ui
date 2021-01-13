@@ -9,7 +9,8 @@ import Lend from "containers/Lend/Lend";
 import Borrow from "containers/Borrow/Borrow";
 import Markets from "containers/Markets/Markets";
 import History from "containers/History/History";
-import Liquidate from "components/Liquidate/Liquidate";
+import Liquidate from "containers/Liquidate/Liquidate";
+import Swap from "containers/Swap/Swap";
 import NoWhere from "components/NoWhere/NoWhere";
 import {
     DASHBOARD,
@@ -18,6 +19,7 @@ import {
     MARKETS,
     HISTORY,
     LIQUIDATE,
+    SWAP,
 } from "constants/routes";
 
 describe("<LayoutContent />", () => {
@@ -31,8 +33,8 @@ describe("<LayoutContent />", () => {
         expect(wrapper.find(Switch).length).toEqual(1);
     });
 
-    it("renders 7 <Route /> components", () => {
-        expect(wrapper.find(Route).length).toEqual(7);
+    it("renders 8 <Route /> components", () => {
+        expect(wrapper.find(Route).length).toEqual(8);
     });
 
     it("route 1 renders a <Dashboard /> component", () => {
@@ -60,8 +62,18 @@ describe("<LayoutContent />", () => {
         expect(wrapper.find(Route).at(4).props().component).toEqual(History);
     });
 
-    it("route 7 renders a <NoWhere /> component", () => {
-        expect(wrapper.find(Route).at(6).props().component).toEqual(NoWhere);
+    it("route 6 renders a <Liquidate /> container", () => {
+        expect(wrapper.find(Route).at(5).props().path).toEqual(LIQUIDATE);
+        expect(wrapper.find(Route).at(5).props().component).toEqual(Liquidate);
+    });
+
+    it("route 7 renders a <Swap /> container", () => {
+        expect(wrapper.find(Route).at(6).props().path).toEqual(SWAP);
+        expect(wrapper.find(Route).at(6).props().component).toEqual(Swap);
+    });
+
+    it("route 8 renders a <NoWhere /> component", () => {
+        expect(wrapper.find(Route).at(7).props().component).toEqual(NoWhere);
     });
 
     it("matches snapshot", () => {
