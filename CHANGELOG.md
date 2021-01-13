@@ -1,3 +1,10 @@
+## [1.10.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.10.0...v1.10.1) (2021-01-13)
+
+
+### Bug Fixes
+
+* disable activate button for non-kyc wallets ([7f3e892](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7f3e892becb77f3f61411c485aeabd01313ee673))
+
 # [1.10.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.3...v1.10.0) (2021-01-13)
 
 
