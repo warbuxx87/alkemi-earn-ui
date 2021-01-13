@@ -176,12 +176,6 @@ const getLendAsset = createSelector(
                     ethBalance / web3.utils.fromWei(totalSupplied)
                 ).toString();
 
-                // TODO clean up: old value that always returned 0
-
-                /*USDprice =
-                    assetPrices["0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E"] ||
-                    "0";*/
-
                 // Replaced now with address_USDC
                 USDprice = assetPrices[address[network][`address_USDC`]] || "0";
             }

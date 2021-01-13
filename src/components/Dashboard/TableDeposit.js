@@ -17,12 +17,7 @@ import {
 
 //import { useHistory } from "react-router-dom";
 import DepositTableCell from "components/UI/TableCell";
-import {
-    formatNumber,
-    formatPercent,
-    //    formatMoney,
-    calculateEarnings,
-} from "utils/ui";
+import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -40,13 +35,13 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
     },
     imageSize: {
-        width: "30px",
-        height: "30px",
+        width: "34px",
+        height: "34px",
     },
     label: {
         fontFamily: theme.typography.fontFamily,
         alignItems: "center",
-        borderRadius: 2,
+        borderRadius: 4,
         display: "inline-flex",
         flexGrow: 0,
         whiteSpace: "nowrap",
@@ -56,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         letterSpacing: 0.5,
         minWidth: 20,
-        padding: theme.spacing(0.5, 0.5),
+        padding: theme.spacing(1.5, 1),
         textTransform: "uppercase",
         color: theme.palette.success.main,
         backgroundColor: fade(theme.palette.success.main, 0.08),
@@ -90,11 +85,12 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                     />
                                     <Box ml={2}>
                                         <Typography
-                                            variant="h6"
+                                            variant="body1"
                                             color="textPrimary"
                                         >
-                                            {row.symbol}
-                                            {row.unit}
+                                            {row.alternativeUnitLabel
+                                                ? row.alternativeUnitLabel
+                                                : row.unit}
                                         </Typography>
                                         <Typography
                                             variant="body2"
@@ -106,7 +102,7 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                 </Box>
                             </DepositTableCell>
                             <DepositTableCell align="right">
-                                <Typography variant="h6" color="textPrimary">
+                                <Typography variant="body1" color="textPrimary">
                                     {formatNumber(row.wallet, row.unit)}
                                 </Typography>
                                 <Typography
@@ -117,7 +113,7 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                 </Typography>
                             </DepositTableCell>
                             <DepositTableCell align="right">
-                                <Typography variant="h6" color="textPrimary">
+                                <Typography variant="body1" color="textPrimary">
                                     {formatNumber(row.balance, row.unit)}
                                 </Typography>
                                 <Typography
@@ -128,8 +124,25 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                 </Typography>
                             </DepositTableCell>
                             <DepositTableCell align="right">
+                                <Typography variant="body1" color="textPrimary">
+                                    $
+                                    {formatNumber(
+                                        ETHBalanceToUSD(
+                                            row.ethBalance,
+                                            USDPrice
+                                        )
+                                    )}
+                                </Typography>
                                 <Typography
-                                    variant="h6"
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    USD Value
+                                </Typography>
+                            </DepositTableCell>
+                            <DepositTableCell align="right">
+                                <Typography
+                                    variant="body1"
                                     className={classes.label}
                                 >
                                     {formatPercent(row.apy)}
@@ -139,25 +152,6 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                     color="textSecondary"
                                 >
                                     APY
-                                </Typography>
-                            </DepositTableCell>
-                            <DepositTableCell
-                                align="right"
-                                className={classes.endcell}
-                            >
-                                <Typography variant="h6" color="textPrimary">
-                                    {calculateEarnings(
-                                        row.balance,
-                                        row.principal,
-                                        row.unit,
-                                        USDPrice
-                                    )}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                >
-                                    Earnings
                                 </Typography>
                             </DepositTableCell>
                         </TableRow>

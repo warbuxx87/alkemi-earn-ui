@@ -1,6 +1,6 @@
 # Alkemi Earn | User Interface
 
-![Version](https://img.shields.io/badge/version-1.4.1-blue.svg?cacheSeconds=2592000) [![Built with React](https://img.shields.io/badge/React-black?style=flat&logo=react)](https://docs.alkemi.network) [![Built on Ethereum](https://img.shields.io/badge/web3.js-blue?style=flat&logo=ethereum)](https://web3js.readthedocs.io/en/v1.3.0/) [![Twitter: AlkemiOfficial](https://img.shields.io/twitter/follow/AlkemiOfficial.svg?style=social)](https://twitter.com/AlkemiOfficial)
+![Version](https://img.shields.io/badge/version-1.8.0-blue.svg?cacheSeconds=2592000) [![Built with React](https://img.shields.io/badge/React-black?style=flat&logo=react)](https://docs.alkemi.network/earn-ui) [![Built on Ethereum](https://img.shields.io/badge/web3.js-blue?style=flat&logo=ethereum)](https://web3js.readthedocs.io/en/v1.3.0/) [![Twitter: AlkemiOfficial](https://img.shields.io/twitter/follow/AlkemiOfficial.svg?style=social)](https://twitter.com/AlkemiOfficial)
 
 > Web3 User Interface for Alkemi EARN
 
@@ -17,7 +17,7 @@ This application make active usage of
 -   [react-router v4](https://reacttraining.com/react-router/) for routing
 -   [connected-react-router](https://github.com/supasate/connected-react-router) to connect router to redux state
 -   [material-ui v1](https://material-ui.com/) as main visual component library
--   [react-toastify](https://fkhadra.github.io/react-toastify/) toast notifactions container
+-   [react-toastify](https://fkhadra.github.io/react-toastify/) toast notifications container
 -   [drizzle](https://www.trufflesuite.com/drizzle) for web3 integration
 -   [onboard-bnc](onboard.js) for web3 wallet provider
 

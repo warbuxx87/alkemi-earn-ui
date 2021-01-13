@@ -1,60 +1,79 @@
 export default {
     body1: {
         fontWeight: 400,
-        fontSize: 14,
+        fontSize: "0.875rem",
+        lineHeight: 1.6,
+        "@media (min-width:1940px)": {
+            fontSize: "0.9375rem",
+        },
     },
 
     body2: {
         fontWeight: 400,
-        fontSize: 12,
+        fontSize: "	0.75rem",
+        "@media (min-width:1940px)": {
+            fontSize: "0.8125rem",
+        },
     },
 
     h1: {
         fontWeight: 400,
-        fontSize: 46,
+        fontSize: "2.25rem",
+        "@media (min-width:1940px)": {
+            fontSize: "2.625rem",
+        },
     },
     h2: {
         fontWeight: 500,
-        fontSize: 30,
+        fontSize: "1.5rem",
+        "@media (min-width:1940px)": {
+            fontSize: "1.75rem",
+        },
     },
     h3: {
         fontWeight: 400,
-        fontSize: 20,
-        "@media (min-width:1550px)": {
-            fontSize: 22,
+        fontSize: "1.375rem",
+        "@media (min-width:1940px)": {
+            fontSize: "1.625rem",
         },
     },
     h4: {
         fontWeight: 400,
-        fontSize: 22,
+        fontSize: "1rem",
+        "@media (min-width:1940px)": {
+            fontSize: "1.1875rem",
+        },
     },
     h5: {
         fontWeight: 500,
-        fontSize: 16,
+        fontSize: "	0.9375rem",
+        "@media (min-width:1940px)": {
+            fontSize: "1rem",
+        },
     },
     h6: {
         fontWeight: 400,
-        fontSize: 15,
+        fontSize: "	0.9375rem",
     },
 
     subtitle1: {
         fontWeight: 400,
-        fontSize: 12,
-        letterSpacing: "-0.05px",
-        lineHeight: 2.6,
+        fontSize: "0.75rem",
+        lineHeight: 1.7,
+        "@media (min-width:1940px)": {
+            fontSize: "0.8125rem",
+        },
     },
 
     subtitle2: {
         fontWeight: 400,
         fontSize: 11,
-        letterSpacing: "-0.05px",
         lineHeight: 1.3,
     },
 
     overline: {
         fontWeight: 400,
-        fontSize: 11,
-        letterSpacing: "-0.05px",
+        fontSize: 50,
         lineHeight: 1.5,
         textTransform: "capitalize",
     },

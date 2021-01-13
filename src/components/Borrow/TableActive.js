@@ -22,7 +22,7 @@ import {
 import BorrowDrawerBorrow from "containers/Borrow/DrawerBorrow";
 import BorrowDrawerRepay from "containers/Borrow/DrawerRepay";
 import BorrowTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent } from "utils/ui";
+import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -73,13 +73,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const BorrowTableActive = ({ data = [] }) => {
+const BorrowTableActive = ({ data = [], USDPrice }) => {
     const classes = useStyles();
     return (
         <Box mt={2}>
             <Typography
                 className={classes.heading}
-                variant="h6"
+                variant="body1"
                 color="textPrimary"
             >
                 Active Borrowed
@@ -107,10 +107,12 @@ const BorrowTableActive = ({ data = [] }) => {
                                         />
                                         <Box ml={2}>
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
-                                                {row.unit}
+                                                {row.alternativeUnitLabel
+                                                    ? row.alternativeUnitLabel
+                                                    : row.unit}
                                             </Typography>
                                             <Typography
                                                 variant="body2"
@@ -126,7 +128,7 @@ const BorrowTableActive = ({ data = [] }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                     >
                                         {formatNumber(row.balance, row.unit)}
@@ -143,16 +145,22 @@ const BorrowTableActive = ({ data = [] }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                     >
-                                        0 {row.fees}
+                                        $
+                                        {formatNumber(
+                                            ETHBalanceToUSD(
+                                                row.ethBalance,
+                                                USDPrice
+                                            )
+                                        )}
                                     </Typography>
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Fees
+                                        USD Value
                                     </Typography>
                                 </BorrowTableCell>
 
@@ -161,7 +169,7 @@ const BorrowTableActive = ({ data = [] }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                         className={classes.label}
                                     >

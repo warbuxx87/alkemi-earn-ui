@@ -31,16 +31,30 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
     },
     upicon: {
-        fontSize: "3.1rem",
+        fontSize: "2.55rem",
+        "@media (min-width:1940px)": {
+            fontSize: "2.8rem",
+            marginTop: 2,
+        },
         marginLeft: 5,
         marginTop: 2,
         color: theme.palette.success.main,
     },
     downicon: {
-        fontSize: "3.1rem",
+        fontSize: "2.55rem",
+        "@media (min-width:1940px)": {
+            fontSize: "2.8rem",
+            marginTop: 2,
+        },
         marginLeft: 5,
         marginTop: 2,
         color: theme.palette.warning.main,
+    },
+    combinedApy: {
+        textAlign: "left",
+        "@media (min-width: 520px)": {
+            textAlign: "right",
+        },
     },
 }));
 
@@ -65,7 +79,7 @@ function Overview({ aggregatedBalance, combinedAPY }) {
     const classes = useStyles();
     // Section 5: Code Component
     return (
-        <Box mt={3} mb={1}>
+        <Box mt={1} mb={1}>
             <Grid
                 alignItems="center"
                 container
@@ -77,22 +91,30 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                         variant="subtitle1"
                         color="textSecondary"
                         align="left"
+                        style={{ paddingBottom: "8px" }}
                     >
                         Aggregated Value
                     </Typography>
-                    <Typography variant="h1" color="textPrimary" align="left">
-                        $
-                        <SplitNumber
-                            theNumber={aggregatedBalance}
-                            centsClassName={classes.cents}
-                        />
-                    </Typography>
+                    <Box>
+                        <Typography
+                            variant="h1"
+                            color="textPrimary"
+                            align="left"
+                        >
+                            $
+                            <SplitNumber
+                                theNumber={aggregatedBalance}
+                                centsClassName={classes.cents}
+                            />
+                        </Typography>
+                    </Box>
                 </Grid>
                 <Grid item>
                     <Typography
                         variant="subtitle1"
                         color="textSecondary"
-                        align="right"
+                        className={classes.combinedApy}
+                        style={{ paddingTop: "4px", paddingBottom: "4px" }}
                     >
                         Combined APY
                     </Typography>
@@ -101,15 +123,9 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                         justifyContent="flex-end"
                         alignItems="center"
                     >
-                        <Box>
-                            <Typography
-                                variant="h1"
-                                color="textPrimary"
-                                align="right"
-                            >
-                                {formatPercent(combinedAPY)}
-                            </Typography>
-                        </Box>
+                        <Typography variant="h1" color="textPrimary">
+                            {formatPercent(combinedAPY)}
+                        </Typography>
                         <Box>{displayAPYIcon(classes, combinedAPY)}</Box>
                     </Box>
                 </Grid>

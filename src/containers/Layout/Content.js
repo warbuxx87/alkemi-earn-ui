@@ -10,7 +10,7 @@ import Borrow from "containers/Borrow/Borrow";
 import Markets from "containers/Markets/Markets";
 import History from "containers/History/History";
 import Liquidate from "containers/Liquidate/Liquidate";
-import Swap from "components/Swap/Swap";
+import Swap from "containers/Swap/Swap";
 import NoWhere from "components/NoWhere/NoWhere";
 
 import {
@@ -19,8 +19,8 @@ import {
     BORROW,
     HISTORY,
     MARKETS,
-    SWAP,
     LIQUIDATE,
+    SWAP,
 } from "constants/routes";
 
 const LayoutContent = () => (

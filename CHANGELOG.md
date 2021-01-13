@@ -1,25 +1,114 @@
-# [1.5.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.1...v1.5.0) (2020-12-03)
+## [1.9.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.2...v1.9.3) (2021-01-11)
 
 
 ### Bug Fixes
 
-* :art: fix liquidate validation ([89d51cc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/89d51cc86ffec5866ba42f24dcb6f805b3674270))
-* improve WBTC value conversion ([81e2962](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/81e2962577854f995fa327e9e52d64b75b932f65))
-* limit number of inputed decimals on withdraw ([9be0e17](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9be0e17eb3d076d5cfc3214c9f3fa3754adcf4ea))
-* limited the number of decimals inputted for all drawers ([b42eae8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b42eae84961e97e4bbe7e7e8cf202d4260e7fc15))
+* disable portis wallet provider ([7ba597e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7ba597e5ed2c5e40bcde1ad50f53df124ab4b0f9))
 
+## [1.9.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.1...v1.9.2) (2021-01-10)
+
+
+### Bug Fixes
+
+* additional wallet providers won't connect ([25c6c1b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/25c6c1b61c271db8e6b6a9d85b26248dc70bfebb))
+* crash when user disconnects wallet ([2b963dc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2b963dcf4479a51566f439960feafb233deaa48f))
+* disable squarelink service not currently working ([277f4f4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/277f4f42839c4898073efc1fde4ebcc2c00c7146))
+* enable additional wallet providers ([078806c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/078806c4c4af29d143f377dcff969f0bd95d34d5))
+* ether balance not auto updating on user wallet UI-385 ([3ce231f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3ce231fcc3bcae49cc69fe5ed298124339f7bd60))
+* failed prop type variant subtitle22 on TableMarkets ([bcae653](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bcae6534e4343652bcf159ce0ad5ba701ee0db27))
+* failed prop_type warning object set as type string on ListItem ([31cd513](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/31cd513ffd4a3e2b957be417f05a66b09b794bf9))
+
+## [1.9.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.0...v1.9.1) (2021-01-01)
+
+### Bug Fixes
+
+-   history page tx link to etherscan UI-174 ([e9e2653](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e9e2653de09648c0a19519f9c0943b72659b75f7))
+
+# [1.9.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.8.0...v1.9.0) (2021-01-01)
 
 ### Features
 
-* :art: add proper validation to drawers and liquidity cap check ([a7a74fe](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a7a74fea007e155ced50f5c828b0d73c31162a2e))
-* add available liquidity check for withdraw and borrow ([9030861](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/90308610f78f6aee349497bcf537accd5d51485d))
+-   add bug reporting form ([b9d158d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b9d158d0af22724e4970aff10e28521e903e7e3d))
 
-## [1.4.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.0...v1.4.1) (2020-11-30)
+# [1.8.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.2...v1.8.0) (2020-12-31)
 
+### Features
+
+-   enable mainnet contracts ([a553d79](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a553d79f9d9303f82fec31d6ad63ab1ad2e55fb8))
+
+## [1.7.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.1...v1.7.2) (2020-12-23)
 
 ### Bug Fixes
 
-* add changelog link to version number ([7b21948](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7b2194896d4908a87bbb90c79293fdaeaa04cea7))
+-   point WETH to correct contract on kovan ([056d291](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/056d291d1aebf1e38814ee4a0b57cf15a53374a4))
+
+## [1.7.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.7.0...v1.7.1) (2020-12-22)
+
+### Bug Fixes
+
+-   have fromWei math to use big.js for division ([6493ea7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6493ea79900159b140b089d198a387b477ffbe83))
+-   replace bn with bigjs for max borrow math ([b5f094c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b5f094c59d699eab3efa9ba5ba6ef6685099ac6e))
+-   retrieve max borrow mulitiplier from smart contract ([f7940ea](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f7940ea215b4045a31b3b815bca99ac7492ee255))
+
+# [1.7.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.6.0...v1.7.0) (2020-12-22)
+
+### Features
+
+-   add history page account filtering by savings or credit type ([3a6e4a9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3a6e4a9888f483f3d01090c6094c798fbb3c8bd8))
+
+# [1.6.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.4...v1.6.0) (2020-12-21)
+
+### Features
+
+-   introduce cache busting ([7f4a6c5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7f4a6c58ca98e9350b9a998bb942eae03e92efd9))
+
+## [1.5.4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.3...v1.5.4) (2020-12-21)
+
+### Bug Fixes
+
+-   scrollbar now displaying on smaller screen resolutions ([5002002](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/50020029f2e9b7b79286f46e4addd18591c628dc))
+
+## [1.5.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.2...v1.5.3) (2020-12-15)
+
+### Bug Fixes
+
+-   use correct eth icon on history page ([4194a95](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4194a9529a6125c0cb6403c03c9d4328a7ba3640))
+
+## [1.5.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.1...v1.5.2) (2020-12-11)
+
+### Bug Fixes
+
+-   limit deposit amount for ETH ([be6b15c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/be6b15c466d16d22fd8e764f1f819bb314ece068))
+-   send proper value when repay in ETH ([fd7db0d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/fd7db0dfa6640cf076e176bd35a7013c9ee8c1f2))
+-   set calculated max for ETH repay ([b6f33aa](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b6f33aabf316305ce2eb95d132cfe719180903f4))
+-   use proper repay method name for estimation of gas ([cfb3f75](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/cfb3f7597e29b82b91abfe74d82fedf5682ebd41))
+
+## [1.5.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.5.0...v1.5.1) (2020-12-04)
+
+### Bug Fixes
+
+-   add proper max value to withdraw ([f893d8d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f893d8d823548b99236100169739fb4eac6117af))
+-   fix calculated max value for borrow amount ([0bcef3f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0bcef3f29c52a48cc464349c762d4d79e3d711ff))
+
+# [1.5.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.1...v1.5.0) (2020-12-03)
+
+### Bug Fixes
+
+-   fix liquidate validation ([89d51cc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/89d51cc86ffec5866ba42f24dcb6f805b3674270))
+-   improve WBTC value conversion ([81e2962](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/81e2962577854f995fa327e9e52d64b75b932f65))
+-   limit number of inputed decimals on withdraw ([9be0e17](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9be0e17eb3d076d5cfc3214c9f3fa3754adcf4ea))
+-   limited the number of decimals inputted for all drawers ([b42eae8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b42eae84961e97e4bbe7e7e8cf202d4260e7fc15))
+
+### Features
+
+-   add proper validation to drawers and liquidity cap check ([a7a74fe](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a7a74fea007e155ced50f5c828b0d73c31162a2e))
+-   add available liquidity check for withdraw and borrow ([9030861](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/90308610f78f6aee349497bcf537accd5d51485d))
+
+## [1.4.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.4.0...v1.4.1) (2020-11-30)
+
+### Bug Fixes
+
+-   add changelog link to version number ([7b21948](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7b2194896d4908a87bbb90c79293fdaeaa04cea7))
 
 # [1.4.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.3.3...v1.4.0) (2020-11-27)
 
@@ -108,9 +197,6 @@
 -   fix styling of toastr ([1b91ec3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1b91ec3de8d4efe1173a73389389788bf7913bfe))
 -   remove input visual bug ([f42dbf2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f42dbf25f5c4eaf046e4557985979380850589fd))
 -   better failure message ([541fa60](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/541fa6049729b6a6707c6d081274d377e6150b5c))
--   clean up ([2a495be](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2a495bef30cddd686dc7c6f2e6e132dc210f8b47))
--   clean up ([30bc725](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/30bc7252444ba4960f80742f9db93657535f3f76))
--   clean up ([8a4c49d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8a4c49dc4d0aa6b8d7eb7e9ba53de6146c8b2738))
 -   comment out pax and usdt references ([c539f24](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c539f2492bbae56fd967d0bc4200cad9e5444b42))
 -   hide wallet selection and change button ([087f15d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/087f15dfc96bb4709d8ac12faa34fe543e9997d8))
 -   quick fix for infinite loop ([ee23f7b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ee23f7b6feb2319d8d29994d91d44d468a448280))
@@ -122,7 +208,7 @@
 -   add side bar divider ([7cb9071](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7cb907158b88ee5dfd349ec9ae4c2e86b28a612c))
 -   add tooltips to liquidity draw ([5cded47](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5cded47b3ff37894dfb6071c8cce6161a34d99dd))
 -   added fixed Version number to footer and other styling / layout fixes to sidebar ([8782534](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8782534bb246869511e20623db2880fbd6c024a2))
--   Added select menu to allow user to select receiving asset. Edits to both styling and info displaying in the liquidation information grid. Other overall stylng and layout fixes. ([b384763](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b3847633bf56bf7b3cf9691eef239858f3c37fa9))
+-   added select menu to allow user to select receiving asset. edits to both styling and info displaying in the liquidation information grid. Other overall stylng and layout fixes. ([b384763](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b3847633bf56bf7b3cf9691eef239858f3c37fa9))
 -   adding deposit/borrow color scheme to cards ([db85188](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/db85188f8446754e4112775069bbd621d92a6dfe))
 -   additional ui updates to theme & notify ([fe1452b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/fe1452b1bc7aeef10f216a78d169124d4e964eda))
 -   adjust decimal place amount determinded by whole number amount ([3f284bb](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3f284bb74a5f60c2beb03c3f1f4519028396bc9b))
@@ -138,7 +224,7 @@
 -   create contracts after connect to account ([a8f170c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a8f170c7f961929f2d5eb7b3811aaa52607882d9))
 -   data doesn't refresh on metamask account change ([e3d6d6b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e3d6d6b89ea0c9e647d7e33bc408c9c766786926))
 -   UI-106 propType declarations to Strings ([74bdcb6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/74bdcb653830047a3c440c29609eedc8d5c1f28d))
--   UI-106 resolves Zaks comments on PR ([ab26cf0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ab26cf06d52d4d2aed0b224a456c0c6694c4de8b))
+-   UI-106 resolves Zak's comments on PR ([ab26cf0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ab26cf06d52d4d2aed0b224a456c0c6694c4de8b))
 -   UI-219 updated Borrow Active Asset table to be consistent with Dashboard and Lend page ([7af6020](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7af602039f63bc1eaffb4a6da813f8c7f7982617))
 -   UI-84 Prop warning on DrawerBorrow to declare proper Boolean ([f3c06b7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f3c06b711c58b27a6fa8d9f59f5471196dc80cfc))
 -   edits to layout/styling for snackbar ([72b63e6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/72b63e6ccf3dccbbf64220486ff10ec797fabad7))
@@ -150,29 +236,23 @@
 -   height issue on apr card ([4961db8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4961db8fb37ea7b9daaa30d66f73fe12940895c6))
 -   hide notification & settings menu from appbar ([d348d14](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d348d14df5d2a7ee51fb39902c7527200bc66aa4))
 -   history page to display blockNumber and auto load npm version ([9d8d759](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9d8d759d99eb711656b1dee78fd59a2780ffa45c))
--   hotfix address map to lowercase ([78387c8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/78387c84d8b794e018f73cbdb40cab120096f098))
--   hotfix comment out unused vars ([f0620e8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f0620e81422539302fb12c713dab74a109a07cdb))
--   hotfix disable drawer input amount helpers ([94df72e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/94df72eaac5fb214616352c53cd0fdb56084dd54))
--   hotfix for collapsed menu ([321a000](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/321a000fde3b5c23247a346e4b44e17c812df7d1))
--   hotfix for eslint rule breaking liquidity display ([8765ed7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8765ed7f7315bd9d544a8982cdbb5597e64723c7))
--   hotfix oraclePrice to web3 wei based on API changes ([7c738b1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7c738b1e723e056fd2eeb9e0c9108a907de5b6ce))
--   hotfix resolves BTC deposit max calcuation error ([55179b7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/55179b725d1a1c51b66f91ea46cab6b4bc324216))
--   Icon style/alignment in select and imput boxes ([35636f5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/35636f5ca869dc344900a92317e5a75430d2b660))
+-   fix address map to lowercase ([78387c8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/78387c84d8b794e018f73cbdb40cab120096f098))
+-   fix comment out unused vars ([f0620e8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f0620e81422539302fb12c713dab74a109a07cdb))
+-   fix disable drawer input amount helpers ([94df72e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/94df72eaac5fb214616352c53cd0fdb56084dd54))
+-   fix for collapsed menu ([321a000](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/321a000fde3b5c23247a346e4b44e17c812df7d1))
+-   fix for eslint rule breaking liquidity display ([8765ed7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8765ed7f7315bd9d544a8982cdbb5597e64723c7))
+-   fix oraclePrice to web3 wei based on API changes ([7c738b1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7c738b1e723e056fd2eeb9e0c9108a907de5b6ce))
+-   fix resolves BTC deposit max calculation error ([55179b7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/55179b725d1a1c51b66f91ea46cab6b4bc324216))
+-   icon style/alignment in select and imput boxes ([35636f5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/35636f5ca869dc344900a92317e5a75430d2b660))
 -   import error ([5f157e2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5f157e2b1c227096e41290935438a9cd61f57ede))
 -   L-29 Bug on Sonarcloud ([828640d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/828640d0b0c2a25c6290244ea519f9224b27c708))
 -   layout & spacing for liquidity table ([76641ae](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/76641aeebce430e8f1fce031405bbd3376429013))
 -   layout font, theme color and spacing adjustments to dashboard page ([050bc45](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/050bc452532e87d02214cff271eb08d18a0ea120))
 -   layout/style fixes to liquidity drawer ([49a2fc9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/49a2fc99aa323172677fea251f1ccd696e7f3e2a))
--   lending spage Active Lending Reserves table alignment ([998b37f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/998b37fcc7d627674dc62df981ae91c1180c9b8d))
--   Liquidity page view points and responsiveness on mobile plus split liquidity page into seperate component and page. ([c6f5614](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c6f5614a28abbaef466104b99def938f5e385210))
+-   lend page Active Lending Reserves table alignment ([998b37f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/998b37fcc7d627674dc62df981ae91c1180c9b8d))
+-   liquidity page view points and responsiveness on mobile plus split liquidity page into seperate component and page. ([c6f5614](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c6f5614a28abbaef466104b99def938f5e385210))
 -   markets data bug due to wrong type in function ([75d7e2a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/75d7e2ac9674f4f80477d2387e7aa65a8a1efa66))
 -   max amount for web3 methods was failing due to interger overflow ([6603ce4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6603ce45eb4725f5afe2b2a54e8b36aeac408f08))
--   merge conflict ([3b27645](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3b27645a53b21d473479e529a1a560682ee3d280))
--   merge conflicts ([8e69769](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8e6976915fc4b8fb64130c5fc6046eb871143892))
--   merge dev into current branch UI-235 ([a060bbc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a060bbccde819b117796a3125eebb03a07e00566))
--   merge issues with UI-164 ([6657ca5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6657ca562f78c1730164f8f1ea5cffe98f35d361))
--   merge issues with UI-250 ([65e302e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/65e302ec213ba43eb4d8522d0050e502d5122e01))
--   Merged development into UI-254-make-ui-table-liquidity-drawer ([dad8e32](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dad8e3293203d10fe538c444b2361dcd12bc9deb))
 -   network type get failed ([e8e4814](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e8e48140350448951230d6510bded921694bc74f))
 -   progressbar sizing on borrow and market components. spacing adjustments on dashboard ([88d85f3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/88d85f3efb1fc104a000effb3845ab855f5d2567))
 -   redux action usd price hooks ([ad39218](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ad39218e00db206a3ac56f3f0a0c7cf461eb46b2))
@@ -185,7 +265,7 @@
 -   remove console log checks from markets ([29401ef](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/29401ef57bba7febef3c99c40007fc97af8740cc))
 -   removing card structure from dashboard page and replacing with box/paper components ([fc3df22](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/fc3df22dcb3f83a1da1452c9f8e10b5d9989b4c8))
 -   removing redundant material imports ([c35139a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c35139af9d42c17ea4d62e1e94d705f604f40e54))
--   Replace Earnings with TBD. Tidy up lending table layout/styling ([0179c9b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0179c9b59b81a3ef51fd82a67b546d821de10e4b))
+-   replace Earnings with TBD. Tidy up lending table layout/styling ([0179c9b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0179c9b59b81a3ef51fd82a67b546d821de10e4b))
 -   reported market liquidity should derive from balanceOf token ([1ebf69a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1ebf69ac173387f760e04c0589997930d27a4c37))
 -   resetting toastify clear timer back to 7500 ([3d30dc0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3d30dc073f23e9c836ea0a9221425578b6b4cecf))
 -   selector name on cardDeposit dashboard ([7e622df](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7e622df9925589e5fe7a385cf3da2c819aa6d0b4))
@@ -194,12 +274,12 @@
 -   snapshot updates ([5f65dba](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5f65dba65ad0871b050cd9476daccd603a69ab32))
 -   spacing and ui fixes to all pages ([fbc7635](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/fbc7635a39ad51f19f3f0a5f17848e32b1c389d6))
 -   spacing, typography and styling edits to lend/borrow drawer ([4045440](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/40454409cc6188edd96d9516f51f8ee8fa54d06a))
--   style edits to borrow progess percent on apr borrow card ([8c6cdde](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8c6cdde53df8fa5169a787ca2476b228022e2075))
+-   style edits to borrow progress percent on apr borrow card ([8c6cdde](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8c6cdde53df8fa5169a787ca2476b228022e2075))
 -   styling edits to borrow progress bar for cardstats component on markets page ([042be67](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/042be671cb83ac9aa3b7fd97b256ef111fd6ddb1))
 -   styling update to borrow labels ([e7a54ab](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e7a54ab47a67c2cce80a748d1b694f2e8f2f41eb))
 -   swap Available and Supplied values on Lending Active Table ([79534b0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/79534b0273e46ef9bf7bb97992e8d19e01b5a7bc))
 -   switch logo to svg version, format version number, change table figures to 5 decimals ([edb2a2a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/edb2a2a470b1c4d464575e91453894a289bba134))
--   switchiing chartjs for apexcharts to help solve clipping in table issue. ([1d8b8d4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1d8b8d49800446718a3308d20f4bda1cc080b697))
+-   switching chartjs for apexcharts to help solve clipping in table issue. ([1d8b8d4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1d8b8d49800446718a3308d20f4bda1cc080b697))
 -   temporary fix build failed ([2bcb3cc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2bcb3cc41910c830ba56d29fc46d4fac9698fd6d))
 -   ui adjustments to draw ([0d016fe](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0d016feb178c5f0afbcd77bc8f240fbf2e7caaf1))
 -   update mobile menu links ([101f4ca](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/101f4caa44d941b1ce1cc02bac07df4f033a692e))
@@ -224,9 +304,9 @@
 -   new styling for lend and borrow totals ([e3e2b73](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e3e2b73c2e3e6a97a9d396962a1e9fbcbff915e1))
 -   progress on snackbar showing up notif data ([ce9619f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ce9619f59bd92e857a77c64f8b17150bffa3fc25))
 -   refactor split number onto a component ([50383d3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/50383d39a0208b5cb074a1759079788c075482d2))
--   reload metmask on network change ([c604488](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c6044885633fa5f2492864099e80ceb4cb1570e4))
+-   reload metamask on network change ([c604488](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c6044885633fa5f2492864099e80ceb4cb1570e4))
 -   progress on liquidation ([948c4f6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/948c4f68fa7a5c15f20e61fa70614b69bb9546b6))
--   show apy on drawers ([f954f08](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f954f084fab9ec39e94164d1f509428584e24b7e))
+-   show APY on drawers ([f954f08](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f954f084fab9ec39e94164d1f509428584e24b7e))
 -   Progress on renaming & combined APY selector ([01e0f7f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/01e0f7fd569106b43cc8b1c03363ff2b8a0275cc))
 -   (WIP) displaying new notification in notify ([8886696](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8886696f5008cb6f3a3064a5a5351bd0c5c8ec42))
 -   clean up and progress on liquidity desk ([9cbf316](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9cbf316c97d1a9f49561d0bdceda147625ba3ee0))
@@ -236,7 +316,7 @@
 -   hide unconfirmed wallets ([373f3d5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/373f3d5b5492fae22ae378b5212efb62f5dd54ff))
 -   ([bb50479](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bb50479443ce7e44456094af836b0f7eada00b17))
 -   adapting markets data to liquidate ([f81cad5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f81cad5104016acb273915d11606714be0f1ddf0))
--   Add borrow assets selection ([52b96cb](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/52b96cb66ad0eb908d86f7a966fe70ca5fbf4635))
+-   add borrow assets selection ([52b96cb](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/52b96cb66ad0eb908d86f7a966fe70ca5fbf4635))
 -   add proper math for total receive ([c5fe0bc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c5fe0bcfa8c817a95598a7390efd53f03131a484))
 -   add proper math to covering debt ([379e4ee](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/379e4ee218b9dca4c1b74347df30543cd1acf829))
 -   add the math for bonus and receive total ([722ac84](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/722ac848b58eaead8082eb5fa9335dfe88077a72))
@@ -274,17 +354,17 @@
 -   add message for liquidations on toastr ([0736a48](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0736a48b3dc89e9621206e543d8b4e4357956c06))
 -   add ropsten network testnet and update error codes for kyc methods ([953b4da](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/953b4dafb3b24c20280951ae5616e404eea316ee))
 -   add selector for borrow liquidity ([da4c3c9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/da4c3c9a797516f5a1575c898ac83d7b855d6cb2))
--   Added Liquidity page/table and liquidity management drawer ([60b85fe](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/60b85fea77160c063b792199c38bd64e0ef35d2c))
+-   added Liquidity page/table and liquidity management drawer ([60b85fe](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/60b85fea77160c063b792199c38bd64e0ef35d2c))
 -   automate history page data ([f50d6d6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f50d6d6e123ca7859b5481a852c69adc9f232115))
 -   created liquidations store + ([56183a1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/56183a127af514426ec7a31128d4e786a5c42093))
--   UI-106 Add combined Borrow & Supply portfolio APR rates ([3e103c9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3e103c9314a9058b888e0127d64d8f9c6b0b1eb4))
--   UI-106 Added APR Card Containers ([cc1b32e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/cc1b32ea801dd33c825f617124bd99b2919ce6d3))
+-   UI-106 add combined Borrow & Supply portfolio APR rates ([3e103c9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3e103c9314a9058b888e0127d64d8f9c6b0b1eb4))
+-   UI-106 added APR Card Containers ([cc1b32e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/cc1b32ea801dd33c825f617124bd99b2919ce6d3))
 -   enable max liquidate amount on drawer ([bc13b54](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bc13b54e3f9e1bf25721e83e527648db5dd0e595))
 -   enable minimum balance wallet check ([7b495ab](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7b495ab7c44eb4e6da7625838bdc39ec79f8a960))
 -   history page defaults sort tx by most recent ([0358c73](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0358c7317de5aa7148306927f362e4fe3b042794))
 -   history page now updates from alkemi api instead of etherscan ([c508d14](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c508d14a5203242ac76a46c36188f5c308a9ac04))
--   **liquidate:** dynamically calculate token amounts from user inputs ([bdf4479](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bdf4479fb180a30c4e1ab24075b34279be34ecd2))
--   improve lend and borrow table lableing for consistency ([6b358a5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6b358a5060bde8491c192db1617cf5a207cb671e))
+-   liquidate dynamically calculate token amounts from user inputs ([bdf4479](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bdf4479fb180a30c4e1ab24075b34279be34ecd2))
+-   improve lend and borrow table labeling for consistency ([6b358a5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6b358a5060bde8491c192db1617cf5a207cb671e))
 -   update Kovan Contract UI-237 ([7033063](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/703306317444b8a3d94379a30045a3ef11d30a54))
 -   use real data for liquidations (real list + smart contract call) ([7f4f70d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7f4f70d3e3034a28a037c3ea0eff53bedab0c212))
 -   wrapped liquidations + fetching accounts ([db50677](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/db506775cf1688d38095d66b08fe6861123f5141))
@@ -297,11 +377,9 @@
 
 -   Revert "edits to market page layout and styling" ([83dbd5e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/83dbd5eb5114c788dd7b06cfd5075320080db249))
 
-# Versions
+# Pre-Release Versions
 
-## 0.4.0
-
-###### _April 20th 2020_
+# 0.4.0 (2020-04-20)
 
 ### Features
 
@@ -316,85 +394,81 @@
     -   Fortmatic
     -   Squarelink
 
-*   Fixed alignment/spacing of appbar, content, sidebar
-*   Updated render one appbar for all router
-*   Fixed dashboard/lending table alignment
-*   Updated lending Component Active Lending Reserves table alignment
-*   Updated Markets Page
-*   Fixed registerServiceWorker
-*   Update README add Contributing Guidelines
-*   Added feature toggle side bar
-*   Updated imports across app to use absolute path
-*   Fixed theme import error
-*   Updated sidebar styling
-*   Fixed app bar
-*   Updated MUI Theme palette
-*   Removed unnecessary color imports
-*   Fixed bad color secondary.dark
-*   Updated revamp of history page using MUI
-*   Removed unnecessary theme settings
-*   Updated to history page, add link to etherscan
-*   Fixed table cell alignments on history page
-*   Fixed Selected Icon highlighting
-*   Added Custom Material SVG icons for sidebar items
-*   Fixed Squarelink
-*   Fixed css import for build
-*   Added menu icon to toggle side bar
-*   Fixed sidebar item styling
-*   Fixed add side bar divider
-*   Updated theme into a themes folder which related styling files. Updated theme js to reflect changes. Made layout edits to lending page and broke down components into cards and grid structure. Other minor styling issues corrected.
-*   Fixed values to values instead of strings with 2 place decimal formatting.
-*   Updated Changelog
+-   Fixed alignment/spacing of appbar, content, sidebar
+-   updated render one appbar for all router
+-   Fixed dashboard/lending table alignment
+-   updated lending Component Active Lending Reserves table alignment
+-   updated Markets Page
+-   Fixed registerServiceWorker
+-   Update README add Contributing Guidelines
+-   added feature toggle side bar
+-   updated imports across app to use absolute path
+-   Fixed theme import error
+-   updated sidebar styling
+-   Fixed app bar
+-   updated MUI Theme palette
+-   Removed unnecessary color imports
+-   Fixed bad color secondary.dark
+-   updated revamp of history page using MUI
+-   Removed unnecessary theme settings
+-   updated to history page, add link to etherscan
+-   Fixed table cell alignments on history page
+-   Fixed Selected Icon highlighting
+-   added Custom Material SVG icons for sidebar items
+-   Fixed Squarelink
+-   Fixed css import for build
+-   added menu icon to toggle side bar
+-   Fixed sidebar item styling
+-   Fixed add side bar divider
+-   updated theme into a themes folder which related styling files. updated theme js to reflect changes. Made layout edits to lending page and broke down components into cards and grid structure. Other minor styling issues corrected.
+-   Fixed values to values instead of strings with 2 place decimal formatting.
+-   updated Changelog
 
 ---
 
-## 0.3.0
-
-###### _April 13th 2020_
+# 0.3.0 (2020-04-13)
 
 ### Features
 
 -   Fixed memory leak
--   Added Dashboard Component, improved routing
--   Updated sidebar app with proper code splitting
--   Added Dashboard material-ui layout base components
--   Added load Dynamic Headings based on page location
--   Added Supply and Withdraw Modals to ActiveLendingTable Component
--   Updated use of custom Material UI theme
--   Updated css in js styling, fixing layout for dashboard
--   Added onBoard.js for web3 wallet connects
--   Updated Dashboard Component
--   Updated Lending Component
--   Updated Borrow Component
--   Updated Borrow Info Cards
--   Updated Dashboard Info Cards
--   Added layout and style improvements to Supply Modal
--   Updated styling and layout fixes dashboard page
--   Added Portis, Fortmatic, Squarelink web3 providers to connect wallet
+-   added Dashboard Component, improved routing
+-   updated sidebar app with proper code splitting
+-   added Dashboard material-ui layout base components
+-   added load Dynamic Headings based on page location
+-   added Supply and Withdraw Modals to ActiveLendingTable Component
+-   updated use of custom Material UI theme
+-   updated css in js styling, fixing layout for dashboard
+-   added onBoard.js for web3 wallet connects
+-   updated Dashboard Component
+-   updated Lending Component
+-   updated Borrow Component
+-   updated Borrow Info Cards
+-   updated Dashboard Info Cards
+-   added layout and style improvements to Supply Modal
+-   updated styling and layout fixes dashboard page
+-   added Portis, Fortmatic, Squarelink web3 providers to connect wallet
 -   Fixed connect button styling on AppBar
--   Added Dashboard icons
--   Updated History and Liquidation Pages
--   Updated Button on lending and borrowing pages, adding colored asset icon variants to pages, some more uniform spacing added across grid.
--   Updated Sidebar wallet balances
+-   added Dashboard icons
+-   updated History and Liquidation Pages
+-   updated Button on lending and borrowing pages, adding colored asset icon variants to pages, some more uniform spacing added across grid.
+-   updated Sidebar wallet balances
 -   Fixed USDC icon on markets page
--   Added Liquidation page
+-   added Liquidation page
 -   Fixed sidebar active menu link
--   Adding French Language Definitions
--   Updated styling to table, grid titles. Spacing between info grids, add asset button edits, sub heading table font edits.
+-   adding French Language Definitions
+-   updated styling to table, grid titles. Spacing between info grids, add asset button edits, sub heading table font edits.
 
 ---
 
-## 0.2.0
-
-###### _April 6th 2020_
+# 0.2.0 (2020-04-06)
 
 ### Features
 
--   Edits to styling, lending page layout and connect wallet functionality
--   Added Web3 connectivity
+-   edits to styling, lending page layout and connect wallet functionality
+-   added Web3 connectivity
 -   Refactored out functions from markets page to utils.js
--   Added to market page layout and styling
--   Added styling and layout for markets page
+-   added to market page layout and styling
+-   added styling and layout for markets page
 -   Fix flexbox to adjust to different screen sizes
 -   Fix Sorting on Markets Page
 
@@ -406,9 +480,7 @@
 
 ---
 
-## 0.1.0
-
-###### _March 21st 2020_
+# 0.1.0 (2020-03-21)
 
 ### Features
 
@@ -442,7 +514,7 @@
 
 ### Chore
 
--   [Dockerfile] Add production docker configuration with multi-stage build
+-   [Dockerfile] add production docker configuration with multi-stage build
 -   [nginx] Production docker image use nginx server
 -   [docker-compose.yml] Implement dev environment script
 -   [bitbucket-pipelines.yml] CI/CD script
@@ -450,6 +522,6 @@
 
 ### Doc
 
--   [CONTRIBUTING.md] Add contributing guidelines
--   [CHANGES.md] Add changelog
--   [README.md] Add readme with badges
+-   [CONTRIBUTING.md] add contributing guidelines
+-   [CHANGELOG.md] add changelog
+-   [README.md] add readme with badges

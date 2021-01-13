@@ -21,6 +21,8 @@ import {
     assetToDecimals,
 } from "utils/ui";
 
+import { estimateGasForMethod } from "utils/drizzle";
+
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
@@ -39,6 +41,14 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
 
     const [amount, setAmount] = React.useState("");
 
+    const [estimationOfGasPrice, setEstimationOfGasPrice] = React.useState(
+        "3000000000"
+    ); // defaults to 3 gwei
+    const [
+        estimationOfDepositMethodCall,
+        setEstimationOfDepositMethodCall,
+    ] = React.useState("1050000000000000"); // defaults to 3 gwei * 350000
+
     const onSetAmount = (newValue) => {
         const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
             ? assetToDecimals[asset.unit].toString()
@@ -53,8 +63,60 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     };
 
     const onSetMax = () => {
-        setAmount(fromWei(asset.wallet, asset.unit));
+        if (asset.unit === "ETH" || asset.unit === "WETH") {
+            // If user sets all their ether, they cannot make the transaction, choice here is to limit what they can deposit from a calculated gas fee originating from past gas cost * (gas price estimation + 2 gwei)
+            const calculatedMax = web3.utils
+                .toBN(asset.wallet)
+                .sub(web3.utils.toBN(estimationOfDepositMethodCall));
+
+            setAmount(fromWei(calculatedMax.toString(), asset.unit));
+        } else {
+            setAmount(fromWei(asset.wallet, asset.unit));
+        }
     };
+
+    React.useEffect(() => {
+        // Retrieves an estimation of gas price and adds 2 gwei to it on starts
+        drizzle.web3.eth.getGasPrice().then((result) => {
+            const calculatedResult = web3.utils
+                .toBN("2000000000") // adds 2 gwei to the result estimation of gasPrice from the last blocks
+                .add(web3.utils.toBN(result));
+
+            setEstimationOfGasPrice(calculatedResult.toString());
+        });
+    }, [drizzle.web3.eth]);
+
+    React.useEffect(() => {
+        const runEstimateOfMethodCall = () => {
+            estimateGasForMethod({
+                drizzle,
+                userWalletNetwork,
+                userWalletAddress,
+                estimationOfGasPrice,
+                method: "supply",
+            })
+                .then((result) => {
+                    const calculatedResult = web3.utils
+                        .toBN(estimationOfGasPrice)
+                        .mul(web3.utils.toBN(result.toString()));
+
+                    setEstimationOfDepositMethodCall(
+                        calculatedResult.toString()
+                    );
+                })
+                .catch((/* e */) => {
+                    //console.log('Something went wrong: ', e)
+                });
+        };
+
+        runEstimateOfMethodCall();
+    }, [
+        estimationOfGasPrice,
+        userWalletNetwork,
+        userWalletAddress,
+        drizzle,
+        drizzle.web3.eth,
+    ]);
 
     const [enableDeposit, setEnableDeposit] = React.useState(false);
 
@@ -67,15 +129,30 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 .required()
                 .positive()
                 .test("maxValueTest", "You can't deposit this amount", () => {
+                    let allowedAmount = web3.utils.toBN(asset.wallet);
+
+                    if (asset.unit === "ETH" || asset.unit === "WETH") {
+                        // If user sets all their ether, they cannot make the transaction, choice here is to limit what they can deposit from a calculated gas fee originating from past gas cost * (gas price estimation + 2 gwei)
+                        const calculatedMax = web3.utils
+                            .toBN(asset.wallet)
+                            .sub(
+                                web3.utils.toBN(estimationOfDepositMethodCall)
+                            );
+
+                        allowedAmount = web3.utils.toBN(
+                            calculatedMax.toString()
+                        );
+                    }
+
                     return web3.utils
                         .toBN(toWei(amount, asset.unit))
-                        .lte(web3.utils.toBN(asset.wallet));
+                        .lte(allowedAmount);
                 });
             setEnableDeposit(await schema.isValid(amount));
         };
 
         checkValidity();
-    }, [amount, asset.wallet, asset.unit]);
+    }, [amount, asset.wallet, asset.unit, estimationOfDepositMethodCall]);
 
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
@@ -120,7 +197,11 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 onSetMax={onSetMax}
                 amount={amount}
                 setAmount={onSetAmount}
-                mainTitle={`Deposit ${asset.unit}`}
+                mainTitle={`Deposit ${
+                    asset.alternativeUnitLabel
+                        ? asset.alternativeUnitLabel
+                        : asset.unit
+                }`}
                 balanceValue={formatNumber(asset.balance, asset.unit)}
                 amountValue={`Wallet: ${formatNumber(
                     asset.wallet,

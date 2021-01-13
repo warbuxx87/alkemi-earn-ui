@@ -3,35 +3,6 @@
 // Section 2: Action types declarations and action creators
 
 //                                               //
-// ------------ APPROVE  ACTIONS -------------   //
-//                                               //
-
-export const APPROVE_PENDING = "APPROVE_PENDING";
-export const approvePending = (asset) => ({
-    type: APPROVE_PENDING,
-    payload: {
-        asset,
-    },
-});
-
-export const APPROVE_SUCCESS = "APPROVE_SUCCESS";
-export const approveSuccess = (asset) => ({
-    type: APPROVE_SUCCESS,
-    payload: {
-        asset,
-    },
-});
-
-export const APPROVE_ERROR = "APPROVE_ERROR";
-export const approveError = (asset, error) => ({
-    type: APPROVE_ERROR,
-    payload: {
-        asset,
-    },
-    error,
-});
-
-//                                               //
 // ------------- RESET LEND DATA -------------   //
 //                                               //
 
@@ -39,6 +10,18 @@ export const RESET_LEND_DATA = "RESET_LEND_DATA";
 
 export const resetLendData = () => ({
     type: RESET_LEND_DATA,
+});
+
+// Declare action type as a constant
+export const SET_ETH_LEND_BALANCE = "SET_ETH_LEND_BALANCE";
+
+// Declare action creator
+export const setEthLendBalance = (walletETHBalance) => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: SET_ETH_LEND_BALANCE,
+    payload: {
+        walletETHBalance,
+    },
 });
 
 // Section 3: Action dispatch methods and async funcs

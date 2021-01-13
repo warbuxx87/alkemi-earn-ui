@@ -64,10 +64,13 @@ definitions:
                   - export NODE_OPTIONS=--max_old_space_size=7168
                   - echo "Build"
                   - npm install --quiet
+                  # Saves build version to a json file for cache-busting purposes
+                  - npm run generate-build-version
                   - npm run build
               artifacts:
                   # keep all files from this build step and make available for next step
                   - build/**
+                  - public/meta.json
 
         # DEFINE Upload to AWS Step
         - step: &upload
@@ -108,7 +111,7 @@ definitions:
         # DEFINE DEPLOY TO STAGING 1 step
         - step: &deploy-staging-1
               name: "Deploy to Staging 1"
-              deployment: staging
+              deployment: staging1
               script:
                   - echo "$VERSION Deployment to Staging 1!"
                   - apt-get update
@@ -124,10 +127,11 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-1"
                         WAIT: "true"
+
         # DEFINE DEPLOY TO Staging 2 step
         - step: &deploy-staging-2
               name: "Deploy to Staging 2"
-              deployment: staging
+              deployment: staging2
               script:
                   - echo "$VERSION Deployment to Staging 2!"
                   - apt-get update
@@ -143,10 +147,11 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-2"
                         WAIT: "true"
+
         # DEFINE DEPLOY TO Staging 3 step
         - step: &deploy-staging-3
               name: "Deploy to Staging 3"
-              deployment: staging
+              deployment: staging3
               script:
                   - echo "$VERSION Deployment to Staging 3!"
                   - apt-get update
@@ -162,6 +167,7 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-3"
                         WAIT: "true"
+
         # DEFINE DEPLOY TO DEVELOPMENT step
         - step: &deploy-development
               name: "Deploy to Development"
@@ -181,6 +187,7 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-development"
                         WAIT: "true"
+
         # DEFINE DEPLOY TO PRODUCTION STEP
         - step: &deploy-production
               name: "Deploy to Production"
@@ -200,6 +207,7 @@ definitions:
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-production"
                         WAIT: "true"
+
         # DEFINE RELEASE and bump VERSION
         - step: &release
               name: "Release and bump version"
@@ -238,22 +246,37 @@ pipelines:
     pull-requests:
         # Runs on all pull requests
         "**":
-            - step: *analyze
+            - parallel:
+                  - step: *test
+                  - step: *analyze
 
     branches:
         development:
             # Runs only on Development Branch
-            - step: *analyze
+            - parallel:
+                  - step: *test
+                  - step: *analyze
             - step: *release
             - step: *build
             - step: *upload
             - step: *deploy-development
         master:
             # Runs only on Master Branch
-            - step: *analyze
-            - step: *github
-            #  - step: *quality-gate
+            - parallel:
+                  - step: *test
+                  - step: *analyze
+                  - step: *github
+                  - step: *docs
             - step: *build
             - step: *upload
-            - step: *docs
             - step: *deploy-production
+
+            #                  SAVING THIS FOR LATER
+            #                  - pipe: sentryio/sentry-new-release:0.3.0
+            #                    variables:
+            #                        SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
+            #                        SENTRY_ORG: "alkemi-ai-inc"
+            #                        SENTRY_PROJECT: "alkemi-earn-ui"
+            #                        ENVIRONMENT: "staging2" # Optional.
+            #                        FINALIZE: "false" # Optional.
+            #

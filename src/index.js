@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
+//Cache bust
+import CacheBuster from "./CacheBuster";
+
 // sentry libs
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
@@ -34,16 +37,18 @@ Sentry.init({
 export class App extends Component {
     render() {
         return (
-            <Provider store={store}>
-                <Drizzle>
-                    <ConnectedRouter history={history}>
-                        <MuiThemeProvider theme={theme}>
-                            <CssBaseline />
-                            <Layout />
-                        </MuiThemeProvider>
-                    </ConnectedRouter>
-                </Drizzle>
-            </Provider>
+            <CacheBuster>
+                <Provider store={store}>
+                    <Drizzle>
+                        <ConnectedRouter history={history}>
+                            <MuiThemeProvider theme={theme}>
+                                <CssBaseline />
+                                <Layout />
+                            </MuiThemeProvider>
+                        </ConnectedRouter>
+                    </Drizzle>
+                </Provider>
+            </CacheBuster>
         );
     }
 }
