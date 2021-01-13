@@ -9,8 +9,7 @@
         "history_url": "https://rinkeby.api.alkemi.network/history",
         "markets_url": "https://rinkeby.api.alkemi.network/markets",
         "accounts_url": "https://rinkeby.api.alkemi.network/accounts",
-        "liquidations_url": "https://rinkeby.api.alkemi.network/liquidations",
-        "swap_url": "https://rinkeby.api.alkemi.network/swap"
+        "liquidations_url": "https://rinkeby.api.alkemi.network/liquidations"
     },
     "ropsten": {
         "history_url": "https://ropsten.api.alkemi.network/history",
