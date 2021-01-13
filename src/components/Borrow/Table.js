@@ -84,7 +84,7 @@ const checkActivating = (Row, txs) => {
 };
 
 // Section 5: Code Component
-const BorrowTable = ({ data = [], onActivate, txs }) => {
+const BorrowTable = ({ data = [], onActivate, txs, walletIsKYCd }) => {
     const classes = useStyles();
     return (
         <Box mt={1}>
@@ -220,10 +220,10 @@ const BorrowTable = ({ data = [], onActivate, txs }) => {
                                                 }
                                                 variant="outlined"
                                                 color="secondary"
-                                                disabled={checkActivating(
-                                                    Row,
-                                                    txs
-                                                )}
+                                                disabled={
+                                                    checkActivating(Row, txs) ||
+                                                    walletIsKYCd !== true
+                                                }
                                                 onClick={() => onActivate(Row)}
                                             >
                                                 {checkActivating(Row, txs) ? (

@@ -28,7 +28,7 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 
-import { getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
 // Section 4: components
 import Borrow from "components/Borrow/Borrow";
@@ -45,6 +45,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
 
     const walletConnected = useSelector(isWalletConnected);
 
+    const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
 
     const activateAsset = (asset) =>
@@ -63,6 +64,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
             onActivate={walletConnected ? activateAsset : onConnect}
             txs={txs}
             USDPrice={USDPrice}
+            walletIsKYCd={walletIsKYCd}
         />
     );
 };

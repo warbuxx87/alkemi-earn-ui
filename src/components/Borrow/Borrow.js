@@ -31,7 +31,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Borrow({ activeBorrow, inactiveBorrow, onActivate, USDPrice, txs }) {
+function Borrow({
+    activeBorrow,
+    inactiveBorrow,
+    onActivate,
+    USDPrice,
+    txs,
+    walletIsKYCd,
+}) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
@@ -60,6 +67,7 @@ function Borrow({ activeBorrow, inactiveBorrow, onActivate, USDPrice, txs }) {
                                 data={inactiveBorrow}
                                 onActivate={onActivate}
                                 txs={txs}
+                                walletIsKYCd={walletIsKYCd}
                             />
                         </Grid>
                     )}
