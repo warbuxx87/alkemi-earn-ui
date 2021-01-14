@@ -85,7 +85,13 @@ const checkActivating = (row, txs) => {
 };
 
 // Section 5: Code Component
-const LendTable = ({ data = [], onActivate, displayAllocateButton, txs }) => {
+const LendTable = ({
+    data = [],
+    onActivate,
+    displayAllocateButton,
+    txs,
+    walletIsKYCd,
+}) => {
     const classes = useStyles();
     return (
         <Box mt={1}>
@@ -228,10 +234,10 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton, txs }) => {
                                                 variant="outlined"
                                                 size="small"
                                                 color="secondary"
-                                                disabled={checkActivating(
-                                                    row,
-                                                    txs
-                                                )}
+                                                disabled={
+                                                    checkActivating(row, txs) ||
+                                                    walletIsKYCd !== true
+                                                }
                                                 onClick={() => onActivate(row)}
                                             >
                                                 {checkActivating(row, txs) ? (

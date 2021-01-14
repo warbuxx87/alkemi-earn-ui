@@ -73,6 +73,11 @@ exports[`<LayoutContent /> matches snapshot 1`] = `
       path="/liquidate"
     />
     <Route
+      component={[Function]}
+      exact={true}
+      path="/swap"
+    />
+    <Route
       component={
         Object {
           "$$typeof": Symbol(react.forward_ref),

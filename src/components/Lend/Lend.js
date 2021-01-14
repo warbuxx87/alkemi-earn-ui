@@ -38,6 +38,7 @@ function Lend({
     USDPrice,
     displayAllocateButton,
     txs,
+    walletIsKYCd,
 }) {
     const classes = useStyles();
     return (
@@ -68,6 +69,7 @@ function Lend({
                                 onActivate={onActivate}
                                 displayAllocateButton={displayAllocateButton}
                                 txs={txs}
+                                walletIsKYCd={walletIsKYCd}
                             />
                         </Grid>
                     )}{" "}

@@ -129,6 +129,7 @@ function AppBar({
                                 variant="h4"
                                 color="textPrimary"
                                 data-testid="title"
+                                noWrap
                                 className={classes.title}
                             >
                                 {title}

@@ -1,3 +1,17 @@
+## [1.10.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.10.0...v1.10.1) (2021-01-13)
+
+
+### Bug Fixes
+
+* disable activate button for non-kyc wallets ([7f3e892](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7f3e892becb77f3f61411c485aeabd01313ee673))
+
+# [1.10.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.3...v1.10.0) (2021-01-13)
+
+
+### Features
+
+* swap component ([4ad184a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4ad184a0668e96ebe316edcfbf7ffd72d27fceb0))
+
 ## [1.9.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.9.2...v1.9.3) (2021-01-11)
 
 

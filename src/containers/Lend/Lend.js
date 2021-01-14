@@ -29,7 +29,7 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 
-import { getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
@@ -43,6 +43,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
 
     const walletConnected = useSelector(isWalletConnected);
 
+    const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
 
     const activateAsset = (asset) =>
@@ -65,6 +66,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
                 userWalletNetwork !== "1" && userWalletNetwork !== 1
             }
             txs={txs}
+            walletIsKYCd={walletIsKYCd}
         />
     );
 };
