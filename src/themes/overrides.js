@@ -58,13 +58,6 @@ const overrides = {
             paddingBottom: 30,
         },
     },
-    MuiAppBar: {
-        root: {
-            paddingTop: 22,
-            boxShadow: "none",
-            paddingBottom: 30,
-        },
-    },
     MuiTableHead: {
         root: {
             backgroundColor: "#f7f9fc",
