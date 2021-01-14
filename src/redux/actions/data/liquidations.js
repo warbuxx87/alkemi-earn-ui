@@ -2,6 +2,8 @@
 
 import _ from "lodash";
 
+import { transactionTriggered } from "redux/actions/status/transactions";
+
 import { handle_liquidate_click } from "utils/drizzle";
 import { triggerToastDisplay } from "utils/notify";
 
@@ -34,43 +36,6 @@ const fetchLiquidationsSuccess = (liquidations) => ({
     payload: {
         liquidations,
     },
-});
-
-//                                                  //
-// -------------- LIQUIDATE ACTIONS --------------  //
-//                                                  //
-
-// track the smart contract calls
-
-// Declare action type as a constant
-export const LIQUIDATE_PENDING = "LIQUIDATE_PENDING";
-
-const liquidatePending = (asset) => ({
-    type: LIQUIDATE_PENDING,
-    payload: {
-        asset,
-    },
-});
-
-// Declare action type as a constant
-export const LIQUIDATE_SUCCESS = "LIQUIDATE_SUCCESS";
-
-const liquidateSuccess = (asset) => ({
-    type: LIQUIDATE_SUCCESS,
-    payload: {
-        asset,
-    },
-});
-
-// Declare action type as a constant
-export const LIQUIDATE_ERROR = "LIQUIDATE_ERROR";
-
-const liquidateError = (symbol, error) => ({
-    type: LIQUIDATE_ERROR,
-    payload: {
-        symbol,
-    },
-    error,
 });
 
 // Declare action type as a constant
@@ -126,6 +91,7 @@ export const fetchLiquidations = ({ currentNetworkName, address }) => async (
     throttledFetchLiquidations({ currentNetworkName, address, dispatch });
 };
 
+// TODO: to be merged in transactions (when the other drawers are refactored in UI-359)
 export const onLiquidateAction = ({
     drizzle,
     userWalletNetwork,
@@ -135,8 +101,9 @@ export const onLiquidateAction = ({
     assetCollateral,
     assetBorrow,
     targetAccount,
+    type,
+    liquidationId,
 }) => async (dispatch) => {
-    dispatch(liquidatePending(symbol));
     handle_liquidate_click({
         drizzle,
         userWalletNetwork,
@@ -147,14 +114,14 @@ export const onLiquidateAction = ({
         assetBorrow,
         targetAccount,
     })
-        .then(() => dispatch(liquidateSuccess(symbol)))
+        .then((stackId) => {
+            dispatch(transactionTriggered(liquidationId, stackId, type));
+        })
         .catch((error) => {
             triggerToastDisplay({
                 toastMessageVariant: "failure",
                 displayMessage: "Something went wrong",
                 displaySecondaryMessage: error.message,
             });
-
-            dispatch(liquidateError(symbol, error.message));
         });
 };

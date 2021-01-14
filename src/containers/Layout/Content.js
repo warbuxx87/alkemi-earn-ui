@@ -10,15 +10,17 @@ import Borrow from "containers/Borrow/Borrow";
 import Markets from "containers/Markets/Markets";
 import History from "containers/History/History";
 import Liquidate from "containers/Liquidate/Liquidate";
+import Swap from "containers/Swap/Swap";
 import NoWhere from "components/NoWhere/NoWhere";
 
 import {
     DASHBOARD,
     LEND,
     BORROW,
-    MARKETS,
     HISTORY,
+    MARKETS,
     LIQUIDATE,
+    SWAP,
 } from "constants/routes";
 
 const LayoutContent = () => (
@@ -31,6 +33,7 @@ const LayoutContent = () => (
             <Route path={MARKETS} exact component={Markets} />
             <Route path={HISTORY} exact component={History} />
             <Route path={LIQUIDATE} exact component={Liquidate} />
+            <Route path={SWAP} exact component={Swap} />
             <Route component={NoWhere} />
         </Switch>
     </div>

@@ -6,7 +6,6 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = (theme) => ({
     head: {
-        fontSize: 12,
         color: theme.palette.text.secondary,
         opacity: "1",
         lineHeight: "1px",

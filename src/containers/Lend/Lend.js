@@ -10,7 +10,7 @@ import Lend from "components/Lend/Lend";
 
 import DrizzleContext from "utils/DrizzleContext";
 
-import { onLendActivate } from "redux/actions/status/lend";
+import { onTx } from "redux/actions/status/transactions";
 
 import useOnboard from "hooks/useOnboard";
 
@@ -29,8 +29,12 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 
+import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
+    const { onConnect } = useOnboard();
+
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const drizzle = useContext(DrizzleContext);
@@ -38,7 +42,9 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const userWalletNetwork = useSelector(walletNetwork);
 
     const walletConnected = useSelector(isWalletConnected);
-    const { onConnect } = useOnboard();
+
+    const walletIsKYCd = useSelector(isWalletKYCd);
+    const txs = useSelector(getTransactions);
 
     const activateAsset = (asset) =>
         onActivate({
@@ -46,6 +52,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             userWalletNetwork,
             userWalletAddress,
             asset,
+            type: "approve",
         });
 
     return (
@@ -58,6 +65,8 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             displayAllocateButton={
                 userWalletNetwork !== "1" && userWalletNetwork !== 1
             }
+            txs={txs}
+            walletIsKYCd={walletIsKYCd}
         />
     );
 };
@@ -71,7 +80,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            onActivate: onLendActivate,
+            onActivate: onTx,
         },
         dispatch
     );

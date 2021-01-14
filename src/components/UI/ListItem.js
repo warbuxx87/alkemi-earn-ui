@@ -49,7 +49,7 @@ const ListItem1 = ({ icon, text, onClick, selected, ...props }) => {
 // Section 6: Documentation with PropTypes
 ListItem1.propTypes = {
     icon: PropTypes.node.isRequired,
-    text: PropTypes.string.isRequired,
+    text: PropTypes.object.isRequired,
     color: PropTypes.string,
     onClick: PropTypes.func.isRequired,
 };

@@ -1,12 +1,7 @@
 // Import action of interest as constants
 import {
-    BORROW_PENDING,
-    BORROW_SUCCESS,
-    BORROW_ERROR,
-    REPAY_PENDING,
-    REPAY_SUCCESS,
-    REPAY_ERROR,
     RESET_BORROW_DATA,
+    SET_ETH_BORROW_BALANCE,
 } from "redux/actions/data/borrow";
 
 import address from "constants/address_map.json";
@@ -17,23 +12,22 @@ import usdc from "assets/images/USDC.svg";
 import wbtc from "assets/images/WBTC.svg";
 import eth from "assets/images/WETH.svg";
 
-function createData(name, unit, image, wallet) {
+function createData(name, unit, image, wallet, alternativeUnitLabel) {
     return {
         name,
         unit,
+        alternativeUnitLabel,
         image,
         wallet,
         activated: false,
         pending: false,
-        borrowing: false,
-        repaying: false,
         redeeming: false,
     };
 }
 
 const assets = {
-    WETH: createData("Ether", "WETH", eth, "0"),
     DAI: createData("Dai Stablecoin", "DAI", dai, "0"),
+    WETH: createData("Ether", "WETH", eth, "0", "ETH"),
     USDC: createData("USD Coin", "USDC", usdc, "0"),
     WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0"),
 };
@@ -55,7 +49,8 @@ export default (state = initialState, action) => {
                     if (
                         !Object.values(address)
                             .map((net) => net.address_MoneyMarket)
-                            .includes(action.args[0]) // check if the contract address linked to the action is not the address of moneyMarket (in any of the networks)
+                            .includes(action.args[0]) && // check if the contract address linked to the action is not the address of moneyMarket (in any of the networks)
+                        action.name !== "WETH" // under the hood ETH is used out of user wallet, we cannot change all references form WETH to ETH as WETH is used in some other places, so this is the cleanest way found to make this exception for ETH
                     ) {
                         return {
                             ...state,
@@ -73,79 +68,19 @@ export default (state = initialState, action) => {
                     return state;
             }
         }
-        case BORROW_PENDING:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        borrowing: true,
-                    },
-                },
-            };
-        case BORROW_SUCCESS:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        borrowing: false,
-                        activated: true,
-                    },
-                },
-            };
 
-        case BORROW_ERROR:
+        case SET_ETH_BORROW_BALANCE: {
             return {
                 ...state,
                 assets: {
                     ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        borrowing: false,
-                        error: action.error,
+                    WETH: {
+                        ...state.assets["WETH"],
+                        wallet: action.payload.walletETHBalance, // expecting that only one account is used at the same time, and thus only one value is retrieved
                     },
                 },
             };
-
-        case REPAY_PENDING:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        repaying: true,
-                    },
-                },
-            };
-        case REPAY_SUCCESS:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        repaying: false,
-                        activated: true,
-                    },
-                },
-            };
-
-        case REPAY_ERROR:
-            return {
-                ...state,
-                assets: {
-                    ...state.assets,
-                    [action.payload.asset]: {
-                        ...state.assets[action.payload.asset],
-                        repaying: false,
-                        error: action.error,
-                    },
-                },
-            };
+        }
 
         case RESET_BORROW_DATA:
             return initialState;

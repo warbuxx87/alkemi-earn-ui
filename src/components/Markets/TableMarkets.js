@@ -8,8 +8,9 @@ import {
     Box,
     Card,
     CardHeader,
-    Divider,
+    FormControlLabel,
     Paper,
+    Switch,
     Table,
     TableBody,
     TableContainer,
@@ -33,9 +34,6 @@ import WBTC from "assets/images/WBTC.svg";
 import DAI from "assets/images/DAI.svg";
 import USDC from "assets/images/USDC.svg";
 
-//import PAX from "assets/images/pax.png";
-//import USDT from "assets/images/USDT.svg";
-
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,35 +52,77 @@ const useStyles = makeStyles((theme) => ({
     assetImage: {
         width: 34,
     },
+    header: {
+        padding: "10px 16px",
+        "& .MuiCardHeader-action": {
+            margin: 0,
+        },
+    },
+    switch: {
+        "& .MuiTypography-body1": {
+            fontSize: 12,
+        },
+    },
 }));
 
 // Section 5: Code Component
 const TableMarkets = ({ marketsData }) => {
     const classes = useStyles();
 
+    const [toggleUSD, setToggleUSD] = React.useState(false);
+
+    const displayUSDOrNativeValue = (usdValue, nativeValue, nativeUnit) => {
+        if (toggleUSD === true) {
+            return <>${format_str_to_kmb(usdValue)}</>;
+        } else {
+            return (
+                <>
+                    {format_str_to_kmb(nativeValue)}
+                    {" " + nativeUnit}
+                </>
+            );
+        }
+    };
+
     const tokens = {
         WETH: WETH,
         USDC: USDC,
         WBTC: WBTC,
         DAI: DAI,
-
-        //USDT: USDT,
-        //PAX: PAX,
     };
 
     return (
         <Card>
-            <CardHeader title="Market Liquidity" className={classes.header} />
-            <Divider />
+            <CardHeader
+                title="Market Liquidity"
+                className={classes.header}
+                action={
+                    <FormControlLabel
+                        value="usd"
+                        className={classes.switch}
+                        control={
+                            <Switch
+                                color="secondary"
+                                checked={toggleUSD}
+                                onChange={() => {
+                                    setToggleUSD(!toggleUSD);
+                                }}
+                            />
+                        }
+                        label="Display USD"
+                        labelPlacement="start"
+                    />
+                }
+            />
             <PerfectScrollbar>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
-                        <TableHead className={classes.tableHead}>
+                        <TableHead className={classes.tablehead}>
                             <TableRow>
                                 <MarketsTableCell>
                                     {" "}
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         {" "}
@@ -91,35 +131,44 @@ const TableMarkets = ({ marketsData }) => {
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
                                         {" "}
-                                        Gross Supply{" "}
+                                        Total Supply{" "}
                                     </Typography>
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
                                         color="textSecondary"
+                                        variant="subtitle2"
                                     >
-                                        Deposit APR{" "}
+                                        Total Borrow
                                     </Typography>
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
-                                        Gross Borrow
+                                        Deposit APY{" "}
+                                    </Typography>
+                                </MarketsTableCell>
+
+                                <MarketsTableCell align="right">
+                                    <Typography
+                                        variant="subtitle2"
+                                        color="textSecondary"
+                                    >
+                                        Borrow APY
                                     </Typography>
                                 </MarketsTableCell>
                                 <MarketsTableCell align="right">
                                     <Typography
-                                        variant="body2"
+                                        variant="subtitle2"
                                         color="textSecondary"
                                     >
-                                        Borrow APR
+                                        Market Utilization
                                     </Typography>
                                 </MarketsTableCell>
                             </TableRow>
@@ -147,16 +196,26 @@ const TableMarkets = ({ marketsData }) => {
                                                 />
                                                 <Box ml={2}>
                                                     <Typography
-                                                        variant="h6"
+                                                        variant="body1"
                                                         color="textPrimary"
                                                     >
-                                                        {item.name}
+                                                        {
+                                                            item.symbol ===
+                                                            "WETH"
+                                                                ? "ETH"
+                                                                : item.symbol /* Re-labeling WETH to ETH only */
+                                                        }
                                                     </Typography>
                                                     <Typography
                                                         variant="body2"
                                                         color="textSecondary"
                                                     >
-                                                        {item.symbol}
+                                                        {
+                                                            item.name ===
+                                                            "Wrapped Ether"
+                                                                ? "Ether"
+                                                                : item.name /* Re-labeling WETH to ETH only */
+                                                        }
                                                     </Typography>
                                                 </Box>
                                             </Box>
@@ -164,20 +223,38 @@ const TableMarkets = ({ marketsData }) => {
                                         <MarketsTableCell align="right">
                                             {" "}
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
-                                                {" "}
-                                                $
-                                                {format_str_to_kmb(
-                                                    item.totalSupplyUSD
+                                                {displayUSDOrNativeValue(
+                                                    item.totalSupplyUSD,
+                                                    item.totalSupply,
+                                                    item.symbol === "WETH"
+                                                        ? "ETH"
+                                                        : item.symbol /* Re-labeling WETH to ETH only */
+                                                )}
+                                            </Typography>
+                                        </MarketsTableCell>
+
+                                        <MarketsTableCell align="right">
+                                            {" "}
+                                            <Typography
+                                                variant="body1"
+                                                color="textPrimary"
+                                            >
+                                                {displayUSDOrNativeValue(
+                                                    item.totalBorrowUSD,
+                                                    item.totalBorrow,
+                                                    item.symbol === "WETH"
+                                                        ? "ETH"
+                                                        : item.symbol /* Re-labeling WETH to ETH only */
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>
                                         <MarketsTableCell align="right">
                                             {" "}
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
                                                 {format_str_to_percent(
@@ -188,24 +265,22 @@ const TableMarkets = ({ marketsData }) => {
                                         <MarketsTableCell align="right">
                                             {" "}
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
-                                                {" "}
-                                                $
-                                                {format_str_to_kmb(
-                                                    item.totalBorrowUSD
+                                                {format_str_to_percent(
+                                                    item.borrowAPR
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>
                                         <MarketsTableCell align="right">
                                             {" "}
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
                                                 {format_str_to_percent(
-                                                    item.borrowAPR
+                                                    item.utilizationRate * 1
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>

@@ -37,6 +37,14 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     tabs: {
+        "& .MuiTab-root": {
+            textTransform: "capitalize",
+            fontSize: "0.8125rem",
+            lineHeight: 1.7,
+            "@media (min-width:1940px)": {
+                fontSize: "0.875rem",
+            },
+        },
         "& .MuiDivider-root": {
             backgroundColor: "#d9dfe8",
         },

@@ -36,12 +36,11 @@ const useStyles = makeStyles((theme) => ({
         color: "#000000",
     },
     appBar: {
-        paddingLeft: "16px",
-        paddingRight: "16px",
-        "@media (min-width:1550px)": {
-            paddingLeft: "0px",
-            paddingRight: "0px",
-        },
+        paddingLeft: "0px",
+        paddingRight: "0px",
+    },
+    title: {
+        textTransform: "uppercase",
     },
 }));
 
@@ -123,15 +122,17 @@ function AppBar({
                         </Hidden>
                         <Hidden mdDown>
                             <Typography
-                                variant="subtitle2"
+                                variant="subtitle1"
                                 color="textSecondary"
                             >
-                                OVERVIEW
+                                Overview
                             </Typography>
                             <Typography
-                                variant="h3"
+                                variant="h4"
                                 color="textPrimary"
                                 data-testid="title"
+                                noWrap
+                                className={classes.title}
                             >
                                 {title}
                             </Typography>

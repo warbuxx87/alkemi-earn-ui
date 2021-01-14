@@ -74,14 +74,33 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const checkActivating = (row, txs) => {
+    const tx = Object.values(txs).filter((aTx) => {
+        return (
+            aTx.transactionLocalId === row.unit &&
+            aTx.type === "approve" &&
+            aTx.processing === true
+        );
+    });
+
+    if (tx && tx.length > 0) return true;
+    else return false;
+};
+
 // Section 5: Code Component
-const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
+const LendTable = ({
+    data = [],
+    onActivate,
+    displayAllocateButton,
+    txs,
+    walletIsKYCd,
+}) => {
     const classes = useStyles();
     return (
         <Box mt={1}>
             <Typography
                 className={classes.heading}
-                variant="h6"
+                variant="body1"
                 color="textPrimary"
             >
                 Available Markets
@@ -109,10 +128,12 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
                                         />
                                         <Box ml={2}>
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="textPrimary"
                                             >
-                                                {row.unit}
+                                                {row.alternativeUnitLabel
+                                                    ? row.alternativeUnitLabel
+                                                    : row.unit}
                                             </Typography>
                                             <Typography
                                                 variant="body2"
@@ -128,7 +149,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                     >
                                         {formatNumber(row.wallet, row.unit)}
@@ -145,7 +166,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                     >
                                         {formatNumber(row.liquidity, row.unit)}
@@ -162,7 +183,7 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
                                     style={{ width: "18%" }}
                                 >
                                     <Typography
-                                        variant="h6"
+                                        variant="body1"
                                         color="textPrimary"
                                         className={classes.label}
                                     >
@@ -216,12 +237,13 @@ const LendTable = ({ data = [], onActivate, displayAllocateButton }) => {
                                                 variant="outlined"
                                                 size="small"
                                                 color="secondary"
-                                                disable={row.activating.toString()}
-                                                onClick={() =>
-                                                    onActivate(row.unit)
+                                                disabled={
+                                                    checkActivating(row, txs) ||
+                                                    walletIsKYCd !== true
                                                 }
+                                                onClick={() => onActivate(row)}
                                             >
-                                                {row.activating ? (
+                                                {checkActivating(row, txs) ? (
                                                     <CircularProgress
                                                         size={20}
                                                         color="inherit"

@@ -9,10 +9,10 @@ export const handle_approve_click = async ({
     drizzle,
     userWalletNetwork,
     asset,
-    myAccount,
+    userWalletAddress,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transaction");
-
+    const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
 
     const address_MoneyMarket = address[network].address_MoneyMarket;
@@ -20,7 +20,7 @@ export const handle_approve_click = async ({
     const tokenContract = initAssetContract({
         drizzle,
         userWalletAddress: myAccount,
-        asset,
+        asset: asset.unit,
     });
     const sendApprove = tokenContract.methods.approve.cacheSend(
         address_MoneyMarket,
@@ -77,13 +77,26 @@ export const handle_deposit_click = async ({
     let weiAmount = amount;
     if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
 
-    const sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
-        token_address,
-        weiAmount,
-        {
-            from: myAccount,
-        }
-    );
+    let sendDeposit;
+    if (unit === "WETH" || unit === "ETH") {
+        sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
+            token_address,
+            weiAmount,
+            {
+                from: myAccount,
+                value: weiAmount,
+            }
+        );
+    } else {
+        sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
+            token_address,
+            weiAmount,
+            {
+                from: myAccount,
+            }
+        );
+    }
+
     return sendDeposit;
 };
 
@@ -135,13 +148,26 @@ export const handle_repay_click = async ({
     let weiAmount = amount;
     if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
 
-    const sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
-        token_address,
-        weiAmount,
-        {
-            from: myAccount,
-        }
-    );
+    let sendRepay;
+
+    if (unit === "WETH" || unit === "ETH") {
+        sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
+            token_address,
+            weiAmount,
+            {
+                from: myAccount,
+                value: weiAmount,
+            }
+        );
+    } else {
+        sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
+            token_address,
+            weiAmount,
+            {
+                from: myAccount,
+            }
+        );
+    }
     return sendRepay;
 };
 
@@ -209,4 +235,32 @@ export const handle_liquidate_click = async ({
     );
 
     return sendLiquidate;
+};
+
+// Estimate method gas, NOT very reliable, since I noticed different values on metamask, but does the trick for the most part
+export const estimateGasForMethod = async ({
+    drizzle,
+    userWalletNetwork,
+    userWalletAddress,
+    estimationOfGasPrice,
+    method,
+}) => {
+    if (!(await readyToTransact())) throw new Error("not ready to transact");
+    if (!method) throw new Error("Must select a method");
+
+    const myAccount = userWalletAddress;
+    const network = constants.network_type[userWalletNetwork];
+    const MoneyMarketContract = drizzle.contracts.MoneyMarket;
+    const token_address = address[network][`address_WETH`];
+
+    const estimateMethodCall = await MoneyMarketContract.methods[method](
+        token_address,
+        "1"
+    ).estimateGas({
+        from: myAccount,
+        gasPrice: estimationOfGasPrice,
+        value: "1", // making the estimation if the user wants to send 1 wei, not great, but a value is better than none, and as the call is async, we cannot set an amount dynamically, it won't resolve in time to be properly responsive
+    });
+
+    return estimateMethodCall;
 };

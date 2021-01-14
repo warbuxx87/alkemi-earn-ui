@@ -8,40 +8,52 @@ import Drawer from "components/UI/Drawer/Drawer";
 
 import DrizzleContext from "utils/DrizzleContext";
 
-import { onAllocateAction } from "redux/actions/data/lend";
+import { onTx } from "redux/actions/status/transactions";
 
-import { formatNumber, fromWei, formatETHMoney } from "utils/ui";
+import {
+    formatNumber,
+    fromWei,
+    formatETHMoney,
+    assetToDecimals,
+} from "utils/ui";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
-const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
+const DrawerAllocateContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
     const walletIsKYCd = useSelector(isWalletKYCd);
+    const txs = useSelector(getTransactions);
 
     const [amount, setAmount] = React.useState("");
-    const [shouldSendMax, setShouldSendMax] = React.useState(false);
 
     const onSetAmount = (newValue) => {
-        setShouldSendMax(false);
+        const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
+            ? assetToDecimals[asset.unit].toString()
+            : "18"; // chose 18 as default, arbitrary choice here
+        const regex = new RegExp(
+            "^(?:\\d*\\.\\d{0," + numberOfDecimalsForAsset + "}|\\d+)$"
+        );
 
-        setAmount(newValue);
+        if (newValue === "" || (newValue + "").match(regex))
+            // limiting inputting more decimal places than the asset supports
+            setAmount(newValue);
     };
 
     const onSetMax = () => {
-        setShouldSendMax(true);
-
         setAmount(fromWei(asset.wallet, asset.unit));
     };
 
     const [enableAllocate, setEnableAllocate] = React.useState(false);
+
+    const [isProcessing, setIsProcessing] = React.useState(false);
 
     React.useEffect(() => {
         if (amount) {
@@ -50,23 +62,44 @@ const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
         }
     }, [amount, asset.wallet, asset.unit]);
 
+    React.useEffect(() => {
+        const tx = Object.values(txs).filter((aTx) => {
+            return (
+                aTx.transactionLocalId === asset.unit &&
+                aTx.type === "allocate" &&
+                aTx.processing === true
+            );
+        });
+
+        if (tx && tx.length > 0) setIsProcessing(tx[0].processing);
+        else setIsProcessing(false);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [txs]);
+
     return (
         <Drawer
             asset={asset}
             buttonsLabel="Allocate"
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
-            enableButtonClick={enableAllocate}
+            enableButtonClick={
+                enableAllocate &&
+                (asset.alternativeUnitLabel === "ETH"
+                    ? false
+                    : true) /* Disabled allocating for ETH */
+            }
             onButtonClick={() =>
-                onAllocateAction({
+                onTx({
                     drizzle,
                     userWalletAddress,
                     asset,
                     amount,
-                    shouldSendMax,
+                    type: "allocate",
+                    shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
                 })
             }
-            isDoingAction={asset.allocating}
+            isDoingAction={isProcessing}
             usdPrice={formatETHMoney(asset.price, "USD", asset.unit, USDPrice)}
             onSetMax={onSetMax}
             amount={amount}
@@ -81,8 +114,7 @@ const DrawerAllocateContainer = ({ asset, onAllocateAction }) => {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ onAllocateAction }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ onTx }, dispatch);
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(
     DrawerAllocateContainer

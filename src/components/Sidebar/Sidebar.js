@@ -12,6 +12,7 @@ import {
     Divider,
     Drawer,
     Hidden,
+    Link,
     List,
     withWidth,
     withStyles,
@@ -30,10 +31,10 @@ import SidebarHeader from "containers/Sidebar/Header";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
     drawer: {
-        width: 280,
+        width: 290,
         marginLeft: 24,
         flexShrink: 0,
-        "@media (min-width:1550px)": {
+        "@media (min-width:1940px)": {
             marginLeft: 35,
             width: 340,
         },
@@ -42,8 +43,8 @@ const styles = (theme) => ({
         overflowX: "hidden",
     },
     drawerOpen: {
-        width: 280,
-        "@media (min-width:1550px)": {
+        width: 290,
+        "@media (min-width:1940px)": {
             width: 340,
         },
         transition: theme.transitions.create("width", {
@@ -62,8 +63,8 @@ const styles = (theme) => ({
             width: 70,
         },
         "&:hover": {
-            width: 280,
-            "@media (min-width:1550px)": {
+            width: 290,
+            "@media (min-width:1940px)": {
                 width: 340,
             },
             transition: theme.transitions.create("width", {
@@ -80,9 +81,9 @@ const styles = (theme) => ({
         "@media (min-width:1550px)": {
             margin: "22px 0px 0px 35px",
         },
-        color: "white",
+        //color: "black",
         border: "none",
-        backgroundColor: "#0d0e10",
+        //backgroundColor: "#0d0e10",
     },
     divider: {
         backgroundColor: theme.palette.common.black,
@@ -120,7 +121,15 @@ function Sidebar({ classes, width, variant, open }) {
                     <Divider className={classes.divider} />
                     <Box py={2} px={2}>
                         <Typography variant="body2" color="textSecondary">
-                            {process.env.REACT_APP_VERSION}
+                            <Link
+                                href="https://docs.alkemi.network/earn-ui/changelog"
+                                variant="body2"
+                                color="inherit"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {process.env.REACT_APP_VERSION}
+                            </Link>
                         </Typography>
                     </Box>
                 </Box>

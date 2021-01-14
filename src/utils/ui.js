@@ -1,4 +1,6 @@
 import web3 from "web3";
+
+import Big from "big.js";
 // import internal assets
 import DAI from "assets/images/DAI.svg";
 import USDC from "assets/images/USDC.svg";
@@ -6,6 +8,7 @@ import WBTC from "assets/images/WBTC.svg";
 import USDT from "assets/images/USDT.svg";
 import WETH from "assets/images/WETH.svg";
 import PAX from "assets/images/pax.png";
+import ETH from "assets/images/eth.png";
 
 const decimalsToUnit = {
     6: "mwei",
@@ -16,8 +19,7 @@ const decimalsToUnit = {
 };
 
 // decimals is constant, default will be 12
-const assetToDecimals = {
-    USDx: 18,
+export const assetToDecimals = {
     WETH: 18,
     DAI: 18,
     PAX: 18,
@@ -33,6 +35,7 @@ const token2icon = {
     PAX: PAX,
     WBTC: WBTC,
     DAI: DAI,
+    ETH: ETH,
 };
 
 export const getTokenIcon = (symbol) => {
@@ -48,9 +51,18 @@ export const fromWei = (value, unit) => {
 
     if (unit === "WBTC") {
         //wbtc has 8 decimals
-        let amount = value / 1e8;
+        let amount = Big(value);
+        amount = amount.div(1e8);
 
-        return amount.toString();
+        // Commented out the next part because the "value" would and should never have decimal places, so it doesn't make sense for the calculated amount to have more than 8 decimal places ever
+        // let returnAmount = amount.toString()
+
+        // const amountSplit = amount.toString().split(".");
+        // if(amountSplit[1] && amountSplit[1].length > 8) { // making very sure the number doesn't have more than 8 decimal places
+        //     returnAmount = amount.toFixed(8)
+        // }
+
+        return amount.toString(); // returnAmount
     } else {
         return web3.utils.fromWei(
             value,
@@ -62,7 +74,9 @@ export const fromWei = (value, unit) => {
 export const toWei = (value, unit) => {
     if (unit === "WBTC") {
         //wbtc has 8 decimals
-        let amount = value * 1e8;
+        let amount = Big(value);
+        amount = amount.times(1e8); // This fix might be useful for other coins that are not set to have the defined decimal points like ether (6, 9...), a good idea would be to refactor everything to this
+
         return amount.toString();
     } else {
         return web3.utils.toWei(
@@ -79,15 +93,23 @@ export const formatNumber = (value, unit) => {
     switch (unit) {
         case "USDC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 6,
+                maximumFractionDigits: 8,
+                minimumFractionDigits: 2,
+            }).format(wei);
+        case "WETH":
+            return new Intl.NumberFormat("en-es", {
+                maximumFractionDigits: 8,
+                minimumFractionDigits: 4,
             }).format(wei);
         case "WBTC":
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits: 8,
+                minimumFractionDigits: 4,
             }).format(wei);
         default:
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits: 18,
+                minimumFractionDigits: 2,
             }).format(wei);
     }
 };
@@ -163,6 +185,13 @@ export const formatETHMoney = (value, currency, unit, usdPrice) => {
     }).format(calculation);
 };
 
+// eth balance value in USD
+export const ETHBalanceToUSD = (ethBalance, USDPrice) => {
+    return ethBalance && USDPrice
+        ? web3.utils.toBN(ethBalance).div(web3.utils.toBN(USDPrice)).toString()
+        : "0";
+};
+
 // Format a price number with proper symbol (ex: $1.01)
 export const formatPriceWithCurrency = (price, currency) => {
     return new Intl.NumberFormat("en-es", {
@@ -231,7 +260,11 @@ export const checkAction = (address, toAddress, fromAddress, amount) => {
 };
 
 export const openEtherScan = (hash, currentNetworkName) => {
-    const urlBase = `https://${currentNetworkName}.etherscan.io/tx/`;
+    let urlBase = `https://${currentNetworkName}.etherscan.io/tx/`;
+    // mainnet does not resolve main.etherscan.io change to root etherscan.io
+    if (currentNetworkName === "main") {
+        urlBase = `https://etherscan.io/tx/`;
+    }
     const url = urlBase + hash;
 
     return url;
@@ -291,7 +324,7 @@ export const format_str_to_percent = (str_num) => {
     var index_num = str_num.indexOf(".") + 2;
     var cpmp_str = str_num.replace(/\./, "");
     var res_str =
-        cpmp_str.slice(0, index_num) + "." + cpmp_str.substr(index_num, 2);
+        cpmp_str.slice(0, index_num) + "." + cpmp_str.substr(index_num, 18);
     // console.log(Number(res_str))
 
     if (Number(res_str) === 0) {

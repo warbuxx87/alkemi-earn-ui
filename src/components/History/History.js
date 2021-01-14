@@ -61,6 +61,10 @@ const assetName = [
         name: "DAI - Dai Stablecoin",
     },
     {
+        id: "WETH",
+        name: "ETH - Ether",
+    },
+    {
         id: "USDC",
         name: "USDC - USD Coin",
     },
@@ -68,36 +72,20 @@ const assetName = [
         id: "WBTC",
         name: "WBTC - Wrapped BTC",
     },
-    {
-        id: "WETH",
-        name: "WETH - Ether",
-    },
 ];
 
-const eventAction = [
+const accountType = [
     {
         id: "All",
         name: "All",
     },
     {
-        id: "Deposit",
-        name: "Deposit",
+        id: "savings",
+        name: "Savings",
     },
     {
-        id: "Withdraw",
-        name: "Withdraw",
-    },
-    {
-        id: "Borrow",
-        name: "Borrow",
-    },
-    {
-        id: "Repay",
-        name: "Repay",
-    },
-    {
-        id: "Liquidate",
-        name: "Liquidate",
+        id: "credit",
+        name: "Credit",
     },
 ];
 
@@ -147,9 +135,9 @@ const History = ({
         if (values.asset && values.asset !== "ALL") {
             data = data.filter((item) => item.symbol === values.asset);
         }
-        if (values.action && values.action !== "All") {
+        if (values.account && values.account !== "All") {
             data = data.filter((item) => {
-                return item.topic === values.action;
+                return item.type === values.account;
             });
         }
 
@@ -185,7 +173,7 @@ const History = ({
 
         setPage(0);
         setTxtListData(data);
-    }, [txList, values.asset, values.action, values.sortBy]);
+    }, [txList, values.asset, values.account, values.sortBy]);
 
     // filter the data displayed by type and sorting selected
     const getDateFromBlockNumber = useCallback(
@@ -257,8 +245,8 @@ const History = ({
                         </TextField>
                         <TextField
                             fullWidth
-                            label="Action"
-                            name="action"
+                            label="Account"
+                            name="account"
                             className={classes.eventField}
                             onChange={handleChange}
                             select
@@ -266,7 +254,7 @@ const History = ({
                             variant="outlined"
                             color="secondary"
                         >
-                            {eventAction.map((category) => (
+                            {accountType.map((category) => (
                                 <MenuItem key={category.id} value={category.id}>
                                     {category.name}
                                 </MenuItem>
@@ -396,7 +384,11 @@ const History = ({
                                             variant="body1"
                                             color="textPrimary"
                                         >
-                                            {item.name}
+                                            {
+                                                item.name === "Wrapped Ether"
+                                                    ? "Ether"
+                                                    : item.name /* Re-labeling WETH to ETH only */
+                                            }
                                         </Typography>
                                     </HistoryTableCell>
                                     <HistoryTableCell
@@ -405,8 +397,16 @@ const History = ({
                                     >
                                         <img
                                             className={classes.imageSize}
-                                            src={getTokenIcon(item.symbol)}
-                                            alt={item.name}
+                                            src={
+                                                item.symbol === "WETH"
+                                                    ? getTokenIcon("ETH")
+                                                    : getTokenIcon(item.symbol)
+                                            }
+                                            alt={
+                                                item.name === "Wrapped Ether"
+                                                    ? "Ether"
+                                                    : item.name /* Re-labeling WETH to ETH only */
+                                            }
                                         />
                                     </HistoryTableCell>
                                     <HistoryTableCell

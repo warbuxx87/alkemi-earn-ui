@@ -32,12 +32,13 @@ const useStyles = makeStyles((theme) => ({
 
 // Section 5: Code Component
 function Lend({
-    className,
     activeLend,
     inactiveLend,
     onActivate,
     USDPrice,
     displayAllocateButton,
+    txs,
+    walletIsKYCd,
 }) {
     const classes = useStyles();
     return (
@@ -67,6 +68,8 @@ function Lend({
                                 data={inactiveLend}
                                 onActivate={onActivate}
                                 displayAllocateButton={displayAllocateButton}
+                                txs={txs}
+                                walletIsKYCd={walletIsKYCd}
                             />
                         </Grid>
                     )}{" "}

@@ -19,7 +19,7 @@ import {
 
 //import { useHistory } from "react-router-dom";
 import BorrowTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent, calculateEarnings } from "utils/ui";
+import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -40,13 +40,13 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "4px",
     },
     imageSize: {
-        width: "30px",
-        height: "30px",
+        width: "34px",
+        height: "34px",
     },
     label: {
         fontFamily: theme.typography.fontFamily,
         alignItems: "center",
-        borderRadius: 2,
+        borderRadius: 4,
         display: "inline-flex",
         flexGrow: 0,
         whiteSpace: "nowrap",
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         letterSpacing: 0.5,
         minWidth: 20,
-        padding: theme.spacing(0.5, 0.5),
+        padding: theme.spacing(1.5, 1),
         textTransform: "uppercase",
         color: theme.palette.warning.main,
         backgroundColor: fade(theme.palette.warning.main, 0.1),
@@ -92,11 +92,12 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                     />
                                     <Box ml={2}>
                                         <Typography
-                                            variant="h6"
+                                            variant="body1"
                                             color="textPrimary"
                                         >
-                                            {row.symbol}
-                                            {row.unit}
+                                            {row.alternativeUnitLabel
+                                                ? row.alternativeUnitLabel
+                                                : row.unit}
                                         </Typography>
                                         <Typography
                                             variant="body2"
@@ -108,7 +109,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                 </Box>
                             </BorrowTableCell>
                             <BorrowTableCell align="right">
-                                <Typography variant="h6" color="textPrimary">
+                                <Typography variant="body1" color="textPrimary">
                                     {formatNumber(row.wallet, row.unit)}
                                 </Typography>
                                 <Typography
@@ -119,7 +120,7 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                 </Typography>
                             </BorrowTableCell>
                             <BorrowTableCell align="right">
-                                <Typography variant="h6" color="textPrimary">
+                                <Typography variant="body1" color="textPrimary">
                                     {formatNumber(row.balance, row.unit)}
                                 </Typography>
                                 <Typography
@@ -130,8 +131,25 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                 </Typography>
                             </BorrowTableCell>
                             <BorrowTableCell align="right">
+                                <Typography variant="body1" color="textPrimary">
+                                    $
+                                    {formatNumber(
+                                        ETHBalanceToUSD(
+                                            row.ethBalance,
+                                            USDPrice
+                                        )
+                                    )}
+                                </Typography>
                                 <Typography
-                                    variant="h6"
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    USD Value
+                                </Typography>
+                            </BorrowTableCell>
+                            <BorrowTableCell align="right">
+                                <Typography
+                                    variant="body1"
                                     color="textPrimary"
                                     className={classes.label}
                                 >
@@ -142,25 +160,6 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                     color="textSecondary"
                                 >
                                     APY
-                                </Typography>
-                            </BorrowTableCell>
-                            <BorrowTableCell
-                                align="right"
-                                className={classes.endcell}
-                            >
-                                <Typography variant="h6" color="textPrimary">
-                                    {calculateEarnings(
-                                        row.balance,
-                                        row.principal,
-                                        row.unit,
-                                        USDPrice
-                                    )}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                >
-                                    Fees
                                 </Typography>
                             </BorrowTableCell>
                         </TableRow>

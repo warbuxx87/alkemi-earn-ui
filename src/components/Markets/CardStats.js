@@ -85,14 +85,19 @@ class Stats extends React.Component {
                     />
                     <Typography
                         className={classes.assetName}
-                        variant="h6"
+                        variant="body1"
                         color="textPrimary"
                     >
-                        {this.props.symbol}
+                        {
+                            this.props.symbol === "WETH"
+                                ? "ETH"
+                                : this.props
+                                      .symbol /* Re-labeling WETH to ETH only */
+                        }
                     </Typography>
                     <Box flexGrow={1}>
                         <Typography
-                            variant="h6"
+                            variant="body1"
                             color="textPrimary"
                             align="right"
                         >

@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
             paddingRight: 0,
         },
     },
+    containerRow: {
+        marginTop: 12,
+    },
 }));
 
 // Section 5: Code Component
@@ -72,7 +75,14 @@ const Markets = ({
                             cardContent={collateralRatioContent}
                         />
                     </Grid>
-                    <Grid item lg={6} sm={6} xs={12}>
+                </Grid>
+                <Grid
+                    container
+                    spacing={3}
+                    mt={4}
+                    className={classes.containerRow}
+                >
+                    <Grid item lg={6} sm={6}>
                         <Card>
                             <CardHeader title="Deposits" />
                             <Divider />

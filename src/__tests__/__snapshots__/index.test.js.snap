@@ -73,14 +73,14 @@ Object {
                         class="MuiButton-label"
                       >
                         <div
-                          class="MuiBox-root MuiBox-root-65"
+                          class="MuiBox-root MuiBox-root-67"
                         >
                           <div
-                            class="MuiBox-root MuiBox-root-69"
+                            class="MuiBox-root MuiBox-root-71"
                           >
                             <svg
                               aria-hidden="true"
-                              class="MuiSvgIcon-root makeStyles-Tooltip-85 makeStyles-KYCIcon-84 MuiSvgIcon-fontSizeSmall"
+                              class="MuiSvgIcon-root makeStyles-Tooltip-87 makeStyles-KYCIcon-86 MuiSvgIcon-fontSizeSmall"
                               focusable="false"
                               title="Not connected"
                               viewBox="0 0 24 24"
@@ -91,7 +91,7 @@ Object {
                             </svg>
                           </div>
                           <div
-                            class="MuiBox-root MuiBox-root-70"
+                            class="MuiBox-root MuiBox-root-72"
                             data-testid="connectAddressButton"
                           >
                             Connect
@@ -108,7 +108,7 @@ Object {
             </div>
           </header>
           <div
-            class="MuiBox-root MuiBox-root-71"
+            class="MuiBox-root MuiBox-root-73"
           >
             <div>
               <div
@@ -183,7 +183,7 @@ Object {
               class="Toastify"
             />
             <div
-              class="MuiContainer-root makeStyles-container-17"
+              class="MuiContainer-root makeStyles-container-18"
             >
               <div
                 class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -192,7 +192,7 @@ Object {
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-72"
+                    class="MuiBox-root MuiBox-root-74"
                   >
                     <div
                       class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -202,50 +202,52 @@ Object {
                       >
                         <h6
                           class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                          style="padding-bottom: 8px;"
                         >
                           Aggregated Value
                         </h6>
-                        <h1
-                          class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                        <div
+                          class="MuiBox-root MuiBox-root-75"
                         >
-                          $
-                          <span>
-                            0
-                            <span
-                              class="makeStyles-cents-22"
-                            >
-                              .
+                          <h1
+                            class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                          >
+                            $
+                            <span>
                               0
+                              <span
+                                class="makeStyles-cents-23"
+                              >
+                                .
+                                00
+                              </span>
                             </span>
-                          </span>
-                        </h1>
+                          </h1>
+                        </div>
                       </div>
                       <div
                         class="MuiGrid-root MuiGrid-item"
                       >
                         <h6
-                          class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
+                          class="MuiTypography-root makeStyles-combinedApy-26 MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
+                          style="padding-top: 4px; padding-bottom: 4px;"
                         >
                           Combined APY
                         </h6>
                         <div
-                          class="MuiBox-root MuiBox-root-73"
+                          class="MuiBox-root MuiBox-root-76"
                         >
-                          <div
-                            class="MuiBox-root MuiBox-root-74"
+                          <h1
+                            class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary"
                           >
-                            <h1
-                              class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignRight"
-                            >
-                              0.00%
-                            </h1>
-                          </div>
+                            0.00%
+                          </h1>
                           <div
-                            class="MuiBox-root MuiBox-root-75"
+                            class="MuiBox-root MuiBox-root-77"
                           >
                             <svg
                               aria-hidden="true"
-                              class="MuiSvgIcon-root makeStyles-upicon-23 MuiSvgIcon-fontSizeSmall"
+                              class="MuiSvgIcon-root makeStyles-upicon-24 MuiSvgIcon-fontSizeSmall"
                               focusable="false"
                               viewBox="0 0 24 24"
                             >
@@ -284,7 +286,7 @@ Object {
                     class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-76 makeStyles-item-31"
+                      class="MuiBox-root MuiBox-root-78 makeStyles-item-33"
                     >
                       <div
                         class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -293,7 +295,7 @@ Object {
                           class="MuiGrid-root MuiGrid-item"
                         >
                           <h6
-                            class="MuiTypography-root makeStyles-cardtitle-34 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                            class="MuiTypography-root makeStyles-cardtitle-36 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                           >
                             Lending Overview
                           </h6>
@@ -304,10 +306,10 @@ Object {
                             <span>
                               0
                               <span
-                                class="makeStyles-cents-32"
+                                class="makeStyles-cents-34"
                               >
                                 .
-                                0
+                                00
                               </span>
                             </span>
                           </h3>
@@ -316,12 +318,12 @@ Object {
                           class="MuiGrid-root MuiGrid-item"
                         >
                           <h6
-                            class="MuiTypography-root makeStyles-cardtitle-34 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
+                            class="MuiTypography-root makeStyles-cardtitle-36 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
                           >
                             Earning APY
                           </h6>
                           <h3
-                            class="MuiTypography-root makeStyles-apy-33 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                            class="MuiTypography-root makeStyles-apy-35 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
                           >
                             0.00%
                           </h3>
@@ -337,7 +339,7 @@ Object {
                     class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-77 makeStyles-item-38"
+                      class="MuiBox-root MuiBox-root-79 makeStyles-item-40"
                     >
                       <div
                         class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -346,7 +348,7 @@ Object {
                           class="MuiGrid-root MuiGrid-item"
                         >
                           <h6
-                            class="MuiTypography-root makeStyles-cardtitle-41 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                            class="MuiTypography-root makeStyles-cardtitle-43 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                           >
                             Borrowing Overview
                           </h6>
@@ -357,10 +359,10 @@ Object {
                             <span>
                               0
                               <span
-                                class="makeStyles-cents-40"
+                                class="makeStyles-cents-42"
                               >
                                 .
-                                0
+                                00
                               </span>
                             </span>
                           </h3>
@@ -369,12 +371,12 @@ Object {
                           class="MuiGrid-root MuiGrid-item"
                         >
                           <h6
-                            class="MuiTypography-root makeStyles-cardtitle-41 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
+                            class="MuiTypography-root makeStyles-cardtitle-43 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
                           >
                             Borrow APY
                           </h6>
                           <h3
-                            class="MuiTypography-root makeStyles-apy-39 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                            class="MuiTypography-root makeStyles-apy-41 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
                           >
                             0.00%
                           </h3>
@@ -390,7 +392,7 @@ Object {
                     class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-78 makeStyles-item-44"
+                      class="MuiBox-root MuiBox-root-80 makeStyles-item-46"
                     >
                       <div
                         class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center"
@@ -399,12 +401,12 @@ Object {
                           class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
                         >
                           <h6
-                            class="MuiTypography-root makeStyles-cardtitle-46 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                            class="MuiTypography-root makeStyles-cardtitle-48 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                           >
                             Borrow Limit
                           </h6>
                           <div
-                            class="MuiBox-root MuiBox-root-79"
+                            class="MuiBox-root MuiBox-root-81"
                           >
                             <h3
                               class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary"
@@ -416,7 +418,7 @@ Object {
                               aria-valuemax="100"
                               aria-valuemin="0"
                               aria-valuenow="0"
-                              class="MuiLinearProgress-root MuiLinearProgress-colorSecondary makeStyles-progress-45 MuiLinearProgress-determinate"
+                              class="MuiLinearProgress-root MuiLinearProgress-colorSecondary makeStyles-progress-47 MuiLinearProgress-determinate"
                               role="progressbar"
                             >
                               <div
@@ -434,13 +436,13 @@ Object {
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-80 makeStyles-tabs-18"
+                    class="MuiBox-root MuiBox-root-82 makeStyles-tabs-19"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-81"
+                      class="MuiBox-root MuiBox-root-83"
                     >
                       <div
-                        class="MuiTabs-root makeStyles-tabs-18"
+                        class="MuiTabs-root makeStyles-tabs-19"
                       >
                         <div
                           class="MuiTabs-scrollable"
@@ -488,7 +490,7 @@ Object {
                             </button>
                           </div>
                           <span
-                            class="PrivateTabIndicator-root-51 PrivateTabIndicator-colorSecondary-53 MuiTabs-indicator"
+                            class="PrivateTabIndicator-root-53 PrivateTabIndicator-colorSecondary-55 MuiTabs-indicator"
                             style="left: 0px; width: 0px;"
                           />
                         </div>
@@ -498,13 +500,13 @@ Object {
                       class="MuiDivider-root"
                     />
                     <div
-                      class="MuiBox-root MuiBox-root-82"
+                      class="MuiBox-root MuiBox-root-84"
                     >
                       <div
                         class="scrollbar-container ps"
                       >
                         <table
-                          class="MuiTable-root makeStyles-root-56"
+                          class="MuiTable-root makeStyles-root-58"
                         >
                           <tbody
                             class="MuiTableBody-root"
@@ -607,14 +609,14 @@ Object {
                       class="MuiButton-label"
                     >
                       <div
-                        class="MuiBox-root MuiBox-root-65"
+                        class="MuiBox-root MuiBox-root-67"
                       >
                         <div
-                          class="MuiBox-root MuiBox-root-69"
+                          class="MuiBox-root MuiBox-root-71"
                         >
                           <svg
                             aria-hidden="true"
-                            class="MuiSvgIcon-root makeStyles-Tooltip-85 makeStyles-KYCIcon-84 MuiSvgIcon-fontSizeSmall"
+                            class="MuiSvgIcon-root makeStyles-Tooltip-87 makeStyles-KYCIcon-86 MuiSvgIcon-fontSizeSmall"
                             focusable="false"
                             title="Not connected"
                             viewBox="0 0 24 24"
@@ -625,7 +627,7 @@ Object {
                           </svg>
                         </div>
                         <div
-                          class="MuiBox-root MuiBox-root-70"
+                          class="MuiBox-root MuiBox-root-72"
                           data-testid="connectAddressButton"
                         >
                           Connect
@@ -642,7 +644,7 @@ Object {
           </div>
         </header>
         <div
-          class="MuiBox-root MuiBox-root-71"
+          class="MuiBox-root MuiBox-root-73"
         >
           <div>
             <div
@@ -717,7 +719,7 @@ Object {
             class="Toastify"
           />
           <div
-            class="MuiContainer-root makeStyles-container-17"
+            class="MuiContainer-root makeStyles-container-18"
           >
             <div
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -726,7 +728,7 @@ Object {
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
               >
                 <div
-                  class="MuiBox-root MuiBox-root-72"
+                  class="MuiBox-root MuiBox-root-74"
                 >
                   <div
                     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -736,50 +738,52 @@ Object {
                     >
                       <h6
                         class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                        style="padding-bottom: 8px;"
                       >
                         Aggregated Value
                       </h6>
-                      <h1
-                        class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                      <div
+                        class="MuiBox-root MuiBox-root-75"
                       >
-                        $
-                        <span>
-                          0
-                          <span
-                            class="makeStyles-cents-22"
-                          >
-                            .
+                        <h1
+                          class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                        >
+                          $
+                          <span>
                             0
+                            <span
+                              class="makeStyles-cents-23"
+                            >
+                              .
+                              00
+                            </span>
                           </span>
-                        </span>
-                      </h1>
+                        </h1>
+                      </div>
                     </div>
                     <div
                       class="MuiGrid-root MuiGrid-item"
                     >
                       <h6
-                        class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
+                        class="MuiTypography-root makeStyles-combinedApy-26 MuiTypography-subtitle1 MuiTypography-colorTextSecondary"
+                        style="padding-top: 4px; padding-bottom: 4px;"
                       >
                         Combined APY
                       </h6>
                       <div
-                        class="MuiBox-root MuiBox-root-73"
+                        class="MuiBox-root MuiBox-root-76"
                       >
-                        <div
-                          class="MuiBox-root MuiBox-root-74"
+                        <h1
+                          class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary"
                         >
-                          <h1
-                            class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignRight"
-                          >
-                            0.00%
-                          </h1>
-                        </div>
+                          0.00%
+                        </h1>
                         <div
-                          class="MuiBox-root MuiBox-root-75"
+                          class="MuiBox-root MuiBox-root-77"
                         >
                           <svg
                             aria-hidden="true"
-                            class="MuiSvgIcon-root makeStyles-upicon-23 MuiSvgIcon-fontSizeSmall"
+                            class="MuiSvgIcon-root makeStyles-upicon-24 MuiSvgIcon-fontSizeSmall"
                             focusable="false"
                             viewBox="0 0 24 24"
                           >
@@ -818,7 +822,7 @@ Object {
                   class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-76 makeStyles-item-31"
+                    class="MuiBox-root MuiBox-root-78 makeStyles-item-33"
                   >
                     <div
                       class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -827,7 +831,7 @@ Object {
                         class="MuiGrid-root MuiGrid-item"
                       >
                         <h6
-                          class="MuiTypography-root makeStyles-cardtitle-34 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                          class="MuiTypography-root makeStyles-cardtitle-36 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                         >
                           Lending Overview
                         </h6>
@@ -838,10 +842,10 @@ Object {
                           <span>
                             0
                             <span
-                              class="makeStyles-cents-32"
+                              class="makeStyles-cents-34"
                             >
                               .
-                              0
+                              00
                             </span>
                           </span>
                         </h3>
@@ -850,12 +854,12 @@ Object {
                         class="MuiGrid-root MuiGrid-item"
                       >
                         <h6
-                          class="MuiTypography-root makeStyles-cardtitle-34 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
+                          class="MuiTypography-root makeStyles-cardtitle-36 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
                         >
                           Earning APY
                         </h6>
                         <h3
-                          class="MuiTypography-root makeStyles-apy-33 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                          class="MuiTypography-root makeStyles-apy-35 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
                         >
                           0.00%
                         </h3>
@@ -871,7 +875,7 @@ Object {
                   class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-77 makeStyles-item-38"
+                    class="MuiBox-root MuiBox-root-79 makeStyles-item-40"
                   >
                     <div
                       class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
@@ -880,7 +884,7 @@ Object {
                         class="MuiGrid-root MuiGrid-item"
                       >
                         <h6
-                          class="MuiTypography-root makeStyles-cardtitle-41 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                          class="MuiTypography-root makeStyles-cardtitle-43 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                         >
                           Borrowing Overview
                         </h6>
@@ -891,10 +895,10 @@ Object {
                           <span>
                             0
                             <span
-                              class="makeStyles-cents-40"
+                              class="makeStyles-cents-42"
                             >
                               .
-                              0
+                              00
                             </span>
                           </span>
                         </h3>
@@ -903,12 +907,12 @@ Object {
                         class="MuiGrid-root MuiGrid-item"
                       >
                         <h6
-                          class="MuiTypography-root makeStyles-cardtitle-41 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
+                          class="MuiTypography-root makeStyles-cardtitle-43 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignRight"
                         >
                           Borrow APY
                         </h6>
                         <h3
-                          class="MuiTypography-root makeStyles-apy-39 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
+                          class="MuiTypography-root makeStyles-apy-41 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignRight"
                         >
                           0.00%
                         </h3>
@@ -924,7 +928,7 @@ Object {
                   class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-78 makeStyles-item-44"
+                    class="MuiBox-root MuiBox-root-80 makeStyles-item-46"
                   >
                     <div
                       class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center"
@@ -933,12 +937,12 @@ Object {
                         class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
                       >
                         <h6
-                          class="MuiTypography-root makeStyles-cardtitle-46 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                          class="MuiTypography-root makeStyles-cardtitle-48 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                         >
                           Borrow Limit
                         </h6>
                         <div
-                          class="MuiBox-root MuiBox-root-79"
+                          class="MuiBox-root MuiBox-root-81"
                         >
                           <h3
                             class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary"
@@ -950,7 +954,7 @@ Object {
                             aria-valuemax="100"
                             aria-valuemin="0"
                             aria-valuenow="0"
-                            class="MuiLinearProgress-root MuiLinearProgress-colorSecondary makeStyles-progress-45 MuiLinearProgress-determinate"
+                            class="MuiLinearProgress-root MuiLinearProgress-colorSecondary makeStyles-progress-47 MuiLinearProgress-determinate"
                             role="progressbar"
                           >
                             <div
@@ -968,13 +972,13 @@ Object {
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
               >
                 <div
-                  class="MuiBox-root MuiBox-root-80 makeStyles-tabs-18"
+                  class="MuiBox-root MuiBox-root-82 makeStyles-tabs-19"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-81"
+                    class="MuiBox-root MuiBox-root-83"
                   >
                     <div
-                      class="MuiTabs-root makeStyles-tabs-18"
+                      class="MuiTabs-root makeStyles-tabs-19"
                     >
                       <div
                         class="MuiTabs-scrollable"
@@ -1022,7 +1026,7 @@ Object {
                           </button>
                         </div>
                         <span
-                          class="PrivateTabIndicator-root-51 PrivateTabIndicator-colorSecondary-53 MuiTabs-indicator"
+                          class="PrivateTabIndicator-root-53 PrivateTabIndicator-colorSecondary-55 MuiTabs-indicator"
                           style="left: 0px; width: 0px;"
                         />
                       </div>
@@ -1032,13 +1036,13 @@ Object {
                     class="MuiDivider-root"
                   />
                   <div
-                    class="MuiBox-root MuiBox-root-82"
+                    class="MuiBox-root MuiBox-root-84"
                   >
                     <div
                       class="scrollbar-container ps"
                     >
                       <table
-                        class="MuiTable-root makeStyles-root-56"
+                        class="MuiTable-root makeStyles-root-58"
                       >
                         <tbody
                           class="MuiTableBody-root"

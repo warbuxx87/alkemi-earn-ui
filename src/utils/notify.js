@@ -125,8 +125,8 @@ export const triggerToastDisplay = ({
         pauseOnHover: true,
         draggable: false,
         progress: undefined,
-        closeButton: false,
         hideProgressBar: true,
+        closeButton: false,
     };
 
     const display = (
