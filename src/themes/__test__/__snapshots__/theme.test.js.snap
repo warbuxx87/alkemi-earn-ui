@@ -62,7 +62,7 @@ Object {
     },
     "MuiDivider": Object {
       "root": Object {
-        "backgroundColor": "#000000",
+        "backgroundColor": "#e3ebf6",
       },
     },
     "MuiInput": Object {
@@ -70,6 +70,16 @@ Object {
         "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": Object {
           "display": "none",
         },
+      },
+    },
+    "MuiPaper": Object {
+      "elevation1": Object {
+        "boxShadow": "0px 2px 4px 0px rgba(0,0,0,.04), 0px 1px 2px 0 rgba(15,89,209,.08)",
+      },
+    },
+    "MuiTableHead": Object {
+      "root": Object {
+        "backgroundColor": "#f7f9fc",
       },
     },
     "MuiToolbar": Object {
@@ -106,8 +116,8 @@ Object {
     "augmentColor": [Function],
     "background": Object {
       "dark": "#1B1B1B",
-      "default": "#000000",
-      "paper": "#0d0e10",
+      "default": "#f8f9fd",
+      "paper": "#FFFFFF",
     },
     "common": Object {
       "black": "#000",
@@ -147,15 +157,15 @@ Object {
     },
     "primary": Object {
       "contrastText": "#fff",
-      "dark": "rgb(42, 125, 55)",
-      "light": "rgb(99, 194, 114)",
-      "main": "#3cb34f",
+      "dark": "rgb(46, 46, 178)",
+      "light": "rgb(104, 104, 255)",
+      "main": "#4343FF",
     },
     "secondary": Object {
       "contrastText": "#000",
-      "dark": "rgb(178, 178, 178)",
-      "light": "rgb(255, 255, 255)",
-      "main": "#ffffff",
+      "dark": "rgb(0, 0, 0)",
+      "light": "rgb(51, 51, 51)",
+      "main": "#000000",
     },
     "success": Object {
       "contrastText": "#fff",
@@ -167,8 +177,8 @@ Object {
       "disabled": "rgba(255, 255, 255, 1)",
       "hint": "rgba(184, 233, 134, 1)",
       "icon": "rgba(255, 255, 255, 0.5)",
-      "primary": "#ffffff",
-      "secondary": "#8c8c8c",
+      "primary": "#12263f",
+      "secondary": "#95aac9",
       "success": "#3cb34f",
     },
     "tonalOffset": 0.2,
