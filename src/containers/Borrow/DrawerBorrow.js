@@ -30,7 +30,7 @@ import Drawer from "components/UI/Drawer/Drawer";
 
 // Section 5: Code Container
 const BorrowDrawerContainer = ({ asset, onTx }) => {
-    const drizzle = useContext(DrizzleContext);
+    const { drizzle } = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 

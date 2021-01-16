@@ -13,9 +13,15 @@ import MoneyMarket from "contracts/MoneyMarket.json";
 
 const appMiddlewares = [thunk, txHandler, contractTXNotifier];
 
-const fallback = new web3(
-    "wss://mainnet.infura.io/ws/v3/6d08631addb0433e967d2cf625cd6495"
-);
+const setUsedProvider = () => {
+    return window.currentlyUsedProvider;
+};
+
+const setFallback = () => {
+    return new web3(
+        "wss://rinkeby.infura.io/ws/v3/6d08631addb0433e967d2cf625cd6495"
+    );
+};
 
 export const drizzleOptions = {
     drizzleOptions: {
@@ -30,8 +36,8 @@ export const drizzleOptions = {
             ],
         },
         web3: {
-            customProvider: window.currentlyUsedProvider,
-            fallback: fallback,
+            customProvider: setUsedProvider(),
+            fallback: setFallback(),
         },
     },
     polls: {

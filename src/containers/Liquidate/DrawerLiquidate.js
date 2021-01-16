@@ -31,7 +31,7 @@ const LiquidateDrawerContainer = ({
 
     liquidationId,
 }) => {
-    const drizzle = useContext(DrizzleContext);
+    const { drizzle } = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 

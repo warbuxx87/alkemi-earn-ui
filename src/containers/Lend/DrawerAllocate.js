@@ -24,7 +24,7 @@ import { walletAddress } from "redux/selectors/data/onboard";
 import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
 const DrawerAllocateContainer = ({ asset, onTx }) => {
-    const drizzle = useContext(DrizzleContext);
+    const { drizzle } = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store

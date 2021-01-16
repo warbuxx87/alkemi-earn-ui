@@ -39,7 +39,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
-    const drizzle = useContext(DrizzleContext);
+    const { drizzle } = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 

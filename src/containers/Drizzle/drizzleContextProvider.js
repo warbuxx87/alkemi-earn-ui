@@ -8,11 +8,20 @@ import { Drizzle } from "@drizzle/store";
 
 import DrizzleContext from "utils/DrizzleContext";
 
-const drizzle = new Drizzle(drizzleOptions, store);
-
 export default ({ children }) => {
+    const [drizzle, setDrizzle] = React.useState();
+    // const [needToLoadWeb3, setNeedToLoadWeb3] = React.useState(false);
+    const [alreadyInit, setAlreadyInit] = React.useState(false);
+
+    const initDrizzle = () => {
+        if (alreadyInit) return;
+
+        setDrizzle(new Drizzle(drizzleOptions, store));
+        setAlreadyInit(true);
+    };
+
     return (
-        <DrizzleContext.Provider value={drizzle}>
+        <DrizzleContext.Provider value={{ drizzle, initDrizzle }}>
             {children}
         </DrizzleContext.Provider>
     );

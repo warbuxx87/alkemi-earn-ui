@@ -37,7 +37,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
-    const drizzle = useContext(DrizzleContext);
+    const { drizzle } = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 

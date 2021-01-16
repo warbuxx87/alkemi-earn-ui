@@ -9,7 +9,7 @@ import DrizzleContext from "utils/DrizzleContext";
 import onBorrowAction from "./BorrowAction";
 
 const BorrowModalContainer = ({ asset, onBorrowAction }) => {
-    const drizzle = useContext(DrizzleContext);
+    const { drizzle } = useContext(DrizzleContext);
 
     return (
         <BorrowModal

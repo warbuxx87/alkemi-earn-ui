@@ -16,7 +16,7 @@ import { walletAddress } from "redux/selectors/data/onboard";
 
 // Retrieve the tx List every 60 seconds from EtherScan
 export default (fetchPeriodically = false) => {
-    const drizzle = useContext(DrizzleContext);
+    const { drizzle } = useContext(DrizzleContext);
     const dispatch = useDispatch();
 
     const walletConnected = useSelector(isWalletConnected); // Kind of useless to use here but won't hurt (hopefully)

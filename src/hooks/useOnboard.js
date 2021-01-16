@@ -35,7 +35,7 @@ const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 export default () => {
     const dispatch = useDispatch();
 
-    const drizzle = useContext(DrizzleContext);
+    const { drizzle, initDrizzle } = useContext(DrizzleContext);
     const currentState = onboard.getState();
     //  console.log("onboard currentstate", currentState);
 
@@ -46,45 +46,45 @@ export default () => {
     const userWalletBalance = useSelector(walletBalance);
 
     // get previous selected wallet
-    useEffect(() => {
-        const checkIfPreviouslySelectedWallet = async () => {
-            const previouslySelectedWallet = window.localStorage.getItem(
-                "selectedWallet"
-            );
+    // useEffect(() => {
+    //     const checkIfPreviouslySelectedWallet = async () => {
+    //         const previouslySelectedWallet = window.localStorage.getItem(
+    //             "selectedWallet"
+    //         );
 
-            if (
-                previouslySelectedWallet !== undefined &&
-                typeof previouslySelectedWallet === "string" && // comment these two conditions to show wallet selection on load/disconnect
-                onboard
-            ) {
-                const isSelectWallet = await onboard.walletSelect(
-                    previouslySelectedWallet
-                );
+    //         if (
+    //             previouslySelectedWallet !== undefined &&
+    //             typeof previouslySelectedWallet === "string" && // comment these two conditions to show wallet selection on load/disconnect
+    //             onboard
+    //         ) {
+    //             const isSelectWallet = await onboard.walletSelect(
+    //                 previouslySelectedWallet
+    //             );
 
-                if (isSelectWallet) {
-                    const readyToTransact = await onboard.walletCheck();
+    //             if (isSelectWallet) {
+    //                 const readyToTransact = await onboard.walletCheck();
 
-                    if (window.currentlyUsedProvider) {
-                        // set current address from chosen provider in onboard
+    //                 if (window.currentlyUsedProvider) {
+    //                     // set current address from chosen provider in onboard
 
-                        // The order matters here
-                        // As the network is always set(with the default one at least), must set address last so anything else that rely on it being null (example fetchTx) fire only when the correct data is set
-                        dispatch(setWalletNetwork(currentState.network));
+    //                     // The order matters here
+    //                     // As the network is always set(with the default one at least), must set address last so anything else that rely on it being null (example fetchTx) fire only when the correct data is set
+    //                     dispatch(setWalletNetwork(currentState.network));
 
-                        dispatch(setWalletAddress(currentState.address));
-                    }
+    //                     dispatch(setWalletAddress(currentState.address));
+    //                 }
 
-                    dispatch(setWalletConnected(readyToTransact));
+    //                 dispatch(setWalletConnected(readyToTransact));
 
-                    if (!readyToTransact) {
-                        // TODO: if it is not ready -> show some warning
-                    }
-                }
-            }
-        };
+    //                 if (!readyToTransact) {
+    //                     // TODO: if it is not ready -> show some warning
+    //                 }
+    //             }
+    //         }
+    //     };
 
-        checkIfPreviouslySelectedWallet();
-    }, [currentState.address, currentState.network, dispatch]);
+    //     checkIfPreviouslySelectedWallet();
+    // }, [currentState.address, currentState.network, dispatch]);
 
     const resetStoreData = useCallback(() => {
         dispatch(resetLendData());
@@ -126,27 +126,34 @@ export default () => {
     useEffect(() => {
         const initDrizzleData = (forceUpdate = false) => {
             if (walletConnected === true) {
-                let currentWalletAddress = userWalletAddress;
-                let currentWalletNetwork = userWalletNetwork;
-                let currentWalletBalance = userWalletBalance;
-
                 if (drizzle && !forceUpdate) {
-                    const web3 = new Web3(window.currentlyUsedProvider);
-
-                    drizzle.web3 = web3; // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
-
+                    // drizzle.web3 = web3; // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
+                    initDrizzle();
                     // set it in sync vars as redux stores data async here it seems
-                    currentWalletAddress = currentState.address;
-
-                    currentWalletNetwork = currentState.network;
-
-                    currentWalletBalance = currentState.balance;
 
                     // if (currentWalletBalance !== undefined) {
                     //     currentWalletBalance = currentWalletBalance.toNumber;
                     // }
 
                     // console.log("eth_balance", currentWalletBalance);
+                }
+
+                if (drizzle && drizzle.web3 && drizzle.web3.currentProvider) {
+                    // let currentWalletAddress = userWalletAddress;
+                    // let currentWalletNetwork = userWalletNetwork;
+                    // let currentWalletBalance = userWalletBalance;
+
+                    let currentWalletAddress = currentState.address;
+
+                    let currentWalletNetwork = currentState.network;
+
+                    let currentWalletBalance = currentState.balance;
+
+                    console.log(
+                        currentWalletAddress,
+                        currentWalletNetwork,
+                        currentWalletBalance
+                    );
 
                     // The order matters here
                     dispatch(setWalletNetwork(currentWalletNetwork));
@@ -154,18 +161,16 @@ export default () => {
                     dispatch(setWalletBalance(currentWalletBalance));
                     dispatch(setEthLendBalance(currentWalletBalance));
                     dispatch(setEthBorrowBalance(currentWalletBalance));
-                }
 
-                // account connected
-                initContracts(
-                    drizzle,
-                    currentWalletAddress,
-                    currentWalletNetwork,
-                    currentWalletBalance,
-                    forceUpdate
-                );
+                    // account connected
+                    initContracts(
+                        drizzle,
+                        currentWalletAddress,
+                        currentWalletNetwork,
+                        currentWalletBalance,
+                        forceUpdate
+                    );
 
-                if (drizzle && drizzle.web3 && drizzle.web3.currentProvider) {
                     try {
                         drizzle.web3.currentProvider.removeAllListeners(
                             "accountsChanged"
@@ -230,6 +235,7 @@ export default () => {
         initDrizzleData();
     }, [
         drizzle,
+        initDrizzle,
         walletConnected,
         userWalletAddress,
         userWalletNetwork,
@@ -243,16 +249,17 @@ export default () => {
 
     const onConnect = async () => {
         const isSelectWallet = await onboard.walletSelect();
-        deleteCurrentData();
+        // deleteCurrentData();
         if (isSelectWallet) {
-            deleteCurrentData();
+            // deleteCurrentData();
+            initDrizzle();
 
             const readyToTransact = await onboard.walletCheck();
-            dispatch(setWalletNetwork(currentState.network));
-            dispatch(setWalletAddress(currentState.address));
-            dispatch(setWalletBalance(currentState.balance));
-            dispatch(setEthLendBalance(currentState.balance));
-            dispatch(setEthBorrowBalance(currentState.balance));
+            // dispatch(setWalletNetwork(currentState.network));
+            // dispatch(setWalletAddress(currentState.address));
+            // dispatch(setWalletBalance(currentState.balance));
+            // dispatch(setEthLendBalance(currentState.balance));
+            // dispatch(setEthBorrowBalance(currentState.balance));
             dispatch(setWalletConnected(readyToTransact));
 
             if (!readyToTransact) {
