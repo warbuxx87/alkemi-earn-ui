@@ -219,7 +219,7 @@ definitions:
                   # Run Test
                   - npm run test
                   # Do Release w/ debug on
-                  - npx semantic-release --debug
+                  - npx semantic-release
               artifacts: # defining the artifacts to be passed to each future step.
                   - CHANGELOG.md
                   - package.json
