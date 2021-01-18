@@ -32,7 +32,6 @@ import { ExternalLink as LinkIcon } from "react-feather";
 import { openEtherScan, getTokenIcon } from "utils/ui";
 
 import HistoryTableCell from "components/UI/TableCell";
-import Report from "components/UI/DateSelectDialog";
 import Reportpop from "components/UI/DateSelectPopper";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -239,6 +238,15 @@ const History = ({
                             value={values.asset}
                             variant="outlined"
                             color="secondary"
+                            SelectProps={{
+                                MenuProps: {
+                                    anchorOrigin: {
+                                        vertical: "bottom",
+                                        horizontal: "left",
+                                    },
+                                    getContentAnchorEl: null,
+                                },
+                            }}
                         >
                             {assetName.map((category) => (
                                 <MenuItem key={category.id} value={category.id}>
@@ -257,6 +265,15 @@ const History = ({
                             value={values.action}
                             variant="outlined"
                             color="secondary"
+                            SelectProps={{
+                                MenuProps: {
+                                    anchorOrigin: {
+                                        vertical: "bottom",
+                                        horizontal: "left",
+                                    },
+                                    getContentAnchorEl: null,
+                                },
+                            }}
                         >
                             {accountType.map((category) => (
                                 <MenuItem key={category.id} value={category.id}>
@@ -276,6 +293,15 @@ const History = ({
                             value={values.sortBy}
                             variant="outlined"
                             color="secondary"
+                            SelectProps={{
+                                MenuProps: {
+                                    anchorOrigin: {
+                                        vertical: "bottom",
+                                        horizontal: "left",
+                                    },
+                                    getContentAnchorEl: null,
+                                },
+                            }}
                         >
                             {sortOptions.map((category) => (
                                 <MenuItem
@@ -286,7 +312,6 @@ const History = ({
                                 </MenuItem>
                             ))}
                         </TextField>
-                        <Report />
                         <Reportpop />
                     </Box>
                 </Box>

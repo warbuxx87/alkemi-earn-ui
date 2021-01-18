@@ -53,12 +53,6 @@ const overrides = {
             paddingBottom: 30,
         },
     },
-    MuiPickersCalendarHeader: {
-        switchHeader: {
-            // backgroundColor: lightBlue.A200,
-            // color: "white",
-        },
-    },
     MuiPickersDay: {
         day: {
             color: "#ffffff",
@@ -73,19 +67,14 @@ const overrides = {
             fontWeight: "600",
         },
     },
-    MuiPickersModal: {
-        dialogAction: {
-            color: "#ffffff",
-        },
-    },
     MuiPickersCalendarHeader: {
         dayLabel: {
             color: "#a7a7a7",
         },
     },
-    MuiPickersModal: {
-        dialogAction: {
-            color: "#ffffff",
+    MuiPopover: {
+        paper: {
+            border: "solid 1px #080808",
         },
     },
 };
