@@ -131,6 +131,7 @@ function SelectDateForm({ date, onCancel }) {
                                             <KeyboardDatePicker
                                                 disableToolbar
                                                 fullWidth
+                                                variant="inline"
                                                 format="DD/MM/YYYY"
                                                 inputVariant="outlined"
                                                 label="Start date"

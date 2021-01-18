@@ -33,6 +33,7 @@ import { openEtherScan, getTokenIcon } from "utils/ui";
 
 import HistoryTableCell from "components/UI/TableCell";
 import Report from "components/UI/DateSelectDialog";
+import Reportpop from "components/UI/DateSelectPopper";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -286,6 +287,7 @@ const History = ({
                             ))}
                         </TextField>
                         <Report />
+                        <Reportpop />
                     </Box>
                 </Box>
                 <Table size="small" className="whitespace-pre">
