@@ -30,7 +30,7 @@ import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
 const DrawerRepayContainer = ({ asset, onTx }) => {
-    const { drizzle } = useContext(DrizzleContext);
+    const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
