@@ -60,12 +60,12 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                 .sub(
                     web3.utils
                         .toBN(estimationOfRepayMethodCall)
-                        .add(web3.utils.toBN(asset.balance))
+                        .add(web3.utils.toBN(asset.balance * 1.01))
                 ); // user's ether - (estimation of gas + borrowed amount)
 
             if (calculatedDifference.gte(web3.utils.toBN("0"))) {
                 // user has on their wallet enough to pay for borrowed balance and gas
-                setAmount(fromWei(asset.balance, asset.unit));
+                setAmount(fromWei(asset.balance * 1.01, asset.unit));
             } else {
                 const calculatedMax = web3.utils
                     .toBN(asset.wallet)
@@ -151,6 +151,9 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                 .test("maxValueTest", "You can't repay this amount", () => {
                     // user has an amount on their wallet, to subtract fee from that
                     let allowedAmount = web3.utils.toBN(asset.wallet);
+                    let repayAmount = web3.utils
+                        .toBN(toWei(amount, asset.unit))
+                        .lte(web3.utils.toBN(asset.balance));
 
                     if (asset.unit === "ETH" || asset.unit === "WETH") {
                         // If user sets all their ether, they cannot make the transaction, choice here is to limit what they can repay from a calculated gas fee originating from past gas cost * (gas price estimation + 2 gwei)
@@ -161,12 +164,14 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                         allowedAmount = web3.utils.toBN(
                             calculatedMax.toString()
                         );
+                        // if user repaying ETH allow 101% repayment of balance owed
+                        repayAmount = web3.utils
+                            .toBN(toWei(amount, asset.unit))
+                            .lte(web3.utils.toBN(asset.balance * 1.01));
                     }
 
                     return (
-                        web3.utils
-                            .toBN(toWei(amount, asset.unit))
-                            .lte(web3.utils.toBN(asset.balance)) &&
+                        repayAmount &&
                         web3.utils
                             .toBN(toWei(amount, asset.unit))
                             .lte(allowedAmount)
