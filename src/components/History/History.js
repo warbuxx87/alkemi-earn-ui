@@ -32,6 +32,7 @@ import { ExternalLink as LinkIcon } from "react-feather";
 import { openEtherScan, getTokenIcon } from "utils/ui";
 
 import HistoryTableCell from "components/UI/TableCell";
+import Report from "components/UI/DateSelectDialog";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -228,6 +229,7 @@ const History = ({
                     <Box display="flex" alignItems="center">
                         <TextField
                             fullWidth
+                            size="small"
                             label="Asset"
                             name="asset"
                             className={classes.assetField}
@@ -245,6 +247,7 @@ const History = ({
                         </TextField>
                         <TextField
                             fullWidth
+                            size="small"
                             label="Account"
                             name="account"
                             className={classes.eventField}
@@ -263,6 +266,7 @@ const History = ({
                         <Box flexGrow={1} />
                         <TextField
                             fullWidth
+                            size="small"
                             label="Sort By"
                             name="sortBy"
                             className={classes.sortField}
@@ -281,6 +285,7 @@ const History = ({
                                 </MenuItem>
                             ))}
                         </TextField>
+                        <Report />
                     </Box>
                 </Box>
                 <Table size="small" className="whitespace-pre">

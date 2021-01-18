@@ -53,6 +53,41 @@ const overrides = {
             paddingBottom: 30,
         },
     },
+    MuiPickersCalendarHeader: {
+        switchHeader: {
+            // backgroundColor: lightBlue.A200,
+            // color: "white",
+        },
+    },
+    MuiPickersDay: {
+        day: {
+            color: "#ffffff",
+        },
+        daySelected: {
+            backgroundColor: "#ffffff",
+            color: "#000000",
+        },
+        current: {
+            color: "#ffffff",
+            backgroundColor: "#ffffff14",
+            fontWeight: "600",
+        },
+    },
+    MuiPickersModal: {
+        dialogAction: {
+            color: "#ffffff",
+        },
+    },
+    MuiPickersCalendarHeader: {
+        dayLabel: {
+            color: "#a7a7a7",
+        },
+    },
+    MuiPickersModal: {
+        dialogAction: {
+            color: "#ffffff",
+        },
+    },
 };
 
 export default overrides;
