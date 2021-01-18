@@ -1,3 +1,15 @@
+# [1.11.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.10.1...v1.11.0) (2021-01-18)
+
+
+### Bug Fixes
+
+* remove curly brackets around drizzle var ([a15adfa](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a15adfaa0e972a0fc5155d529653036aadb2f7f7))
+
+
+### Features
+
+* **repay:** enable 101% max repayment of eth balance UI-417 ([7adcbd8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7adcbd86a6868d2a95c16a7b214a7f60629b758f))
+
 ## [1.10.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.10.0...v1.10.1) (2021-01-13)
 
 
