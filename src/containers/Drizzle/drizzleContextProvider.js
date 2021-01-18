@@ -20,6 +20,20 @@ export default ({ children }) => {
         setAlreadyInit(true);
     };
 
+    // React.useEffect(() => {
+    //     console.log('drizzle: ', drizzle)
+
+    //     if(drizzle && drizzle.web3) {
+    //         console.log('window.currentlyUsedProvider: ', window.currentlyUsedProvider)
+    //         drizzle.web3 = new Web3(window.currentlyUsedProvider)
+    //     }
+    // }, [drizzle]);
+
+    // React.useEffect(() => {
+    //     if(drizzle && drizzle.web3)
+    //     console.log('drizzle.web3:', drizzle.web3)
+    // }, [drizzle]);
+
     return (
         <DrizzleContext.Provider value={{ drizzle, initDrizzle }}>
             {children}

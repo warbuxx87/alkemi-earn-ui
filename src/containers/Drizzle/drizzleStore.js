@@ -13,15 +13,13 @@ import MoneyMarket from "contracts/MoneyMarket.json";
 
 const appMiddlewares = [thunk, txHandler, contractTXNotifier];
 
-const setUsedProvider = () => {
-    return window.currentlyUsedProvider;
-};
+// const setUsedProvider = () => {
+//     return window.currentlyUsedProvider;
+// };
 
-const setFallback = () => {
-    return new web3(
-        "wss://rinkeby.infura.io/ws/v3/6d08631addb0433e967d2cf625cd6495"
-    );
-};
+// const setFallback = () => {
+//     return {type: "ws", url: "wss://rinkeby.infura.io/ws/v3/365177f2aeb74fc0a7e14c463bdcab7a"}
+// };
 
 export const drizzleOptions = {
     drizzleOptions: {
@@ -35,11 +33,16 @@ export const drizzleOptions = {
                 "Failure",
             ],
         },
-        web3: {
-            customProvider: setUsedProvider(),
-            fallback: setFallback(),
+    },
+
+    web3: {
+        customProvider: window.currentlyUsedProvider,
+        fallback: {
+            url:
+                "wss://rinkeby.infura.io/ws/v3/365177f2aeb74fc0a7e14c463bdcab7a",
         },
     },
+
     polls: {
         blocks: 15000,
     },
