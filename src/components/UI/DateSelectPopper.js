@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function SelectDatePopper({ date, onCancel }) {
+function SelectDatePopper({ date, walletConnected, onCancel }) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleClick = (event) => {
@@ -71,6 +71,7 @@ function SelectDatePopper({ date, onCancel }) {
                 onClick={handleClick}
                 startIcon={<Export />}
                 className={classes.export}
+                disabled={!walletConnected}
             >
                 Report
             </Button>
@@ -112,6 +113,21 @@ function SelectDatePopper({ date, onCancel }) {
                                         )
                                 ),
                             })}
+                            onSubmit={(values /*, actions*/) => {
+                                // Should be refactored out to a parent container (this part to history.js container) in case the date select popper in case this component is reused
+                                const startTimestamp = moment
+                                    .utc(values.start)
+                                    .startOf("day")
+                                    .unix(); // start of the the day
+                                const endTimestamp = moment
+                                    .utc(values.end)
+                                    .endOf("day")
+                                    .unix(); // last second of the the day
+
+                                const link = `https://rinkeby.api.alkemi.network/reports/0xb7bfbc2cf0167eb2945247c18dd7caa28d9c39f0?timestamp[$gte]=${startTimestamp}&timestamp[$lte]=${endTimestamp}`;
+
+                                window.open(link, "_blank");
+                            }}
                         >
                             {({
                                 errors,
@@ -177,25 +193,38 @@ function SelectDatePopper({ date, onCancel }) {
                                             </Box>
                                         )}
                                     </Box>
+
+                                    <Divider />
+                                    <Box
+                                        p={2}
+                                        display="flex"
+                                        justifyContent="flex-end"
+                                    >
+                                        <Button
+                                            size="small"
+                                            autoFocus
+                                            onClick={handleClose}
+                                        >
+                                            Close
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            type="submit"
+                                            color="secondary"
+                                            className={classes.confirmButton}
+                                            size="small"
+                                            disabled={
+                                                Object.keys(errors).length !==
+                                                0 /* Not really a good way to implement this, TODO: set a template on how to manage formik forms, and use Yup here too (as a callback perhaps) */
+                                            }
+                                        >
+                                            Download
+                                        </Button>
+                                    </Box>
                                 </form>
                             )}
                         </Formik>
                     </MuiPickersUtilsProvider>
-                </Box>
-                <Divider />
-                <Box p={2} display="flex" justifyContent="flex-end">
-                    <Button size="small" autoFocus onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button
-                        variant="contained"
-                        type="submit"
-                        color="secondary"
-                        className={classes.confirmButton}
-                        size="small"
-                    >
-                        Download
-                    </Button>
                 </Box>
             </Popover>
         </div>

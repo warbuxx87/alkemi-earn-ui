@@ -118,6 +118,7 @@ const History = ({
     txError,
     currentNetworkName,
     blocksData,
+    walletConnected,
     ...rest
 }) => {
     const classes = useStyles();
@@ -312,7 +313,7 @@ const History = ({
                                 </MenuItem>
                             ))}
                         </TextField>
-                        <Reportpop />
+                        <Reportpop walletConnected={walletConnected} />
                     </Box>
                 </Box>
                 <Table size="small" className="whitespace-pre">
