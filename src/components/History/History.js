@@ -313,7 +313,10 @@ const History = ({
                                 </MenuItem>
                             ))}
                         </TextField>
-                        <Reportpop walletConnected={walletConnected} />
+                        <Reportpop
+                            walletConnected={walletConnected}
+                            currentNetworkName={currentNetworkName}
+                        />
                     </Box>
                 </Box>
                 <Table size="small" className="whitespace-pre">

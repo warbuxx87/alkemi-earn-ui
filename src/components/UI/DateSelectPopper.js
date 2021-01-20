@@ -50,7 +50,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function SelectDatePopper({ date, walletConnected, onCancel }) {
+function SelectDatePopper({
+    date,
+    walletConnected,
+    currentNetworkName,
+    onCancel,
+}) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleClick = (event) => {
@@ -124,7 +129,7 @@ function SelectDatePopper({ date, walletConnected, onCancel }) {
                                     .endOf("day")
                                     .unix(); // last second of the the day
 
-                                const link = `https://rinkeby.api.alkemi.network/reports/0xb7bfbc2cf0167eb2945247c18dd7caa28d9c39f0?timestamp[$gte]=${startTimestamp}&timestamp[$lte]=${endTimestamp}`;
+                                const link = `https://${currentNetworkName}.api.alkemi.network/reports/0xb7bfbc2cf0167eb2945247c18dd7caa28d9c39f0?timestamp[$gte]=${startTimestamp}&timestamp[$lte]=${endTimestamp}`;
 
                                 window.open(link, "_blank");
                             }}
