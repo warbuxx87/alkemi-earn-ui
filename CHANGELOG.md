@@ -1,3 +1,10 @@
+## [1.12.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.12.0...v1.12.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* **history:** dynamically set users connected wallet for report download ([d07fd3d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d07fd3ddb9262cad9d1686a039d36c0caeec6daa))
+
 # [1.12.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.11.0...v1.12.0) (2021-01-22)
 
 
