@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 function SelectDatePopper({
     date,
     walletConnected,
+    address,
     currentNetworkName,
     onCancel,
 }) {
@@ -135,7 +136,7 @@ function SelectDatePopper({
                                     subdomain = `${currentNetworkName}.api`;
                                 }
 
-                                const link = `https://${subdomain}.alkemi.network/reports/0xb7bfbc2cf0167eb2945247c18dd7caa28d9c39f0?timestamp[$gte]=${startTimestamp}&timestamp[$lte]=${endTimestamp}`;
+                                const link = `https://${subdomain}.alkemi.network/reports/${address}/?unix[$gte]=${startTimestamp}&unix[$lte]=${endTimestamp}`;
 
                                 window.open(link, "_blank");
                             }}
