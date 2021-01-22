@@ -53,6 +53,30 @@ const overrides = {
             paddingBottom: 30,
         },
     },
+    MuiPickersDay: {
+        day: {
+            color: "#ffffff",
+        },
+        daySelected: {
+            backgroundColor: "#ffffff",
+            color: "#000000",
+        },
+        current: {
+            color: "#ffffff",
+            backgroundColor: "#ffffff14",
+            fontWeight: "600",
+        },
+    },
+    MuiPickersCalendarHeader: {
+        dayLabel: {
+            color: "#a7a7a7",
+        },
+    },
+    MuiPopover: {
+        paper: {
+            border: "solid 1px #080808",
+        },
+    },
 };
 
 export default overrides;

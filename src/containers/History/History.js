@@ -13,12 +13,18 @@ import useFetchTx from "hooks/useFetchTx";
 import { getTxList, getTxPending, getTxError } from "redux/selectors/data/tx";
 import { getBlocksData } from "redux/selectors/data/history";
 
-import { walletAddress, walletNetworkName } from "redux/selectors/data/onboard";
+import {
+    walletAddress,
+    walletNetworkName,
+    isWalletConnected,
+} from "redux/selectors/data/onboard";
 
 // Section 4: Container Code
 
 const HistoryContainer = ({ txPending, txError }) => {
     useFetchTx(); // gets txList from Etherscan
+
+    const walletConnected = useSelector(isWalletConnected);
 
     const currentAddress = useSelector(walletAddress);
     const currentNetworkName = useSelector(walletNetworkName);
@@ -35,6 +41,7 @@ const HistoryContainer = ({ txPending, txError }) => {
                 txError={txError}
                 address={currentAddress}
                 currentNetworkName={currentNetworkName}
+                walletConnected={walletConnected}
             />
         </div>
     );
