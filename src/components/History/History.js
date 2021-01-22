@@ -314,6 +314,7 @@ const History = ({
                             ))}
                         </TextField>
                         <Reportpop
+                            address={address}
                             walletConnected={walletConnected}
                             currentNetworkName={currentNetworkName}
                         />
