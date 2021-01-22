@@ -1,3 +1,16 @@
+# [1.12.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.11.0...v1.12.0) (2021-01-22)
+
+
+### Bug Fixes
+
+* set proper network address for date download ([bf89906](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bf8990643487740142fed850f8cf00463f37bb34))
+* wrong subdomain for main api UI-418 ([cd2c21b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/cd2c21b678e7e5a8788bad88210024413f344a58))
+
+
+### Features
+
+* allow user to download history data by date ([0fdb691](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0fdb6916c9a25439428d630a86df3f13689db33c))
+
 # [1.11.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.10.1...v1.11.0) (2021-01-18)
 
 
