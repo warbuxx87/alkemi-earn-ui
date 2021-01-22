@@ -104,8 +104,8 @@ function SelectDatePopper({
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <Formik
                             initialValues={{
+                                start: date.start || moment("01-01-2021"),
                                 end: date.end || moment(),
-                                start: date.start || moment(),
                             }}
                             validationSchema={Yup.object().shape({
                                 end: Yup.date().when(
@@ -129,7 +129,13 @@ function SelectDatePopper({
                                     .endOf("day")
                                     .unix(); // last second of the the day
 
-                                const link = `https://${currentNetworkName}.api.alkemi.network/reports/0xb7bfbc2cf0167eb2945247c18dd7caa28d9c39f0?timestamp[$gte]=${startTimestamp}&timestamp[$lte]=${endTimestamp}`;
+                                let subdomain = "api";
+
+                                if (currentNetworkName !== "main") {
+                                    subdomain = `${currentNetworkName}.api`;
+                                }
+
+                                const link = `https://${subdomain}.alkemi.network/reports/0xb7bfbc2cf0167eb2945247c18dd7caa28d9c39f0?timestamp[$gte]=${startTimestamp}&timestamp[$lte]=${endTimestamp}`;
 
                                 window.open(link, "_blank");
                             }}
