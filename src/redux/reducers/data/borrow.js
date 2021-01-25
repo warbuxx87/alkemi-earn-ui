@@ -95,7 +95,7 @@ export default (state = initialState, action) => {
                         },
                     },
                 };
-            break;
+            else return state;
         }
 
         case RESET_BORROW_DATA:

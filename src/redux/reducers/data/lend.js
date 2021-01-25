@@ -92,7 +92,7 @@ export default (state = initialState, action) => {
                         },
                     },
                 };
-            break;
+            else return state;
         }
 
         case RESET_LEND_DATA:
