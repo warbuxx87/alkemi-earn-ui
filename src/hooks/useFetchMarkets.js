@@ -9,7 +9,7 @@ import { walletNetworkName } from "redux/selectors/data/onboard";
 
 const ENABLED_TOKENS = process.env.REACT_APP_ENABLED_TOKENS
     ? process.env.REACT_APP_ENABLED_TOKENS.split(",")
-    : "DAI,USDC,WBTC,WETH";
+    : "DAI,WETH,USDC,WBTC";
 const url_map = require("constants/url_map.json");
 
 // Retrieve the USD price every 15 seconds

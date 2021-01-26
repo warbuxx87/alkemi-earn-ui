@@ -14,7 +14,7 @@ import eth from "assets/images/WETH.svg";
 
 const ENABLED_TOKENS = process.env.REACT_APP_ENABLED_TOKENS
     ? process.env.REACT_APP_ENABLED_TOKENS.split(",")
-    : "DAI,USDC,WBTC,WETH";
+    : "DAI,WETH,USDC,WBTC";
 
 function createData(name, unit, image, wallet, alternativeUnitLabel) {
     return {

@@ -22,6 +22,10 @@ import {
 // Section 4: Container Code
 
 const HistoryContainer = ({ txPending, txError }) => {
+    const ENABLED_TOKENS = process.env.REACT_APP_ENABLED_TOKENS
+        ? process.env.REACT_APP_ENABLED_TOKENS.split(",")
+        : "DAI,WETH,USDC,WBTC";
+
     useFetchTx(); // gets txList from Etherscan
 
     const walletConnected = useSelector(isWalletConnected);
@@ -42,6 +46,7 @@ const HistoryContainer = ({ txPending, txError }) => {
                 address={currentAddress}
                 currentNetworkName={currentNetworkName}
                 walletConnected={walletConnected}
+                ENABLED_TOKENS={ENABLED_TOKENS}
             />
         </div>
     );

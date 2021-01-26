@@ -119,6 +119,7 @@ const History = ({
     currentNetworkName,
     blocksData,
     walletConnected,
+    ENABLED_TOKENS,
     ...rest
 }) => {
     const classes = useStyles();
@@ -130,6 +131,27 @@ const History = ({
         topic: "",
         sortBy: "",
     });
+
+    const [assetsList, setAssetsList] = React.useState(assetName); // assets filter list
+
+    // generate assets filter list from enabled tokens in env var
+    const filterAssets = useCallback(() => {
+        let enabledAssetsFilterList = [];
+
+        enabledAssetsFilterList.push(
+            assetName.find((assetEntry) => "ALL" === assetEntry.id)
+        );
+
+        ENABLED_TOKENS.forEach((v) => {
+            enabledAssetsFilterList.push(
+                assetName.find((assetEntry) => v === assetEntry.id)
+            );
+        });
+
+        console.log("enabledAssetsFilterList: ", enabledAssetsFilterList);
+
+        setAssetsList(enabledAssetsFilterList);
+    }, [ENABLED_TOKENS]);
 
     // filter the data displayed by type and sorting selected
     const filterData = useCallback(() => {
@@ -208,6 +230,10 @@ const History = ({
         filterData();
     }, [filterData]);
 
+    React.useEffect(() => {
+        filterAssets();
+    }, [filterAssets]);
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -249,7 +275,7 @@ const History = ({
                                 },
                             }}
                         >
-                            {assetName.map((category) => (
+                            {assetsList.map((category) => (
                                 <MenuItem key={category.id} value={category.id}>
                                     {category.name}
                                 </MenuItem>
