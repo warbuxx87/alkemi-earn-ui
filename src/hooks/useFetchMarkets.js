@@ -7,6 +7,9 @@ import { compare_supply, compare_borrow } from "utils/markets";
 
 import { walletNetworkName } from "redux/selectors/data/onboard";
 
+const ENABLED_TOKENS = process.env.REACT_APP_ENABLED_TOKENS
+    ? process.env.REACT_APP_ENABLED_TOKENS.split(",")
+    : "DAI,USDC,WBTC,WETH";
 const url_map = require("constants/url_map.json");
 
 // Retrieve the USD price every 15 seconds
@@ -46,10 +49,13 @@ export default (fetchPeriodically = false) => {
                         let totalSupplyBalanceUSD = 0;
                         let totalBorrowBalanceUSD = 0;
 
-                        const arr_items = arr_markets.map((market) => {
+                        const arr_items = arr_markets.flatMap((market) => {
                             let key_items = Object.values(market);
 
                             let asset = key_items[0];
+
+                            if (!ENABLED_TOKENS.includes(asset.symbol))
+                                return []; // skips not enabled assets
 
                             totalSupplyBalanceUSD += parseFloat(
                                 asset.totalSupplyUSD
