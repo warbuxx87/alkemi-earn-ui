@@ -136,18 +136,50 @@ definitions:
               name: "Deploy to Staging 1"
               deployment: staging1
               script:
-                  - echo "$VERSION Deployment to Staging 1!"
+                  # Increase Node Memory Size to 7GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=7168
                   - apt-get update
-                  - apt-get install jq -y
+                  - apt-get install jq zip -y
+                  - echo "Creating New Environment File"
+                  # create a new .env file
+                  - touch .env
+                  # Skip SKIP_PREFLIGHT_CHECK
+                  - echo SKIP_PREFLIGHT_CHECK=true >> .env
+                  # Package Version
                   - declare -x VERSION=$(jq -r '.version' package.json)
+                  - echo REACT_APP_VERSION=$VERSION >> .env
+                  # Default Network Settings
+                  - echo REACT_APP_DEFAULT_NETWORK=$REACT_APP_DEFAULT_NETWORK >> .env
+                  # Onboard JS Settings
+                  - echo REACT_APP_DAPP_ID=$REACT_APP_DAPP_ID >> .env
+                  - echo REACT_APP_APP_URL=$REACT_APP_APP_URL >> .env
+                  - echo REACT_APP_CONTACT_EMAIL=$REACT_APP_APP_URL >> .env
+                  - echo REACT_APP_FORTMATIC_KEY=$REACT_APP_FORTMATIC_KEY >> .env
+                  - echo REACT_APP_FORTMATIC_TEST_KEY=$REACT_APP_FORTMATIC_TEST_KEY >> .env
+                  - echo REACT_APP_PORTIS_KEY=$REACT_APP_PORTIS_KEY >> .env
+                  - echo REACT_APP_SQUARELINK_KEY=$REACT_APP_SQUARELINK_KEY >> .env
+                  - echo REACT_APP_SQUARELINK_SECRET=$REACT_APP_SQUARELINK_SECRET >> .env
+                  - echo REACT_APP_INFURA_ID=$REACT_APP_INFURA_ID >> .env
+                  - echo REACT_APP_ENABLED_TOKENS=$REACT_APP_ENABLED_TOKENS >> .env
+                  - echo "Installing"
+                  - npm install --quiet
+                  # Saves build version to a json file for cache-busting purposes
+                  - echo "Preparing Build"
+                  - npm run generate-build-version
+                  - echo "Building"
+                  - npm run build
+                  - echo "$VERSION Deployment to Staging 1!"
+                  # Zip BITBUCKET_CLONE_DIR
+                  - zip -r application.zip .
                   - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.7
                     variables:
                         AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                         AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                         AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
                         APPLICATION_NAME: "$APPLICATION_NAME"
-                        COMMAND: "deploy-only"
+                        #COMMAND: "deploy-only"
                         VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
+                        ZIP_FILE: "application.zip"
                         ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-1"
                         WAIT: "true"
 
@@ -251,8 +283,8 @@ pipelines:
     custom: # defines that this can only be triggered manually or by a schedule
         # RUN Staging CHOOSE TO MANUALLY DEPLOY TO Staging 1/2/3
         staging1:
-            - step: *build
-            - step: *upload
+            #  - step: *build
+            #  - step: *upload
             - step: *deploy-staging-1
         staging2:
             - step: *build
