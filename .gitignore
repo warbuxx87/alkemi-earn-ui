@@ -10,3 +10,4 @@ dist
 !.npmrc.example
 debug.log*
 .env*
+!.env.test
