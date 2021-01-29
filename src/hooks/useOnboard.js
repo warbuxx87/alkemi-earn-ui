@@ -140,14 +140,6 @@ export default () => {
 
                     currentWalletNetwork = currentState.network;
 
-                    web3.eth
-                        .getBalance(currentWalletAddress)
-                        .then((currentWalletBalance) => {
-                            dispatch(setWalletBalance(currentWalletBalance));
-                            dispatch(setEthLendBalance(currentWalletBalance));
-                            dispatch(setEthBorrowBalance(currentWalletBalance));
-                        });
-
                     // The order matters here
                     dispatch(setWalletNetwork(currentWalletNetwork));
                     dispatch(setWalletAddress(currentWalletAddress));
@@ -247,9 +239,6 @@ export default () => {
             const readyToTransact = await onboard.walletCheck();
             dispatch(setWalletNetwork(currentState.network));
             dispatch(setWalletAddress(currentState.address));
-            dispatch(setWalletBalance(currentState.balance));
-            dispatch(setEthLendBalance(currentState.balance));
-            dispatch(setEthBorrowBalance(currentState.balance));
             dispatch(setWalletConnected(readyToTransact));
 
             if (!readyToTransact) {
