@@ -62,13 +62,36 @@ definitions:
               script:
                   # Increase Node Memory Size to 7GB instead of default 512MB
                   - export NODE_OPTIONS=--max_old_space_size=7168
-                  - echo "Build"
+                  # remove existing environment file
+                  - rm .env
+                  - echo "Creating New Environment File"
+                  # create a new .env file
+                  - touch .env
+                  # Package Version
+                  - echo REACT_APP_VERSION=$npm_package_version >> .env
+                  # Default Network Settings
+                  - echo REACT_APP_DEFAULT_NETWORK=$REACT_APP_DEFAULT_NETWORK >> .env
+                  # Onboard JS Settings
+                  - echo REACT_APP_DAPP_ID=$REACT_APP_DAPP_ID >> .env
+                  - echo REACT_APP_APP_URL=$REACT_APP_APP_URL >> .env
+                  - echo REACT_APP_CONTACT_EMAIL=$REACT_APP_APP_URL >> .env
+                  - echo REACT_APP_FORTMATIC_KEY=$REACT_APP_FORTMATIC_KEY >> .env
+                  - echo REACT_APP_FORTMATIC_TEST_KEY=$REACT_APP_FORTMATIC_TEST_KEY >> .env
+                  - echo REACT_APP_PORTIS_KEY=$REACT_APP_PORTIS_KEY >> .env
+                  - echo REACT_APP_SQUARELINK_KEY=$REACT_APP_SQUARELINK_KEY >> .env
+                  - echo REACT_APP_SQUARELINK_SECRET=$REACT_APP_SQUARELINK_SECRET >> .env
+                  - echo REACT_APP_INFURA_ID=$REACT_APP_INFURA_ID >> .env
+                  - echo REACT_APP_ENABLED_TOKENS=$REACT_APP_ENABLED_TOKENS >> .env
+                  - echo "Installing"
                   - npm install --quiet
                   # Saves build version to a json file for cache-busting purposes
+                  - echo "Preparing Build"
                   - npm run generate-build-version
+                  - echo "Building"
                   - npm run build
               artifacts:
                   # keep all files from this build step and make available for next step
+                  - .env
                   - build/**
                   - public/meta.json
 
