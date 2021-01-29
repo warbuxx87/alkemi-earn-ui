@@ -11,3 +11,4 @@ dist
 debug.log*
 .env*
 !.env.test
+!.env.example
