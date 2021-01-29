@@ -138,8 +138,8 @@ definitions:
               caches:
                   - node
               deployment: rinkeby
-              clone:
-                  enabled: false
+              #            clone:
+              #                enabled: false
               script:
                   # Increase Node Memory Size to 7GB instead of default 512MB
                   - export NODE_OPTIONS=--max_old_space_size=7168
@@ -168,11 +168,10 @@ definitions:
                   - echo REACT_APP_ENABLED_TOKENS=$ENABLED_TOKENS >> .env
                   - echo "Installing"
                   - npm install --quiet
-                  # Saves build version to a json file for cache-busting purposes
-                  - echo "Preparing Build"
-                  - npm run generate-build-version
                   - echo "Building"
                   - npm run build
+                  # Saves build version to a json file for cache-busting purposes
+                  - npm run generate-build-version
                   - echo "$VERSION Deployment to Rinkeby!"
                   # sync your files to S3
                   - pipe: atlassian/aws-s3-deploy:0.4.4
