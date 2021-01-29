@@ -68,20 +68,20 @@ definitions:
                   # Skip SKIP_PREFLIGHT_CHECK
                   - echo SKIP_PREFLIGHT_CHECK=true >> .env
                   # Package Version
-                  - echo REACT_APP_VERSION=$npm_package_version >> .env
+                  - echo REACT_APP_VERSION=$VERSION >> .env
                   # Default Network Settings
-                  - echo REACT_APP_DEFAULT_NETWORK=$REACT_APP_DEFAULT_NETWORK >> .env
+                  - echo REACT_APP_DEFAULT_NETWORK=$DEFAULT_NETWORK >> .env
                   # Onboard JS Settings
-                  - echo REACT_APP_DAPP_ID=$REACT_APP_DAPP_ID >> .env
-                  - echo REACT_APP_APP_URL=$REACT_APP_APP_URL >> .env
-                  - echo REACT_APP_CONTACT_EMAIL=$REACT_APP_APP_URL >> .env
-                  - echo REACT_APP_FORTMATIC_KEY=$REACT_APP_FORTMATIC_KEY >> .env
-                  - echo REACT_APP_FORTMATIC_TEST_KEY=$REACT_APP_FORTMATIC_TEST_KEY >> .env
-                  - echo REACT_APP_PORTIS_KEY=$REACT_APP_PORTIS_KEY >> .env
-                  - echo REACT_APP_SQUARELINK_KEY=$REACT_APP_SQUARELINK_KEY >> .env
-                  - echo REACT_APP_SQUARELINK_SECRET=$REACT_APP_SQUARELINK_SECRET >> .env
-                  - echo REACT_APP_INFURA_ID=$REACT_APP_INFURA_ID >> .env
-                  - echo REACT_APP_ENABLED_TOKENS=$REACT_APP_ENABLED_TOKENS >> .env
+                  - echo REACT_APP_DAPP_ID=$DAPP_ID >> .env
+                  - echo REACT_APP_APP_URL=$APP_URL >> .env
+                  - echo REACT_APP_CONTACT_EMAIL=$CONTACT_EMAIL >> .env
+                  - echo REACT_APP_FORTMATIC_KEY=$FORTMATIC_KEY >> .env
+                  - echo REACT_APP_FORTMATIC_TEST_KEY=$FORTMATIC_TEST_KEY >> .env
+                  - echo REACT_APP_PORTIS_KEY=$PORTIS_KEY >> .env
+                  - echo REACT_APP_SQUARELINK_KEY=$SQUARELINK_KEY >> .env
+                  - echo REACT_APP_SQUARELINK_SECRET=$SQUARELINK_SECRET >> .env
+                  - echo REACT_APP_INFURA_ID=$INFURA_ID >> .env
+                  - echo REACT_APP_ENABLED_TOKENS=$ENABLED_TOKENS >> .env
                   - echo "Installing"
                   - npm install --quiet
                   # Saves build version to a json file for cache-busting purposes
@@ -132,9 +132,14 @@ definitions:
                   - markdown2confluence -u $CONFLUENCE_USER -p $CONFLUENCE_PASSWORD -e $CONFLUENCE_ENDPOINT -s 'ARCH' --parent 'Repositories' -t 'alkemi-debt-ui' -d README.md
 
         # DEFINE DEPLOY TO STAGING 1 step
-        - step: &deploy-staging-1
-              name: "Deploy to Staging 1"
-              deployment: staging1
+        - step: &deploy-rinkeby
+              name: "Deploy to Staging Rinkeby"
+              size: 2x
+              caches:
+                  - node
+              deployment: rinkeby
+              clone:
+                  enabled: false
               script:
                   # Increase Node Memory Size to 7GB instead of default 512MB
                   - export NODE_OPTIONS=--max_old_space_size=7168
@@ -149,18 +154,18 @@ definitions:
                   - declare -x VERSION=$(jq -r '.version' package.json)
                   - echo REACT_APP_VERSION=$VERSION >> .env
                   # Default Network Settings
-                  - echo REACT_APP_DEFAULT_NETWORK=$REACT_APP_DEFAULT_NETWORK >> .env
+                  - echo REACT_APP_DEFAULT_NETWORK=$DEFAULT_NETWORK >> .env
                   # Onboard JS Settings
-                  - echo REACT_APP_DAPP_ID=$REACT_APP_DAPP_ID >> .env
-                  - echo REACT_APP_APP_URL=$REACT_APP_APP_URL >> .env
-                  - echo REACT_APP_CONTACT_EMAIL=$REACT_APP_APP_URL >> .env
-                  - echo REACT_APP_FORTMATIC_KEY=$REACT_APP_FORTMATIC_KEY >> .env
-                  - echo REACT_APP_FORTMATIC_TEST_KEY=$REACT_APP_FORTMATIC_TEST_KEY >> .env
-                  - echo REACT_APP_PORTIS_KEY=$REACT_APP_PORTIS_KEY >> .env
-                  - echo REACT_APP_SQUARELINK_KEY=$REACT_APP_SQUARELINK_KEY >> .env
-                  - echo REACT_APP_SQUARELINK_SECRET=$REACT_APP_SQUARELINK_SECRET >> .env
-                  - echo REACT_APP_INFURA_ID=$REACT_APP_INFURA_ID >> .env
-                  - echo REACT_APP_ENABLED_TOKENS=$REACT_APP_ENABLED_TOKENS >> .env
+                  - echo REACT_APP_DAPP_ID=$DAPP_ID >> .env
+                  - echo REACT_APP_APP_URL=$APP_URL >> .env
+                  - echo REACT_APP_CONTACT_EMAIL=$CONTACT_EMAIL >> .env
+                  - echo REACT_APP_FORTMATIC_KEY=$FORTMATIC_KEY >> .env
+                  - echo REACT_APP_FORTMATIC_TEST_KEY=$FORTMATIC_TEST_KEY >> .env
+                  - echo REACT_APP_PORTIS_KEY=$PORTIS_KEY >> .env
+                  - echo REACT_APP_SQUARELINK_KEY=$SQUARELINK_KEY >> .env
+                  - echo REACT_APP_SQUARELINK_SECRET=$SQUARELINK_SECRET >> .env
+                  - echo REACT_APP_INFURA_ID=$INFURA_ID >> .env
+                  - echo REACT_APP_ENABLED_TOKENS=$ENABLED_TOKENS >> .env
                   - echo "Installing"
                   - npm install --quiet
                   # Saves build version to a json file for cache-busting purposes
@@ -168,20 +173,22 @@ definitions:
                   - npm run generate-build-version
                   - echo "Building"
                   - npm run build
-                  - echo "$VERSION Deployment to Staging 1!"
-                  # Zip BITBUCKET_CLONE_DIR
-                  - zip -r application.zip .
-                  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.7
+                  - echo "$VERSION Deployment to Rinkeby!"
+                  # sync your files to S3
+                  - pipe: atlassian/aws-s3-deploy:0.4.4
                     variables:
                         AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
                         AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                         AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-                        APPLICATION_NAME: "$APPLICATION_NAME"
-                        #COMMAND: "deploy-only"
-                        VERSION_LABEL: "$APPLICATION_NAME-$VERSION-$BITBUCKET_BUILD_NUMBER"
-                        ZIP_FILE: "application.zip"
-                        ENVIRONMENT_NAME: "$APPLICATION_NAME-staging-1"
-                        WAIT: "true"
+                        S3_BUCKET: $AWS_S3_BUCKET
+                        LOCAL_PATH: "build"
+                  # triggering a distribution invalidation to refresh the CDN caches
+                  - pipe: atlassian/aws-cloudfront-invalidate:0.1.1
+                    variables:
+                        AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                        AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                        AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                        DISTRIBUTION_ID: $AWS_CLOUDFRONT_ID
 
         # DEFINE DEPLOY TO Staging 2 step
         - step: &deploy-staging-2
@@ -282,15 +289,13 @@ definitions:
 pipelines:
     custom: # defines that this can only be triggered manually or by a schedule
         # RUN Staging CHOOSE TO MANUALLY DEPLOY TO Staging 1/2/3
-        staging1:
-            #  - step: *build
-            #  - step: *upload
-            - step: *deploy-staging-1
-        staging2:
+        rinkeby:
+            - step: *deploy-rinkeby
+        kovan:
             - step: *build
             - step: *upload
             - step: *deploy-staging-2
-        staging3:
+        ropsten:
             - step: *build
             - step: *upload
             - step: *deploy-staging-3
@@ -325,13 +330,3 @@ pipelines:
             - step: *build
             - step: *upload
             - step: *deploy-production
-
-            #                  SAVING THIS FOR LATER
-            #                  - pipe: sentryio/sentry-new-release:0.3.0
-            #                    variables:
-            #                        SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
-            #                        SENTRY_ORG: "alkemi-ai-inc"
-            #                        SENTRY_PROJECT: "alkemi-earn-ui"
-            #                        ENVIRONMENT: "staging2" # Optional.
-            #                        FINALIZE: "false" # Optional.
-            #
