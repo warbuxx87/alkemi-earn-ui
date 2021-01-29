@@ -62,8 +62,6 @@ definitions:
               script:
                   # Increase Node Memory Size to 7GB instead of default 512MB
                   - export NODE_OPTIONS=--max_old_space_size=7168
-                  # remove existing environment file
-                  - rm .env
                   - echo "Creating New Environment File"
                   # create a new .env file
                   - touch .env
