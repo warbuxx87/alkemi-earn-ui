@@ -65,6 +65,8 @@ definitions:
                   - echo "Creating New Environment File"
                   # create a new .env file
                   - touch .env
+                  # Skip SKIP_PREFLIGHT_CHECK
+                  - echo SKIP_PREFLIGHT_CHECK=true >> .env
                   # Package Version
                   - echo REACT_APP_VERSION=$npm_package_version >> .env
                   # Default Network Settings
