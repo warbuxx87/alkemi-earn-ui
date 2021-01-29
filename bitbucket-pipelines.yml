@@ -166,8 +166,6 @@ definitions:
                   - echo REACT_APP_SQUARELINK_SECRET=$SQUARELINK_SECRET >> .env
                   - echo REACT_APP_INFURA_ID=$INFURA_ID >> .env
                   - echo REACT_APP_ENABLED_TOKENS=$ENABLED_TOKENS >> .env
-                  - echo "Installing"
-                  - npm install --quiet
                   - echo "Building"
                   - npm run build
                   # Saves build version to a json file for cache-busting purposes
@@ -289,6 +287,7 @@ pipelines:
     custom: # defines that this can only be triggered manually or by a schedule
         # RUN Staging CHOOSE TO MANUALLY DEPLOY TO Staging 1/2/3
         rinkeby:
+            - step: *test
             - step: *deploy-rinkeby
         kovan:
             - step: *build
