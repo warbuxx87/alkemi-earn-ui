@@ -1,3 +1,11 @@
+## [1.12.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.12.1...v1.12.2) (2021-02-05)
+
+
+### Bug Fixes
+
+* continually get ether balance UI-419 ([a8401b9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a8401b92b7c2d15d511e4a5e17c4f3c4ec043e3e))
+* get balance properly for walletconnect UI-419 ([542cabb](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/542cabbf59240ddce39b140ce4a1eaab75f4782d))
+
 ## [1.12.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.12.0...v1.12.1) (2021-01-22)
 
 
