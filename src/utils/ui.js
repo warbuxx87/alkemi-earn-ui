@@ -94,8 +94,11 @@ export const toWei = (value, unit) => {
 
 // Turns a number from wei value to one with a decimal point, also returns a certain number of fraction digits depending on the asset/token
 export const formatNumber = (value, unit, userWalletNetwork) => {
-    const maxDecimals = 2; // maximum number of decimals to display
-    const minDecimals = 2; // minimum number of decimals to display
+    const maxDecimals = 2; // maximum number of decimals to display by default
+    // const minDecimals = 2; // minimum number of decimals to display by default
+
+    const maxDecimalsHigherValueAsset = 5; // maximum number of decimals to display for WBTC & ETH
+    const minDecimalsHigherValueAsset = 5; // minimum number of decimals to display for WBTC & ETH
 
     if (!value) return 0;
     const wei = fromWei(value, unit);
@@ -112,22 +115,22 @@ export const formatNumber = (value, unit, userWalletNetwork) => {
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits:
                     userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
-                        ? maxDecimals
+                        ? maxDecimalsHigherValueAsset
                         : 18,
                 minimumFractionDigits:
                     userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
-                        ? minDecimals
+                        ? minDecimalsHigherValueAsset
                         : 4,
             }).format(wei);
         case "WBTC":
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits:
                     userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
-                        ? maxDecimals
+                        ? maxDecimalsHigherValueAsset
                         : 8,
                 minimumFractionDigits:
                     userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
-                        ? minDecimals
+                        ? minDecimalsHigherValueAsset
                         : 4,
             }).format(wei);
         default:
