@@ -364,19 +364,17 @@ export const format_str_to_kmb = (str_num) => {
     return str_num;
 };
 
-export const format_str_to_percent = (str_num) => {
-    // console.log(str_num)
-    str_num = str_num.toString();
-    var index_num = str_num.indexOf(".") + 2;
-    var cpmp_str = str_num.replace(/\./, "");
-    var res_str =
-        cpmp_str.slice(0, index_num) + "." + cpmp_str.substr(index_num, 18);
-    // console.log(Number(res_str))
+export const format_str_to_percent = (str_num, userWalletNetwork) => {
+    let bigStrNum = Big(str_num);
+    bigStrNum = bigStrNum.times(100);
 
-    if (Number(res_str) === 0) {
+    if (bigStrNum.lte(0.01)) {
         return "<0.01%";
     } else {
-        return Number(res_str) + "%";
+        return (
+            formatStringNumber(bigStrNum.toString(), null, userWalletNetwork) +
+            "%"
+        );
     }
 };
 
