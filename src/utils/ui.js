@@ -39,7 +39,7 @@ const token2icon = {
 };
 
 // This is used in formatNumber and formatStringNumber below, if the currentnetwork id is equal to this variable, it's going to force values display to have 2 decimal places
-const MAINNET_NETWORK_ID = 1;
+const TWO_DECIMAL_PLACES_NETWORK_ID = 1;
 
 export const getTokenIcon = (symbol) => {
     const icon = token2icon[symbol];
@@ -100,27 +100,39 @@ export const formatNumber = (value, unit, userWalletNetwork) => {
         case "USDC":
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits:
-                    userWalletNetwork === MAINNET_NETWORK_ID ? maxDecimals : 6,
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? maxDecimals
+                        : 6,
                 minimumFractionDigits: 2,
             }).format(wei);
         case "WETH":
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits:
-                    userWalletNetwork === MAINNET_NETWORK_ID ? maxDecimals : 18,
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? maxDecimals
+                        : 18,
                 minimumFractionDigits:
-                    userWalletNetwork === MAINNET_NETWORK_ID ? minDecimals : 4,
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? minDecimals
+                        : 4,
             }).format(wei);
         case "WBTC":
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits:
-                    userWalletNetwork === MAINNET_NETWORK_ID ? maxDecimals : 8,
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? maxDecimals
+                        : 8,
                 minimumFractionDigits:
-                    userWalletNetwork === MAINNET_NETWORK_ID ? minDecimals : 4,
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? minDecimals
+                        : 4,
             }).format(wei);
         default:
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits:
-                    userWalletNetwork === MAINNET_NETWORK_ID ? maxDecimals : 18,
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? maxDecimals
+                        : 18,
                 minimumFractionDigits: 2,
             }).format(wei);
     }
@@ -134,7 +146,7 @@ export const formatStringNumber = (
     userWalletNetwork,
     preferredDecimalsPlaces
 ) => {
-    if (userWalletNetwork === MAINNET_NETWORK_ID) {
+    if (userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID) {
         let bigValue = Big(value);
         return bigValue.toFixed(2);
     } else if (preferredDecimalsPlaces !== undefined) {
