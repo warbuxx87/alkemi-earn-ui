@@ -39,7 +39,10 @@ const token2icon = {
 };
 
 // This is used in formatNumber and formatStringNumber below, if the currentnetwork id is equal to this variable, it's going to force values display to have 2 decimal places
-const TWO_DECIMAL_PLACES_NETWORK_ID = 1;
+const TWO_DECIMAL_PLACES_NETWORK_ID = parseInt(
+    process.env.REACT_APP_TWO_DECIMAL_PLACES_NETWORK_ID,
+    10
+);
 
 export const getTokenIcon = (symbol) => {
     const icon = token2icon[symbol];
