@@ -233,8 +233,16 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                     ? asset.alternativeUnitLabel
                     : asset.unit
             }`}
-            balanceValue={formatNumber(asset.balance, asset.unit)}
-            amountValue={`Borrowed: ${formatNumber(asset.balance, asset.unit)}`}
+            balanceValue={formatNumber(
+                asset.balance,
+                asset.unit,
+                userWalletNetwork
+            )}
+            amountValue={`Borrowed: ${formatNumber(
+                asset.balance,
+                asset.unit,
+                userWalletNetwork
+            )}`}
             walletIsKYCd={walletIsKYCd}
         />
     );

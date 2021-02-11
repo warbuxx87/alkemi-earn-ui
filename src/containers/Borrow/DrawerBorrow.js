@@ -13,6 +13,7 @@ import {
     toWei,
     fromWei,
     assetToDecimals,
+    formatStringNumber,
 } from "utils/ui";
 
 import DrizzleContext from "utils/DrizzleContext";
@@ -146,8 +147,16 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
                     ? asset.alternativeUnitLabel
                     : asset.unit
             }`}
-            balanceValue={formatNumber(asset.balance, asset.unit)}
-            amountValue={`Available: ${getMaxBorrow()}`}
+            balanceValue={formatNumber(
+                asset.balance,
+                asset.unit,
+                userWalletNetwork
+            )}
+            amountValue={`Available: ${formatStringNumber(
+                getMaxBorrow(),
+                null,
+                userWalletNetwork
+            )}`}
             walletIsKYCd={walletIsKYCd}
         />
     );

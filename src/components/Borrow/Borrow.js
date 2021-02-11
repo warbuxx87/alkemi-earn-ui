@@ -38,6 +38,7 @@ function Borrow({
     USDPrice,
     txs,
     walletIsKYCd,
+    userWalletNetwork,
 }) {
     const classes = useStyles();
     return (
@@ -58,6 +59,7 @@ function Borrow({
                             <BorrowTableActive
                                 data={activeBorrow}
                                 USDPrice={USDPrice}
+                                userWalletNetwork={userWalletNetwork}
                             />
                         </Grid>
                     )}
@@ -68,6 +70,7 @@ function Borrow({
                                 onActivate={onActivate}
                                 txs={txs}
                                 walletIsKYCd={walletIsKYCd}
+                                userWalletNetwork={userWalletNetwork}
                             />
                         </Grid>
                     )}

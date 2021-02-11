@@ -87,30 +87,50 @@ export const toWei = (value, unit) => {
 };
 
 // Turns a number from wei value to one with a decimal point, also returns a certain number of fraction digits depending on the asset/token
-export const formatNumber = (value, unit) => {
+export const formatNumber = (value, unit, userWalletNetwork) => {
+    const maxDecimals = 2; // maximum number of decimals to display
+    const minDecimals = 2; // minimum number of decimals to display
+
     if (!value) return 0;
     const wei = fromWei(value, unit);
     switch (unit) {
         case "USDC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 8,
+                maximumFractionDigits:
+                    userWalletNetwork === 4 ? maxDecimals : 6,
                 minimumFractionDigits: 2,
             }).format(wei);
         case "WETH":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 8,
-                minimumFractionDigits: 4,
+                maximumFractionDigits:
+                    userWalletNetwork === 4 ? maxDecimals : 18,
+                minimumFractionDigits:
+                    userWalletNetwork === 4 ? minDecimals : 4,
             }).format(wei);
         case "WBTC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 8,
-                minimumFractionDigits: 4,
+                maximumFractionDigits:
+                    userWalletNetwork === 4 ? maxDecimals : 8,
+                minimumFractionDigits:
+                    userWalletNetwork === 4 ? minDecimals : 4,
             }).format(wei);
         default:
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 18,
+                maximumFractionDigits:
+                    userWalletNetwork === 4 ? maxDecimals : 18,
                 minimumFractionDigits: 2,
             }).format(wei);
+    }
+};
+
+// For the string representation of numbers
+// Returns either the number itself or with a precise number of decimals (2)
+export const formatStringNumber = (value, unit = null, userWalletNetwork) => {
+    if (userWalletNetwork === 4) {
+        let bigValue = Big(value);
+        return bigValue.toFixed(2);
+    } else {
+        return value;
     }
 };
 

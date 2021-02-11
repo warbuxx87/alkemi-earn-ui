@@ -137,8 +137,16 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
                     ? asset.alternativeUnitLabel
                     : asset.unit
             }`}
-            balanceValue={formatNumber(asset.balance, asset.unit)}
-            amountValue={`Supplied: ${formatNumber(asset.balance, asset.unit)}`}
+            balanceValue={formatNumber(
+                asset.balance,
+                asset.unit,
+                userWalletNetwork
+            )}
+            amountValue={`Supplied: ${formatNumber(
+                asset.balance,
+                asset.unit,
+                userWalletNetwork
+            )}`}
             walletIsKYCd={walletIsKYCd}
         />
     );

@@ -17,6 +17,7 @@ import {
     walletAddress,
     walletNetworkName,
     isWalletConnected,
+    walletNetwork,
 } from "redux/selectors/data/onboard";
 
 // Section 4: Container Code
@@ -28,6 +29,7 @@ const HistoryContainer = ({ txPending, txError }) => {
 
     const currentAddress = useSelector(walletAddress);
     const currentNetworkName = useSelector(walletNetworkName);
+    const userWalletNetwork = useSelector(walletNetwork);
 
     const txList = useSelector(getTxList);
     const blocksData = useSelector(getBlocksData); // blocks TXs above were fired on (and their timestamp)
@@ -42,6 +44,7 @@ const HistoryContainer = ({ txPending, txError }) => {
                 address={currentAddress}
                 currentNetworkName={currentNetworkName}
                 walletConnected={walletConnected}
+                userWalletNetwork={userWalletNetwork}
             />
         </div>
     );
