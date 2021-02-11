@@ -29,7 +29,7 @@ import { ExternalLink as LinkIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 
-import { openEtherScan, getTokenIcon } from "utils/ui";
+import { openEtherScan, getTokenIcon, formatStringNumber } from "utils/ui";
 
 import HistoryTableCell from "components/UI/TableCell";
 import Reportpop from "components/UI/DateSelectPopper";
@@ -119,6 +119,7 @@ const History = ({
     currentNetworkName,
     blocksData,
     walletConnected,
+    userWalletNetwork,
     ...rest
 }) => {
     const classes = useStyles();
@@ -454,7 +455,11 @@ const History = ({
                                             variant="body1"
                                             color="textPrimary"
                                         >
-                                            {item.amount}
+                                            {formatStringNumber(
+                                                item.amount,
+                                                null,
+                                                userWalletNetwork
+                                            )}
                                         </Typography>
                                     </HistoryTableCell>
                                     <HistoryTableCell
@@ -465,7 +470,11 @@ const History = ({
                                             variant="body1"
                                             color="textPrimary"
                                         >
-                                            {item.newBalance}
+                                            {formatStringNumber(
+                                                item.newBalance,
+                                                null,
+                                                userWalletNetwork
+                                            )}
                                         </Typography>
                                     </HistoryTableCell>
                                     <HistoryTableCell

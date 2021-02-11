@@ -27,14 +27,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Liquidate({ liquidationsList }) {
+function Liquidate({ liquidationsList, userWalletNetwork }) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
             <Box mt={3}>
                 <Grid container spacing={3}>
                     <Grid item lg={12} xs={12}>
-                        <LiquidateTable liquidationsList={liquidationsList} />
+                        <LiquidateTable
+                            liquidationsList={liquidationsList}
+                            userWalletNetwork={userWalletNetwork}
+                        />
                     </Grid>
                 </Grid>
             </Box>

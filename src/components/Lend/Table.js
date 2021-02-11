@@ -91,6 +91,7 @@ const LendTable = ({
     displayAllocateButton,
     txs,
     walletIsKYCd,
+    userWalletNetwork,
 }) => {
     const classes = useStyles();
     return (
@@ -149,7 +150,11 @@ const LendTable = ({
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(row.wallet, row.unit)}
+                                        {formatNumber(
+                                            row.wallet,
+                                            row.unit,
+                                            userWalletNetwork
+                                        )}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -166,7 +171,11 @@ const LendTable = ({
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(row.liquidity, row.unit)}
+                                        {formatNumber(
+                                            row.liquidity,
+                                            row.unit,
+                                            userWalletNetwork
+                                        )}
                                     </Typography>
                                     <Typography
                                         variant="body2"

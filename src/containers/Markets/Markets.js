@@ -1,5 +1,6 @@
 // Section 1: React/Redux low level imports
 import React from "react";
+import { useSelector } from "react-redux";
 
 // Section 2: internal imports
 import Markets from "components/Markets/Markets";
@@ -9,6 +10,7 @@ import useFetchMarkets from "hooks/useFetchMarkets";
 import { format_str_to_kmb } from "utils/ui";
 
 // Section 3: Selectors
+import { walletNetwork } from "redux/selectors/data/onboard";
 
 // Section 4: Container body
 const MarketsContainer = () => {
@@ -18,6 +20,8 @@ const MarketsContainer = () => {
         borrowArray,
         calculationsTotals,
     } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
+
+    const userWalletNetwork = useSelector(walletNetwork);
 
     const totalBorrowedContent = `$${
         calculationsTotals && calculationsTotals.totalBorrowBalanceUSD
@@ -49,6 +53,7 @@ const MarketsContainer = () => {
             totalBorrowedContent={totalBorrowedContent}
             collateralRatioContent={collateralRatioContent}
             totalDepositsContent={totalDepositsContent}
+            userWalletNetwork={userWalletNetwork}
         />
     );
 };
