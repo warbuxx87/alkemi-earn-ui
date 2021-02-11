@@ -38,6 +38,9 @@ const token2icon = {
     ETH: ETH,
 };
 
+// This is used in formatNumber and formatStringNumber below, if the currentnetwork id is equal to this variable, it's going to force values display to have 2 decimal places
+const MAINNET_NETWORK_ID = 1;
+
 export const getTokenIcon = (symbol) => {
     const icon = token2icon[symbol];
     return icon;
@@ -97,38 +100,46 @@ export const formatNumber = (value, unit, userWalletNetwork) => {
         case "USDC":
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits:
-                    userWalletNetwork === 4 ? maxDecimals : 6,
+                    userWalletNetwork === MAINNET_NETWORK_ID ? maxDecimals : 6,
                 minimumFractionDigits: 2,
             }).format(wei);
         case "WETH":
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits:
-                    userWalletNetwork === 4 ? maxDecimals : 18,
+                    userWalletNetwork === MAINNET_NETWORK_ID ? maxDecimals : 18,
                 minimumFractionDigits:
-                    userWalletNetwork === 4 ? minDecimals : 4,
+                    userWalletNetwork === MAINNET_NETWORK_ID ? minDecimals : 4,
             }).format(wei);
         case "WBTC":
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits:
-                    userWalletNetwork === 4 ? maxDecimals : 8,
+                    userWalletNetwork === MAINNET_NETWORK_ID ? maxDecimals : 8,
                 minimumFractionDigits:
-                    userWalletNetwork === 4 ? minDecimals : 4,
+                    userWalletNetwork === MAINNET_NETWORK_ID ? minDecimals : 4,
             }).format(wei);
         default:
             return new Intl.NumberFormat("en-es", {
                 maximumFractionDigits:
-                    userWalletNetwork === 4 ? maxDecimals : 18,
+                    userWalletNetwork === MAINNET_NETWORK_ID ? maxDecimals : 18,
                 minimumFractionDigits: 2,
             }).format(wei);
     }
 };
 
 // For the string representation of numbers
-// Returns either the number itself or with a precise number of decimals (2)
-export const formatStringNumber = (value, unit = null, userWalletNetwork) => {
-    if (userWalletNetwork === 4) {
+// Returns either the number or with a precise number of decimals (2) or with another preferred number of decimal places
+export const formatStringNumber = (
+    value,
+    unit = null,
+    userWalletNetwork,
+    preferredDecimalsPlaces
+) => {
+    if (userWalletNetwork === MAINNET_NETWORK_ID) {
         let bigValue = Big(value);
         return bigValue.toFixed(2);
+    } else if (preferredDecimalsPlaces !== undefined) {
+        let bigValue = Big(value);
+        return bigValue.toFixed(preferredDecimalsPlaces);
     } else {
         return value;
     }
