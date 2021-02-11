@@ -1,3 +1,18 @@
+# [1.13.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.12.2...v1.13.0) (2021-02-11)
+
+
+### Bug Fixes
+
+* change env config to mainnet UI-424 ([10ee0b4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/10ee0b4e6d5340a02090adf8b96634485b7d3914))
+* proper number parsing of env var UI-424 ([3355e98](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3355e982f3e74651d1482985caa427ccb7f9c486))
+
+
+### Features
+
+* add decimals points enforcing to markets UI-424 ([3de312a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3de312a0fa3468ab7d77f263556ddc382338ee03))
+* display decimal places depending on config network UI-424 ([25539ca](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/25539ca4a678bed18453f1a83969e3ca18b33a70))
+* display number of decimals depending on network UI-424 ([b52d0b8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b52d0b851bcc244b011483ac4168dee314e41d75))
+
 ## [1.12.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.12.1...v1.12.2) (2021-02-05)
 
 
