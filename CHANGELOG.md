@@ -1,3 +1,10 @@
+## [1.13.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.0...v1.13.1) (2021-02-22)
+
+
+### Bug Fixes
+
+* change weth address to latest for mainnet UI-426 ([20444cf](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/20444cfbc2cf36acd33e383690f601ac5d7e12f3))
+
 # [1.13.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.12.2...v1.13.0) (2021-02-11)
 
 
