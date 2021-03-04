@@ -19,13 +19,14 @@ import {
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
-import { walletAddress } from "redux/selectors/data/onboard";
+import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
 const DrawerAllocateContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
+    const userWalletNetwork = useSelector(walletNetwork);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -106,7 +107,11 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
             setAmount={onSetAmount}
             mainTitle={`Mint New ${asset.unit} Tokens`}
             balanceValue={`0.00`}
-            amountValue={`Wallet: ${formatNumber(asset.wallet, asset.unit)}`}
+            amountValue={`Wallet: ${formatNumber(
+                asset.wallet,
+                asset.unit,
+                userWalletNetwork
+            )}`}
             walletIsKYCd={walletIsKYCd}
         />
     );

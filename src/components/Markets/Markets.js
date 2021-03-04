@@ -50,6 +50,7 @@ const Markets = ({
     totalBorrowedContent,
     collateralRatioContent,
     totalDepositsContent,
+    userWalletNetwork,
 }) => {
     const classes = useStyles();
 
@@ -136,7 +137,10 @@ const Markets = ({
                         </Card>
                     </Grid>
                     <Grid item lg={12} sm={12} xs={12}>
-                        <MarketsTable marketsData={marketsData} />
+                        <MarketsTable
+                            marketsData={marketsData}
+                            userWalletNetwork={userWalletNetwork}
+                        />
                     </Grid>
                 </Grid>
             </Box>

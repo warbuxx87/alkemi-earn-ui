@@ -72,6 +72,30 @@ Object {
         },
       },
     },
+    "MuiPickersCalendarHeader": Object {
+      "dayLabel": Object {
+        "color": "#a7a7a7",
+      },
+    },
+    "MuiPickersDay": Object {
+      "current": Object {
+        "backgroundColor": "#ffffff14",
+        "color": "#ffffff",
+        "fontWeight": "600",
+      },
+      "day": Object {
+        "color": "#ffffff",
+      },
+      "daySelected": Object {
+        "backgroundColor": "#ffffff",
+        "color": "#000000",
+      },
+    },
+    "MuiPopover": Object {
+      "paper": Object {
+        "border": "solid 1px #080808",
+      },
+    },
     "MuiToolbar": Object {
       "root": Object {
         "disableGutters": "true",

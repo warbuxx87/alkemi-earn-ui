@@ -29,9 +29,10 @@ import { ExternalLink as LinkIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 
-import { openEtherScan, getTokenIcon } from "utils/ui";
+import { openEtherScan, getTokenIcon, formatStringNumber } from "utils/ui";
 
 import HistoryTableCell from "components/UI/TableCell";
+import Reportpop from "components/UI/DateSelectPopper";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -117,6 +118,8 @@ const History = ({
     txError,
     currentNetworkName,
     blocksData,
+    walletConnected,
+    userWalletNetwork,
     ...rest
 }) => {
     const classes = useStyles();
@@ -228,6 +231,7 @@ const History = ({
                     <Box display="flex" alignItems="center">
                         <TextField
                             fullWidth
+                            size="small"
                             label="Asset"
                             name="asset"
                             className={classes.assetField}
@@ -236,6 +240,15 @@ const History = ({
                             value={values.asset}
                             variant="outlined"
                             color="secondary"
+                            SelectProps={{
+                                MenuProps: {
+                                    anchorOrigin: {
+                                        vertical: "bottom",
+                                        horizontal: "left",
+                                    },
+                                    getContentAnchorEl: null,
+                                },
+                            }}
                         >
                             {assetName.map((category) => (
                                 <MenuItem key={category.id} value={category.id}>
@@ -245,6 +258,7 @@ const History = ({
                         </TextField>
                         <TextField
                             fullWidth
+                            size="small"
                             label="Account"
                             name="account"
                             className={classes.eventField}
@@ -253,6 +267,15 @@ const History = ({
                             value={values.action}
                             variant="outlined"
                             color="secondary"
+                            SelectProps={{
+                                MenuProps: {
+                                    anchorOrigin: {
+                                        vertical: "bottom",
+                                        horizontal: "left",
+                                    },
+                                    getContentAnchorEl: null,
+                                },
+                            }}
                         >
                             {accountType.map((category) => (
                                 <MenuItem key={category.id} value={category.id}>
@@ -263,6 +286,7 @@ const History = ({
                         <Box flexGrow={1} />
                         <TextField
                             fullWidth
+                            size="small"
                             label="Sort By"
                             name="sortBy"
                             className={classes.sortField}
@@ -271,6 +295,15 @@ const History = ({
                             value={values.sortBy}
                             variant="outlined"
                             color="secondary"
+                            SelectProps={{
+                                MenuProps: {
+                                    anchorOrigin: {
+                                        vertical: "bottom",
+                                        horizontal: "left",
+                                    },
+                                    getContentAnchorEl: null,
+                                },
+                            }}
                         >
                             {sortOptions.map((category) => (
                                 <MenuItem
@@ -281,6 +314,11 @@ const History = ({
                                 </MenuItem>
                             ))}
                         </TextField>
+                        <Reportpop
+                            address={address}
+                            walletConnected={walletConnected}
+                            currentNetworkName={currentNetworkName}
+                        />
                     </Box>
                 </Box>
                 <Table size="small" className="whitespace-pre">
@@ -417,7 +455,11 @@ const History = ({
                                             variant="body1"
                                             color="textPrimary"
                                         >
-                                            {item.amount}
+                                            {formatStringNumber(
+                                                item.amount,
+                                                null,
+                                                userWalletNetwork
+                                            )}
                                         </Typography>
                                     </HistoryTableCell>
                                     <HistoryTableCell
@@ -428,7 +470,11 @@ const History = ({
                                             variant="body1"
                                             color="textPrimary"
                                         >
-                                            {item.newBalance}
+                                            {formatStringNumber(
+                                                item.newBalance,
+                                                null,
+                                                userWalletNetwork
+                                            )}
                                         </Typography>
                                     </HistoryTableCell>
                                     <HistoryTableCell

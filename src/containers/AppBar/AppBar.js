@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 
 // Section 2: internal imports
 import useOnboard from "hooks/useOnboard";
+import useWatchEtherBalance from "hooks/useWatchEtherBalance";
 
 // Section 3: Selectors
 import { isWalletConnected, walletAddress } from "redux/selectors/data/onboard";
@@ -30,6 +31,7 @@ const locationToTitles = {
 // Section 5: Code Container
 const AppBarContainer = () => {
     const { onConnect, onReset } = useOnboard();
+    useWatchEtherBalance();
 
     const walletConnected = useSelector(isWalletConnected);
     const currentAddress = useSelector(walletAddress);

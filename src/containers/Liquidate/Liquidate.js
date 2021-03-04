@@ -8,14 +8,21 @@ import useFetchLiquidations from "hooks/useFetchLiquidations";
 
 // Section 3: Selectors
 import { getLiquidationsList } from "redux/selectors/data/liquidations";
+import { walletNetwork } from "redux/selectors/data/onboard";
 
 // Section 4: Container body
 const LiquidateContainer = () => {
     useFetchLiquidations(true); // retrieve liquidations
 
     const liquidationsList = useSelector(getLiquidationsList);
+    const userWalletNetwork = useSelector(walletNetwork);
 
-    return <Liquidate liquidationsList={liquidationsList} />;
+    return (
+        <Liquidate
+            liquidationsList={liquidationsList}
+            userWalletNetwork={userWalletNetwork}
+        />
+    );
 };
 
 // Section 5: Exports

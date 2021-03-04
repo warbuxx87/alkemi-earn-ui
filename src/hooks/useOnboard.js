@@ -140,20 +140,9 @@ export default () => {
 
                     currentWalletNetwork = currentState.network;
 
-                    currentWalletBalance = currentState.balance;
-
-                    // if (currentWalletBalance !== undefined) {
-                    //     currentWalletBalance = currentWalletBalance.toNumber;
-                    // }
-
-                    // console.log("eth_balance", currentWalletBalance);
-
                     // The order matters here
                     dispatch(setWalletNetwork(currentWalletNetwork));
                     dispatch(setWalletAddress(currentWalletAddress));
-                    dispatch(setWalletBalance(currentWalletBalance));
-                    dispatch(setEthLendBalance(currentWalletBalance));
-                    dispatch(setEthBorrowBalance(currentWalletBalance));
                 }
 
                 // account connected
@@ -250,9 +239,6 @@ export default () => {
             const readyToTransact = await onboard.walletCheck();
             dispatch(setWalletNetwork(currentState.network));
             dispatch(setWalletAddress(currentState.address));
-            dispatch(setWalletBalance(currentState.balance));
-            dispatch(setEthLendBalance(currentState.balance));
-            dispatch(setEthBorrowBalance(currentState.balance));
             dispatch(setWalletConnected(readyToTransact));
 
             if (!readyToTransact) {

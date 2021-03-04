@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const TableMarkets = ({ marketsData }) => {
+const TableMarkets = ({ marketsData, userWalletNetwork }) => {
     const classes = useStyles();
 
     const [toggleUSD, setToggleUSD] = React.useState(false);
@@ -258,7 +258,8 @@ const TableMarkets = ({ marketsData }) => {
                                                 color="textPrimary"
                                             >
                                                 {format_str_to_percent(
-                                                    item.supplyAPR
+                                                    item.supplyAPR,
+                                                    userWalletNetwork
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>
@@ -269,7 +270,8 @@ const TableMarkets = ({ marketsData }) => {
                                                 color="textPrimary"
                                             >
                                                 {format_str_to_percent(
-                                                    item.borrowAPR
+                                                    item.borrowAPR,
+                                                    userWalletNetwork
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>
@@ -280,7 +282,8 @@ const TableMarkets = ({ marketsData }) => {
                                                 color="textPrimary"
                                             >
                                                 {format_str_to_percent(
-                                                    item.utilizationRate * 1
+                                                    item.utilizationRate * 1,
+                                                    userWalletNetwork
                                                 )}
                                             </Typography>
                                         </MarketsTableCell>

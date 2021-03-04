@@ -23,7 +23,7 @@ import LiquidateButton from "containers/Liquidate/DrawerLiquidate";
 import LiquidTableCell from "components/UI/TableCell";
 import LiquidationChart from "components/Liquidate/Chart";
 
-import { addressParser } from "utils/ui";
+import { addressParser, formatStringNumber } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -47,7 +47,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Liquidate = ({ className, liquidationsList, ...rest }) => {
+const Liquidate = ({
+    className,
+    liquidationsList,
+    userWalletNetwork,
+    ...rest
+}) => {
     const classes = useStyles();
     const [rowsPerPage, setRowsPerPage] = React.useState(8);
     const [page, setPage] = React.useState(0);
@@ -171,7 +176,10 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                                     variant="h6"
                                                     color="textPrimary"
                                                 >
-                                                    {item.totalSupplyETH.toFixed(
+                                                    {formatStringNumber(
+                                                        item.totalSupplyETH,
+                                                        null,
+                                                        userWalletNetwork,
                                                         6
                                                     )}{" "}
                                                     ETH
@@ -180,7 +188,12 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                                     variant="body2"
                                                     color="textSecondary"
                                                 >
-                                                    ${item.totalSupplyUSD}
+                                                    $
+                                                    {formatStringNumber(
+                                                        item.totalSupplyUSD,
+                                                        null,
+                                                        userWalletNetwork
+                                                    )}
                                                 </Typography>
                                             </Box>
                                         </Box>
@@ -189,7 +202,13 @@ const Liquidate = ({ className, liquidationsList, ...rest }) => {
                                         className={classes.cell}
                                         align="left"
                                     >
-                                        {item.collateralRate.toFixed(4)}%
+                                        {formatStringNumber(
+                                            item.collateralRate,
+                                            null,
+                                            userWalletNetwork,
+                                            4
+                                        )}
+                                        %
                                     </LiquidTableCell>
                                     <LiquidTableCell className={classes.cell}>
                                         {addressParser(item.address)}
