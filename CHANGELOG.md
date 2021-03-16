@@ -1,3 +1,10 @@
+## [1.13.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.1...v1.13.2) (2021-03-15)
+
+
+### Bug Fixes
+
+* allow withdraw without KYC UI-433 ([05b4ef4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/05b4ef40c55686634ab8642da36902dbe1f56a7d))
+
 ## [1.13.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.0...v1.13.1) (2021-02-22)
 
 

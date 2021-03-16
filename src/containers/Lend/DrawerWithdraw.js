@@ -24,14 +24,13 @@ import DrizzleContext from "utils/DrizzleContext";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+import { getTransactions } from "redux/selectors/status";
 
 const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
-    const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
@@ -147,7 +146,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
                 asset.unit,
                 userWalletNetwork
             )}`}
-            walletIsKYCd={walletIsKYCd}
+            walletIsKYCd={true} // Even if the wallet is not KYC'd, the user is able to withdraw their funds
         />
     );
 };
