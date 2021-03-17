@@ -30,7 +30,7 @@ const topics = {
         "0x0938b1e79e1fd5816573487e5bd6a1e1329ec26f94f401a7b49d4b71d479657a",
     failure:
         "0x45b96fe442630264581b197e84bbada861235052c5a1aadfff9ea4e40a969aa0",
-};
+}; // TODO, manage token approvals example: https://rinkeby.etherscan.io/tx/0x32105e1747a31da8e35bbb115a3bb01223bddb04d758340218300d8e7c7aa2eb#eventlog
 
 // define data structure
 const contractInput = [
