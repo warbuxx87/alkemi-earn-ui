@@ -9,6 +9,7 @@ import {
 
 // 3. constants imports
 
+// TODO discard this file
 const txHandler = (store) => (next) => (action) => {
     if (!action) next(action); // could be replaced with a simple return since we don't really have an action
 

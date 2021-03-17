@@ -4,6 +4,7 @@ import {
     SET_WALLET_ADDRESS,
     SET_WALLET_NETWORK,
     SET_WALLET_BALANCE,
+    SET_WALLET_NAME,
 } from "redux/actions/status/onboard";
 
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
@@ -41,6 +42,12 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 walletBalance: action.payload.walletBalance,
+            };
+
+        case SET_WALLET_NAME:
+            return {
+                ...state,
+                walletName: action.payload.walletName,
             };
 
         default:

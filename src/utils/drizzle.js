@@ -4,6 +4,10 @@ import address from "constants/address_map.json";
 import constants from "constants/constant.json";
 import { initAssetContract } from "utils/contracts";
 
+// testing web3 sendTx
+import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
+import Web3 from "web3";
+
 // Approve Unlimited amount of ERC20 tokens to interact with protocol
 export const handle_approve_click = async ({
     drizzle,
@@ -58,15 +62,81 @@ export const handle_allocate_click = async ({
     return sendAllocate;
 };
 
+// generic MoneyMarketContract tx handler
+export const handle_moneymarket_tx = async ({
+    userWalletNetwork,
+    userWalletAddress,
+    userWalletName,
+    amount,
+    asset,
+    shouldSendMax,
+    handleETHCallsSeparately,
+    selectedMethod,
+}) => {
+    return new Promise(async (resolve, reject) => {
+        if (!(await readyToTransact()))
+            throw new Error("not ready to transact");
+
+        const myAccount = userWalletAddress;
+        const network = constants.network_type[userWalletNetwork];
+        const token_address = address[network][`address_${asset.unit}`];
+
+        let weiAmount = amount;
+        if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
+
+        const unit = asset.unit;
+
+        let sendTx = {};
+
+        if (
+            handleETHCallsSeparately === true &&
+            (unit === "WETH" || unit === "ETH")
+        ) {
+        } else {
+            const web3 = new Web3(window.currentlyUsedProvider); // could be replaced by window.currentlyUsedProvider
+
+            const address_MoneyMarket = address[network].address_MoneyMarket;
+
+            const MoneyMarketContract = new web3.eth.Contract(
+                MoneyMarket_ABI,
+                address_MoneyMarket
+            );
+
+            const getData = MoneyMarketContract.methods[selectedMethod](
+                token_address,
+                weiAmount
+            ).encodeABI();
+
+            web3.eth.sendTransaction(
+                { to: address_MoneyMarket, from: myAccount, data: getData },
+                (error, receipt) => {
+                    if (error) console.error("error: ", error);
+                    else {
+                        console.log("receipt: ", receipt);
+
+                        sendTx.txHash = receipt; // this is NOT necessarily the tx hash on the blockchain (For metamask yes, for walletconnect it's the safetx)
+                        sendTx.userWalletName = userWalletName;
+
+                        resolve(sendTx);
+                    }
+                }
+            );
+        }
+    });
+};
+
 // Deposit Tokens to Lending Pool
 export const handle_deposit_click = async ({
     drizzle,
     userWalletNetwork,
     userWalletAddress,
+    userWalletName,
     amount,
     asset,
     shouldSendMax,
 }) => {
+    // console.log('userWalletName: ', userWalletName)
+
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
@@ -88,13 +158,70 @@ export const handle_deposit_click = async ({
             }
         );
     } else {
-        sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
-            token_address,
-            weiAmount,
-            {
-                from: myAccount,
+        // sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
+        //     token_address,
+        //     weiAmount,
+        //     {
+        //         from: myAccount,
+        //     }
+        // );
+
+        const address_MoneyMarket = address[network].address_MoneyMarket;
+        const web3 = new Web3(window.currentlyUsedProvider);
+
+        var myContract = new web3.eth.Contract(
+            MoneyMarket_ABI,
+            address_MoneyMarket
+        );
+        // suppose you want to call a function named myFunction of myContract
+        var getData = myContract.methods
+            .supply(token_address, weiAmount)
+            .encodeABI();
+        // finally pass this data parameter to send Transaction
+
+        console.log("sending tx");
+        let recei = null;
+        web3.eth.sendTransaction(
+            { to: address_MoneyMarket, from: myAccount, data: getData },
+            (error, receipt) => {
+                if (error) console.error("error: ", error);
+                else {
+                    console.log("receipt: ", receipt);
+
+                    //   recei = receipt
+
+                    //   fetch(`https://safe-transaction.rinkeby.gnosis.io/api/v1/multisig-transactions/${receipt}`)
+                    //     .then((res) => {
+                    //         console.log('1st res: ', res)
+                    //         return res.json();
+                    //     })
+                    //     .then((data) => {
+                    //         console.log('1st fetch data: ', data)
+                    //     });
+                }
             }
         );
+
+        // For faster processing of walletconnect calls, use subscribe
+        // var subscription = web3.eth.subscribe('logs', {
+        // address: myAccount,
+        // }, async function(error, result){
+
+        // let counter = 0
+        // let setInter = setInterval(function(){ fff() }, 500);
+
+        // const fff = () => {
+        //     fetch(`https://safe-transaction.rinkeby.gnosis.io/api/v1/multisig-transactions/${recei}`)
+        //     .then((res) => {
+        //         // console.log('2nd res: ', res)
+        //         return res.json();
+        //     })
+        //     .then((data) => {
+        //         counter += 500
+        //         console.log('2nd fetch data: ', data)
+        //         console.log('counter: ', counter, 'ms')
+        //     });
+        // }
     }
 
     return sendDeposit;

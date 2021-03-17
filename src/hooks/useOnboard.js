@@ -14,6 +14,7 @@ import {
     setWalletAddress,
     setWalletNetwork,
     setWalletBalance,
+    setWalletName,
 } from "redux/actions/status/onboard";
 
 import { setEthLendBalance } from "redux/actions/data/lend";
@@ -37,7 +38,6 @@ export default () => {
 
     const drizzle = useContext(DrizzleContext);
     const currentState = onboard.getState();
-    //  console.log("onboard currentstate", currentState);
 
     const walletConnected = useSelector(isWalletConnected);
 
@@ -72,6 +72,9 @@ export default () => {
                         dispatch(setWalletNetwork(currentState.network));
 
                         dispatch(setWalletAddress(currentState.address));
+
+                        if (currentState.wallet && currentState.wallet.name)
+                            dispatch(setWalletName(currentState.wallet.name));
                     }
 
                     dispatch(setWalletConnected(readyToTransact));
@@ -143,6 +146,9 @@ export default () => {
                     // The order matters here
                     dispatch(setWalletNetwork(currentWalletNetwork));
                     dispatch(setWalletAddress(currentWalletAddress));
+
+                    if (currentState.wallet && currentState.wallet.name)
+                        dispatch(setWalletName(currentState.wallet.name));
                 }
 
                 // account connected
@@ -237,9 +243,14 @@ export default () => {
             deleteCurrentData();
 
             const readyToTransact = await onboard.walletCheck();
+
             dispatch(setWalletNetwork(currentState.network));
             dispatch(setWalletAddress(currentState.address));
+
             dispatch(setWalletConnected(readyToTransact));
+
+            if (currentState.wallet && currentState.wallet.name)
+                dispatch(setWalletName(currentState.wallet.name));
 
             if (!readyToTransact) {
                 // TODO: if it is not ready -> show some warning

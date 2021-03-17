@@ -43,6 +43,18 @@ export const setWalletNetwork = (walletNetwork) => ({
 });
 
 // Declare action type as a constant
+export const SET_WALLET_NAME = "SET_WALLET_NAME";
+
+// Declare action creator
+export const setWalletName = (walletName) => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: SET_WALLET_NAME,
+    payload: {
+        walletName,
+    },
+});
+
+// Declare action type as a constant
 export const SET_WALLET_BALANCE = "SET_WALLET_BALANCE";
 
 // Declare action creator

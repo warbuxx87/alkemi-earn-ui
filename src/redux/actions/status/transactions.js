@@ -7,6 +7,7 @@ import {
     handle_repay_click,
     handle_borrow_click,
     handle_approve_click,
+    handle_moneymarket_tx,
 } from "utils/drizzle";
 
 import constants from "constants/constant.json";
@@ -19,11 +20,11 @@ import { triggerToastDisplay } from "utils/notify";
 //                                            //
 
 export const TRANSACTION_TRIGGERED = "TRANSACTION_TRIGGERED";
-export const transactionTriggered = (transactionLocalId, stackId, type) => ({
+export const transactionTriggered = ({ assetUnit, txData, type }) => ({
     type: TRANSACTION_TRIGGERED,
     payload: {
-        stackId,
-        transactionLocalId, // this is NOT the tx hash on the blockchain, just a unique identifier locally (the type also helps as a second id when checking)
+        txData,
+        assetUnit,
         type,
     },
 });
@@ -40,10 +41,12 @@ export const transactionSent = (stackId, txHash) => {
 };
 
 export const TRANSACTION_RESOLVED = "TRANSACTION_RESOLVED";
-export const transactionResolved = (txHash) => ({
+export const transactionResolved = ({ txHash, assetUnit, type }) => ({
     type: TRANSACTION_RESOLVED,
     payload: {
         txHash,
+        assetUnit,
+        type,
     },
 });
 
@@ -59,7 +62,7 @@ export const transactionCanceled = (txHash) => ({
 // Section 3: Action dispatch methods and async funcs
 
 const actionToCall = {
-    deposit: handle_deposit_click,
+    supply: handle_moneymarket_tx,
     allocate: handle_allocate_click,
     withdraw: handle_withdraw_click,
     repay: handle_repay_click,
@@ -71,6 +74,7 @@ export const onTx = ({
     drizzle,
     userWalletNetwork,
     userWalletAddress,
+    userWalletName,
     amount,
     asset,
     shouldSendMax,
@@ -83,12 +87,17 @@ export const onTx = ({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
+        userWalletName,
         amount: amountToSend,
         asset,
         shouldSendMax,
+        handleETHCallsSeparately: true, // todo make generic
+        selectedMethod: type,
     })
-        .then((stackId) => {
-            dispatch(transactionTriggered(asset.unit, stackId, type));
+        .then((txData) => {
+            dispatch(
+                transactionTriggered({ assetUnit: asset.unit, txData, type })
+            );
         })
         .catch((error) => {
             triggerToastDisplay({
