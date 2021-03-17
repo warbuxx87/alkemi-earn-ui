@@ -15,6 +15,8 @@ import { transactionResolved } from "redux/actions/status/transactions";
 
 import addressMap from "constants/address_map.json";
 
+import { triggerToastDisplay } from "utils/notify";
+
 // TODO move constants to config files + TODO: use the same naming
 const topics = {
     supply:
@@ -53,6 +55,11 @@ const contractInput = [
         name: "newBalance",
     },
 ];
+
+const messagePerType = {
+    supply: "Supply Received",
+    borrow: "Borrow Taken",
+};
 
 function getKeyByValue(object, value) {
     return Object.keys(object).find((key) => {
@@ -148,6 +155,19 @@ export default () => {
                                                 type: resultType,
                                             })
                                         );
+
+                                        triggerToastDisplay({
+                                            toastMessageVariant: "success",
+                                            displayMessage:
+                                                "Transaction Successful",
+                                            displaySecondaryMessage:
+                                                messagePerType[
+                                                    resultType ||
+                                                        "Consult the transaction hash"
+                                                ],
+                                            currentNetworkName,
+                                            txHash: tx.transactionHash,
+                                        });
                                     }
                                 }
                             }

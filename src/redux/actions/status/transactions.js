@@ -99,6 +99,12 @@ export const onTx = ({
             dispatch(
                 transactionTriggered({ assetUnit: asset.unit, txData, type })
             );
+
+            triggerToastDisplay({
+                toastMessageVariant: "processing",
+                displayMessage: "Transaction pending...",
+                displaySecondaryMessage: "This might take a few minutes",
+            });
         })
         .catch((error) => {
             triggerToastDisplay({
