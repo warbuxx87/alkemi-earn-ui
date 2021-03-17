@@ -88,40 +88,43 @@ export const handle_moneymarket_tx = async ({
 
         let sendTx = {};
 
-        if (
+        const sendValue =
             handleETHCallsSeparately === true &&
-            (unit === "WETH" || unit === "ETH")
-        ) {
-        } else {
-            const web3 = new Web3(window.currentlyUsedProvider); // could be replaced by window.currentlyUsedProvider
+            (unit === "WETH" || unit === "ETH"); // For ETHs deposits/borrow are handled differently
 
-            const address_MoneyMarket = address[network].address_MoneyMarket;
+        const web3 = new Web3(window.currentlyUsedProvider); // could be replaced by window.currentlyUsedProvider
 
-            const MoneyMarketContract = new web3.eth.Contract(
-                MoneyMarket_ABI,
-                address_MoneyMarket
-            );
+        const address_MoneyMarket = address[network].address_MoneyMarket;
 
-            const getData = MoneyMarketContract.methods[selectedMethod](
-                token_address,
-                weiAmount
-            ).encodeABI();
+        const MoneyMarketContract = new web3.eth.Contract(
+            MoneyMarket_ABI,
+            address_MoneyMarket
+        );
 
-            web3.eth.sendTransaction(
-                { to: address_MoneyMarket, from: myAccount, data: getData },
-                (error, receipt) => {
-                    if (error) console.error("error: ", error);
-                    else {
-                        console.log("receipt: ", receipt);
+        const getData = MoneyMarketContract.methods[selectedMethod](
+            token_address,
+            weiAmount
+        ).encodeABI();
 
-                        sendTx.txHash = receipt; // this is NOT necessarily the tx hash on the blockchain (For metamask yes, for walletconnect it's the safetx)
-                        sendTx.userWalletName = userWalletName;
+        const dataToSend = {
+            to: address_MoneyMarket,
+            from: myAccount,
+            data: getData,
+        };
 
-                        resolve(sendTx);
-                    }
-                }
-            );
-        }
+        if (sendValue) dataToSend.value = weiAmount;
+
+        web3.eth.sendTransaction(dataToSend, (error, receipt) => {
+            if (error) console.error("error: ", error);
+            else {
+                console.log("receipt: ", receipt);
+
+                sendTx.txHash = receipt; // this is NOT necessarily the tx hash on the blockchain (For metamask yes, for walletconnect it's the safetx)
+                sendTx.userWalletName = userWalletName;
+
+                resolve(sendTx);
+            }
+        });
     });
 };
 

@@ -168,7 +168,7 @@ export default () => {
         }
 
         return () => {
-            if (watcher) watcher.unsubscribe(); // TODO could be improved
+            if (watcher) watcher.unsubscribe();
         };
     }, [
         userWalletAddress,

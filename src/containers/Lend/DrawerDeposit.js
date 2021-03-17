@@ -172,7 +172,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
         else setIsProcessing(false);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [txs]);
+    }, [txs, asset.unit]);
 
     return (
         <>
