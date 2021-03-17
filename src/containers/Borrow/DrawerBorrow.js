@@ -76,7 +76,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
+                aTx.assetUnit === asset.unit &&
                 aTx.type === "borrow" &&
                 aTx.processing === true
             );
@@ -86,7 +86,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
         else setIsProcessing(false);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [txs]);
+    }, [txs, asset.unit]);
 
     React.useEffect(() => {
         const checkValidity = async () => {

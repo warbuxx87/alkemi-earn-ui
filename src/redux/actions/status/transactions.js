@@ -62,11 +62,12 @@ export const transactionCanceled = (txHash) => ({
 // Section 3: Action dispatch methods and async funcs
 
 const actionToCall = {
-    supply: handle_moneymarket_tx,
+    supply: handle_moneymarket_tx, // Deposit Tokens to Lending Pool
+    borrow: handle_moneymarket_tx,
+
     allocate: handle_allocate_click,
     withdraw: handle_withdraw_click,
     repay: handle_repay_click,
-    borrow: handle_borrow_click,
     approve: handle_approve_click,
 };
 
@@ -91,7 +92,7 @@ export const onTx = ({
         amount: amountToSend,
         asset,
         shouldSendMax,
-        handleETHCallsSeparately: true, // todo make generic
+        handleETHCallsSeparately: type.includes["supply"], // todo make generic
         selectedMethod: type,
     })
         .then((txData) => {

@@ -72,22 +72,20 @@ export default () => {
     useEffect(() => {
         let watcher;
 
-        const options = {
-            address: ["0x9296F7df6A25053A9816db9166a4A8bbc34287B3"], // TODO: use config
-        };
-
-        console.log("running use watch txs");
-
         const watchEth = () => {
+            const options = {
+                address: addressMap[currentNetworkName].address_MoneyMarket,
+            };
+
             watcher = drizzle.web3.eth.subscribe(
                 "logs",
                 options,
                 function (error, tx) {
                     if (error || tx == null) {
-                        console.log(
-                            "Error when watching incoming transactions: ",
-                            error
-                        );
+                        // console.log(
+                        //     "Error when watching incoming transactions: ",
+                        //     error
+                        // );
                         return;
                     }
 
@@ -162,7 +160,9 @@ export default () => {
         if (
             walletConnected &&
             userWalletAddress !== undefined &&
-            userWalletAddress !== null
+            userWalletAddress != null &&
+            currentNetworkName !== undefined &&
+            currentNetworkName != null
         ) {
             watchEth();
         }
