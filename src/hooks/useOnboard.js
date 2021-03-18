@@ -87,7 +87,12 @@ export default () => {
         };
 
         checkIfPreviouslySelectedWallet();
-    }, [currentState.address, currentState.network, dispatch]);
+    }, [
+        currentState.address,
+        currentState.network,
+        currentState.wallet,
+        dispatch,
+    ]);
 
     const resetStoreData = useCallback(() => {
         dispatch(resetLendData());
@@ -233,6 +238,7 @@ export default () => {
         currentState.address,
         currentState.network,
         currentState.balance,
+        currentState.wallet,
         userWalletBalance,
     ]);
 

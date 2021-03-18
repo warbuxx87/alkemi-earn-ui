@@ -73,7 +73,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
+                aTx.assetUnit === asset.unit &&
                 aTx.type === "withdraw" &&
                 aTx.processing === true
             );
@@ -81,9 +81,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
 
         if (tx && tx.length > 0) setIsProcessing(tx[0].processing);
         else setIsProcessing(false);
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [txs]);
+    }, [txs, asset.unit]);
 
     React.useEffect(() => {
         const checkValidity = async () => {

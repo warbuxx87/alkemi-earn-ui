@@ -1,13 +1,9 @@
 // Section 1: Utilities imports and low level imports
 
 import {
-    handle_allocate_click,
-    handle_deposit_click,
-    handle_withdraw_click,
-    handle_repay_click,
-    handle_borrow_click,
-    handle_approve_click,
     handle_moneymarket_tx,
+    handle_approve_click,
+    handle_allocate_click,
 } from "utils/drizzle";
 
 import constants from "constants/constant.json";
@@ -64,10 +60,10 @@ export const transactionCanceled = (txHash) => ({
 const actionToCall = {
     supply: handle_moneymarket_tx, // Deposit Tokens to Lending Pool
     borrow: handle_moneymarket_tx,
+    withdraw: handle_moneymarket_tx, // Withdraw tokens from lending pool
+    repayBorrow: handle_moneymarket_tx, // Repay Borrowed Tokens from wallet back to Lending Pool
 
     allocate: handle_allocate_click,
-    withdraw: handle_withdraw_click,
-    repay: handle_repay_click,
     approve: handle_approve_click,
 };
 
@@ -92,7 +88,7 @@ export const onTx = ({
         amount: amountToSend,
         asset,
         shouldSendMax,
-        handleETHCallsSeparately: type.includes["supply"], // todo make generic
+        handleETHCallsSeparately: ["supply", "repayBorrow"].includes(type),
         selectedMethod: type,
     })
         .then((txData) => {

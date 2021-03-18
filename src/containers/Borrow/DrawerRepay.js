@@ -193,17 +193,15 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
-                aTx.type === "repay" &&
+                aTx.assetUnit === asset.unit &&
+                aTx.type === "repayBorrow" &&
                 aTx.processing === true
             );
         });
 
         if (tx && tx.length > 0) setIsProcessing(tx[0].processing);
         else setIsProcessing(false);
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [txs]);
+    }, [txs, asset.unit]);
 
     return (
         <Drawer
@@ -220,7 +218,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                     asset,
                     amount,
                     shouldSendMax,
-                    type: "repay",
+                    type: "repayBorrow",
                 })
             }
             isDoingAction={isProcessing}

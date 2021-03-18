@@ -25,7 +25,8 @@ const topics = {
         "0x56559a17e3aa8ea4b05036eaf31aeaf9fb71fc1b8865b6389647639940bed030",
     borrow:
         "0x6b69190ebbb96f162b04dc222ef96416f9dca9a415b6dd183c79424501113e18",
-    repay: "0x550e7e464126359c6adc43831f011682856b177df6c49c0af6675dd2a063649d",
+    repayBorrow:
+        "0x550e7e464126359c6adc43831f011682856b177df6c49c0af6675dd2a063649d",
     liquidate:
         "0x0938b1e79e1fd5816573487e5bd6a1e1329ec26f94f401a7b49d4b71d479657a",
     failure:
@@ -59,6 +60,13 @@ const contractInput = [
 const messagePerType = {
     supply: "Supply Received",
     borrow: "Borrow Taken",
+    withdraw: "Supply Withdrawn",
+    repayBorrow: "Borrow Repaid",
+
+    liquidate: "Borrow Liquidated",
+
+    approve: "Asset Authorized", // activate
+    allocate: "Tokens Minted", // test network only
 };
 
 function getKeyByValue(object, value) {
@@ -103,7 +111,7 @@ export default () => {
                             topic === topics.supply ||
                             topic === topics.withdraw ||
                             topic === topics.borrow ||
-                            topic === topics.repay
+                            topic === topics.repayBorrow
                         ) {
                             // @dev https://web3js.readthedocs.io/en/v1.2.7/web3-eth-abi.html#id18
                             console.log(
