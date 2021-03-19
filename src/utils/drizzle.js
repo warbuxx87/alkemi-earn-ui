@@ -127,40 +127,66 @@ export const handle_moneymarket_tx = async ({
 };
 
 // Borrow Tokens from Lending Pool
+// TODO: to be merged in transactions (when the other drawers are refactored in UI-359)
 export const handle_liquidate_click = async ({
-    drizzle,
     userWalletNetwork,
     userWalletAddress,
+    userWalletName,
     symbol,
     amount,
     assetCollateral,
     assetBorrow,
     targetAccount,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transact");
-    const myAccount = userWalletAddress;
-    //const network = constants.network_type[userWalletNetwork];
-    const MoneyMarketContract = drizzle.contracts.MoneyMarket;
-    //const token_address = address[network][`address_${symbol}`];
-    let weiAmount = amount.toString();
+    return new Promise(async (resolve, reject) => {
+        if (!(await readyToTransact()))
+            throw new Error("not ready to transact");
+        const myAccount = userWalletAddress;
+        const network = constants.network_type[userWalletNetwork];
 
-    if (weiAmount === "-1") {
-        weiAmount = constants.max_uint;
-    } else {
-        weiAmount = toWei(amount, symbol);
-    }
+        let weiAmount = amount.toString();
 
-    const sendLiquidate = MoneyMarketContract.methods.liquidateBorrow.cacheSend(
-        targetAccount,
-        assetBorrow,
-        assetCollateral,
-        weiAmount,
-        {
-            from: myAccount,
+        if (weiAmount === "-1") {
+            weiAmount = constants.max_uint;
+        } else {
+            weiAmount = toWei(amount, symbol);
         }
-    );
 
-    return sendLiquidate;
+        const web3 = new Web3(window.currentlyUsedProvider); // could be replaced by window.currentlyUsedProvider
+
+        const address_MoneyMarket = address[network].address_MoneyMarket;
+
+        const MoneyMarketContract = new web3.eth.Contract(
+            MoneyMarket_ABI,
+            address_MoneyMarket
+        );
+
+        const getData = MoneyMarketContract.methods["liquidateBorrow"](
+            targetAccount,
+            assetBorrow,
+            assetCollateral,
+            weiAmount
+        ).encodeABI();
+
+        const dataToSend = {
+            to: address_MoneyMarket,
+            from: myAccount,
+            data: getData,
+        };
+
+        web3.eth.sendTransaction(dataToSend, (error, receipt) => {
+            if (error) reject("The transaction was rejected");
+            // TODO: check it errors out properly
+            else {
+                let sendTx = {};
+
+                sendTx.txHash = receipt; // this is NOT necessarily the tx hash on the blockchain (For metamask yes, for walletconnect it's the safetx)
+                sendTx.userWalletName = userWalletName;
+
+                resolve(sendTx);
+            }
+        });
+    });
 };
 
 // Estimate method gas, NOT very reliable, since I noticed different values on metamask, but does the trick for the most part

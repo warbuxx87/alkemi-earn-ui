@@ -103,6 +103,7 @@ export const onLiquidateAction = ({
     targetAccount,
     type,
     liquidationId,
+    userWalletName,
 }) => async (dispatch) => {
     handle_liquidate_click({
         drizzle,
@@ -113,9 +114,18 @@ export const onLiquidateAction = ({
         assetCollateral,
         assetBorrow,
         targetAccount,
+        userWalletName,
     })
-        .then((stackId) => {
-            dispatch(transactionTriggered(liquidationId, stackId, type));
+        .then((txData) => {
+            dispatch(
+                transactionTriggered({ assetUnit: liquidationId, txData, type })
+            ); // TODO: rename assetUnit for clarity as liquidations use ID instead of Symbol/asset.unit
+
+            triggerToastDisplay({
+                toastMessageVariant: "processing",
+                displayMessage: "Transaction pending...",
+                displaySecondaryMessage: "This might take a few minutes",
+            });
         })
         .catch((error) => {
             triggerToastDisplay({

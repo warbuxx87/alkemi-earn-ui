@@ -17,6 +17,7 @@ import { triggerToastDisplay } from "utils/notify";
 
 export const TRANSACTION_TRIGGERED = "TRANSACTION_TRIGGERED";
 export const transactionTriggered = ({ assetUnit, txData, type }) => ({
+    // TODO: rename assetUnit for clarity as liquidations use ID instead of Symbol/asset.unit
     type: TRANSACTION_TRIGGERED,
     payload: {
         txData,

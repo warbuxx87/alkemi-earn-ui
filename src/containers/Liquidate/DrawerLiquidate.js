@@ -17,7 +17,11 @@ import useFetchMarkets from "hooks/useFetchMarkets";
 import { toWei, assetToDecimals } from "utils/ui";
 
 // Section 3: Selectors
-import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
+import {
+    walletAddress,
+    walletName,
+    walletNetwork,
+} from "redux/selectors/data/onboard";
 import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
 const LiquidateDrawerContainer = ({
@@ -34,6 +38,7 @@ const LiquidateDrawerContainer = ({
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+    const userWalletName = useSelector(walletName);
 
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
@@ -133,7 +138,7 @@ const LiquidateDrawerContainer = ({
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === liquidationId && // using liquidationId as ID instead of asset for this transaction
+                aTx.assetUnit === liquidationId && // using liquidationId as ID instead of asset for this transaction // TODO: Refactor assetUnit label to something more generic
                 aTx.type === "liquidate" &&
                 aTx.processing === true
             );
@@ -162,6 +167,7 @@ const LiquidateDrawerContainer = ({
                     type: "liquidate",
 
                     liquidationId,
+                    userWalletName,
                 });
             }}
             onSetMax={onSetMax}
