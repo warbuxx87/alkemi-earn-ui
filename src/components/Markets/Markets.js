@@ -83,7 +83,7 @@ const Markets = ({
                     mt={4}
                     className={classes.containerRow}
                 >
-                    <Grid item lg={6} sm={6}>
+                    <Grid item lg={6} sm={6} xs={12}>
                         <Card>
                             <CardHeader title="Deposits" />
                             <Divider />

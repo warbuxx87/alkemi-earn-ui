@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme) => ({
     connectWallet: {
         minWidth: 130,
         padding: "4px 0",
+        [theme.breakpoints.down("xs")]: {
+            marginRight: 16,
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            marginRight: 24,
+        },
     },
     appBar: {
         paddingLeft: "0px",
