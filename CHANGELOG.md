@@ -1,3 +1,10 @@
+## [1.13.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.2...v1.13.3) (2021-03-21)
+
+
+### Bug Fixes
+
+* market card display full width mobile, wallet button margin on sm screen UI-428 ([a2451ac](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a2451ac8846459ca0c907ecb3c73481706194ba9))
+
 ## [1.13.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.1...v1.13.2) (2021-03-15)
 
 

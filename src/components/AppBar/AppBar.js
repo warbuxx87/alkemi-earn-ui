@@ -36,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down("xs")]: {
             minWidth: 110,
             padding: "3px 0 2px 0",
+            marginRight: 16,
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            marginRight: 24,
         },
     },
     appBar: {
