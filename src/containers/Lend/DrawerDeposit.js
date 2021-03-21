@@ -208,10 +208,15 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                         ? asset.alternativeUnitLabel
                         : asset.unit
                 }`}
-                balanceValue={formatNumber(asset.balance, asset.unit)}
+                balanceValue={formatNumber(
+                    asset.balance,
+                    asset.unit,
+                    userWalletNetwork
+                )}
                 amountValue={`Wallet: ${formatNumber(
                     asset.wallet,
-                    asset.unit
+                    asset.unit,
+                    userWalletNetwork
                 )}`}
                 walletIsKYCd={walletIsKYCd}
             />

@@ -60,7 +60,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function BorrowTables({ activeReserves, USDPrice }) {
+export default function BorrowTables({
+    activeReserves,
+    USDPrice,
+    userWalletNetwork,
+}) {
     const classes = useStyles();
 
     //  let history = useHistory();
@@ -107,7 +111,11 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                             </BorrowTableCell>
                             <BorrowTableCell align="right">
                                 <Typography variant="body1" color="textPrimary">
-                                    {formatNumber(row.wallet, row.unit)}
+                                    {formatNumber(
+                                        row.wallet,
+                                        row.unit,
+                                        userWalletNetwork
+                                    )}
                                 </Typography>
                                 <Typography
                                     variant="body2"
@@ -118,7 +126,11 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                             </BorrowTableCell>
                             <BorrowTableCell align="right">
                                 <Typography variant="body1" color="textPrimary">
-                                    {formatNumber(row.balance, row.unit)}
+                                    {formatNumber(
+                                        row.balance,
+                                        row.unit,
+                                        userWalletNetwork
+                                    )}
                                 </Typography>
                                 <Typography
                                     variant="body2"
@@ -134,7 +146,9 @@ export default function BorrowTables({ activeReserves, USDPrice }) {
                                         ETHBalanceToUSD(
                                             row.ethBalance,
                                             USDPrice
-                                        )
+                                        ),
+                                        null,
+                                        userWalletNetwork
                                     )}
                                 </Typography>
                                 <Typography

@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const BorrowTableActive = ({ data = [], USDPrice }) => {
+const BorrowTableActive = ({ data = [], USDPrice, userWalletNetwork }) => {
     const classes = useStyles();
     return (
         <Box mt={2}>
@@ -131,7 +131,11 @@ const BorrowTableActive = ({ data = [], USDPrice }) => {
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(row.balance, row.unit)}
+                                        {formatNumber(
+                                            row.balance,
+                                            row.unit,
+                                            userWalletNetwork
+                                        )}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -153,7 +157,9 @@ const BorrowTableActive = ({ data = [], USDPrice }) => {
                                             ETHBalanceToUSD(
                                                 row.ethBalance,
                                                 USDPrice
-                                            )
+                                            ),
+                                            null,
+                                            userWalletNetwork
                                         )}
                                     </Typography>
                                     <Typography

@@ -58,7 +58,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function DepositTables({ activeReserves, USDPrice }) {
+export default function DepositTables({
+    activeReserves,
+    USDPrice,
+    userWalletNetwork,
+}) {
     const classes = useStyles();
     //  let history = useHistory();
     // Section 5: Code Component
@@ -103,7 +107,11 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                             </DepositTableCell>
                             <DepositTableCell align="right">
                                 <Typography variant="body1" color="textPrimary">
-                                    {formatNumber(row.wallet, row.unit)}
+                                    {formatNumber(
+                                        row.wallet,
+                                        row.unit,
+                                        userWalletNetwork
+                                    )}
                                 </Typography>
                                 <Typography
                                     variant="body2"
@@ -114,7 +122,11 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                             </DepositTableCell>
                             <DepositTableCell align="right">
                                 <Typography variant="body1" color="textPrimary">
-                                    {formatNumber(row.balance, row.unit)}
+                                    {formatNumber(
+                                        row.balance,
+                                        row.unit,
+                                        userWalletNetwork
+                                    )}
                                 </Typography>
                                 <Typography
                                     variant="body2"
@@ -130,7 +142,9 @@ export default function DepositTables({ activeReserves, USDPrice }) {
                                         ETHBalanceToUSD(
                                             row.ethBalance,
                                             USDPrice
-                                        )
+                                        ),
+                                        null,
+                                        userWalletNetwork
                                     )}
                                 </Typography>
                                 <Typography

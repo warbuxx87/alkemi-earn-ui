@@ -38,6 +38,12 @@ const token2icon = {
     ETH: ETH,
 };
 
+// This is used in formatNumber and formatStringNumber below, if the currentnetwork id is equal to this variable, it's going to force values display to have 2 decimal places
+const TWO_DECIMAL_PLACES_NETWORK_ID = parseInt(
+    process.env.REACT_APP_TWO_DECIMAL_PLACES_NETWORK_ID,
+    10
+);
+
 export const getTokenIcon = (symbol) => {
     const icon = token2icon[symbol];
     return icon;
@@ -87,30 +93,73 @@ export const toWei = (value, unit) => {
 };
 
 // Turns a number from wei value to one with a decimal point, also returns a certain number of fraction digits depending on the asset/token
-export const formatNumber = (value, unit) => {
+export const formatNumber = (value, unit, userWalletNetwork) => {
+    const maxDecimals = 2; // maximum number of decimals to display by default
+    // const minDecimals = 2; // minimum number of decimals to display by default
+
+    const maxDecimalsHigherValueAsset = 5; // maximum number of decimals to display for WBTC & ETH
+    const minDecimalsHigherValueAsset = 5; // minimum number of decimals to display for WBTC & ETH
+
     if (!value) return 0;
     const wei = fromWei(value, unit);
     switch (unit) {
         case "USDC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 8,
+                maximumFractionDigits:
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? maxDecimals
+                        : 6,
                 minimumFractionDigits: 2,
             }).format(wei);
         case "WETH":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 8,
-                minimumFractionDigits: 4,
+                maximumFractionDigits:
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? maxDecimalsHigherValueAsset
+                        : 18,
+                minimumFractionDigits:
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? minDecimalsHigherValueAsset
+                        : 4,
             }).format(wei);
         case "WBTC":
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 8,
-                minimumFractionDigits: 4,
+                maximumFractionDigits:
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? maxDecimalsHigherValueAsset
+                        : 8,
+                minimumFractionDigits:
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? minDecimalsHigherValueAsset
+                        : 4,
             }).format(wei);
         default:
             return new Intl.NumberFormat("en-es", {
-                maximumFractionDigits: 18,
+                maximumFractionDigits:
+                    userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
+                        ? maxDecimals
+                        : 18,
                 minimumFractionDigits: 2,
             }).format(wei);
+    }
+};
+
+// For the string representation of numbers
+// Returns either the number or with a precise number of decimals (2) or with another preferred number of decimal places
+export const formatStringNumber = (
+    value,
+    unit = null,
+    userWalletNetwork,
+    preferredDecimalsPlaces
+) => {
+    if (userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID) {
+        let bigValue = Big(value);
+        return bigValue.toFixed(2);
+    } else if (preferredDecimalsPlaces !== undefined) {
+        let bigValue = Big(value);
+        return bigValue.toFixed(preferredDecimalsPlaces);
+    } else {
+        return value;
     }
 };
 
@@ -271,7 +320,7 @@ export const openEtherScan = (hash, currentNetworkName) => {
 };
 
 export const addressParser = (address) =>
-    `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
+    `${address.substr(0, 4)}..${address.substr(address.length - 4, 4)}`;
 
 export const format_str_to_kmb = (str_num) => {
     str_num = str_num.toString();
@@ -318,19 +367,17 @@ export const format_str_to_kmb = (str_num) => {
     return str_num;
 };
 
-export const format_str_to_percent = (str_num) => {
-    // console.log(str_num)
-    str_num = str_num.toString();
-    var index_num = str_num.indexOf(".") + 2;
-    var cpmp_str = str_num.replace(/\./, "");
-    var res_str =
-        cpmp_str.slice(0, index_num) + "." + cpmp_str.substr(index_num, 18);
-    // console.log(Number(res_str))
+export const format_str_to_percent = (str_num, userWalletNetwork) => {
+    let bigStrNum = Big(str_num);
+    bigStrNum = bigStrNum.times(100);
 
-    if (Number(res_str) === 0) {
+    if (bigStrNum.lte(0.01)) {
         return "<0.01%";
     } else {
-        return Number(res_str) + "%";
+        return (
+            formatStringNumber(bigStrNum.toString(), null, userWalletNetwork) +
+            "%"
+        );
     }
 };
 
