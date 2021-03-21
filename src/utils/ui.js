@@ -320,7 +320,7 @@ export const openEtherScan = (hash, currentNetworkName) => {
 };
 
 export const addressParser = (address) =>
-    `${address.substr(0, 4)}...${address.substr(address.length - 4, 4)}`;
+    `${address.substr(0, 4)}..${address.substr(address.length - 4, 4)}`;
 
 export const format_str_to_kmb = (str_num) => {
     str_num = str_num.toString();

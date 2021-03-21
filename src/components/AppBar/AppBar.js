@@ -24,6 +24,7 @@ import {
 //import Notifications from "./Notifications";
 import MobileMenu from "./MobileMenu";
 import StatusDisplay from "./StatusDisplay";
+import logo from "assets/images/logo-white.svg";
 
 import { addressParser } from "utils/ui";
 
@@ -33,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 130,
         padding: "4px 0",
         [theme.breakpoints.down("xs")]: {
+            minWidth: 110,
+            padding: "3px 0 2px 0",
             marginRight: 16,
         },
         [theme.breakpoints.between("sm", "md")]: {
@@ -45,6 +48,16 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         textTransform: "uppercase",
+    },
+    logo: {
+        maxWidth: 140,
+        marginLeft: 6,
+    },
+    address: {
+        fontSize: "0.875rem",
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "0.825rem",
+        },
     },
 }));
 
@@ -120,10 +133,11 @@ function AppBar({
                     justify="flex-start"
                     wrap="nowrap"
                 >
-                    <Grid item>
+                    <Grid>
                         <Hidden lgUp>
                             <MobileMenu />
                         </Hidden>
+
                         <Hidden mdDown>
                             <Typography
                                 variant="subtitle1"
@@ -142,6 +156,13 @@ function AppBar({
                             </Typography>
                         </Hidden>
                     </Grid>
+                    <Hidden lgUp>
+                        <img
+                            className={classes.logo}
+                            src={logo}
+                            alt={"Alkemi Logo"}
+                        />
+                    </Hidden>
                     <Grid
                         container
                         alignItems="center"
@@ -176,7 +197,7 @@ function AppBar({
                                         walletIsKYCd
                                     )}
                                     <Box
-                                        className={classes.price}
+                                        className={classes.address}
                                         data-testid="connectAddressButton"
                                     >
                                         {/* 0x121565...6456 */}
