@@ -58,9 +58,9 @@ const styles = (theme) => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         overflowX: "hidden",
-        width: 70,
+        width: 68,
         [theme.breakpoints.up("sm")]: {
-            width: 70,
+            width: 68,
         },
         "&:hover": {
             width: 290,
