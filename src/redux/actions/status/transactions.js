@@ -78,8 +78,9 @@ export const onTx = ({
     shouldSendMax,
     type,
 }) => async (dispatch) => {
-    const amountToSend =
-        shouldSendMax === true ? constants["max_uint"] : amount;
+    let amountToSend = shouldSendMax === true ? constants["max_uint"] : amount;
+
+    if (type === "approve") amountToSend = constants["max_uint"];
 
     actionToCall[type]({
         drizzle,

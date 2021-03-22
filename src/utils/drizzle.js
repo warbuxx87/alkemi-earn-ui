@@ -2,37 +2,83 @@ import { readyToTransact } from "utils/onboard"; // TODO: Should probably be rep
 import { toWei } from "utils/ui";
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
-import { initAssetContract } from "utils/contracts";
 
 import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
 import Web3 from "web3";
 
+import WETH_ABI from "constants/ABI/WETH_ABI.json";
+import DAI_ABI from "constants/ABI/DAI_ABI.json";
+import USDC_ABI from "constants/ABI/USDC_ABI.json";
+import WBTC_ABI from "constants/ABI/WBTC_ABI.json";
+
+const ABIs = {
+    WETH: WETH_ABI,
+    DAI: DAI_ABI,
+    USDC: USDC_ABI,
+    WBTC: WBTC_ABI,
+};
+
 // Approve Unlimited amount of ERC20 tokens to interact with protocol
 export const handle_approve_click = async ({
-    drizzle,
     userWalletNetwork,
-    asset,
     userWalletAddress,
+    userWalletName,
+    amount,
+    asset,
+    selectedMethod,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transaction");
-    const myAccount = userWalletAddress;
-    const network = constants.network_type[userWalletNetwork];
+    return new Promise(async (resolve, reject) => {
+        if (!(await readyToTransact()))
+            throw new Error("not ready to transaction");
+        console.log("reached approve: ", {
+            userWalletNetwork,
+            userWalletAddress,
+            userWalletName,
+            amount,
+            asset,
+            selectedMethod,
+        });
 
-    const address_MoneyMarket = address[network].address_MoneyMarket;
+        const myAccount = userWalletAddress;
+        const network = constants.network_type[userWalletNetwork];
 
-    const tokenContract = initAssetContract({
-        drizzle,
-        userWalletAddress: myAccount,
-        asset: asset.unit,
-    });
-    const sendApprove = tokenContract.methods.approve.cacheSend(
-        address_MoneyMarket,
-        constants.max_uint,
-        {
+        const unit = asset.unit;
+        const token_address = address[network][`address_${unit}`];
+
+        const web3 = new Web3(window.currentlyUsedProvider); // could be replaced by window.currentlyUsedProvider
+
+        const address_MoneyMarket = address[network].address_MoneyMarket;
+
+        console.log("ABIs[asset.unit]: ", ABIs[asset.unit]);
+        const tokenContract = new web3.eth.Contract(
+            ABIs[asset.unit],
+            token_address
+        );
+
+        const getData = tokenContract.methods[selectedMethod](
+            address_MoneyMarket,
+            amount
+        ).encodeABI();
+
+        const dataToSend = {
+            to: token_address,
             from: myAccount,
-        }
-    );
-    return sendApprove;
+            data: getData,
+        };
+
+        web3.eth.sendTransaction(dataToSend, (error, receipt) => {
+            if (error) reject("The transaction was rejected");
+            // TODO: check it errors out properly
+            else {
+                let sendTx = {};
+
+                sendTx.txHash = receipt; // this is NOT necessarily the tx hash on the blockchain (For metamask yes, for walletconnect it's the safetx)
+                sendTx.userWalletName = userWalletName;
+
+                resolve(sendTx);
+            }
+        });
+    });
 };
 
 // Mint new Test Tokens
