@@ -27,6 +27,7 @@ const styles = (theme) => ({
     },
     image: {
         maxWidth: "155px",
+        minWidth: "155px",
     },
     menu: {
         width: 35,

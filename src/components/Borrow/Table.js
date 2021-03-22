@@ -84,7 +84,13 @@ const checkActivating = (Row, txs) => {
 };
 
 // Section 5: Code Component
-const BorrowTable = ({ data = [], onActivate, txs, walletIsKYCd }) => {
+const BorrowTable = ({
+    data = [],
+    onActivate,
+    txs,
+    walletIsKYCd,
+    userWalletNetwork,
+}) => {
     const classes = useStyles();
     return (
         <Box mt={1}>
@@ -142,7 +148,11 @@ const BorrowTable = ({ data = [], onActivate, txs, walletIsKYCd }) => {
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(Row.wallet, Row.unit)}
+                                        {formatNumber(
+                                            Row.wallet,
+                                            Row.unit,
+                                            userWalletNetwork
+                                        )}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -159,7 +169,11 @@ const BorrowTable = ({ data = [], onActivate, txs, walletIsKYCd }) => {
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(Row.liquidity, Row.unit)}
+                                        {formatNumber(
+                                            Row.liquidity,
+                                            Row.unit,
+                                            userWalletNetwork
+                                        )}
                                     </Typography>
                                     <Typography
                                         variant="body2"

@@ -67,6 +67,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             }
             txs={txs}
             walletIsKYCd={walletIsKYCd}
+            userWalletNetwork={userWalletNetwork}
         />
     );
 };

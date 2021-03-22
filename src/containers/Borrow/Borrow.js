@@ -65,6 +65,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
             txs={txs}
             USDPrice={USDPrice}
             walletIsKYCd={walletIsKYCd}
+            userWalletNetwork={userWalletNetwork}
         />
     );
 };

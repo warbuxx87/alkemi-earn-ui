@@ -11,13 +11,18 @@ import { getBorrowActive } from "redux/selectors/data/borrow";
 
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 
+import { walletNetwork } from "redux/selectors/data/onboard";
+
 const TableBorrowContainer = ({ activeReserves }) => {
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
+    const userWalletNetwork = useSelector(walletNetwork);
 
     return (
         <TableBorrow
             activeReserves={activeReserves}
             /*currency="USD"*/ USDPrice={USDPrice}
+            userWalletNetwork={userWalletNetwork}
         />
     );
 };
