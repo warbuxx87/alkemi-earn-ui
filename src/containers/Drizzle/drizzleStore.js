@@ -3,7 +3,6 @@ import thunk from "redux-thunk";
 
 // 2. Libraries imports
 import { generateStore } from "@drizzle/store";
-import web3 from "web3";
 
 // 3. internal imports
 import appReducers from "redux/reducers";
@@ -13,9 +12,9 @@ import MoneyMarket from "contracts/MoneyMarket.json";
 
 const appMiddlewares = [thunk, txHandler, contractTXNotifier];
 
-const fallback = new web3(
-    "wss://mainnet.infura.io/ws/v3/6d08631addb0433e967d2cf625cd6495"
-);
+const fallback = {
+    url: "wss://mainnet.infura.io/ws/v3/6d08631addb0433e967d2cf625cd6495", // using mainnet directly seems to work directly
+};
 
 export const drizzleOptions = {
     drizzleOptions: {
@@ -29,10 +28,10 @@ export const drizzleOptions = {
                 "Failure",
             ],
         },
-        web3: {
-            customProvider: window.currentlyUsedProvider,
-            fallback: fallback,
-        },
+    },
+    web3: {
+        customProvider: window.currentlyUsedProvider,
+        fallback: fallback,
     },
     polls: {
         blocks: 15000,
