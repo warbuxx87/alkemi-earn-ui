@@ -3,7 +3,7 @@
 import {
     handle_moneymarket_tx,
     handle_asset_contract_method_click,
-} from "utils/drizzle";
+} from "utils/transactionsSender";
 
 import constants from "constants/constant.json";
 import { triggerToastDisplay } from "utils/notify";
