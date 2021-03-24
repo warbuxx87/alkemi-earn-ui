@@ -131,7 +131,7 @@ export const onLiquidateAction = ({
             triggerToastDisplay({
                 toastMessageVariant: "failure",
                 displayMessage: "Something went wrong",
-                displaySecondaryMessage: error.message,
+                displaySecondaryMessage: error,
             });
         });
 };

@@ -245,7 +245,7 @@ export default () => {
                             topic === assetsTopics.approve
                         ) {
                             // @dev https://web3js.readthedocs.io/en/v1.2.7/web3-eth-abi.html#id18
-                            console.log("Tx topic matched allocateTo/approve");
+                            // console.log("Tx topic matched allocateTo/approve");
 
                             drizzle.web3.eth
                                 .getTransaction(tx.transactionHash)
