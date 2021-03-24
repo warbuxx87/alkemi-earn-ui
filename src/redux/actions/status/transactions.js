@@ -2,8 +2,7 @@
 
 import {
     handle_moneymarket_tx,
-    handle_approve_click,
-    handle_allocate_click,
+    handle_asset_contract_method_click,
 } from "utils/drizzle";
 
 import constants from "constants/constant.json";
@@ -64,8 +63,8 @@ const actionToCall = {
     withdraw: handle_moneymarket_tx, // Withdraw tokens from lending pool
     repayBorrow: handle_moneymarket_tx, // Repay Borrowed Tokens from wallet back to Lending Pool
 
-    allocate: handle_allocate_click,
-    approve: handle_approve_click,
+    allocateTo: handle_asset_contract_method_click, // Mint new Test Tokens
+    approve: handle_asset_contract_method_click, // Approve Unlimited amount of ERC20 tokens to interact with protocol
 };
 
 export const onTx = ({

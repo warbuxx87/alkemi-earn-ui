@@ -36,7 +36,7 @@ const topics = {
 const assetsTopics = {
     approve:
         "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925",
-    allocate:
+    allocateTo:
         "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
 };
 
@@ -98,7 +98,7 @@ const messagePerType = {
     liquidate: "Borrow Liquidated",
 
     approve: "Asset Authorized", // activate
-    allocate: "Tokens Minted", // test network only
+    allocateTo: "Tokens Minted", // test network only
 };
 
 function getKeyByValue(object, value) {
@@ -241,11 +241,11 @@ export default () => {
                         // console.log("Found tx with this topic " + topic);
                         // If the Transaction Topic is supply / withdraw / borrow / repay
                         if (
-                            topic === assetsTopics.allocate ||
+                            topic === assetsTopics.allocateTo ||
                             topic === assetsTopics.approve
                         ) {
                             // @dev https://web3js.readthedocs.io/en/v1.2.7/web3-eth-abi.html#id18
-                            console.log("Tx topic matched allocate/approve");
+                            console.log("Tx topic matched allocateTo/approve");
 
                             drizzle.web3.eth
                                 .getTransaction(tx.transactionHash)

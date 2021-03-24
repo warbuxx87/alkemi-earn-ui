@@ -25,7 +25,11 @@ import { estimateGasForMethod } from "utils/drizzle";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
-import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
+import {
+    walletAddress,
+    walletNetwork,
+    walletName,
+} from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
@@ -33,6 +37,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+    const userWalletName = useSelector(walletName);
 
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
@@ -215,6 +220,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                     drizzle,
                     userWalletNetwork,
                     userWalletAddress,
+                    userWalletName,
                     asset,
                     amount,
                     shouldSendMax,

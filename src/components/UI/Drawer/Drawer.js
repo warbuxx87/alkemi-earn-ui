@@ -114,6 +114,7 @@ const DrawerWrapper = ({
     triggerButtonVariant,
     amountValue,
     walletIsKYCd,
+    hideMaxButton,
 }) => {
     const classes = DrawerClass();
 
@@ -217,12 +218,16 @@ const DrawerWrapper = ({
                                 value={amount}
                                 fullWidth={true}
                             />
-                            <span
-                                className={classes.maxTips}
-                                onClick={onSetMax}
-                            >
-                                MAX
-                            </span>
+
+                            {hideMaxButton !== true && (
+                                <span
+                                    className={classes.maxTips}
+                                    onClick={onSetMax}
+                                >
+                                    MAX
+                                </span>
+                            )}
+
                             {/* onClick={() => { click_max(this) }} */}
                         </div>
                         <Grid className={classes.rateInfo}>

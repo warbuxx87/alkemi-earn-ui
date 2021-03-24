@@ -71,8 +71,8 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
-                aTx.type === "allocate" &&
+                aTx.assetUnit === asset.unit &&
+                aTx.type === "allocateTo" &&
                 aTx.processing === true
             );
         });
@@ -102,8 +102,9 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
                     userWalletName,
                     asset,
                     amount,
-                    type: "allocate",
+                    type: "allocateTo",
                     shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
+                    userWalletNetwork,
                 })
             }
             isDoingAction={isProcessing}
@@ -119,6 +120,9 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
                 userWalletNetwork
             )}`}
             walletIsKYCd={walletIsKYCd}
+            hideMaxButton={
+                true /* Hide max for allocate as it doesn't make sense to have it */
+            }
         />
     );
 };

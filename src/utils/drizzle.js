@@ -18,8 +18,8 @@ const ABIs = {
     WBTC: WBTC_ABI,
 };
 
-// Approve Unlimited amount of ERC20 tokens to interact with protocol
-export const handle_approve_click = async ({
+// Handles asset contract calls (allocate/approve)
+export const handle_asset_contract_method_click = async ({
     userWalletNetwork,
     userWalletAddress,
     userWalletName,
@@ -30,14 +30,6 @@ export const handle_approve_click = async ({
     return new Promise(async (resolve, reject) => {
         if (!(await readyToTransact()))
             throw new Error("not ready to transaction");
-        console.log("reached approve: ", {
-            userWalletNetwork,
-            userWalletAddress,
-            userWalletName,
-            amount,
-            asset,
-            selectedMethod,
-        });
 
         const myAccount = userWalletAddress;
         const network = constants.network_type[userWalletNetwork];
@@ -49,15 +41,16 @@ export const handle_approve_click = async ({
 
         const address_MoneyMarket = address[network].address_MoneyMarket;
 
-        console.log("ABIs[asset.unit]: ", ABIs[asset.unit]);
-        const tokenContract = new web3.eth.Contract(
-            ABIs[asset.unit],
-            token_address
-        );
+        const tokenContract = new web3.eth.Contract(ABIs[unit], token_address);
 
+        let weiAmount = amount;
+        if (selectedMethod === "allocateTo") weiAmount = toWei(amount, unit);
+
+        const targetAddress =
+            selectedMethod === "approve" ? address_MoneyMarket : myAccount;
         const getData = tokenContract.methods[selectedMethod](
-            address_MoneyMarket,
-            amount
+            targetAddress,
+            weiAmount
         ).encodeABI();
 
         const dataToSend = {
@@ -79,32 +72,6 @@ export const handle_approve_click = async ({
             }
         });
     });
-};
-
-// Mint new Test Tokens
-export const handle_allocate_click = async ({
-    drizzle,
-    userWalletAddress,
-    asset,
-    amount,
-    shouldSendMax,
-}) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transact");
-    const myAccount = userWalletAddress;
-    const unit = asset.unit;
-    const tokenContract = drizzle.contracts[unit];
-
-    let weiAmount = amount;
-    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
-
-    const sendAllocate = tokenContract.methods.allocateTo.cacheSend(
-        myAccount,
-        weiAmount,
-        {
-            from: myAccount,
-        }
-    );
-    return sendAllocate;
 };
 
 // generic MoneyMarketContract tx handler
