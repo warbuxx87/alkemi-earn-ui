@@ -61,7 +61,6 @@ export const handle_asset_contract_method_click = async ({
 
         web3.eth.sendTransaction(dataToSend, (error, receipt) => {
             if (error) reject("The transaction was rejected");
-            // TODO: check it errors out properly
             else {
                 let sendTx = {};
 
@@ -126,7 +125,6 @@ export const handle_moneymarket_tx = async ({
 
         web3.eth.sendTransaction(dataToSend, (error, receipt) => {
             if (error) reject("The transaction was rejected");
-            // TODO: check it errors out properly
             else {
                 let sendTx = {};
 
@@ -189,7 +187,6 @@ export const handle_liquidate_click = async ({
 
         web3.eth.sendTransaction(dataToSend, (error, receipt) => {
             if (error) reject("The transaction was rejected");
-            // TODO: check it errors out properly
             else {
                 let sendTx = {};
 
