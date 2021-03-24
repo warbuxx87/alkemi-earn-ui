@@ -17,36 +17,13 @@ import addressMap from "constants/address_map.json";
 
 import { triggerToastDisplay } from "utils/notify";
 
-// TODO move constants to config files + TODO: use the same naming
-const topics = {
-    supply:
-        "0x4ea5606ff36959d6c1a24f693661d800a98dd80c0fb8469a665d2ec7e8313c21",
-    withdraw:
-        "0x56559a17e3aa8ea4b05036eaf31aeaf9fb71fc1b8865b6389647639940bed030",
-    borrow:
-        "0x6b69190ebbb96f162b04dc222ef96416f9dca9a415b6dd183c79424501113e18",
-    repayBorrow:
-        "0x550e7e464126359c6adc43831f011682856b177df6c49c0af6675dd2a063649d",
-    liquidate:
-        "0x0938b1e79e1fd5816573487e5bd6a1e1329ec26f94f401a7b49d4b71d479657a",
-    failure:
-        "0x45b96fe442630264581b197e84bbada861235052c5a1aadfff9ea4e40a969aa0",
-}; // TODO, manage token approvals example: https://rinkeby.etherscan.io/tx/0x32105e1747a31da8e35bbb115a3bb01223bddb04d758340218300d8e7c7aa2eb#eventlog
+import topics from "constants/topics";
 
-const assetsTopics = {
-    approve:
-        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925",
-    allocateTo:
-        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
-};
+const moneyMarketTopics = topics.MoneyMarket;
 
-// TODO: filter by this
-// const assetsTopicsToWatch = [
-//     "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925",
-//     "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
-// ]
+const assetsTopics = topics.assets;
 
-// define data structure
+// define data structure for input for moneymarket contract
 const contractInput = [
     {
         type: "address",
@@ -69,25 +46,6 @@ const contractInput = [
         name: "newBalance",
     },
 ];
-// define data structure
-// const assetsContractInputApprove = {
-//     DAI: [
-//         { "name": "guy", "type": "address" },
-//         { "name": "wad", "type": "uint256" }
-//     ],
-//     WETH: [
-//         { "name": "guy", "type": "address" },
-//         { "name": "wad", "type": "uint256" }
-//     ],
-//     USDC: [
-//         { "name": "_spender", "type": "address" },
-//         { "name": "_value", "type": "uint256" }
-//     ],
-//     WBTC: [
-//         { "name": "_spender", "type": "address" },
-//         { "name": "_value", "type": "uint256" }
-//     ]
-// };
 
 const messagePerType = {
     supply: "Supply Received",
@@ -115,8 +73,6 @@ export default () => {
     const userWalletAddress = useSelector(walletAddress);
     const currentNetworkName = useSelector(walletNetworkName);
 
-    const notifiedTx = []; // tracking fired notifications by txHash (avoids web3.subscribe to fire multiple times)
-
     const clearWatchers = (watchers) => {
         if (watchers) {
             for (const key of Object.keys(watchers)) {
@@ -127,6 +83,7 @@ export default () => {
 
     useEffect(() => {
         let watchers = {};
+        const notifiedTx = []; // tracking fired notifications by txHash (protects against web3.subscribe firing multiple times)
 
         const watchMoneyMarketLogs = () => {
             const options = {
@@ -150,10 +107,10 @@ export default () => {
                         // console.log("Found tx with this topic " + topic);
                         // If the Transaction Topic is supply / withdraw / borrow / repay
                         if (
-                            topic === topics.supply ||
-                            topic === topics.withdraw ||
-                            topic === topics.borrow ||
-                            topic === topics.repayBorrow
+                            topic === moneyMarketTopics.supply ||
+                            topic === moneyMarketTopics.withdraw ||
+                            topic === moneyMarketTopics.borrow ||
+                            topic === moneyMarketTopics.repayBorrow
                         ) {
                             // @dev https://web3js.readthedocs.io/en/v1.2.7/web3-eth-abi.html#id18
                             // console.log(
@@ -190,7 +147,7 @@ export default () => {
                                     );
 
                                     const resultType = getKeyByValue(
-                                        topics,
+                                        moneyMarketTopics,
                                         topic
                                     );
 

@@ -8,8 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Notify from "components/UI/Notify";
 
 // 3. constants imports
-import errorMessage from "constants/error_code";
-import constants from "constants/constant.json";
+// import errorMessage from "constants/error_code";
+// import constants from "constants/constant.json";
 
 // const contractTXNotifier = (store) => (next) => (action) => {
 //     if (!action) next(action); // could be replaced with a simple return since we don't really have an action

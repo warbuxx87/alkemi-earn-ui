@@ -1,0 +1,14 @@
+{
+    "MoneyMarket": {
+        "supply": "0x4ea5606ff36959d6c1a24f693661d800a98dd80c0fb8469a665d2ec7e8313c21",
+        "withdraw": "0x56559a17e3aa8ea4b05036eaf31aeaf9fb71fc1b8865b6389647639940bed030",
+        "borrow": "0x6b69190ebbb96f162b04dc222ef96416f9dca9a415b6dd183c79424501113e18",
+        "repayBorrow": "0x550e7e464126359c6adc43831f011682856b177df6c49c0af6675dd2a063649d",
+        "liquidate": "0x0938b1e79e1fd5816573487e5bd6a1e1329ec26f94f401a7b49d4b71d479657a",
+        "failure": "0x45b96fe442630264581b197e84bbada861235052c5a1aadfff9ea4e40a969aa0"
+    },
+    "assets": {
+        "approve": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925",
+        "allocateTo": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+    }
+}
