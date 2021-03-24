@@ -98,7 +98,7 @@ const messagePerType = {
     liquidate: "Borrow Liquidated",
 
     approve: "Asset Authorized", // activate
-    allocateTo: "Tokens Minted", // test network only
+    allocateTo: "Assets allocated", // test network only (fires also on borrow especially)
 };
 
 function getKeyByValue(object, value) {
@@ -107,7 +107,6 @@ function getKeyByValue(object, value) {
     });
 }
 
-// Retrieve the user's wallet ether balance every 30 seconds
 export default () => {
     const drizzle = useContext(DrizzleContext);
     const dispatch = useDispatch();
@@ -116,8 +115,18 @@ export default () => {
     const userWalletAddress = useSelector(walletAddress);
     const currentNetworkName = useSelector(walletNetworkName);
 
+    const notifiedTx = []; // tracking fired notifications by txHash (avoids web3.subscribe to fire multiple times)
+
+    const clearWatchers = (watchers) => {
+        if (watchers) {
+            for (const key of Object.keys(watchers)) {
+                watchers[key].unsubscribe();
+            }
+        }
+    };
+
     useEffect(() => {
-        let watcher = {};
+        let watchers = {};
 
         const watchMoneyMarketLogs = () => {
             const options = {
@@ -125,7 +134,7 @@ export default () => {
                 //topics: ['0x12345...']
             };
 
-            watcher.MoneyMarket = drizzle.web3.eth.subscribe(
+            watchers.MoneyMarket = drizzle.web3.eth.subscribe(
                 "logs",
                 options,
                 function (error, tx) {
@@ -189,26 +198,34 @@ export default () => {
                                         resultType !== undefined &&
                                         resultType != null
                                     ) {
-                                        dispatch(
-                                            transactionResolved({
-                                                txHash: tx.transactionHash,
-                                                assetUnit,
-                                                type: resultType,
-                                            })
-                                        );
+                                        if (
+                                            !notifiedTx.includes(
+                                                tx.transactionHash
+                                            )
+                                        ) {
+                                            notifiedTx.push(tx.transactionHash);
 
-                                        triggerToastDisplay({
-                                            toastMessageVariant: "success",
-                                            displayMessage:
-                                                "Transaction Successful",
-                                            displaySecondaryMessage:
-                                                messagePerType[
-                                                    resultType ||
-                                                        "Consult the transaction hash"
-                                                ],
-                                            currentNetworkName,
-                                            txHash: tx.transactionHash,
-                                        });
+                                            dispatch(
+                                                transactionResolved({
+                                                    txHash: tx.transactionHash,
+                                                    assetUnit,
+                                                    type: resultType,
+                                                })
+                                            );
+
+                                            triggerToastDisplay({
+                                                toastMessageVariant: "success",
+                                                displayMessage:
+                                                    "Transaction Successful",
+                                                displaySecondaryMessage:
+                                                    messagePerType[
+                                                        resultType
+                                                    ] ||
+                                                    "Consult the transaction hash",
+                                                currentNetworkName,
+                                                txHash: tx.transactionHash,
+                                            });
+                                        }
                                     }
                                 }
                             }
@@ -225,7 +242,7 @@ export default () => {
                 // topics: assetsTopicsToWatch
             };
 
-            watcher[assetSymbol] = drizzle.web3.eth.subscribe(
+            watchers[assetSymbol] = drizzle.web3.eth.subscribe(
                 "logs",
                 options,
                 function (error, tx) {
@@ -263,26 +280,38 @@ export default () => {
                                             resultType !== undefined &&
                                             resultType != null
                                         ) {
-                                            dispatch(
-                                                transactionResolved({
-                                                    txHash: tx.transactionHash,
-                                                    assetSymbol,
-                                                    type: resultType,
-                                                })
-                                            );
+                                            if (
+                                                !notifiedTx.includes(
+                                                    tx.transactionHash
+                                                )
+                                            ) {
+                                                notifiedTx.push(
+                                                    tx.transactionHash
+                                                );
 
-                                            triggerToastDisplay({
-                                                toastMessageVariant: "success",
-                                                displayMessage:
-                                                    "Transaction Successful",
-                                                displaySecondaryMessage:
-                                                    messagePerType[
-                                                        resultType ||
-                                                            "Consult the transaction hash"
-                                                    ],
-                                                currentNetworkName,
-                                                txHash: tx.transactionHash,
-                                            });
+                                                dispatch(
+                                                    transactionResolved({
+                                                        txHash:
+                                                            tx.transactionHash,
+                                                        assetSymbol,
+                                                        type: resultType,
+                                                    })
+                                                );
+
+                                                triggerToastDisplay({
+                                                    toastMessageVariant:
+                                                        "success",
+                                                    displayMessage:
+                                                        "Transaction Successful",
+                                                    displaySecondaryMessage:
+                                                        messagePerType[
+                                                            resultType
+                                                        ] ||
+                                                        "Consult the transaction hash",
+                                                    currentNetworkName,
+                                                    txHash: tx.transactionHash,
+                                                });
+                                            }
                                         }
                                     }
                                 });
@@ -299,6 +328,8 @@ export default () => {
             currentNetworkName !== undefined &&
             currentNetworkName != null
         ) {
+            clearWatchers(watchers);
+
             watchMoneyMarketLogs();
             watchAssetLogs("USDC");
             watchAssetLogs("WBTC");
@@ -307,11 +338,7 @@ export default () => {
         }
 
         return () => {
-            if (watcher) {
-                for (const key of Object.keys(watcher)) {
-                    watcher[key].unsubscribe();
-                }
-            }
+            clearWatchers(watchers);
         };
     }, [
         userWalletAddress,

@@ -7,11 +7,10 @@ import web3 from "web3";
 
 // 3. internal imports
 import appReducers from "redux/reducers";
-import contractTXNotifier from "utils/notify";
 import txHandler from "utils/txHandler";
 import MoneyMarket from "contracts/MoneyMarket.json";
 
-const appMiddlewares = [thunk, txHandler, contractTXNotifier];
+const appMiddlewares = [thunk, txHandler];
 
 const fallback = new web3(
     "wss://mainnet.infura.io/ws/v3/6d08631addb0433e967d2cf625cd6495"
