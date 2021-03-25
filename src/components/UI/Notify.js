@@ -119,7 +119,10 @@ export default function PositionedSnackbar({
                                 className={classes.Button}
                                 color="inherit"
                                 size="small"
-                                href={generateEtherscanLink()}
+                                href={generateEtherscanLink({
+                                    currentNetworkName,
+                                    txHash,
+                                })}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
