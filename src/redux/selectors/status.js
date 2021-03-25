@@ -14,6 +14,10 @@ export const isWalletKYCd = (state) => {
     return false;
 };
 
+export const displayWalletConnectModal = (state) => {
+    return state.status.walletconnect.show;
+};
+
 export const getTransactions = (state) => {
     return state.status.transactions.txs;
 };

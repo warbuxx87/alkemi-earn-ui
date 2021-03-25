@@ -31,6 +31,7 @@ const locationToTitles = {
 
 // Section 5: Code Container
 const AppBarContainer = () => {
+    // TODO: For a clearer code and better structured code, the following instruction could be moved higher to the skeleton component, or a separate setup manager
     const { onConnect, onReset } = useOnboard();
     useWatchEtherBalance();
     useWatchTxs();

@@ -22,7 +22,11 @@ import DrizzleContext from "utils/DrizzleContext";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
-import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
+import {
+    walletAddress,
+    walletNetwork,
+    walletName,
+} from "redux/selectors/data/onboard";
 
 import { getTransactions } from "redux/selectors/status";
 
@@ -30,6 +34,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+    const userWalletName = useSelector(walletName);
 
     const txs = useSelector(getTransactions);
 
@@ -118,6 +123,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
                     drizzle,
                     userWalletNetwork,
                     userWalletAddress,
+                    userWalletName,
                     asset,
                     amount,
                     shouldSendMax,

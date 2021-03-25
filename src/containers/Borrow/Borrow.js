@@ -26,6 +26,7 @@ import {
     isWalletConnected,
     walletAddress,
     walletNetwork,
+    walletName,
 } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, getTransactions } from "redux/selectors/status";
@@ -42,6 +43,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+    const userWalletName = useSelector(walletName);
 
     const walletConnected = useSelector(isWalletConnected);
 
@@ -53,6 +55,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
             drizzle,
             userWalletNetwork,
             userWalletAddress,
+            userWalletName,
             asset,
             type: "approve",
         });

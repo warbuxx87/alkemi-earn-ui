@@ -13,6 +13,7 @@ import Sidebar from "containers/Sidebar/Sidebar";
 import AppBar from "containers/AppBar/AppBar";
 
 import ConnectionBanner from "components/UI/ConnectionBanner";
+import WalletConnectModal from "containers/WalletConnectModal/WalletConnectModal";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
@@ -93,6 +94,7 @@ function LayoutSkeleton({
                     DEFAULT_NETWORK={DEFAULT_NETWORK}
                 />
                 <LayoutContent />
+                <WalletConnectModal />
             </div>
         </div>
     );

@@ -22,7 +22,11 @@ import DrizzleContext from "utils/DrizzleContext";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { onTx } from "redux/actions/status/transactions";
 
-import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
+import {
+    walletAddress,
+    walletNetwork,
+    walletName,
+} from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 
@@ -34,6 +38,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+    const userWalletName = useSelector(walletName);
 
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
@@ -129,6 +134,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
                     drizzle,
                     userWalletNetwork,
                     userWalletAddress,
+                    userWalletName,
                     asset,
                     amount,
                     type: "borrow",

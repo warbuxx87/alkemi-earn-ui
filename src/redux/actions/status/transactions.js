@@ -7,6 +7,7 @@ import {
 
 import constants from "constants/constant.json";
 import { triggerToastDisplay } from "utils/notify";
+import { setShowWalletConnectModal } from "redux/actions/status/walletconnect";
 
 // Section 2: Action types declarations and action creators
 
@@ -77,9 +78,23 @@ export const onTx = ({
     shouldSendMax,
     type,
 }) => async (dispatch) => {
+    console.log({
+        drizzle,
+        userWalletNetwork,
+        userWalletAddress,
+        userWalletName,
+        amount,
+        asset,
+        shouldSendMax,
+        type,
+    });
     let amountToSend = shouldSendMax === true ? constants["max_uint"] : amount;
 
     if (type === "approve") amountToSend = constants["max_uint"];
+
+    if (userWalletName === "WalletConnect") {
+        dispatch(setShowWalletConnectModal(true));
+    }
 
     actionToCall[type]({
         drizzle,
@@ -102,6 +117,9 @@ export const onTx = ({
                 displayMessage: "Transaction pending...",
                 displaySecondaryMessage: "This might take a few minutes",
             });
+
+            if (userWalletName === "WalletConnect")
+                dispatch(setShowWalletConnectModal(false));
         })
         .catch((error) => {
             triggerToastDisplay({
@@ -109,5 +127,8 @@ export const onTx = ({
                 displayMessage: "Something went wrong",
                 displaySecondaryMessage: error,
             });
+
+            if (userWalletName === "WalletConnect")
+                dispatch(setShowWalletConnectModal(false));
         });
 };
