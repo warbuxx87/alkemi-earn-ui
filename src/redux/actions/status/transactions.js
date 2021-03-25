@@ -78,16 +78,6 @@ export const onTx = ({
     shouldSendMax,
     type,
 }) => async (dispatch) => {
-    console.log({
-        drizzle,
-        userWalletNetwork,
-        userWalletAddress,
-        userWalletName,
-        amount,
-        asset,
-        shouldSendMax,
-        type,
-    });
     let amountToSend = shouldSendMax === true ? constants["max_uint"] : amount;
 
     if (type === "approve") amountToSend = constants["max_uint"];
