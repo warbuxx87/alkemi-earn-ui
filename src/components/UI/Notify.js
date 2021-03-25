@@ -98,6 +98,16 @@ export default function PositionedSnackbar({
         }
     };
 
+    const generateEtherscanLink = ({ currentNetworkName, txHash }) => {
+        let subdomain = `${currentNetworkName}.`;
+
+        if (currentNetworkName === "main" || currentNetworkName === "mainnet") {
+            subdomain = "";
+        }
+
+        return `https://${subdomain}etherscan.io/tx/${txHash}`;
+    };
+
     return (
         <Alert
             action={
@@ -109,7 +119,7 @@ export default function PositionedSnackbar({
                                 className={classes.Button}
                                 color="inherit"
                                 size="small"
-                                href={`https://${currentNetworkName}.etherscan.io/tx/${txHash}`}
+                                href={generateEtherscanLink()}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
