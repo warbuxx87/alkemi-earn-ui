@@ -11,6 +11,7 @@ exports[`<LayoutSkeleton /> matches snapshot 1`] = `
     <AppBarContainer />
     <ConnectionBanner />
     <LayoutContent />
+    <WalletConnectModal />
   </div>
 </div>
 `;
