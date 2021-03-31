@@ -6,7 +6,7 @@ import {
     // BORROW,
     // MARKETS,
     // HISTORY,
-    // LIQUIDATE,
+    LIQUIDATE,
     // SWAP,
 } from "constants/routes";
 
@@ -36,11 +36,11 @@ describe("<LayoutContent />", () => {
         );
     });
 
-    it("content is displaying nowhere component content", () => {
+    it("<LayoutContent /> is displaying nowhere component content", () => {
         expect(screen.getByText("Oops... It seems that you are lost!"));
     });
 
-    it("content is displaying dashboard component content", () => {
+    it("<LayoutContent /> is displaying dashboard component content", () => {
         history.push(DASHBOARD);
 
         // following checks could be highly improved
@@ -53,6 +53,12 @@ describe("<LayoutContent />", () => {
 
         expect(screen.getByText("Active Deposits"));
         expect(screen.getByText("Active Borrowed"));
+    });
+
+    it("<LayoutContent /> does not display liquidate content", () => {
+        history.push(LIQUIDATE);
+
+        expect(screen.getByText("Oops... It seems that you are lost!"));
     });
 
     it("matches snapshot", () => {
