@@ -1,28 +1,20 @@
 import React from "react";
 
-// import Dashboard from "containers/Dashboard/Dashboard";
-// import Lend from "containers/Lend/Lend";
-// import Borrow from "containers/Borrow/Borrow";
-// import Markets from "containers/Markets/Markets";
-// import History from "containers/History/History";
-// import Liquidate from "containers/Liquidate/Liquidate";
-// import Swap from "containers/Swap/Swap";
-// import NoWhere from "components/NoWhere/NoWhere";
+import {
+    DASHBOARD,
+    // LEND,
+    // BORROW,
+    // MARKETS,
+    // HISTORY,
+    // LIQUIDATE,
+    // SWAP,
+} from "constants/routes";
 
-// import {
-//     DASHBOARD,
-//     LEND,
-//     BORROW,
-//     MARKETS,
-//     HISTORY,
-//     LIQUIDATE,
-//     SWAP,
-// } from "constants/routes";
+import { render, screen } from "@testing-library/react";
 
-import { render } from "@testing-library/react";
-import { screen } from "@testing-library/dom";
+import { createMemoryHistory } from "history";
 
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "containers/Drizzle/drizzleStore.js";
@@ -31,15 +23,36 @@ import LayoutContent from "../Content";
 
 describe("<LayoutContent />", () => {
     let wrapper;
+    let history;
 
     beforeEach(() => {
+        history = createMemoryHistory();
         wrapper = render(
             <Provider store={store}>
-                <Router>
+                <Router history={history}>
                     <LayoutContent />
                 </Router>
             </Provider>
         );
+    });
+
+    it("content is displaying nowhere component content", () => {
+        expect(screen.getByText("Oops... It seems that you are lost!"));
+    });
+
+    it("content is displaying dashboard component content", () => {
+        history.push(DASHBOARD);
+
+        // following checks could be highly improved
+        expect(screen.getByText("Aggregated Value"));
+        expect(screen.getByText("Combined APY"));
+
+        expect(screen.getByText("Lending Overview"));
+        expect(screen.getByText("Borrowing Overview"));
+        expect(screen.getByText("Borrow Limit"));
+
+        expect(screen.getByText("Active Deposits"));
+        expect(screen.getByText("Active Borrowed"));
     });
 
     it("matches snapshot", () => {
