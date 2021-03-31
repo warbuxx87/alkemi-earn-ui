@@ -34,11 +34,17 @@ const getAllowances = (state) => {
 const getUtilizationValues = (state) => {
     const utilizationRates = {};
     Object.values(_.get(state, "contracts.MoneyMarket.markets", {})).forEach(
-        (market) =>
-            (utilizationRates[market.args[0]] = calculateUtilization(
-                market.value[6],
-                market.value[3]
-            ))
+        (market) => {
+            if (
+                market.args[0] !== undefined &&
+                market.value[6] !== undefined &&
+                market.value[3] !== undefined
+            )
+                return (utilizationRates[market.args[0]] = calculateUtilization(
+                    market.value[6],
+                    market.value[3]
+                ));
+        }
     );
     return utilizationRates;
 };
