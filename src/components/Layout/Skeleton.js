@@ -79,11 +79,12 @@ function LayoutSkeleton({
     currentNetworkName,
     userWalletAddress,
     DEFAULT_NETWORK,
+    walletIsLiquidator,
 }) {
     // networkID is null when no wallet is selected
     return (
         <div className={classes.frame}>
-            <Sidebar />
+            <Sidebar walletIsLiquidator={walletIsLiquidator} />
             <div className={classes.content}>
                 <AppBar />
                 <ConnectionBanner

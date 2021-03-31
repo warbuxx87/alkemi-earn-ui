@@ -38,7 +38,7 @@ const DrawerClass = makeStyles((theme) =>
 );
 
 // Section 5: Code Component
-export default function MobileMenu() {
+export default function MobileMenu({ walletIsLiquidator }) {
     const classes = DrawerClass();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [isOpen, setOpen] = React.useState(false);
@@ -92,7 +92,9 @@ export default function MobileMenu() {
                             <SidebarBorrowItem />
                             <SidebarMarketsItem />
                             <SidebarHistoryItem />
-                            <SidebarLiquidateItem />
+                            {walletIsLiquidator === true ? (
+                                <SidebarLiquidateItem />
+                            ) : null}
                         </List>
                     </Box>
                 </Box>

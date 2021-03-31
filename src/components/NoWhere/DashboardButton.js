@@ -12,7 +12,7 @@ const styles = (theme) => ({
 
 const NoWhereDashboardButton = ({ classes, onClick }) => (
     <Button
-        variant="raised"
+        variant="outlined"
         color="default"
         className={classes.button}
         onClick={onClick}

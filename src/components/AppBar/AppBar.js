@@ -50,6 +50,7 @@ function AppBar({
     accountAddress,
     walletConnected,
     walletIsKYCd,
+    walletIsLiquidator,
 }) {
     const classes = useStyles();
 
@@ -116,7 +117,9 @@ function AppBar({
                 >
                     <Grid item>
                         <Hidden lgUp>
-                            <MobileMenu />
+                            <MobileMenu
+                                walletIsLiquidator={walletIsLiquidator}
+                            />
                         </Hidden>
                         <Hidden mdDown>
                             <Typography
