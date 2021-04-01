@@ -31,11 +31,20 @@ const MarketsContainer = () => {
             : 0
     }`;
 
-    const collateralRatioContent = `${
-        calculationsTotals && calculationsTotals.totalBorrowBalanceUSD
-            ? calculationsTotals.totalCollateralRatio
-            : 0
-    }%`;
+    const collateralRatioContent = () => {
+        let displayedValue = 0;
+
+        if (calculationsTotals && calculationsTotals.totalBorrowBalanceUSD) {
+            if (
+                isFinite(calculationsTotals.totalCollateralRatio) &&
+                !isNaN(calculationsTotals.totalCollateralRatio)
+            )
+                // Will display 0 instead of Infinity
+                displayedValue = calculationsTotals.totalCollateralRatio;
+        }
+
+        return `${displayedValue}%`;
+    };
 
     const totalDepositsContent = `$${
         calculationsTotals && calculationsTotals.totalBorrowBalanceUSD
@@ -51,7 +60,7 @@ const MarketsContainer = () => {
             supplyArray={supplyArray}
             borrowArray={borrowArray}
             totalBorrowedContent={totalBorrowedContent}
-            collateralRatioContent={collateralRatioContent}
+            collateralRatioContent={collateralRatioContent()}
             totalDepositsContent={totalDepositsContent}
             userWalletNetwork={userWalletNetwork}
         />

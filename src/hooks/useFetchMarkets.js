@@ -102,6 +102,8 @@ export default (fetchPeriodically = false) => {
                                     100
                             ).toFixed(1);
 
+                            if (isNaN(e.percentage_borrow))
+                                e.percentage_borrow = "0";
                             return e;
                         });
 
