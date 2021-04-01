@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 import { Route, Switch } from "react-router";
 
 import { ToastContainer } from "react-toastify";
@@ -23,20 +25,30 @@ import {
     SWAP,
 } from "constants/routes";
 
-const LayoutContent = () => (
-    <div>
-        <ToastContainer />
-        <Switch>
-            <Route path={DASHBOARD} exact component={Dashboard} />
-            <Route path={LEND} exact component={Lend} />
-            <Route path={BORROW} exact component={Borrow} />
-            <Route path={MARKETS} exact component={Markets} />
-            <Route path={HISTORY} exact component={History} />
-            <Route path={LIQUIDATE} exact component={Liquidate} />
-            <Route path={SWAP} exact component={Swap} />
-            <Route component={NoWhere} />
-        </Switch>
-    </div>
-);
+import { isLiquidator } from "redux/selectors/status";
+
+const LayoutContent = () => {
+    const walletIsLiquidator = useSelector(isLiquidator);
+
+    return (
+        <div>
+            <ToastContainer />
+            <Switch>
+                <Route path={DASHBOARD} exact component={Dashboard} />
+                <Route path={LEND} exact component={Lend} />
+                <Route path={BORROW} exact component={Borrow} />
+                <Route path={MARKETS} exact component={Markets} />
+                <Route path={HISTORY} exact component={History} />
+                <Route
+                    path={LIQUIDATE}
+                    exact
+                    component={walletIsLiquidator ? Liquidate : NoWhere}
+                />
+                <Route path={SWAP} exact component={Swap} />
+                <Route component={NoWhere} />
+            </Switch>
+        </div>
+    );
+};
 
 export default LayoutContent;

@@ -14,6 +14,20 @@ export const isWalletKYCd = (state) => {
     return false;
 };
 
+export const isLiquidator = (state) => {
+    const verifyLiquidator = Object.values(
+        _.get(state, "contracts.MoneyMarket.verifyLiquidator", {})
+    );
+
+    if (verifyLiquidator[0]) {
+        const isALiquidator = verifyLiquidator[0].value
+            ? verifyLiquidator[0].value
+            : false;
+        return isALiquidator;
+    }
+    return false;
+};
+
 export const getTransactions = (state) => {
     return state.status.transactions.txs;
 };

@@ -12,7 +12,7 @@ import useWatchEtherBalance from "hooks/useWatchEtherBalance";
 // Section 3: Selectors
 import { isWalletConnected, walletAddress } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd } from "redux/selectors/status";
+import { isWalletKYCd, isLiquidator } from "redux/selectors/status";
 
 // Section 4: components
 import AppBar from "components/AppBar/AppBar";
@@ -36,6 +36,7 @@ const AppBarContainer = () => {
     const walletConnected = useSelector(isWalletConnected);
     const currentAddress = useSelector(walletAddress);
     const walletIsKYCd = useSelector(isWalletKYCd);
+    const walletIsLiquidator = useSelector(isLiquidator);
 
     let location = useLocation();
     // update Appbar title whenever location change
@@ -55,6 +56,7 @@ const AppBarContainer = () => {
             accountAddress={walletConnected ? currentAddress : null}
             walletIsKYCd={walletIsKYCd}
             walletConnected={walletConnected}
+            walletIsLiquidator={walletIsLiquidator}
         />
     );
 };
