@@ -1,3 +1,11 @@
+## [1.13.5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.4...v1.13.5) (2021-04-01)
+
+
+### Bug Fixes
+
+* hide liquidation choice when user is not verified UI-388 ([85d54c4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/85d54c4b2d51a15929ea4a515f81ea2cfd54cda2))
+* improve testing of content UI-388 ([ef1e7cc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ef1e7cc701dbc2db7f53abb01634b19e12184479))
+
 ## [1.13.4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.3...v1.13.4) (2021-03-30)
 
 
