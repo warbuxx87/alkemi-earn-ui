@@ -1,3 +1,25 @@
+## [1.13.4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.3...v1.13.4) (2021-03-30)
+
+
+### Bug Fixes
+
+* add checks to variables that become undefined UI-435 ([010c0b0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/010c0b03bee1c40375eadcd562d6f6960614b73f))
+* properly set fallback for drizzle UI-435 ([9909128](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9909128f74de6796bb892947233e24ba49533bd2))
+
+## [1.13.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.2...v1.13.3) (2021-03-21)
+
+
+### Bug Fixes
+
+* market card display full width mobile, wallet button margin on sm screen UI-428 ([a2451ac](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a2451ac8846459ca0c907ecb3c73481706194ba9))
+
+## [1.13.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.1...v1.13.2) (2021-03-15)
+
+
+### Bug Fixes
+
+* allow withdraw without KYC UI-433 ([05b4ef4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/05b4ef40c55686634ab8642da36902dbe1f56a7d))
+
 ## [1.13.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.0...v1.13.1) (2021-02-22)
 
 
