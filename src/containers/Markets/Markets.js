@@ -32,18 +32,17 @@ const MarketsContainer = () => {
     }`;
 
     const collateralRatioContent = () => {
-        let displayedValue = 0;
-
         if (calculationsTotals && calculationsTotals.totalBorrowBalanceUSD) {
             if (
                 isFinite(calculationsTotals.totalCollateralRatio) &&
                 !isNaN(calculationsTotals.totalCollateralRatio)
-            )
-                // Will display 0 instead of Infinity
-                displayedValue = calculationsTotals.totalCollateralRatio;
+            ) {
+                const displayedValue = calculationsTotals.totalCollateralRatio;
+                return `${displayedValue}%`;
+            }
         }
 
-        return `${displayedValue}%`;
+        return "∞";
     };
 
     const totalDepositsContent = `$${
