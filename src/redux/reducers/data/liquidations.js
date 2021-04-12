@@ -11,7 +11,7 @@ const initialState = {
 };
 
 // Implement "reducer" function with initial state as default state
-export default (state = initialState, action) => {
+const liquidationsReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_LIQUIDATIONS_PENDING:
             return {
@@ -36,3 +36,5 @@ export default (state = initialState, action) => {
             return state;
     }
 };
+
+export default liquidationsReducer;

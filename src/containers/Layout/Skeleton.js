@@ -15,7 +15,7 @@ import { isLiquidator } from "redux/selectors/status";
 
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
-export default () => {
+const Skeleton = () => {
     const userWalletNetwork = useSelector(walletNetwork);
     const currentNetworkName = useSelector(walletNetworkName);
     const userWalletAddress = useSelector(walletAddress);
@@ -31,3 +31,5 @@ export default () => {
         />
     );
 };
+
+export default Skeleton;

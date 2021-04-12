@@ -36,7 +36,7 @@ const initialState = {
 };
 
 // Implement "reducer" function with initial state as default state
-export default (state = initialState, action) => {
+const lendReducer = (state = initialState, action) => {
     switch (action.type) {
         case "GOT_CONTRACT_VAR": {
             switch (action.variable) {
@@ -86,3 +86,5 @@ export default (state = initialState, action) => {
             return state;
     }
 };
+
+export default lendReducer;
