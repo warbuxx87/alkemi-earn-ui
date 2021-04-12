@@ -13,7 +13,6 @@ import { Provider } from "react-redux";
 import store from "containers/Drizzle/drizzleStore.js";
 
 import { ConnectedRouter } from "connected-react-router";
-import { hot } from "react-hot-loader/root";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -53,10 +52,8 @@ export class App extends Component {
     }
 }
 
-const AppWithHotReload = hot(App);
-
 ReactDOM.render(
-    <AppWithHotReload />,
+    <App />,
     document.getElementById("root") || document.createElement("div")
 );
 registerServiceWorker();
