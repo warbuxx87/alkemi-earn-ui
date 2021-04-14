@@ -12,7 +12,7 @@ import { setEthLendBalance } from "redux/actions/data/lend";
 import { setEthBorrowBalance } from "redux/actions/data/borrow";
 
 // Retrieve the user's wallet ether balance every 30 seconds
-export default () => {
+const useWatchEtherBalance = () => {
     const drizzle = useContext(DrizzleContext);
     const dispatch = useDispatch();
 
@@ -46,3 +46,5 @@ export default () => {
         };
     }, [address, walletConnected, drizzle, dispatch]);
 };
+
+export default useWatchEtherBalance;

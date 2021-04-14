@@ -126,8 +126,13 @@ export const getUSDPrice = (state) => {
                 (asset) => asset.args[0] === contractAddress
             );
 
-            if (USDCData && USDCData.value !== undefined)
-                return USDCData.value.slice(0, -12); // USDC has 12 trailling zeros
+            try {
+                if (USDCData && USDCData.value)
+                    return USDCData.value.slice(0, -12); // USDC has 12 trailling zeros
+            } catch (e) {
+                console.error(e);
+                return null;
+            }
         }
     }
 

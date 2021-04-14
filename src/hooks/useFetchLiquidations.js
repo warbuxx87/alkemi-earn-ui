@@ -6,7 +6,7 @@ import { walletNetworkName } from "redux/selectors/data/onboard";
 import { fetchLiquidations } from "redux/actions/data/liquidations";
 
 // Retrieve the liquidations (optionally every 15 seconds)
-export default (fetchPeriodically = false) => {
+const useFetchLiquidations = (fetchPeriodically = false) => {
     const dispatch = useDispatch();
 
     const currentNetworkName = useSelector(walletNetworkName);
@@ -35,3 +35,5 @@ export default (fetchPeriodically = false) => {
         };
     }, [currentNetworkName, dispatch, fetchPeriodically]);
 };
+
+export default useFetchLiquidations;
