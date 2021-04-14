@@ -1,3 +1,19 @@
+## [1.13.6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.5...v1.13.6) (2021-04-14)
+
+
+### Bug Fixes
+
+* error on variable that becomes null UI-441 ([f9ef6e9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f9ef6e92f664da11f97162c2d5dd06319aa98bb6))
+
+
+
+## [1.13.6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.5...v1.13.6) (2021-04-14)
+
+
+### Bug Fixes
+
+* error on variable that becomes null UI-441 ([f9ef6e9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f9ef6e92f664da11f97162c2d5dd06319aa98bb6))
+
 ## [1.13.5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.4...v1.13.5) (2021-04-01)
 
 
