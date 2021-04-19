@@ -14,7 +14,6 @@ import { fetchTx } from "redux/actions/data/tx";
 
 import { walletAddress } from "redux/selectors/data/onboard";
 
-// Retrieve the tx List every 60 seconds from EtherScan
 const useFetchTx = (fetchPeriodically = false) => {
     const drizzle = useContext(DrizzleContext);
     const dispatch = useDispatch();

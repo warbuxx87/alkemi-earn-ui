@@ -13,6 +13,7 @@ import DrizzleContext from "utils/DrizzleContext";
 import { onTx } from "redux/actions/status/transactions";
 
 import useOnboard from "hooks/useOnboard";
+import useFetchInterest from "hooks/useFetchInterest";
 
 // Section 3: Selectors
 import {
@@ -34,6 +35,7 @@ import { isWalletKYCd, getTransactions } from "redux/selectors/status";
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const { onConnect } = useOnboard();
+    useFetchInterest();
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
