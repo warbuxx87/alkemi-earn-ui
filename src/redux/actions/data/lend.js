@@ -62,7 +62,7 @@ const fetchInterestCall = ({
     if (!address) return;
     if (!url_map[currentNetworkName].interest_url) return;
 
-    const params = `?account=${address.toLowerCase()}&asset=${asset}&type=savings&startDate=01-01-2020&endDate=31-12-2999`; // TODO: replace with timestamp
+    const params = `?account=${address.toLowerCase()}&asset=${asset}&type=savings&timestamp=${Date.now()}&millisecondsBefore=86400`; // TODO: replace with timestamp
 
     const interestURL = url_map[currentNetworkName].interest_url + params;
 
@@ -75,13 +75,18 @@ const fetchInterestCall = ({
                 console.log({ data, asset });
                 const interestCallResult = JSON.parse(data);
 
-                dispatch(
-                    fetchInterestSuccess({
-                        calculatedInterest:
-                            interestCallResult.data.calculatedInterest,
-                        asset,
-                    })
-                );
+                if (["fail", "error"].includes(interestCallResult.status)) {
+                    // in case the backend errors out or the call above hasn't been merged yet to the API
+                    dispatch(fetchInterestError());
+                } else {
+                    dispatch(
+                        fetchInterestSuccess({
+                            calculatedInterest:
+                                interestCallResult.data.calculatedInterest,
+                            asset,
+                        })
+                    );
+                }
             }
         })
         .catch(() => {
