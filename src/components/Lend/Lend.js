@@ -43,6 +43,7 @@ function Lend({
 
     calculatedInterest,
     fetchInterestErrorStatus,
+    walletConnected,
 }) {
     const classes = useStyles();
     return (
@@ -56,6 +57,7 @@ function Lend({
                         <LendCardInterest
                             calculatedInterest={calculatedInterest}
                             fetchInterestErrorStatus={fetchInterestErrorStatus}
+                            walletConnected={walletConnected}
                         />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>

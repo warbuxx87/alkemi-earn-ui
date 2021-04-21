@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 function CardValue({
     calculatedInterest,
     fetchInterestErrorStatus,
-    className,
+    walletConnected,
 }) {
     const classes = useStyles();
     //const data = {
@@ -62,7 +62,15 @@ function CardValue({
     const [displayInterest, setDisplayInterest] = useState(loadingSkeleton);
 
     useEffect(() => {
-        if (fetchInterestErrorStatus) {
+        if (!walletConnected) {
+            setDisplayInterest(
+                <SplitNumber
+                    theNumber={"0.00"}
+                    shouldFormatNumber={false}
+                    centsClassName={classes.cents}
+                />
+            );
+        } else if (fetchInterestErrorStatus) {
             setDisplayInterest("TBD");
         } else if (calculatedInterest) {
             setDisplayInterest(
@@ -80,6 +88,7 @@ function CardValue({
         fetchInterestErrorStatus,
         classes.cents,
         loadingSkeleton,
+        walletConnected,
     ]);
 
     // Section 5: Code Component

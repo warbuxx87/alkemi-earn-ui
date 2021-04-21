@@ -77,6 +77,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             userWalletNetwork={userWalletNetwork}
             calculatedInterest={calculatedInterest}
             fetchInterestErrorStatus={fetchInterestErrorStatus}
+            walletConnected={walletConnected}
         />
     );
 };
