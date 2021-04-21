@@ -1,7 +1,7 @@
 // Sub Component
 
 // Section 1: React low level imports
-import React from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
@@ -15,7 +15,10 @@ import {
     makeStyles,
 } from "@material-ui/core";
 
+import { Skeleton } from "@material-ui/lab"; // Skeleton is still in lab and not in core (or atleast no export yet, seems that they forgot to do so)
+
 // Section 3: Components & Containers import from the application
+import SplitNumber from "components/UI/SplitNumber";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -32,15 +35,52 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "center",
         justifyContent: "center",
     },
+    cents: {
+        color: theme.palette.text.secondary,
+    },
 }));
 
-function CardValue({ className, ...rest }) {
+function CardValue({
+    calculatedInterest,
+    fetchInterestErrorStatus,
+    className,
+}) {
     const classes = useStyles();
     //const data = {
     //      value: (0.0).toFixed(2),
     //      currency: "$",
     //      difference: 0,
     //   };
+
+    const loadingSkeleton = useMemo(
+        () => (
+            <Skeleton variant="rect" width={137} height={20} animation="wave" />
+        ),
+        []
+    );
+
+    const [displayInterest, setDisplayInterest] = useState(loadingSkeleton);
+
+    useEffect(() => {
+        if (fetchInterestErrorStatus) {
+            setDisplayInterest("TBD");
+        } else if (calculatedInterest) {
+            setDisplayInterest(
+                <SplitNumber
+                    theNumber={calculatedInterest}
+                    shouldFormatNumber={false}
+                    centsClassName={classes.cents}
+                />
+            );
+        } else {
+            setDisplayInterest(loadingSkeleton);
+        }
+    }, [
+        calculatedInterest,
+        fetchInterestErrorStatus,
+        classes.cents,
+        loadingSkeleton,
+    ]);
 
     // Section 5: Code Component
     return (
@@ -59,7 +99,7 @@ function CardValue({ className, ...rest }) {
                     <Typography variant="h3" color="textPrimary">
                         {/* {data.currency}
                         {data.value}*/}
-                        TBD
+                        {displayInterest}
                     </Typography>
                 </Box>
             </CardContent>

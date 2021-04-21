@@ -40,6 +40,9 @@ function Lend({
     txs,
     walletIsKYCd,
     userWalletNetwork,
+
+    calculatedInterest,
+    fetchInterestErrorStatus,
 }) {
     const classes = useStyles();
     return (
@@ -50,7 +53,10 @@ function Lend({
                         <LendCardValue />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <LendCardInterest />
+                        <LendCardInterest
+                            calculatedInterest={calculatedInterest}
+                            fetchInterestErrorStatus={fetchInterestErrorStatus}
+                        />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
                         <LendCardAPY />

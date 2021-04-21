@@ -20,6 +20,8 @@ import {
     getLendError,
     getLendActive,
     getLendInactive,
+    getCalculatedInterests,
+    getInterestErrorStatus,
 } from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -48,6 +50,9 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
 
+    const calculatedInterest = useSelector(getCalculatedInterests);
+    const fetchInterestErrorStatus = useSelector(getInterestErrorStatus);
+
     const activateAsset = (asset) =>
         onActivate({
             drizzle,
@@ -70,6 +75,8 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             txs={txs}
             walletIsKYCd={walletIsKYCd}
             userWalletNetwork={userWalletNetwork}
+            calculatedInterest={calculatedInterest}
+            fetchInterestErrorStatus={fetchInterestErrorStatus}
         />
     );
 };
