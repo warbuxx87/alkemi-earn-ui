@@ -54,7 +54,7 @@ function CardValue({
 
     const loadingSkeleton = useMemo(
         () => (
-            <Skeleton variant="rect" width={137} height={20} animation="wave" />
+            <Skeleton variant="rect" width={137} height={25} animation="wave" />
         ),
         []
     );
