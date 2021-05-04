@@ -13,6 +13,7 @@ import Markets from "containers/Markets/Markets";
 import History from "containers/History/History";
 import Liquidate from "containers/Liquidate/Liquidate";
 import Swap from "containers/Swap/Swap";
+import SignIn from "containers/SignIn/SignIn";
 import NoWhere from "components/NoWhere/NoWhere";
 
 import {
@@ -23,6 +24,7 @@ import {
     MARKETS,
     LIQUIDATE,
     SWAP,
+    SIGN_IN,
 } from "constants/routes";
 
 import { isLiquidator } from "redux/selectors/status";
@@ -45,6 +47,7 @@ const LayoutContent = () => {
                     component={walletIsLiquidator ? Liquidate : NoWhere}
                 />
                 <Route path={SWAP} exact component={Swap} />
+                <Route path={SIGN_IN} exact component={SignIn} />
                 <Route component={NoWhere} />
             </Switch>
         </div>
