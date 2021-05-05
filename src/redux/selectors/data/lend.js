@@ -263,7 +263,7 @@ export const getCalculatedInterests = (state) => {
         } catch (e) {}
     }
 
-    return totalCalculatedInterest.toString();
+    return totalCalculatedInterest.toFixed(18);
 };
 
 export const getInterestErrorStatus = (state) => {
