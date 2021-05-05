@@ -7,3 +7,4 @@ export const HISTORY = "/history";
 export const LIQUIDATE = "/liquidate";
 export const SWAP = "/swap";
 export const SIGN_IN = "/signin";
+export const KYC_DASHBOARD = "/kycdashboard";

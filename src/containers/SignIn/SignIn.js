@@ -1,7 +1,7 @@
 // Main Container
 
 // Section 1: React/Redux low level imports
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useForm } from "react-hook-form";
@@ -13,19 +13,30 @@ import SignIn from "components/SignIn/SignIn";
 
 import { signIn } from "redux/actions/status/auth";
 
+import { KYC_DASHBOARD } from "constants/routes";
+
 // Section 3: Selectors
 import { getAuth } from "redux/selectors/status/auth";
 
 import { walletNetworkName } from "redux/selectors/data/onboard";
 
 // Section 4: Container
-const SignInContainer = () => {
+const SignInContainer = ({ ...props }) => {
     const dispatch = useDispatch();
 
     const currentNetworkName = useSelector(walletNetworkName);
     const authList = useSelector(getAuth);
 
-    console.log("authList: ", authList);
+    useEffect(() => {
+        console.log("state in sign in: ", currentNetworkName, authList);
+        if (currentNetworkName && authList[currentNetworkName]) {
+            props.history.push(KYC_DASHBOARD);
+        }
+
+        // if(!currentNetworkName && authList['main']) {
+        //     props.history.push(DASHBOARD)
+        // }
+    }, [authList, props.history]);
 
     const {
         register,

@@ -22,12 +22,13 @@ const fetchSignInPending = () => ({
 export const FETCH_SIGN_IN_SUCCESS = "FETCH_SIGN_IN_SUCCESS";
 
 // Declare action creator
-const fetchSignInSuccess = ({ accessToken, network }) => ({
+const fetchSignInSuccess = ({ accessToken, network, isAdmin }) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_SIGN_IN_SUCCESS,
     payload: {
         accessToken,
         network,
+        isAdmin,
     },
 });
 
@@ -43,7 +44,20 @@ const fetchSignInError = (error) => ({
 });
 
 //                                               //
-// ---------------- RESET SIGN_IN DATA -------------- //
+// ---------------- RESTORE AUTH DATA ------------ //
+//                                               //
+
+export const RESTORE_AUTH_DATA = "RESTORE_AUTH_DATA";
+
+export const restoreAuthData = (auth) => ({
+    type: RESTORE_AUTH_DATA,
+    payload: {
+        auth,
+    },
+});
+
+//                                               //
+// ---------------- RESET AUTH DATA ------------ //
 //                                               //
 
 export const RESET_AUTH_DATA = "RESET_AUTH_DATA";
@@ -83,10 +97,16 @@ export const signIn = ({ email, password, strategy, currentNetworkName }) => (
             if (data) {
                 const userSignIn = JSON.parse(data);
 
+                console.log({
+                    accessToken: userSignIn.accessToken,
+                    network: selectedNetwork,
+                });
+
                 dispatch(
                     fetchSignInSuccess({
                         accessToken: userSignIn.accessToken,
                         network: selectedNetwork,
+                        isAdmin: userSignIn.user.isAdmin,
                     })
                 );
             }

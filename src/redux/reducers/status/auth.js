@@ -3,6 +3,7 @@ import {
     FETCH_SIGN_IN_PENDING,
     FETCH_SIGN_IN_SUCCESS,
     FETCH_SIGN_IN_ERROR,
+    RESTORE_AUTH_DATA,
     RESET_AUTH_DATA,
 } from "redux/actions/status/auth";
 // import internal assets
@@ -20,8 +21,18 @@ const lendReducer = (state = initialState, action) => {
                 ...state,
                 auth: {
                     ...state.assets,
-                    [action.payload.network]: action.payload.accessToken,
+                    [action.payload.network]: {
+                        accessToken: action.payload.accessToken,
+                        isAdmin: action.payload.isAdmin,
+                    },
                 },
+            };
+        }
+
+        case RESTORE_AUTH_DATA: {
+            return {
+                ...state,
+                auth: action.payload.auth,
             };
         }
 

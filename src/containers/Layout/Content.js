@@ -14,6 +14,7 @@ import History from "containers/History/History";
 import Liquidate from "containers/Liquidate/Liquidate";
 import Swap from "containers/Swap/Swap";
 import SignIn from "containers/SignIn/SignIn";
+import KycDashboard from "containers/KycDashboard/KycDashboard";
 import NoWhere from "components/NoWhere/NoWhere";
 
 import {
@@ -25,6 +26,7 @@ import {
     LIQUIDATE,
     SWAP,
     SIGN_IN,
+    KYC_DASHBOARD,
 } from "constants/routes";
 
 import { isLiquidator } from "redux/selectors/status/general";
@@ -48,6 +50,7 @@ const LayoutContent = () => {
                 />
                 <Route path={SWAP} exact component={Swap} />
                 <Route path={SIGN_IN} exact component={SignIn} />
+                <Route path={KYC_DASHBOARD} exact component={KycDashboard} />
                 <Route component={NoWhere} />
             </Switch>
         </div>
