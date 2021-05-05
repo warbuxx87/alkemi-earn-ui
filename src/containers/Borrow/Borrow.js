@@ -28,7 +28,7 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status/general";
 
 // Section 4: components
 import Borrow from "components/Borrow/Borrow";

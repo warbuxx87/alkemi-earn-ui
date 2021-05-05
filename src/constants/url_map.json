@@ -4,27 +4,39 @@
         "markets_url": "https://api.alkemi.network/markets",
         "accounts_url": "https://api.alkemi.network/accounts",
         "liquidations_url": "https://api.alkemi.network/liquidations",
-        "reports_url": "https://api.alkemi.network/reports"
+        "reports_url": "https://api.alkemi.network/reports",
+        "authentication_url": "https://api.alkemi.network/authentication",
+        "kycapplications_url": "https://api.alkemi.network/kycapplications",
+        "kycusers_url": "https://api.alkemi.network/kycusers"
     },
     "rinkeby": {
         "history_url": "https://rinkeby.api.alkemi.network/history",
         "markets_url": "https://rinkeby.api.alkemi.network/markets",
         "accounts_url": "https://rinkeby.api.alkemi.network/accounts",
         "liquidations_url": "https://rinkeby.api.alkemi.network/liquidations",
-        "reports_url": "https://rinkeby.api.alkemi.network/reports"
+        "reports_url": "https://rinkeby.api.alkemi.network/reports",
+        "authentication_url": "https://rinkeby.api.alkemi.network/authentication",
+        "kycapplications_url": "https://rinkeby.api.alkemi.network/kycapplications",
+        "kycusers_url": "https://rinkeby.api.alkemi.network/kycusers"
     },
     "ropsten": {
         "history_url": "https://ropsten.api.alkemi.network/history",
         "markets_url": "https://ropsten.api.alkemi.network/markets",
         "accounts_url": "https://ropsten.api.alkemi.network/accounts",
         "liquidations_url": "https://ropsten.api.alkemi.network/liquidations",
-        "reports_url": "https://ropsten.api.alkemi.network/reports"
+        "reports_url": "https://ropsten.api.alkemi.network/reports",
+        "authentication_url": "https://ropsten.api.alkemi.network/authentication",
+        "kycapplications_url": "https://ropsten.api.alkemi.network/kycapplications",
+        "kycusers_url": "https://ropsten.api.alkemi.network/kycusers"
     },
     "kovan": {
         "history_url": "https://kovan.api.alkemi.network/history",
         "markets_url": "https://kovan.api.alkemi.network/markets",
         "accounts_url": "https://kovan.api.alkemi.network/accounts",
         "liquidations_url": "https://kovan.api.alkemi.network/liquidations",
-        "reports_url": "https://kovan.api.alkemi.network/reports"
+        "reports_url": "https://kovan.api.alkemi.network/reports",
+        "authentication_url": "https://kovan.api.alkemi.network/authentication",
+        "kycapplications_url": "https://kovan.api.alkemi.network/kycapplications",
+        "kycusers_url": "https://kovan.api.alkemi.network/kycusers"
     }
 }

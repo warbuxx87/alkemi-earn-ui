@@ -45,53 +45,39 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function SignIn({
-    handleSubmit,
-    handleChange,
-    values,
-    touched,
-    errors,
-    handleBlur,
-}) {
+function SignIn({ handleSubmit, errors, register, onSubmit }) {
     const classes = useStyles();
     return (
         <Container maxWidth={false} className={classes.container}>
-            <form className={classes.form} onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={classes.inputWrap}>
                     <Input
-                        disableUnderline={true}
-                        className={classes.input}
+                        noValidate
                         placeholder="user@alkemi.ai"
+                        {...register("email")}
                         type="email"
                         fullWidth={true}
-                        id="email"
-                        name="email"
-                        value={values.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
+                        disableUnderline={true}
+                        className={classes.input}
                     />
-                    {touched.email && errors.email ? (
-                        <div>{errors.email}</div>
-                    ) : null}
+                    {errors && errors.email && (
+                        <div>{errors.email.message}</div>
+                    )}
                 </div>
 
                 <div className={classes.inputWrap}>
                     <Input
-                        disableUnderline={true}
-                        className={classes.input}
-                        placeholder="password"
+                        noValidate
+                        placeholder="********"
+                        {...register("password")}
                         type="password"
                         fullWidth={true}
-                        id="password"
-                        name="password"
-                        value={values.password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
+                        disableUnderline={true}
+                        className={classes.input}
                     />
-
-                    {touched.password && errors.password ? (
-                        <div>{errors.password}</div>
-                    ) : null}
+                    {errors && errors.password && (
+                        <div>{errors.password.message}</div>
+                    )}
                 </div>
 
                 <Box mt={4}>

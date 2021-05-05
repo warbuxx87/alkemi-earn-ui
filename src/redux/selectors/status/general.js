@@ -1,4 +1,4 @@
-// Libs
+// Misc retrieval of status info
 // import { createSelector } from "reselect";
 import _ from "lodash";
 

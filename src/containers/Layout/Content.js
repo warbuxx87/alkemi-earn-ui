@@ -27,7 +27,7 @@ import {
     SIGN_IN,
 } from "constants/routes";
 
-import { isLiquidator } from "redux/selectors/status";
+import { isLiquidator } from "redux/selectors/status/general";
 
 const LayoutContent = () => {
     const walletIsLiquidator = useSelector(isLiquidator);

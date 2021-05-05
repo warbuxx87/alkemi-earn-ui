@@ -21,7 +21,7 @@ import {
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status/general";
 
 const DrawerAllocateContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);

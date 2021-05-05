@@ -11,7 +11,7 @@ import {
     walletNetworkName,
 } from "redux/selectors/data/onboard";
 
-import { isLiquidator } from "redux/selectors/status";
+import { isLiquidator } from "redux/selectors/status/general";
 
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
