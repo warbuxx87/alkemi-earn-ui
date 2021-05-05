@@ -22,11 +22,12 @@ const fetchSignInPending = () => ({
 export const FETCH_SIGN_IN_SUCCESS = "FETCH_SIGN_IN_SUCCESS";
 
 // Declare action creator
-const fetchSignInSuccess = (signIn) => ({
+const fetchSignInSuccess = ({ accessToken, network }) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: FETCH_SIGN_IN_SUCCESS,
     payload: {
-        signIn,
+        accessToken,
+        network,
     },
 });
 
@@ -45,10 +46,10 @@ const fetchSignInError = (error) => ({
 // ---------------- RESET SIGN_IN DATA -------------- //
 //                                               //
 
-export const RESET_SIGN_IN_DATA = "RESET_SIGN_IN_DATA";
+export const RESET_AUTH_DATA = "RESET_AUTH_DATA";
 
-const resetSignInData = () => ({
-    type: RESET_SIGN_IN_DATA,
+const resetAuthData = () => ({
+    type: RESET_AUTH_DATA,
 });
 
 // Section 3: Action dispatch methods and async funcs
@@ -82,9 +83,12 @@ export const signIn = ({ email, password, strategy, currentNetworkName }) => (
             if (data) {
                 const userSignIn = JSON.parse(data);
 
-                console.log("userSignIn: ", userSignIn);
-
-                dispatch(fetchSignInSuccess(userSignIn));
+                dispatch(
+                    fetchSignInSuccess({
+                        accessToken: userSignIn.accessToken,
+                        network: selectedNetwork,
+                    })
+                );
             }
         })
         .catch((error) => {

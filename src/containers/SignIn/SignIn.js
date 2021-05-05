@@ -14,9 +14,7 @@ import SignIn from "components/SignIn/SignIn";
 import { signIn } from "redux/actions/status/auth";
 
 // Section 3: Selectors
-// import {
-
-// } from "redux/selectors/data/xxx";
+import { getAuth } from "redux/selectors/status/auth";
 
 import { walletNetworkName } from "redux/selectors/data/onboard";
 
@@ -25,11 +23,14 @@ const SignInContainer = () => {
     const dispatch = useDispatch();
 
     const currentNetworkName = useSelector(walletNetworkName);
+    const authList = useSelector(getAuth);
+
+    console.log("authList: ", authList);
 
     const {
         register,
         handleSubmit,
-        watch,
+        // watch,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(
