@@ -29,6 +29,7 @@ const SignInContainer = ({ ...props }) => {
 
     useEffect(() => {
         console.log("state in sign in: ", currentNetworkName, authList);
+        // TODO: put proper checks
         if (currentNetworkName && authList[currentNetworkName]) {
             props.history.push(KYC_DASHBOARD);
         }

@@ -6,24 +6,31 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Section 2: internal imports
 
-import { DASHBOARD, SIGN_IN } from "constants/routes";
+import KycDashboard from "components/KycDashboard/KycDashboard";
+
+import { SIGN_IN } from "constants/routes";
 
 // Section 3: Selectors
 import { getAuth } from "redux/selectors/status/auth";
 
 import { walletNetworkName } from "redux/selectors/data/onboard";
+import useFetchKycData from "hooks/useFetchKycData";
+import { getKycApplications } from "redux/selectors/data/kyc";
 
 // Section 4: Container
-const SignInContainer = ({ ...props }) => {
+const KycDashboardContainer = ({ ...props }) => {
+    useFetchKycData();
+
     const currentNetworkName = useSelector(walletNetworkName);
     const authList = useSelector(getAuth);
 
+    const kycApplications = useSelector(getKycApplications);
+
     useEffect(() => {
-        console.log(
-            "state in sign in KYC dashboard: ",
-            currentNetworkName,
-            authList
-        );
+        if (currentNetworkName && !authList[currentNetworkName]) {
+            props.history.push(SIGN_IN);
+        }
+
         // if(currentNetworkName && authList[currentNetworkName]) {
         //     props.history.push(SIGN_IN)
         // } else if(!currentNetworkName && authList['main']) {
@@ -31,8 +38,13 @@ const SignInContainer = ({ ...props }) => {
         // } // TODO: check not admin
     }, [authList, props.history]);
 
-    return <span>KYC DASHBOARD</span>;
+    return (
+        <KycDashboard
+            kycApplications={kycApplications}
+            currentNetworkName={currentNetworkName}
+        />
+    );
 };
 
 // Section 5: Export
-export default SignInContainer;
+export default KycDashboardContainer;

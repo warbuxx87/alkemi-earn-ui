@@ -319,6 +319,17 @@ export const openEtherScan = (hash, currentNetworkName) => {
     return url;
 };
 
+export const openEtherScanAddress = (address, currentNetworkName) => {
+    let urlBase = `https://${currentNetworkName}.etherscan.io/address/`;
+    // mainnet does not resolve main.etherscan.io change to root etherscan.io
+    if (currentNetworkName === "main") {
+        urlBase = `https://etherscan.io/address/`;
+    }
+    const url = urlBase + address;
+
+    return url;
+};
+
 export const addressParser = (address) =>
     `${address.substr(0, 4)}..${address.substr(address.length - 4, 4)}`;
 

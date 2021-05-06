@@ -14,7 +14,7 @@ const initialState = {
 };
 
 // Implement "reducer" function with initial state as default state
-const lendReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_SIGN_IN_SUCCESS: {
             return {
@@ -44,4 +44,4 @@ const lendReducer = (state = initialState, action) => {
     }
 };
 
-export default lendReducer;
+export default authReducer;

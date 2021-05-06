@@ -22,17 +22,11 @@ const useWatchAuth = () => {
         // TODO: move all localstorage into a single main object
         var retrievedAuth = localStorage.getItem("auth");
 
-        console.log("0 retrievedAuth: ", JSON.parse(retrievedAuth));
-
         dispatch(restoreAuthData(JSON.parse(retrievedAuth)));
     }, []);
 
     useEffect(() => {
-        // if(initFromLocalStorage) {
-        console.log("1 save to local storage: ", JSON.stringify(authList));
-
         // save to local storage
-        console.log("authList: ", authList);
         if (authList) localStorage.setItem("auth", JSON.stringify(authList));
         // }
 
