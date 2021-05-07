@@ -1,8 +1,8 @@
 // Main Container
 
 // Section 1: React/Redux low level imports
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 // Section 2: internal imports
 
@@ -30,7 +30,7 @@ const KycDashboardContainer = ({ ...props }) => {
     const kycApplications = useSelector(getKycApplications);
     const previouslyKycdWallets = useSelector(getPreviouslyKycdWallets);
 
-    console.log("---------------------- ", previouslyKycdWallets);
+    const [kycdWithoutApplications, setKycdWithoutApplications] = useState([]);
 
     useEffect(() => {
         if (currentNetworkName && !authList[currentNetworkName]) {
@@ -44,11 +44,35 @@ const KycDashboardContainer = ({ ...props }) => {
         // } // TODO: check not admin
     }, [authList, props.history]);
 
+    useEffect(() => {
+        if (previouslyKycdWallets) {
+            const kycdWalletsWithoutApplications = [];
+            Object.entries(previouslyKycdWallets).forEach(([key, value]) => {
+                if (value === true) {
+                    const found =
+                        kycApplications && Array.isArray(kycApplications)
+                            ? kycApplications.find((application) => {
+                                  return application.ethAddress === key;
+                              })
+                            : false;
+
+                    if (!found)
+                        kycdWalletsWithoutApplications.push({
+                            ethAddress: key,
+                        });
+                }
+            });
+
+            setKycdWithoutApplications(kycdWalletsWithoutApplications);
+        }
+    }, [kycApplications, previouslyKycdWallets]);
+
     return (
         <KycDashboard
             kycApplications={kycApplications}
             currentNetworkName={currentNetworkName}
             previouslyKycdWallets={previouslyKycdWallets}
+            kycdWithoutApplications={kycdWithoutApplications}
         />
     );
 };
