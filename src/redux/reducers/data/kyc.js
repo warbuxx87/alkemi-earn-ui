@@ -1,10 +1,18 @@
 // Import action of interest as constants
-import { SET_KYC_APPLICATIONS } from "redux/actions/data/kyc";
+import {
+    SET_KYC_APPLICATIONS,
+    SET_PREVIOUSLY_KYCD_WALLETS,
+} from "redux/actions/data/kyc";
 // import internal assets
 
 // Define initial state
 const initialState = {
     kycApplications: {
+        data: [],
+        fetched: false, // TODO: use to display loader
+    },
+
+    previouslyKycdWallets: {
         data: [],
         fetched: false, // TODO: use to display loader
     },
@@ -19,6 +27,16 @@ const kycReducer = (state = initialState, action) => {
                 kycApplications: {
                     fetched: true,
                     data: action.payload.kycApplications,
+                },
+            };
+        }
+
+        case SET_PREVIOUSLY_KYCD_WALLETS: {
+            return {
+                ...state,
+                previouslyKycdWallets: {
+                    fetched: true,
+                    data: action.payload.previouslyKycdWallets,
                 },
             };
         }

@@ -15,4 +15,15 @@ export const setKycApplications = (kycApplications) => ({
     },
 });
 
+export const SET_PREVIOUSLY_KYCD_WALLETS = "SET_PREVIOUSLY_KYCD_WALLETS";
+
+// Declare action creator
+export const setPreviouslyKycdWallets = (previouslyKycdWallets) => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: SET_PREVIOUSLY_KYCD_WALLETS,
+    payload: {
+        previouslyKycdWallets,
+    },
+});
+
 // Section 3: Action dispatch methods and async funcs

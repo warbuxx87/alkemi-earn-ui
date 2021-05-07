@@ -7,7 +7,8 @@
         "reports_url": "https://api.alkemi.network/reports",
         "authentication_url": "https://api.alkemi.network/authentication",
         "kycapplications_url": "https://api.alkemi.network/kycapplications",
-        "kycusers_url": "https://api.alkemi.network/kycusers"
+        "kycusers_url": "https://api.alkemi.network/kycusers",
+        "checkkyc_url": "https://api.alkemi.network/checkKyc"
     },
     "rinkeby": {
         "history_url": "https://rinkeby.api.alkemi.network/history",
@@ -17,7 +18,8 @@
         "reports_url": "https://rinkeby.api.alkemi.network/reports",
         "authentication_url": "https://rinkeby.api.alkemi.network/authentication",
         "kycapplications_url": "https://rinkeby.api.alkemi.network/kycapplications",
-        "kycusers_url": "https://rinkeby.api.alkemi.network/kycusers"
+        "kycusers_url": "https://rinkeby.api.alkemi.network/kycusers",
+        "checkkyc_url": "https://rinkeby.api.alkemi.network/checkKyc"
     },
     "ropsten": {
         "history_url": "https://ropsten.api.alkemi.network/history",
@@ -27,7 +29,8 @@
         "reports_url": "https://ropsten.api.alkemi.network/reports",
         "authentication_url": "https://ropsten.api.alkemi.network/authentication",
         "kycapplications_url": "https://ropsten.api.alkemi.network/kycapplications",
-        "kycusers_url": "https://ropsten.api.alkemi.network/kycusers"
+        "kycusers_url": "https://ropsten.api.alkemi.network/kycusers",
+        "checkkyc_url": "https://ropsten.api.alkemi.network/checkKyc"
     },
     "kovan": {
         "history_url": "https://kovan.api.alkemi.network/history",
@@ -37,6 +40,7 @@
         "reports_url": "https://kovan.api.alkemi.network/reports",
         "authentication_url": "https://kovan.api.alkemi.network/authentication",
         "kycapplications_url": "https://kovan.api.alkemi.network/kycapplications",
-        "kycusers_url": "https://kovan.api.alkemi.network/kycusers"
+        "kycusers_url": "https://kovan.api.alkemi.network/kycusers",
+        "checkkyc_url": "https://kovan.api.alkemi.network/checkKyc"
     }
 }
