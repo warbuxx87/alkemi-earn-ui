@@ -5,12 +5,9 @@ import React from "react";
 
 // Section 2: Material-UI imports
 import {
-    Box,
     Card,
     CardHeader,
-    FormControlLabel,
     Paper,
-    Switch,
     Table,
     TableBody,
     TableContainer,
@@ -28,7 +25,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Section 3: Components & Containers import from the application
 
-import { openEtherScanAddress, addressParser } from "utils/ui";
+import { openEtherScanAddress } from "utils/ui";
 
 import TableCell from "components/UI/TableCell";
 

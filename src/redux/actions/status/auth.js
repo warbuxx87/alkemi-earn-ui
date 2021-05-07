@@ -1,5 +1,4 @@
 // Section 1: Utilities imports and low level imports
-import _ from "lodash";
 
 const url_map = require("constants/url_map.json");
 
@@ -12,11 +11,11 @@ const url_map = require("constants/url_map.json");
 // Declare action type as a constant
 export const FETCH_SIGN_IN_PENDING = "FETCH_SIGN_IN_PENDING";
 
-// Declare action creator
-const fetchSignInPending = () => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_SIGN_IN_PENDING,
-});
+// // Declare action creator
+// const fetchSignInPending = () => ({
+//     // Respect FSA standard format (type, payload, meta properties)
+//     type: FETCH_SIGN_IN_PENDING,
+// });
 
 // Declare action type as a constant
 export const FETCH_SIGN_IN_SUCCESS = "FETCH_SIGN_IN_SUCCESS";
@@ -35,13 +34,13 @@ const fetchSignInSuccess = ({ accessToken, network, isAdmin }) => ({
 // Declare action type as a constant
 export const FETCH_SIGN_IN_ERROR = "FETCH_SIGN_IN_ERROR";
 
-// Declare action creator
-const fetchSignInError = (error) => ({
-    // Respect FSA standard format (type, payload, meta properties)
-    type: FETCH_SIGN_IN_ERROR,
-    payload: new Error(),
-    error: true,
-});
+// // Declare action creator
+// const fetchSignInError = (error) => ({
+//     // Respect FSA standard format (type, payload, meta properties)
+//     type: FETCH_SIGN_IN_ERROR,
+//     payload: new Error(),
+//     error: true,
+// });
 
 //                                               //
 // ---------------- RESTORE AUTH DATA ------------ //
@@ -62,9 +61,9 @@ export const restoreAuthData = (auth) => ({
 
 export const RESET_AUTH_DATA = "RESET_AUTH_DATA";
 
-const resetAuthData = () => ({
-    type: RESET_AUTH_DATA,
-});
+// const resetAuthData = () => ({
+//     type: RESET_AUTH_DATA,
+// });
 
 // Section 3: Action dispatch methods and async funcs
 export const signIn = ({ email, password, strategy, currentNetworkName }) => (

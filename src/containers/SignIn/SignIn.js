@@ -36,7 +36,7 @@ const SignInContainer = ({ ...props }) => {
         // if(!currentNetworkName && authList['main']) {
         //     props.history.push(DASHBOARD)
         // }
-    }, [authList, props.history]);
+    }, [authList, props.history, currentNetworkName]);
 
     const {
         register,

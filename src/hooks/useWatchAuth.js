@@ -1,7 +1,7 @@
 // Retrieve auth on start, also saves it to local storage (jwt token) when
 
 // Section 1: React/Redux low level imports
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Section 2: internal imports
@@ -23,7 +23,7 @@ const useWatchAuth = () => {
         var retrievedAuth = localStorage.getItem("auth");
 
         dispatch(restoreAuthData(JSON.parse(retrievedAuth)));
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         // save to local storage

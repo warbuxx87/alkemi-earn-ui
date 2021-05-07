@@ -1,8 +1,6 @@
 // Import action of interest as constants
 import {
-    FETCH_SIGN_IN_PENDING,
     FETCH_SIGN_IN_SUCCESS,
-    FETCH_SIGN_IN_ERROR,
     RESTORE_AUTH_DATA,
     RESET_AUTH_DATA,
 } from "redux/actions/status/auth";

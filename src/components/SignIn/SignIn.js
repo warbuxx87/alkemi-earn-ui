@@ -2,7 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
 import { makeStyles, Input, Container, Button, Box } from "@material-ui/core";

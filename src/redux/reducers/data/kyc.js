@@ -3,7 +3,6 @@ import {
     SET_KYC_APPLICATIONS,
     SET_PREVIOUSLY_KYCD_WALLET,
 } from "redux/actions/data/kyc";
-import data from ".";
 // import internal assets
 
 // Define initial state

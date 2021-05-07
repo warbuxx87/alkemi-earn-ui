@@ -5,12 +5,9 @@ import React from "react";
 
 // Section 2: Material-UI imports
 import {
-    Box,
     Card,
     CardHeader,
-    FormControlLabel,
     Paper,
-    Switch,
     Table,
     TableBody,
     TableContainer,

@@ -42,7 +42,7 @@ const KycDashboardContainer = ({ ...props }) => {
         // } else if(!currentNetworkName && authList['main']) {
         //     props.history.push(SIGN_IN)
         // } // TODO: check not admin
-    }, [authList, props.history]);
+    }, [authList, props.history, currentNetworkName]);
 
     useEffect(() => {
         if (previouslyKycdWallets) {
@@ -65,7 +65,7 @@ const KycDashboardContainer = ({ ...props }) => {
 
             setKycdWithoutApplications(kycdWalletsWithoutApplications);
         }
-    }, [kycApplications, previouslyKycdWallets]);
+    }, [kycApplications, previouslyKycdWallets, currentNetworkName]);
 
     return (
         <KycDashboard
