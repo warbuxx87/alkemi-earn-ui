@@ -15,14 +15,14 @@ export const setKycApplications = (kycApplications) => ({
     },
 });
 
-export const SET_PREVIOUSLY_KYCD_WALLETS = "SET_PREVIOUSLY_KYCD_WALLETS";
+export const SET_PREVIOUSLY_KYCD_WALLET = "SET_PREVIOUSLY_KYCD_WALLET";
 
 // Declare action creator
-export const setPreviouslyKycdWallets = (previouslyKycdWallets) => ({
+export const setPreviouslyKycdWallet = (previouslyKycdWallet) => ({
     // Respect FSA standard format (type, payload, meta properties)
-    type: SET_PREVIOUSLY_KYCD_WALLETS,
+    type: SET_PREVIOUSLY_KYCD_WALLET,
     payload: {
-        previouslyKycdWallets,
+        previouslyKycdWallet,
     },
 });
 

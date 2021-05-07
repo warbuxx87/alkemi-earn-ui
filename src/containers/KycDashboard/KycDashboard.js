@@ -15,7 +15,10 @@ import { getAuth } from "redux/selectors/status/auth";
 
 import { walletNetworkName } from "redux/selectors/data/onboard";
 import useFetchKycData from "hooks/useFetchKycData";
-import { getKycApplications } from "redux/selectors/data/kyc";
+import {
+    getKycApplications,
+    getPreviouslyKycdWallets,
+} from "redux/selectors/data/kyc";
 
 // Section 4: Container
 const KycDashboardContainer = ({ ...props }) => {
@@ -25,6 +28,9 @@ const KycDashboardContainer = ({ ...props }) => {
     const authList = useSelector(getAuth);
 
     const kycApplications = useSelector(getKycApplications);
+    const previouslyKycdWallets = useSelector(getPreviouslyKycdWallets);
+
+    console.log("---------------------- ", previouslyKycdWallets);
 
     useEffect(() => {
         if (currentNetworkName && !authList[currentNetworkName]) {
@@ -42,6 +48,7 @@ const KycDashboardContainer = ({ ...props }) => {
         <KycDashboard
             kycApplications={kycApplications}
             currentNetworkName={currentNetworkName}
+            previouslyKycdWallets={previouslyKycdWallets}
         />
     );
 };

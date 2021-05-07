@@ -54,22 +54,26 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 
-    approvedStatus: {
+    greenStatus: {
         color: "#00e676",
     },
-    InProgressStatus: {
+    yellowStatus: {
         color: "#ffeb3b",
     },
     ReadyForReviewStatus: {
         color: "#2979ff",
     },
-    CancelledStatus: {
+    redStatus: {
         color: "#f50057",
     },
 }));
 
 // Section 5: Code Component
-const ApplicationsList = ({ kycApplications, currentNetworkName }) => {
+const ApplicationsList = ({
+    kycApplications,
+    currentNetworkName,
+    previouslyKycdWallets,
+}) => {
     const classes = useStyles();
 
     const displayOwners = (owners) => {
@@ -88,7 +92,7 @@ const ApplicationsList = ({ kycApplications, currentNetworkName }) => {
 
     const displayStatus = (status) => {
         if (status === "Approved") {
-            return <span className={classes.approvedStatus}>{status}</span>;
+            return <span className={classes.greenStatus}>{status}</span>;
         }
 
         if (status === "Ready For Review") {
@@ -98,14 +102,31 @@ const ApplicationsList = ({ kycApplications, currentNetworkName }) => {
         }
 
         if (status === "In Progress") {
-            return <span className={classes.InProgressStatus}>{status}</span>;
+            return <span className={classes.yellowStatus}>{status}</span>;
         }
 
         if (status === "Cancelled") {
-            return <span className={classes.CancelledStatus}>{status}</span>;
+            return <span className={classes.redStatus}>{status}</span>;
         }
 
         return <span>{status}</span>;
+    };
+
+    const displayOnchainStatus = (wallet, previouslyKycdWallets) => {
+        if (wallet) {
+            if (previouslyKycdWallets[wallet] === true)
+                return <span className={classes.greenStatus}>KYC enabled</span>;
+            if (previouslyKycdWallets[wallet] === false)
+                return <span className={classes.redStatus}>KYC disabled</span>;
+            else
+                return (
+                    <span className={classes.yellowStatus}>
+                        Wallet was never KYC'd before
+                    </span>
+                );
+        } else {
+            return "--";
+        }
     };
 
     return (
@@ -233,7 +254,10 @@ const ApplicationsList = ({ kycApplications, currentNetworkName }) => {
                                                 variant="body1"
                                                 color="textPrimary"
                                             >
-                                                ...
+                                                {displayOnchainStatus(
+                                                    item.ethAddress,
+                                                    previouslyKycdWallets
+                                                )}
                                             </Typography>
                                         </TableCell>
                                     </TableRow>

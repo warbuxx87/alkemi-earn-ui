@@ -32,7 +32,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const KycDashboard = ({ kycApplications, currentNetworkName }) => {
+const KycDashboard = ({
+    kycApplications,
+    currentNetworkName,
+    previouslyKycdWallets,
+}) => {
     const classes = useStyles();
 
     return (
@@ -43,6 +47,7 @@ const KycDashboard = ({ kycApplications, currentNetworkName }) => {
                         <ApplicationsList
                             kycApplications={kycApplications}
                             currentNetworkName={currentNetworkName}
+                            previouslyKycdWallets={previouslyKycdWallets}
                         />
                     </Grid>
                 </Grid>

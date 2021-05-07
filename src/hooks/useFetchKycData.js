@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import _ from "lodash";
+import Web3 from "web3";
 
 import { walletNetworkName } from "redux/selectors/data/onboard";
 
@@ -9,8 +10,11 @@ import { getAuth } from "redux/selectors/status/auth";
 import { restoreAuthData } from "redux/actions/status/auth";
 import {
     setKycApplications,
-    setPreviouslyKycdWallets,
+    setPreviouslyKycdWallet,
 } from "redux/actions/data/kyc";
+
+import address from "constants/address_map.json";
+import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
 
 const url_map = require("constants/url_map.json");
 
@@ -119,7 +123,37 @@ const useFetchKycData = (fetchPeriodically = false) => {
                             ); // TODO: improve with selective reset action
                         }
 
-                        dispatch(setPreviouslyKycdWallets(obj_data.data.res));
+                        obj_data.data.res.forEach((wallet) => {
+                            // const network = constants.network_type[currentNetworkName];
+
+                            let provider = window.currentlyUsedProvider;
+                            if (!provider) {
+                                // TODO: improve
+                                provider = window.ethereum;
+                            }
+
+                            const web3 = new Web3(provider); // could be replaced by window.currentlyUsedProvider
+
+                            const address_MoneyMarket =
+                                address[currentNetworkName].address_MoneyMarket;
+
+                            const MoneyMarketContract = new web3.eth.Contract(
+                                MoneyMarket_ABI,
+                                address_MoneyMarket
+                            );
+
+                            MoneyMarketContract.methods
+                                .verifyKYC(wallet)
+                                .call()
+                                .then((res) => {
+                                    dispatch(
+                                        setPreviouslyKycdWallet({
+                                            address: wallet,
+                                            kycStatus: res,
+                                        })
+                                    );
+                                });
+                        });
                     }
                 });
         };
