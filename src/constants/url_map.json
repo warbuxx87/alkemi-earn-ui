@@ -1,14 +1,14 @@
 {
     "main": {
-        "history_url": "https://api.alkemi.network/history",
-        "markets_url": "https://api.alkemi.network/markets",
-        "accounts_url": "https://api.alkemi.network/accounts",
-        "liquidations_url": "https://api.alkemi.network/liquidations",
-        "reports_url": "https://api.alkemi.network/reports",
-        "authentication_url": "https://api.alkemi.network/authentication",
-        "kycapplications_url": "https://api.alkemi.network/kycapplications",
-        "kycusers_url": "https://api.alkemi.network/kycusers",
-        "checkkyc_url": "https://api.alkemi.network/checkKyc"
+        "history_url": "https://staging-alkemi-kyc-chain.herokuapp.com/history",
+        "markets_url": "https://staging-alkemi-kyc-chain.herokuapp.com/markets",
+        "accounts_url": "https://staging-alkemi-kyc-chain.herokuapp.com/accounts",
+        "liquidations_url": "https://staging-alkemi-kyc-chain.herokuapp.com/liquidations",
+        "reports_url": "https://staging-alkemi-kyc-chain.herokuapp.com/reports",
+        "authentication_url": "https://staging-alkemi-kyc-chain.herokuapp.com/authentication",
+        "kycapplications_url": "https://staging-alkemi-kyc-chain.herokuapp.com/kycapplications",
+        "kycusers_url": "https://staging-alkemi-kyc-chain.herokuapp.com/kycusers",
+        "checkkyc_url": "https://staging-alkemi-kyc-chain.herokuapp.com/checkKyc"
     },
     "rinkeby": {
         "history_url": "https://rinkeby.api.alkemi.network/history",
