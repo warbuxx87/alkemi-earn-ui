@@ -66,6 +66,10 @@ const useStyles = makeStyles((theme) => ({
     redStatus: {
         color: "#f50057",
     },
+
+    highlightApplication: {
+        background: "#1E2025",
+    },
 }));
 
 // Section 5: Code Component
@@ -187,7 +191,15 @@ const ApplicationsList = ({
                             {kycApplications &&
                                 kycApplications.length > 0 &&
                                 kycApplications.map((item) => (
-                                    <TableRow key={item.id}>
+                                    <TableRow
+                                        key={item.id}
+                                        className={
+                                            item.statusName ===
+                                            "Ready For Review"
+                                                ? classes.highlightApplication
+                                                : null
+                                        }
+                                    >
                                         <TableCell align="right">
                                             {" "}
                                             <Typography

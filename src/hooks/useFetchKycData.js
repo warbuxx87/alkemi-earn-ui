@@ -123,7 +123,13 @@ const useFetchKycData = (fetchPeriodically = false) => {
                             ); // TODO: improve with selective reset action
                         }
 
-                        if (!obj_data.data.res) return; // TODO: no data/wrong endpoint handle properly
+                        if (
+                            obj_data.data.res === undefined ||
+                            obj_data.data.res == null ||
+                            !Array.isArray(obj_data.data.res)
+                        )
+                            return; // TODO: no data/wrong endpoint handle properly
+
                         obj_data.data.res.forEach((wallet) => {
                             // const network = constants.network_type[currentNetworkName];
 
