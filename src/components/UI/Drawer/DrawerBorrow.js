@@ -18,12 +18,14 @@ import {
     Input,
     Grid,
     SvgIcon,
+    Tooltip,
     Typography,
 } from "@material-ui/core";
 
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import { XCircle as XIcon } from "react-feather";
+import { HelpCircle as HelpIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 // import Chart from "./ChartWrapper";
@@ -97,6 +99,11 @@ const DrawerClass = makeStyles((theme) =>
         },
         vertCent: {
             margin: "auto",
+        },
+        helpIcon: {
+            width: ".8rem",
+            marginLeft: "6px",
+            color: "#979797",
         },
     })
 );
@@ -311,12 +318,25 @@ const DrawerWrapper = ({
                                     xs
                                     className={classes.vertCent}
                                 >
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                    >
-                                        Borrow Fees
-                                    </Typography>
+                                    <Box display="flex" alignItems="center">
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                        >
+                                            Borrow Fees
+                                        </Typography>
+                                        <Tooltip
+                                            title="0.1% origination fee"
+                                            placement="right"
+                                            arrow
+                                            className={classes.toolTip}
+                                        >
+                                            <HelpIcon
+                                                fontSize="small"
+                                                className={classes.helpIcon}
+                                            />
+                                        </Tooltip>
+                                    </Box>
                                 </Grid>
                                 <Grid
                                     item
@@ -325,38 +345,25 @@ const DrawerWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {amount * orgFee}{" "}
-                                    {asset.unit == "WETH" ? "ETH" : asset.unit}
-                                </Grid>
-                            </Grid>
-                            <Grid container className={classes.rateRow}>
-                                <Grid
-                                    item
-                                    md={6}
-                                    xs
-                                    className={classes.vertCent}
-                                >
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                    >
-                                        Borrow Fees in USD
-                                    </Typography>
-                                </Grid>
-                                <Grid
-                                    item
-                                    md={6}
-                                    xs
-                                    container
-                                    justify="flex-end"
-                                >
-                                    {formatETHMoneyOrgFee(
-                                        asset.price,
-                                        amount,
-                                        "USD",
-                                        asset.unit,
-                                        useSelector(getUSDPrice)
-                                    )}
+                                    <Box>
+                                        {amount * orgFee}{" "}
+                                        {asset.unit == "WETH"
+                                            ? "ETH"
+                                            : asset.unit}
+                                        <Typography
+                                            variant="body2"
+                                            color="textSecondary"
+                                            align="right"
+                                        >
+                                            {formatETHMoneyOrgFee(
+                                                asset.price,
+                                                amount,
+                                                "USD",
+                                                asset.unit,
+                                                useSelector(getUSDPrice)
+                                            )}
+                                        </Typography>
+                                    </Box>
                                 </Grid>
                             </Grid>
                         </Grid>
