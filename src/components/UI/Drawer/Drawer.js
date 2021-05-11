@@ -299,6 +299,7 @@ const DrawerWrapper = ({
                                 </Grid>
                             </Grid>
                         </Grid>
+
                         <Box className={classes.sendButtonDiv} mt={4}>
                             <Button
                                 type="button"
