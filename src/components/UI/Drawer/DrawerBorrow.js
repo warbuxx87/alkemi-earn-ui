@@ -3,9 +3,8 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
-import Big from "big.js";
 
 // Section 2: Material-UI imports
 import {
@@ -347,7 +346,7 @@ const DrawerWrapper = ({
                                 >
                                     <Box>
                                         {amount * orgFee}{" "}
-                                        {asset.unit == "WETH"
+                                        {asset.unit === "WETH"
                                             ? "ETH"
                                             : asset.unit}
                                         <Typography
