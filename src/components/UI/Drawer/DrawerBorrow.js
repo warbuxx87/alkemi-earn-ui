@@ -3,6 +3,9 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import { connect, useSelector } from "react-redux";
+import { getUSDPrice } from "redux/selectors/data/totalBalance";
+import Big from "big.js";
 
 // Section 2: Material-UI imports
 import {
@@ -24,7 +27,7 @@ import { XCircle as XIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 // import Chart from "./ChartWrapper";
-import { formatPercent } from "utils/ui";
+import { formatPercent, formatETHMoneyOrgFee } from "utils/ui";
 import ToolTipWrapper from "./ToolTipWrapper";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
@@ -127,6 +130,9 @@ const DrawerWrapper = ({
     const handleClose = () => {
         setOpen(false);
     };
+
+    //Origination Fee
+    const orgFee = 0.001;
 
     // Section 5: Code Component
     return (
@@ -318,7 +324,40 @@ const DrawerWrapper = ({
                                     xs
                                     container
                                     justify="flex-end"
-                                ></Grid>
+                                >
+                                    {amount * orgFee}{" "}
+                                    {asset.unit == "WETH" ? "ETH" : asset.unit}
+                                </Grid>
+                            </Grid>
+                            <Grid container className={classes.rateRow}>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    className={classes.vertCent}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                    >
+                                        Borrow Fees in USD
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs
+                                    container
+                                    justify="flex-end"
+                                >
+                                    {formatETHMoneyOrgFee(
+                                        asset.price,
+                                        amount,
+                                        "USD",
+                                        asset.unit,
+                                        useSelector(getUSDPrice)
+                                    )}
+                                </Grid>
                             </Grid>
                         </Grid>
 
