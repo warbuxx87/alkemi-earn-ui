@@ -1,3 +1,25 @@
+## [1.13.7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.6...v1.13.7) (2021-05-13)
+
+
+### Bug Fixes
+
+* change default collateral ratio value UI-439 ([58d15a2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/58d15a2bd8b8e35880e90479f2b00f958c096e68))
+* hide non user friendly values from markets page UI-438 ([dc91d4f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dc91d4fa67840a0877a591cc29c4d4e2a2063ce7))
+* use proper link to check txs on etherscan UI-436 ([773f3d6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/773f3d6ab4ed1213e8a51cffdbfd9b25fb981184))
+* use proper link to check txs on etherscan UI-436 ([18a3fbc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/18a3fbceb46cba193b840578886af29d1692caba))
+
+
+
+## [1.13.7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.6...v1.13.7) (2021-05-13)
+
+
+### Bug Fixes
+
+* change default collateral ratio value UI-439 ([58d15a2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/58d15a2bd8b8e35880e90479f2b00f958c096e68))
+* hide non user friendly values from markets page UI-438 ([dc91d4f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dc91d4fa67840a0877a591cc29c4d4e2a2063ce7))
+* use proper link to check txs on etherscan UI-436 ([773f3d6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/773f3d6ab4ed1213e8a51cffdbfd9b25fb981184))
+* use proper link to check txs on etherscan UI-436 ([18a3fbc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/18a3fbceb46cba193b840578886af29d1692caba))
+
 ## [1.13.6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.5...v1.13.6) (2021-04-14)
 
 
