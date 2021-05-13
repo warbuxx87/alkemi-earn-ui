@@ -17,7 +17,7 @@ const initialState = {
 };
 
 // Implement "reducer" function with initial state as default state
-export default (state = initialState, action) => {
+const onboardReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_WALLET_CONNECTED:
             return {
@@ -47,3 +47,5 @@ export default (state = initialState, action) => {
             return state;
     }
 };
+
+export default onboardReducer;

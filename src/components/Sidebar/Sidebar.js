@@ -99,7 +99,7 @@ const styles = (theme) => ({
 });
 
 // Section 5: Code Component
-function Sidebar({ classes, width, variant, open }) {
+function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
     const content = (
         <Box className={classes.drawerInner}>
             <SidebarHeader />
@@ -112,7 +112,9 @@ function Sidebar({ classes, width, variant, open }) {
                         <SidebarBorrowItem />
                         <SidebarMarketsItem />
                         <SidebarHistoryItem />
-                        <SidebarLiquidateItem />
+                        {walletIsLiquidator === true ? (
+                            <SidebarLiquidateItem />
+                        ) : null}
                     </List>
                 </Box>
                 <Divider className={classes.divider} />

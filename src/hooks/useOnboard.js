@@ -32,7 +32,7 @@ import DrizzleContext from "utils/DrizzleContext";
 
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
-export default () => {
+const useOnboard = () => {
     const dispatch = useDispatch();
 
     const drizzle = useContext(DrizzleContext);
@@ -252,3 +252,5 @@ export default () => {
         onReset,
     };
 };
+
+export default useOnboard;

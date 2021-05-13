@@ -5,9 +5,11 @@ import ui from "./ui";
 import status from "./status";
 import data from "./data";
 
-export default {
+const reducersIndex = {
     router: connectRouter(history),
     ui,
     status,
     data,
 };
+
+export default reducersIndex;

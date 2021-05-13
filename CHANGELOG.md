@@ -1,3 +1,57 @@
+## [1.13.7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.6...v1.13.7) (2021-05-13)
+
+
+### Bug Fixes
+
+* change default collateral ratio value UI-439 ([58d15a2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/58d15a2bd8b8e35880e90479f2b00f958c096e68))
+* hide non user friendly values from markets page UI-438 ([dc91d4f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dc91d4fa67840a0877a591cc29c4d4e2a2063ce7))
+* use proper link to check txs on etherscan UI-436 ([773f3d6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/773f3d6ab4ed1213e8a51cffdbfd9b25fb981184))
+* use proper link to check txs on etherscan UI-436 ([18a3fbc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/18a3fbceb46cba193b840578886af29d1692caba))
+
+
+
+## [1.13.7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.6...v1.13.7) (2021-05-13)
+
+
+### Bug Fixes
+
+* change default collateral ratio value UI-439 ([58d15a2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/58d15a2bd8b8e35880e90479f2b00f958c096e68))
+* hide non user friendly values from markets page UI-438 ([dc91d4f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dc91d4fa67840a0877a591cc29c4d4e2a2063ce7))
+* use proper link to check txs on etherscan UI-436 ([773f3d6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/773f3d6ab4ed1213e8a51cffdbfd9b25fb981184))
+* use proper link to check txs on etherscan UI-436 ([18a3fbc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/18a3fbceb46cba193b840578886af29d1692caba))
+
+## [1.13.6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.5...v1.13.6) (2021-04-14)
+
+
+### Bug Fixes
+
+* error on variable that becomes null UI-441 ([f9ef6e9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f9ef6e92f664da11f97162c2d5dd06319aa98bb6))
+
+
+
+## [1.13.6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.5...v1.13.6) (2021-04-14)
+
+
+### Bug Fixes
+
+* error on variable that becomes null UI-441 ([f9ef6e9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f9ef6e92f664da11f97162c2d5dd06319aa98bb6))
+
+## [1.13.5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.4...v1.13.5) (2021-04-01)
+
+
+### Bug Fixes
+
+* hide liquidation choice when user is not verified UI-388 ([85d54c4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/85d54c4b2d51a15929ea4a515f81ea2cfd54cda2))
+* improve testing of content UI-388 ([ef1e7cc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ef1e7cc701dbc2db7f53abb01634b19e12184479))
+
+## [1.13.4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.3...v1.13.4) (2021-03-30)
+
+
+### Bug Fixes
+
+* add checks to variables that become undefined UI-435 ([010c0b0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/010c0b03bee1c40375eadcd562d6f6960614b73f))
+* properly set fallback for drizzle UI-435 ([9909128](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9909128f74de6796bb892947233e24ba49533bd2))
+
 ## [1.13.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.2...v1.13.3) (2021-03-21)
 
 

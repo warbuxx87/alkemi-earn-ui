@@ -16,7 +16,7 @@ const initialState = {
 };
 
 // Implement "reducer" function with initial state as default state
-export default (state = initialState, action) => {
+const txReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_TX_PENDING:
             return {
@@ -45,3 +45,5 @@ export default (state = initialState, action) => {
             return state;
     }
 };
+
+export default txReducer;

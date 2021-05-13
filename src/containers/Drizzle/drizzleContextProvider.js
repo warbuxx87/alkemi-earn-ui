@@ -10,10 +10,12 @@ import DrizzleContext from "utils/DrizzleContext";
 
 const drizzle = new Drizzle(drizzleOptions, store);
 
-export default ({ children }) => {
+const drizzleContextProvider = ({ children }) => {
     return (
         <DrizzleContext.Provider value={drizzle}>
             {children}
         </DrizzleContext.Provider>
     );
 };
+
+export default drizzleContextProvider;

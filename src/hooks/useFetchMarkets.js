@@ -10,7 +10,7 @@ import { walletNetworkName } from "redux/selectors/data/onboard";
 const url_map = require("constants/url_map.json");
 
 // Retrieve the USD price every 15 seconds
-export default (fetchPeriodically = false) => {
+const useFetchMarkets = (fetchPeriodically = false) => {
     const dispatch = useDispatch();
 
     const currentNetworkName = useSelector(walletNetworkName);
@@ -131,3 +131,5 @@ export default (fetchPeriodically = false) => {
 
     return { marketsData, supplyArray, borrowArray, calculationsTotals };
 };
+
+export default useFetchMarkets;

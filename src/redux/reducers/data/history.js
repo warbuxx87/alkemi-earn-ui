@@ -11,7 +11,7 @@ const initialState = {
 };
 
 // Implement "reducer" function with initial state as default state
-export default (state = initialState, action) => {
+const historyReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_BLOCK_TIMESTAMP_PENDING: {
             const newBlock = { pending: true };
@@ -62,3 +62,5 @@ export default (state = initialState, action) => {
             return state;
     }
 };
+
+export default historyReducer;

@@ -4,7 +4,7 @@ const initialState = {
     open: true,
 };
 
-export default (state = initialState, { type }) => {
+const sidebarReducer = (state = initialState, { type }) => {
     switch (type) {
         case OPEN_SIDEBAR:
             return {
@@ -22,3 +22,5 @@ export default (state = initialState, { type }) => {
             return state;
     }
 };
+
+export default sidebarReducer;

@@ -1,4 +1,4 @@
-export default {
+const typography = {
     body1: {
         fontWeight: 400,
         fontSize: "0.875rem",
@@ -78,3 +78,5 @@ export default {
         textTransform: "capitalize",
     },
 };
+
+export default typography;

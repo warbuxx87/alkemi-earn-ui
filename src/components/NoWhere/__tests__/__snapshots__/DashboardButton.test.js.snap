@@ -5,7 +5,7 @@ exports[`<BackDashboardButton /> matches snapshot 1`] = `
   className="NoWhereDashboardButton-button-1"
   color="default"
   onClick={[MockFunction]}
-  variant="raised"
+  variant="outlined"
 >
   Bring me back home!
 </WithStyles(ForwardRef(Button))>

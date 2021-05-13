@@ -137,6 +137,9 @@ export const initMarketContract = ({
     // verify KYC
     MoneyMarketContract.methods.verifyKYC.cacheCall(myAddress);
 
+    // verify Liquidator
+    MoneyMarketContract.methods.verifyLiquidator.cacheCall(myAddress);
+
     // get collateralRatio
     MoneyMarketContract.methods.collateralRatio.cacheCall();
 
