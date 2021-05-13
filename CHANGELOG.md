@@ -1,3 +1,19 @@
+## [1.13.8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.7...v1.13.8) (2021-05-13)
+
+
+### Bug Fixes
+
+* allow user to repay even when not kycd UI-446 ([a341d63](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a341d6325415c886acb3e2108e5e7be01f1496d9))
+
+
+
+## [1.13.8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.7...v1.13.8) (2021-05-13)
+
+
+### Bug Fixes
+
+* allow user to repay even when not kycd UI-446 ([a341d63](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a341d6325415c886acb3e2108e5e7be01f1496d9))
+
 ## [1.13.7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.6...v1.13.7) (2021-05-13)
 
 
