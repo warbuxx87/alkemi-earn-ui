@@ -114,15 +114,18 @@ const useFetchMarkets = (fetchPeriodically = false) => {
                 });
         };
 
-        const getMarketsData = () => {
+        const getMarketsData = (fetchPeriodically) => {
             if (currentNetworkName !== undefined) get_markets_data();
 
             if (fetchPeriodically === true) {
-                timer = setTimeout(getMarketsData, 15 * 1000);
+                timer = setTimeout(
+                    () => getMarketsData(fetchPeriodically),
+                    30 * 1000
+                );
             }
         };
 
-        if (currentNetworkName !== undefined) getMarketsData();
+        if (currentNetworkName !== undefined) getMarketsData(fetchPeriodically);
 
         return () => {
             if (timer) clearTimeout(timer);
