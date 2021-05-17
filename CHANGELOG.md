@@ -1,3 +1,23 @@
+## [1.13.9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.8...v1.13.9) (2021-05-17)
+
+
+### Bug Fixes
+
+* periodical fetch of data UI-452 ([57f4bdf](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/57f4bdf4d1017904b818afb26eaeae77a65dad17))
+* properly fetch periodically liquidation data UI-452 ([7fd41db](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7fd41dbffc10a24c78925df7da94e8f33ce0b85d))
+* properly fetch periodically markets data UI-452 ([28e5196](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/28e519691bd854fb6db259cf76ce1b2ebf0ffc26))
+
+
+
+## [1.13.9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.8...v1.13.9) (2021-05-17)
+
+
+### Bug Fixes
+
+* periodical fetch of data UI-452 ([57f4bdf](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/57f4bdf4d1017904b818afb26eaeae77a65dad17))
+* properly fetch periodically liquidation data UI-452 ([7fd41db](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7fd41dbffc10a24c78925df7da94e8f33ce0b85d))
+* properly fetch periodically markets data UI-452 ([28e5196](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/28e519691bd854fb6db259cf76ce1b2ebf0ffc26))
+
 ## [1.13.8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.7...v1.13.8) (2021-05-13)
 
 
