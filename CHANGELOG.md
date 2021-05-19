@@ -1,3 +1,19 @@
+## [1.13.10](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.9...v1.13.10) (2021-05-19)
+
+
+### Bug Fixes
+
+* properly hide connection banner on mainnete UI-447 ([e47a512](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e47a5122c2d6a5d675c263596a55e615c330bf79))
+
+
+
+## [1.13.10](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.9...v1.13.10) (2021-05-19)
+
+
+### Bug Fixes
+
+* properly hide connection banner on mainnete UI-447 ([e47a512](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e47a5122c2d6a5d675c263596a55e615c330bf79))
+
 ## [1.13.9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.8...v1.13.9) (2021-05-17)
 
 
