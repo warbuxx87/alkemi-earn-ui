@@ -13,7 +13,7 @@ import {
 
 import { isLiquidator } from "redux/selectors/status";
 
-const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
+const DEFAULT_NETWORK = parseInt(process.env.REACT_APP_DEFAULT_NETWORK, 10);
 
 const Skeleton = () => {
     const userWalletNetwork = useSelector(walletNetwork);
