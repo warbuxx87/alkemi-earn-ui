@@ -152,6 +152,7 @@ const Markets = ({
 Markets.propTypes = {
     supplyArray: PropTypes.array.isRequired,
     borrowArray: PropTypes.array.isRequired,
+    userWalletNetwork: PropTypes.number.isRequired,
 };
 
 // Section 7:  Export
