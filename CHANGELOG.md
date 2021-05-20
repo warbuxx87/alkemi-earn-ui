@@ -1,3 +1,21 @@
+## [1.13.11](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.10...v1.13.11) (2021-05-20)
+
+
+### Bug Fixes
+
+* type cast for default network when wallet is not connected UI-454 ([6d9ef1e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6d9ef1eea34ca9ddd8eea2937ac46953124acfa8))
+* use proptype for default network in markets UI-454 ([7165408](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/71654087ae50f0dc6297d786629107cf7e1f0700))
+
+
+
+## [1.13.11](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.10...v1.13.11) (2021-05-20)
+
+
+### Bug Fixes
+
+* type cast for default network when wallet is not connected UI-454 ([6d9ef1e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6d9ef1eea34ca9ddd8eea2937ac46953124acfa8))
+* use proptype for default network in markets UI-454 ([7165408](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/71654087ae50f0dc6297d786629107cf7e1f0700))
+
 ## [1.13.10](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.9...v1.13.10) (2021-05-19)
 
 
