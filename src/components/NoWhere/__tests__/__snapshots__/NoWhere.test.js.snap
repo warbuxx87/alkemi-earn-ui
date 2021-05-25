@@ -7,7 +7,7 @@ exports[`<NoWhere /> matches snapshot 1`] = `
   <div
     className="NoWhere-nowhereHeader-2"
   >
-    <Memo(ForwardRef(ReportIcon))
+    <Memo([object Object])
       className="NoWhere-nowhereIcon-4"
     />
     <h1
