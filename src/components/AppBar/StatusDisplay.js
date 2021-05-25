@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
 import { Box, makeStyles, withStyles, Tooltip } from "@material-ui/core";
-import Status from "@material-ui/icons/Lens";
+import Status from "@material-ui/icons/VerifiedUser";
 
 // Section 3: Components & Containers import from the application
 
@@ -17,8 +17,8 @@ const useStyles = (props) =>
             //color: theme.palette[props.color].main,
         },
         KYCIcon: {
-            width: "14px",
-            height: "14px",
+            width: "17px",
+            height: "17px",
             color: theme.palette[props.color].main,
         },
         Tooltip: {
@@ -46,7 +46,7 @@ function StatusDisplay({ walletIsKYCd, tooltipTitle, ...props }) {
 
     // Section 5: Code Component
     return (
-        <Box mr={1} pt={0.5}>
+        <Box display="flex" px={1}>
             <CustomTooltip
                 className={classes.Tooltip}
                 title={tooltipTitle}

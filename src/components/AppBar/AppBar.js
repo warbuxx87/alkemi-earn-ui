@@ -20,8 +20,8 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-//import Settings from "./Settings";
-//import Notifications from "./Notifications";
+// import Settings from "./Settings";
+import Other from "./Other";
 import MobileMenu from "./MobileMenu";
 import StatusDisplay from "./StatusDisplay";
 import logo from "assets/images/logo-white.svg";
@@ -31,8 +31,11 @@ import { addressParser } from "utils/ui";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     connectWallet: {
-        minWidth: 130,
-        padding: "4px 0",
+        padding: "2px 2px 2px 0px",
+        background: theme.palette.background.paper,
+        "& .MuiButton-label": {
+            justifyContent: "flex-end",
+        },
         [theme.breakpoints.down("xs")]: {
             minWidth: 110,
             padding: "3px 0 2px 0",
@@ -53,8 +56,21 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 140,
         marginLeft: 6,
     },
+    dropdown: {
+        marginTop: "4px",
+    },
+    menuitem: {
+        fontSize: "0.875rem",
+    },
     address: {
         fontSize: "0.875rem",
+        backgroundColor: "#000000",
+        paddingLeft: "10px",
+        paddingRight: "10px",
+        borderRadius: "2px",
+        display: "inline-flex",
+        paddingTop: "1px",
+        height: "32px",
         [theme.breakpoints.down("xs")]: {
             fontSize: "0.825rem",
         },
@@ -84,9 +100,11 @@ function AppBar({
         onReset();
         setAnchorEl(null);
     };
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -127,112 +145,103 @@ function AppBar({
             className={classes.appBar}
         >
             <Toolbar disableGutters={true}>
-                <Grid
-                    container
-                    alignItems="center"
-                    direction="row"
-                    justify="flex-start"
-                    wrap="nowrap"
-                >
-                    <Grid>
-                        <Hidden lgUp>
-                            <MobileMenu
-                                walletIsLiquidator={walletIsLiquidator}
-                            />
-                        </Hidden>
+                <Hidden lgUp>
+                    <MobileMenu walletIsLiquidator={walletIsLiquidator} />
+                </Hidden>
 
-                        <Hidden mdDown>
-                            <Typography
-                                variant="subtitle1"
-                                color="textSecondary"
-                            >
-                                Overview
-                            </Typography>
-                            <Typography
-                                variant="h4"
-                                color="textPrimary"
-                                data-testid="title"
-                                noWrap
-                                className={classes.title}
-                            >
-                                {title}
-                            </Typography>
-                        </Hidden>
-                    </Grid>
-                    <Hidden lgUp>
-                        <img
-                            className={classes.logo}
-                            src={logo}
-                            alt={"Alkemi Logo"}
-                        />
-                    </Hidden>
+                <Hidden mdDown>
+                    <Typography
+                        variant="h4"
+                        color="textPrimary"
+                        data-testid="title"
+                        noWrap
+                        className={classes.title}
+                    >
+                        {title}
+                    </Typography>
+                </Hidden>
+                <Hidden lgUp>
+                    <img
+                        className={classes.logo}
+                        src={logo}
+                        alt={"Alkemi Logo"}
+                    />
+                </Hidden>
+                <Box ml={2} flexGrow={1} />
+                <Button
+                    className={classes.connectWallet}
+                    type="button"
+                    color="secondary"
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={accountAddress ? handleClick : handleOnConnect}
+                >
                     <Grid
                         container
+                        direction="row"
+                        justify="center"
                         alignItems="center"
-                        spacing={2}
-                        justify="flex-end"
                     >
-                        <Grid item>
-                            {/*<Settings />
-                            <Notifications />*/}
+                        <Grid
+                            item
+                            display="flex"
+                            justifyContent="right"
+                            alignItems="center"
+                        >
+                            {displayWalletStatus(walletConnected, walletIsKYCd)}
                         </Grid>
-                        <Grid item>
-                            <Button
-                                className={classes.connectWallet}
-                                type="button"
-                                variant="outlined"
-                                color="secondary"
-                                aria-controls="simple-menu"
-                                aria-haspopup="true"
-                                onClick={
-                                    accountAddress
-                                        ? handleClick
-                                        : handleOnConnect
-                                }
-                            >
-                                <Box
-                                    display="flex"
-                                    justifyContent="space-between"
-                                    alignItems="center"
-                                >
-                                    {displayWalletStatus(
-                                        walletConnected,
-                                        walletIsKYCd
-                                    )}
-                                    <Box
-                                        className={classes.address}
-                                        data-testid="connectAddressButton"
-                                    >
-                                        {/* 0x121565...6456 */}
-                                        {accountAddress
-                                            ? addressParser(accountAddress)
-                                            : "Connect"}
-                                    </Box>
-                                </Box>
-                            </Button>
-                            <Menu
-                                id="simple-menu"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                {
-                                    false && (
-                                        <MenuItem onClick={handleOnConnect}>
-                                            Change Wallet
-                                        </MenuItem>
-                                    ) /* TODO: show when using more than a single wallet */
-                                }
-                                {accountAddress ? (
-                                    <MenuItem onClick={handleOnReset}>
-                                        Disconnect Wallet
-                                    </MenuItem>
-                                ) : null}
-                            </Menu>
+                        <Grid
+                            item
+                            className={classes.address}
+                            data-testid="connectAddressButton"
+                            alignItems="center"
+                        >
+                            <Box>
+                                {/* 0x121565...6456 */}
+                                {accountAddress
+                                    ? addressParser(accountAddress)
+                                    : "Connect"}
+                            </Box>
                         </Grid>
                     </Grid>
-                </Grid>
+                </Button>
+                <Menu
+                    className={classes.dropdown}
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                    getContentAnchorEl={null}
+                    anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "right",
+                    }}
+                    transformOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                    }}
+                >
+                    {
+                        false && (
+                            <MenuItem onClick={handleOnConnect}>
+                                Change Wallet
+                            </MenuItem>
+                        ) /* TODO: show when using more than a single wallet */
+                    }
+                    {accountAddress ? (
+                        <MenuItem
+                            className={classes.menuitem}
+                            onClick={handleOnReset}
+                        >
+                            Disconnect Wallet
+                        </MenuItem>
+                    ) : null}
+                </Menu>
+                <Hidden mdDown>
+                    <Box ml={1}>
+                        <Other />
+                    </Box>
+                </Hidden>
             </Toolbar>
         </MuiAppBar>
     );
