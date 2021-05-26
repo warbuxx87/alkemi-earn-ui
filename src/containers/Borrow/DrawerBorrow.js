@@ -6,6 +6,8 @@ import { bindActionCreators, compose } from "redux";
 import web3 from "web3";
 import * as yup from "yup";
 
+import Big from "big.js";
+
 // Section 2: internal imports
 import {
     formatNumber,
@@ -83,9 +85,28 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
         "0.00"
     );
 
+    const [calculatedBorrowFee, setCalculatedBorrowFee] = React.useState(0);
+
+    React.useEffect(() => {
+        if (amount && orginationFee) {
+            const amountBig = Big(amount);
+
+            const calculatedBorrowFeeBig = amountBig.times(Big(orginationFee));
+
+            if (calculatedBorrowFeeBig.gte(Big(0.000001)))
+                setCalculatedBorrowFee(
+                    parseFloat(calculatedBorrowFeeBig.toFixed(6))
+                );
+            else if (calculatedBorrowFeeBig.eq(Big(0)))
+                setCalculatedBorrowFee(0);
+            else setCalculatedBorrowFee("<0.000001");
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [amount, orginationFee]);
+
     React.useEffect(() => {
         if (asset.price && amount && asset.unit && USDPrice) {
-            console.log(asset.price, amount, asset.unit, USDPrice);
             setFormattedOrginationFee(
                 formatETHMoneyOrgFee(
                     asset.price,
@@ -187,6 +208,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
             displayOriginationFee={true}
             orginationFee={orginationFee}
             formattedOrginationFee={formattedOrginationFee}
+            calculatedBorrowFee={calculatedBorrowFee}
             currentBalanceLabel="Current borrow balance"
         />
     );

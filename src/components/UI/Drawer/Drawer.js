@@ -124,7 +124,7 @@ const DrawerWrapper = ({
     currentBalanceLabel,
 
     displayOriginationFee,
-    orginationFee,
+    calculatedBorrowFee,
     formattedOrginationFee,
 }) => {
     const classes = DrawerClass();
@@ -314,8 +314,7 @@ const DrawerWrapper = ({
                             </Grid>
                             {displayOriginationFee === true ? (
                                 <OrginationFeeDisplay
-                                    orginationFee={orginationFee}
-                                    amount={amount}
+                                    calculatedBorrowFee={calculatedBorrowFee}
                                     asset={asset}
                                     classes={classes}
                                     usdPrice={usdPrice}
@@ -376,9 +375,11 @@ DrawerWrapper.propTypes = {
     walletIsKYCd: PropTypes.bool.isRequired,
     currentBalanceLabel: PropTypes.string,
 
-    orginationFee: PropTypes.number,
+    calculatedBorrowFee: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
     formattedOrginationFee: PropTypes.string,
-    currentBalanceLabel: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export

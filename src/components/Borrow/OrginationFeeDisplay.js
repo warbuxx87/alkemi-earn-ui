@@ -16,8 +16,7 @@ import { HelpCircle as HelpIcon } from "react-feather";
 // Section 5: Code Component
 function OriginationFeeDisplay({
     classes,
-    amount,
-    orginationFee,
+    calculatedBorrowFee,
     asset,
     formattedOrginationFee,
 }) {
@@ -43,7 +42,7 @@ function OriginationFeeDisplay({
             </Grid>
             <Grid item md={6} xs container justify="flex-end">
                 <Box>
-                    {amount * orginationFee}{" "}
+                    {calculatedBorrowFee}{" "}
                     {asset.unit === "WETH" ? "ETH" : asset.unit}
                     <Typography
                         variant="body2"
@@ -61,8 +60,10 @@ function OriginationFeeDisplay({
 // Section 6: Documentation with PropTypes
 OriginationFeeDisplay.propTypes = {
     classes: PropTypes.object.isRequired,
-    orginationFee: PropTypes.number.isRequired,
-    amount: PropTypes.string.isRequired,
+    calculatedBorrowFee: PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.number.isRequired,
+    ]),
     asset: PropTypes.object.isRequired,
     formattedOrginationFee: PropTypes.string.isRequired,
 };
