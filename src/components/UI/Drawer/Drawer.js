@@ -27,6 +27,8 @@ import { XCircle as XIcon } from "react-feather";
 import { formatPercent } from "utils/ui";
 import ToolTipWrapper from "./ToolTipWrapper";
 
+import OrginationFeeDisplay from "components/Borrow/OrginationFeeDisplay";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 const DrawerClass = makeStyles((theme) =>
     createStyles({
@@ -95,6 +97,11 @@ const DrawerClass = makeStyles((theme) =>
         vertCent: {
             margin: "auto",
         },
+        helpIcon: {
+            width: ".8rem",
+            marginLeft: "6px",
+            color: "#979797",
+        },
     })
 );
 
@@ -114,6 +121,11 @@ const DrawerWrapper = ({
     triggerButtonVariant,
     amountValue,
     walletIsKYCd,
+    currentBalanceLabel,
+
+    displayOriginationFee,
+    orginationFee,
+    formattedOrginationFee,
 }) => {
     const classes = DrawerClass();
 
@@ -285,7 +297,9 @@ const DrawerWrapper = ({
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Current Balance
+                                        {currentBalanceLabel
+                                            ? currentBalanceLabel
+                                            : "Current Balance"}
                                     </Typography>
                                 </Grid>
                                 <Grid
@@ -298,6 +312,18 @@ const DrawerWrapper = ({
                                     {balanceValue}
                                 </Grid>
                             </Grid>
+                            {displayOriginationFee === true ? (
+                                <OrginationFeeDisplay
+                                    orginationFee={orginationFee}
+                                    amount={amount}
+                                    asset={asset}
+                                    classes={classes}
+                                    usdPrice={usdPrice}
+                                    formattedOrginationFee={
+                                        formattedOrginationFee
+                                    }
+                                />
+                            ) : null}
                         </Grid>
 
                         <Box className={classes.sendButtonDiv} mt={4}>
@@ -348,6 +374,11 @@ DrawerWrapper.propTypes = {
     triggerButtonVariant: PropTypes.string,
     amountValue: PropTypes.string.isRequired,
     walletIsKYCd: PropTypes.bool.isRequired,
+    currentBalanceLabel: PropTypes.string,
+
+    orginationFee: PropTypes.number,
+    formattedOrginationFee: PropTypes.string,
+    currentBalanceLabel: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export
