@@ -179,24 +179,18 @@ function AppBar({
                     <Grid
                         container
                         direction="row"
-                        justify="center"
                         alignItems="center"
+                        display="flex"
                     >
-                        <Grid
-                            item
-                            display="flex"
-                            justifyContent="right"
-                            alignItems="center"
-                        >
+                        <Grid item>
                             {displayWalletStatus(walletConnected, walletIsKYCd)}
                         </Grid>
                         <Grid
                             item
                             className={classes.address}
                             data-testid="connectAddressButton"
-                            alignItems="center"
                         >
-                            <Box>
+                            <Box display="flex" alignItems="center">
                                 {/* 0x121565...6456 */}
                                 {accountAddress
                                     ? addressParser(accountAddress)

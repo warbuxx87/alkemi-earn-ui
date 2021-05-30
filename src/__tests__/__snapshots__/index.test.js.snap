@@ -60,12 +60,11 @@ Object {
                   class="MuiButton-label"
                 >
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center MuiGrid-justify-xs-center"
+                    class="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
+                    display="flex"
                   >
                     <div
-                      class="MuiGrid-root MuiGrid-item MuiGrid-align-items-xs-center"
-                      display="flex"
-                      justifycontent="right"
+                      class="MuiGrid-root MuiGrid-item"
                     >
                       <div
                         class="MuiBox-root MuiBox-root-75"
@@ -84,7 +83,7 @@ Object {
                       </div>
                     </div>
                     <div
-                      class="MuiGrid-root makeStyles-address-11 MuiGrid-item MuiGrid-align-items-xs-center"
+                      class="MuiGrid-root makeStyles-address-11 MuiGrid-item"
                       data-testid="connectAddressButton"
                     >
                       <div
@@ -590,12 +589,11 @@ Object {
                 class="MuiButton-label"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center MuiGrid-justify-xs-center"
+                  class="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
+                  display="flex"
                 >
                   <div
-                    class="MuiGrid-root MuiGrid-item MuiGrid-align-items-xs-center"
-                    display="flex"
-                    justifycontent="right"
+                    class="MuiGrid-root MuiGrid-item"
                   >
                     <div
                       class="MuiBox-root MuiBox-root-75"
@@ -614,7 +612,7 @@ Object {
                     </div>
                   </div>
                   <div
-                    class="MuiGrid-root makeStyles-address-11 MuiGrid-item MuiGrid-align-items-xs-center"
+                    class="MuiGrid-root makeStyles-address-11 MuiGrid-item"
                     data-testid="connectAddressButton"
                   >
                     <div
