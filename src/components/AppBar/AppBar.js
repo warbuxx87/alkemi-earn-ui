@@ -37,9 +37,7 @@ const useStyles = makeStyles((theme) => ({
             justifyContent: "flex-end",
         },
         [theme.breakpoints.down("xs")]: {
-            minWidth: 110,
-            padding: "3px 0 2px 0",
-            marginRight: 16,
+            marginRight: 8,
         },
         [theme.breakpoints.between("sm", "md")]: {
             marginRight: 24,
@@ -48,13 +46,17 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         paddingLeft: "0px",
         paddingRight: "0px",
+        [theme.breakpoints.down("xs")]: {
+            paddingLeft: "16px",
+            paddingRight: "16px",
+            paddingTop: "8px",
+        },
     },
     title: {
         textTransform: "uppercase",
     },
     logo: {
-        maxWidth: 140,
-        marginLeft: 6,
+        maxWidth: 130,
     },
     dropdown: {
         marginTop: "4px",
@@ -145,10 +147,6 @@ function AppBar({
             className={classes.appBar}
         >
             <Toolbar disableGutters={true}>
-                <Hidden lgUp>
-                    <MobileMenu walletIsLiquidator={walletIsLiquidator} />
-                </Hidden>
-
                 <Hidden mdDown>
                     <Typography
                         variant="h4"
@@ -181,6 +179,7 @@ function AppBar({
                         direction="row"
                         alignItems="center"
                         display="flex"
+                        justify="flex-end"
                     >
                         <Grid item>
                             {displayWalletStatus(walletConnected, walletIsKYCd)}
@@ -235,6 +234,9 @@ function AppBar({
                     <Box ml={1}>
                         <Other />
                     </Box>
+                </Hidden>
+                <Hidden lgUp>
+                    <MobileMenu walletIsLiquidator={walletIsLiquidator} />
                 </Hidden>
             </Toolbar>
         </MuiAppBar>
