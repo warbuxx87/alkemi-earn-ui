@@ -1,3 +1,19 @@
+## [1.13.12](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.11...v1.13.12) (2021-05-31)
+
+
+### Bug Fixes
+
+* use regular number display instead of scientific notation for borrow fee UI-457 ([93263e2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/93263e2191af0f9e43eef04e8acf3a15848151f2))
+
+
+
+## [1.13.12](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.11...v1.13.12) (2021-05-31)
+
+
+### Bug Fixes
+
+* use regular number display instead of scientific notation for borrow fee UI-457 ([93263e2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/93263e2191af0f9e43eef04e8acf3a15848151f2))
+
 ## [1.13.11](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.10...v1.13.11) (2021-05-20)
 
 
