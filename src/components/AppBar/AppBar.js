@@ -77,6 +77,12 @@ const useStyles = makeStyles((theme) => ({
             fontSize: "0.825rem",
         },
     },
+    btnConnect: {
+        minWidth: 100,
+        textTransform: "capitalize",
+        fontWeight: 500,
+        minHeight: 32,
+    },
 }));
 
 // Section 5: Code Component
@@ -112,31 +118,72 @@ function AppBar({
     };
 
     const displayWalletStatus = (walletConnected, walletIsKYCd) => {
-        if (!walletConnected)
+        if (walletIsKYCd)
             return (
                 <StatusDisplay
-                    color="secondary"
+                    color="success"
                     walletIsKYCd={walletIsKYCd}
-                    tooltipTitle="Not connected"
+                    tooltipTitle="KYC Authorized"
                 />
             );
+        else
+            return (
+                <StatusDisplay
+                    color="warning"
+                    walletIsKYCd={walletIsKYCd}
+                    tooltipTitle="Not KYC Authorized"
+                />
+            );
+    };
+
+    const displayConnectionButton = ({ walletConnected, walletIsKYCd }) => {
+        if (!walletConnected)
+            return (
+                <Button
+                    type="button"
+                    className={classes.btnConnect}
+                    variant="contained"
+                    size="small"
+                    onClick={handleOnConnect}
+                >
+                    Connect
+                </Button>
+            );
         else {
-            if (walletIsKYCd)
-                return (
-                    <StatusDisplay
-                        color="success"
-                        walletIsKYCd={walletIsKYCd}
-                        tooltipTitle="KYC Authorized"
-                    />
-                );
-            else
-                return (
-                    <StatusDisplay
-                        color="warning"
-                        walletIsKYCd={walletIsKYCd}
-                        tooltipTitle="Not KYC Authorized"
-                    />
-                );
+            return (
+                <Button
+                    className={classes.connectWallet}
+                    type="button"
+                    color="secondary"
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                >
+                    <Grid
+                        container
+                        direction="row"
+                        alignItems="center"
+                        display="flex"
+                        justify="flex-end"
+                    >
+                        <Grid item>
+                            {displayWalletStatus(walletConnected, walletIsKYCd)}
+                        </Grid>
+                        <Grid
+                            item
+                            className={classes.address}
+                            data-testid="connectAddressButton"
+                        >
+                            <Box display="flex" alignItems="center">
+                                {/* 0x121565...6456 */}
+                                {accountAddress
+                                    ? addressParser(accountAddress)
+                                    : "Connect"}
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </Button>
+            );
         }
     };
 
@@ -166,38 +213,8 @@ function AppBar({
                     />
                 </Hidden>
                 <Box ml={2} flexGrow={1} />
-                <Button
-                    className={classes.connectWallet}
-                    type="button"
-                    color="secondary"
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={accountAddress ? handleClick : handleOnConnect}
-                >
-                    <Grid
-                        container
-                        direction="row"
-                        alignItems="center"
-                        display="flex"
-                        justify="flex-end"
-                    >
-                        <Grid item>
-                            {displayWalletStatus(walletConnected, walletIsKYCd)}
-                        </Grid>
-                        <Grid
-                            item
-                            className={classes.address}
-                            data-testid="connectAddressButton"
-                        >
-                            <Box display="flex" alignItems="center">
-                                {/* 0x121565...6456 */}
-                                {accountAddress
-                                    ? addressParser(accountAddress)
-                                    : "Connect"}
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Button>
+
+                {displayConnectionButton({ walletConnected, walletIsKYCd })}
                 <Menu
                     className={classes.dropdown}
                     anchorEl={anchorEl}
