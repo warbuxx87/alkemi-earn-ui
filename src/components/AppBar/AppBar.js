@@ -145,6 +145,7 @@ function AppBar({
                     variant="contained"
                     size="small"
                     onClick={handleOnConnect}
+                    data-testid="connectButton"
                 >
                     Connect
                 </Button>
@@ -169,12 +170,12 @@ function AppBar({
                         <Grid item>
                             {displayWalletStatus(walletConnected, walletIsKYCd)}
                         </Grid>
-                        <Grid
-                            item
-                            className={classes.address}
-                            data-testid="connectAddressButton"
-                        >
-                            <Box display="flex" alignItems="center">
+                        <Grid item className={classes.address}>
+                            <Box
+                                display="flex"
+                                alignItems="center"
+                                data-testid="addressButton"
+                            >
                                 {/* 0x121565...6456 */}
                                 {accountAddress
                                     ? addressParser(accountAddress)
