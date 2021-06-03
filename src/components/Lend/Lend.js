@@ -40,6 +40,8 @@ function Lend({
     txs,
     walletIsKYCd,
     userWalletNetwork,
+    marketsData,
+    walletConnected,
 }) {
     const classes = useStyles();
     return (
@@ -73,6 +75,8 @@ function Lend({
                                 txs={txs}
                                 walletIsKYCd={walletIsKYCd}
                                 userWalletNetwork={userWalletNetwork}
+                                marketsData={marketsData}
+                                walletConnected={walletConnected}
                             />
                         </Grid>
                     )}{" "}
