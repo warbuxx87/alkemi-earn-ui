@@ -94,13 +94,6 @@ const BorrowTable = ({
     const classes = useStyles();
     return (
         <Box mt={1}>
-            <Typography
-                className={classes.heading}
-                variant="body1"
-                color="textPrimary"
-            >
-                Available Markets
-            </Typography>
             <PerfectScrollbar>
                 <Table className={classes.root}>
                     <TableBody>
