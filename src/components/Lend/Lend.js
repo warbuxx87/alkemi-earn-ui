@@ -1,11 +1,19 @@
 // Main Component
 
 // Section 1: React low level imports
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Box, Container, Grid, makeStyles } from "@material-ui/core";
+import {
+    Box,
+    Container,
+    Divider,
+    Grid,
+    makeStyles,
+    Tab,
+    Tabs,
+} from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 import LendTable from "./Table";
@@ -28,7 +36,25 @@ const useStyles = makeStyles((theme) => ({
             paddingRight: 0,
         },
     },
+    tabs: {
+        "& .MuiTab-root": {
+            textTransform: "capitalize",
+            fontSize: "0.875rem",
+            lineHeight: 1.7,
+            "@media (min-width:1940px)": {
+                fontSize: "0.8125rem",
+            },
+        },
+        "& .MuiDivider-root": {
+            backgroundColor: "#121316",
+        },
+    },
 }));
+
+const tabs = [
+    { value: "tableverified", label: "Verified" },
+    { value: "tableopen", label: "Open" },
+];
 
 // Section 5: Code Component
 function Lend({
@@ -42,6 +68,10 @@ function Lend({
     userWalletNetwork,
 }) {
     const classes = useStyles();
+    const [currentTab, setCurrentTab] = useState("tableverified");
+    const handleTabsChange = (event, value) => {
+        setCurrentTab(value);
+    };
     return (
         <Container maxWidth={false} className={classes.container}>
             <Box mt={3}>
@@ -66,14 +96,57 @@ function Lend({
                     )}
                     {!!inactiveLend.length && (
                         <Grid item lg={12} xs={12}>
-                            <LendTable
-                                data={inactiveLend}
-                                onActivate={onActivate}
-                                displayAllocateButton={displayAllocateButton}
-                                txs={txs}
-                                walletIsKYCd={walletIsKYCd}
-                                userWalletNetwork={userWalletNetwork}
-                            />
+                            <Box className={classes.tabs}>
+                                <Box mt={5}>
+                                    <Tabs
+                                        onChange={handleTabsChange}
+                                        scrollButtons="auto"
+                                        value={currentTab}
+                                        textColor="secondary"
+                                        variant="scrollable"
+                                        className={classes.tabs}
+                                    >
+                                        {tabs.map((tab) => (
+                                            <Tab
+                                                key={tab.value}
+                                                label={tab.label}
+                                                value={tab.value}
+                                            />
+                                        ))}
+                                    </Tabs>
+                                </Box>
+                                <Divider />
+                                <Box py={1} pb={6}>
+                                    {currentTab === "tableverified" && (
+                                        <LendTable
+                                            data={inactiveLend}
+                                            onActivate={onActivate}
+                                            displayAllocateButton={
+                                                displayAllocateButton
+                                            }
+                                            txs={txs}
+                                            walletIsKYCd={walletIsKYCd}
+                                            userWalletNetwork={
+                                                userWalletNetwork
+                                            }
+                                        />
+                                    )}
+                                    {currentTab === "tableopen" && (
+                                        <LendTable
+                                            data={inactiveLend}
+                                            onActivate={onActivate}
+                                            displayAllocateButton={
+                                                displayAllocateButton
+                                            }
+                                            txs={txs}
+                                            walletIsKYCd={walletIsKYCd}
+                                            userWalletNetwork={
+                                                userWalletNetwork
+                                            }
+                                        />
+                                    )}
+                                </Box>
+                            </Box>
                         </Grid>
                     )}{" "}
                 </Grid>

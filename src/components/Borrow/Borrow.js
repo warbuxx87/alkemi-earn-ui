@@ -39,10 +39,10 @@ const useStyles = makeStyles((theme) => ({
     tabs: {
         "& .MuiTab-root": {
             textTransform: "capitalize",
-            fontSize: "0.8125rem",
+            fontSize: "0.875rem",
             lineHeight: 1.7,
             "@media (min-width:1940px)": {
-                fontSize: "0.875rem",
+                fontSize: "0.8125rem",
             },
         },
         "& .MuiDivider-root": {
@@ -67,7 +67,7 @@ function Borrow({
     userWalletNetwork,
 }) {
     const classes = useStyles();
-    const [currentTab, setCurrentTab] = useState("tabledeposit");
+    const [currentTab, setCurrentTab] = useState("tableverified");
     const handleTabsChange = (event, value) => {
         setCurrentTab(value);
     };
@@ -117,7 +117,7 @@ function Borrow({
                                 </Box>
                                 <Divider />
                                 <Box py={1} pb={6}>
-                                    {currentTab === "tabledeposit" && (
+                                    {currentTab === "tableverified" && (
                                         <BorrowTable
                                             data={inactiveBorrow}
                                             onActivate={onActivate}
@@ -128,7 +128,7 @@ function Borrow({
                                             }
                                         />
                                     )}
-                                    {currentTab === "tableborrow" && (
+                                    {currentTab === "tableopen" && (
                                         <BorrowTable
                                             data={inactiveBorrow}
                                             onActivate={onActivate}
