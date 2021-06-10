@@ -7,11 +7,11 @@
         "reports_url": "https://api.alkemi.network/reports"
     },
     "rinkeby": {
-        "history_url": "https://rinkeby.api.alkemi.network/history",
-        "markets_url": "https://rinkeby.api.alkemi.network/markets",
-        "accounts_url": "https://rinkeby.api.alkemi.network/accounts",
-        "liquidations_url": "https://rinkeby.api.alkemi.network/liquidations",
-        "reports_url": "https://rinkeby.api.alkemi.network/reports"
+        "history_url": "http://earn-api-staging-2.ca-central-1.elasticbeanstalk.com/history",
+        "markets_url": "http://earn-api-staging-2.ca-central-1.elasticbeanstalk.com/markets",
+        "accounts_url": "http://earn-api-staging-2.ca-central-1.elasticbeanstalk.com/accounts",
+        "liquidations_url": "http://earn-api-staging-2.ca-central-1.elasticbeanstalk.com/liquidations",
+        "reports_url": "http://earn-api-staging-2.ca-central-1.elasticbeanstalk.com/reports"
     },
     "ropsten": {
         "history_url": "https://ropsten.api.alkemi.network/history",
