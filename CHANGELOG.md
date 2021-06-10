@@ -1,3 +1,19 @@
+# [1.14.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.12...v1.14.0) (2021-06-07)
+
+
+### Features
+
+* display APY for borrow & lend views when user is not connected UI-451 ([97f949a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/97f949a86586ad16dc22964eec702bdf13d20b6d))
+
+
+
+# [1.14.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.12...v1.14.0) (2021-06-07)
+
+
+### Features
+
+* display APY for borrow & lend views when user is not connected UI-451 ([97f949a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/97f949a86586ad16dc22964eec702bdf13d20b6d))
+
 ## [1.13.12](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.11...v1.13.12) (2021-05-31)
 
 
