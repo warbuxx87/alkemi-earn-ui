@@ -38,6 +38,8 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const [amount, setAmount] = React.useState("");
     const [shouldSendMax, setShouldSendMax] = React.useState(false);
 
+    const [maxWithdraw, setMaxWithdraw] = React.useState("0.00");
+
     const onSetAmount = (newValue) => {
         setShouldSendMax(false);
 
@@ -56,14 +58,34 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const onSetMax = () => {
         setShouldSendMax(true);
 
+        setAmount(maxWithdraw);
+    };
+
+    // Sets max available to withdraw
+    React.useEffect(() => {
         if (
+            web3.utils
+                .toBN(toWei(asset.maxWithdrawToken, asset.unit))
+                .lte(web3.utils.toBN(asset.balance)) &&
+            web3.utils
+                .toBN(toWei(asset.maxWithdrawToken, asset.unit))
+                .lte(web3.utils.toBN(asset.liquidity))
+        ) {
+            setMaxWithdraw(asset.maxWithdrawToken);
+        } else if (
             web3.utils.toBN(asset.balance).lte(web3.utils.toBN(asset.liquidity))
         ) {
-            setAmount(fromWei(asset.balance, asset.unit));
+            setMaxWithdraw(fromWei(asset.balance, asset.unit));
         } else {
-            setAmount(fromWei(asset.liquidity, asset.unit));
+            setMaxWithdraw(fromWei(asset.liquidity, asset.unit));
         }
-    };
+    }, [asset.maxWithdrawToken, asset.balance, asset.liquidity, asset.unit]);
+
+    // keeps displaying max when user has set max withdraw
+    // UX improvement to be done, lock the field the same as with liquidity drawer
+    React.useEffect(() => {
+        if (shouldSendMax === true) setAmount(maxWithdraw);
+    }, [maxWithdraw, shouldSendMax]);
 
     const [enableWithdraw, setEnableWithdraw] = React.useState(false);
 
@@ -141,11 +163,8 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
                 asset.unit,
                 userWalletNetwork
             )}
-            amountValue={`Supplied: ${formatNumber(
-                asset.balance,
-                asset.unit,
-                userWalletNetwork
-            )}`}
+            amountValue={`Available: ${maxWithdraw}`}
+            currentBalanceLabel={"Supplied"}
             walletIsKYCd={true} // Even if the wallet is not KYC'd, the user is able to withdraw their funds
         />
     );
