@@ -32,7 +32,7 @@ import { addressParser } from "utils/ui";
 const useStyles = makeStyles((theme) => ({
     connectWallet: {
         padding: "2px 2px 2px 0px",
-        background: theme.palette.background.paper,
+        background: theme.palette.background.light,
         "& .MuiButton-label": {
             justifyContent: "flex-end",
         },
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     },
     address: {
         fontSize: "0.875rem",
-        backgroundColor: "#000000",
+        backgroundColor: theme.palette.background.default,
         paddingLeft: "10px",
         paddingRight: "10px",
         borderRadius: "2px",
@@ -213,6 +213,7 @@ function AppBar({
                         alt={"Alkemi Logo"}
                     />
                 </Hidden>
+
                 <Box ml={2} flexGrow={1} />
 
                 {displayConnectionButton({ walletConnected, walletIsKYCd })}

@@ -6,21 +6,26 @@ import React from "react";
 // Section 2: Material-UI imports
 import {
     IconButton,
+    Box,
+    Divider,
     Menu,
     MenuItem,
     SvgIcon,
+    Typography,
     makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
+
 import MenuIcon from "@material-ui/icons/MoreHoriz";
+import PoolSelect from "./PoolSelect";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     iconbutton: {
         borderRadius: "4px",
         border: "solid 2px",
-        borderColor: theme.palette.background.paper,
+        borderColor: theme.palette.background.light,
         minHeight: "36px",
         minWidth: "36px",
     },
@@ -73,51 +78,60 @@ function Other() {
                     horizontal: "right",
                 }}
             >
-                <MenuItem
-                    className={classes.menuitem}
-                    onClick={handleClose}
-                    href="//docs.alkemi.network/user-guide/"
-                    target="_blank"
-                    component="a"
-                >
-                    User Guide
-                </MenuItem>
-                <MenuItem
-                    className={classes.menuitem}
-                    onClick={handleClose}
-                    href="//support.alkemi.network/support/tickets/new"
-                    target="_blank"
-                    component="a"
-                >
-                    Contact Support
-                </MenuItem>
-                <MenuItem
-                    className={classes.menuitem}
-                    onClick={handleClose}
-                    href="//feedback.alkemi.network/feature-requests"
-                    target="_blank"
-                    component="a"
-                >
-                    Feature Request
-                </MenuItem>
-                <MenuItem
-                    className={classes.menuitem}
-                    onClick={handleClose}
-                    href="//feedback.alkemi.network/bug-reports"
-                    target="_blank"
-                    component="a"
-                >
-                    Report Bug
-                </MenuItem>
-                <MenuItem
-                    className={classes.menuitem}
-                    onClick={handleClose}
-                    href="//discord.gg/Y9vmtFjhHB"
-                    target="_blank"
-                    component="a"
-                >
-                    Discord
-                </MenuItem>
+                <Box px={2} pb={3} pt={1}>
+                    <Box mb={1}>
+                        <Typography variant="body2">Pool Select</Typography>
+                    </Box>
+                    <PoolSelect />
+                </Box>
+                <Divider />
+                <Box mt={2}>
+                    <MenuItem
+                        className={classes.menuitem}
+                        onClick={handleClose}
+                        href="//docs.alkemi.network/user-guide/"
+                        target="_blank"
+                        component="a"
+                    >
+                        User Guide
+                    </MenuItem>
+                    <MenuItem
+                        className={classes.menuitem}
+                        onClick={handleClose}
+                        href="//support.alkemi.network/support/tickets/new"
+                        target="_blank"
+                        component="a"
+                    >
+                        Contact Support
+                    </MenuItem>
+                    <MenuItem
+                        className={classes.menuitem}
+                        onClick={handleClose}
+                        href="//feedback.alkemi.network/feature-requests"
+                        target="_blank"
+                        component="a"
+                    >
+                        Feature Request
+                    </MenuItem>
+                    <MenuItem
+                        className={classes.menuitem}
+                        onClick={handleClose}
+                        href="//feedback.alkemi.network/bug-reports"
+                        target="_blank"
+                        component="a"
+                    >
+                        Report Bug
+                    </MenuItem>
+                    <MenuItem
+                        className={classes.menuitem}
+                        onClick={handleClose}
+                        href="//discord.gg/Y9vmtFjhHB"
+                        target="_blank"
+                        component="a"
+                    >
+                        Discord
+                    </MenuItem>
+                </Box>
             </Menu>
         </>
     );
