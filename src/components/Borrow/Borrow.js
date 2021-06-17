@@ -39,6 +39,8 @@ function Borrow({
     txs,
     walletIsKYCd,
     userWalletNetwork,
+    marketsData,
+    walletConnected,
 }) {
     const classes = useStyles();
     return (
@@ -71,6 +73,8 @@ function Borrow({
                                 txs={txs}
                                 walletIsKYCd={walletIsKYCd}
                                 userWalletNetwork={userWalletNetwork}
+                                marketsData={marketsData}
+                                walletConnected={walletConnected}
                             />
                         </Grid>
                     )}

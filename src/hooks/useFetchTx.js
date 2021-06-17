@@ -23,7 +23,7 @@ const useFetchTx = (fetchPeriodically = false) => {
     const address = useSelector(walletAddress);
 
     useEffect(
-        (fetchPeriodically) => {
+        () => {
             let timer;
 
             const getTxList = (fetchPeriodically) => {
@@ -36,7 +36,10 @@ const useFetchTx = (fetchPeriodically = false) => {
                 );
 
                 if (fetchPeriodically === true) {
-                    timer = setTimeout(getTxList, 60 * 1000);
+                    timer = setTimeout(
+                        () => getTxList(fetchPeriodically),
+                        60 * 1000
+                    );
                 }
             };
 

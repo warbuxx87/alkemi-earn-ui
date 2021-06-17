@@ -43,6 +43,7 @@ function Lend({
 
     calculatedInterest,
     fetchInterestErrorStatus,
+    marketsData,
     walletConnected,
 }) {
     const classes = useStyles();
@@ -81,6 +82,8 @@ function Lend({
                                 txs={txs}
                                 walletIsKYCd={walletIsKYCd}
                                 userWalletNetwork={userWalletNetwork}
+                                marketsData={marketsData}
+                                walletConnected={walletConnected}
                             />
                         </Grid>
                     )}{" "}

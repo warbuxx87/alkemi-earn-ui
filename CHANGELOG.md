@@ -1,3 +1,127 @@
+# [1.14.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.12...v1.14.0) (2021-06-07)
+
+
+### Features
+
+* display APY for borrow & lend views when user is not connected UI-451 ([97f949a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/97f949a86586ad16dc22964eec702bdf13d20b6d))
+
+
+
+# [1.14.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.12...v1.14.0) (2021-06-07)
+
+
+### Features
+
+* display APY for borrow & lend views when user is not connected UI-451 ([97f949a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/97f949a86586ad16dc22964eec702bdf13d20b6d))
+
+## [1.13.12](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.11...v1.13.12) (2021-05-31)
+
+
+### Bug Fixes
+
+* use regular number display instead of scientific notation for borrow fee UI-457 ([93263e2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/93263e2191af0f9e43eef04e8acf3a15848151f2))
+
+
+
+## [1.13.12](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.11...v1.13.12) (2021-05-31)
+
+
+### Bug Fixes
+
+* use regular number display instead of scientific notation for borrow fee UI-457 ([93263e2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/93263e2191af0f9e43eef04e8acf3a15848151f2))
+
+## [1.13.11](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.10...v1.13.11) (2021-05-20)
+
+
+### Bug Fixes
+
+* type cast for default network when wallet is not connected UI-454 ([6d9ef1e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6d9ef1eea34ca9ddd8eea2937ac46953124acfa8))
+* use proptype for default network in markets UI-454 ([7165408](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/71654087ae50f0dc6297d786629107cf7e1f0700))
+
+
+
+## [1.13.11](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.10...v1.13.11) (2021-05-20)
+
+
+### Bug Fixes
+
+* type cast for default network when wallet is not connected UI-454 ([6d9ef1e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6d9ef1eea34ca9ddd8eea2937ac46953124acfa8))
+* use proptype for default network in markets UI-454 ([7165408](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/71654087ae50f0dc6297d786629107cf7e1f0700))
+
+## [1.13.10](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.9...v1.13.10) (2021-05-19)
+
+
+### Bug Fixes
+
+* properly hide connection banner on mainnete UI-447 ([e47a512](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e47a5122c2d6a5d675c263596a55e615c330bf79))
+
+
+
+## [1.13.10](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.9...v1.13.10) (2021-05-19)
+
+
+### Bug Fixes
+
+* properly hide connection banner on mainnete UI-447 ([e47a512](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e47a5122c2d6a5d675c263596a55e615c330bf79))
+
+## [1.13.9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.8...v1.13.9) (2021-05-17)
+
+
+### Bug Fixes
+
+* periodical fetch of data UI-452 ([57f4bdf](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/57f4bdf4d1017904b818afb26eaeae77a65dad17))
+* properly fetch periodically liquidation data UI-452 ([7fd41db](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7fd41dbffc10a24c78925df7da94e8f33ce0b85d))
+* properly fetch periodically markets data UI-452 ([28e5196](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/28e519691bd854fb6db259cf76ce1b2ebf0ffc26))
+
+
+
+## [1.13.9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.8...v1.13.9) (2021-05-17)
+
+
+### Bug Fixes
+
+* periodical fetch of data UI-452 ([57f4bdf](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/57f4bdf4d1017904b818afb26eaeae77a65dad17))
+* properly fetch periodically liquidation data UI-452 ([7fd41db](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7fd41dbffc10a24c78925df7da94e8f33ce0b85d))
+* properly fetch periodically markets data UI-452 ([28e5196](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/28e519691bd854fb6db259cf76ce1b2ebf0ffc26))
+
+## [1.13.8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.7...v1.13.8) (2021-05-13)
+
+
+### Bug Fixes
+
+* allow user to repay even when not kycd UI-446 ([a341d63](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a341d6325415c886acb3e2108e5e7be01f1496d9))
+
+
+
+## [1.13.8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.7...v1.13.8) (2021-05-13)
+
+
+### Bug Fixes
+
+* allow user to repay even when not kycd UI-446 ([a341d63](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a341d6325415c886acb3e2108e5e7be01f1496d9))
+
+## [1.13.7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.6...v1.13.7) (2021-05-13)
+
+
+### Bug Fixes
+
+* change default collateral ratio value UI-439 ([58d15a2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/58d15a2bd8b8e35880e90479f2b00f958c096e68))
+* hide non user friendly values from markets page UI-438 ([dc91d4f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dc91d4fa67840a0877a591cc29c4d4e2a2063ce7))
+* use proper link to check txs on etherscan UI-436 ([773f3d6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/773f3d6ab4ed1213e8a51cffdbfd9b25fb981184))
+* use proper link to check txs on etherscan UI-436 ([18a3fbc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/18a3fbceb46cba193b840578886af29d1692caba))
+
+
+
+## [1.13.7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.6...v1.13.7) (2021-05-13)
+
+
+### Bug Fixes
+
+* change default collateral ratio value UI-439 ([58d15a2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/58d15a2bd8b8e35880e90479f2b00f958c096e68))
+* hide non user friendly values from markets page UI-438 ([dc91d4f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dc91d4fa67840a0877a591cc29c4d4e2a2063ce7))
+* use proper link to check txs on etherscan UI-436 ([773f3d6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/773f3d6ab4ed1213e8a51cffdbfd9b25fb981184))
+* use proper link to check txs on etherscan UI-436 ([18a3fbc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/18a3fbceb46cba193b840578886af29d1692caba))
+
 ## [1.13.6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.5...v1.13.6) (2021-04-14)
 
 

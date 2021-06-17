@@ -44,6 +44,8 @@ const TWO_DECIMAL_PLACES_NETWORK_ID = parseInt(
     10
 );
 
+const orgFee = 0.001;
+
 export const getTokenIcon = (symbol) => {
     const icon = token2icon[symbol];
     return icon;
@@ -239,6 +241,41 @@ export const formatETHMoney = (value, currency, unit, usdPrice) => {
         style: "currency",
         currency,
     }).format(calculation);
+};
+
+// value in USD to calculate Origination Fees while borrowing
+export const formatETHMoneyOrgFee = (
+    value,
+    amount,
+    currency,
+    unit,
+    usdPrice
+) => {
+    if (usdPrice === null || usdPrice === undefined) {
+        usdPrice = "4131207138725935";
+    }
+
+    let calculation = web3.utils
+        .toBN(value)
+        .div(web3.utils.toBN(usdPrice))
+        .toString();
+
+    switch (unit) {
+        case "WBTC":
+            calculation = calculation / 1e10;
+            break;
+        case "USDC":
+        case "USDT":
+            calculation = calculation / 1e12;
+            break;
+        default:
+        // code block
+    }
+
+    return new Intl.NumberFormat("en-es", {
+        style: "currency",
+        currency,
+    }).format(calculation * orgFee * amount);
 };
 
 // eth balance value in USD
