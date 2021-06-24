@@ -158,14 +158,14 @@ const useOnboard = () => {
                         : address[network].address_MoneyMarket;
 
                 // account connected
-                initContracts(
+                initContracts({
                     drizzle,
-                    currentWalletAddress,
-                    currentWalletNetwork,
+                    userWalletAddress: currentWalletAddress,
+                    userWalletNetwork: currentWalletNetwork,
                     currentWalletBalance,
                     forceUpdate,
-                    address_MoneyMarket
-                );
+                    address_MoneyMarket,
+                });
 
                 if (drizzle && drizzle.web3 && drizzle.web3.currentProvider) {
                     try {

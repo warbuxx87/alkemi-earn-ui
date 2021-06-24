@@ -17,13 +17,13 @@ const ABIs = {
     WBTC: WBTC_ABI,
 };
 
-export const initContracts = (
+export const initContracts = ({
     drizzle,
     userWalletAddress,
     userWalletNetwork,
     forceUpdate,
-    address_MoneyMarket
-) => {
+    address_MoneyMarket,
+}) => {
     const resolved = initMarketContract({
         drizzle,
         userWalletAddress,
@@ -64,6 +64,7 @@ export const initMarketContract = ({
 }) => {
     if (drizzle.contracts.MoneyMarket && !forceUpdate)
         return drizzle.contracts.MoneyMarket;
+
     const myAddress = userWalletAddress;
 
     const network = constants.network_type[userWalletNetwork];
@@ -170,15 +171,6 @@ export const initAssetContract = ({
 }) => {
     if (drizzle.contracts[asset] && !forceUpdate)
         return drizzle.contracts[asset];
-
-    console.log({
-        drizzle,
-        userWalletAddress,
-        userWalletNetwork,
-        asset,
-        forceUpdate,
-        address_MoneyMarket,
-    });
 
     const myAddress = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
