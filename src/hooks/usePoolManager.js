@@ -1,21 +1,14 @@
 // Contracts address manager, manage selection between open and permissioned pools
 
 // Section 1: React/Redux low level imports
-import { useEffect, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 // Section 2: internal imports
-import { getPool } from "redux/selectors/status/pool";
+import { setPool } from "redux/actions/status/pool";
 
-import { walletNetworkName } from "redux/selectors/data/onboard";
-
-import { SET_POOL } from "redux/actions/status/pool";
-
-const useProtocolManager = () => {
+const usePoolManager = () => {
     const dispatch = useDispatch();
-
-    const currentPool = useSelector(getPool);
-    const currentNetworkName = useSelector(walletNetworkName);
 
     // On start
     useEffect(() => {
@@ -27,14 +20,10 @@ const useProtocolManager = () => {
             previouslySelectedPool !== undefined &&
             typeof previouslySelectedPool === "string"
         ) {
-            dispatch(SET_POOL(previouslySelectedPool));
+            dispatch(setPool(previouslySelectedPool));
         } else {
         }
     }, []);
-
-    return {
-        getPoolAddresses,
-    };
 };
 
-export default useProtocolManager;
+export default usePoolManager;

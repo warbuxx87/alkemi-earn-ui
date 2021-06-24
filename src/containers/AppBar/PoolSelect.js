@@ -2,9 +2,11 @@
 
 // Section 1: React low level imports
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Section 2: internal imports
+import { onPoolChange } from "redux/actions/status/pool";
+
 // Section 3: Selectors
 import { getPool } from "redux/selectors/status/pool";
 
@@ -13,8 +15,11 @@ import PoolSelect from "components/AppBar/PoolSelect";
 
 // Section 5: Code Container
 const PoolSelectContainer = () => {
+    const dispatch = useDispatch();
+
     const onChangePool = (event, newPool) => {
-        console.log(newPool);
+        console.log();
+        dispatch(onPoolChange({ pool: newPool }));
     };
 
     const currentPool = useSelector(getPool);
