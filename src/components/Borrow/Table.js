@@ -90,6 +90,7 @@ const BorrowTable = ({
     txs,
     walletIsKYCd,
     userWalletNetwork,
+    needKYC,
 }) => {
     const classes = useStyles();
     return (
@@ -236,7 +237,9 @@ const BorrowTable = ({
                                                 color="secondary"
                                                 disabled={
                                                     checkActivating(Row, txs) ||
-                                                    walletIsKYCd !== true
+                                                    needKYC
+                                                        ? !walletIsKYCd
+                                                        : false
                                                 }
                                                 onClick={() => onActivate(Row)}
                                             >

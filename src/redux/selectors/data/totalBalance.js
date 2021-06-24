@@ -184,7 +184,9 @@ export const getMarketLiquidity = (state) => {
     if (currentNetworkName) {
         const assetLiquidity = {};
 
+        // Retrieve current pool (permissioned or open)
         const currentPool = getPool(state);
+
         const address_MoneyMarket =
             currentPool === "open"
                 ? address[currentNetworkName].address_open_MoneyMarket

@@ -15,6 +15,8 @@ import { isWalletConnected, walletAddress } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, isLiquidator } from "redux/selectors/status/status";
 
+import { getPool } from "redux/selectors/status/pool";
+
 // Section 4: components
 import AppBar from "components/AppBar/AppBar";
 
@@ -50,6 +52,8 @@ const AppBarContainer = () => {
         setTitle(currentTitle);
     }, [location]);
 
+    const currentPool = useSelector(getPool);
+
     return (
         <AppBar
             title={title}
@@ -59,6 +63,7 @@ const AppBarContainer = () => {
             walletIsKYCd={walletIsKYCd}
             walletConnected={walletConnected}
             walletIsLiquidator={walletIsLiquidator}
+            displayKYCStatus={currentPool !== "open"}
         />
     );
 };

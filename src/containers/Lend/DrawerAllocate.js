@@ -23,12 +23,19 @@ import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
+import { isKYCPool } from "redux/selectors/status/pool";
+
+// Section 4: Import Underlying Components / Containers
+
+// Section 5: Code Container
 const DrawerAllocateContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
+    const needKYC = useSelector(isKYCPool);
 
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
@@ -112,7 +119,7 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
                 asset.unit,
                 userWalletNetwork
             )}`}
-            walletIsKYCd={walletIsKYCd}
+            walletIsKYCd={needKYC ? walletIsKYCd : true}
         />
     );
 };

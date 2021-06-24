@@ -94,6 +94,7 @@ function AppBar({
     walletConnected,
     walletIsKYCd,
     walletIsLiquidator,
+    displayKYCStatus,
 }) {
     const classes = useStyles();
 
@@ -117,7 +118,7 @@ function AppBar({
         setAnchorEl(null);
     };
 
-    const displayWalletStatus = (walletConnected, walletIsKYCd) => {
+    const displayWalletStatus = ({ walletIsKYCd }) => {
         if (walletIsKYCd)
             return (
                 <StatusDisplay
@@ -136,7 +137,11 @@ function AppBar({
             );
     };
 
-    const displayConnectionButton = ({ walletConnected, walletIsKYCd }) => {
+    const displayConnectionButton = ({
+        walletConnected,
+        walletIsKYCd,
+        displayKYCStatus,
+    }) => {
         if (!walletConnected)
             return (
                 <Button
@@ -167,9 +172,11 @@ function AppBar({
                         display="flex"
                         justify="flex-end"
                     >
-                        <Grid item>
-                            {displayWalletStatus(walletConnected, walletIsKYCd)}
-                        </Grid>
+                        {displayKYCStatus ? (
+                            <Grid item>
+                                {displayWalletStatus({ walletIsKYCd })}
+                            </Grid>
+                        ) : null}
                         <Grid item className={classes.address}>
                             <Box
                                 display="flex"
@@ -216,7 +223,11 @@ function AppBar({
 
                 <Box ml={2} flexGrow={1} />
 
-                {displayConnectionButton({ walletConnected, walletIsKYCd })}
+                {displayConnectionButton({
+                    walletConnected,
+                    walletIsKYCd,
+                    displayKYCStatus,
+                })}
                 <Menu
                     className={classes.dropdown}
                     anchorEl={anchorEl}

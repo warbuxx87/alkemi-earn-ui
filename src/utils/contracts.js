@@ -171,6 +171,15 @@ export const initAssetContract = ({
     if (drizzle.contracts[asset] && !forceUpdate)
         return drizzle.contracts[asset];
 
+    console.log({
+        drizzle,
+        userWalletAddress,
+        userWalletNetwork,
+        asset,
+        forceUpdate,
+        address_MoneyMarket,
+    });
+
     const myAddress = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
 
@@ -197,6 +206,7 @@ export const initAssetContract = ({
         },
         events
     );
+
     // get allowance
     tokenContract.methods.allowance.cacheCall(myAddress, address_MoneyMarket);
 

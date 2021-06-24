@@ -91,6 +91,7 @@ const LendTable = ({
     displayAllocateButton,
     txs,
     walletIsKYCd,
+    needKYC,
     userWalletNetwork,
 }) => {
     const classes = useStyles();
@@ -245,7 +246,9 @@ const LendTable = ({
                                                 color="secondary"
                                                 disabled={
                                                     checkActivating(row, txs) ||
-                                                    walletIsKYCd !== true
+                                                    needKYC
+                                                        ? !walletIsKYCd
+                                                        : false
                                                 }
                                                 onClick={() => onActivate(row)}
                                             >

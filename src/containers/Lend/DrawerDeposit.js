@@ -7,8 +7,6 @@ import web3 from "web3";
 import * as yup from "yup";
 
 // Section 2: internal imports
-import Drawer from "components/UI/Drawer/Drawer";
-
 import DrizzleContext from "utils/DrizzleContext";
 
 import { onTx } from "redux/actions/status/transactions";
@@ -29,6 +27,12 @@ import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
+import { isKYCPool } from "redux/selectors/status/pool";
+
+// Section 4: Import Underlying Components / Containers
+import Drawer from "components/UI/Drawer/Drawer";
+
+// Section 5: Code Container
 const DepositDrawerContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
@@ -38,6 +42,8 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     const txs = useSelector(getTransactions);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
+    const needKYC = useSelector(isKYCPool);
 
     const [amount, setAmount] = React.useState("");
 
@@ -212,7 +218,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                     asset.unit,
                     userWalletNetwork
                 )}`}
-                walletIsKYCd={walletIsKYCd}
+                walletIsKYCd={needKYC ? walletIsKYCd : true}
             />
         </>
     );

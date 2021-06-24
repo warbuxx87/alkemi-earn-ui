@@ -26,7 +26,9 @@ export const handle_approve_click = async ({
         userWalletAddress: myAccount,
         asset: asset.unit,
         address_MoneyMarket,
+        userWalletNetwork,
     });
+
     const sendApprove = tokenContract.methods.approve.cacheSend(
         address_MoneyMarket,
         constants.max_uint,

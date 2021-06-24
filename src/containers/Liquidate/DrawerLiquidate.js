@@ -7,7 +7,6 @@ import web3 from "web3";
 import * as yup from "yup";
 
 // Section 2: internal imports
-import DrawerLiquidate from "components/UI/Drawer/DrawerLiquidate";
 import DrizzleContext from "utils/DrizzleContext";
 
 import { onLiquidateAction } from "redux/actions/data/liquidations";
@@ -19,7 +18,12 @@ import { toWei, assetToDecimals } from "utils/ui";
 // Section 3: Selectors
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
+import { isKYCPool } from "redux/selectors/status/pool";
 
+// Section 4: Import Components / Containers
+import DrawerLiquidate from "components/UI/Drawer/DrawerLiquidate";
+
+// Section 5: Container's body
 const LiquidateDrawerContainer = ({
     supplyList,
     borrowList,
@@ -37,6 +41,8 @@ const LiquidateDrawerContainer = ({
 
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
+
+    const needKYC = useSelector(isKYCPool);
 
     const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
 
@@ -177,7 +183,7 @@ const LiquidateDrawerContainer = ({
             selectedCollateralAsset={selectedSupplyAsset}
             setSelectedCollateralAsset={setSelectedSupplyAsset}
             marketsData={marketsData}
-            walletIsKYCd={walletIsKYCd}
+            walletIsKYCd={needKYC ? walletIsKYCd : true}
             maxAmountForToken={maxAmountForToken}
         />
     );

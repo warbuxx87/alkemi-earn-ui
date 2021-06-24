@@ -37,6 +37,7 @@ function Borrow({
     onActivate,
     USDPrice,
     txs,
+    needKYC,
     walletIsKYCd,
     userWalletNetwork,
 }) {
@@ -70,6 +71,7 @@ function Borrow({
                                 onActivate={onActivate}
                                 txs={txs}
                                 walletIsKYCd={walletIsKYCd}
+                                needKYC={needKYC}
                                 userWalletNetwork={userWalletNetwork}
                             />
                         </Grid>

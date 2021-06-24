@@ -29,7 +29,7 @@ import {
 } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
-import { getPool } from "redux/selectors/status/pool";
+import { getPool, isKYCPool } from "redux/selectors/status/pool";
 
 // Section 4: components
 import Borrow from "components/Borrow/Borrow";
@@ -51,6 +51,8 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
 
     const currentPool = useSelector(getPool);
 
+    const needKYC = useSelector(isKYCPool);
+
     const activateAsset = (asset) =>
         onActivate({
             drizzle,
@@ -69,6 +71,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
             txs={txs}
             USDPrice={USDPrice}
             walletIsKYCd={walletIsKYCd}
+            needKYC={needKYC}
             userWalletNetwork={userWalletNetwork}
         />
     );

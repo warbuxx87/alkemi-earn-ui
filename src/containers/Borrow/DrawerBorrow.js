@@ -26,6 +26,8 @@ import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
+import { isKYCPool } from "redux/selectors/status/pool";
+
 // Section 4: Import Underlying Components / Containers
 import Drawer from "components/UI/Drawer/DrawerBorrow";
 
@@ -39,6 +41,8 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     const txs = useSelector(getTransactions);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
+
+    const needKYC = useSelector(isKYCPool);
 
     const [amount, setAmount] = React.useState("");
 
@@ -157,7 +161,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
                 null,
                 userWalletNetwork
             )}`}
-            walletIsKYCd={walletIsKYCd}
+            walletIsKYCd={needKYC ? walletIsKYCd : true}
         />
     );
 };

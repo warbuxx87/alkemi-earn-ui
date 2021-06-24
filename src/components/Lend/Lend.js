@@ -38,6 +38,7 @@ function Lend({
     USDPrice,
     displayAllocateButton,
     txs,
+    needKYC,
     walletIsKYCd,
     userWalletNetwork,
 }) {
@@ -72,6 +73,7 @@ function Lend({
                                 displayAllocateButton={displayAllocateButton}
                                 txs={txs}
                                 walletIsKYCd={walletIsKYCd}
+                                needKYC={needKYC}
                                 userWalletNetwork={userWalletNetwork}
                             />
                         </Grid>
