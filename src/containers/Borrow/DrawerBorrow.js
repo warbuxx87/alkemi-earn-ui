@@ -24,7 +24,7 @@ import { onTx } from "redux/actions/status/transactions";
 
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
 // Section 4: Import Underlying Components / Containers
 import Drawer from "components/UI/Drawer/DrawerBorrow";

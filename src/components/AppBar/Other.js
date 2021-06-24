@@ -18,7 +18,7 @@ import {
 // Section 3: Components & Containers import from the application
 
 import MenuIcon from "@material-ui/icons/MoreHoriz";
-import PoolSelect from "./PoolSelect";
+import PoolSelect from "containers/AppBar/PoolSelect";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({

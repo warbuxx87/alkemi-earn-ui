@@ -36,38 +36,24 @@ const useStyles = makeStyles((theme) => ({
 
 // Section 5: Code Component
 
-export default function ToggleButtonNotEmpty() {
-    const [alignment, setAlignment] = React.useState("left");
-    const [formats, setFormats] = React.useState(() => ["phone"]);
-
-    const handleFormat = (event, newFormats) => {
-        if (newFormats.length) {
-            setFormats(newFormats);
-        }
-    };
-    const handleAlignment = (event, newAlignment) => {
-        if (newAlignment !== null) {
-            setAlignment(newAlignment);
-        }
-    };
-
+export default function PoolSelect({ onChangePool, currentPool }) {
     const classes = useStyles();
 
     return (
         <ToggleButtonGroup
-            value={alignment}
+            value={currentPool}
             exclusive
-            onChange={handleAlignment}
+            onChange={onChangePool}
             aria-label="text alignment"
             className={classes.toggleButton}
         >
-            <ToggleButton value="left" aria-label="left aligned">
+            <ToggleButton value="permissioned" aria-label="left aligned">
                 <Verified fontSize="small" />{" "}
                 <Typography className={classes.toggleTitle} variant="body2">
                     Verified
                 </Typography>
             </ToggleButton>
-            <ToggleButton value="right" aria-label="centered">
+            <ToggleButton value="open" aria-label="centered">
                 <Open fontSize="small" />{" "}
                 <Typography className={classes.toggleTitle} variant="body2">
                     Open

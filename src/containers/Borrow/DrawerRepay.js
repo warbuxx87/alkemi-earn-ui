@@ -27,7 +27,7 @@ import { estimateGasForMethod } from "utils/drizzle";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
-import { getTransactions } from "redux/selectors/status";
+import { getTransactions } from "redux/selectors/status/status";
 
 const DrawerRepayContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);

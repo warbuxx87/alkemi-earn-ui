@@ -12,7 +12,7 @@ import useWatchEtherBalance from "hooks/useWatchEtherBalance";
 // Section 3: Selectors
 import { isWalletConnected, walletAddress } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, isLiquidator } from "redux/selectors/status";
+import { isWalletKYCd, isLiquidator } from "redux/selectors/status/status";
 
 // Section 4: components
 import AppBar from "components/AppBar/AppBar";

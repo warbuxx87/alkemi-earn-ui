@@ -25,7 +25,7 @@ import {
     SWAP,
 } from "constants/routes";
 
-import { isLiquidator } from "redux/selectors/status";
+import { isLiquidator } from "redux/selectors/status/status";
 
 const LayoutContent = () => {
     const walletIsLiquidator = useSelector(isLiquidator);

@@ -18,7 +18,7 @@ import { toWei, assetToDecimals } from "utils/ui";
 
 // Section 3: Selectors
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
-import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
 const LiquidateDrawerContainer = ({
     supplyList,
