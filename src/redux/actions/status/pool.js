@@ -23,10 +23,11 @@ export const setPool = (pool) => ({
 
 // Section 3: Action dispatch methods and async funcs
 export const onPoolChange = ({ pool }) => async (dispatch, getState) => {
-    console.log(getPool(getState()));
-    window.localStorage.setItem("selectedPool", pool);
+    if (getPool(getState()) !== pool) {
+        window.localStorage.setItem("selectedPool", pool);
 
-    dispatch(setPool(pool));
+        dispatch(setPool(pool));
 
-    window.location.reload();
+        window.location.reload();
+    }
 };

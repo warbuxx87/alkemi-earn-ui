@@ -18,7 +18,6 @@ const PoolSelectContainer = () => {
     const dispatch = useDispatch();
 
     const onChangePool = (event, newPool) => {
-        console.log();
         dispatch(onPoolChange({ pool: newPool }));
     };
 

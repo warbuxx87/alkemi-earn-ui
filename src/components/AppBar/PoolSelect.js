@@ -47,13 +47,21 @@ export default function PoolSelect({ onChangePool, currentPool }) {
             aria-label="text alignment"
             className={classes.toggleButton}
         >
-            <ToggleButton value="permissioned" aria-label="left aligned">
+            <ToggleButton
+                value="permissioned"
+                aria-label="left aligned"
+                disabled={currentPool === "permissioned"}
+            >
                 <Verified fontSize="small" />{" "}
                 <Typography className={classes.toggleTitle} variant="body2">
                     Verified
                 </Typography>
             </ToggleButton>
-            <ToggleButton value="open" aria-label="centered">
+            <ToggleButton
+                value="open"
+                aria-label="centered"
+                disabled={currentPool === "open"}
+            >
                 <Open fontSize="small" />{" "}
                 <Typography className={classes.toggleTitle} variant="body2">
                     Open
