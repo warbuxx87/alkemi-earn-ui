@@ -23,7 +23,7 @@ const usePoolManager = () => {
             dispatch(setPool(previouslySelectedPool));
         } else {
         }
-    }, []);
+    }, [dispatch]); // Might cause a problem to have dispatch here
 };
 
 export default usePoolManager;

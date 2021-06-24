@@ -21,13 +21,15 @@ export const initContracts = (
     drizzle,
     userWalletAddress,
     userWalletNetwork,
-    forceUpdate
+    forceUpdate,
+    address_MoneyMarket
 ) => {
     const resolved = initMarketContract({
         drizzle,
         userWalletAddress,
         userWalletNetwork,
         forceUpdate,
+        address_MoneyMarket,
     });
 
     if (resolved !== false)
@@ -38,6 +40,7 @@ export const initContracts = (
                 userWalletNetwork,
                 asset,
                 forceUpdate,
+                address_MoneyMarket,
             })
         );
 };
@@ -57,6 +60,7 @@ export const initMarketContract = ({
     userWalletAddress,
     userWalletNetwork,
     forceUpdate,
+    address_MoneyMarket,
 }) => {
     if (drizzle.contracts.MoneyMarket && !forceUpdate)
         return drizzle.contracts.MoneyMarket;
@@ -70,14 +74,12 @@ export const initMarketContract = ({
     // check if this network has configured contract addresses
     if (!address[network]) return false;
 
-    const contractAddress = address[network][`address_MoneyMarket`];
-
     // avoids undefined contract address/or 0x values set for now, could be improved with a check for valid eth address
-    if (!contractAddress || contractAddress.length < 3) return false;
+    if (!address_MoneyMarket || address_MoneyMarket.length < 3) return false;
 
     const MoneyMarketContract = new drizzle.web3.eth.Contract(
         MoneyMarket_ABI,
-        contractAddress
+        address_MoneyMarket
     );
 
     try {
@@ -164,6 +166,7 @@ export const initAssetContract = ({
     userWalletNetwork,
     asset,
     forceUpdate,
+    address_MoneyMarket,
 }) => {
     if (drizzle.contracts[asset] && !forceUpdate)
         return drizzle.contracts[asset];
@@ -195,17 +198,12 @@ export const initAssetContract = ({
         events
     );
     // get allowance
-    tokenContract.methods.allowance.cacheCall(
-        myAddress,
-        address[network].address_MoneyMarket
-    );
+    tokenContract.methods.allowance.cacheCall(myAddress, address_MoneyMarket);
 
     // get token balance for connected user wallet
     tokenContract.methods.balanceOf.cacheCall(myAddress);
 
     // get token balance for main MoneyMarket Contract --> used for Available Liquidity Selectors
-    tokenContract.methods.balanceOf.cacheCall(
-        address[network].address_MoneyMarket
-    );
+    tokenContract.methods.balanceOf.cacheCall(address_MoneyMarket);
     return drizzle.contracts[asset];
 };

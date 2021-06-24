@@ -7,6 +7,7 @@ import { getAggregatedDepositAPY } from "./lend";
 import { getAggregatedBorrowAPY } from "./borrow";
 
 import { walletNetworkName } from "./onboard";
+import { getPool } from "../status/pool";
 
 const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(
@@ -183,6 +184,12 @@ export const getMarketLiquidity = (state) => {
     if (currentNetworkName) {
         const assetLiquidity = {};
 
+        const currentPool = getPool(state);
+        const address_MoneyMarket =
+            currentPool === "open"
+                ? address[currentNetworkName].address_open_MoneyMarket
+                : address[currentNetworkName].address_MoneyMarket;
+
         Object.keys(state.contracts).forEach((asset) => {
             if (asset !== "MoneyMarket") {
                 let assetName = "address_" + asset;
@@ -196,10 +203,7 @@ export const getMarketLiquidity = (state) => {
 
                     liquidity.forEach((balance) => {
                         // only want to grab balanceOf each tokenContract for MoneyMarket Contract
-                        if (
-                            balance.args[0] ===
-                            address[currentNetworkName].address_MoneyMarket
-                        ) {
+                        if (balance.args[0] === address_MoneyMarket) {
                             //  console.log(balance);
                             let value = _.get(balance, "value");
                             // console.log(value);
