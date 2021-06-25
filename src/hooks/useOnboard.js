@@ -165,6 +165,7 @@ const useOnboard = () => {
                     currentWalletBalance,
                     forceUpdate,
                     address_MoneyMarket,
+                    currentPool,
                 });
 
                 if (drizzle && drizzle.web3 && drizzle.web3.currentProvider) {

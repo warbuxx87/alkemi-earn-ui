@@ -23,6 +23,7 @@ export const initContracts = ({
     userWalletNetwork,
     forceUpdate,
     address_MoneyMarket,
+    currentPool,
 }) => {
     const resolved = initMarketContract({
         drizzle,
@@ -30,6 +31,7 @@ export const initContracts = ({
         userWalletNetwork,
         forceUpdate,
         address_MoneyMarket,
+        currentPool,
     });
 
     if (resolved !== false)
@@ -61,6 +63,7 @@ export const initMarketContract = ({
     userWalletNetwork,
     forceUpdate,
     address_MoneyMarket,
+    currentPool,
 }) => {
     if (drizzle.contracts.MoneyMarket && !forceUpdate)
         return drizzle.contracts.MoneyMarket;
@@ -137,11 +140,13 @@ export const initMarketContract = ({
     // get account balance
     MoneyMarketContract.methods.calculateAccountValues.cacheCall(myAddress);
 
-    // verify KYC
-    MoneyMarketContract.methods.verifyKYC.cacheCall(myAddress);
+    if (currentPool !== "open") {
+        // verify KYC
+        MoneyMarketContract.methods.verifyKYC.cacheCall(myAddress);
 
-    // verify Liquidator
-    MoneyMarketContract.methods.verifyLiquidator.cacheCall(myAddress);
+        // verify Liquidator
+        MoneyMarketContract.methods.verifyLiquidator.cacheCall(myAddress);
+    }
 
     // get collateralRatio
     MoneyMarketContract.methods.collateralRatio.cacheCall();
