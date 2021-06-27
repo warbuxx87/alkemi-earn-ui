@@ -37,10 +37,14 @@ const AppBarContainer = () => {
     useWatchEtherBalance();
     usePoolManager();
 
+    const [isWalletLiquidator, setIsWalletLiquidator] = useState(false);
+
     const walletConnected = useSelector(isWalletConnected);
     const currentAddress = useSelector(walletAddress);
     const walletIsKYCd = useSelector(isWalletKYCd);
     const walletIsLiquidator = useSelector(isLiquidator);
+
+    const currentPool = useSelector(getPool);
 
     let location = useLocation();
     // update Appbar title whenever location change
@@ -52,7 +56,13 @@ const AppBarContainer = () => {
         setTitle(currentTitle);
     }, [location]);
 
-    const currentPool = useSelector(getPool);
+    useEffect(() => {
+        if (currentPool === "open") {
+            setIsWalletLiquidator(true);
+        } else {
+            setIsWalletLiquidator(walletIsLiquidator);
+        }
+    }, [currentPool, walletIsLiquidator]);
 
     return (
         <AppBar
@@ -62,7 +72,7 @@ const AppBarContainer = () => {
             accountAddress={walletConnected ? currentAddress : null}
             walletIsKYCd={walletIsKYCd}
             walletConnected={walletConnected}
-            walletIsLiquidator={walletIsLiquidator}
+            walletIsLiquidator={isWalletLiquidator}
             displayKYCStatus={currentPool !== "open"}
         />
     );

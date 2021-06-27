@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { Route, Switch } from "react-router";
@@ -26,9 +26,22 @@ import {
 } from "constants/routes";
 
 import { isLiquidator } from "redux/selectors/status/status";
+import { getPool } from "redux/selectors/status/pool";
 
 const LayoutContent = () => {
+    const [isWalletLiquidator, setIsWalletLiquidator] = useState(false);
+
     const walletIsLiquidator = useSelector(isLiquidator);
+
+    const currentPool = useSelector(getPool);
+
+    useEffect(() => {
+        if (currentPool === "open") {
+            setIsWalletLiquidator(true);
+        } else {
+            setIsWalletLiquidator(walletIsLiquidator);
+        }
+    }, [currentPool, walletIsLiquidator]);
 
     return (
         <div>
@@ -42,7 +55,7 @@ const LayoutContent = () => {
                 <Route
                     path={LIQUIDATE}
                     exact
-                    component={walletIsLiquidator ? Liquidate : NoWhere}
+                    component={isWalletLiquidator ? Liquidate : NoWhere}
                 />
                 <Route path={SWAP} exact component={Swap} />
                 <Route component={NoWhere} />

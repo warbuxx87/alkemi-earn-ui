@@ -54,15 +54,27 @@ const resetTxData = () => ({
 });
 
 // Section 3: Action dispatch methods and async funcs
-const fetchTxCall = ({ currentNetworkName, address, drizzle, dispatch }) => {
+const fetchTxCall = ({
+    currentNetworkName,
+    address,
+    drizzle,
+    currentPool,
+    dispatch,
+}) => {
     if (!address) return;
-    if (!url_map[currentNetworkName].history_url) return;
+
+    if (
+        !url_map[currentNetworkName][currentPool] ||
+        !url_map[currentNetworkName][currentPool].history_url
+    )
+        return;
 
     dispatch(fetchTxPending());
 
     const params = "?account=" + address.toLowerCase();
 
-    const accountURL = url_map[currentNetworkName].history_url + params;
+    const accountURL =
+        url_map[currentNetworkName][currentPool].history_url + params;
 
     fetch(accountURL)
         .then((res) => {
@@ -98,6 +110,7 @@ export const fetchTx = ({
     currentNetworkName,
     address,
     drizzle,
+    currentPool,
     fetchPeriodically,
 }) => async (dispatch) => {
     if (fetchPeriodically)
@@ -106,6 +119,7 @@ export const fetchTx = ({
             currentNetworkName,
             address,
             drizzle,
+            currentPool,
             dispatch,
         });
     // if not, it will call on fetch directly no matter what
@@ -114,6 +128,7 @@ export const fetchTx = ({
             currentNetworkName,
             address,
             drizzle,
+            currentPool,
             dispatch,
         });
 
