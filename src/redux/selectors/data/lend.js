@@ -251,14 +251,12 @@ export const getCalculatedInterests = (state) => {
     let totalCalculatedInterest = Big(0);
 
     for (let [key] of Object.entries(calculatedInterests)) {
+        // some entries might not have the value ready yet (or errored), display anyway
         try {
             if (calculatedInterests[key]) {
                 totalCalculatedInterest = totalCalculatedInterest.plus(
                     Big(calculatedInterests[key])
                 );
-            } else if (calculatedInterests[key] == null) {
-                // wait that we retrieve all values for all assets
-                return null;
             }
         } catch (e) {}
     }

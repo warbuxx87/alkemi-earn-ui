@@ -70,8 +70,6 @@ function CardValue({
                     centsClassName={classes.cents}
                 />
             );
-        } else if (fetchInterestErrorStatus) {
-            setDisplayInterest("TBD");
         } else if (calculatedInterest) {
             setDisplayInterest(
                 <SplitNumber
@@ -83,13 +81,7 @@ function CardValue({
         } else {
             setDisplayInterest(loadingSkeleton);
         }
-    }, [
-        calculatedInterest,
-        fetchInterestErrorStatus,
-        classes.cents,
-        loadingSkeleton,
-        walletConnected,
-    ]);
+    }, [calculatedInterest, classes.cents, loadingSkeleton, walletConnected]);
 
     // Section 5: Code Component
     return (

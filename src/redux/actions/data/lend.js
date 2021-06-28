@@ -62,7 +62,7 @@ const fetchInterestCall = ({
     if (!address) return;
     if (!url_map[currentNetworkName].interest_url) return;
 
-    const params = `?account=${address.toLowerCase()}&asset=${asset}&type=savings&timestamp=${Date.now()}&millisecondsBefore=86400`; // TODO: replace with timestamp
+    const params = `?account=${address.toLowerCase()}&asset=${asset}&type=savings&millisecondsBefore=86400000`;
 
     const interestURL = url_map[currentNetworkName].interest_url + params;
 
