@@ -1,3 +1,19 @@
+# [1.15.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.14.1...v1.15.0) (2021-06-29)
+
+
+### Features
+
+* **web:** enable gnosis safe web3 provider UI-469 ([2df35e0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2df35e022294f5e83833558e32f749684752fa07))
+
+
+
+# [1.15.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.14.1...v1.15.0) (2021-06-29)
+
+
+### Features
+
+* **web:** enable gnosis safe web3 provider UI-469 ([2df35e0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2df35e022294f5e83833558e32f749684752fa07))
+
 ## [1.14.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.14.0...v1.14.1) (2021-06-17)
 
 
