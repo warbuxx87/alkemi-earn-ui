@@ -1,3 +1,19 @@
+## [1.14.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.14.0...v1.14.1) (2021-06-17)
+
+
+### Bug Fixes
+
+* use proper max withdraw value UI-456 ([3fd08a3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3fd08a38e0b0a65592754415650fed778dae164f))
+
+
+
+## [1.14.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.14.0...v1.14.1) (2021-06-17)
+
+
+### Bug Fixes
+
+* use proper max withdraw value UI-456 ([3fd08a3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3fd08a38e0b0a65592754415650fed778dae164f))
+
 # [1.14.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.12...v1.14.0) (2021-06-07)
 
 
