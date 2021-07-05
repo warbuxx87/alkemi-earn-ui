@@ -6,6 +6,8 @@ import { render, screen } from "@testing-library/react";
 
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
+import ComponentsWrapper from "utils/tests-utils/ComponentsWrapper";
+
 // Section 2: Constants & Helper functions
 const DEMO_ETH_ADDRESS = "0xA13C9A32BcDB89e58c411941304E7e606f1b4c22";
 const EXPECTED_ADDRESS = "0xA1..4c22";
@@ -13,12 +15,20 @@ const EXPECTED_ADDRESS = "0xA1..4c22";
 // Section 3: The Tests
 describe("AppBar component", () => {
     it("renders without crashing", () => {
-        render(<AppBar></AppBar>);
+        render(
+            <ComponentsWrapper>
+                <AppBar />
+            </ComponentsWrapper>
+        );
     });
 
     it("has connectAddressButton's value set to Connect on load and to a shortened address when the prop change", () => {
         // Rendering AppBar while getting getByTestId (which will allow to get elements set with tag "data-testid") and rerender (which will allow to re-render the same component (with different props))
-        const { rerender } = render(<AppBar></AppBar>);
+        const { rerender } = render(
+            <ComponentsWrapper>
+                <AppBar />
+            </ComponentsWrapper>
+        );
 
         const connectButtonContent = screen.getByTestId("connectButton")
             .textContent;
@@ -27,10 +37,12 @@ describe("AppBar component", () => {
         expect(connectButtonContent).toBe("Connect");
 
         rerender(
-            <AppBar
-                accountAddress={DEMO_ETH_ADDRESS}
-                walletConnected={true}
-            ></AppBar>
+            <ComponentsWrapper>
+                <AppBar
+                    accountAddress={DEMO_ETH_ADDRESS}
+                    walletConnected={true}
+                />
+            </ComponentsWrapper>
         );
 
         // value of addressButtonContent should be EXPECTED_ADDRESS
@@ -46,17 +58,21 @@ describe("AppBar component", () => {
         });
 
         const { rerender } = render(
-            <MuiThemeProvider theme={theme}>
-                <AppBar title="Dashboard" />
-            </MuiThemeProvider>
+            <ComponentsWrapper>
+                <MuiThemeProvider theme={theme}>
+                    <AppBar title="Dashboard" />
+                </MuiThemeProvider>
+            </ComponentsWrapper>
         );
 
         expect(screen.getByTestId("title").textContent).toBe("Dashboard");
 
         rerender(
-            <MuiThemeProvider theme={theme}>
-                <AppBar title="Borrow" />
-            </MuiThemeProvider>
+            <ComponentsWrapper>
+                <MuiThemeProvider theme={theme}>
+                    <AppBar title="Borrow" />
+                </MuiThemeProvider>
+            </ComponentsWrapper>
         );
 
         expect(screen.getByTestId("title").textContent).not.toBe("Dashboard");
@@ -68,9 +84,11 @@ describe("AppBar component", () => {
         });
 
         rerender(
-            <MuiThemeProvider theme={theme}>
-                <AppBar title="Borrow" />
-            </MuiThemeProvider>
+            <ComponentsWrapper>
+                <MuiThemeProvider theme={theme}>
+                    <AppBar title="Borrow" />
+                </MuiThemeProvider>
+            </ComponentsWrapper>
         );
 
         // Hidden on small screens

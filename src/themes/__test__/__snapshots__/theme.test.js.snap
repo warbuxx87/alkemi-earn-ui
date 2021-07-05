@@ -55,6 +55,11 @@ Object {
         "paddingTop": 22,
       },
     },
+    "MuiBackdrop": Object {
+      "root": Object {
+        "backgroundColor": "rgba(0, 1, 5, 0.5)",
+      },
+    },
     "MuiButton": Object {
       "root": Object {
         "textTransform": "capitalize",
@@ -91,11 +96,6 @@ Object {
         "color": "#000000",
       },
     },
-    "MuiPopover": Object {
-      "paper": Object {
-        "border": "solid 1px #080808",
-      },
-    },
     "MuiToolbar": Object {
       "root": Object {
         "disableGutters": "true",
@@ -129,9 +129,10 @@ Object {
     },
     "augmentColor": [Function],
     "background": Object {
-      "dark": "#1B1B1B",
-      "default": "#000000",
-      "paper": "#0d0e10",
+      "dark": "#000000",
+      "default": "#08090c",
+      "light": "#161a1f",
+      "paper": "#13161a",
     },
     "common": Object {
       "black": "#000",
