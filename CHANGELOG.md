@@ -1,3 +1,67 @@
+# [1.15.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.14.1...v1.15.0) (2021-06-29)
+
+
+### Features
+
+* **web:** enable gnosis safe web3 provider UI-469 ([2df35e0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2df35e022294f5e83833558e32f749684752fa07))
+
+
+
+# [1.15.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.14.1...v1.15.0) (2021-06-29)
+
+
+### Features
+
+* **web:** enable gnosis safe web3 provider UI-469 ([2df35e0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2df35e022294f5e83833558e32f749684752fa07))
+
+## [1.14.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.14.0...v1.14.1) (2021-06-17)
+
+
+### Bug Fixes
+
+* use proper max withdraw value UI-456 ([3fd08a3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3fd08a38e0b0a65592754415650fed778dae164f))
+
+
+
+## [1.14.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.14.0...v1.14.1) (2021-06-17)
+
+
+### Bug Fixes
+
+* use proper max withdraw value UI-456 ([3fd08a3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3fd08a38e0b0a65592754415650fed778dae164f))
+
+# [1.14.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.12...v1.14.0) (2021-06-07)
+
+
+### Features
+
+* display APY for borrow & lend views when user is not connected UI-451 ([97f949a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/97f949a86586ad16dc22964eec702bdf13d20b6d))
+
+
+
+# [1.14.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.12...v1.14.0) (2021-06-07)
+
+
+### Features
+
+* display APY for borrow & lend views when user is not connected UI-451 ([97f949a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/97f949a86586ad16dc22964eec702bdf13d20b6d))
+
+## [1.13.12](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.11...v1.13.12) (2021-05-31)
+
+
+### Bug Fixes
+
+* use regular number display instead of scientific notation for borrow fee UI-457 ([93263e2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/93263e2191af0f9e43eef04e8acf3a15848151f2))
+
+
+
+## [1.13.12](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.11...v1.13.12) (2021-05-31)
+
+
+### Bug Fixes
+
+* use regular number display instead of scientific notation for borrow fee UI-457 ([93263e2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/93263e2191af0f9e43eef04e8acf3a15848151f2))
+
 ## [1.13.11](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.13.10...v1.13.11) (2021-05-20)
 
 

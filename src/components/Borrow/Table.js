@@ -20,7 +20,7 @@ import {
 // Section 3: Components & Containers import from the application
 import BorrowTableCell from "components/UI/TableCell";
 import BorrowDrawerContainer from "containers/Borrow/DrawerBorrow";
-import { formatNumber, formatPercent } from "utils/ui";
+import { formatNumber, formatPercent, format_str_to_percent } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -91,8 +91,34 @@ const BorrowTable = ({
     walletIsKYCd,
     userWalletNetwork,
     needKYC,
+    marketsData,
+    walletConnected,
 }) => {
     const classes = useStyles();
+
+    const displayAPY = ({
+        apy,
+        marketsData,
+        userWalletNetwork,
+        walletConnected,
+        symbol,
+    }) => {
+        if (walletConnected) {
+            return formatPercent(apy);
+        } else {
+            const asset = marketsData.find((market) => {
+                return market.symbol === symbol;
+            });
+
+            if (asset && asset.symbol)
+                return format_str_to_percent(
+                    asset.borrowAPR,
+                    userWalletNetwork
+                );
+            else return formatPercent(apy);
+        }
+    };
+
     return (
         <Box mt={1}>
             <Typography
@@ -192,7 +218,13 @@ const BorrowTable = ({
                                         color="textPrimary"
                                         className={classes.label}
                                     >
-                                        {formatPercent(Row.apy)}
+                                        {displayAPY({
+                                            apy: Row.apy,
+                                            marketsData,
+                                            userWalletNetwork,
+                                            walletConnected,
+                                            symbol: Row.unit,
+                                        })}
                                     </Typography>
                                     <Typography
                                         variant="body2"
