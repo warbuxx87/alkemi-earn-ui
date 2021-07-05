@@ -18,11 +18,11 @@
             "reports_url": "https://rinkeby.api.alkemi.network/reports"
         },
         "open": {
-            "history_url": "http://rinkeby.open.api.alkemi.network/history",
-            "markets_url": "http://rinkeby.open.api.alkemi.network/markets",
-            "accounts_url": "http://rinkeby.open.api.alkemi.network/accounts",
-            "liquidations_url": "http://rinkeby.open.api.alkemi.network/liquidations",
-            "reports_url": "http://rinkeby.open.api.alkemi.network/reports"
+            "history_url": "https://rinkeby.open.api.alkemi.network/history",
+            "markets_url": "https://rinkeby.open.api.alkemi.network/markets",
+            "accounts_url": "https://rinkeby.open.api.alkemi.network/accounts",
+            "liquidations_url": "https://rinkeby.open.api.alkemi.network/liquidations",
+            "reports_url": "https://rinkeby.open.api.alkemi.network/reports"
         }
     },
     "ropsten": {
