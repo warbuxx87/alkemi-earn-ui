@@ -10,6 +10,8 @@ import {
     Drawer,
     IconButton,
     List,
+    ListItem,
+    ListItemText,
     SvgIcon,
 } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -34,6 +36,13 @@ const DrawerClass = makeStyles((theme) =>
                 width: 380,
             },
         },
+        iconbutton: {
+            borderRadius: "4px",
+            border: "solid 2px",
+            borderColor: theme.palette.background.paper,
+            minHeight: "36px",
+            minWidth: "36px",
+        },
     })
 );
 
@@ -56,7 +65,9 @@ export default function MobileMenu({ walletIsLiquidator }) {
             <IconButton
                 color="inherit"
                 onClick={handleOpen}
+                className={classes.iconbutton}
                 data-testid="openMenu"
+                size="small"
             >
                 <MenuIcon />
             </IconButton>
@@ -85,7 +96,7 @@ export default function MobileMenu({ walletIsLiquidator }) {
                         </IconButton>
                     </Box>
                     <Divider />
-                    <Box pt={1}>
+                    <Box pt={1} pb={1}>
                         <List onClick={handleClose}>
                             <SidebarDashboardItem />
                             <SidebarLendItem />
@@ -95,6 +106,46 @@ export default function MobileMenu({ walletIsLiquidator }) {
                             {walletIsLiquidator === true ? (
                                 <SidebarLiquidateItem />
                             ) : null}
+                        </List>
+                    </Box>
+                    <Divider />
+                    <Box p={1} display="flex" alignItems="flex-end">
+                        <List>
+                            <ListItem
+                                button
+                                component="a"
+                                href="https://docs.alkemi.network/user-guide/"
+                            >
+                                <ListItemText primary="Earn User Guide" />
+                            </ListItem>
+                            <ListItem
+                                button
+                                component="a"
+                                href="https://support.alkemi.network/support/tickets/new"
+                            >
+                                <ListItemText primary="Contact Support" />
+                            </ListItem>
+                            <ListItem
+                                button
+                                component="a"
+                                href="https://feedback.alkemi.network/feature-requests"
+                            >
+                                <ListItemText primary="Feature Request" />
+                            </ListItem>
+                            <ListItem
+                                button
+                                component="a"
+                                href="https://feedback.alkemi.network/bug-reports"
+                            >
+                                <ListItemText primary="Report Bug" />
+                            </ListItem>
+                            <ListItem
+                                button
+                                component="a"
+                                href="https://discord.gg/Y9vmtFjhHB"
+                            >
+                                <ListItemText primary="Join Discord" />
+                            </ListItem>
                         </List>
                     </Box>
                 </Box>

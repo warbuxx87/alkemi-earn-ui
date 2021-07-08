@@ -90,6 +90,7 @@ const BorrowTable = ({
     txs,
     walletIsKYCd,
     userWalletNetwork,
+    needKYC,
     marketsData,
     walletConnected,
 }) => {
@@ -268,7 +269,9 @@ const BorrowTable = ({
                                                 color="secondary"
                                                 disabled={
                                                     checkActivating(Row, txs) ||
-                                                    walletIsKYCd !== true
+                                                    needKYC
+                                                        ? !walletIsKYCd
+                                                        : false
                                                 }
                                                 onClick={() => onActivate(Row)}
                                             >
