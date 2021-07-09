@@ -38,10 +38,9 @@ function Lend({
     USDPrice,
     displayAllocateButton,
     txs,
+    needKYC,
     walletIsKYCd,
     userWalletNetwork,
-    marketsData,
-    walletConnected,
 }) {
     const classes = useStyles();
     return (
@@ -74,9 +73,8 @@ function Lend({
                                 displayAllocateButton={displayAllocateButton}
                                 txs={txs}
                                 walletIsKYCd={walletIsKYCd}
+                                needKYC={needKYC}
                                 userWalletNetwork={userWalletNetwork}
-                                marketsData={marketsData}
-                                walletConnected={walletConnected}
                             />
                         </Grid>
                     )}{" "}

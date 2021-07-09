@@ -75,6 +75,7 @@ export const onTx = ({
     asset,
     shouldSendMax,
     type,
+    currentPool,
 }) => async (dispatch) => {
     const amountToSend =
         shouldSendMax === true ? constants["max_uint"] : amount;
@@ -86,6 +87,7 @@ export const onTx = ({
         amount: amountToSend,
         asset,
         shouldSendMax,
+        currentPool,
     })
         .then((stackId) => {
             dispatch(transactionTriggered(asset.unit, stackId, type));

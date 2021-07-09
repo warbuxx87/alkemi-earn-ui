@@ -176,15 +176,11 @@ export const formattedNumberToSplitNumber = (formattedNumber) => {
 };
 
 // Takes a split number (from the decimal point), and returns a certain amount of fraction digits depending on the length of the left side of the decimal point
-export const breakNumberFromDecimalPoint = (theNumber, formattedNumber) => {
+export const breakNumberFromDecimalPoint = (theNumber, classes) => {
     const {
         leftOfDecimalPoint,
         rightOfDecimalPoint,
-    } = formattedNumberToSplitNumber(
-        formattedNumber === true
-            ? theNumber
-            : formatNumber(theNumber.toString(), "ETH")
-    );
+    } = formattedNumberToSplitNumber(formatNumber(theNumber.toString(), "ETH"));
 
     const numbersOnLeft = leftOfDecimalPoint.replace("-", ""); // remove negative
     let numberOnRightToDisplay = rightOfDecimalPoint;

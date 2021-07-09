@@ -20,17 +20,21 @@ describe("AppBar component", () => {
         // Rendering AppBar while getting getByTestId (which will allow to get elements set with tag "data-testid") and rerender (which will allow to re-render the same component (with different props))
         const { rerender } = render(<AppBar></AppBar>);
 
-        const connectAddressButtonContent = screen.getByTestId(
-            "connectAddressButton"
-        ).textContent;
+        const connectButtonContent = screen.getByTestId("connectButton")
+            .textContent;
 
-        // value of connectAddressButtonContent should be 'Connect'
-        expect(connectAddressButtonContent).toBe("Connect");
+        // value of connectButtonContent should be 'Connect'
+        expect(connectButtonContent).toBe("Connect");
 
-        rerender(<AppBar accountAddress={DEMO_ETH_ADDRESS}></AppBar>);
+        rerender(
+            <AppBar
+                accountAddress={DEMO_ETH_ADDRESS}
+                walletConnected={true}
+            ></AppBar>
+        );
 
-        // value of connectAddressButtonContent should be EXPECTED_ADDRESS
-        expect(screen.getByTestId("connectAddressButton").textContent).toBe(
+        // value of addressButtonContent should be EXPECTED_ADDRESS
+        expect(screen.getByTestId("addressButton").textContent).toBe(
             EXPECTED_ADDRESS
         );
     });

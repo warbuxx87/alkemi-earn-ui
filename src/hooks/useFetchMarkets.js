@@ -6,6 +6,7 @@ import _ from "lodash";
 import { compare_supply, compare_borrow } from "utils/markets";
 
 import { walletNetworkName } from "redux/selectors/data/onboard";
+import { getPool } from "redux/selectors/status/pool";
 
 const url_map = require("constants/url_map.json");
 
@@ -22,12 +23,21 @@ const useFetchMarkets = (fetchPeriodically = false) => {
 
     const [calculationsTotals, setCalculationsTotals] = useState({});
 
+    const currentPool = useSelector(getPool);
+
     useEffect(() => {
         let timer;
 
         // move this async call to redux if needs to be called from more than one place
         const get_markets_data = () => {
-            const markets_api = url_map[currentNetworkName].markets_url;
+            if (
+                !url_map[currentNetworkName][currentPool] ||
+                !url_map[currentNetworkName][currentPool].markets_url
+            )
+                return;
+
+            const markets_api =
+                url_map[currentNetworkName][currentPool].markets_url;
 
             fetch(markets_api)
                 .then((res) => {
@@ -115,7 +125,7 @@ const useFetchMarkets = (fetchPeriodically = false) => {
         };
 
         const getMarketsData = (fetchPeriodically) => {
-            if (currentNetworkName !== undefined) get_markets_data();
+            if (currentNetworkName !== undefined) get_markets_data(); // TODO: retest this call when open network is set for main network
 
             if (fetchPeriodically === true) {
                 timer = setTimeout(
@@ -130,7 +140,7 @@ const useFetchMarkets = (fetchPeriodically = false) => {
         return () => {
             if (timer) clearTimeout(timer);
         };
-    }, [dispatch, fetchPeriodically, currentNetworkName]);
+    }, [dispatch, fetchPeriodically, currentNetworkName, currentPool]);
 
     return { marketsData, supplyArray, borrowArray, calculationsTotals };
 };

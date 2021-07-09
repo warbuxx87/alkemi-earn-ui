@@ -14,8 +14,6 @@ import { onTx } from "redux/actions/status/transactions";
 
 import useOnboard from "hooks/useOnboard";
 
-import useFetchMarkets from "hooks/useFetchMarkets";
-
 // Section 3: Selectors
 import {
     getLendError,
@@ -31,13 +29,13 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
+
+import { getPool, isKYCPool } from "redux/selectors/status/pool";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const { onConnect } = useOnboard();
-
-    const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -50,6 +48,9 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
 
+    const currentPool = useSelector(getPool);
+    const needKYC = useSelector(isKYCPool);
+
     const activateAsset = (asset) =>
         onActivate({
             drizzle,
@@ -57,6 +58,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             userWalletAddress,
             asset,
             type: "approve",
+            currentPool,
         });
 
     return (
@@ -71,9 +73,8 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             }
             txs={txs}
             walletIsKYCd={walletIsKYCd}
+            needKYC={needKYC}
             userWalletNetwork={userWalletNetwork}
-            marketsData={marketsData}
-            walletConnected={walletConnected}
         />
     );
 };
