@@ -1,3 +1,19 @@
+## [1.16.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.0...v1.16.1) (2021-07-13)
+
+
+### Bug Fixes
+
+* update weth address for rinkeby UI-465 ([4912c28](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4912c28cb7f309d9e0377f0958bf96373de98935))
+
+
+
+## [1.16.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.0...v1.16.1) (2021-07-13)
+
+
+### Bug Fixes
+
+* update weth address for rinkeby UI-465 ([4912c28](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4912c28cb7f309d9e0377f0958bf96373de98935))
+
 # [1.16.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.15.0...v1.16.0) (2021-07-08)
 
 
