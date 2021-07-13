@@ -11,7 +11,7 @@
         "address_open_MoneyMarket": "0x2A871001f53C48A1d0e6d19684cb06ae1aA40120",
         "address_USDC": "0x4dbcdf9b62e891a7cec5a2568c3f4faf9e8abe2b",
         "address_WBTC": "0x577d296678535e4903d59a4c929b718e1d575e0a",
-        "address_WETH": "0x9e3865F0A681F2356BcF5Cf6b978F0a773716886",
+        "address_WETH": "0xF7c05Cfc2e060dc2E8aBFCc334EaB420D6455fE6",
         "address_DAI": "0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea"
     },
     "ropsten": {
