@@ -15,9 +15,10 @@ const darkTheme = createMuiTheme({
             darkGrey: "#151617",
         },
         background: {
-            default: "#000000", //Black
-            dark: "#1B1B1B", // Dark Grey
-            paper: "#0d0e10", // Light Grey
+            default: "#08090c", //Black
+            dark: "#000000", // Dark Grey #080a0c 1B1B1B
+            paper: "#13161a", // Light Grey  #0d0e10
+            light: "#161a1f",
         },
 
         primary: {

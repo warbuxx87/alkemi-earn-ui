@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         borderLeftStyle: "solid",
         borderWidth: 2,
         borderColor: theme.palette.common.white,
-        backgroundColor: theme.palette.common.darkGrey,
+        backgroundColor: theme.palette.background.default,
     },
     itemIcon: {
         minWidth: 48,
