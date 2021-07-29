@@ -33,7 +33,7 @@ const SidebarBorrowItem = ({ onClick, selected }) => (
                 variant="subtitle2"
                 style={{ fontSize: "0.875rem", lineHeight: 1.5 }}
             >
-                Borrow
+                Borrows
             </Typography>
         }
         onClick={onClick}

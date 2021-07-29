@@ -1,0 +1,245 @@
+import React from "react";
+import PropTypes from "prop-types";
+import {
+    Box,
+    Button,
+    Checkbox,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Divider,
+    FormControlLabel,
+    Link,
+    SvgIcon,
+    Typography,
+    makeStyles,
+} from "@material-ui/core";
+import withWidth from "@material-ui/core/withWidth";
+
+import { ReactComponent as Verified } from "assets/images/verpool.svg";
+import Open from "@material-ui/icons/Public";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+
+const useStyles = makeStyles((theme) => ({
+    toggleSubtitle: {
+        textTransform: "none",
+        fontSize: "0.8125rem",
+        fontWeight: "300",
+        color: "#cecece",
+    },
+    toggleTitle: {
+        fontSize: "0.875rem",
+        fontWeight: "500",
+        color: "#ffffff",
+    },
+    toggleButton: {
+        flexWrap: "wrap",
+        "& .MuiButtonBase-root": {
+            borderRadius: "4px",
+            padding: "16px",
+        },
+        "& .MuiToggleButton-label": {
+            flexDirection: "column",
+        },
+        "& .MuiToggleButtonGroup-groupedHorizontal:not(:first-child) ": {
+            marginLeft: 12,
+        },
+        "& .MuiToggleButton-root": {
+            borderTop: "1px solid rgba(255, 255, 255, 0.12)",
+            width: "270px",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
+        },
+
+        "& .MuiToggleButton-root.Mui-selected": {
+            backgroundColor: "rgba(255, 255, 255, 0.02)",
+            border: "solid 1px rgba(255, 255, 255, .7) ",
+        },
+    },
+    kyclink: {
+        borderLeft: "0px",
+        marginLeft: "4px !important",
+        minWidth: "268px",
+    },
+    verIcon: {
+        color: "#ffffff",
+    },
+    connectButton: {
+        fontSize: "0.8125rem",
+        minWidth: "110px",
+    },
+    checkBox: {
+        fontSize: "2rem",
+    },
+}));
+
+function PoolDialog({ width }) {
+    const [pools, setPools] = React.useState("Verified");
+
+    const handlePools = (event, newPools) => {
+        setPools(newPools);
+    };
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const classes = useStyles();
+
+    const isSmallScreen = /xs/.test(width);
+    const buttonProps = {
+        orientation: isSmallScreen ? "vertical" : "horizontal",
+    };
+    const boxProps = {
+        order: isSmallScreen ? "0" : "3",
+    };
+
+    const [checked, setChecked] = React.useState(true);
+
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+    };
+
+    return (
+        <div>
+            <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleClickOpen}
+            >
+                Open Notification
+            </Button>
+            <Dialog
+                onClose={handleClose}
+                aria-labelledby="pool-select"
+                open={open}
+                disableEscapeKeyDown
+                disableBackdropClick
+            >
+                <Box p={3}>
+                    <Typography variant="h4" color="textPrimary" align="center">
+                        Select liquidity pool
+                    </Typography>
+                </Box>
+                <DialogContent>
+                    <ToggleButtonGroup
+                        value={pools}
+                        exclusive
+                        onChange={handlePools}
+                        aria-label="Pool Select"
+                        className={classes.toggleButton}
+                        {...buttonProps}
+                    >
+                        <ToggleButton
+                            value="permissioned"
+                            aria-label="Verified"
+                        >
+                            <SvgIcon className={classes.verIcon}>
+                                <Verified />
+                            </SvgIcon>{" "}
+                            <Box pt={1}>
+                                <Typography
+                                    className={classes.toggleTitle}
+                                    variant="body1"
+                                >
+                                    Earn Verified
+                                </Typography>
+                            </Box>
+                            <Box pt={1}>
+                                <Typography
+                                    className={classes.toggleSubtitle}
+                                    variant="body2"
+                                >
+                                    Access Earn's verified liquidity pool which
+                                    requires KYC user verification.
+                                </Typography>
+                            </Box>
+                        </ToggleButton>
+                        <Box
+                            pt={1.5}
+                            pb={1}
+                            className={classes.kyclink}
+                            {...boxProps}
+                        >
+                            <Typography
+                                className={classes.kycref}
+                                variant="subtitle2"
+                            >
+                                <Link
+                                    href="https://alkemi.network"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Get KYC Verified
+                                </Link>
+                            </Typography>
+                        </Box>
+                        <ToggleButton value="open" aria-label="Open">
+                            <SvgIcon>
+                                <Verified />
+                            </SvgIcon>{" "}
+                            <Box pt={1}>
+                                <Typography
+                                    className={classes.toggleTitle}
+                                    variant="body1"
+                                >
+                                    Earn Open
+                                </Typography>
+                            </Box>
+                            <Box pt={1}>
+                                <Typography
+                                    className={classes.toggleSubtitle}
+                                    variant="body2"
+                                >
+                                    Access Earn's open liquidity pool available
+                                    to everyone with a web3 wallet.
+                                </Typography>
+                            </Box>
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                </DialogContent>
+                <Divider />
+                <Box
+                    py={1}
+                    px={3}
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
+                    <FormControlLabel
+                        className={classes.checkBox}
+                        value="default"
+                        control={<Checkbox color="secondary" />}
+                        label="Set default"
+                        labelPlacement="end"
+                    />
+
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        size="medium"
+                        className={classes.connectButton}
+                        autoFocus
+                        onClick={handleClose}
+                    >
+                        Continue
+                    </Button>
+                </Box>
+            </Dialog>
+        </div>
+    );
+}
+
+PoolDialog.propTypes = {
+    /** The name of the current breakpoint, for example "sm" */
+    width: PropTypes.string.isRequired,
+};
+
+export default withWidth()(PoolDialog);

@@ -1,7 +1,7 @@
 const overrides = {
     MuiDivider: {
         root: {
-            backgroundColor: "#000000",
+            backgroundColor: "#08090c",
         },
     },
 
