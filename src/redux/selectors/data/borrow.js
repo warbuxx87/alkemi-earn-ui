@@ -6,6 +6,7 @@ import { walletNetworkName } from "redux/selectors/data/onboard";
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
 import web3 from "web3";
 import Big from "big.js";
+import constants from "constants/constant.json";
 
 // Helpers
 function calculateInterest(rateMantissa) {
@@ -23,7 +24,7 @@ function calculateUtilization(totalBorrow, totalSupply) {
 const getAllowances = (state) => {
     const allowances = {};
     Object.keys(state.contracts).forEach((asset) => {
-        if (asset !== "MoneyMarket") {
+        if (constants.assets.includes(asset)) {
             const allowance = Object.values(state.contracts[asset].allowance);
             allowances[asset] = _.get(allowance, "[0].value", "0") !== "0";
         }

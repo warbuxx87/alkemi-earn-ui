@@ -4,6 +4,7 @@ import _ from "lodash";
 import address from "constants/address_map.json";
 import { walletNetworkName } from "redux/selectors/data/onboard";
 import web3 from "web3";
+import constants from "constants/constant.json";
 
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
 
@@ -23,7 +24,7 @@ function calculateUtilization(totalBorrow, totalSupply) {
 const getAllowances = (state) => {
     const allowances = {};
     Object.keys(state.contracts).forEach((asset) => {
-        if (asset !== "MoneyMarket") {
+        if (constants.assets.includes(asset)) {
             const allowance = Object.values(state.contracts[asset].allowance);
             allowances[asset] = _.get(allowance, "[0].value", "0") !== "0";
         }

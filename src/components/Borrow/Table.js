@@ -91,6 +91,8 @@ const BorrowTable = ({
     walletIsKYCd,
     userWalletNetwork,
     needKYC,
+    marketsData,
+    walletConnected,
 }) => {
     const classes = useStyles();
     return (

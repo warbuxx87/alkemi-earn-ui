@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Rewards() {
+function Rewards({ alkReward }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -157,7 +157,7 @@ function Rewards() {
                             alignItems="center"
                             data-testid="addressButton"
                         >
-                            27272.21
+                            {alkReward}
                         </Box>
                     </Grid>
                 </Grid>
@@ -180,7 +180,7 @@ function Rewards() {
                     <Box>Your Alk Rewards</Box>
                     <Box>
                         <IconButton onClick={handleClose}>
-                            <SvgIcon fontSize="medium">
+                            <SvgIcon fontSize="default">
                                 <XIcon />
                             </SvgIcon>
                         </IconButton>
@@ -199,15 +199,17 @@ function Rewards() {
                     </Box>
                     <Box mt={1}>
                         <Typography variant="h4" color="textPrimary">
-                            10,000 ALK
+                            {alkReward} ALK
                         </Typography>
-                        <Typography
-                            variant="subtitle1"
-                            color="textSecondary"
-                            align="center"
-                        >
-                            $0.00
-                        </Typography>
+                        {
+                            <Typography
+                                variant="subtitle1"
+                                color="textSecondary"
+                                align="center"
+                            >
+                                $0.00
+                            </Typography>
+                        }
                     </Box>
                 </Box>
                 <Box mt={3} px={2}>
@@ -228,19 +230,24 @@ function Rewards() {
                             </Typography>
                         </Grid>
                         <Grid item md={6} xs container justify="flex-end">
-                            1,283,435
+                            TBD
                         </Grid>
                     </Grid>
-                    <Grid container className={classes.datarowlast}>
-                        <Grid item md={6} xs className={classes.vertcent}>
-                            <Typography variant="body2" color="textSecondary">
-                                Alk Price
-                            </Typography>
+                    {
+                        <Grid container className={classes.datarowlast}>
+                            <Grid item md={6} xs className={classes.vertcent}>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                >
+                                    Alk Price
+                                </Typography>
+                            </Grid>
+                            <Grid item md={6} xs container justify="flex-end">
+                                $0.00
+                            </Grid>
                         </Grid>
-                        <Grid item md={6} xs container justify="flex-end">
-                            $0.00
-                        </Grid>
-                    </Grid>
+                    }
                 </Box>
                 <Box p={2}>
                     <Button

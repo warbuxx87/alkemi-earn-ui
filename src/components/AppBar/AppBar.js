@@ -20,11 +20,12 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
+import Rewards from "containers/AppBar/Rewards";
+
 // import Settings from "./Settings";
 import Other from "./Other";
 import MobileMenu from "./MobileMenu";
 import StatusDisplay from "./StatusDisplay";
-import Rewards from "./Rewards";
 import logo from "assets/images/logo-white.svg";
 
 import { addressParser } from "utils/ui";
