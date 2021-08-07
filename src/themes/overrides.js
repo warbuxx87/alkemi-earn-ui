@@ -1,10 +1,4 @@
 const overrides = {
-    MuiDivider: {
-        root: {
-            backgroundColor: "#08090c",
-        },
-    },
-
     MuiToolbar: {
         root: {
             disableGutters: "true",

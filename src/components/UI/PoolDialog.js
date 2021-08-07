@@ -23,6 +23,10 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 const useStyles = makeStyles((theme) => ({
+    dialogContent: {
+        paddingTop: "20px",
+        paddingBottom: "12px",
+    },
     toggleSubtitle: {
         textTransform: "none",
         fontSize: "0.8125rem",
@@ -128,7 +132,8 @@ function PoolDialog({ width }) {
                         Select liquidity pool
                     </Typography>
                 </Box>
-                <DialogContent>
+                <Divider />
+                <DialogContent className={classes.dialogContent}>
                     <ToggleButtonGroup
                         value={pools}
                         exclusive
@@ -140,6 +145,7 @@ function PoolDialog({ width }) {
                         <ToggleButton
                             value="permissioned"
                             aria-label="Verified"
+                            disableRipple
                         >
                             <SvgIcon className={classes.verIcon}>
                                 <Verified />
@@ -181,7 +187,11 @@ function PoolDialog({ width }) {
                                 </Link>
                             </Typography>
                         </Box>
-                        <ToggleButton value="open" aria-label="Open">
+                        <ToggleButton
+                            value="open"
+                            aria-label="Open"
+                            disableRipple
+                        >
                             <SvgIcon>
                                 <Verified />
                             </SvgIcon>{" "}

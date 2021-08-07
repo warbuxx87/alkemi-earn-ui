@@ -6,6 +6,7 @@
     background-color: #13161a !important;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
     padding: 0px !important;
+    border-radius: 4px !important;
 }
 .bn-onboard-modal-content-header {
     padding: 16px 16px 16px 16px !important;
@@ -109,9 +110,8 @@
 .bn-onboard-modal {
     z-index: 1200 !important;
     background: rgba(0, 1, 5, 0.5) !important;
-    align-items: flex-start !important;
     position: absolute !important;
-    padding-top: 20vh !important;
+
 }
 
 // Toastify
