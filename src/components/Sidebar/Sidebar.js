@@ -31,21 +31,21 @@ import SidebarHeader from "containers/Sidebar/Header";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
     drawer: {
-        width: 290,
+        width: 280,
         marginLeft: 24,
         flexShrink: 0,
         "@media (min-width:1940px)": {
             marginLeft: 35,
-            width: 340,
+            width: 300,
         },
     },
     drawerInner: {
         overflowX: "hidden",
     },
     drawerOpen: {
-        width: 290,
+        width: 280,
         "@media (min-width:1940px)": {
-            width: 340,
+            width: 300,
         },
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
@@ -63,9 +63,9 @@ const styles = (theme) => ({
             width: 68,
         },
         "&:hover": {
-            width: 290,
+            width: 280,
             "@media (min-width:1940px)": {
-                width: 340,
+                width: 300,
             },
             transition: theme.transitions.create("width", {
                 easing: theme.transitions.easing.sharp,
@@ -84,26 +84,19 @@ const styles = (theme) => ({
         color: "white",
         border: "none",
     },
-    divider: {
-        backgroundColor: theme.palette.common.black,
-    },
-    bottomPush: {
-        position: "fixed",
-        bottom: 10,
-        paddingBottom: 10,
-        maxWidth: 280,
-        "@media (min-width:1550px)": {
-            maxWidth: 340,
-        },
-    },
 });
 
 // Section 5: Code Component
 function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
     const content = (
-        <Box className={classes.drawerInner}>
+        <Box
+            className={classes.drawerInner}
+            display="flex"
+            flexDirection="column"
+            height={1}
+        >
             <SidebarHeader />
-            <Box display="flex" flexDirection="column">
+            <Box flexDirection="column" flexGrow={1}>
                 <Divider className={classes.divider} />
                 <Box pt={1} pb={1}>
                     <List className={classes.list}>
@@ -116,23 +109,23 @@ function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
                             <SidebarLiquidateItem />
                         ) : null}
                     </List>
-                </Box>
-                <Divider className={classes.divider} />
-                <Box width={1} className={classes.bottomPush}>
                     <Divider className={classes.divider} />
-                    <Box py={2} px={2}>
-                        <Typography variant="body2" color="textSecondary">
-                            <Link
-                                href="https://docs.alkemi.network/earn-ui/changelog"
-                                variant="body2"
-                                color="inherit"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {process.env.REACT_APP_VERSION}
-                            </Link>
-                        </Typography>
-                    </Box>
+                </Box>
+            </Box>
+            <Box className={classes.bottom}>
+                <Divider className={classes.divider} />
+                <Box py={2} px={2}>
+                    <Typography variant="body2" color="textSecondary">
+                        <Link
+                            href="https://docs.alkemi.network/earn-ui/changelog"
+                            variant="body2"
+                            color="inherit"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {process.env.REACT_APP_VERSION}
+                        </Link>
+                    </Typography>
                 </Box>
             </Box>
         </Box>
