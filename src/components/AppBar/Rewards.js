@@ -13,16 +13,18 @@ import {
     DialogActions,
     DialogContent,
     Divider,
+    Tooltip,
     Typography,
     SvgIcon,
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import { XCircle as XIcon } from "react-feather";
 
 // Section 3: Components & Containers import from the application
 
 // import Settings from "./Settings";
+import { XCircle as XIcon } from "react-feather";
+import { HelpCircle as HelpIcon } from "react-feather";
 import alktoken from "assets/images/alktoken.svg";
 import icon from "assets/images/alktoken.svg";
 
@@ -91,23 +93,41 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: "500",
     },
     dataRow: {
-        padding: "12px 0",
+        padding: "8px 0",
         borderBottom: "1px dashed #57595d",
+        alignItems: "center",
     },
     datarow: {
-        padding: "12px 0",
+        padding: "8px 0",
         borderBottom: "1px dashed #57595d",
+        alignItems: "center",
     },
     datarowlast: {
-        padding: "12px 0",
+        padding: "8px 0",
+        alignItems: "center",
     },
     vertcent: {
         margin: "auto",
+        display: "flex",
+        alignItems: "center",
     },
     modal: {
         "& .MuiDialog-paper": {
-            minWidth: "320px",
+            minWidth: "340px",
         },
+    },
+    balanceheader: {
+        fontWeight: 400,
+        fontSize: "0.9375rem",
+    },
+    helpIcon: {
+        width: ".8rem",
+        marginLeft: "4px",
+        color: "#979797",
+    },
+    alkTotal: {
+        fontSize: "1.4rem",
+        fontWeight: 500,
     },
 }));
 
@@ -193,12 +213,35 @@ function Rewards({ alkReward }) {
                             className={classes.alkicon}
                             src={icon}
                             alt={"Gnosis Icon"}
-                            height={85}
-                            width={85}
+                            height={60}
+                            width={60}
                         />
                     </Box>
                     <Box mt={1}>
-                        <Typography variant="h4" color="textPrimary">
+                        <Box display="flex" alignItems="center" mb={1}>
+                            <Typography
+                                variant="h5"
+                                color="textSecondary"
+                                align="center"
+                                className={classes.balanceheader}
+                            >
+                                Total Balance
+                            </Typography>
+                            <Tooltip
+                                title="Your total farmed ALK Rewards"
+                                placement="right"
+                                arrow
+                                className={classes.toolTip}
+                            >
+                                <HelpIcon className={classes.helpIcon} />
+                            </Tooltip>
+                        </Box>
+                        <Typography
+                            variant="h4"
+                            align="center"
+                            color="textPrimary"
+                            className={classes.alkTotal}
+                        >
                             {alkReward} ALK
                         </Typography>
                         {
@@ -207,30 +250,34 @@ function Rewards({ alkReward }) {
                                 color="textSecondary"
                                 align="center"
                             >
-                                $0.00
+                                = $0.00 USD
                             </Typography>
                         }
                     </Box>
                 </Box>
                 <Box mt={3} px={2}>
-                    <Grid container className={classes.datarow}>
-                        <Grid item md={6} xs className={classes.vertcent}>
+                    <Grid container direction="row" className={classes.datarow}>
+                        <Grid
+                            item
+                            md={6}
+                            xs
+                            className={classes.vertcent}
+                            direction="row"
+                        >
                             <Typography variant="body2" color="textSecondary">
-                                Alk Total Supply
+                                Claimable ALK
                             </Typography>
+                            <Tooltip
+                                title="Your available ALK that you can currently claim"
+                                placement="right"
+                                arrow
+                                className={classes.toolTip}
+                            >
+                                <HelpIcon className={classes.helpIcon} />
+                            </Tooltip>
                         </Grid>
                         <Grid item md={6} xs container justify="flex-end">
-                            200,000,000
-                        </Grid>
-                    </Grid>
-                    <Grid container className={classes.datarow}>
-                        <Grid item md={6} xs className={classes.vertcent}>
-                            <Typography variant="body2" color="textSecondary">
-                                Alk in Circulation
-                            </Typography>
-                        </Grid>
-                        <Grid item md={6} xs container justify="flex-end">
-                            TBD
+                            0.000 ALK
                         </Grid>
                     </Grid>
                     {
@@ -240,11 +287,19 @@ function Rewards({ alkReward }) {
                                     variant="body2"
                                     color="textSecondary"
                                 >
-                                    Alk Price
+                                    Est. ALK Price
                                 </Typography>
+                                <Tooltip
+                                    title="Estimated ALK oken price based on current markets"
+                                    placement="right"
+                                    arrow
+                                    className={classes.toolTip}
+                                >
+                                    <HelpIcon className={classes.helpIcon} />
+                                </Tooltip>
                             </Grid>
                             <Grid item md={6} xs container justify="flex-end">
-                                $0.00
+                                TBD
                             </Grid>
                         </Grid>
                     }
@@ -260,7 +315,7 @@ function Rewards({ alkReward }) {
                         fullWidth={true}
                         onClick={handleClose}
                     >
-                        Claim
+                        Claim 0.000 ALK
                     </Button>
                 </Box>
             </Dialog>

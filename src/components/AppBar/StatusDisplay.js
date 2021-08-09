@@ -30,14 +30,8 @@ const useStyles = (props) =>
 
 const CustomTooltip = withStyles((theme) => ({
     tooltipPlacementLeft: {
-        backgroundColor: theme.palette.background.light,
-        color: "#ffffff",
         boxShadow: theme.shadows[1],
-        fontSize: 11,
         marginRight: 25,
-    },
-    arrow: {
-        color: theme.palette.background.light,
     },
 }))(Tooltip);
 
