@@ -1,4 +1,10 @@
 const overrides = {
+    MuiDivider: {
+        root: {
+            backgroundColor: "rgba(255, 255, 255, 0.10)",
+        },
+    },
+
     MuiToolbar: {
         root: {
             disableGutters: "true",
@@ -13,13 +19,12 @@ const overrides = {
     },
     MuiTooltip: {
         tooltip: {
-            fontSize: "12px",
-            color: "#fff",
-            backgroundColor: "#000",
+            color: "#000",
+            backgroundColor: "#fff",
             fontWeight: 400,
         },
         arrow: {
-            color: "#000",
+            color: "#fff",
         },
     },
     MuiButton: {

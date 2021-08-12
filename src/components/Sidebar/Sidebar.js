@@ -1,7 +1,7 @@
 // Main Component
 
 // Section 1: React low level imports
-import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { compose } from "redux";
 import clsx from "clsx";
@@ -27,8 +27,11 @@ import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
 import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
 import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
 import SidebarHeader from "containers/Sidebar/Header";
+import { PoolPopover } from "./PoolSelect";
+import { CustomCube as CloudIcon } from "../UI/Icons/custom-cube";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
+
 const styles = (theme) => ({
     drawer: {
         width: 280,
@@ -85,9 +88,30 @@ const styles = (theme) => ({
         border: "none",
     },
 });
-
+const pools = [
+    {
+        id: "verified",
+        name: "Verified Pool",
+        icon: <CloudIcon />,
+    },
+    {
+        id: "open",
+        name: "Open Pool",
+        icon: "assets/images/logo-white.svg",
+    },
+];
 // Section 5: Code Component
 function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
+    const [currentPool, setCurrentPool] = useState(pools[0]);
+
+    const handlePoolChange = (poolId) => {
+        const newPool = pools.find((pool) => pool.id === poolId);
+
+        if (!newPool) {
+            return;
+        }
+        setCurrentPool(newPool);
+    };
     const content = (
         <Box
             className={classes.drawerInner}
@@ -110,6 +134,13 @@ function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
                         ) : null}
                     </List>
                     <Divider className={classes.divider} />
+                </Box>
+                <Box p={3}>
+                    <PoolPopover
+                        currentPool={currentPool}
+                        onPoolChange={handlePoolChange}
+                        pools={pools}
+                    />
                 </Box>
             </Box>
             <Box className={classes.bottom}>
