@@ -123,28 +123,29 @@ function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
             <Box flexDirection="column" flexGrow={1}>
                 <Divider className={classes.divider} />
                 <Box pt={1} pb={1}>
-                    <List className={classes.list}>
-                        <SidebarDashboardItem />
-                        <SidebarLendItem />
-                        <SidebarBorrowItem />
-                        <SidebarMarketsItem />
-                        <SidebarHistoryItem />
-                        {walletIsLiquidator === true ? (
-                            <SidebarLiquidateItem />
-                        ) : null}
-                    </List>
+                    <Box px={2} pb={1}>
+                        <List className={classes.list}>
+                            <SidebarDashboardItem />
+                            <SidebarLendItem />
+                            <SidebarBorrowItem />
+                            <SidebarMarketsItem />
+                            <SidebarHistoryItem />
+                            {walletIsLiquidator === true ? (
+                                <SidebarLiquidateItem />
+                            ) : null}
+                        </List>
+                    </Box>
                     <Divider className={classes.divider} />
                 </Box>
-                <Box p={3}>
+            </Box>
+            <Box className={classes.bottom}>
+                <Box px={2}>
                     <PoolPopover
                         currentPool={currentPool}
                         onPoolChange={handlePoolChange}
                         pools={pools}
                     />
                 </Box>
-            </Box>
-            <Box className={classes.bottom}>
-                <Divider className={classes.divider} />
                 <Box py={2} px={2}>
                     <Typography variant="body2" color="textSecondary">
                         <Link

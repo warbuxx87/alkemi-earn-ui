@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
     popover: {
         "& .MuiPopover-paper": {
-            width: "252px !important",
+            width: "268px !important",
         },
     },
     avatar: {
@@ -77,7 +77,10 @@ export const PoolPopover = (props) => {
                 anchorEl={anchorRef.current}
                 anchorOrigin={{
                     horizontal: "left",
-                    vertical: "top",
+                    vertical: "bottom",
+                }}
+                transformOrigin={{
+                    vertical: "bottom",
                 }}
                 keepMounted
                 onClose={handleClose}
