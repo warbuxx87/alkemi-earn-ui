@@ -1,7 +1,7 @@
 // Main Component
 
 // Section 1: React low level imports
-import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { compose } from "redux";
 import clsx from "clsx";
@@ -27,25 +27,28 @@ import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
 import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
 import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
 import SidebarHeader from "containers/Sidebar/Header";
+import { PoolPopover } from "./PoolSelect";
+import { CustomCube as CloudIcon } from "../UI/Icons/custom-cube";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
+
 const styles = (theme) => ({
     drawer: {
-        width: 290,
+        width: 280,
         marginLeft: 24,
         flexShrink: 0,
         "@media (min-width:1940px)": {
             marginLeft: 35,
-            width: 340,
+            width: 300,
         },
     },
     drawerInner: {
         overflowX: "hidden",
     },
     drawerOpen: {
-        width: 290,
+        width: 280,
         "@media (min-width:1940px)": {
-            width: 340,
+            width: 300,
         },
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
@@ -63,9 +66,9 @@ const styles = (theme) => ({
             width: 68,
         },
         "&:hover": {
-            width: 290,
+            width: 280,
             "@media (min-width:1940px)": {
-                width: 340,
+                width: 300,
             },
             transition: theme.transitions.create("width", {
                 easing: theme.transitions.easing.sharp,
@@ -84,53 +87,77 @@ const styles = (theme) => ({
         color: "white",
         border: "none",
     },
-
-    bottomPush: {
-        position: "fixed",
-        bottom: 10,
-        paddingBottom: 10,
-        maxWidth: 280,
-        "@media (min-width:1550px)": {
-            maxWidth: 340,
-        },
-    },
 });
-
+const pools = [
+    {
+        id: "verified",
+        name: "Verified Pool",
+        icon: <CloudIcon />,
+    },
+    {
+        id: "open",
+        name: "Open Pool",
+        icon: "assets/images/logo-white.svg",
+    },
+];
 // Section 5: Code Component
 function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
+    const [currentPool, setCurrentPool] = useState(pools[0]);
+
+    const handlePoolChange = (poolId) => {
+        const newPool = pools.find((pool) => pool.id === poolId);
+
+        if (!newPool) {
+            return;
+        }
+        setCurrentPool(newPool);
+    };
     const content = (
-        <Box className={classes.drawerInner}>
+        <Box
+            className={classes.drawerInner}
+            display="flex"
+            flexDirection="column"
+            height={1}
+        >
             <SidebarHeader />
-            <Box display="flex" flexDirection="column">
+            <Box flexDirection="column" flexGrow={1}>
                 <Divider className={classes.divider} />
                 <Box pt={1} pb={1}>
-                    <List className={classes.list}>
-                        <SidebarDashboardItem />
-                        <SidebarLendItem />
-                        <SidebarBorrowItem />
-                        <SidebarMarketsItem />
-                        <SidebarHistoryItem />
-                        {walletIsLiquidator === true ? (
-                            <SidebarLiquidateItem />
-                        ) : null}
-                    </List>
-                </Box>
-                <Divider className={classes.divider} />
-                <Box width={1} className={classes.bottomPush}>
-                    <Divider className={classes.divider} />
-                    <Box py={2} px={2}>
-                        <Typography variant="body2" color="textSecondary">
-                            <Link
-                                href="https://docs.alkemi.network/earn-ui/changelog"
-                                variant="body2"
-                                color="inherit"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {process.env.REACT_APP_VERSION}
-                            </Link>
-                        </Typography>
+                    <Box px={2} pb={1}>
+                        <List className={classes.list}>
+                            <SidebarDashboardItem />
+                            <SidebarLendItem />
+                            <SidebarBorrowItem />
+                            <SidebarMarketsItem />
+                            <SidebarHistoryItem />
+                            {walletIsLiquidator === true ? (
+                                <SidebarLiquidateItem />
+                            ) : null}
+                        </List>
                     </Box>
+                    <Divider className={classes.divider} />
+                </Box>
+            </Box>
+            <Box className={classes.bottom}>
+                <Box px={2}>
+                    <PoolPopover
+                        currentPool={currentPool}
+                        onPoolChange={handlePoolChange}
+                        pools={pools}
+                    />
+                </Box>
+                <Box py={2} px={2}>
+                    <Typography variant="body2" color="textSecondary">
+                        <Link
+                            href="https://docs.alkemi.network/earn-ui/changelog"
+                            variant="body2"
+                            color="inherit"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {process.env.REACT_APP_VERSION}
+                        </Link>
+                    </Typography>
                 </Box>
             </Box>
         </Box>

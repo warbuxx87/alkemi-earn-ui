@@ -22,7 +22,7 @@ const styles = (theme) => ({
         justifyContent: "space-between",
         width: "inherit",
         overflow: "hidden",
-        marginLeft: 20,
+        marginLeft: 22,
         marginRight: 20,
         [theme.breakpoints.down("xs")]: {
             marginLeft: 8,
@@ -30,8 +30,8 @@ const styles = (theme) => ({
         },
     },
     image: {
-        maxWidth: "155px",
-        minWidth: "155px",
+        maxWidth: "140px",
+        minWidth: "140px",
         [theme.breakpoints.down("xs")]: {
             maxWidth: "130px",
             minWidth: "130px",
