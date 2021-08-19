@@ -13,6 +13,7 @@ import DrizzleContext from "utils/DrizzleContext";
 import { fetchTx } from "redux/actions/data/tx";
 
 import { walletAddress } from "redux/selectors/data/onboard";
+import { getPool } from "redux/selectors/status/pool";
 
 const useFetchTx = (fetchPeriodically = false) => {
     const drizzle = useContext(DrizzleContext);
@@ -21,6 +22,8 @@ const useFetchTx = (fetchPeriodically = false) => {
     const walletConnected = useSelector(isWalletConnected); // Kind of useless to use here but won't hurt (hopefully)
     const currentNetworkName = useSelector(walletNetworkName);
     const address = useSelector(walletAddress);
+
+    const currentPool = useSelector(getPool);
 
     useEffect(
         () => {
@@ -32,6 +35,7 @@ const useFetchTx = (fetchPeriodically = false) => {
                         currentNetworkName,
                         address,
                         drizzle,
+                        currentPool,
                     })
                 );
 
@@ -57,6 +61,7 @@ const useFetchTx = (fetchPeriodically = false) => {
             walletConnected,
             drizzle,
             fetchPeriodically,
+            currentPool,
             dispatch,
         ] // TODO check blocksData constant refresh
     );

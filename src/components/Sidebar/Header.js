@@ -24,10 +24,18 @@ const styles = (theme) => ({
         overflow: "hidden",
         marginLeft: 20,
         marginRight: 20,
+        [theme.breakpoints.down("xs")]: {
+            marginLeft: 8,
+            marginRight: 16,
+        },
     },
     image: {
         maxWidth: "155px",
         minWidth: "155px",
+        [theme.breakpoints.down("xs")]: {
+            maxWidth: "130px",
+            minWidth: "130px",
+        },
     },
     menu: {
         width: 35,

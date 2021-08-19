@@ -34,7 +34,9 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
+
+import { getPool, isKYCPool } from "redux/selectors/status/pool";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
@@ -56,6 +58,8 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
 
     const calculatedInterest = useSelector(getCalculatedInterests);
     const fetchInterestErrorStatus = useSelector(getInterestErrorStatus);
+    const currentPool = useSelector(getPool);
+    const needKYC = useSelector(isKYCPool);
 
     const activateAsset = (asset) =>
         onActivate({
@@ -64,6 +68,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             userWalletAddress,
             asset,
             type: "approve",
+            currentPool,
         });
 
     return (
@@ -78,6 +83,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             }
             txs={txs}
             walletIsKYCd={walletIsKYCd}
+            needKYC={needKYC}
             userWalletNetwork={userWalletNetwork}
             calculatedInterest={calculatedInterest}
             fetchInterestErrorStatus={fetchInterestErrorStatus}

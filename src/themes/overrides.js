@@ -72,9 +72,9 @@ const overrides = {
             color: "#a7a7a7",
         },
     },
-    MuiPopover: {
-        paper: {
-            border: "solid 1px #080808",
+    MuiBackdrop: {
+        root: {
+            backgroundColor: "rgba(0, 1, 5, 0.5)",
         },
     },
 };

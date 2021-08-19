@@ -37,6 +37,7 @@ function Borrow({
     onActivate,
     USDPrice,
     txs,
+    needKYC,
     walletIsKYCd,
     userWalletNetwork,
     marketsData,
@@ -72,6 +73,7 @@ function Borrow({
                                 onActivate={onActivate}
                                 txs={txs}
                                 walletIsKYCd={walletIsKYCd}
+                                needKYC={needKYC}
                                 userWalletNetwork={userWalletNetwork}
                                 marketsData={marketsData}
                                 walletConnected={walletConnected}

@@ -8,11 +8,14 @@ import { useLocation } from "react-router-dom";
 // Section 2: internal imports
 import useOnboard from "hooks/useOnboard";
 import useWatchEtherBalance from "hooks/useWatchEtherBalance";
+import usePoolManager from "hooks/usePoolManager";
 
 // Section 3: Selectors
 import { isWalletConnected, walletAddress } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, isLiquidator } from "redux/selectors/status";
+import { isWalletKYCd, isLiquidator } from "redux/selectors/status/status";
+
+import { getPool } from "redux/selectors/status/pool";
 
 // Section 4: components
 import AppBar from "components/AppBar/AppBar";
@@ -32,11 +35,16 @@ const locationToTitles = {
 const AppBarContainer = () => {
     const { onConnect, onReset } = useOnboard();
     useWatchEtherBalance();
+    usePoolManager();
+
+    const [isWalletLiquidator, setIsWalletLiquidator] = useState(false);
 
     const walletConnected = useSelector(isWalletConnected);
     const currentAddress = useSelector(walletAddress);
     const walletIsKYCd = useSelector(isWalletKYCd);
     const walletIsLiquidator = useSelector(isLiquidator);
+
+    const currentPool = useSelector(getPool);
 
     let location = useLocation();
     // update Appbar title whenever location change
@@ -48,6 +56,14 @@ const AppBarContainer = () => {
         setTitle(currentTitle);
     }, [location]);
 
+    useEffect(() => {
+        if (currentPool === "open") {
+            setIsWalletLiquidator(true);
+        } else {
+            setIsWalletLiquidator(walletIsLiquidator);
+        }
+    }, [currentPool, walletIsLiquidator]);
+
     return (
         <AppBar
             title={title}
@@ -56,7 +72,8 @@ const AppBarContainer = () => {
             accountAddress={walletConnected ? currentAddress : null}
             walletIsKYCd={walletIsKYCd}
             walletConnected={walletConnected}
-            walletIsLiquidator={walletIsLiquidator}
+            walletIsLiquidator={isWalletLiquidator}
+            displayKYCStatus={currentPool !== "open"}
         />
     );
 };

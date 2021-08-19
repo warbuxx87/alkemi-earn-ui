@@ -127,6 +127,17 @@ const getAssetPrices = (state) => {
     return assetPrices;
 };
 
+const getAccountLiquidity = (state) => {
+    const accountLiquidity = Object.values(
+        _.get(state, "contracts.MoneyMarket.getAccountLiquidity", {})
+    );
+    if (accountLiquidity[0]) {
+        //console.log(" Account Liquidity", accountLiquidity[0].value);
+        return _.get(accountLiquidity, "[0].value");
+    }
+    return null;
+};
+
 const getLendAsset = createSelector(
     (state) => lendAssetSelector(state),
     (state) => walletNetworkName(state),
@@ -138,6 +149,7 @@ const getLendAsset = createSelector(
     (state) => getAssetPrices(state),
     (state) => getSupplyAccountValue(state), // TODO: refactor this to getLendAccountValue for consistency
     (state) => getMarketLiquidity(state),
+    (state) => getAccountLiquidity(state),
     (
         assets,
         network,
@@ -148,7 +160,8 @@ const getLendAsset = createSelector(
         marketUtilization,
         assetPrices,
         accountTotalSupply,
-        marketLiquidity
+        marketLiquidity,
+        accountLiquidity
     ) =>
         Object.values(assets).map((asset) => {
             // supply wallet
@@ -163,6 +176,7 @@ const getLendAsset = createSelector(
             let weight = "0";
             let USDprice = "0";
             let liquidity = "0";
+            let maxWithdrawToken = "0";
 
             if (network) {
                 const token_address = address[network][`address_${asset.unit}`];
@@ -184,6 +198,37 @@ const getLendAsset = createSelector(
 
                 // Replaced now with address_USDC
                 USDprice = assetPrices[address[network][`address_USDC`]] || "0";
+
+                // global max withdraw, adapted to each token
+                if (accountLiquidity && price && price > 0) {
+                    let mantissaPrice;
+                    switch (asset.unit) {
+                        case "USDC":
+                            mantissaPrice = price / 1e12;
+                            break;
+                        case "WBTC":
+                            mantissaPrice = price / 1e10;
+                            break;
+                        default:
+                            mantissaPrice = price;
+                    }
+
+                    let maxWithdrawTokenBig = Big(accountLiquidity); // Amount of User Liquidity in ETH scaled by 10e18
+                    maxWithdrawTokenBig = maxWithdrawTokenBig.div(
+                        mantissaPrice.toString()
+                    ); // Liquidity ETH Amount divided Amount of tokens for 1 Eth
+
+                    switch (asset.unit) {
+                        case "WBTC":
+                            maxWithdrawToken = maxWithdrawTokenBig.toFixed(8);
+                            break;
+                        case "USDC":
+                            maxWithdrawToken = maxWithdrawTokenBig.toFixed(6);
+                            break;
+                        default:
+                            maxWithdrawToken = maxWithdrawTokenBig.toFixed(18);
+                    }
+                }
             }
             return {
                 ...asset,
@@ -197,6 +242,7 @@ const getLendAsset = createSelector(
                 price,
                 USDprice,
                 liquidity,
+                maxWithdrawToken,
             };
         })
 );

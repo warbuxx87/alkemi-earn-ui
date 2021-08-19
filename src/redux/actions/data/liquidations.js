@@ -53,8 +53,17 @@ const fetchLiquidationsError = (error) => ({
 // ------- LIQUIDATIONS METHOD ACTIONS --------  //
 //                                               //
 
-const fetchLiquidationsCall = ({ currentNetworkName, address, dispatch }) => {
-    if (!url_map[currentNetworkName].liquidations_url) return;
+const fetchLiquidationsCall = ({
+    currentNetworkName,
+    address,
+    currentPool,
+    dispatch,
+}) => {
+    if (
+        !url_map[currentNetworkName][currentPool] ||
+        !url_map[currentNetworkName][currentPool].liquidations_url
+    )
+        return;
 
     dispatch(fetchLiquidationsPending());
 
@@ -85,10 +94,17 @@ const throttledFetchLiquidations = _.throttle(
 
 // Section 3: Action dispatch methods and async funcs
 
-export const fetchLiquidations = ({ currentNetworkName, address }) => async (
-    dispatch
-) => {
-    throttledFetchLiquidations({ currentNetworkName, address, dispatch });
+export const fetchLiquidations = ({
+    currentNetworkName,
+    address,
+    currentPool,
+}) => async (dispatch) => {
+    throttledFetchLiquidations({
+        currentNetworkName,
+        address,
+        currentPool,
+        dispatch,
+    });
 };
 
 // TODO: to be merged in transactions (when the other drawers are refactored in UI-359)
