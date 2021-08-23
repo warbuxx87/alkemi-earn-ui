@@ -55,16 +55,19 @@ const fetchInterestError = (error) => ({
 // Section 3: Action dispatch methods and async funcs
 const fetchInterestCall = ({
     currentNetworkName,
+    currentPool,
     address,
     asset,
     dispatch,
 }) => {
     if (!address) return;
-    if (!url_map[currentNetworkName].interest_url) return;
+    if (!url_map[currentNetworkName][currentPool].interest_url) return;
 
     const params = `?account=${address.toLowerCase()}&asset=${asset}&type=savings&millisecondsBefore=86400000`;
 
-    const interestURL = url_map[currentNetworkName].interest_url + params;
+    const interestURL =
+        url_map[currentNetworkName][currentPool].interest_url + params;
+    console.log("🚀 ~ file: lend.js ~ line 68 ~ interestURL", interestURL);
 
     fetch(interestURL)
         .then((res) => {
@@ -101,6 +104,7 @@ const throttledFetchInterest = _.throttle(fetchInterestCall, 60 * 1000, {
 
 export const fetchInterest = ({
     currentNetworkName,
+    currentPool,
     address,
     asset,
     fetchPeriodically,
@@ -109,6 +113,7 @@ export const fetchInterest = ({
         // if fetchPeriodically set to true it will go through the throttled method
         throttledFetchInterest({
             currentNetworkName,
+            currentPool,
             address,
             asset,
             dispatch,
@@ -117,6 +122,7 @@ export const fetchInterest = ({
     else
         fetchInterestCall({
             currentNetworkName,
+            currentPool,
             address,
             asset,
             dispatch,

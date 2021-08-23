@@ -11,6 +11,7 @@ import {
 import { fetchInterest } from "redux/actions/data/lend";
 
 import { walletAddress } from "redux/selectors/data/onboard";
+import { getPool } from "redux/selectors/status/pool";
 
 const useFetchInterest = (fetchPeriodically = false) => {
     const dispatch = useDispatch();
@@ -18,6 +19,8 @@ const useFetchInterest = (fetchPeriodically = false) => {
     const walletConnected = useSelector(isWalletConnected); // Kind of useless to use here but won't hurt (hopefully)
     const currentNetworkName = useSelector(walletNetworkName);
     const address = useSelector(walletAddress);
+
+    const currentPool = useSelector(getPool);
 
     useEffect(
         (fetchPeriodically) => {
@@ -30,6 +33,7 @@ const useFetchInterest = (fetchPeriodically = false) => {
                     dispatch(
                         fetchInterest({
                             currentNetworkName,
+                            currentPool,
                             address,
                             asset,
                         })
@@ -52,6 +56,7 @@ const useFetchInterest = (fetchPeriodically = false) => {
         [
             address,
             currentNetworkName,
+            currentPool,
             walletConnected,
             fetchPeriodically,
             dispatch,
