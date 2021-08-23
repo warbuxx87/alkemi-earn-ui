@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
+    AppBar,
     Avatar,
     Box,
     Button,
@@ -13,20 +14,21 @@ import {
     FormControlLabel,
     Link,
     SvgIcon,
+    Toolbar,
     Typography,
     makeStyles,
 } from "@material-ui/core";
 import withWidth from "@material-ui/core/withWidth";
 
-import { ReactComponent as Verified } from "assets/images/verpool.svg";
-import Open from "@material-ui/icons/Public";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import Verified from "@material-ui/icons/VerifiedUser";
+import Open from "@material-ui/icons/Public";
 
 const useStyles = makeStyles((theme) => ({
     dialogContent: {
-        paddingTop: "20px",
-        paddingBottom: "12px",
+        paddingTop: "0px",
+        paddingBottom: "20px",
     },
     toggleSubtitle: {
         textTransform: "none",
@@ -76,6 +78,12 @@ const useStyles = makeStyles((theme) => ({
     },
     checkBox: {
         fontSize: "2rem",
+    },
+    avatar: {
+        backgroundColor: "transparent",
+        border: "1px solid rgba(255, 255, 255, 0.10)",
+        width: "36px",
+        height: "36px",
     },
 }));
 
@@ -128,12 +136,11 @@ function PoolDialog({ width }) {
                 disableEscapeKeyDown
                 disableBackdropClick
             >
-                <Box p={3}>
+                <Box p={4}>
                     <Typography variant="h4" color="textPrimary" align="center">
                         Select liquidity pool
                     </Typography>
                 </Box>
-                <Divider />
                 <DialogContent className={classes.dialogContent}>
                     <ToggleButtonGroup
                         value={pools}
@@ -147,10 +154,19 @@ function PoolDialog({ width }) {
                             value="permissioned"
                             aria-label="Verified"
                             disableRipple
+                            disableFocusRipple
                         >
-                            <SvgIcon className={classes.verIcon}>
-                                <Verified />
-                            </SvgIcon>{" "}
+                            <Avatar
+                                variant="rounded"
+                                className={classes.avatar}
+                            >
+                                <Box
+                                    display="flex"
+                                    className={classes.avatarimg}
+                                >
+                                    <Verified color="primary" />
+                                </Box>
+                            </Avatar>{" "}
                             <Box pt={1}>
                                 <Typography
                                     className={classes.toggleTitle}
@@ -193,9 +209,17 @@ function PoolDialog({ width }) {
                             aria-label="Open"
                             disableRipple
                         >
-                            <SvgIcon>
-                                <Verified />
-                            </SvgIcon>{" "}
+                            <Avatar
+                                variant="rounded"
+                                className={classes.avatar}
+                            >
+                                <Box
+                                    display="flex"
+                                    className={classes.avatarimg}
+                                >
+                                    <Open color="primary" />
+                                </Box>
+                            </Avatar>{" "}
                             <Box pt={1}>
                                 <Typography
                                     className={classes.toggleTitle}
