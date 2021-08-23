@@ -46,11 +46,6 @@ function CardValue({
     walletConnected,
 }) {
     const classes = useStyles();
-    //const data = {
-    //      value: (0.0).toFixed(2),
-    //      currency: "$",
-    //      difference: 0,
-    //   };
 
     const loadingSkeleton = useMemo(
         () => (
@@ -64,19 +59,25 @@ function CardValue({
     useEffect(() => {
         if (!walletConnected) {
             setDisplayInterest(
-                <SplitNumber
-                    theNumber={"0.00"}
-                    shouldFormatNumber={false}
-                    centsClassName={classes.cents}
-                />
+                <>
+                    $
+                    <SplitNumber
+                        theNumber={"0.00"}
+                        shouldFormatNumber={false}
+                        centsClassName={classes.cents}
+                    />
+                </>
             );
         } else if (calculatedInterest) {
             setDisplayInterest(
-                <SplitNumber
-                    theNumber={calculatedInterest}
-                    shouldFormatNumber={false}
-                    centsClassName={classes.cents}
-                />
+                <>
+                    $
+                    <SplitNumber
+                        theNumber={calculatedInterest}
+                        shouldFormatNumber={false}
+                        centsClassName={classes.cents}
+                    />
+                </>
             );
         } else {
             setDisplayInterest(loadingSkeleton);
@@ -98,8 +99,6 @@ function CardValue({
                     flexWrap="wrap"
                 >
                     <Typography variant="h3" color="textPrimary">
-                        {/* {data.currency}
-                        {data.value}*/}
                         {displayInterest}
                     </Typography>
                 </Box>

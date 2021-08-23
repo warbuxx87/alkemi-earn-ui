@@ -67,7 +67,6 @@ const fetchInterestCall = ({
 
     const interestURL =
         url_map[currentNetworkName][currentPool].interest_url + params;
-    console.log("🚀 ~ file: lend.js ~ line 68 ~ interestURL", interestURL);
 
     fetch(interestURL)
         .then((res) => {
@@ -75,7 +74,6 @@ const fetchInterestCall = ({
         })
         .then((data) => {
             if (data) {
-                console.log({ data, asset });
                 const interestCallResult = JSON.parse(data);
 
                 if (["fail", "error"].includes(interestCallResult.status)) {
@@ -85,7 +83,7 @@ const fetchInterestCall = ({
                     dispatch(
                         fetchInterestSuccess({
                             calculatedInterest:
-                                interestCallResult.data.calculatedInterest,
+                                interestCallResult.data.calculatedInterestInUSD,
                             asset,
                         })
                     );
