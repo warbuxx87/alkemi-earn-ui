@@ -116,6 +116,7 @@ export const formatNumber = (value, unit, userWalletNetwork) => {
     const minDecimalsHigherValueAsset = 5; // minimum number of decimals to display for WBTC & ETH
 
     if (!value) return 0;
+
     const wei = fromWei(value, unit);
     switch (unit) {
         case "USDC":
@@ -147,6 +148,11 @@ export const formatNumber = (value, unit, userWalletNetwork) => {
                     userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
                         ? minDecimalsHigherValueAsset
                         : 4,
+            }).format(wei);
+        case "ALK":
+            return new Intl.NumberFormat("en-es", {
+                maximumFractionDigits: 3,
+                minimumFractionDigits: 3,
             }).format(wei);
         default:
             return new Intl.NumberFormat("en-es", {

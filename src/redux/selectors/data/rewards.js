@@ -21,7 +21,7 @@ export const walletClaimableALKRewards = (state) => {
     );
 
     if (getAlkRewards[0]) {
-        const reward = getAlkRewards[0].value ? getAlkRewards[0].value : 0;
+        const reward = getAlkRewards[0].value ? getAlkRewards[0].value : "0";
         return reward;
     }
     return 0;
@@ -33,7 +33,7 @@ export const walletBalanceOfALKTokens = (state) => {
     );
 
     if (balanceOf[0]) {
-        const reward = balanceOf[0].value ? balanceOf[0].value : 0;
+        const reward = balanceOf[0].value ? balanceOf[0].value : "0";
         return reward;
     }
     return 0;

@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 
 // Section 2: internal imports
-import { bigNumberToLocale } from "utils/ui";
+import { bigNumberToLocale, fromWei, formatNumber } from "utils/ui";
 import DrizzleContext from "utils/DrizzleContext";
 
 // Section 3: Selectors
@@ -35,11 +35,11 @@ const RewardsContainer = () => {
             userWalletAddress,
         });
     };
-    // TODO: format balanceOf to account for 18 decimals
+
     return (
         <Rewards
-            claimableALKReward={bigNumberToLocale(claimableALKReward)}
-            balanceOfALKTokens={bigNumberToLocale(balanceOfALKTokens)}
+            claimableALKReward={formatNumber(claimableALKReward, "ALK")}
+            balanceOfALKTokens={formatNumber(balanceOfALKTokens, "ALK")}
             onClaimALK={onClaimALK}
         />
     );
