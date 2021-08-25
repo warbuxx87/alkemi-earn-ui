@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Rewards({ alkReward }) {
+function Rewards({ claimableALKReward, balanceOfALKTokens }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -177,7 +177,7 @@ function Rewards({ alkReward }) {
                             alignItems="center"
                             data-testid="addressButton"
                         >
-                            {alkReward}
+                            {balanceOfALKTokens}
                         </Box>
                     </Grid>
                 </Grid>
@@ -242,7 +242,7 @@ function Rewards({ alkReward }) {
                             color="textPrimary"
                             className={classes.alkTotal}
                         >
-                            {alkReward} ALK
+                            {balanceOfALKTokens} ALK
                         </Typography>
                         {
                             <Typography
@@ -277,7 +277,7 @@ function Rewards({ alkReward }) {
                             </Tooltip>
                         </Grid>
                         <Grid item md={6} xs container justify="flex-end">
-                            0.000 ALK
+                            {claimableALKReward} ALK
                         </Grid>
                     </Grid>
                     {

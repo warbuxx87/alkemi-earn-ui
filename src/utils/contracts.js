@@ -5,6 +5,7 @@ import WBTC_ABI from "constants/ABI/WBTC_ABI.json";
 
 import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
 import RewardControl_ABI from "constants/ABI/RewardControl_ABI.json";
+import ALK_TOKEN_ABI from "constants/ABI/ALK_TOKEN_ABI.json";
 
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
@@ -45,13 +46,21 @@ export const initContracts = ({
             })
         );
 
-    if (resolved !== false)
+    if (resolved !== false) {
         initRewardControlContract({
             drizzle,
             userWalletAddress,
             userWalletNetwork,
             forceUpdate,
         });
+
+        initALKTokenContract({
+            drizzle,
+            userWalletAddress,
+            userWalletNetwork,
+            forceUpdate,
+        });
+    }
 };
 
 export const deleteAllContracts = (drizzle) => {
@@ -254,7 +263,47 @@ export const initRewardControlContract = ({
     });
 
     // get the ALK rewards for a user
-    rewardControlContract.methods.getAlkAccrued.cacheCall(myAddress);
+    // rewardControlContract.methods.getAlkAccrued.cacheCall(myAddress);
+
+    // getting the rewards for any user, it will give us the tokens scaled to 18 decimals, this function is what gives the claimable amount
+    rewardControlContract.methods.getAlkRewards.cacheCall(myAddress);
 
     return drizzle.contracts.RewardControl;
+};
+
+export const initALKTokenContract = ({
+    drizzle,
+    userWalletAddress,
+    userWalletNetwork,
+    forceUpdate,
+}) => {
+    if (drizzle.contracts.ALKToken && !forceUpdate)
+        return drizzle.contracts.ALKToken;
+
+    const myAddress = userWalletAddress;
+    const network = constants.network_type[userWalletNetwork];
+
+    if (!drizzle.web3.eth) return;
+    if (!address[network]) return;
+
+    const ALKTokenContract = new drizzle.web3.eth.Contract(
+        ALK_TOKEN_ABI,
+        address[network][`address_ALK_TOKEN`]
+    );
+
+    try {
+        if (forceUpdate) drizzle.deleteContract("ALKToken");
+    } catch (e) {
+        // catches error
+    }
+
+    drizzle.addContract({
+        contractName: "ALKToken",
+        web3Contract: ALKTokenContract,
+    });
+
+    // getting the rewards for any user, it will give us the tokens scaled to 18 decimals, this function is what gives the claimable amount
+    ALKTokenContract.methods.balanceOf.cacheCall(myAddress);
+
+    return drizzle.contracts.ALKToken;
 };

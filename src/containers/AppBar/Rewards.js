@@ -8,16 +8,26 @@ import { useSelector } from "react-redux";
 import { bigNumberToLocale } from "utils/ui";
 
 // Section 3: Selectors
-import { walletAlkReward } from "redux/selectors/data/rewards";
+import {
+    walletClaimableALKRewards,
+    walletBalanceOfALKTokens,
+} from "redux/selectors/data/rewards";
 
 // Section 4: components
 import Rewards from "components/AppBar/Rewards";
 
 // Section 5: Code Container
 const RewardsContainer = () => {
-    const alkReward = useSelector(walletAlkReward);
+    const claimableALKReward = useSelector(walletClaimableALKRewards);
+    const balanceOfALKTokens = useSelector(walletBalanceOfALKTokens);
 
-    return <Rewards alkReward={bigNumberToLocale(alkReward)} />;
+    // TODO: format balanceOf to account for 18 decimals
+    return (
+        <Rewards
+            claimableALKReward={bigNumberToLocale(claimableALKReward)}
+            balanceOfALKTokens={bigNumberToLocale(balanceOfALKTokens)}
+        />
+    );
 };
 
 // Export
