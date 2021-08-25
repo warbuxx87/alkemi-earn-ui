@@ -1,3 +1,61 @@
+## [1.16.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.0...v1.16.1) (2021-07-13)
+
+
+### Bug Fixes
+
+* update weth address for rinkeby UI-465 ([4912c28](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4912c28cb7f309d9e0377f0958bf96373de98935))
+
+
+
+## [1.16.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.0...v1.16.1) (2021-07-13)
+
+
+### Bug Fixes
+
+* update weth address for rinkeby UI-465 ([4912c28](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4912c28cb7f309d9e0377f0958bf96373de98935))
+
+# [1.16.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.15.0...v1.16.0) (2021-07-08)
+
+
+### Bug Fixes
+
+* disable kyc and liquidations retrieval from open pool UI-443 ([13d37a2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/13d37a2128fb9b58e9917b08fe86761affc43c0b))
+* init moneymarket contract on start UI-443 ([3c32975](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3c32975b3c1e1c3356c34f386a1b04706e90f308))
+* snapshot errors UI-440 ([e5b64d9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e5b64d9922ee61b79602274ff2d563f674a50ea9))
+* update to newest protocol address & set https for api UI-443 ([25bac7e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/25bac7e582e92fa0ffc9ed413ebddb47a000e789))
+
+
+### Features
+
+* add open protocol urls & open access to liquidations UI-443 ([599fddc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/599fddceb5acff6ee0ccc2be2e9680c491ff3d1b))
+* add state management for pool selection UI-443 ([25fc11a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/25fc11a384786000f59a1e34d48f107c4a291d85))
+* add transactions to open pool UI-443 ([5c987be](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5c987bec8daa9f7efe0f68780f9f30244b3291e7))
+* disable selection button for pool selection UI-443 ([a1ef81f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a1ef81f5e527908b5afd681b8ae1fbda396a294f))
+* persist and retrieve pool selection UI-443 ([1030fe8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1030fe85f70bc6f0f05a342f028d947d052166f6))
+* use proper money market address where needed UI-443 ([d7b9185](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d7b91856d434e1437ecbfc0bc150993c01d6fc6b))
+
+
+
+# [1.16.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.15.0...v1.16.0) (2021-07-08)
+
+
+### Bug Fixes
+
+* disable kyc and liquidations retrieval from open pool UI-443 ([13d37a2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/13d37a2128fb9b58e9917b08fe86761affc43c0b))
+* init moneymarket contract on start UI-443 ([3c32975](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3c32975b3c1e1c3356c34f386a1b04706e90f308))
+* snapshot errors UI-440 ([e5b64d9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e5b64d9922ee61b79602274ff2d563f674a50ea9))
+* update to newest protocol address & set https for api UI-443 ([25bac7e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/25bac7e582e92fa0ffc9ed413ebddb47a000e789))
+
+
+### Features
+
+* add open protocol urls & open access to liquidations UI-443 ([599fddc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/599fddceb5acff6ee0ccc2be2e9680c491ff3d1b))
+* add state management for pool selection UI-443 ([25fc11a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/25fc11a384786000f59a1e34d48f107c4a291d85))
+* add transactions to open pool UI-443 ([5c987be](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5c987bec8daa9f7efe0f68780f9f30244b3291e7))
+* disable selection button for pool selection UI-443 ([a1ef81f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a1ef81f5e527908b5afd681b8ae1fbda396a294f))
+* persist and retrieve pool selection UI-443 ([1030fe8](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1030fe85f70bc6f0f05a342f028d947d052166f6))
+* use proper money market address where needed UI-443 ([d7b9185](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d7b91856d434e1437ecbfc0bc150993c01d6fc6b))
+
 # [1.15.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.14.1...v1.15.0) (2021-06-29)
 
 
