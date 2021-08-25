@@ -152,7 +152,6 @@ function Rewards({ claimableALKReward, balanceOfALKTokens, onClaimALK }) {
             >
                 <Grid
                     container
-                    direction="row"
                     alignItems="center"
                     display="flex"
                     justify="flex-end"
@@ -253,14 +252,8 @@ function Rewards({ claimableALKReward, balanceOfALKTokens, onClaimALK }) {
                     </Box>
                 </Box>
                 <Box mt={3} px={2}>
-                    <Grid container direction="row" className={classes.datarow}>
-                        <Grid
-                            item
-                            md={6}
-                            xs
-                            className={classes.vertcent}
-                            direction="row"
-                        >
+                    <Grid container className={classes.datarow}>
+                        <Grid item md={6} xs className={classes.vertcent}>
                             <Typography variant="body2" color="textSecondary">
                                 Claimable ALK
                             </Typography>

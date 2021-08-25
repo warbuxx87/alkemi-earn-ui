@@ -168,8 +168,8 @@ const getBorrowAsset = createSelector(
         marketLiquidity,
         collateralRatio,
         originationFee
-    ) =>
-        Object.values(assets).map((asset) => {
+    ) => {
+        return Object.values(assets).map((asset) => {
             let balance = "0";
             let ethBalance = "0";
             let weight = "0";
@@ -275,7 +275,8 @@ const getBorrowAsset = createSelector(
                 safeBorrowToken,
                 liquidity,
             };
-        })
+        });
+    }
 );
 
 export const getBorrowActive = createSelector(getBorrowAsset, (assets) =>

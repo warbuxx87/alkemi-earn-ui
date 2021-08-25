@@ -174,7 +174,6 @@ function AppBar({
                         >
                             <Grid
                                 container
-                                direction="row"
                                 alignItems="center"
                                 display="flex"
                                 justify="flex-end"
