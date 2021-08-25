@@ -168,11 +168,7 @@ function Rewards({ claimableALKReward, balanceOfALKTokens, onClaimALK }) {
                         </Box>
                     </Grid>
                     <Grid item className={classes.address}>
-                        <Box
-                            display="flex"
-                            alignItems="center"
-                            data-testid="addressButton"
-                        >
+                        <Box display="flex" alignItems="center">
                             {balanceOfALKTokens}
                         </Box>
                     </Grid>
