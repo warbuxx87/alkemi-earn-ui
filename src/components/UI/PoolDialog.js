@@ -26,9 +26,18 @@ import Verified from "@material-ui/icons/VerifiedUser";
 import Open from "@material-ui/icons/Public";
 
 const useStyles = makeStyles((theme) => ({
+    dialog: {
+        "& .MuiDialog-paperWidthMd": {
+            maxWidth: "605px",
+        },
+    },
+    connectButton: {
+        fontSize: "0.8125rem",
+        maxWidth: "110px",
+    },
     dialogContent: {
         paddingTop: "0px",
-        paddingBottom: "20px",
+        paddingBottom: "16px",
     },
     toggleSubtitle: {
         textTransform: "none",
@@ -51,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
             flexDirection: "column",
         },
         "& .MuiToggleButtonGroup-groupedHorizontal:not(:first-child) ": {
-            marginLeft: 12,
+            marginLeft: 16,
         },
         "& .MuiToggleButton-root": {
             borderTop: "1px solid rgba(255, 255, 255, 0.12)",
@@ -77,7 +86,9 @@ const useStyles = makeStyles((theme) => ({
         minWidth: "110px",
     },
     checkBox: {
-        fontSize: "2rem",
+        "& .MuiFormControlLabel-label": {
+            fontSize: "0.8125rem",
+        },
     },
     avatar: {
         backgroundColor: "transparent",
@@ -135,6 +146,8 @@ function PoolDialog({ width }) {
                 open={open}
                 disableEscapeKeyDown
                 disableBackdropClick
+                maxWidth="md"
+                className={classes.dialog}
             >
                 <Box p={4}>
                     <Typography variant="h4" color="textPrimary" align="center">

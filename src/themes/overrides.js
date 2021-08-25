@@ -73,7 +73,7 @@ const overrides = {
     },
     MuiBackdrop: {
         root: {
-            backgroundColor: "rgba(0, 1, 5, 0.5)",
+            backgroundColor: "rgba(0, 1, 6, 0.7)",
         },
     },
 };
