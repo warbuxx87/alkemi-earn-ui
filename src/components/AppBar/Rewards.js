@@ -10,15 +10,12 @@ import {
     Grid,
     makeStyles,
     Dialog,
-    DialogActions,
-    DialogContent,
     Divider,
     Tooltip,
     Typography,
     SvgIcon,
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
 
 // Section 3: Components & Containers import from the application
 
@@ -299,7 +296,7 @@ function Rewards({ claimableALKReward, balanceOfALKTokens, onClaimALK }) {
                                 </Tooltip>
                             </Grid>
                             <Grid item md={6} xs container justify="flex-end">
-                                TBD
+                                $0.00
                             </Grid>
                         </Grid>
                     }

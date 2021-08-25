@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 
 // Section 2: internal imports
-import { bigNumberToLocale, fromWei, formatNumber } from "utils/ui";
+import { formatNumber } from "utils/ui";
 import DrizzleContext from "utils/DrizzleContext";
 
 // Section 3: Selectors
