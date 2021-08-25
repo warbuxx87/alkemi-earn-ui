@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Rewards({ claimableALKReward, balanceOfALKTokens }) {
+function Rewards({ claimableALKReward, balanceOfALKTokens, onClaimALK }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -313,9 +313,9 @@ function Rewards({ claimableALKReward, balanceOfALKTokens }) {
                         color="primary"
                         size="large"
                         fullWidth={true}
-                        onClick={handleClose}
+                        onClick={onClaimALK}
                     >
-                        Claim 0.000 ALK
+                        Claim {claimableALKReward} ALK
                     </Button>
                 </Box>
             </Dialog>
