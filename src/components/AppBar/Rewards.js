@@ -14,6 +14,7 @@ import {
     Tooltip,
     Typography,
     SvgIcon,
+    CircularProgress,
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 
@@ -129,7 +130,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Rewards({ claimableALKReward, balanceOfALKTokens, onClaimALK }) {
+function Rewards({
+    claimableALKReward,
+    balanceOfALKTokens,
+    onClaimALK,
+    isDoingAction,
+}) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -300,8 +306,21 @@ function Rewards({ claimableALKReward, balanceOfALKTokens, onClaimALK }) {
                         size="large"
                         fullWidth={true}
                         onClick={onClaimALK}
+                        disabled={
+                            isDoingAction || claimableALKReward === "0.000"
+                        }
                     >
-                        Claim {claimableALKReward} ALK
+                        {isDoingAction ? (
+                            <CircularProgress size={20} color="inherit" />
+                        ) : (
+                            <>
+                                {claimableALKReward === "0.000" ? (
+                                    "Claim"
+                                ) : (
+                                    <>Claim {claimableALKReward} ALK</>
+                                )}
+                            </>
+                        )}
                     </Button>
                 </Box>
             </Dialog>
