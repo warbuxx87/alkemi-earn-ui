@@ -9,10 +9,7 @@ import { formatNumber } from "utils/ui";
 import DrizzleContext from "utils/DrizzleContext";
 
 // Section 3: Selectors
-import {
-    walletClaimableALKRewards,
-    walletBalanceOfALKTokens,
-} from "redux/selectors/data/rewards";
+import { walletClaimableALKRewards } from "redux/selectors/data/rewards";
 
 import { walletAddress } from "redux/selectors/data/onboard";
 
@@ -29,7 +26,6 @@ const RewardsContainer = () => {
     const drizzle = useContext(DrizzleContext);
 
     const claimableALKReward = useSelector(walletClaimableALKRewards);
-    const balanceOfALKTokens = useSelector(walletBalanceOfALKTokens);
 
     const userWalletAddress = useSelector(walletAddress);
 
@@ -64,7 +60,6 @@ const RewardsContainer = () => {
     return (
         <Rewards
             claimableALKReward={formatNumber(claimableALKReward, "ALK")}
-            balanceOfALKTokens={formatNumber(balanceOfALKTokens, "ALK")}
             onClaimALK={onClaimALK}
             isDoingAction={isProcessing}
         />

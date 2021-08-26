@@ -130,12 +130,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Rewards({
-    claimableALKReward,
-    balanceOfALKTokens,
-    onClaimALK,
-    isDoingAction,
-}) {
+function Rewards({ claimableALKReward, onClaimALK, isDoingAction }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -175,7 +170,7 @@ function Rewards({
                     </Grid>
                     <Grid item className={classes.address}>
                         <Box display="flex" alignItems="center">
-                            {balanceOfALKTokens}
+                            {claimableALKReward}
                         </Box>
                     </Grid>
                 </Grid>
@@ -223,7 +218,7 @@ function Rewards({
                                 align="center"
                                 className={classes.balanceheader}
                             >
-                                Total Balance
+                                Total Rewards
                             </Typography>
                             <Tooltip
                                 title="Your total farmed ALK Rewards"
@@ -240,7 +235,7 @@ function Rewards({
                             color="textPrimary"
                             className={classes.alkTotal}
                         >
-                            {balanceOfALKTokens} ALK
+                            {claimableALKReward} ALK
                         </Typography>
                         {
                             <Typography
@@ -252,49 +247,6 @@ function Rewards({
                             </Typography>
                         }
                     </Box>
-                </Box>
-                <Box mt={3} px={2}>
-                    <Grid container className={classes.datarow}>
-                        <Grid item md={6} xs className={classes.vertcent}>
-                            <Typography variant="body2" color="textSecondary">
-                                Claimable ALK
-                            </Typography>
-                            <Tooltip
-                                title="Your available ALK that you can currently claim"
-                                placement="right"
-                                arrow
-                                className={classes.toolTip}
-                            >
-                                <HelpIcon className={classes.helpIcon} />
-                            </Tooltip>
-                        </Grid>
-                        <Grid item md={6} xs container justify="flex-end">
-                            {claimableALKReward} ALK
-                        </Grid>
-                    </Grid>
-                    {
-                        <Grid container className={classes.datarowlast}>
-                            <Grid item md={6} xs className={classes.vertcent}>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                >
-                                    Est. ALK Price
-                                </Typography>
-                                <Tooltip
-                                    title="Estimated ALK oken price based on current markets"
-                                    placement="right"
-                                    arrow
-                                    className={classes.toolTip}
-                                >
-                                    <HelpIcon className={classes.helpIcon} />
-                                </Tooltip>
-                            </Grid>
-                            <Grid item md={6} xs container justify="flex-end">
-                                $0.00
-                            </Grid>
-                        </Grid>
-                    }
                 </Box>
                 <Box p={2}>
                     <Button
