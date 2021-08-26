@@ -5,6 +5,7 @@ import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { compose } from "redux";
 import clsx from "clsx";
+import moment from "moment";
 
 // Section 2: Material-UI imports
 import {
@@ -185,9 +186,9 @@ const History = ({
                 if (blocksData[blockNumber].pending === false) {
                     return (
                         <span>
-                            {new Date(
+                            {moment(
                                 blocksData[blockNumber].timestamp * 1000
-                            ).toLocaleString()}
+                            ).format('YYYY-MM-DD HH:mm:ss')}
                         </span>
                     );
                 }
