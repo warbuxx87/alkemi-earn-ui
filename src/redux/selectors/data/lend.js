@@ -1,10 +1,11 @@
 // Libs
 import { createSelector } from "reselect";
 import _ from "lodash";
+import Big from "big.js";
+import web3 from "web3";
+
 import address from "constants/address_map.json";
 import { walletNetworkName } from "redux/selectors/data/onboard";
-import web3 from "web3";
-import Big from "big.js";
 
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
 
@@ -288,3 +289,27 @@ export const getLendPending = (state) =>
     Object.values(state.data.lend.assets).filter((asset) => asset.pending);
 
 export const getLendError = (state) => state.data.lend.error;
+
+//
+
+export const getCalculatedInterests = (state) => {
+    const calculatedInterests = state.data.lend.calculatedInterests;
+    let totalCalculatedInterest = Big(0);
+
+    for (let [key] of Object.entries(calculatedInterests)) {
+        // some entries might not have the value ready yet (or errored), display anyway
+        try {
+            if (calculatedInterests[key]) {
+                totalCalculatedInterest = totalCalculatedInterest.plus(
+                    Big(calculatedInterests[key])
+                );
+            }
+        } catch (e) {}
+    }
+
+    return totalCalculatedInterest.toFixed(18);
+};
+
+export const getInterestErrorStatus = (state) => {
+    return state.data.lend.fetchInterestError;
+};
