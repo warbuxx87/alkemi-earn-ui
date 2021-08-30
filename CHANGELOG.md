@@ -1,3 +1,19 @@
+# [1.18.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.17.0...v1.18.0) (2021-08-30)
+
+
+### Features
+
+* changed History date display to YYYY-MM-DD HH:mm:ss UI-479 ([ce7849d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ce7849dccaf97fd71ac2726df6f152f5659ab009))
+
+
+
+# [1.18.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.17.0...v1.18.0) (2021-08-30)
+
+
+### Features
+
+* changed History date display to YYYY-MM-DD HH:mm:ss UI-479 ([ce7849d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ce7849dccaf97fd71ac2726df6f152f5659ab009))
+
 # [1.17.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.1...v1.17.0) (2021-08-27)
 
 
