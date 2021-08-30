@@ -1,3 +1,37 @@
+# [1.17.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.1...v1.17.0) (2021-08-27)
+
+
+### Bug Fixes
+
+* add pool selection to interest branch UI-423 ([d4938ea](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d4938eae915c1d649e0571f16b0a9d63e7f5b3b9))
+* display last 24hrs interest UI-423 ([9a4b600](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9a4b600eccf93b4acc6780d1424bd861e8e48536))
+* remove scientific notation from interest UI-423 ([8d03cb2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8d03cb29404f32b701e3ca9fd8a5ed0855110a10))
+
+
+### Features
+
+* display interest earn UI-423 ([aa162c6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/aa162c6476f581e836e1372be2f3602aed1154c8))
+* display interest in usd UI-423 ([dc25bd9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dc25bd9b30f5d05395f439db43581f2deadfbb0a))
+* retrieve interest for each asset UI-423 ([35f7a06](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/35f7a062f9656a42b5fda3f651bc4b060db306ab))
+
+
+
+# [1.17.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.1...v1.17.0) (2021-08-27)
+
+
+### Bug Fixes
+
+* add pool selection to interest branch UI-423 ([d4938ea](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d4938eae915c1d649e0571f16b0a9d63e7f5b3b9))
+* display last 24hrs interest UI-423 ([9a4b600](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9a4b600eccf93b4acc6780d1424bd861e8e48536))
+* remove scientific notation from interest UI-423 ([8d03cb2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8d03cb29404f32b701e3ca9fd8a5ed0855110a10))
+
+
+### Features
+
+* display interest earn UI-423 ([aa162c6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/aa162c6476f581e836e1372be2f3602aed1154c8))
+* display interest in usd UI-423 ([dc25bd9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dc25bd9b30f5d05395f439db43581f2deadfbb0a))
+* retrieve interest for each asset UI-423 ([35f7a06](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/35f7a062f9656a42b5fda3f651bc4b060db306ab))
+
 ## [1.16.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.0...v1.16.1) (2021-07-13)
 
 

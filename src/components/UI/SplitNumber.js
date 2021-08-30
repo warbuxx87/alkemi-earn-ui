@@ -12,12 +12,11 @@ import { breakNumberFromDecimalPoint } from "utils/ui";
 // Section 5: Code Component
 
 // Number formatted to have the color of left part of the decimal point and the cents different
-const SplitNumber = ({ theNumber, centsClassName, formattedNumber }) => {
-    // if formattedNumber === true, it will use the number directly (expects it to already be in string format with a decimal point), otherwise it will expect a BigNumber in string format
+const SplitNumber = ({ theNumber, shouldFormatNumber, centsClassName }) => {
     const {
         leftOfDecimalPoint,
         numberOnRightToDisplay,
-    } = breakNumberFromDecimalPoint(theNumber, formattedNumber);
+    } = breakNumberFromDecimalPoint(theNumber, shouldFormatNumber);
 
     return (
         <span>
