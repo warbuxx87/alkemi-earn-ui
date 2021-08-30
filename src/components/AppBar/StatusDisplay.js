@@ -17,8 +17,8 @@ const useStyles = (props) =>
             //color: theme.palette[props.color].main,
         },
         KYCIcon: {
-            width: "17px",
-            height: "17px",
+            width: "18px",
+            height: "18px",
             color: theme.palette[props.color].main,
         },
         Tooltip: {
@@ -33,7 +33,6 @@ const CustomTooltip = withStyles((theme) => ({
         backgroundColor: theme.palette.background.light,
         color: "#ffffff",
         boxShadow: theme.shadows[1],
-        fontSize: 11,
         marginRight: 25,
     },
     arrow: {

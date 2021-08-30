@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
         "& .MuiToggleButton-root.Mui-selected": {
             backgroundColor: "rgba(255, 255, 255, 0.12)",
             border: "solid 1px rgba(255, 255, 255, .35) ",
+            color: "#ffffff",
         },
     },
     toggleTitle: {

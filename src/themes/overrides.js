@@ -19,13 +19,13 @@ const overrides = {
     },
     MuiTooltip: {
         tooltip: {
-            fontSize: "12px",
-            color: "#fff",
-            backgroundColor: "#000",
+            fontSize: "11px",
+            color: "#000",
+            backgroundColor: "#fff",
             fontWeight: 400,
         },
         arrow: {
-            color: "#000",
+            color: "#fff",
         },
     },
     MuiButton: {

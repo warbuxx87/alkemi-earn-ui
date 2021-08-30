@@ -18,7 +18,6 @@ import {
 
 // Section 3: Components & Containers import from the application
 
-//import DrawerBorrow from "components/UI/DrawerBorrow";
 import BorrowDrawerBorrow from "containers/Borrow/DrawerBorrow";
 import BorrowDrawerRepay from "containers/Borrow/DrawerRepay";
 import BorrowTableCell from "components/UI/TableCell";

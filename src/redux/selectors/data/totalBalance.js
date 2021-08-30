@@ -9,6 +9,8 @@ import { getAggregatedBorrowAPY } from "./borrow";
 import { walletNetworkName } from "./onboard";
 import { getPool } from "../status/pool";
 
+import constants from "constants/constant.json";
+
 const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
@@ -193,7 +195,7 @@ export const getMarketLiquidity = (state) => {
                 : address[currentNetworkName].address_MoneyMarket;
 
         Object.keys(state.contracts).forEach((asset) => {
-            if (asset !== "MoneyMarket") {
+            if (constants.assets.includes(asset)) {
                 let assetName = "address_" + asset;
                 const assetAddress = address[currentNetworkName][assetName];
                 //  console.log(assetAddress);

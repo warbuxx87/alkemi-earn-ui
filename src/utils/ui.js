@@ -94,6 +94,19 @@ export const toWei = (value, unit) => {
     }
 };
 
+function numberWithCommas(x) {
+    return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// displays a big number in a correct locale format
+// @param value is expected to not have any decimals
+export const bigNumberToLocale = (value) => {
+    if (typeof value === "number") return value.toLocaleString("en-US");
+    if (typeof value === "string") return numberWithCommas(value);
+
+    return value;
+};
+
 // Turns a number from wei value to one with a decimal point, also returns a certain number of fraction digits depending on the asset/token
 export const formatNumber = (value, unit, userWalletNetwork) => {
     const maxDecimals = 2; // maximum number of decimals to display by default
@@ -103,6 +116,7 @@ export const formatNumber = (value, unit, userWalletNetwork) => {
     const minDecimalsHigherValueAsset = 5; // minimum number of decimals to display for WBTC & ETH
 
     if (!value) return 0;
+
     const wei = fromWei(value, unit);
     switch (unit) {
         case "USDC":
@@ -134,6 +148,11 @@ export const formatNumber = (value, unit, userWalletNetwork) => {
                     userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID
                         ? minDecimalsHigherValueAsset
                         : 4,
+            }).format(wei);
+        case "ALK":
+            return new Intl.NumberFormat("en-es", {
+                maximumFractionDigits: 3,
+                minimumFractionDigits: 3,
             }).format(wei);
         default:
             return new Intl.NumberFormat("en-es", {

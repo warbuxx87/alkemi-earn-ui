@@ -271,3 +271,22 @@ export const estimateGasForMethod = async ({
 
     return estimateMethodCall;
 };
+
+export const handle_claim_ALK_click = async ({
+    drizzle,
+    userWalletAddress,
+}) => {
+    if (!(await readyToTransact())) throw new Error("not ready to transact");
+    const myAccount = userWalletAddress;
+
+    const RewardControlContract = drizzle.contracts.RewardControl;
+
+    const sendClaimAlk = RewardControlContract.methods.claimAlk.cacheSend(
+        myAccount,
+        {
+            from: myAccount,
+        }
+    );
+
+    return sendClaimAlk;
+};
