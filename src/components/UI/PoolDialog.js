@@ -98,23 +98,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function PoolDialog({ width }) {
-    const [pools, setPools] = React.useState("Verified");
-
-    const handlePools = (event, newPools) => {
-        setPools(newPools);
-    };
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+function PoolDialog({
+    width,
+    handleCheckDefaultPool,
+    handlePoolChange,
+    selectedPool,
+    onContinue,
+    open,
+}) {
     const classes = useStyles();
 
     const isSmallScreen = /xs/.test(width);
@@ -125,23 +116,9 @@ function PoolDialog({ width }) {
         order: isSmallScreen ? "0" : "3",
     };
 
-    const [checked, setChecked] = React.useState(true);
-
-    const handleChange = (event) => {
-        setChecked(event.target.checked);
-    };
-
     return (
         <div>
-            <Button
-                variant="outlined"
-                color="secondary"
-                onClick={handleClickOpen}
-            >
-                Open Notification
-            </Button>
             <Dialog
-                onClose={handleClose}
                 aria-labelledby="pool-select"
                 open={open}
                 disableEscapeKeyDown
@@ -156,9 +133,9 @@ function PoolDialog({ width }) {
                 </Box>
                 <DialogContent className={classes.dialogContent}>
                     <ToggleButtonGroup
-                        value={pools}
+                        value={selectedPool}
                         exclusive
-                        onChange={handlePools}
+                        onChange={handlePoolChange}
                         aria-label="Pool Select"
                         className={classes.toggleButton}
                         {...buttonProps}
@@ -264,7 +241,12 @@ function PoolDialog({ width }) {
                     <FormControlLabel
                         className={classes.checkBox}
                         value="default"
-                        control={<Checkbox color="secondary" />}
+                        control={
+                            <Checkbox
+                                color="secondary"
+                                onClick={handleCheckDefaultPool}
+                            />
+                        }
                         label="Set default"
                         labelPlacement="end"
                     />
@@ -275,7 +257,8 @@ function PoolDialog({ width }) {
                         size="medium"
                         className={classes.connectButton}
                         autoFocus
-                        onClick={handleClose}
+                        onClick={onContinue}
+                        disabled={!selectedPool}
                     >
                         Continue
                     </Button>

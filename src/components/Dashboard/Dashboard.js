@@ -22,8 +22,6 @@ import TableDeposit from "containers/Dashboard/TableDeposit";
 import TableBorrow from "containers/Dashboard/TableBorrow";
 import Overview from "containers/Dashboard/Overview";
 
-import Pool from "components/UI/PoolDialog";
-
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -81,7 +79,6 @@ function Dashboard() {
                 <Grid item lg={4} sm={6} xs={12}>
                     <TableLimit />
                 </Grid>
-                <Pool />
                 <Grid item lg={12} sm={12} xs={12}>
                     <Box className={classes.tabs}>
                         <Box mt={5}>

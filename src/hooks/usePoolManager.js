@@ -12,16 +12,26 @@ const usePoolManager = () => {
 
     // On start
     useEffect(() => {
-        const previouslySelectedPool = window.localStorage.getItem(
-            "selectedPool"
+        const previouslySetDefaultPool = window.localStorage.getItem(
+            "defaultPool"
+        );
+
+        const previouslyChangedPool = window.localStorage.getItem(
+            "changedPool"
         );
 
         if (
-            previouslySelectedPool !== undefined &&
-            typeof previouslySelectedPool === "string"
+            previouslyChangedPool !== undefined &&
+            typeof previouslyChangedPool === "string"
         ) {
-            dispatch(setPool(previouslySelectedPool));
-        } else {
+            dispatch(setPool(previouslyChangedPool));
+
+            localStorage.removeItem("changedPool");
+        } else if (
+            previouslySetDefaultPool !== undefined &&
+            typeof previouslySetDefaultPool === "string"
+        ) {
+            dispatch(setPool(previouslySetDefaultPool));
         }
     }, [dispatch]); // Might cause a problem to have dispatch here
 };

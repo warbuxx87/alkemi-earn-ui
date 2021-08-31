@@ -14,6 +14,8 @@ import AppBar from "containers/AppBar/AppBar";
 
 import ConnectionBanner from "components/UI/ConnectionBanner";
 
+import PoolSelect from "containers/PoolSelect/PoolSelect";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
     frame: {
@@ -84,6 +86,7 @@ function LayoutSkeleton({
     // networkID is null when no wallet is selected
     return (
         <div className={classes.frame}>
+            <PoolSelect />
             <Sidebar walletIsLiquidator={walletIsLiquidator} />
             <div className={classes.content}>
                 <AppBar />
