@@ -10,8 +10,6 @@ import {
     Grid,
     makeStyles,
     Dialog,
-    DialogActions,
-    DialogContent,
     Divider,
     Tooltip,
     Typography,
@@ -19,7 +17,6 @@ import {
     CircularProgress,
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
 
 // Section 3: Components & Containers import from the application
 
