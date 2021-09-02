@@ -14,6 +14,7 @@ import { onTx } from "redux/actions/status/transactions";
 
 import useOnboard from "hooks/useOnboard";
 import useFetchInterest from "hooks/useFetchInterest";
+import useFetchMarkets from "hooks/useFetchMarkets";
 
 // Section 3: Selectors
 import {
@@ -40,6 +41,8 @@ import { getPool, isKYCPool } from "redux/selectors/status/pool";
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const { onConnect } = useOnboard();
     useFetchInterest();
+
+    const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
