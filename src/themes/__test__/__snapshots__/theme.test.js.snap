@@ -57,7 +57,7 @@ Object {
     },
     "MuiBackdrop": Object {
       "root": Object {
-        "backgroundColor": "rgba(0, 1, 5, 0.5)",
+        "backgroundColor": "rgba(0, 1, 6, 0.7)",
       },
     },
     "MuiButton": Object {
@@ -67,7 +67,7 @@ Object {
     },
     "MuiDivider": Object {
       "root": Object {
-        "backgroundColor": "#000000",
+        "backgroundColor": "rgba(255, 255, 255, 0.10)",
       },
     },
     "MuiInput": Object {
@@ -103,12 +103,11 @@ Object {
     },
     "MuiTooltip": Object {
       "arrow": Object {
-        "color": "#000",
+        "color": "#fff",
       },
       "tooltip": Object {
-        "backgroundColor": "#000",
-        "color": "#fff",
-        "fontSize": "12px",
+        "backgroundColor": "#fff",
+        "color": "#000",
         "fontWeight": 400,
       },
     },
