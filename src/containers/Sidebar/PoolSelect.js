@@ -12,7 +12,6 @@ import { PoolPopover } from "components/Sidebar/PoolSelect";
 import { getPool } from "redux/selectors/status/pool";
 
 // Section 4: components
-import { CustomCube as CloudIcon } from "components/UI/Icons/custom-cube";
 
 // Section 5: Code Container
 const PoolSelectContainer = () => {
@@ -22,12 +21,10 @@ const PoolSelectContainer = () => {
         {
             id: "permissioned",
             name: "Verified Pool",
-            icon: <CloudIcon />,
         },
         {
             id: "open",
             name: "Open Pool",
-            icon: "assets/images/logo-white.svg",
         },
     ];
 

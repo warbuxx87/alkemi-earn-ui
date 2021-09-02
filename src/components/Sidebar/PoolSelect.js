@@ -12,6 +12,8 @@ import {
 } from "@material-ui/core";
 import { usePopover } from "../../hooks/usePopover";
 import { Selector as SelectorIcon } from "../UI/Icons/selector";
+import { CustomCube as CloudIcon } from "components/UI/Icons/custom-cube";
+import logo from "assets/images/logo-white.svg";
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -43,6 +45,22 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const poolsIcons = {
+    permissioned: <CloudIcon />,
+    open: <img src={logo} />,
+};
+
+// const poolsIcons = (id) => {
+//     switch(id) {
+//     case "permissioned":
+//         return  <CloudIcon />;
+//     case "open":
+//         return <img src={logo} />;
+//     default:
+//         return <CloudIcon />;
+//     }
+// }
+
 export const PoolPopover = (props) => {
     const { selectedPool, pools, onPoolChange, sx, ...other } = props;
     const [anchorRef, open, handleOpen, handleClose] = usePopover();
@@ -63,7 +81,7 @@ export const PoolPopover = (props) => {
             >
                 <Avatar variant="rounded" className={classes.avatar}>
                     <Box display="flex" className={classes.avatarbox}>
-                        <img alt={pools.name} src={pools.icon} />
+                        {poolsIcons[selectedPool.id]}
                     </Box>
                 </Avatar>
                 <Typography color="textPrimary" variant="body1">
@@ -103,7 +121,7 @@ export const PoolPopover = (props) => {
                                     display="flex"
                                     className={classes.avatarimg}
                                 >
-                                    <img alt={pools.name} src={pools.icon} />
+                                    {poolsIcons[pool.id]}
                                 </Box>
                             </Avatar>
                             <ListItemText primary={pool.name} />
