@@ -8,6 +8,9 @@ import {
     Divider,
     Typography,
     makeStyles,
+    Link,
+    FormControlLabel,
+    Checkbox,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,14 +29,49 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         fontWeight: "500",
     },
+    checkBox: {
+        "& .MuiFormControlLabel-label": {
+            fontSize: "0.8125rem",
+        },
+    },
 }));
 
-export default function PoolSwitchAlert({ handleConfirm, open, setOpen }) {
-    const handleClose = () => {
-        setOpen(false);
+export default function PoolSwitchAlert({
+    handleConfirm,
+    open,
+    setOpen,
+    chosenPool,
+    handleCheckDoNotShow,
+    handleClose,
+}) {
+    const classes = useStyles();
+
+    const headers = {
+        permissioned: "Entering verified pool",
+        open: "Exiting the verified pool",
     };
 
-    const classes = useStyles();
+    const bodies = {
+        permissioned: (
+            <>
+                You are entering the verified pool, if you are not KYC'd yet,
+                feel free to do so by following this link:&nbsp;
+                <Link
+                    href="https://alkemi.network"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    Get KYC Verified
+                </Link>
+            </>
+        ),
+        open: (
+            <>
+                Warning, you are switching from the safe verified pool to the
+                open and public one.
+            </>
+        ),
+    };
 
     return (
         <div>
@@ -48,17 +86,28 @@ export default function PoolSwitchAlert({ handleConfirm, open, setOpen }) {
                     disableTypography
                     className={classes.header}
                 >
-                    Exiting the verified pool
+                    {headers[chosenPool]}
                 </DialogTitle>
                 <Divider />
                 <DialogContent>
                     <Typography variant="body1" className={classes.content}>
-                        Warning, you are switching from the safe verified pool
-                        to the open and public one.
+                        {bodies[chosenPool]}
                     </Typography>
                 </DialogContent>
                 <Divider />
                 <DialogActions>
+                    <FormControlLabel
+                        className={classes.checkBox}
+                        value="default"
+                        control={
+                            <Checkbox
+                                color="secondary"
+                                onClick={handleCheckDoNotShow}
+                            />
+                        }
+                        label="Do not show anymore"
+                        labelPlacement="end"
+                    />
                     <Button onClick={handleConfirm}>Approve</Button>
                     <Button autoFocus onClick={handleClose}>
                         Cancel
