@@ -3,19 +3,21 @@
 // Section 1: React low level imports
 import React from "react";
 import { useSelector } from "react-redux";
-import { PoolPopover } from "components/Sidebar/PoolSelect";
 
 // Section 2: internal imports
 // import { onPoolChange } from "redux/actions/status/pool";
+import PoolSwitchAlert from "./PoolSwitchAlert";
 
 // Section 3: Selectors
 import { getPool } from "redux/selectors/status/pool";
 
 // Section 4: components
+import { PoolPopover } from "components/Sidebar/PoolSelect";
 
 // Section 5: Code Container
 const PoolSelectContainer = () => {
     const currentPool = useSelector(getPool);
+    const [openAlert, setOpenAlert] = React.useState(false);
 
     const pools = [
         {
@@ -42,18 +44,27 @@ const PoolSelectContainer = () => {
         const newPool = pools.find((pool) => pool.id === poolId);
 
         if (newPool.id !== currentPool) {
-            window.localStorage.setItem("changedPool", newPool.id);
+            if (newPool.id !== "permissioned") {
+                // verified to open
+                setOpenAlert(true);
+            } else {
+                // open to verified
+                window.localStorage.setItem("changedPool", newPool.id);
 
-            window.location.reload();
+                window.location.reload();
+            }
         }
     };
 
     return (
-        <PoolPopover
-            selectedPool={selectedPool}
-            onPoolChange={handlePoolChange}
-            pools={pools}
-        />
+        <>
+            <PoolSwitchAlert open={openAlert} setOpen={setOpenAlert} />
+            <PoolPopover
+                selectedPool={selectedPool}
+                onPoolChange={handlePoolChange}
+                pools={pools}
+            />
+        </>
     );
 };
 
