@@ -15,8 +15,6 @@ import PoolDialog from "components/UI/PoolDialog";
 
 // Section 5: Code Container
 const PoolSelectContainer = () => {
-    const dispatch = useDispatch();
-
     // On start
     React.useEffect(() => {
         const previouslySetDefaultPool = window.localStorage.getItem(
@@ -57,8 +55,6 @@ const PoolSelectContainer = () => {
 
             window.location.reload();
         }
-
-        // dispatch(onPoolChange({ pool: selectedPool, defaultPoolChecked,  }));
     };
 
     const [selectedPool, setSelectedPool] = React.useState("permissioned");

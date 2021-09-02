@@ -4,7 +4,7 @@ import {
     Box,
     ButtonBase,
     List,
-    MenuItem,
+    ListItem,
     ListItemText,
     makeStyles,
     Popover,
@@ -12,7 +12,6 @@ import {
 } from "@material-ui/core";
 import { usePopover } from "../../hooks/usePopover";
 import { Selector as SelectorIcon } from "../UI/Icons/selector";
-import { CustomCube as CloudIcon } from "../UI/Icons/custom-cube";
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -45,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const PoolPopover = (props) => {
-    const { currentPool, pools, onPoolChange, sx, ...other } = props;
+    const { selectedPool, pools, onPoolChange, sx, ...other } = props;
     const [anchorRef, open, handleOpen, handleClose] = usePopover();
 
     const handlePoolChange = (poolId) => {
@@ -68,7 +67,7 @@ export const PoolPopover = (props) => {
                     </Box>
                 </Avatar>
                 <Typography color="textPrimary" variant="body1">
-                    {currentPool.name}
+                    {selectedPool.name}
                 </Typography>
                 <Box flexGrow="1" />
                 <SelectorIcon fontSize="small" />
@@ -90,10 +89,10 @@ export const PoolPopover = (props) => {
             >
                 <List>
                     {pools.map((pool) => (
-                        <MenuItem
+                        <ListItem
                             key={pool.id}
                             button
-                            selected={pool.id === currentPool.id}
+                            selected={pool.id === selectedPool.id}
                             onClick={() => handlePoolChange(pool.id)}
                         >
                             <Avatar
@@ -108,7 +107,7 @@ export const PoolPopover = (props) => {
                                 </Box>
                             </Avatar>
                             <ListItemText primary={pool.name} />
-                        </MenuItem>
+                        </ListItem>
                     ))}
                 </List>
             </Popover>
@@ -117,7 +116,7 @@ export const PoolPopover = (props) => {
 };
 
 PoolPopover.propTypes = {
-    currentPool: PropTypes.object.isRequired,
+    selectedPool: PropTypes.object.isRequired,
     onPoolChange: PropTypes.func,
     pools: PropTypes.array.isRequired,
 };
