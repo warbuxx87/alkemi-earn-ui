@@ -84,6 +84,8 @@ function Lend({
                                 walletIsKYCd={walletIsKYCd}
                                 needKYC={needKYC}
                                 userWalletNetwork={userWalletNetwork}
+                                marketsData={marketsData}
+                                walletConnected={walletConnected}
                             />
                         </Grid>
                     )}{" "}
