@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 const poolsIcons = {
     permissioned: <CloudIcon />,
-    open: <img src={logo} />,
+    open: <img src={logo} alt="" />,
 };
 
 // const poolsIcons = (id) => {
@@ -62,7 +62,7 @@ const poolsIcons = {
 // }
 
 export const PoolPopover = (props) => {
-    const { selectedPool, pools, onPoolChange, sx, ...other } = props;
+    const { selectedPool, pools, onPoolChange } = props;
     const [anchorRef, open, handleOpen, handleClose] = usePopover();
 
     const handlePoolChange = (poolId) => {

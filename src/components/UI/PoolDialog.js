@@ -1,20 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-    AppBar,
     Avatar,
     Box,
     Button,
     Checkbox,
     Dialog,
-    DialogActions,
     DialogContent,
-    DialogTitle,
     Divider,
     FormControlLabel,
     Link,
-    SvgIcon,
-    Toolbar,
     Typography,
     makeStyles,
 } from "@material-ui/core";
@@ -80,10 +75,6 @@ const useStyles = makeStyles((theme) => ({
     },
     verIcon: {
         color: "#ffffff",
-    },
-    connectButton: {
-        fontSize: "0.8125rem",
-        minWidth: "110px",
     },
     checkBox: {
         "& .MuiFormControlLabel-label": {

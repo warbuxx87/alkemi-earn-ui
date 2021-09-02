@@ -7,11 +7,9 @@ import React from "react";
 import {
     IconButton,
     Box,
-    Divider,
     Menu,
     MenuItem,
     SvgIcon,
-    Typography,
     makeStyles,
 } from "@material-ui/core";
 

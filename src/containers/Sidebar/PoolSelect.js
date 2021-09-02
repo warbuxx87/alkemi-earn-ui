@@ -14,21 +14,21 @@ import { getPool } from "redux/selectors/status/pool";
 // Section 4: components
 import { PoolPopover } from "components/Sidebar/PoolSelect";
 
+const pools = [
+    {
+        id: "permissioned",
+        name: "Verified Pool",
+    },
+    {
+        id: "open",
+        name: "Open Pool",
+    },
+];
+
 // Section 5: Code Container
 const PoolSelectContainer = () => {
     const currentPool = useSelector(getPool);
     const [openAlert, setOpenAlert] = React.useState(false);
-
-    const pools = [
-        {
-            id: "permissioned",
-            name: "Verified Pool",
-        },
-        {
-            id: "open",
-            name: "Open Pool",
-        },
-    ];
 
     // On start
     React.useEffect(() => {

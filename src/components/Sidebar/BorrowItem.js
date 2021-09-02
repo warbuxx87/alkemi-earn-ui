@@ -5,7 +5,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import SvgIcon from "@material-ui/core/SvgIcon";
 import { Typography } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application

@@ -2,7 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 // Section 2: internal imports
 // import { onPoolChange } from "redux/actions/status/pool";
