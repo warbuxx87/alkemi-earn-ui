@@ -1,5 +1,10 @@
 // Import action of interest as constants
-import { RESET_LEND_DATA, SET_ETH_LEND_BALANCE } from "redux/actions/data/lend";
+import {
+    RESET_LEND_DATA,
+    SET_ETH_LEND_BALANCE,
+    SET_INTEREST,
+    FETCH_INTEREST_ERROR,
+} from "redux/actions/data/lend";
 // import internal assets
 import dai from "assets/images/DAI.svg";
 import usdc from "assets/images/USDC.svg";
@@ -29,10 +34,20 @@ const assets = {
     WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0"),
 };
 
+const allowedActionNames = ["DAI", "USDC", "WBTC"]; // under the hood ETH is used out of user wallet, we cannot change all references form WETH to ETH as WETH is used in some other places, so this is the cleanest way found to make this exception for ETH
+const calculatedInterests = {
+    DAI: null,
+    WETH: null,
+    USDC: null,
+    WBTC: null,
+};
+
 // Define initial state
 const initialState = {
     assets,
     error: null,
+    calculatedInterests,
+    fetchInterestError: null,
 };
 
 // Implement "reducer" function with initial state as default state
@@ -51,7 +66,10 @@ const lendReducer = (state = initialState, action) => {
                         !Object.values(address)
                             .map((net) => net.address_open_MoneyMarket)
                             .includes(action.args[0]) &&
-                        action.name !== "WETH" // under the hood ETH is used out of user wallet, we cannot change all references form WETH to ETH as WETH is used in some other places, so this is the cleanest way found to make this exception for ETH
+                        !Object.values(address)
+                            .map((net) => net.address_ALK_TOKEN)
+                            .includes(action.args[0]) &&
+                        allowedActionNames.includes(action.name)
                     ) {
                         return {
                             ...state,
@@ -80,6 +98,24 @@ const lendReducer = (state = initialState, action) => {
                         wallet: action.payload.walletETHBalance, // expecting that only one account is used at the same time, and thus only one value is retrieved
                     },
                 },
+            };
+        }
+
+        case SET_INTEREST: {
+            return {
+                ...state,
+                fetchInterestError: false,
+                calculatedInterests: {
+                    ...state.calculatedInterests,
+                    [action.payload.asset]: action.payload.calculatedInterest,
+                },
+            };
+        }
+
+        case FETCH_INTEREST_ERROR: {
+            return {
+                ...state,
+                fetchInterestError: true,
             };
         }
 

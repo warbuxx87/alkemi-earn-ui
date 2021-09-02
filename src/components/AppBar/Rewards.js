@@ -16,6 +16,7 @@ import {
     Tooltip,
     Typography,
     SvgIcon,
+    CircularProgress,
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
@@ -132,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Rewards({ alkReward }) {
+function Rewards({ claimableALKReward, onClaimALK, isDoingAction }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -155,7 +156,6 @@ function Rewards({ alkReward }) {
             >
                 <Grid
                     container
-                    direction="row"
                     alignItems="center"
                     display="flex"
                     justify="flex-end"
@@ -172,12 +172,8 @@ function Rewards({ alkReward }) {
                         </Box>
                     </Grid>
                     <Grid item className={classes.address}>
-                        <Box
-                            display="flex"
-                            alignItems="center"
-                            data-testid="addressButton"
-                        >
-                            {alkReward}
+                        <Box display="flex" alignItems="center">
+                            {claimableALKReward}
                         </Box>
                     </Grid>
                 </Grid>
@@ -225,7 +221,7 @@ function Rewards({ alkReward }) {
                                 align="center"
                                 className={classes.balanceheader}
                             >
-                                Total Balance
+                                Total Rewards
                             </Typography>
                             <Tooltip
                                 title="Your total farmed ALK Rewards"
@@ -242,7 +238,7 @@ function Rewards({ alkReward }) {
                             color="textPrimary"
                             className={classes.alkTotal}
                         >
-                            {alkReward} ALK
+                            {claimableALKReward} ALK
                         </Typography>
                         {
                             <Typography
@@ -255,55 +251,6 @@ function Rewards({ alkReward }) {
                         }
                     </Box>
                 </Box>
-                <Box mt={3} px={2}>
-                    <Grid container direction="row" className={classes.datarow}>
-                        <Grid
-                            item
-                            md={6}
-                            xs
-                            className={classes.vertcent}
-                            direction="row"
-                        >
-                            <Typography variant="body2" color="textSecondary">
-                                Claimable ALK
-                            </Typography>
-                            <Tooltip
-                                title="Your available ALK that you can currently claim"
-                                placement="right"
-                                arrow
-                                className={classes.toolTip}
-                            >
-                                <HelpIcon className={classes.helpIcon} />
-                            </Tooltip>
-                        </Grid>
-                        <Grid item md={6} xs container justify="flex-end">
-                            0.000 ALK
-                        </Grid>
-                    </Grid>
-                    {
-                        <Grid container className={classes.datarowlast}>
-                            <Grid item md={6} xs className={classes.vertcent}>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                >
-                                    Est. ALK Price
-                                </Typography>
-                                <Tooltip
-                                    title="Estimated ALK oken price based on current markets"
-                                    placement="right"
-                                    arrow
-                                    className={classes.toolTip}
-                                >
-                                    <HelpIcon className={classes.helpIcon} />
-                                </Tooltip>
-                            </Grid>
-                            <Grid item md={6} xs container justify="flex-end">
-                                TBD
-                            </Grid>
-                        </Grid>
-                    }
-                </Box>
                 <Box p={2}>
                     <Button
                         autoFocus
@@ -313,9 +260,22 @@ function Rewards({ alkReward }) {
                         color="primary"
                         size="large"
                         fullWidth={true}
-                        onClick={handleClose}
+                        onClick={onClaimALK}
+                        disabled={
+                            isDoingAction || claimableALKReward === "0.000"
+                        }
                     >
-                        Claim 0.000 ALK
+                        {isDoingAction ? (
+                            <CircularProgress size={20} color="inherit" />
+                        ) : (
+                            <>
+                                {claimableALKReward === "0.000" ? (
+                                    "Claim"
+                                ) : (
+                                    <>Claim {claimableALKReward} ALK</>
+                                )}
+                            </>
+                        )}
                     </Button>
                 </Box>
             </Dialog>

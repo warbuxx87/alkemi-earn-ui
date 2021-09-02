@@ -7,6 +7,7 @@ import {
     handle_repay_click,
     handle_borrow_click,
     handle_approve_click,
+    handle_claim_ALK_click,
 } from "utils/drizzle";
 
 import constants from "constants/constant.json";
@@ -65,6 +66,7 @@ const actionToCall = {
     repay: handle_repay_click,
     borrow: handle_borrow_click,
     approve: handle_approve_click,
+    claim: handle_claim_ALK_click,
 };
 
 export const onTx = ({

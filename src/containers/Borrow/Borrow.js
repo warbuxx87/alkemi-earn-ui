@@ -12,8 +12,6 @@ import { onTx } from "redux/actions/status/transactions";
 
 import useOnboard from "hooks/useOnboard";
 
-import useFetchMarkets from "hooks/useFetchMarkets";
-
 // Section 3: Selectors
 import {
     getBorrowActive,
@@ -39,8 +37,6 @@ import Borrow from "components/Borrow/Borrow";
 // Section 5: Code Container
 const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
     const { onConnect } = useOnboard();
-
-    const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -77,8 +73,6 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
             walletIsKYCd={walletIsKYCd}
             needKYC={needKYC}
             userWalletNetwork={userWalletNetwork}
-            marketsData={marketsData}
-            walletConnected={walletConnected}
         />
     );
 };

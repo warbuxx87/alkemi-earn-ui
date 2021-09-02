@@ -108,6 +108,7 @@ Object {
       "tooltip": Object {
         "backgroundColor": "#fff",
         "color": "#000",
+        "fontSize": "11px",
         "fontWeight": 400,
       },
     },

@@ -20,6 +20,8 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
+import Rewards from "containers/AppBar/Rewards";
+
 // import Settings from "./Settings";
 import Other from "./Other";
 import MobileMenu from "./MobileMenu";
@@ -157,40 +159,46 @@ function AppBar({
             );
         else {
             return (
-                <Button
-                    className={classes.connectWallet}
-                    type="button"
-                    color="secondary"
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={handleClick}
-                >
-                    <Grid
-                        container
-                        direction="row"
-                        alignItems="center"
-                        display="flex"
-                        justify="flex-end"
-                    >
-                        {displayKYCStatus ? (
-                            <Grid item>
-                                {displayWalletStatus({ walletIsKYCd })}
-                            </Grid>
-                        ) : null}
-                        <Grid item className={classes.address}>
-                            <Box
-                                display="flex"
+                <Box display="flex">
+                    <Box>
+                        <Rewards />
+                    </Box>
+                    <Box ml={1}>
+                        <Button
+                            className={classes.connectWallet}
+                            type="button"
+                            color="secondary"
+                            aria-controls="simple-menu"
+                            aria-haspopup="true"
+                            onClick={handleClick}
+                        >
+                            <Grid
+                                container
                                 alignItems="center"
-                                data-testid="addressButton"
+                                display="flex"
+                                justify="flex-end"
                             >
-                                {/* 0x121565...6456 */}
-                                {accountAddress
-                                    ? addressParser(accountAddress)
-                                    : "Connect"}
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Button>
+                                {displayKYCStatus ? (
+                                    <Grid item>
+                                        {displayWalletStatus({ walletIsKYCd })}
+                                    </Grid>
+                                ) : null}
+                                <Grid item className={classes.address}>
+                                    <Box
+                                        display="flex"
+                                        alignItems="center"
+                                        data-testid="addressButton"
+                                    >
+                                        {/* 0x121565...6456 */}
+                                        {accountAddress
+                                            ? addressParser(accountAddress)
+                                            : "Connect"}
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </Button>
+                    </Box>
+                </Box>
             );
         }
     };
@@ -222,7 +230,6 @@ function AppBar({
                 </Hidden>
 
                 <Box ml={2} flexGrow={1} />
-
                 {displayConnectionButton({
                     walletConnected,
                     walletIsKYCd,

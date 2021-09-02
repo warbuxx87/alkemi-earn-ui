@@ -22,7 +22,6 @@ const walletChecks = [
 
 const wallets = [
     { walletName: "metamask", preferred: true },
-    { walletName: "gnosis", preferred: true },
     { walletName: "trust", preferred: true },
     { walletName: "coinbase", preferred: true },
     {

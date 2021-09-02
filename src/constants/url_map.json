@@ -5,7 +5,8 @@
             "markets_url": "https://api.alkemi.network/markets",
             "accounts_url": "https://api.alkemi.network/accounts",
             "liquidations_url": "https://api.alkemi.network/liquidations",
-            "reports_url": "https://api.alkemi.network/reports"
+            "reports_url": "https://api.alkemi.network/reports",
+            "interest_url": "https://api.alkemi.network/interest"
         },
         "open": {}
     },
@@ -15,14 +16,16 @@
             "markets_url": "https://rinkeby.api.alkemi.network/markets",
             "accounts_url": "https://rinkeby.api.alkemi.network/accounts",
             "liquidations_url": "https://rinkeby.api.alkemi.network/liquidations",
-            "reports_url": "https://rinkeby.api.alkemi.network/reports"
+            "reports_url": "https://rinkeby.api.alkemi.network/reports",
+            "interest_url": "https://rinkeby.api.alkemi.network/interest"
         },
         "open": {
             "history_url": "https://rinkeby.open.api.alkemi.network/history",
             "markets_url": "https://rinkeby.open.api.alkemi.network/markets",
             "accounts_url": "https://rinkeby.open.api.alkemi.network/accounts",
             "liquidations_url": "https://rinkeby.open.api.alkemi.network/liquidations",
-            "reports_url": "https://rinkeby.open.api.alkemi.network/reports"
+            "reports_url": "https://rinkeby.open.api.alkemi.network/reports",
+            "interest_url": "https://rinkeby.open.api.alkemi.network/interest"
         }
     },
     "ropsten": {
@@ -31,7 +34,8 @@
             "markets_url": "https://ropsten.api.alkemi.network/markets",
             "accounts_url": "https://ropsten.api.alkemi.network/accounts",
             "liquidations_url": "https://ropsten.api.alkemi.network/liquidations",
-            "reports_url": "https://ropsten.api.alkemi.network/reports"
+            "reports_url": "https://ropsten.api.alkemi.network/reports",
+            "interest_url": "https://ropsten.api.alkemi.network/interest"
         },
         "open": {}
     },
@@ -41,7 +45,8 @@
             "markets_url": "https://kovan.api.alkemi.network/markets",
             "accounts_url": "https://kovan.api.alkemi.network/accounts",
             "liquidations_url": "https://kovan.api.alkemi.network/liquidations",
-            "reports_url": "https://kovan.api.alkemi.network/reports"
+            "reports_url": "https://kovan.api.alkemi.network/reports",
+            "interest_url": "https://kovan.api.alkemi.network/interest"
         },
         "open": {}
     }

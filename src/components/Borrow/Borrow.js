@@ -40,8 +40,6 @@ function Borrow({
     needKYC,
     walletIsKYCd,
     userWalletNetwork,
-    marketsData,
-    walletConnected,
 }) {
     const classes = useStyles();
     return (
@@ -75,8 +73,6 @@ function Borrow({
                                 walletIsKYCd={walletIsKYCd}
                                 needKYC={needKYC}
                                 userWalletNetwork={userWalletNetwork}
-                                marketsData={marketsData}
-                                walletConnected={walletConnected}
                             />
                         </Grid>
                     )}

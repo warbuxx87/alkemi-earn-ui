@@ -71,6 +71,11 @@ const contractTXNotifier = (store) => (next) => (action) => {
             if (action.receipt.events.Transfer) {
                 displayMessage = "Tokens Minted";
             }
+
+            if (action.receipt.events.TransferredAlk) {
+                displayMessage = "Claimed ALK tokens";
+            }
+
             // Contract can still fail even if transaction was Successful
             // If Failure event detected in receipt object then return transaction failed rather than Successful to user
             // Error code is in txReceipt.Failure.returnValues.error

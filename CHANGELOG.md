@@ -1,3 +1,91 @@
+# [1.19.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.18.0...v1.19.0) (2021-08-30)
+
+
+### Bug Fixes
+
+* hiding alk token from displaying among markets UI-473 ([aad7544](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/aad7544a76b53bfc62ab40848e8c5b4e4ac37bda))
+
+
+### Features
+
+* add alk reporting ui UI-473 ([59c7b33](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/59c7b33b006e221350c4a2fa12f09e67b650f2f5))
+* display alk balance and claimable rewards UI-473 ([4a79152](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4a791520723bfa66b8e6cebf7cec3ee88b0cbf82))
+* display user alk rewards UI-473 ([1f25adc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1f25adc423026ec328605c1fee101584821243f1))
+* format alk token to have 3 decimals UI-473 ([dd63689](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dd63689913921e66b4f715120bc0c956eef2eb95))
+* show success message notification for claim calls UI-473 ([9495544](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/949554408aed9fb4e306a50e543c36c73d61c188))
+* show tx progress for claim calls UI-473 ([15f1cfd](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/15f1cfd1bdd5384ce63a259f915752d57ded3c4d))
+* user can claim alk rewards UI-473 ([0db806b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0db806b370abc18dd8d92f34725d47d92a52aa9e))
+
+
+
+# [1.19.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.18.0...v1.19.0) (2021-08-30)
+
+
+### Bug Fixes
+
+* hiding alk token from displaying among markets UI-473 ([aad7544](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/aad7544a76b53bfc62ab40848e8c5b4e4ac37bda))
+
+
+### Features
+
+* add alk reporting ui UI-473 ([59c7b33](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/59c7b33b006e221350c4a2fa12f09e67b650f2f5))
+* display alk balance and claimable rewards UI-473 ([4a79152](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4a791520723bfa66b8e6cebf7cec3ee88b0cbf82))
+* display user alk rewards UI-473 ([1f25adc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1f25adc423026ec328605c1fee101584821243f1))
+* format alk token to have 3 decimals UI-473 ([dd63689](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dd63689913921e66b4f715120bc0c956eef2eb95))
+* show success message notification for claim calls UI-473 ([9495544](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/949554408aed9fb4e306a50e543c36c73d61c188))
+* show tx progress for claim calls UI-473 ([15f1cfd](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/15f1cfd1bdd5384ce63a259f915752d57ded3c4d))
+* user can claim alk rewards UI-473 ([0db806b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0db806b370abc18dd8d92f34725d47d92a52aa9e))
+
+# [1.18.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.17.0...v1.18.0) (2021-08-30)
+
+
+### Features
+
+* changed History date display to YYYY-MM-DD HH:mm:ss UI-479 ([ce7849d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ce7849dccaf97fd71ac2726df6f152f5659ab009))
+
+
+
+# [1.18.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.17.0...v1.18.0) (2021-08-30)
+
+
+### Features
+
+* changed History date display to YYYY-MM-DD HH:mm:ss UI-479 ([ce7849d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ce7849dccaf97fd71ac2726df6f152f5659ab009))
+
+# [1.17.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.1...v1.17.0) (2021-08-27)
+
+
+### Bug Fixes
+
+* add pool selection to interest branch UI-423 ([d4938ea](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d4938eae915c1d649e0571f16b0a9d63e7f5b3b9))
+* display last 24hrs interest UI-423 ([9a4b600](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9a4b600eccf93b4acc6780d1424bd861e8e48536))
+* remove scientific notation from interest UI-423 ([8d03cb2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8d03cb29404f32b701e3ca9fd8a5ed0855110a10))
+
+
+### Features
+
+* display interest earn UI-423 ([aa162c6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/aa162c6476f581e836e1372be2f3602aed1154c8))
+* display interest in usd UI-423 ([dc25bd9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dc25bd9b30f5d05395f439db43581f2deadfbb0a))
+* retrieve interest for each asset UI-423 ([35f7a06](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/35f7a062f9656a42b5fda3f651bc4b060db306ab))
+
+
+
+# [1.17.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.1...v1.17.0) (2021-08-27)
+
+
+### Bug Fixes
+
+* add pool selection to interest branch UI-423 ([d4938ea](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d4938eae915c1d649e0571f16b0a9d63e7f5b3b9))
+* display last 24hrs interest UI-423 ([9a4b600](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9a4b600eccf93b4acc6780d1424bd861e8e48536))
+* remove scientific notation from interest UI-423 ([8d03cb2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8d03cb29404f32b701e3ca9fd8a5ed0855110a10))
+
+
+### Features
+
+* display interest earn UI-423 ([aa162c6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/aa162c6476f581e836e1372be2f3602aed1154c8))
+* display interest in usd UI-423 ([dc25bd9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dc25bd9b30f5d05395f439db43581f2deadfbb0a))
+* retrieve interest for each asset UI-423 ([35f7a06](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/35f7a062f9656a42b5fda3f651bc4b060db306ab))
+
 ## [1.16.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.16.0...v1.16.1) (2021-07-13)
 
 

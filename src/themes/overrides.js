@@ -19,6 +19,7 @@ const overrides = {
     },
     MuiTooltip: {
         tooltip: {
+            fontSize: "11px",
             color: "#000",
             backgroundColor: "#fff",
             fontWeight: 400,

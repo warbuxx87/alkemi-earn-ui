@@ -4,11 +4,11 @@ import USDC_ABI from "constants/ABI/USDC_ABI.json";
 import WBTC_ABI from "constants/ABI/WBTC_ABI.json";
 
 import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
+import RewardControl_ABI from "constants/ABI/RewardControl_ABI.json";
+import ALK_TOKEN_ABI from "constants/ABI/ALK_TOKEN_ABI.json";
 
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
-
-const assets = ["DAI", "USDC", "WBTC", "WETH"];
 
 const ABIs = {
     WETH: WETH_ABI,
@@ -35,7 +35,7 @@ export const initContracts = ({
     });
 
     if (resolved !== false)
-        assets.forEach((asset) =>
+        constants.assets.forEach((asset) =>
             initAssetContract({
                 drizzle,
                 userWalletAddress,
@@ -45,13 +45,29 @@ export const initContracts = ({
                 address_MoneyMarket,
             })
         );
+
+    if (resolved !== false) {
+        initRewardControlContract({
+            drizzle,
+            userWalletAddress,
+            userWalletNetwork,
+            forceUpdate,
+        });
+
+        initALKTokenContract({
+            drizzle,
+            userWalletAddress,
+            userWalletNetwork,
+            forceUpdate,
+        });
+    }
 };
 
 export const deleteAllContracts = (drizzle) => {
     try {
         drizzle.deleteContract("MoneyMarket");
 
-        assets.forEach((asset) => drizzle.deleteContract(asset));
+        constants.assets.forEach((asset) => drizzle.deleteContract(asset));
     } catch (e) {
         // normally if allowed to be clicked it will throw an error, but since we hide the disconnect button it won't
     }
@@ -71,7 +87,7 @@ export const initMarketContract = ({
     const myAddress = userWalletAddress;
 
     const network = constants.network_type[userWalletNetwork];
-    const assets = ["DAI", "USDC", "WBTC", "WETH"];
+
     if (!network) return; // drizzle not fetched
     if (!drizzle.web3.eth) return;
 
@@ -97,7 +113,7 @@ export const initMarketContract = ({
         web3Contract: MoneyMarketContract,
     });
 
-    assets.forEach((asset) => {
+    constants.assets.forEach((asset) => {
         // get each asset Supply Balance (current )
 
         // could put a check to see if the contract address is set for all of them
@@ -213,4 +229,81 @@ export const initAssetContract = ({
     // get token balance for main MoneyMarket Contract --> used for Available Liquidity Selectors
     tokenContract.methods.balanceOf.cacheCall(address_MoneyMarket);
     return drizzle.contracts[asset];
+};
+
+export const initRewardControlContract = ({
+    drizzle,
+    userWalletAddress,
+    userWalletNetwork,
+    forceUpdate,
+}) => {
+    if (drizzle.contracts.RewardControl && !forceUpdate)
+        return drizzle.contracts.RewardControl;
+
+    const myAddress = userWalletAddress;
+    const network = constants.network_type[userWalletNetwork];
+
+    if (!drizzle.web3.eth) return;
+    if (!address[network]) return;
+
+    const rewardControlContract = new drizzle.web3.eth.Contract(
+        RewardControl_ABI,
+        address[network][`address_RewardControl`]
+    );
+
+    try {
+        if (forceUpdate) drizzle.deleteContract("RewardControl");
+    } catch (e) {
+        // catches error
+    }
+
+    drizzle.addContract({
+        contractName: "RewardControl",
+        web3Contract: rewardControlContract,
+    });
+
+    // get the ALK rewards for a user
+    // rewardControlContract.methods.getAlkAccrued.cacheCall(myAddress);
+
+    // getting the rewards for any user, it will give us the tokens scaled to 18 decimals, this function is what gives the claimable amount
+    rewardControlContract.methods.getAlkRewards.cacheCall(myAddress);
+
+    return drizzle.contracts.RewardControl;
+};
+
+export const initALKTokenContract = ({
+    drizzle,
+    userWalletAddress,
+    userWalletNetwork,
+    forceUpdate,
+}) => {
+    if (drizzle.contracts.ALKToken && !forceUpdate)
+        return drizzle.contracts.ALKToken;
+
+    const myAddress = userWalletAddress;
+    const network = constants.network_type[userWalletNetwork];
+
+    if (!drizzle.web3.eth) return;
+    if (!address[network]) return;
+
+    const ALKTokenContract = new drizzle.web3.eth.Contract(
+        ALK_TOKEN_ABI,
+        address[network][`address_ALK_TOKEN`]
+    );
+
+    try {
+        if (forceUpdate) drizzle.deleteContract("ALKToken");
+    } catch (e) {
+        // catches error
+    }
+
+    drizzle.addContract({
+        contractName: "ALKToken",
+        web3Contract: ALKTokenContract,
+    });
+
+    // getting the rewards for any user, it will give us the tokens scaled to 18 decimals, this function is what gives the claimable amount
+    ALKTokenContract.methods.balanceOf.cacheCall(myAddress);
+
+    return drizzle.contracts.ALKToken;
 };

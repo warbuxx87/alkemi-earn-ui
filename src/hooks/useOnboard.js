@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import onboard from "utils/onboard";
 
 import { initContracts, deleteAllContracts } from "utils/contracts";
-import { resetLendData } from "redux/actions/data/lend";
+import { resetLendData, cancelFetchInterest } from "redux/actions/data/lend";
 import { resetBorrowData } from "redux/actions/data/borrow";
 import { resetTxDataAndCancelFetch } from "redux/actions/data/tx";
 
@@ -95,7 +95,8 @@ const useOnboard = () => {
     const resetStoreData = useCallback(() => {
         dispatch(resetLendData());
         dispatch(resetBorrowData());
-        dispatch(resetTxDataAndCancelFetch());
+        dispatch(resetTxDataAndCancelFetch(dispatch));
+        dispatch(cancelFetchInterest());
         // ADD more stores to reset if needs be
     }, [dispatch]);
 
