@@ -8,6 +8,9 @@ import { compare_supply, compare_borrow } from "utils/markets";
 import { walletNetworkName } from "redux/selectors/data/onboard";
 import { getPool } from "redux/selectors/status/pool";
 
+import constants from "constants/constant.json";
+import marketsByNetwork from "constants/markets_by_network.json";
+
 const url_map = require("constants/url_map.json");
 
 // Retrieve the USD price every 15 seconds
@@ -47,10 +50,22 @@ const useFetchMarkets = (fetchPeriodically = false) => {
                     if (data) {
                         let obj_data = JSON.parse(data);
 
-                        let key_markets = Object.keys(obj_data);
+                        // filtering data by network and pool
+                        const arrayOfAssets =
+                            marketsByNetwork[currentNetworkName][currentPool];
+
+                        const dataFilteredByAssets = obj_data.filter(
+                            (marketData) =>
+                                arrayOfAssets.includes(
+                                    Object.values(marketData)[0].symbol
+                                )
+                        );
+                        // could filter out past tokens from here based on only configured assets in UI
+
+                        let key_markets = Object.keys(dataFilteredByAssets);
 
                         const arr_markets = key_markets.map((e) => {
-                            return obj_data[e];
+                            return dataFilteredByAssets[e];
                         });
 
                         let totalSupplyBalanceUSD = 0;
@@ -87,7 +102,6 @@ const useFetchMarkets = (fetchPeriodically = false) => {
                             2
                         );
 
-                        // Might need to filter backend data for newly unsupported markets? Assuming now that the backend sends correct data
                         setMarketsData(arr_items);
 
                         let supply_array = _.cloneDeep(arr_items);
