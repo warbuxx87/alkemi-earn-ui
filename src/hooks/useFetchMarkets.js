@@ -87,6 +87,7 @@ const useFetchMarkets = (fetchPeriodically = false) => {
                             2
                         );
 
+                        // Might need to filter backend data for newly unsupported markets? Assuming now that the backend sends correct data
                         setMarketsData(arr_items);
 
                         let supply_array = _.cloneDeep(arr_items);

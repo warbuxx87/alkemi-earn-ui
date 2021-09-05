@@ -9,6 +9,7 @@ import ALK_TOKEN_ABI from "constants/ABI/ALK_TOKEN_ABI.json";
 
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
+import marketsByNetwork from "constants/markets_by_network.json";
 
 const ABIs = {
     WETH: WETH_ABI,
@@ -35,16 +36,21 @@ export const initContracts = ({
     });
 
     if (resolved !== false)
-        constants.assets.forEach((asset) =>
-            initAssetContract({
-                drizzle,
-                userWalletAddress,
-                userWalletNetwork,
-                asset,
-                forceUpdate,
-                address_MoneyMarket,
-            })
-        );
+        constants.assets.forEach((asset) => {
+            const network = constants.network_type[userWalletNetwork];
+
+            const arrayOfAssets = marketsByNetwork[network][currentPool];
+
+            if (arrayOfAssets.includes[asset])
+                initAssetContract({
+                    drizzle,
+                    userWalletAddress,
+                    userWalletNetwork,
+                    asset,
+                    forceUpdate,
+                    address_MoneyMarket,
+                });
+        });
 
     if (resolved !== false) {
         initRewardControlContract({

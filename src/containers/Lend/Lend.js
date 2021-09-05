@@ -16,6 +16,9 @@ import useOnboard from "hooks/useOnboard";
 import useFetchInterest from "hooks/useFetchInterest";
 import useFetchMarkets from "hooks/useFetchMarkets";
 
+import constants from "constants/constant.json";
+import marketsByNetwork from "constants/markets_by_network.json";
+
 // Section 3: Selectors
 import {
     getLendError,
@@ -60,6 +63,39 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const currentPool = useSelector(getPool);
     const needKYC = useSelector(isKYCPool);
 
+    const [inactiveMarketsData, setInactiveMarketsData] = React.useState([]);
+    const [activeMarketsData, setActiveMarketsData] = React.useState([]);
+
+    React.useEffect(() => {
+        if (!userWalletNetwork) return;
+        if (!currentPool) return;
+
+        const network = constants.network_type[userWalletNetwork];
+
+        const arrayOfAssets = marketsByNetwork[network][currentPool];
+
+        setInactiveMarketsData(
+            inactiveLend.filter((marketData) =>
+                arrayOfAssets.includes(marketData.unit)
+            )
+        );
+    }, [inactiveLend, currentPool, userWalletNetwork]);
+
+    React.useEffect(() => {
+        if (!userWalletNetwork) return;
+        if (!currentPool) return;
+
+        const network = constants.network_type[userWalletNetwork];
+
+        const arrayOfAssets = marketsByNetwork[network][currentPool];
+
+        setActiveMarketsData(
+            activeLend.filter((marketData) =>
+                arrayOfAssets.includes(marketData.unit)
+            )
+        );
+    }, [activeLend, currentPool, userWalletNetwork]);
+
     const activateAsset = (asset) =>
         onActivate({
             drizzle,
@@ -72,8 +108,8 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
 
     return (
         <Lend
-            inactiveLend={inactiveLend}
-            activeLend={activeLend}
+            inactiveLend={inactiveMarketsData}
+            activeLend={activeMarketsData}
             onActivate={walletConnected ? activateAsset : onConnect}
             errorLend={errorLend}
             USDPrice={USDPrice}
