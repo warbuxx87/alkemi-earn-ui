@@ -8,7 +8,6 @@ import { compare_supply, compare_borrow } from "utils/markets";
 import { walletNetworkName } from "redux/selectors/data/onboard";
 import { getPool } from "redux/selectors/status/pool";
 
-import constants from "constants/constant.json";
 import marketsByNetwork from "constants/markets_by_network.json";
 
 const url_map = require("constants/url_map.json");
