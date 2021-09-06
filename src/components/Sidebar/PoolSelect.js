@@ -12,16 +12,16 @@ import {
 } from "@material-ui/core";
 import { usePopover } from "../../hooks/usePopover";
 import { Selector as SelectorIcon } from "../UI/Icons/selector";
-import { CustomCube as CloudIcon } from "components/UI/Icons/custom-cube";
-import logo from "assets/images/logo-white.svg";
+import Verified from "@material-ui/icons/VerifiedUser";
+import Open from "@material-ui/icons/Public";
 
 const useStyles = makeStyles((theme) => ({
     button: {
         borderRadius: "4px",
+        backgroundColor: "#23252a",
         display: "flex",
-        padding: "12px 8px 12px 12px",
+        padding: "8px 8px 8px 8px",
         width: "100%",
-        border: "1px solid rgba(255, 255, 255, 0.10)",
         "&:hover": {
             backgroundColor: "rgba(255,255,255,0.1)",
         },
@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const poolsIcons = {
-    permissioned: <CloudIcon />,
-    open: <img src={logo} alt="" />,
+    permissioned: <Verified color="secondary" fontSize="small" />,
+    open: <Open color="secondary" fontSize="small" />,
 };
 
 // const poolsIcons = (id) => {

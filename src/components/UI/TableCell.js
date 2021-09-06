@@ -11,7 +11,7 @@ const styles = (theme) => ({
         lineHeight: "1px",
         letterSpacing: 0,
         borderBottom: "1px solid #000000",
-        backgroundColor: "#09090a",
+        backgroundColor: "#1a1d21",
         padding: "12px 16px 10px 16px",
         borderTop: "1px solid #000000",
     },

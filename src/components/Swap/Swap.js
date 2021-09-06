@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
             height: "65px",
         },
         "& label.Mui-focused": {
-            color: "#8c8c8c",
+            color: "#868998",
         },
     },
     // Autocomplete dropdown

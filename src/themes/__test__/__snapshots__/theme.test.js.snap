@@ -193,7 +193,7 @@ Object {
       "hint": "rgba(184, 233, 134, 1)",
       "icon": "rgba(255, 255, 255, 0.5)",
       "primary": "#ffffff",
-      "secondary": "#8c8c8c",
+      "secondary": "#868998",
       "success": "#3cb34f",
     },
     "tonalOffset": 0.2,

@@ -18,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
     item: {
         paddingLeft: 16,
         paddingRight: 16,
-        color: "#b1b1b1",
+        color: "#868998",
         "&:hover": {
             backgroundColor: "transparent",
             color: "white",
             "& .MuiListItemIcon-root": {
-                color: "#4948F6",
+                color: "#ffffff",
             },
         },
     },
@@ -32,20 +32,20 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "4px",
         color: "#ffffff",
         "& .MuiListItemIcon-root": {
-            color: "#4948F6",
+            color: "#ffffff",
         },
         "&$selected:hover": {
             backgroundColor: "rgb(235, 237, 255, 0.07)",
             color: "white",
             "& .MuiListItemIcon-root": {
-                color: "#4948F6",
+                color: "#ffffff",
             },
         },
     },
     itemIcon: {
         minWidth: 0,
         marginRight: 16,
-        color: "#b1b1b1",
+        color: "#868998",
     },
 }));
 

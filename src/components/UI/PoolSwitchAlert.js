@@ -1,38 +1,43 @@
 import React from "react";
 import {
+    Box,
     Button,
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
-    Divider,
     Typography,
     makeStyles,
     Link,
-    FormControlLabel,
-    Checkbox,
 } from "@material-ui/core";
+import WarningIcon from "@material-ui/icons/Warning";
 
 const useStyles = makeStyles((theme) => ({
     content: {
         color: "#e0e0e0",
-        paddingTop: 16,
-        paddingBottom: 12,
+        paddingTop: 8,
+        paddingBottom: 8,
     },
     image: {
         maxWidth: "28px",
         marginRight: "12px",
     },
-    header: {
-        fontSize: "1rem",
+    title: {
         display: "flex",
         alignItems: "center",
         fontWeight: "500",
+        paddingTop: "24px",
+        paddingBottom: "16px",
     },
-    checkBox: {
-        "& .MuiFormControlLabel-label": {
-            fontSize: "0.8125rem",
-        },
+    icon: {
+        color: theme.palette.warning.main,
+        marginRight: "12px",
+    },
+    button: {
+        marginRight: "12px",
+    },
+    link: {
+        fontSize: "0.875rem",
     },
 }));
 
@@ -47,19 +52,21 @@ export default function PoolSwitchAlert({
     const classes = useStyles();
 
     const headers = {
-        permissioned: "Entering verified pool",
-        open: "Exiting the verified pool",
+        permissioned: "Switch to Verified Pool",
+        open: "Switch to Open Pool",
     };
 
     const bodies = {
         permissioned: (
             <>
-                You are entering the verified pool, if you are not KYC'd yet,
-                feel free to do so by following this link:&nbsp;
+                Switching to the Verified liquidity pool requires KYC user
+                verification. If you are not KYC'd yet, feel free to do so by
+                following this link:&nbsp;&nbsp;
                 <Link
                     href="https://alkemi.network"
                     target="_blank"
                     rel="noreferrer"
+                    className={classes.link}
                 >
                     Get KYC Verified
                 </Link>
@@ -67,8 +74,8 @@ export default function PoolSwitchAlert({
         ),
         open: (
             <>
-                Warning, you are switching from the safe verified pool to the
-                open and public one.
+                By switching to the Open liquidity pool will be leaving Alkemi
+                Earn's KYC enviroment.
             </>
         ),
     };
@@ -84,34 +91,42 @@ export default function PoolSwitchAlert({
                     id="gnosis-notification"
                     onClose={handleClose}
                     disableTypography
-                    className={classes.header}
+                    className={classes.title}
                 >
-                    {headers[chosenPool]}
+                    {" "}
+                    <WarningIcon fontSize="large" className={classes.icon} />
+                    <Typography
+                        color="inherit"
+                        variant="h4"
+                        className={classes.header}
+                    >
+                        {headers[chosenPool]}
+                    </Typography>
                 </DialogTitle>
-                <Divider />
                 <DialogContent>
                     <Typography variant="body1" className={classes.content}>
                         {bodies[chosenPool]}
                     </Typography>
                 </DialogContent>
-                <Divider />
                 <DialogActions>
-                    <FormControlLabel
-                        className={classes.checkBox}
-                        value="default"
-                        control={
-                            <Checkbox
-                                color="secondary"
-                                onClick={handleCheckDoNotShow}
-                            />
-                        }
-                        label="Do not show anymore"
-                        labelPlacement="end"
-                    />
-                    <Button onClick={handleConfirm}>Approve</Button>
-                    <Button autoFocus onClick={handleClose}>
-                        Cancel
-                    </Button>
+                    <Box p={1}>
+                        <Button
+                            color="secondary"
+                            autoFocus
+                            onClick={handleClose}
+                            variant="text"
+                            className={classes.button}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            color="secondary"
+                            onClick={handleConfirm}
+                            variant="contained"
+                        >
+                            Confirm
+                        </Button>
+                    </Box>
                 </DialogActions>
             </Dialog>
         </div>
