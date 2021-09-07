@@ -31,7 +31,7 @@ const darkTheme = createMuiTheme({
         },
 
         warning: {
-            main: "#ff6534", //orange
+            main: "#d05d39", //orange
             contrastText: "#fff",
         },
 
