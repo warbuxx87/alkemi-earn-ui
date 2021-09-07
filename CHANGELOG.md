@@ -1,3 +1,19 @@
+## [1.19.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.19.0...v1.19.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* resolve missing apy values and crashing app UI-483 ([2dd2be0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2dd2be0108dcf86a74e9d1910dc67c9832b470fd))
+
+
+
+## [1.19.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.19.0...v1.19.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* resolve missing apy values and crashing app UI-483 ([2dd2be0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2dd2be0108dcf86a74e9d1910dc67c9832b470fd))
+
 # [1.19.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.18.0...v1.19.0) (2021-08-30)
 
 
