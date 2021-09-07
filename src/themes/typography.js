@@ -24,7 +24,7 @@ const typography = {
         },
     },
     h2: {
-        fontWeight: 500,
+        fontWeight: 400,
         fontSize: "1.5rem",
         "@media (min-width:1940px)": {
             fontSize: "1.75rem",
@@ -34,7 +34,7 @@ const typography = {
         fontWeight: 400,
         fontSize: "1.375rem",
         "@media (min-width:1940px)": {
-            fontSize: "1.625rem",
+            fontSize: "1.5rem",
         },
     },
     h4: {

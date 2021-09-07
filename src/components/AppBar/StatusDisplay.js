@@ -46,14 +46,9 @@ function StatusDisplay({ walletIsKYCd, tooltipTitle, ...props }) {
     // Section 5: Code Component
     return (
         <Box display="flex" px={1}>
-            <CustomTooltip
-                className={classes.Tooltip}
-                title={tooltipTitle}
-                placement="left"
-                arrow
-            >
+            <Tooltip title={tooltipTitle} placement="bottom" arrow>
                 <Status fontSize="small" className={classes.KYCIcon} />
-            </CustomTooltip>
+            </Tooltip>
         </Box>
     );
 }

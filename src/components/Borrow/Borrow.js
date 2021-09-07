@@ -52,10 +52,10 @@ function Borrow({
                         <BorrowCardValue />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <BorrowCardLimit />
+                        <BorrowCardAPY />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <BorrowCardAPY />
+                        <BorrowCardLimit />
                     </Grid>
                     {!!activeBorrow.length && (
                         <Grid item lg={12} xs={12}>

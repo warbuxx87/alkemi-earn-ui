@@ -121,11 +121,12 @@ const useStyles = makeStyles((theme) => ({
     helpIcon: {
         width: ".8rem",
         marginLeft: "4px",
-        color: "#979797",
+        color: "#868998",
     },
     alkTotal: {
         fontSize: "1.4rem",
         fontWeight: 500,
+        paddingBottom: "4px",
     },
 }));
 
@@ -201,7 +202,7 @@ function Rewards({ claimableALKReward, onClaimALK, isDoingAction }) {
                 </Box>
                 <Divider />
                 <Box display="flex" alignItems="center" flexDirection="column">
-                    <Box mt={5}>
+                    <Box mt={6} mb={2}>
                         <img
                             className={classes.alkicon}
                             src={icon}
@@ -210,8 +211,8 @@ function Rewards({ claimableALKReward, onClaimALK, isDoingAction }) {
                             width={60}
                         />
                     </Box>
-                    <Box mt={1}>
-                        <Box display="flex" alignItems="center" mb={1}>
+                    <Box mt={1} pb={4}>
+                        <Box display="flex" justifyContent="center" mb={1}>
                             <Typography
                                 variant="h5"
                                 color="textSecondary"
