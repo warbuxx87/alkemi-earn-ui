@@ -12,7 +12,7 @@ import LayoutContent from "containers/Layout/Content";
 import Sidebar from "containers/Sidebar/Sidebar";
 import AppBar from "containers/AppBar/AppBar";
 
-import ConnectionBanner from "components/UI/ConnectionBanner";
+import Banner from "components/UI/Banner";
 
 import PoolSelect from "containers/PoolSelect/PoolSelect";
 
@@ -82,6 +82,7 @@ function LayoutSkeleton({
     userWalletAddress,
     DEFAULT_NETWORK,
     walletIsLiquidator,
+    DISPLAY_FREEZE_OF_TXS,
 }) {
     // networkID is null when no wallet is selected
     return (
@@ -90,11 +91,12 @@ function LayoutSkeleton({
             <Sidebar walletIsLiquidator={walletIsLiquidator} />
             <div className={classes.content}>
                 <AppBar />
-                <ConnectionBanner
+                <Banner
                     userWalletNetwork={userWalletNetwork}
                     currentNetworkName={currentNetworkName}
                     userWalletAddress={userWalletAddress}
                     DEFAULT_NETWORK={DEFAULT_NETWORK}
+                    DISPLAY_FREEZE_OF_TXS={DISPLAY_FREEZE_OF_TXS}
                 />
                 <LayoutContent />
             </div>

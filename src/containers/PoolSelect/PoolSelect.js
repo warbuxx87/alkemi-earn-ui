@@ -57,7 +57,7 @@ const PoolSelectContainer = () => {
         }
     };
 
-    const [selectedPool, setSelectedPool] = React.useState("permissioned");
+    const [selectedPool, setSelectedPool] = React.useState(undefined);
     const [defaultPoolChecked, setAsDefaultPool] = React.useState(false);
 
     const handlePoolChange = (event, newPool) => {

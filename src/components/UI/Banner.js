@@ -12,11 +12,12 @@ import constants from "constants/constant.json";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
-function ConnectionBanner({
+function Banner({
     userWalletNetwork,
     currentNetworkName,
     userWalletAddress,
     DEFAULT_NETWORK,
+    DISPLAY_FREEZE_OF_TXS,
 }) {
     const [open, setOpen] = React.useState(true);
 
@@ -76,19 +77,55 @@ function ConnectionBanner({
         );
     };
 
-    // Section 5: Code Component
-    return (
-        <Box>
-            {!userWalletAddress && displayMustConnectMessage()}
+    const displayFreezeWarning = () => {
+        return (
+            <div>
+                <Collapse in={open}>
+                    <Alert
+                        severity="info"
+                        color="warning"
+                        action={
+                            <IconButton
+                                aria-label="close"
+                                color="inherit"
+                                size="small"
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                            >
+                                <CloseIcon fontSize="inherit" />
+                            </IconButton>
+                        }
+                    >
+                        Transactions on mainnet will be frozen on 8 September to
+                        prepare for TGE.
+                    </Alert>
+                </Collapse>
+            </div>
+        );
+    };
 
-            {userWalletAddress &&
-                DEFAULT_NETWORK !== userWalletNetwork &&
-                displayWrongNetworkMessage()}
-        </Box>
-    );
+    const selectMessageToDisplay = () => {
+        if (["true", true].includes(DISPLAY_FREEZE_OF_TXS)) {
+            return displayFreezeWarning();
+        } else {
+            return (
+                <>
+                    {!userWalletAddress && displayMustConnectMessage()}
+
+                    {userWalletAddress &&
+                        DEFAULT_NETWORK !== userWalletNetwork &&
+                        displayWrongNetworkMessage()}
+                </>
+            );
+        }
+    };
+
+    // Section 5: Code Component
+    return <Box>{selectMessageToDisplay()}</Box>;
 }
 
 // Section 6: Documentation with PropTypes
 
 // Section 7:  Connect styles and export
-export default ConnectionBanner;
+export default Banner;

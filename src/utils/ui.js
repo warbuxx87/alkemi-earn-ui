@@ -115,7 +115,10 @@ export const formatNumber = (value, unit, userWalletNetwork) => {
     const maxDecimalsHigherValueAsset = 5; // maximum number of decimals to display for WBTC & ETH
     const minDecimalsHigherValueAsset = 5; // minimum number of decimals to display for WBTC & ETH
 
-    if (!value) return 0;
+    if (!value) {
+        if (unit === "ALK") return "0.000";
+        else return 0;
+    }
 
     const wei = fromWei(value, unit);
     switch (unit) {
