@@ -4,7 +4,7 @@ const typography = {
         fontSize: "0.875rem",
         lineHeight: 1.6,
         "@media (min-width:1940px)": {
-            fontSize: "0.9375rem",
+            fontSize: "1rem",
         },
     },
 

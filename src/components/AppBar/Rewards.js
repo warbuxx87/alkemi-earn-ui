@@ -212,7 +212,12 @@ function Rewards({ claimableALKReward, onClaimALK, isDoingAction }) {
                         />
                     </Box>
                     <Box mt={1} pb={4}>
-                        <Box display="flex" justifyContent="center" mb={1}>
+                        <Box
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            mb={1}
+                        >
                             <Typography
                                 variant="h5"
                                 color="textSecondary"

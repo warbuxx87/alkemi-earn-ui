@@ -87,7 +87,7 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                         align="left"
                         style={{ paddingBottom: "8px" }}
                     >
-                        Aggregated Values
+                        Aggregated Value
                     </Typography>
                     <Box>
                         <Typography
