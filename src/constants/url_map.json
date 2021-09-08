@@ -8,7 +8,14 @@
             "reports_url": "https://api.alkemi.network/reports",
             "interest_url": "https://api.alkemi.network/interest"
         },
-        "open": {}
+        "open": {
+            "history_url": "http://mainnet.open.api.alkemi.network//history",
+            "markets_url": "http://mainnet.open.api.alkemi.network/markets",
+            "accounts_url": "http://mainnet.open.api.alkemi.network/accounts",
+            "liquidations_url": "http://mainnet.open.api.alkemi.network/liquidations",
+            "reports_url": "http://mainnet.open.api.alkemi.network/reports",
+            "interest_url": "http://mainnet.open.api.alkemi.network/interest"
+        }
     },
     "rinkeby": {
         "permissioned": {
