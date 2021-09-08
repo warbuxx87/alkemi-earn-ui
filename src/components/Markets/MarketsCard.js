@@ -49,7 +49,7 @@ const MarketsCard = ({ title, cardContent }) => {
                     alignItems="center"
                     flexWrap="wrap"
                 >
-                    <Typography variant="h3" color="textPrimary">
+                    <Typography variant="h2" color="textPrimary">
                         {cardContent}
                     </Typography>
                 </Box>

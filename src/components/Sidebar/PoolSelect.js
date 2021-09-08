@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
             width: "100%",
         },
     },
+    selecttext: {
+        fontSize: "40px !important",
+    },
 }));
 
 const poolsIcons = {
@@ -84,7 +87,7 @@ export const PoolPopover = (props) => {
                         {poolsIcons[selectedPool.id]}
                     </Box>
                 </Avatar>
-                <Typography color="textPrimary" variant="body1">
+                <Typography color="textPrimary" variant="subtitle2">
                     {selectedPool.name}
                 </Typography>
                 <Box flexGrow="1" />
@@ -124,7 +127,14 @@ export const PoolPopover = (props) => {
                                     {poolsIcons[pool.id]}
                                 </Box>
                             </Avatar>
-                            <ListItemText primary={pool.name} />
+                            <ListItemText
+                                disableTypography
+                                primary={
+                                    <Typography variant="subtitle2">
+                                        {pool.name}
+                                    </Typography>
+                                }
+                            />
                         </ListItem>
                     ))}
                 </List>

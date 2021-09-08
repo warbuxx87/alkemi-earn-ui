@@ -27,8 +27,8 @@ const styles = (theme) => ({
         },
     },
     image: {
-        maxWidth: "140px",
-        minWidth: "140px",
+        maxWidth: "125px",
+        minWidth: "125px",
         [theme.breakpoints.down("xs")]: {
             maxWidth: "130px",
             minWidth: "130px",

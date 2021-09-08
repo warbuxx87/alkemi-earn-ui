@@ -43,6 +43,16 @@ const styles = (theme) => ({
     drawerInner: {
         overflowX: "hidden",
     },
+    chip: {
+        padding: "9px 12px 7px 12px",
+        borderLeft: "solid 1px #868998",
+    },
+    chiptext: {
+        lineHeight: 0,
+        color: "#868998",
+        letterSpacing: "1px",
+        fontWeight: 500,
+    },
     drawerOpen: {
         width: 280,
         "@media (min-width:1940px)": {
@@ -96,7 +106,18 @@ function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
             flexDirection="column"
             height={1}
         >
-            <SidebarHeader />
+            {" "}
+            <Box display="flex" alignItems="center">
+                <SidebarHeader />
+                <Box className={classes.chip}>
+                    <Typography
+                        variant="subtitle2"
+                        className={classes.chiptext}
+                    >
+                        VERIFIED
+                    </Typography>
+                </Box>
+            </Box>
             <Box flexDirection="column" flexGrow={1}>
                 <Divider className={classes.divider} />
                 <Box pt={1} pb={1}>

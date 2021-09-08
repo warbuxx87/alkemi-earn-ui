@@ -186,10 +186,10 @@ function PoolDialog({
                         >
                             <Typography
                                 className={classes.kycref}
-                                variant="subtitle2"
+                                variant="subtitle1"
                             >
                                 <Link
-                                    href="https://alkemi.network"
+                                    href="https://kyc.alkemi.network/#/auth/signup"
                                     target="_blank"
                                     rel="noreferrer"
                                 >
