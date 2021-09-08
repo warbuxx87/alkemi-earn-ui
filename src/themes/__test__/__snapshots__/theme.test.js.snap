@@ -379,18 +379,15 @@ Object {
     "pxToRem": [Function],
     "round": [Function],
     "subtitle1": Object {
-      "@media (min-width:1940px)": Object {
-        "fontSize": "0.8125rem",
-      },
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-      "fontSize": "0.75rem",
+      "fontSize": "0.8125rem",
       "fontWeight": 400,
       "letterSpacing": "0.00938em",
       "lineHeight": 1.7,
     },
     "subtitle2": Object {
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-      "fontSize": 11,
+      "fontSize": "0.875rem",
       "fontWeight": 400,
       "letterSpacing": "0.00714em",
       "lineHeight": 1.3,
