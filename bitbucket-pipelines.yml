@@ -61,7 +61,7 @@ definitions:
                   - node
               script:
                   # Increase Node Memory Size to 7GB instead of default 512MB
-                  - export NODE_OPTIONS=--max_old_space_size=8192
+                  - export NODE_OPTIONS=--max_old_space_size=10240
                   - echo "Build"
                   - npm install --quiet
                   # Saves build version to a json file for cache-busting purposes
