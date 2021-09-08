@@ -26,6 +26,7 @@ import Rewards from "containers/AppBar/Rewards";
 import Other from "./Other";
 import MobileMenu from "./MobileMenu";
 import StatusDisplay from "./StatusDisplay";
+
 import logo from "assets/images/logo-white.svg";
 
 import { addressParser } from "utils/ui";
@@ -236,14 +237,6 @@ function AppBar({
                         {title}
                     </Typography>
                 </Hidden>
-                <Hidden lgUp>
-                    <img
-                        className={classes.logo}
-                        src={logo}
-                        alt={"Alkemi Logo"}
-                    />
-                </Hidden>
-
                 <Box ml={2} flexGrow={1} />
                 {displayConnectionButton({
                     walletConnected,
