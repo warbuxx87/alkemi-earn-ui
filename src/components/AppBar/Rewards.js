@@ -160,13 +160,20 @@ function Rewards({ claimableALKReward, onClaimALK, isDoingAction }) {
                 >
                     <Grid item>
                         <Box display="flex" px={1}>
-                            <img
-                                className={classes.alktoken}
-                                src={alktoken}
-                                alt={"Alkemi Logo"}
-                                height={18}
-                                width={18}
-                            />
+                            <Tooltip
+                                className={classes.Tooltip}
+                                title="Click to claim your ALK Rewards"
+                                placement="bottom"
+                                arrow
+                            >
+                                <img
+                                    className={classes.alktoken}
+                                    src={alktoken}
+                                    alt={"Alkemi Logo"}
+                                    height={18}
+                                    width={18}
+                                />
+                            </Tooltip>
                         </Box>
                     </Grid>
                     <Grid item className={classes.address}>

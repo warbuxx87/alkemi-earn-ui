@@ -97,8 +97,11 @@ function Banner({
                             </IconButton>
                         }
                     >
-                        Transactions on mainnet will be frozen on 8 September to
-                        prepare for TGE.
+                        ATTENTION! We will be pausing the Alkemi Network
+                        protocol from XXXX EST until XXXX EST in preparation for
+                        TGE. During this time you will not be able to make any
+                        additional deposits/borrows but withdrawals will
+                        function as normal.
                     </Alert>
                 </Collapse>
             </div>

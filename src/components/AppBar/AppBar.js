@@ -127,7 +127,7 @@ function AppBar({
                     <StatusDisplay
                         color="success"
                         walletIsKYCd={walletIsKYCd}
-                        tooltipTitle="KYC Authorized"
+                        tooltipTitle="Connected | KYC Verified"
                         displayKYCStatus={displayKYCStatus}
                     />
                 );
@@ -136,16 +136,16 @@ function AppBar({
                     <StatusDisplay
                         color="warning"
                         walletIsKYCd={walletIsKYCd}
-                        tooltipTitle="Not KYC Authorized"
+                        tooltipTitle="Connected | Not KYC Verified"
                         displayKYCStatus={displayKYCStatus}
                     />
                 );
         } else {
             return (
                 <StatusDisplay
-                    color="secondary"
+                    color="success"
                     walletIsKYCd={walletIsKYCd}
-                    tooltipTitle="Open pool"
+                    tooltipTitle="Connected | Open pool"
                     displayKYCStatus={displayKYCStatus}
                 />
             );

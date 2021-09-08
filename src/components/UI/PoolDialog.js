@@ -62,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
             width: "270px",
             borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
         },
+        "& .MuiToggleButton-root:hover": {
+            backgroundColor: "transparent",
+        },
 
         "& .MuiToggleButton-root.Mui-selected": {
             backgroundColor: "rgba(255, 255, 255, 0.02)",
@@ -86,6 +89,9 @@ const useStyles = makeStyles((theme) => ({
         border: "1px solid rgba(255, 255, 255, 0.10)",
         width: "36px",
         height: "36px",
+    },
+    title: {
+        fontWeight: "500 !important",
     },
 }));
 
@@ -118,7 +124,12 @@ function PoolDialog({
                 className={classes.dialog}
             >
                 <Box p={4}>
-                    <Typography variant="h4" color="textPrimary" align="center">
+                    <Typography
+                        variant="h4"
+                        color="textPrimary"
+                        align="center"
+                        className={classes.title}
+                    >
                         Select liquidity pool
                     </Typography>
                 </Box>
@@ -136,6 +147,7 @@ function PoolDialog({
                             aria-label="Verified"
                             disableRipple
                             disableFocusRipple
+                            className={classes.mainButton}
                         >
                             <Avatar
                                 variant="rounded"
