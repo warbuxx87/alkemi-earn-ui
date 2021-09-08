@@ -1,8 +1,26 @@
 [
     {
         "constant": true,
+        "inputs": [{ "name": "", "type": "address" }],
+        "name": "KYCAdmins",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [{ "name": "", "type": "address" }],
+        "name": "customersWithKYC",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
         "inputs": [],
-        "name": "pendingAdmin",
+        "name": "priceOracle",
         "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
         "stateMutability": "view",
@@ -11,7 +29,7 @@
     {
         "constant": true,
         "inputs": [],
-        "name": "wethAddress",
+        "name": "pendingAdmin",
         "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
         "stateMutability": "view",
@@ -34,15 +52,6 @@
         ],
         "name": "originationFeeBalance",
         "outputs": [{ "name": "", "type": "uint256" }],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "oracle",
-        "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -80,6 +89,24 @@
         "inputs": [],
         "name": "WETHContract",
         "outputs": [{ "name": "", "type": "address" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "minimumCollateralRatioMantissa",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "maximumLiquidationDiscountMantissa",
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -129,6 +156,15 @@
     {
         "constant": true,
         "inputs": [],
+        "name": "closeFactorMantissa",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
         "name": "rewardControl",
         "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
@@ -140,6 +176,15 @@
         "inputs": [],
         "name": "admin",
         "outputs": [{ "name": "", "type": "address" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [{ "name": "", "type": "address" }],
+        "name": "liquidators",
+        "outputs": [{ "name": "", "type": "bool" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -168,45 +213,21 @@
         "stateMutability": "view",
         "type": "function"
     },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "initializationDone",
-        "outputs": [{ "name": "", "type": "bool" }],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
     { "payable": true, "stateMutability": "payable", "type": "fallback" },
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": false, "name": "wethAddress", "type": "address" }
+            { "indexed": true, "name": "Liquidator", "type": "address" },
+            { "indexed": false, "name": "newStatus", "type": "bool" }
         ],
-        "name": "WETHAddressSet",
+        "name": "LiquidatorChanged",
         "type": "event"
     },
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": false, "name": "Liquidator", "type": "address" }
-        ],
-        "name": "LiquidatorAdded",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            { "indexed": false, "name": "Liquidator", "type": "address" }
-        ],
-        "name": "LiquidatorRemoved",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            { "indexed": false, "name": "account", "type": "address" },
-            { "indexed": false, "name": "asset", "type": "address" },
+            { "indexed": true, "name": "account", "type": "address" },
+            { "indexed": true, "name": "asset", "type": "address" },
             { "indexed": false, "name": "amount", "type": "uint256" },
             { "indexed": false, "name": "startingBalance", "type": "uint256" },
             { "indexed": false, "name": "newBalance", "type": "uint256" }
@@ -217,20 +238,8 @@
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": false, "name": "account", "type": "address" },
-            { "indexed": false, "name": "asset", "type": "address" },
-            { "indexed": false, "name": "amount", "type": "uint256" },
-            { "indexed": false, "name": "startingBalance", "type": "uint256" },
-            { "indexed": false, "name": "newBalance", "type": "uint256" }
-        ],
-        "name": "SupplyOrgFeeAsAdmin",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            { "indexed": false, "name": "account", "type": "address" },
-            { "indexed": false, "name": "asset", "type": "address" },
+            { "indexed": true, "name": "account", "type": "address" },
+            { "indexed": true, "name": "asset", "type": "address" },
             { "indexed": false, "name": "amount", "type": "uint256" },
             { "indexed": false, "name": "startingBalance", "type": "uint256" },
             { "indexed": false, "name": "newBalance", "type": "uint256" }
@@ -241,8 +250,8 @@
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": false, "name": "account", "type": "address" },
-            { "indexed": false, "name": "asset", "type": "address" },
+            { "indexed": true, "name": "account", "type": "address" },
+            { "indexed": true, "name": "asset", "type": "address" },
             { "indexed": false, "name": "amount", "type": "uint256" },
             { "indexed": false, "name": "startingBalance", "type": "uint256" },
             {
@@ -258,8 +267,8 @@
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": false, "name": "account", "type": "address" },
-            { "indexed": false, "name": "asset", "type": "address" },
+            { "indexed": true, "name": "account", "type": "address" },
+            { "indexed": true, "name": "asset", "type": "address" },
             { "indexed": false, "name": "amount", "type": "uint256" },
             { "indexed": false, "name": "startingBalance", "type": "uint256" },
             { "indexed": false, "name": "newBalance", "type": "uint256" }
@@ -270,42 +279,17 @@
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": false, "name": "targetAccount", "type": "address" },
+            { "indexed": true, "name": "targetAccount", "type": "address" },
             { "indexed": false, "name": "assetBorrow", "type": "address" },
-            {
-                "indexed": false,
-                "name": "borrowBalanceBefore",
-                "type": "uint256"
-            },
             {
                 "indexed": false,
                 "name": "borrowBalanceAccumulated",
                 "type": "uint256"
             },
             { "indexed": false, "name": "amountRepaid", "type": "uint256" },
-            {
-                "indexed": false,
-                "name": "borrowBalanceAfter",
-                "type": "uint256"
-            },
-            { "indexed": false, "name": "liquidator", "type": "address" },
+            { "indexed": true, "name": "liquidator", "type": "address" },
             { "indexed": false, "name": "assetCollateral", "type": "address" },
-            {
-                "indexed": false,
-                "name": "collateralBalanceBefore",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "name": "collateralBalanceAccumulated",
-                "type": "uint256"
-            },
-            { "indexed": false, "name": "amountSeized", "type": "uint256" },
-            {
-                "indexed": false,
-                "name": "collateralBalanceAfter",
-                "type": "uint256"
-            }
+            { "indexed": false, "name": "amountSeized", "type": "uint256" }
         ],
         "name": "BorrowLiquidated",
         "type": "event"
@@ -313,155 +297,34 @@
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": false, "name": "oldPendingAdmin", "type": "address" },
-            { "indexed": false, "name": "newPendingAdmin", "type": "address" }
-        ],
-        "name": "NewPendingAdmin",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            { "indexed": false, "name": "oldAdmin", "type": "address" },
-            { "indexed": false, "name": "newAdmin", "type": "address" }
-        ],
-        "name": "NewAdmin",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            { "indexed": false, "name": "oldOracle", "type": "address" },
-            { "indexed": false, "name": "newOracle", "type": "address" }
-        ],
-        "name": "NewOracle",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            { "indexed": false, "name": "asset", "type": "address" },
-            { "indexed": false, "name": "interestRateModel", "type": "address" }
-        ],
-        "name": "SupportedMarket",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "name": "oldCollateralRatioMantissa",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "name": "newCollateralRatioMantissa",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "name": "oldLiquidationDiscountMantissa",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "name": "newLiquidationDiscountMantissa",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "name": "NewMinimumCollateralRatioMantissa",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "name": "newMaximumLiquidationDiscountMantissa",
-                "type": "uint256"
-            }
-        ],
-        "name": "NewRiskParameters",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "name": "oldOriginationFeeMantissa",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "name": "newOriginationFeeMantissa",
-                "type": "uint256"
-            }
-        ],
-        "name": "NewOriginationFee",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            { "indexed": false, "name": "asset", "type": "address" },
-            { "indexed": false, "name": "interestRateModel", "type": "address" }
-        ],
-        "name": "SetMarketInterestRateModel",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            { "indexed": false, "name": "asset", "type": "address" },
+            { "indexed": true, "name": "asset", "type": "address" },
             {
                 "indexed": false,
                 "name": "equityAvailableBefore",
                 "type": "uint256"
             },
             { "indexed": false, "name": "amount", "type": "uint256" },
-            { "indexed": false, "name": "owner", "type": "address" }
+            { "indexed": true, "name": "owner", "type": "address" }
         ],
         "name": "EquityWithdrawn",
         "type": "event"
     },
     {
         "anonymous": false,
-        "inputs": [{ "indexed": false, "name": "asset", "type": "address" }],
-        "name": "SuspendedMarket",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{ "indexed": false, "name": "newState", "type": "bool" }],
-        "name": "SetPaused",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{ "indexed": false, "name": "KYCAdmin", "type": "address" }],
-        "name": "KYCAdminAdded",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [{ "indexed": false, "name": "KYCAdmin", "type": "address" }],
-        "name": "KYCAdminRemoved",
+        "inputs": [
+            { "indexed": true, "name": "KYCAdmin", "type": "address" },
+            { "indexed": false, "name": "newStatus", "type": "bool" }
+        ],
+        "name": "KYCAdminChanged",
         "type": "event"
     },
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": false, "name": "KYCCustomer", "type": "address" }
+            { "indexed": true, "name": "KYCCustomer", "type": "address" },
+            { "indexed": false, "name": "newStatus", "type": "bool" }
         ],
-        "name": "KYCCustomerAdded",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            { "indexed": false, "name": "KYCCustomer", "type": "address" }
-        ],
-        "name": "KYCCustomerRemoved",
+        "name": "KYCCustomerChanged",
         "type": "event"
     },
     {
@@ -490,7 +353,7 @@
             { "name": "newStatus", "type": "bool" }
         ],
         "name": "_changeKYCAdmin",
-        "outputs": [{ "name": "", "type": "uint256" }],
+        "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
@@ -502,27 +365,9 @@
             { "name": "newStatus", "type": "bool" }
         ],
         "name": "_changeCustomerKYC",
-        "outputs": [{ "name": "", "type": "uint256" }],
+        "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [{ "name": "customer", "type": "address" }],
-        "name": "verifyKYC",
-        "outputs": [{ "name": "", "type": "bool" }],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [{ "name": "_KYCAdmin", "type": "address" }],
-        "name": "checkKYCAdmin",
-        "outputs": [{ "name": "", "type": "bool" }],
-        "payable": false,
-        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -532,27 +377,9 @@
             { "name": "newStatus", "type": "bool" }
         ],
         "name": "_changeLiquidator",
-        "outputs": [{ "name": "", "type": "uint256" }],
+        "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [{ "name": "liquidator", "type": "address" }],
-        "name": "verifyLiquidator",
-        "outputs": [{ "name": "", "type": "bool" }],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getCollateralMarketsLength",
-        "outputs": [{ "name": "", "type": "uint256" }],
-        "payable": false,
-        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -570,7 +397,10 @@
             { "name": "newPendingAdmin", "type": "address" },
             { "name": "newOracle", "type": "address" },
             { "name": "requestedState", "type": "bool" },
-            { "name": "originationFeeMantissa", "type": "uint256" }
+            { "name": "originationFeeMantissa", "type": "uint256" },
+            { "name": "newCloseFactorMantissa", "type": "uint256" },
+            { "name": "wethContractAddress", "type": "address" },
+            { "name": "_rewardControl", "type": "address" }
         ],
         "name": "_adminFunctions",
         "outputs": [{ "name": "", "type": "uint256" }],
@@ -582,7 +412,7 @@
         "constant": false,
         "inputs": [],
         "name": "_acceptAdmin",
-        "outputs": [{ "name": "", "type": "uint256" }],
+        "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
@@ -645,9 +475,7 @@
         "constant": false,
         "inputs": [
             { "name": "collateralRatioMantissa", "type": "uint256" },
-            { "name": "liquidationDiscountMantissa", "type": "uint256" },
-            { "name": "_minimumCollateralRatioMantissa", "type": "uint256" },
-            { "name": "_maximumLiquidationDiscountMantissa", "type": "uint256" }
+            { "name": "liquidationDiscountMantissa", "type": "uint256" }
         ],
         "name": "_setRiskParameters",
         "outputs": [{ "name": "", "type": "uint256" }],
@@ -674,15 +502,6 @@
             { "name": "amount", "type": "uint256" }
         ],
         "name": "_withdrawEquity",
-        "outputs": [{ "name": "", "type": "uint256" }],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [{ "name": "wethContractAddress", "type": "address" }],
-        "name": "setWethAddress",
         "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "nonpayable",
@@ -758,15 +577,6 @@
             { "name": "amount", "type": "uint256" }
         ],
         "name": "borrow",
-        "outputs": [{ "name": "", "type": "uint256" }],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [{ "name": "_rewardControl", "type": "address" }],
-        "name": "setRewardControlAddress",
         "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "nonpayable",
