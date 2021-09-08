@@ -39,7 +39,7 @@ definitions:
                   - sonar
               script:
                   # Increase Node Memory Size to 2GB instead of default 512MB
-                  - export NODE_OPTIONS=--max_old_space_size=2048
+                  - export NODE_OPTIONS=--max_old_space_size=3072
                   - npm install --quiet
                   - npm run test
                   - pipe: sonarsource/sonarcloud-scan:1.2.1
@@ -61,7 +61,7 @@ definitions:
                   - node
               script:
                   # Increase Node Memory Size to 7GB instead of default 512MB
-                  - export NODE_OPTIONS=--max_old_space_size=7168
+                  - export NODE_OPTIONS=--max_old_space_size=8192
                   - echo "Build"
                   - npm install --quiet
                   # Saves build version to a json file for cache-busting purposes
