@@ -27,6 +27,7 @@ export const handle_approve_click = async ({
         asset: asset.unit,
         address_MoneyMarket,
         userWalletNetwork,
+        currentPool,
     });
 
     const sendApprove = tokenContract.methods.approve.cacheSend(
@@ -77,6 +78,7 @@ export const handle_deposit_click = async ({
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
+
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address = address[network][`address_${asset.unit}`];
     const unit = asset.unit;
