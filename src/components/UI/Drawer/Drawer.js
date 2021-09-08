@@ -206,6 +206,7 @@ const DrawerWrapper = ({
                                 </Grid>
                             </Grid>
                         </Box>
+
                         <div className={classes.inputWrap}>
                             <Input
                                 autoFocus={true}
@@ -217,13 +218,15 @@ const DrawerWrapper = ({
                                 value={amount}
                                 fullWidth={true}
                             />
+                            {/*
                             <span
                                 className={classes.maxTips}
                                 onClick={onSetMax}
                             >
                                 MAX
                             </span>
-                            {/* onClick={() => { click_max(this) }} */}
+
+                            */}
                         </div>
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
@@ -310,7 +313,9 @@ const DrawerWrapper = ({
                                     onButtonClick({ asset, amount });
                                     handleClose();
                                 }}
-                                disabled={!enableButtonClick || isDoingAction}
+                                disabled={
+                                    false /*!enableButtonClick || isDoingAction*/
+                                }
                                 size="large"
                                 fullWidth={true}
                             >
