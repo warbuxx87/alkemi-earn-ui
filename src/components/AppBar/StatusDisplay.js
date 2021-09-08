@@ -18,8 +18,13 @@ const useStyles = (props) =>
             //color: theme.palette[props.color].main,
         },
         KYCIcon: {
-            width: "18px",
-            height: "18px",
+            width: "19px",
+            height: "19px",
+            color: theme.palette[props.color].main,
+        },
+        OpenIcon: {
+            width: "14px",
+            height: "14px",
             color: theme.palette[props.color].main,
         },
         Tooltip: {
@@ -49,7 +54,7 @@ function StatusDisplay({
                 {displayKYCStatus ? (
                     <Status fontSize="small" className={classes.KYCIcon} />
                 ) : (
-                    <Open fontSize="small" className={classes.KYCIcon} />
+                    <Open fontSize="small" className={classes.OpenIcon} />
                 )}
             </Tooltip>
         </Box>

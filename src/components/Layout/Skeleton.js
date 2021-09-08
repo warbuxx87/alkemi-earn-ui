@@ -83,12 +83,16 @@ function LayoutSkeleton({
     DEFAULT_NETWORK,
     walletIsLiquidator,
     DISPLAY_FREEZE_OF_TXS,
+    currentPool,
 }) {
     // networkID is null when no wallet is selected
     return (
         <div className={classes.frame}>
             <PoolSelect />
-            <Sidebar walletIsLiquidator={walletIsLiquidator} />
+            <Sidebar
+                walletIsLiquidator={walletIsLiquidator}
+                currentPool={currentPool}
+            />
             <div className={classes.content}>
                 <AppBar />
                 <Banner

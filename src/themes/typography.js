@@ -60,14 +60,12 @@ const typography = {
         fontWeight: 400,
         fontSize: "0.75rem",
         lineHeight: 1.7,
-        "@media (min-width:1940px)": {
-            fontSize: "0.8125rem",
-        },
+        fontSize: "0.8125rem",
     },
 
     subtitle2: {
         fontWeight: 400,
-        fontSize: 11,
+        fontSize: "0.875rem",
         lineHeight: 1.3,
     },
 

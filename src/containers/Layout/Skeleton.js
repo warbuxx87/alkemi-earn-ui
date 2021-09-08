@@ -43,6 +43,7 @@ const Skeleton = () => {
             DEFAULT_NETWORK={DEFAULT_NETWORK}
             walletIsLiquidator={isWalletLiquidator}
             DISPLAY_FREEZE_OF_TXS={DISPLAY_FREEZE_OF_TXS}
+            currentPool={currentPool}
         />
     );
 };
