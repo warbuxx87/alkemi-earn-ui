@@ -120,23 +120,36 @@ function AppBar({
         setAnchorEl(null);
     };
 
-    const displayWalletStatus = ({ walletIsKYCd }) => {
-        if (walletIsKYCd)
+    const displayWalletStatus = ({ displayKYCStatus, walletIsKYCd }) => {
+        if (displayKYCStatus) {
+            if (walletIsKYCd)
+                return (
+                    <StatusDisplay
+                        color="success"
+                        walletIsKYCd={walletIsKYCd}
+                        tooltipTitle="KYC Authorized"
+                        displayKYCStatus={displayKYCStatus}
+                    />
+                );
+            else
+                return (
+                    <StatusDisplay
+                        color="warning"
+                        walletIsKYCd={walletIsKYCd}
+                        tooltipTitle="Not KYC Authorized"
+                        displayKYCStatus={displayKYCStatus}
+                    />
+                );
+        } else {
             return (
                 <StatusDisplay
-                    color="success"
+                    color="secondary"
                     walletIsKYCd={walletIsKYCd}
-                    tooltipTitle="KYC Authorized"
+                    tooltipTitle="Open pool"
+                    displayKYCStatus={displayKYCStatus}
                 />
             );
-        else
-            return (
-                <StatusDisplay
-                    color="warning"
-                    walletIsKYCd={walletIsKYCd}
-                    tooltipTitle="Not KYC Authorized"
-                />
-            );
+        }
     };
 
     const displayConnectionButton = ({
@@ -178,11 +191,13 @@ function AppBar({
                                 display="flex"
                                 justify="flex-end"
                             >
-                                {displayKYCStatus ? (
-                                    <Grid item>
-                                        {displayWalletStatus({ walletIsKYCd })}
-                                    </Grid>
-                                ) : null}
+                                <Grid item>
+                                    {displayWalletStatus({
+                                        displayKYCStatus,
+                                        walletIsKYCd,
+                                    })}
+                                </Grid>
+
                                 <Grid item className={classes.address}>
                                     <Box
                                         display="flex"
