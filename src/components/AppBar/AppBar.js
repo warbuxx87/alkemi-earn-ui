@@ -27,8 +27,6 @@ import Other from "./Other";
 import MobileMenu from "./MobileMenu";
 import StatusDisplay from "./StatusDisplay";
 
-import logo from "assets/images/logo-white.svg";
-
 import { addressParser } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
