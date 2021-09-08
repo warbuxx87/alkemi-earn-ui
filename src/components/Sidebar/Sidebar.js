@@ -98,7 +98,14 @@ const styles = (theme) => ({
 });
 
 // Section 5: Code Component
-function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
+function Sidebar({
+    classes,
+    width,
+    variant,
+    open,
+    walletIsLiquidator,
+    currentPool,
+}) {
     const content = (
         <Box
             className={classes.drawerInner}
@@ -114,7 +121,7 @@ function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
                         variant="subtitle2"
                         className={classes.chiptext}
                     >
-                        VERIFIED
+                        {currentPool === "open" ? "OPEN" : "VERIFIED"}
                     </Typography>
                 </Box>
             </Box>
