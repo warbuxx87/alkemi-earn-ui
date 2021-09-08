@@ -29,6 +29,8 @@ import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import { getTransactions } from "redux/selectors/status/status";
 
+import { getPool } from "redux/selectors/status/pool";
+
 const DrawerRepayContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
@@ -40,6 +42,8 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
 
     const [amount, setAmount] = React.useState("");
     const [shouldSendMax, setShouldSendMax] = React.useState(false);
+
+    const currentPool = useSelector(getPool);
 
     const [estimationOfGasPrice, setEstimationOfGasPrice] = React.useState(
         "3000000000"
@@ -220,6 +224,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                     amount,
                     shouldSendMax,
                     type: "repay",
+                    currentPool,
                 })
             }
             isDoingAction={isProcessing}

@@ -112,9 +112,11 @@ export const getCombinedAPY = createSelector(
 
 export const getUSDPrice = (state) => {
     const currentNetworkName = walletNetworkName(state);
+    const pool = getPool(state);
 
     if (currentNetworkName) {
-        const contractAddress = address[currentNetworkName][`address_USDC`];
+        const contractAddress =
+            address[currentNetworkName][pool][`address_USDC`];
 
         const assetPrices = Object.values(
             _.get(state, "contracts.MoneyMarket.assetPrices", {})
@@ -182,6 +184,7 @@ export const getAggregatedBalance = createSelector(
 
 export const getMarketLiquidity = (state) => {
     const currentNetworkName = walletNetworkName(state);
+    const pool = getPool(state);
 
     if (currentNetworkName) {
         const assetLiquidity = {};
@@ -197,7 +200,8 @@ export const getMarketLiquidity = (state) => {
         Object.keys(state.contracts).forEach((asset) => {
             if (constants.assets.includes(asset)) {
                 let assetName = "address_" + asset;
-                const assetAddress = address[currentNetworkName][assetName];
+                const assetAddress =
+                    address[currentNetworkName][pool][assetName];
                 //  console.log(assetAddress);
 
                 try {

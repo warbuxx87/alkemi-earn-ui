@@ -3,6 +3,7 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "constants/address_map.json";
 import { walletNetworkName } from "redux/selectors/data/onboard";
+import { getPool } from "redux/selectors/status/pool";
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
 import web3 from "web3";
 import Big from "big.js";
@@ -145,6 +146,7 @@ const borrowPrincipalSelector = (state) => {
 const getBorrowAsset = createSelector(
     (state) => borrowAssetSelector(state),
     (state) => walletNetworkName(state),
+    (state) => getPool(state),
     (state) => borrowBalanceSelector(state),
     (state) => borrowAPYSelector(state),
     (state) => borrowPrincipalSelector(state),
@@ -158,6 +160,7 @@ const getBorrowAsset = createSelector(
     (
         assets,
         network,
+        pool,
         borrowBalances,
         borrowAPY,
         borrowPrincipal,
@@ -182,8 +185,9 @@ const getBorrowAsset = createSelector(
             let safeBorrowToken = "0";
             let totalBorrowed = "0";
             let liquidity = "0";
-            if (network && address[network]) {
-                const token_address = address[network][`address_${asset.unit}`];
+            if (network && address[network] && address[network][pool]) {
+                const token_address =
+                    address[network][pool][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
                 apy = borrowAPY[token_address] || "0";
                 principal = borrowPrincipal[token_address] || "0";
@@ -200,7 +204,8 @@ const getBorrowAsset = createSelector(
                 ).toString();
 
                 // Replaced now with address_USDC
-                USDprice = assetPrices[address[network][`address_USDC`]] || "0";
+                USDprice =
+                    assetPrices[address[network][pool][`address_USDC`]] || "0";
             }
 
             if (network && accountLiquidity && price && price > 0) {
