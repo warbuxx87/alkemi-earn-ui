@@ -163,7 +163,7 @@ Object {
                           class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                           style="padding-bottom: 8px;"
                         >
-                          Aggregated Values
+                          Aggregated Value
                         </h6>
                         <div
                           class="MuiBox-root MuiBox-root-64"
@@ -658,7 +658,7 @@ Object {
                         class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
                         style="padding-bottom: 8px;"
                       >
-                        Aggregated Values
+                        Aggregated Value
                       </h6>
                       <div
                         class="MuiBox-root MuiBox-root-64"
