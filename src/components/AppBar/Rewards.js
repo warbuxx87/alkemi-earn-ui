@@ -178,7 +178,7 @@ function Rewards({ claimableALKReward, onClaimALK, isDoingAction }) {
                     </Grid>
                     <Grid item className={classes.address}>
                         <Box display="flex" alignItems="center">
-                            {claimableALKReward}
+                            {claimableALKReward} ALK
                         </Box>
                     </Grid>
                 </Grid>
