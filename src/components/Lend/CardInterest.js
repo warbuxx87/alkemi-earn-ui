@@ -98,7 +98,7 @@ function CardValue({
                     alignItems="center"
                     flexWrap="wrap"
                 >
-                    <Typography variant="h3" color="textPrimary">
+                    <Typography variant="h2" color="textPrimary">
                         {displayInterest}
                     </Typography>
                 </Box>

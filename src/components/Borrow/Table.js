@@ -267,6 +267,7 @@ const BorrowTable = ({
                                                 }
                                                 variant="outlined"
                                                 color="secondary"
+                                                size="small"
                                                 disabled={
                                                     checkActivating(Row, txs) ||
                                                     needKYC

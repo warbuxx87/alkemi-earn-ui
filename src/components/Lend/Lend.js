@@ -56,14 +56,14 @@ function Lend({
                         <LendCardValue />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
+                        <LendCardAPY />
+                    </Grid>
+                    <Grid item lg={4} sm={6} xs={12}>
                         <LendCardInterest
                             calculatedInterest={calculatedInterest}
                             fetchInterestErrorStatus={fetchInterestErrorStatus}
                             walletConnected={walletConnected}
                         />
-                    </Grid>
-                    <Grid item lg={4} sm={6} xs={12}>
-                        <LendCardAPY />
                     </Grid>
                     {!!activeLend.length && (
                         <Grid item lg={12} xs={12}>

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 0,
         fontSize: "0.8125rem",
         color: "#000000 !important",
-        fontWeight: 500,
+        fontWeight: 600,
     },
     IconButton: {
         position: "absolute",

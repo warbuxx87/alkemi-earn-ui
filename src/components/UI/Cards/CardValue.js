@@ -55,7 +55,7 @@ function TotalValue({ title, totalValue, currency, difference, ...rest }) {
                     alignItems="center"
                     flexWrap="wrap"
                 >
-                    <Typography variant="h3" color="textPrimary">
+                    <Typography variant="h2" color="textPrimary">
                         $
                         <SplitNumber
                             theNumber={totalValue}

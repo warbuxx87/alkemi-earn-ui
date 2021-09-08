@@ -26,7 +26,7 @@ const darkTheme = createMuiTheme({
             contrastText: "#fff",
         },
         secondary: {
-            main: "#ffffff", //White
+            main: "#d8dade", //White
             contrastText: "#000",
         },
 
@@ -46,7 +46,7 @@ const darkTheme = createMuiTheme({
         },
 
         text: {
-            primary: "#ffffff", // White
+            primary: "#d8dade", // White
             secondary: "#868998", // Light Grey
             success: "#3cb34f", //Green
             disabled: "rgba(255, 255, 255, 1)",

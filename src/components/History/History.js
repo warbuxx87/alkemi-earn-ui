@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
     sortField: {
         flexBasis: 200,
     },
+    tableBottom: {
+        borderTop: "solid 1px rgba(255, 255, 255, 0.10)",
+    },
 }));
 
 const assetName = [
@@ -499,7 +502,7 @@ const History = ({
                     </TableBody>
                 </Table>
                 <TablePagination
-                    className="px-4"
+                    className={classes.tableBottom}
                     rowsPerPageOptions={[8, 25, 50, 100]}
                     component="div"
                     count={txtListData.length}
