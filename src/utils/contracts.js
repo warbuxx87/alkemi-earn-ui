@@ -158,17 +158,17 @@ export const initMarketContract = ({
 
     if (currentPool !== "open") {
         // verify KYC
-        MoneyMarketContract.methods.verifyKYC.cacheCall(myAddress);
+        MoneyMarketContract.methods.customersWithKYC.cacheCall(myAddress);
 
         // verify Liquidator
-        MoneyMarketContract.methods.verifyLiquidator.cacheCall(myAddress);
+        MoneyMarketContract.methods.liquidators.cacheCall(myAddress);
     }
 
     // get collateralRatio
     MoneyMarketContract.methods.collateralRatio.cacheCall();
 
     // get getCollateralMarketsLength
-    MoneyMarketContract.methods.getCollateralMarketsLength.cacheCall();
+    MoneyMarketContract.methods.collateralMarkets.cacheCall();
 
     // get Origination Fee
     MoneyMarketContract.methods.originationFee.cacheCall();
