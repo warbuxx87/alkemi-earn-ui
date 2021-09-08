@@ -4,7 +4,7 @@ import _ from "lodash";
 
 export const isWalletKYCd = (state) => {
     const verifyKYC = Object.values(
-        _.get(state, "contracts.MoneyMarket.liquidators", {})
+        _.get(state, "contracts.MoneyMarket.customersWithKYC", {})
     );
 
     if (verifyKYC[0]) {
@@ -16,7 +16,7 @@ export const isWalletKYCd = (state) => {
 
 export const isLiquidator = (state) => {
     const verifyLiquidator = Object.values(
-        _.get(state, "contracts.MoneyMarket.verifyLiquidator", {})
+        _.get(state, "contracts.MoneyMarket.liquidators", {})
     );
 
     if (verifyLiquidator[0]) {
