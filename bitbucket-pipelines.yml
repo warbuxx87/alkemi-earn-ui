@@ -8,7 +8,7 @@ definitions:
         sonar: ~/.sonar/cache # Caching SonarCloud artifacts will speed up your build
     services:
         docker:
-            memory: 4096 # Increasing Docker Memory Size to 4GB instead of defailt 1GB
+            memory: 6144 # Increasing Docker Memory Size to 6GB instead of defailt 1GB
     steps:
         # DEFINE Mirror to Github STEP
         - step: &github
