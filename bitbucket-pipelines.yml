@@ -8,7 +8,7 @@ definitions:
         sonar: ~/.sonar/cache # Caching SonarCloud artifacts will speed up your build
     services:
         docker:
-            memory: 6144 # Increasing Docker Memory Size to 6GB instead of defailt 1GB
+            memory: 2048 # Increasing Docker Memory Size to 2GB instead of defailt 1GB
     steps:
         # DEFINE Mirror to Github STEP
         - step: &github
@@ -60,8 +60,8 @@ definitions:
               caches:
                   - node
               script:
-                  # Increase Node Memory Size to 7GB instead of default 512MB
-                  - export NODE_OPTIONS=--max_old_space_size=10240
+                  # Increase Node Memory Size to 6GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=6144
                   - echo "Build"
                   - npm install --quiet
                   # Saves build version to a json file for cache-busting purposes
