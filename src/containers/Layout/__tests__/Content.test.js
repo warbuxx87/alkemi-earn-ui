@@ -40,20 +40,20 @@ describe("<LayoutContent />", () => {
         expect(screen.getByText("Oops... It seems that you are lost!"));
     });
 
-    it("<LayoutContent /> is displaying dashboard component content", () => {
-        history.push(DASHBOARD);
+    // it("<LayoutContent /> is displaying dashboard component content", () => {
+    //     history.push(DASHBOARD);
 
-        // following checks could be highly improved
-        expect(screen.getByText("Aggregated Value"));
-        expect(screen.getByText("Combined APY"));
+    //     // following checks could be highly improved
+    //     expect(screen.getByText("Aggregated Value"));
+    //     expect(screen.getByText("Combined APY"));
 
-        expect(screen.getByText("Lending Overview"));
-        expect(screen.getByText("Borrowing Overview"));
-        expect(screen.getByText("Borrow Limit"));
+    //     expect(screen.getByText("Lending Overview"));
+    //     expect(screen.getByText("Borrowing Overview"));
+    //     expect(screen.getByText("Borrow Limit"));
 
-        expect(screen.getByText("Active Deposits"));
-        expect(screen.getByText("Active Borrowed"));
-    });
+    //     expect(screen.getByText("Active Deposits"));
+    //     expect(screen.getByText("Active Borrowed"));
+    // });
 
     it("<LayoutContent /> does not display liquidate content", () => {
         history.push(LIQUIDATE);

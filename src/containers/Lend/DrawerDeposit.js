@@ -183,6 +183,8 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 asset={asset}
                 buttonsLabel="Deposit"
                 triggerButtonVariant="contained"
+                triggerDrawerColor="primary"
+                triggerApyColor="primary"
                 enableButtonClick={enableDeposit}
                 onButtonClick={() =>
                     onTx({
@@ -216,7 +218,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                     asset.unit,
                     userWalletNetwork
                 )}
-                amountValue={`Wallet: ${formatNumber(
+                amountValue={`Available: ${formatNumber(
                     asset.wallet,
                     asset.unit,
                     userWalletNetwork

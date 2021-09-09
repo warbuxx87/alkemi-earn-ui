@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         textTransform: "uppercase",
+        fontWeight: "500",
     },
     logo: {
         maxWidth: 130,
@@ -226,7 +227,7 @@ function AppBar({
             <Toolbar disableGutters={true}>
                 <Hidden mdDown>
                     <Typography
-                        variant="h4"
+                        variant="h6"
                         color="textPrimary"
                         data-testid="title"
                         noWrap
