@@ -215,6 +215,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
             triggerButtonVariant="outlined"
             triggerButtonColor="secondary"
             enableButtonClick={enableRepay}
+            showWarningColor={true}
             onButtonClick={() =>
                 onTx({
                     drizzle,
