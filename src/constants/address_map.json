@@ -19,7 +19,7 @@
     "rinkeby": {
         "address_MoneyMarket": "0xccFcc25E498c40c67baD046F55bDB01F0eeDA870",
         "address_open_MoneyMarket": "0xE6A282CB974e8F86bf67198d65e9C1Da2D23b40d",
-        "address_RewardControl": "0x6C1A8dd6DbDBD4fFa577877ff01151243a93f40c",
+        "address_RewardControl": "0x7876a5f1F36C869eE17320dA74761f8a4d6E1A34",
         "address_ALK_TOKEN": "***REMOVED***",
         "open": {
             "address_USDC": "0x4dbcdf9b62e891a7cec5a2568c3f4faf9e8abe2b",
