@@ -15,6 +15,7 @@ import { isLiquidator } from "redux/selectors/status/status";
 import { getPool } from "redux/selectors/status/pool";
 
 const DEFAULT_NETWORK = parseInt(process.env.REACT_APP_DEFAULT_NETWORK, 10);
+const DISPLAY_FREEZE_OF_TXS = process.env.REACT_APP_DISPLAY_FREEZE_OF_TXS;
 
 const Skeleton = () => {
     const [isWalletLiquidator, setIsWalletLiquidator] = useState(false);
@@ -41,6 +42,8 @@ const Skeleton = () => {
             userWalletAddress={userWalletAddress}
             DEFAULT_NETWORK={DEFAULT_NETWORK}
             walletIsLiquidator={isWalletLiquidator}
+            DISPLAY_FREEZE_OF_TXS={DISPLAY_FREEZE_OF_TXS}
+            currentPool={currentPool}
         />
     );
 };

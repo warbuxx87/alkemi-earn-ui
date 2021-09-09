@@ -5,8 +5,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Box, makeStyles, withStyles, Tooltip } from "@material-ui/core";
+import { Box, makeStyles, Tooltip } from "@material-ui/core";
 import Status from "@material-ui/icons/VerifiedUser";
+import Open from "@material-ui/icons/Lens";
 
 // Section 3: Components & Containers import from the application
 
@@ -17,8 +18,13 @@ const useStyles = (props) =>
             //color: theme.palette[props.color].main,
         },
         KYCIcon: {
-            width: "18px",
-            height: "18px",
+            width: "19px",
+            height: "19px",
+            color: theme.palette[props.color].main,
+        },
+        OpenIcon: {
+            width: "14px",
+            height: "14px",
             color: theme.palette[props.color].main,
         },
         Tooltip: {
@@ -28,32 +34,29 @@ const useStyles = (props) =>
         },
     }));
 
-const CustomTooltip = withStyles((theme) => ({
-    tooltipPlacementLeft: {
-        backgroundColor: theme.palette.background.light,
-        color: "#ffffff",
-        boxShadow: theme.shadows[1],
-        marginRight: 25,
-    },
-    arrow: {
-        color: theme.palette.background.light,
-    },
-}))(Tooltip);
-
-function StatusDisplay({ walletIsKYCd, tooltipTitle, ...props }) {
+function StatusDisplay({
+    walletIsKYCd,
+    tooltipTitle,
+    displayKYCStatus,
+    ...props
+}) {
     const classes = useStyles(props)();
 
     // Section 5: Code Component
     return (
         <Box display="flex" px={1}>
-            <CustomTooltip
+            <Tooltip
                 className={classes.Tooltip}
                 title={tooltipTitle}
-                placement="left"
+                placement="bottom"
                 arrow
             >
-                <Status fontSize="small" className={classes.KYCIcon} />
-            </CustomTooltip>
+                {displayKYCStatus ? (
+                    <Status fontSize="small" className={classes.KYCIcon} />
+                ) : (
+                    <Open fontSize="small" className={classes.OpenIcon} />
+                )}
+            </Tooltip>
         </Box>
     );
 }

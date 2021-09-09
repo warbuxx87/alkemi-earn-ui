@@ -1,7 +1,7 @@
 // Primary use is to select between open and permissioned pools
 
 // Section 1: Utilities imports and low level imports
-import { getPool } from "redux/selectors/status/pool";
+// import { getPool } from "redux/selectors/status/pool";
 
 // Section 2: Action types declarations and action creators
 
@@ -22,12 +22,15 @@ export const setPool = (pool) => ({
 });
 
 // Section 3: Action dispatch methods and async funcs
-export const onPoolChange = ({ pool }) => async (dispatch, getState) => {
-    if (getPool(getState()) !== pool) {
-        window.localStorage.setItem("selectedPool", pool);
+// export const onPoolChange = ({ pool, defaultPoolChecked }) => async (dispatch, getState) => {
+//     if (getPool(getState()) !== pool) {
 
-        dispatch(setPool(pool));
+//         if(defaultPoolChecked) {
+//             window.localStorage.setItem("defaultPool", pool);
+//         }
 
-        window.location.reload();
-    }
-};
+//         dispatch(setPool(pool));
+
+//         window.location.reload();
+//     }
+// };

@@ -3,12 +3,9 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 
 // Section 2: Material-UI imports
-import { Hidden, withStyles } from "@material-ui/core/";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import { withStyles } from "@material-ui/core/";
 
 // Section 3: Components & Containers import from the application
 import logo from "assets/images/logo-white.svg";
@@ -22,7 +19,7 @@ const styles = (theme) => ({
         justifyContent: "space-between",
         width: "inherit",
         overflow: "hidden",
-        marginLeft: 20,
+        marginLeft: 22,
         marginRight: 20,
         [theme.breakpoints.down("xs")]: {
             marginLeft: 8,
@@ -30,8 +27,8 @@ const styles = (theme) => ({
         },
     },
     image: {
-        maxWidth: "155px",
-        minWidth: "155px",
+        maxWidth: "125px",
+        minWidth: "125px",
         [theme.breakpoints.down("xs")]: {
             maxWidth: "130px",
             minWidth: "130px",
@@ -52,16 +49,6 @@ const SidebarHeader = ({ classes, open, onOpen, onClose }) => {
     return (
         <div className={classes.drawerHeader}>
             <img className={classes.image} src={logo} alt={"Alkemi Logo"} />
-            <Hidden mdDown>
-                <IconButton
-                    onClick={open ? onClose : onOpen}
-                    className={clsx(classes.menu, {
-                        [classes.activeMenu]: open,
-                    })}
-                >
-                    <MenuIcon fontSize="small" />
-                </IconButton>
-            </Hidden>
         </div>
     );
 };

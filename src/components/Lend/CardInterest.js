@@ -11,9 +11,11 @@ import {
     CardContent,
     CardHeader,
     Divider,
+    Tooltip,
     Typography,
     makeStyles,
 } from "@material-ui/core";
+import Help from "@material-ui/icons/HelpOutline";
 
 import { Skeleton } from "@material-ui/lab"; // Skeleton is still in lab and not in core (or atleast no export yet, seems that they forgot to do so)
 
@@ -34,9 +36,15 @@ const useStyles = makeStyles((theme) => ({
     item: {
         textAlign: "center",
         justifyContent: "center",
+        paddingRight: "4px",
     },
     cents: {
         color: theme.palette.text.secondary,
+    },
+    help: {
+        width: "16px",
+        height: "16px",
+        color: "#868998",
     },
 }));
 
@@ -87,7 +95,17 @@ function CardValue({
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Interest Earned" className={classes.item} />
+            <Box display="flex" alignItems="center" justifyContent="center">
+                <CardHeader title="Interest Earned" className={classes.item} />
+                <Tooltip
+                    className={classes.Tooltip}
+                    title="Approximate interest earned (USD) past 24 hours"
+                    placement="bottom"
+                    arrow
+                >
+                    <Help className={classes.help} />
+                </Tooltip>
+            </Box>
             <Divider />
             <CardContent>
                 <Box
@@ -98,7 +116,7 @@ function CardValue({
                     alignItems="center"
                     flexWrap="wrap"
                 >
-                    <Typography variant="h3" color="textPrimary">
+                    <Typography variant="h2" color="textPrimary">
                         {displayInterest}
                     </Typography>
                 </Box>

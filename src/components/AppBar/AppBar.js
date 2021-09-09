@@ -26,7 +26,6 @@ import Rewards from "containers/AppBar/Rewards";
 import Other from "./Other";
 import MobileMenu from "./MobileMenu";
 import StatusDisplay from "./StatusDisplay";
-import logo from "assets/images/logo-white.svg";
 
 import { addressParser } from "utils/ui";
 
@@ -56,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         textTransform: "uppercase",
+        fontWeight: "500",
     },
     logo: {
         maxWidth: 130,
@@ -120,23 +120,36 @@ function AppBar({
         setAnchorEl(null);
     };
 
-    const displayWalletStatus = ({ walletIsKYCd }) => {
-        if (walletIsKYCd)
+    const displayWalletStatus = ({ displayKYCStatus, walletIsKYCd }) => {
+        if (displayKYCStatus) {
+            if (walletIsKYCd)
+                return (
+                    <StatusDisplay
+                        color="success"
+                        walletIsKYCd={walletIsKYCd}
+                        tooltipTitle="Connected | KYC Verified"
+                        displayKYCStatus={displayKYCStatus}
+                    />
+                );
+            else
+                return (
+                    <StatusDisplay
+                        color="warning"
+                        walletIsKYCd={walletIsKYCd}
+                        tooltipTitle="Connected | Not KYC Verified"
+                        displayKYCStatus={displayKYCStatus}
+                    />
+                );
+        } else {
             return (
                 <StatusDisplay
                     color="success"
                     walletIsKYCd={walletIsKYCd}
-                    tooltipTitle="KYC Authorized"
+                    tooltipTitle="Connected | Open pool"
+                    displayKYCStatus={displayKYCStatus}
                 />
             );
-        else
-            return (
-                <StatusDisplay
-                    color="warning"
-                    walletIsKYCd={walletIsKYCd}
-                    tooltipTitle="Not KYC Authorized"
-                />
-            );
+        }
     };
 
     const displayConnectionButton = ({
@@ -178,11 +191,13 @@ function AppBar({
                                 display="flex"
                                 justify="flex-end"
                             >
-                                {displayKYCStatus ? (
-                                    <Grid item>
-                                        {displayWalletStatus({ walletIsKYCd })}
-                                    </Grid>
-                                ) : null}
+                                <Grid item>
+                                    {displayWalletStatus({
+                                        displayKYCStatus,
+                                        walletIsKYCd,
+                                    })}
+                                </Grid>
+
                                 <Grid item className={classes.address}>
                                     <Box
                                         display="flex"
@@ -212,7 +227,7 @@ function AppBar({
             <Toolbar disableGutters={true}>
                 <Hidden mdDown>
                     <Typography
-                        variant="h4"
+                        variant="h6"
                         color="textPrimary"
                         data-testid="title"
                         noWrap
@@ -221,14 +236,6 @@ function AppBar({
                         {title}
                     </Typography>
                 </Hidden>
-                <Hidden lgUp>
-                    <img
-                        className={classes.logo}
-                        src={logo}
-                        alt={"Alkemi Logo"}
-                    />
-                </Hidden>
-
                 <Box ml={2} flexGrow={1} />
                 {displayConnectionButton({
                     walletConnected,

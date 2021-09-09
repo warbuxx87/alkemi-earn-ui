@@ -9,6 +9,7 @@ import ALK_TOKEN_ABI from "constants/ABI/ALK_TOKEN_ABI.json";
 
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
+import marketsByNetwork from "constants/markets_by_network.json";
 
 const ABIs = {
     WETH: WETH_ABI,
@@ -35,16 +36,21 @@ export const initContracts = ({
     });
 
     if (resolved !== false)
-        constants.assets.forEach((asset) =>
-            initAssetContract({
-                drizzle,
-                userWalletAddress,
-                userWalletNetwork,
-                asset,
-                forceUpdate,
-                address_MoneyMarket,
-            })
-        );
+        constants.assets.forEach((asset) => {
+            const network = constants.network_type[userWalletNetwork];
+            const arrayOfAssets = marketsByNetwork[network][currentPool];
+
+            if (arrayOfAssets.includes(asset))
+                initAssetContract({
+                    drizzle,
+                    userWalletAddress,
+                    userWalletNetwork,
+                    asset,
+                    forceUpdate,
+                    address_MoneyMarket,
+                    currentPool,
+                });
+        });
 
     if (resolved !== false) {
         initRewardControlContract({
@@ -119,34 +125,34 @@ export const initMarketContract = ({
         // could put a check to see if the contract address is set for all of them
         MoneyMarketContract.methods.getSupplyBalance.cacheCall(
             myAddress,
-            address[network][`address_${asset}`]
+            address[network][currentPool][`address_${asset}`]
         );
 
         // get each asset Borrow Balance (current )
         MoneyMarketContract.methods.getBorrowBalance.cacheCall(
             myAddress,
-            address[network][`address_${asset}`]
+            address[network][currentPool][`address_${asset}`]
         );
 
         // get each supplyBalances ( principle )
         MoneyMarketContract.methods.supplyBalances.cacheCall(
             myAddress,
-            address[network][`address_${asset}`]
+            address[network][currentPool][`address_${asset}`]
         );
 
         // get each borrowBalances ( principle )
         MoneyMarketContract.methods.borrowBalances.cacheCall(
             myAddress,
-            address[network][`address_${asset}`]
+            address[network][currentPool][`address_${asset}`]
         );
 
         // get each asset Price
         MoneyMarketContract.methods.assetPrices.cacheCall(
-            address[network][`address_${asset}`]
+            address[network][currentPool][`address_${asset}`]
         );
         // get each market data
         MoneyMarketContract.methods.markets.cacheCall(
-            address[network][`address_${asset}`]
+            address[network][currentPool][`address_${asset}`]
         );
     });
 
@@ -168,7 +174,7 @@ export const initMarketContract = ({
     MoneyMarketContract.methods.collateralRatio.cacheCall();
 
     // get getCollateralMarketsLength
-    MoneyMarketContract.methods.collateralMarkets.cacheCall();
+    // MoneyMarketContract.methods.getCollateralMarketsLength.cacheCall();
 
     // get Origination Fee
     MoneyMarketContract.methods.originationFee.cacheCall();
@@ -189,6 +195,7 @@ export const initAssetContract = ({
     asset,
     forceUpdate,
     address_MoneyMarket,
+    currentPool,
 }) => {
     if (drizzle.contracts[asset] && !forceUpdate)
         return drizzle.contracts[asset];
@@ -201,7 +208,7 @@ export const initAssetContract = ({
 
     const tokenContract = new drizzle.web3.eth.Contract(
         ABIs[asset],
-        address[network][`address_${asset}`]
+        address[network][currentPool][`address_${asset}`]
     );
     // const events = ["Approval", "Transfer"];
     const events = [];

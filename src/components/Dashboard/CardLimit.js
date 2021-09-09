@@ -10,9 +10,11 @@ import {
     Grid,
     LinearProgress,
     Paper,
+    Tooltip,
     Typography,
     makeStyles,
 } from "@material-ui/core";
+import Help from "@material-ui/icons/HelpOutline";
 
 // Section 3: Components & Containers import from the application
 
@@ -42,6 +44,13 @@ const useStyles = makeStyles((theme) => ({
         lineHeight: 1.4,
         paddingBottom: 12,
     },
+    help: {
+        width: "15px",
+        height: "15px",
+        color: "#868998",
+        marginLeft: "4px",
+        marginTop: "1px",
+    },
 }));
 
 function BorrowLimit({ borrowLimit }) {
@@ -59,14 +68,24 @@ function BorrowLimit({ borrowLimit }) {
             >
                 <Grid alignItems="center" container spacing={3}>
                     <Grid item xs={12}>
-                        <Typography
-                            variant="subtitle1"
-                            color="textSecondary"
-                            align="left"
-                            className={classes.cardtitle}
-                        >
-                            Borrow Limit
-                        </Typography>
+                        <Box display="flex">
+                            <Typography
+                                variant="subtitle1"
+                                color="textSecondary"
+                                align="left"
+                                className={classes.cardtitle}
+                            >
+                                Borrow Limit
+                            </Typography>
+                            <Tooltip
+                                className={classes.Tooltip}
+                                title="Liquidation occurs if limit equals or exceeds 100%"
+                                placement="bottom"
+                                arrow
+                            >
+                                <Help className={classes.help} />
+                            </Tooltip>
+                        </Box>
                         <Box display="flex" alignItems="center">
                             <Typography variant="h3" color="textPrimary">
                                 {borrowLimit.toFixed(2)}%

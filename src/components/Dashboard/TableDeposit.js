@@ -117,7 +117,7 @@ export default function DepositTables({
                                     variant="body2"
                                     color="textSecondary"
                                 >
-                                    Wallet
+                                    Available
                                 </Typography>
                             </DepositTableCell>
                             <DepositTableCell align="right">
@@ -132,7 +132,7 @@ export default function DepositTables({
                                     variant="body2"
                                     color="textSecondary"
                                 >
-                                    Supplied
+                                    Balance
                                 </Typography>
                             </DepositTableCell>
                             <DepositTableCell align="right">

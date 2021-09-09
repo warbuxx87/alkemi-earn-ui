@@ -49,7 +49,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
             }
 
             if (action.receipt.events.SupplyReceived) {
-                displayMessage = "Supply Received";
+                displayMessage = "Deposit Received";
             }
 
             if (action.receipt.events.BorrowTaken) {
@@ -65,7 +65,7 @@ const contractTXNotifier = (store) => (next) => (action) => {
             }
 
             if (action.receipt.events.SupplyWithdrawn) {
-                displayMessage = "Supply Withdrawn";
+                displayMessage = "Deposit Withdrawn";
             }
 
             if (action.receipt.events.Transfer) {
@@ -125,7 +125,7 @@ export const triggerToastDisplay = ({
     const options = {
         position: "top-right",
         // Automatically Close Notification after 15 seconds
-        autoClose: 7500,
+        autoClose: 10000,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: false,

@@ -27,7 +27,7 @@ import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
-import { isKYCPool } from "redux/selectors/status/pool";
+import { getPool, isKYCPool } from "redux/selectors/status/pool";
 
 // Section 4: Import Underlying Components / Containers
 import Drawer from "components/UI/Drawer/Drawer";
@@ -46,6 +46,8 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     const needKYC = useSelector(isKYCPool);
 
     const [amount, setAmount] = React.useState("");
+
+    const currentPool = useSelector(getPool);
 
     const [estimationOfGasPrice, setEstimationOfGasPrice] = React.useState(
         "3000000000"
@@ -181,6 +183,8 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 asset={asset}
                 buttonsLabel="Deposit"
                 triggerButtonVariant="contained"
+                triggerDrawerColor="primary"
+                triggerApyColor="primary"
                 enableButtonClick={enableDeposit}
                 onButtonClick={() =>
                     onTx({
@@ -191,6 +195,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                         amount,
                         shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
                         type: "deposit",
+                        currentPool,
                     })
                 }
                 isDoingAction={isProcessing}
@@ -213,7 +218,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                     asset.unit,
                     userWalletNetwork
                 )}
-                amountValue={`Wallet: ${formatNumber(
+                amountValue={`Available: ${formatNumber(
                     asset.wallet,
                     asset.unit,
                     userWalletNetwork

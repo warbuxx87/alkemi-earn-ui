@@ -1,7 +1,19 @@
 const overrides = {
+    MuiTab: {
+        root: {
+            marginLeft: "16px !important",
+            marginRight: "16px !important",
+            minWidth: "fit-content !important",
+            paddingLeft: "0px !important",
+            paddingRight: "0px !important",
+            "&:first-of-type": {
+                marginLeft: "0px !important",
+            },
+        },
+    },
     MuiDivider: {
         root: {
-            backgroundColor: "#000000",
+            backgroundColor: "rgba(255, 255, 255, 0.10)",
         },
     },
 
@@ -74,7 +86,7 @@ const overrides = {
     },
     MuiBackdrop: {
         root: {
-            backgroundColor: "rgba(0, 1, 5, 0.5)",
+            backgroundColor: "rgba(0, 1, 6, 0.7)",
         },
     },
 };

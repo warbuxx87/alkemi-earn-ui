@@ -7,18 +7,15 @@ import React from "react";
 import {
     IconButton,
     Box,
-    Divider,
     Menu,
     MenuItem,
     SvgIcon,
-    Typography,
     makeStyles,
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
 
 import MenuIcon from "@material-ui/icons/MoreHoriz";
-import PoolSelect from "containers/AppBar/PoolSelect";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
     menuitem: {
         fontSize: "0.875rem",
+        paddingRight: "40px",
     },
 }));
 
@@ -78,14 +76,7 @@ function Other() {
                     horizontal: "right",
                 }}
             >
-                <Box px={2} pb={3} pt={1}>
-                    <Box mb={1}>
-                        <Typography variant="body2">Pool Select</Typography>
-                    </Box>
-                    <PoolSelect />
-                </Box>
-                <Divider />
-                <Box mt={2}>
+                <Box>
                     <MenuItem
                         className={classes.menuitem}
                         onClick={handleClose}
@@ -125,11 +116,20 @@ function Other() {
                     <MenuItem
                         className={classes.menuitem}
                         onClick={handleClose}
-                        href="//discord.gg/Y9vmtFjhHB"
+                        href="https://snapshot.org/#/alkemidao.eth"
                         target="_blank"
                         component="a"
                     >
-                        Discord
+                        Governance
+                    </MenuItem>
+                    <MenuItem
+                        className={classes.menuitem}
+                        onClick={handleClose}
+                        href="https://kyc.alkemi.network/#/auth/signup"
+                        target="_blank"
+                        component="a"
+                    >
+                        Get KYC Verified
                     </MenuItem>
                 </Box>
             </Menu>

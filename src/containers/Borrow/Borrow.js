@@ -12,6 +12,8 @@ import { onTx } from "redux/actions/status/transactions";
 
 import useOnboard from "hooks/useOnboard";
 
+import constants from "constants/constant.json";
+import marketsByNetwork from "constants/markets_by_network.json";
 import useFetchMarkets from "hooks/useFetchMarkets";
 
 // Section 3: Selectors
@@ -57,6 +59,39 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
 
     const needKYC = useSelector(isKYCPool);
 
+    const [inactiveMarketsData, setInactiveMarketsData] = React.useState([]);
+    const [activeMarketsData, setActiveMarketsData] = React.useState([]);
+
+    React.useEffect(() => {
+        if (!userWalletNetwork) return;
+        if (!currentPool) return;
+
+        const network = constants.network_type[userWalletNetwork];
+
+        const arrayOfAssets = marketsByNetwork[network][currentPool];
+
+        setInactiveMarketsData(
+            inactiveBorrow.filter((marketData) =>
+                arrayOfAssets.includes(marketData.unit)
+            )
+        );
+    }, [inactiveBorrow, currentPool, userWalletNetwork]);
+
+    React.useEffect(() => {
+        if (!userWalletNetwork) return;
+        if (!currentPool) return;
+
+        const network = constants.network_type[userWalletNetwork];
+
+        const arrayOfAssets = marketsByNetwork[network][currentPool];
+
+        setActiveMarketsData(
+            activeBorrow.filter((marketData) =>
+                arrayOfAssets.includes(marketData.unit)
+            )
+        );
+    }, [activeBorrow, currentPool, userWalletNetwork]);
+
     const activateAsset = (asset) =>
         onActivate({
             drizzle,
@@ -69,8 +104,8 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
 
     return (
         <Borrow
-            inactiveBorrow={inactiveBorrow}
-            activeBorrow={activeBorrow}
+            inactiveBorrow={inactiveMarketsData}
+            activeBorrow={activeMarketsData}
             onActivate={walletConnected ? activateAsset : onConnect}
             txs={txs}
             USDPrice={USDPrice}

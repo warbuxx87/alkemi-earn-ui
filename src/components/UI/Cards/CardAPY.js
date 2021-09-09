@@ -71,7 +71,7 @@ function CardAPY({ totalAPY, ...props }) {
                     flexWrap="wrap"
                 >
                     <Typography
-                        variant="h3"
+                        variant="h2"
                         color="textPrimary"
                         className={classes.label}
                     >

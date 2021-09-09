@@ -31,7 +31,7 @@ import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
-import { isKYCPool } from "redux/selectors/status/pool";
+import { getPool, isKYCPool } from "redux/selectors/status/pool";
 
 // Section 4: Import Underlying Components / Containers
 import Drawer from "components/UI/Drawer/Drawer";
@@ -51,6 +51,8 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     const orginationFee = constants.orginationFee;
 
     const [amount, setAmount] = React.useState("");
+
+    const currentPool = useSelector(getPool);
 
     const onSetAmount = (newValue) => {
         const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
@@ -176,6 +178,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
             buttonsLabel="Borrow"
             triggerButtonVariant="contained"
             enableButtonClick={enableBorrow}
+            showWarningColor={true}
             onButtonClick={() =>
                 onTx({
                     drizzle,
@@ -185,6 +188,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
                     amount,
                     type: "borrow",
                     shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount,
+                    currentPool,
                 })
             }
             isDoingAction={isProcessing}

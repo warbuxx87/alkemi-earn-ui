@@ -12,7 +12,9 @@ import LayoutContent from "containers/Layout/Content";
 import Sidebar from "containers/Sidebar/Sidebar";
 import AppBar from "containers/AppBar/AppBar";
 
-import ConnectionBanner from "components/UI/ConnectionBanner";
+import Banner from "components/UI/Banner";
+
+import PoolSelect from "containers/PoolSelect/PoolSelect";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
@@ -80,18 +82,25 @@ function LayoutSkeleton({
     userWalletAddress,
     DEFAULT_NETWORK,
     walletIsLiquidator,
+    DISPLAY_FREEZE_OF_TXS,
+    currentPool,
 }) {
     // networkID is null when no wallet is selected
     return (
         <div className={classes.frame}>
-            <Sidebar walletIsLiquidator={walletIsLiquidator} />
+            <PoolSelect />
+            <Sidebar
+                walletIsLiquidator={walletIsLiquidator}
+                currentPool={currentPool}
+            />
             <div className={classes.content}>
                 <AppBar />
-                <ConnectionBanner
+                <Banner
                     userWalletNetwork={userWalletNetwork}
                     currentNetworkName={currentNetworkName}
                     userWalletAddress={userWalletAddress}
                     DEFAULT_NETWORK={DEFAULT_NETWORK}
+                    DISPLAY_FREEZE_OF_TXS={DISPLAY_FREEZE_OF_TXS}
                 />
                 <LayoutContent />
             </div>

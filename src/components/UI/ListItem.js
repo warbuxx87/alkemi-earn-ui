@@ -16,17 +16,36 @@ import {
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     item: {
-        paddingLeft: 23,
-        paddingRight: 23,
+        paddingLeft: 16,
+        paddingRight: 16,
+        color: "#868998",
+        "&:hover": {
+            backgroundColor: "transparent",
+            color: "white",
+            "& .MuiListItemIcon-root": {
+                color: "#ffffff",
+            },
+        },
     },
     selected: {
-        borderLeftStyle: "solid",
-        borderWidth: 2,
-        borderColor: theme.palette.common.white,
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: "rgb(235, 237, 255, 0.07)",
+        borderRadius: "4px",
+        color: "#ffffff",
+        "& .MuiListItemIcon-root": {
+            color: "#ffffff",
+        },
+        "&$selected:hover": {
+            backgroundColor: "rgb(235, 237, 255, 0.07)",
+            color: "white",
+            "& .MuiListItemIcon-root": {
+                color: "#ffffff",
+            },
+        },
     },
     itemIcon: {
-        minWidth: 48,
+        minWidth: 0,
+        marginRight: 16,
+        color: "#868998",
     },
 }));
 

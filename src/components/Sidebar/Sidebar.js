@@ -1,7 +1,6 @@
 // Main Component
 
 // Section 1: React low level imports
-import React from "react";
 import PropTypes from "prop-types";
 import { compose } from "redux";
 import clsx from "clsx";
@@ -27,25 +26,37 @@ import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
 import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
 import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
 import SidebarHeader from "containers/Sidebar/Header";
+import PoolSelectContainer from "containers/Sidebar/PoolSelect";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
+
 const styles = (theme) => ({
     drawer: {
-        width: 290,
+        width: 280,
         marginLeft: 24,
         flexShrink: 0,
         "@media (min-width:1940px)": {
             marginLeft: 35,
-            width: 340,
+            width: 300,
         },
     },
     drawerInner: {
         overflowX: "hidden",
     },
+    chip: {
+        padding: "9px 12px 7px 12px",
+        borderLeft: "solid 1px #868998",
+    },
+    chiptext: {
+        lineHeight: 0,
+        color: "#868998",
+        letterSpacing: "1px",
+        fontWeight: 500,
+    },
     drawerOpen: {
-        width: 290,
+        width: 280,
         "@media (min-width:1940px)": {
-            width: 340,
+            width: 300,
         },
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
@@ -63,9 +74,9 @@ const styles = (theme) => ({
             width: 68,
         },
         "&:hover": {
-            width: 290,
+            width: 280,
             "@media (min-width:1940px)": {
-                width: 340,
+                width: 300,
             },
             transition: theme.transitions.create("width", {
                 easing: theme.transitions.easing.sharp,
@@ -84,55 +95,70 @@ const styles = (theme) => ({
         color: "white",
         border: "none",
     },
-    divider: {
-        backgroundColor: theme.palette.common.black,
-    },
-    bottomPush: {
-        position: "fixed",
-        bottom: 10,
-        paddingBottom: 10,
-        maxWidth: 280,
-        "@media (min-width:1550px)": {
-            maxWidth: 340,
-        },
-    },
 });
 
 // Section 5: Code Component
-function Sidebar({ classes, width, variant, open, walletIsLiquidator }) {
+function Sidebar({
+    classes,
+    width,
+    variant,
+    open,
+    walletIsLiquidator,
+    currentPool,
+}) {
     const content = (
-        <Box className={classes.drawerInner}>
-            <SidebarHeader />
-            <Box display="flex" flexDirection="column">
+        <Box
+            className={classes.drawerInner}
+            display="flex"
+            flexDirection="column"
+            height={1}
+        >
+            {" "}
+            <Box display="flex" alignItems="center">
+                <SidebarHeader />
+                <Box className={classes.chip}>
+                    <Typography
+                        variant="subtitle2"
+                        className={classes.chiptext}
+                    >
+                        {currentPool === "open" ? "OPEN" : "VERIFIED"}
+                    </Typography>
+                </Box>
+            </Box>
+            <Box flexDirection="column" flexGrow={1}>
                 <Divider className={classes.divider} />
                 <Box pt={1} pb={1}>
-                    <List className={classes.list}>
-                        <SidebarDashboardItem />
-                        <SidebarLendItem />
-                        <SidebarBorrowItem />
-                        <SidebarMarketsItem />
-                        <SidebarHistoryItem />
-                        {walletIsLiquidator === true ? (
-                            <SidebarLiquidateItem />
-                        ) : null}
-                    </List>
-                </Box>
-                <Divider className={classes.divider} />
-                <Box width={1} className={classes.bottomPush}>
-                    <Divider className={classes.divider} />
-                    <Box py={2} px={2}>
-                        <Typography variant="body2" color="textSecondary">
-                            <Link
-                                href="https://docs.alkemi.network/earn-ui/changelog"
-                                variant="body2"
-                                color="inherit"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {process.env.REACT_APP_VERSION}
-                            </Link>
-                        </Typography>
+                    <Box px={2} pb={1}>
+                        <List className={classes.list}>
+                            <SidebarDashboardItem />
+                            <SidebarLendItem />
+                            <SidebarBorrowItem />
+                            <SidebarHistoryItem />
+                            <SidebarMarketsItem />
+                            {walletIsLiquidator === true ? (
+                                <SidebarLiquidateItem />
+                            ) : null}
+                        </List>
                     </Box>
+                    <Divider className={classes.divider} />
+                </Box>
+            </Box>
+            <Box className={classes.bottom}>
+                <Box px={2}>
+                    <PoolSelectContainer />
+                </Box>
+                <Box py={2} px={2}>
+                    <Typography variant="body2" color="textSecondary">
+                        <Link
+                            href="https://docs.alkemi.network/earn-ui/changelog"
+                            variant="body2"
+                            color="inherit"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {process.env.REACT_APP_VERSION}
+                        </Link>
+                    </Typography>
                 </Box>
             </Box>
         </Box>

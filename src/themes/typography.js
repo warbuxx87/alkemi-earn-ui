@@ -4,7 +4,7 @@ const typography = {
         fontSize: "0.875rem",
         lineHeight: 1.6,
         "@media (min-width:1940px)": {
-            fontSize: "0.9375rem",
+            fontSize: "1rem",
         },
     },
 
@@ -24,7 +24,7 @@ const typography = {
         },
     },
     h2: {
-        fontWeight: 500,
+        fontWeight: 400,
         fontSize: "1.5rem",
         "@media (min-width:1940px)": {
             fontSize: "1.75rem",
@@ -34,7 +34,7 @@ const typography = {
         fontWeight: 400,
         fontSize: "1.375rem",
         "@media (min-width:1940px)": {
-            fontSize: "1.625rem",
+            fontSize: "1.5rem",
         },
     },
     h4: {
@@ -58,16 +58,13 @@ const typography = {
 
     subtitle1: {
         fontWeight: 400,
-        fontSize: "0.75rem",
         lineHeight: 1.7,
-        "@media (min-width:1940px)": {
-            fontSize: "0.8125rem",
-        },
+        fontSize: "0.8125rem",
     },
 
     subtitle2: {
         fontWeight: 400,
-        fontSize: 11,
+        fontSize: "0.875rem",
         lineHeight: 1.3,
     },
 

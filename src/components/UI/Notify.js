@@ -20,27 +20,34 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "2rem",
     },
     Alert: {
-        paddingTop: 8,
-        paddingBottom: 8,
-        backgroundColor: "#0f0f10",
-        border: "solid 1px #262628",
+        paddingTop: 4,
+        paddingBottom: 4,
+        paddingLeft: 8,
+        backgroundColor: "transparent",
         margin: "0px",
+        minWidth: "300px",
     },
     Title: {
         marginBottom: 0,
         fontSize: "0.8125rem",
+        color: "#000000 !important",
+        fontWeight: 600,
     },
-    CloseButton: {
+    IconButton: {
         position: "absolute",
-        marginTop: "10px",
-        marginRight: "10px",
+        marginTop: "8px",
+        marginRight: "8px",
         top: 0,
         right: 0,
+        color: "#000000",
+    },
+    CloseButton: {
+        fontSize: "1rem",
     },
     Button: {
-        marginRight: 36,
+        marginRight: 24,
         textTransform: "capitalize",
-        color: "#ffffff",
+        color: "#000000",
         fontSize: 12,
     },
     Circle: {
@@ -52,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
         textTransform: "capitalize",
         fontWeight: 400,
         fontSize: 11,
-        color: "#B8B8B8",
+        color: "#7d7d7d",
     },
 }));
 
@@ -111,7 +118,7 @@ export default function PositionedSnackbar({
     return (
         <Alert
             action={
-                <>
+                <Box>
                     {(variant === "processing" || variant === "success") &&
                         txHash !== undefined &&
                         currentNetworkName !== undefined && (
@@ -133,12 +140,15 @@ export default function PositionedSnackbar({
                     <IconButton
                         size="small"
                         onClick={handleClose}
-                        className={classes.CloseButton}
+                        className={classes.IconButton}
                         color="inherit"
                     >
-                        <CloseIcon fontSize="small" />
+                        <CloseIcon
+                            fontSize="small"
+                            className={classes.CloseButton}
+                        />
                     </IconButton>
-                </>
+                </Box>
             }
             className={classes.Alert}
             icon={getIcon()}

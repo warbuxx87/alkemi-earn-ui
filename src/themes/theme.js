@@ -26,13 +26,14 @@ const darkTheme = createMuiTheme({
             contrastText: "#fff",
         },
         secondary: {
-            main: "#ffffff", //White
+            main: "#d8dade", //White
             contrastText: "#000",
         },
 
         warning: {
-            main: "#ff6534", //orange
+            main: "#d05d39", //orange
             contrastText: "#fff",
+            hover: "rgb(145, 65, 39)",
         },
 
         error: {
@@ -46,8 +47,8 @@ const darkTheme = createMuiTheme({
         },
 
         text: {
-            primary: "#ffffff", // White
-            secondary: "#8c8c8c", // Light Grey
+            primary: "#d8dade", // White
+            secondary: "#868998", // Light Grey
             success: "#3cb34f", //Green
             disabled: "rgba(255, 255, 255, 1)",
             hint: "rgba(184, 233, 134, 1)",

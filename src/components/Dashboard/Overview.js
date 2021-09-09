@@ -14,12 +14,6 @@ import { formatPercent } from "utils/ui";
 import SplitNumber from "components/UI/SplitNumber";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: theme.spacing(3),
-        display: "flex",
-        alignItems: "right",
-        justifyContent: "space-between",
-    },
     label: {
         marginLeft: theme.spacing(1),
     },

@@ -6,6 +6,8 @@ import web3 from "web3";
 
 import address from "constants/address_map.json";
 import { walletNetworkName } from "redux/selectors/data/onboard";
+import { getPool } from "redux/selectors/status/pool";
+
 import constants from "constants/constant.json";
 
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
@@ -131,6 +133,7 @@ const getAssetPrices = (state) => {
 const getLendAsset = createSelector(
     (state) => lendAssetSelector(state),
     (state) => walletNetworkName(state),
+    (state) => getPool(state),
     (state) => lendBalanceSelector(state),
     (state) => lendAPYSelector(state),
     (state) => lendRateMantissaSelector(state),
@@ -142,6 +145,7 @@ const getLendAsset = createSelector(
     (
         assets,
         network,
+        pool,
         lendBalances,
         lendAPY,
         lendMantissa,
@@ -165,8 +169,9 @@ const getLendAsset = createSelector(
             let USDprice = "0";
             let liquidity = "0";
 
-            if (network) {
-                const token_address = address[network][`address_${asset.unit}`];
+            if (network && address[network] && address[network][pool]) {
+                const token_address =
+                    address[network][pool][`address_${asset.unit}`];
                 balance = lendBalances[token_address] || "0";
                 apy = lendAPY[token_address] || "0";
                 mantissa = lendMantissa[token_address] || "0";
@@ -184,7 +189,8 @@ const getLendAsset = createSelector(
                 ).toString();
 
                 // Replaced now with address_USDC
-                USDprice = assetPrices[address[network][`address_USDC`]] || "0";
+                USDprice =
+                    assetPrices[address[network][pool][`address_USDC`]] || "0";
             }
             return {
                 ...asset,

@@ -60,13 +60,13 @@ const Markets = ({
                 <Grid container spacing={3}>
                     <Grid item lg={4} sm={6} xs={12}>
                         <MarketsCard
-                            title="Total Deposits"
+                            title="Total Protocol Deposits"
                             cardContent={totalDepositsContent}
                         />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
                         <MarketsCard
-                            title="Total Borrowed"
+                            title="Total Protocol Borrows"
                             cardContent={totalBorrowedContent}
                         />
                     </Grid>
