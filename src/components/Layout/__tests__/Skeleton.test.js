@@ -7,6 +7,12 @@ import AppBar from "containers/AppBar/AppBar";
 import Sidebar from "containers/Sidebar/Sidebar";
 import createShallow from "utils/tests-utils/createShallow";
 
+Object.defineProperty(global.self, "crypto", {
+    value: {
+        getRandomValues: (arr) => crypto.randomBytes(arr.length),
+    },
+});
+
 describe("<LayoutSkeleton />", () => {
     let shallow;
     let wrapper;
