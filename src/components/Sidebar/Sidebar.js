@@ -133,8 +133,8 @@ function Sidebar({
                             <SidebarDashboardItem />
                             <SidebarLendItem />
                             <SidebarBorrowItem />
-                            <SidebarMarketsItem />
                             <SidebarHistoryItem />
+                            <SidebarMarketsItem />
                             {walletIsLiquidator === true ? (
                                 <SidebarLiquidateItem />
                             ) : null}

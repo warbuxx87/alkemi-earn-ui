@@ -173,8 +173,8 @@ function PoolDialog({
                                     className={classes.toggleSubtitle}
                                     variant="body2"
                                 >
-                                    Access Earn's verified liquidity pool which
-                                    requires KYC user verification.
+                                    Alkemi Earn's 'Verified' pool is only
+                                    accessible for KYC approved users.
                                 </Typography>
                             </Box>
                         </ToggleButton>
@@ -193,7 +193,7 @@ function PoolDialog({
                                     target="_blank"
                                     rel="noreferrer"
                                 >
-                                    Get KYC Verified
+                                    Apply for KYC Verification{" "}
                                 </Link>
                             </Typography>
                         </Box>
@@ -226,8 +226,8 @@ function PoolDialog({
                                     className={classes.toggleSubtitle}
                                     variant="body2"
                                 >
-                                    Access Earn's open liquidity pool available
-                                    to everyone with a web3 wallet.
+                                    Alkemi Earn's 'Open' pool is accessible for
+                                    all using Metamask.
                                 </Typography>
                             </Box>
                         </ToggleButton>

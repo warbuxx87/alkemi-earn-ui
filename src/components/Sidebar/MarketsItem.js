@@ -22,7 +22,7 @@ const SidebarMarketsItem = ({ onClick, selected }) => (
                 variant="subtitle2"
                 style={{ fontSize: "0.875rem", lineHeight: 1.6 }}
             >
-                Markets
+                Protocol Overview
             </Typography>
         }
         onClick={onClick}

@@ -22,7 +22,7 @@ const SidebarLiquidateItem = ({ onClick, selected }) => (
                 variant="subtitle2"
                 style={{ fontSize: "0.875rem", lineHeight: 1.5 }}
             >
-                Liquidate
+                Liquidations
             </Typography>
         }
         onClick={onClick}

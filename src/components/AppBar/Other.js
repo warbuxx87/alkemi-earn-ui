@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
     menuitem: {
         fontSize: "0.875rem",
+        paddingRight: "40px",
     },
 }));
 
@@ -115,11 +116,20 @@ function Other() {
                     <MenuItem
                         className={classes.menuitem}
                         onClick={handleClose}
-                        href="//discord.gg/Y9vmtFjhHB"
+                        href="https://snapshot.org/#/alkemidao.eth"
                         target="_blank"
                         component="a"
                     >
-                        Discord
+                        Governance
+                    </MenuItem>
+                    <MenuItem
+                        className={classes.menuitem}
+                        onClick={handleClose}
+                        href="https://kyc.alkemi.network/#/auth/signup"
+                        target="_blank"
+                        component="a"
+                    >
+                        Get KYC Verified
                     </MenuItem>
                 </Box>
             </Menu>
