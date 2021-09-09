@@ -13,14 +13,14 @@ Object {
           class="Toastify"
         />
         <div
-          class="NoWhere-nowhere-62"
+          class="NoWhere-nowhere-11"
         >
           <div
-            class="NoWhere-nowhereHeader-63"
+            class="NoWhere-nowhereHeader-12"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root NoWhere-nowhereIcon-65"
+              class="MuiSvgIcon-root NoWhere-nowhereIcon-14"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -29,13 +29,13 @@ Object {
               />
             </svg>
             <h1
-              class="NoWhere-nowhereTitle-64"
+              class="NoWhere-nowhereTitle-13"
             >
               Oops... It seems that you are lost!
             </h1>
           </div>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined NoWhereDashboardButton-button-66"
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined NoWhereDashboardButton-button-15"
             tabindex="0"
             type="button"
           >
@@ -58,14 +58,14 @@ Object {
         class="Toastify"
       />
       <div
-        class="NoWhere-nowhere-62"
+        class="NoWhere-nowhere-11"
       >
         <div
-          class="NoWhere-nowhereHeader-63"
+          class="NoWhere-nowhereHeader-12"
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root NoWhere-nowhereIcon-65"
+            class="MuiSvgIcon-root NoWhere-nowhereIcon-14"
             focusable="false"
             viewBox="0 0 24 24"
           >
@@ -74,13 +74,13 @@ Object {
             />
           </svg>
           <h1
-            class="NoWhere-nowhereTitle-64"
+            class="NoWhere-nowhereTitle-13"
           >
             Oops... It seems that you are lost!
           </h1>
         </div>
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined NoWhereDashboardButton-button-66"
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined NoWhereDashboardButton-button-15"
           tabindex="0"
           type="button"
         >

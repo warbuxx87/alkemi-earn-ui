@@ -218,7 +218,7 @@ Object {
               class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
             >
               <div
-                class="MuiBox-root MuiBox-root-32 makeStyles-item-29"
+                class="MuiBox-root MuiBox-root-33 makeStyles-item-29"
               >
                 <div
                   class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center"
@@ -226,13 +226,28 @@ Object {
                   <div
                     class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
                   >
-                    <h6
-                      class="MuiTypography-root makeStyles-cardtitle-31 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
-                    >
-                      Borrow Limit
-                    </h6>
                     <div
-                      class="MuiBox-root MuiBox-root-33"
+                      class="MuiBox-root MuiBox-root-34"
+                    >
+                      <h6
+                        class="MuiTypography-root makeStyles-cardtitle-31 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                      >
+                        Borrow Limit
+                      </h6>
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root makeStyles-help-32"
+                        focusable="false"
+                        title="Liquidation occurs if limit equals or exceeds 100%"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+                        />
+                      </svg>
+                    </div>
+                    <div
+                      class="MuiBox-root MuiBox-root-35"
                     >
                       <h3
                         class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary"
@@ -262,10 +277,10 @@ Object {
             class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
           >
             <div
-              class="MuiBox-root MuiBox-root-34 makeStyles-tabs-3"
+              class="MuiBox-root MuiBox-root-36 makeStyles-tabs-3"
             >
               <div
-                class="MuiBox-root MuiBox-root-35"
+                class="MuiBox-root MuiBox-root-37"
               >
                 <div
                   class="MuiTabs-root makeStyles-tabs-3"
@@ -308,7 +323,7 @@ Object {
                         <span
                           class="MuiTab-wrapper"
                         >
-                          Active Borrowed
+                          Active Borrows
                         </span>
                         <span
                           class="MuiTouchRipple-root"
@@ -316,7 +331,7 @@ Object {
                       </button>
                     </div>
                     <span
-                      class="PrivateTabIndicator-root-36 PrivateTabIndicator-colorSecondary-38 MuiTabs-indicator"
+                      class="PrivateTabIndicator-root-38 PrivateTabIndicator-colorSecondary-40 MuiTabs-indicator"
                       style="left: 0px; width: 0px;"
                     />
                   </div>
@@ -326,13 +341,13 @@ Object {
                 class="MuiDivider-root"
               />
               <div
-                class="MuiBox-root MuiBox-root-40"
+                class="MuiBox-root MuiBox-root-42"
               >
                 <div
                   class="scrollbar-container ps"
                 >
                   <table
-                    class="MuiTable-root makeStyles-root-41"
+                    class="MuiTable-root makeStyles-root-43"
                   >
                     <tbody
                       class="MuiTableBody-root"
@@ -577,7 +592,7 @@ Object {
             class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
           >
             <div
-              class="MuiBox-root MuiBox-root-32 makeStyles-item-29"
+              class="MuiBox-root MuiBox-root-33 makeStyles-item-29"
             >
               <div
                 class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center"
@@ -585,13 +600,28 @@ Object {
                 <div
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
                 >
-                  <h6
-                    class="MuiTypography-root makeStyles-cardtitle-31 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
-                  >
-                    Borrow Limit
-                  </h6>
                   <div
-                    class="MuiBox-root MuiBox-root-33"
+                    class="MuiBox-root MuiBox-root-34"
+                  >
+                    <h6
+                      class="MuiTypography-root makeStyles-cardtitle-31 MuiTypography-subtitle1 MuiTypography-colorTextSecondary MuiTypography-alignLeft"
+                    >
+                      Borrow Limit
+                    </h6>
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root makeStyles-help-32"
+                      focusable="false"
+                      title="Liquidation occurs if limit equals or exceeds 100%"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="MuiBox-root MuiBox-root-35"
                   >
                     <h3
                       class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary"
@@ -621,10 +651,10 @@ Object {
           class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-lg-12"
         >
           <div
-            class="MuiBox-root MuiBox-root-34 makeStyles-tabs-3"
+            class="MuiBox-root MuiBox-root-36 makeStyles-tabs-3"
           >
             <div
-              class="MuiBox-root MuiBox-root-35"
+              class="MuiBox-root MuiBox-root-37"
             >
               <div
                 class="MuiTabs-root makeStyles-tabs-3"
@@ -667,7 +697,7 @@ Object {
                       <span
                         class="MuiTab-wrapper"
                       >
-                        Active Borrowed
+                        Active Borrows
                       </span>
                       <span
                         class="MuiTouchRipple-root"
@@ -675,7 +705,7 @@ Object {
                     </button>
                   </div>
                   <span
-                    class="PrivateTabIndicator-root-36 PrivateTabIndicator-colorSecondary-38 MuiTabs-indicator"
+                    class="PrivateTabIndicator-root-38 PrivateTabIndicator-colorSecondary-40 MuiTabs-indicator"
                     style="left: 0px; width: 0px;"
                   />
                 </div>
@@ -685,13 +715,13 @@ Object {
               class="MuiDivider-root"
             />
             <div
-              class="MuiBox-root MuiBox-root-40"
+              class="MuiBox-root MuiBox-root-42"
             >
               <div
                 class="scrollbar-container ps"
               >
                 <table
-                  class="MuiTable-root makeStyles-root-41"
+                  class="MuiTable-root makeStyles-root-43"
                 >
                   <tbody
                     class="MuiTableBody-root"

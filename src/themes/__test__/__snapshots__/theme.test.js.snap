@@ -213,6 +213,7 @@ Object {
     "warning": Object {
       "contrastText": "#fff",
       "dark": "rgb(145, 65, 39)",
+      "hover": "rgb(145, 65, 39)",
       "light": "rgb(217, 125, 96)",
       "main": "#d05d39",
     },
