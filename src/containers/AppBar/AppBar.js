@@ -21,7 +21,7 @@ import { getPool } from "redux/selectors/status/pool";
 import AppBar from "components/AppBar/AppBar";
 
 const locationToTitles = {
-    "/dashboard": "Account Overvew",
+    "/dashboard": "Account Overview",
     "/lend": "Lending",
     "/borrow": "Borrowing",
     "/markets": "Protocol Overview",

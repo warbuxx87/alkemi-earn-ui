@@ -186,7 +186,7 @@ const BorrowTable = ({
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Wallet
+                                        Available
                                     </Typography>
                                 </BorrowTableCell>
                                 <BorrowTableCell

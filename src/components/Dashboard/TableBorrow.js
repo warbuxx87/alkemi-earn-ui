@@ -121,7 +121,7 @@ export default function BorrowTables({
                                     variant="body2"
                                     color="textSecondary"
                                 >
-                                    Wallet
+                                    Available
                                 </Typography>
                             </BorrowTableCell>
                             <BorrowTableCell align="right">
