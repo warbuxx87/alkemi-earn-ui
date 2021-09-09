@@ -1,3 +1,19 @@
+## [1.19.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.19.1...v1.19.2) (2021-09-08)
+
+
+### Bug Fixes
+
+* changed 3 functions to comply with the new contract UI-490 ([bbed000](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bbed0007ddfe9d10cf90974914744b2d6a94683d))
+
+
+
+## [1.19.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.19.1...v1.19.2) (2021-09-08)
+
+
+### Bug Fixes
+
+* changed 3 functions to comply with the new contract UI-490 ([bbed000](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bbed0007ddfe9d10cf90974914744b2d6a94683d))
+
 ## [1.19.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.19.0...v1.19.1) (2021-09-02)
 
 
