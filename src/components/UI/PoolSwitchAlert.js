@@ -59,23 +59,22 @@ export default function PoolSwitchAlert({
     const bodies = {
         permissioned: (
             <>
-                Switching to the Verified liquidity pool requires KYC user
-                verification. If you are not KYC'd yet, feel free to do so by
-                following this link:&nbsp;&nbsp;
+                Now disconnecting from Alkemi Earn's 'Open' pool; KYC approval
+                is required to access the 'Verified' pool.:&nbsp;&nbsp;
                 <Link
-                    href="https://alkemi.network"
+                    href="https://kyc.alkemi.network/#/auth/signup"
                     target="_blank"
                     rel="noreferrer"
                     className={classes.link}
                 >
-                    Get KYC Verified
+                    Apply for KYC Verification here
                 </Link>
             </>
         ),
         open: (
             <>
-                By switching to the Open liquidity pool will be leaving Alkemi
-                Earn's KYC enviroment.
+                Now disconnecting from Alkemi Earn's KYC 'Verified' pool;
+                switching to the 'Open' pool.
             </>
         ),
     };
@@ -104,7 +103,7 @@ export default function PoolSwitchAlert({
                     </Typography>
                 </DialogTitle>
                 <DialogContent>
-                    <Typography variant="body1" className={classes.content}>
+                    <Typography variant="h6" className={classes.content}>
                         {bodies[chosenPool]}
                     </Typography>
                 </DialogContent>

@@ -118,6 +118,8 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
             buttonsLabel="Withdraw"
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
+            triggerDrawerColor="primary"
+            triggerApyColor="primary"
             enableButtonClick={enableWithdraw}
             onButtonClick={() =>
                 onTx({

@@ -178,6 +178,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
             buttonsLabel="Borrow"
             triggerButtonVariant="contained"
             enableButtonClick={enableBorrow}
+            showWarningColor={true}
             onButtonClick={() =>
                 onTx({
                     drizzle,

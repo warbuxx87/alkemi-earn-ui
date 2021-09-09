@@ -14,6 +14,7 @@ import {
     TableBody,
     TableRow,
     Typography,
+    Tooltip,
     makeStyles,
 } from "@material-ui/core";
 
@@ -128,7 +129,7 @@ const LendTable = ({
                 variant="body1"
                 color="textPrimary"
             >
-                Available Markets
+                Lend Markets
             </Typography>
             <PerfectScrollbar>
                 <Table className={classes.root}>
@@ -187,7 +188,7 @@ const LendTable = ({
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Wallet
+                                        Available
                                     </Typography>
                                 </LendTableCell>
                                 <LendTableCell
@@ -268,31 +269,45 @@ const LendTable = ({
                                         {row.activated ? (
                                             <DepositButton asset={row} />
                                         ) : (
-                                            <Button
-                                                type="button"
-                                                className={
-                                                    classes.btnActiveOutline
-                                                }
-                                                variant="outlined"
-                                                size="small"
-                                                color="secondary"
-                                                disabled={
-                                                    checkActivating(row, txs) ||
-                                                    needKYC
-                                                        ? !walletIsKYCd
-                                                        : false
-                                                }
-                                                onClick={() => onActivate(row)}
+                                            <Tooltip
+                                                className={classes.Tooltip}
+                                                title="Enable to allow lending"
+                                                placement="bottom"
+                                                arrow
                                             >
-                                                {checkActivating(row, txs) ? (
-                                                    <CircularProgress
-                                                        size={20}
-                                                        color="inherit"
-                                                    />
-                                                ) : (
-                                                    "Activate"
-                                                )}
-                                            </Button>
+                                                <Button
+                                                    type="button"
+                                                    className={
+                                                        classes.btnActiveOutline
+                                                    }
+                                                    variant="outlined"
+                                                    size="small"
+                                                    color="secondary"
+                                                    disabled={
+                                                        checkActivating(
+                                                            row,
+                                                            txs
+                                                        ) || needKYC
+                                                            ? !walletIsKYCd
+                                                            : false
+                                                    }
+                                                    onClick={() =>
+                                                        onActivate(row)
+                                                    }
+                                                >
+                                                    {checkActivating(
+                                                        row,
+                                                        txs
+                                                    ) ? (
+                                                        <CircularProgress
+                                                            size={20}
+                                                            color="inherit"
+                                                        />
+                                                    ) : (
+                                                        "Enable"
+                                                    )}
+                                                </Button>
+                                            </Tooltip>
                                         )}
                                     </Box>
                                 </LendTableCell>

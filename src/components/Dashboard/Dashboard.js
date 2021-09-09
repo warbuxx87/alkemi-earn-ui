@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 const tabs = [
     { value: "tabledeposit", label: "Active Deposits" },
-    { value: "tableborrow", label: "Active Borrowed" },
+    { value: "tableborrow", label: "Active Borrows" },
 ];
 
 function Dashboard() {

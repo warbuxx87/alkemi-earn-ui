@@ -33,6 +33,7 @@ const darkTheme = createMuiTheme({
         warning: {
             main: "#d05d39", //orange
             contrastText: "#fff",
+            hover: "rgb(145, 65, 39)",
         },
 
         error: {
