@@ -67,17 +67,17 @@ const DrawerClass = makeStyles((theme) =>
             fontSize: "0.875rem",
         },
         input: {
-            background: "#0a0a0a 0% 0% no-repeat padding-box",
+            background: "#08090c 0% 0% no-repeat padding-box",
             border: "1px solid #000000",
             opacity: 1,
             height: "54px",
             paddingLeft: "10px",
-            color: "white",
+            color: "#d8dade",
             fontSize: "18px",
             borderRadius: "4px",
         },
         rateInfo: {
-            color: "white",
+            color: "#d8dade",
             fontSize: "0.875rem",
             marginTop: "20px",
         },
@@ -94,6 +94,15 @@ const DrawerClass = makeStyles((theme) =>
         },
         vertCent: {
             margin: "auto",
+        },
+        warningText: {
+            color: theme.palette.warning.main,
+        },
+        warningBtn: {
+            backgroundColor: theme.palette.warning.main,
+            "&:hover": {
+                backgroundColor: theme.palette.warning.hover,
+            },
         },
     })
 );
@@ -114,6 +123,7 @@ const DrawerWrapper = ({
     triggerButtonVariant,
     amountValue,
     walletIsKYCd,
+    showWarningColor,
 }) => {
     const classes = DrawerClass();
 
@@ -178,7 +188,16 @@ const DrawerWrapper = ({
                     </Box>
                     <Divider />
                     <Box px={2} py={3} mx={2} mt={5} className={classes.aprBox}>
-                        <Typography variant="h2" color="primary" align="center">
+                        <Typography
+                            variant="h2"
+                            color="primary"
+                            align="center"
+                            className={
+                                showWarningColor === true
+                                    ? classes.warningText
+                                    : null
+                            }
+                        >
                             {formatPercent(asset.apy)} APY
                         </Typography>
 
@@ -206,6 +225,7 @@ const DrawerWrapper = ({
                                 </Grid>
                             </Grid>
                         </Box>
+
                         <div className={classes.inputWrap}>
                             <Input
                                 autoFocus={true}
@@ -217,13 +237,13 @@ const DrawerWrapper = ({
                                 value={amount}
                                 fullWidth={true}
                             />
+
                             <span
                                 className={classes.maxTips}
                                 onClick={onSetMax}
                             >
                                 MAX
                             </span>
-                            {/* onClick={() => { click_max(this) }} */}
                         </div>
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
@@ -303,7 +323,11 @@ const DrawerWrapper = ({
                         <Box className={classes.sendButtonDiv} mt={4}>
                             <Button
                                 type="button"
-                                className={classes.btnModal}
+                                className={
+                                    showWarningColor === true
+                                        ? classes.warningBtn
+                                        : null
+                                }
                                 variant="contained"
                                 color="primary"
                                 onClick={() => {

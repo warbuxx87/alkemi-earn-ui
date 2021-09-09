@@ -34,12 +34,13 @@ definitions:
         # DEFINE Code Analysis
         - step: &analyze
               name: Code Analysis
+              size: 2x
               caches:
                   - node
                   - sonar
               script:
-                  # Increase Node Memory Size to 2GB instead of default 512MB
-                  - export NODE_OPTIONS=--max_old_space_size=2048
+                  # Increase Node Memory Size to 6GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=6144
                   - npm install --quiet
                   - npm run test
                   - pipe: sonarsource/sonarcloud-scan:1.2.1
@@ -60,8 +61,8 @@ definitions:
               caches:
                   - node
               script:
-                  # Increase Node Memory Size to 7GB instead of default 512MB
-                  - export NODE_OPTIONS=--max_old_space_size=7168
+                  # Increase Node Memory Size to 6GB instead of default 512MB
+                  - export NODE_OPTIONS=--max_old_space_size=6144
                   - echo "Build"
                   - npm install --quiet
                   # Saves build version to a json file for cache-busting purposes

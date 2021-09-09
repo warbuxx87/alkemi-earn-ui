@@ -6,6 +6,8 @@ import { bindActionCreators, compose } from "redux";
 import web3 from "web3";
 import * as yup from "yup";
 
+import Big from "big.js";
+
 // Section 2: internal imports
 import {
     formatNumber,
@@ -14,9 +16,12 @@ import {
     fromWei,
     assetToDecimals,
     formatStringNumber,
+    formatETHMoneyOrgFee,
 } from "utils/ui";
 
 import DrizzleContext from "utils/DrizzleContext";
+
+import constants from "constants/constant.json";
 
 // Section 3: Selectors, Hooks & Action Listeners
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -24,10 +29,12 @@ import { onTx } from "redux/actions/status/transactions";
 
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
+
+import { getPool, isKYCPool } from "redux/selectors/status/pool";
 
 // Section 4: Import Underlying Components / Containers
-import Drawer from "components/UI/Drawer/DrawerBorrow";
+import Drawer from "components/UI/Drawer/Drawer";
 
 // Section 5: Code Container
 const BorrowDrawerContainer = ({ asset, onTx }) => {
@@ -40,7 +47,12 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
+    const needKYC = useSelector(isKYCPool);
+    const orginationFee = constants.orginationFee;
+
     const [amount, setAmount] = React.useState("");
+
+    const currentPool = useSelector(getPool);
 
     const onSetAmount = (newValue) => {
         const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
@@ -73,6 +85,46 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     const [enableBorrow, setEnableBorrow] = React.useState(false);
 
     const [isProcessing, setIsProcessing] = React.useState(false);
+
+    const [formattedOrginationFee, setFormattedOrginationFee] = React.useState(
+        "0.00"
+    );
+
+    const [calculatedBorrowFee, setCalculatedBorrowFee] = React.useState(0);
+
+    React.useEffect(() => {
+        if (amount && orginationFee) {
+            const amountBig = Big(amount);
+
+            const calculatedBorrowFeeBig = amountBig.times(Big(orginationFee));
+
+            if (calculatedBorrowFeeBig.gte(Big(0.000001)))
+                setCalculatedBorrowFee(
+                    parseFloat(calculatedBorrowFeeBig.toFixed(6))
+                );
+            else if (calculatedBorrowFeeBig.eq(Big(0)))
+                setCalculatedBorrowFee(0);
+            else setCalculatedBorrowFee("<0.000001");
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [amount, orginationFee]);
+
+    React.useEffect(() => {
+        if (asset.price && amount && asset.unit && USDPrice) {
+            setFormattedOrginationFee(
+                formatETHMoneyOrgFee(
+                    asset.price,
+                    amount,
+                    "USD",
+                    asset.unit,
+                    USDPrice
+                )
+            );
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [asset.price, amount, asset.unit, USDPrice]);
 
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
@@ -126,6 +178,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
             buttonsLabel="Borrow"
             triggerButtonVariant="contained"
             enableButtonClick={enableBorrow}
+            showWarningColor={true}
             onButtonClick={() =>
                 onTx({
                     drizzle,
@@ -135,6 +188,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
                     amount,
                     type: "borrow",
                     shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount,
+                    currentPool,
                 })
             }
             isDoingAction={isProcessing}
@@ -157,7 +211,12 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
                 null,
                 userWalletNetwork
             )}`}
-            walletIsKYCd={walletIsKYCd}
+            walletIsKYCd={needKYC ? walletIsKYCd : true}
+            displayOriginationFee={true}
+            orginationFee={orginationFee}
+            formattedOrginationFee={formattedOrginationFee}
+            calculatedBorrowFee={calculatedBorrowFee}
+            currentBalanceLabel="Current borrow balance"
         />
     );
 };

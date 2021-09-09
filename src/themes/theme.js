@@ -15,9 +15,10 @@ const darkTheme = createMuiTheme({
             darkGrey: "#151617",
         },
         background: {
-            default: "#000000", //Black
-            dark: "#1B1B1B", // Dark Grey
-            paper: "#0d0e10", // Light Grey
+            default: "#08090c", //Black
+            dark: "#000000", // Dark Grey #080a0c 1B1B1B
+            paper: "#13161a", // Light Grey  #0d0e10
+            light: "#161a1f",
         },
 
         primary: {
@@ -25,13 +26,14 @@ const darkTheme = createMuiTheme({
             contrastText: "#fff",
         },
         secondary: {
-            main: "#ffffff", //White
+            main: "#d8dade", //White
             contrastText: "#000",
         },
 
         warning: {
-            main: "#ff6534", //orange
+            main: "#d05d39", //orange
             contrastText: "#fff",
+            hover: "rgb(145, 65, 39)",
         },
 
         error: {
@@ -45,8 +47,8 @@ const darkTheme = createMuiTheme({
         },
 
         text: {
-            primary: "#ffffff", // White
-            secondary: "#8c8c8c", // Light Grey
+            primary: "#d8dade", // White
+            secondary: "#868998", // Light Grey
             success: "#3cb34f", //Green
             disabled: "rgba(255, 255, 255, 1)",
             hint: "rgba(184, 233, 134, 1)",

@@ -6,6 +6,9 @@ import _ from "lodash";
 import { compare_supply, compare_borrow } from "utils/markets";
 
 import { walletNetworkName } from "redux/selectors/data/onboard";
+import { getPool } from "redux/selectors/status/pool";
+
+import marketsByNetwork from "constants/markets_by_network.json";
 
 const url_map = require("constants/url_map.json");
 
@@ -22,12 +25,21 @@ const useFetchMarkets = (fetchPeriodically = false) => {
 
     const [calculationsTotals, setCalculationsTotals] = useState({});
 
+    const currentPool = useSelector(getPool);
+
     useEffect(() => {
         let timer;
 
         // move this async call to redux if needs to be called from more than one place
         const get_markets_data = () => {
-            const markets_api = url_map[currentNetworkName].markets_url;
+            if (
+                !url_map[currentNetworkName][currentPool] ||
+                !url_map[currentNetworkName][currentPool].markets_url
+            )
+                return;
+
+            const markets_api =
+                url_map[currentNetworkName][currentPool].markets_url;
 
             fetch(markets_api)
                 .then((res) => {
@@ -37,10 +49,22 @@ const useFetchMarkets = (fetchPeriodically = false) => {
                     if (data) {
                         let obj_data = JSON.parse(data);
 
-                        let key_markets = Object.keys(obj_data);
+                        // filtering data by network and pool
+                        const arrayOfAssets =
+                            marketsByNetwork[currentNetworkName][currentPool];
+
+                        const dataFilteredByAssets = obj_data.filter(
+                            (marketData) =>
+                                arrayOfAssets.includes(
+                                    Object.values(marketData)[0].symbol
+                                )
+                        );
+                        // could filter out past tokens from here based on only configured assets in UI
+
+                        let key_markets = Object.keys(dataFilteredByAssets);
 
                         const arr_markets = key_markets.map((e) => {
-                            return obj_data[e];
+                            return dataFilteredByAssets[e];
                         });
 
                         let totalSupplyBalanceUSD = 0;
@@ -114,20 +138,23 @@ const useFetchMarkets = (fetchPeriodically = false) => {
                 });
         };
 
-        const getMarketsData = () => {
-            if (currentNetworkName !== undefined) get_markets_data();
+        const getMarketsData = (fetchPeriodically) => {
+            if (currentNetworkName !== undefined) get_markets_data(); // TODO: retest this call when open network is set for main network
 
             if (fetchPeriodically === true) {
-                timer = setTimeout(getMarketsData, 15 * 1000);
+                timer = setTimeout(
+                    () => getMarketsData(fetchPeriodically),
+                    30 * 1000
+                );
             }
         };
 
-        if (currentNetworkName !== undefined) getMarketsData();
+        if (currentNetworkName !== undefined) getMarketsData(fetchPeriodically);
 
         return () => {
             if (timer) clearTimeout(timer);
         };
-    }, [dispatch, fetchPeriodically, currentNetworkName]);
+    }, [dispatch, fetchPeriodically, currentNetworkName, currentPool]);
 
     return { marketsData, supplyArray, borrowArray, calculationsTotals };
 };

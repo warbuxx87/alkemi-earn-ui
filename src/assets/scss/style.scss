@@ -3,9 +3,10 @@
 
 // BNC onboard modal styling
 .bn-onboard-dark-mode {
-    background-color: #0d0e10 !important;
+    background-color: #13161a !important;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
     padding: 0px !important;
+    border-radius: 4px !important;
 }
 .bn-onboard-modal-content-header {
     padding: 16px 16px 16px 16px !important;
@@ -17,7 +18,7 @@
     color: #fff !important;
 }
 .bn-onboard-dark-mode-background {
-    background-color: #0d0e10 !important;
+    background-color: #13161a !important;
 }
 .bn-onboard-dark-mode-background-hover:hover {
     background-color: #151617 !important;
@@ -41,6 +42,7 @@
 .bn-onboard-modal-selected-wallet {
   padding: 0px 16px 16px 16px !important;
 }
+
 
 // BNC wallet buttons
 .bn-onboard-icon-button {
@@ -96,7 +98,7 @@
 }
 
 .bn-onboard-selected-wallet {
-  background: #313234 !important;
+  background: #282b31 !important;
 }
 
 // BNC Error Message
@@ -107,25 +109,24 @@
 //BNC onboard Modal // background overlay
 .bn-onboard-modal {
     z-index: 1200 !important;
-    background: rgba(0, 0, 0, 0.5) !important;
-    align-items: flex-start !important;
+    background: rgba(0, 1, 5, 0.5) !important;
     position: absolute !important;
-    padding-top: 20vh !important;
+
 }
 
 // Toastify
 .Toastify__toast--default {
-    background: transparent !important;
+    background: #efefef !important;
     margin-bottom: 8px !important;
 }
 .fMyqQI {
     &:nth-child(1) {
-        width: 320px;
+        width: 300px;
         margin-top: 0px;
     }
 }
 .Toastify__toast-container {
-    width: 340px !important;
+    width: 320px !important;
     padding-top: 0px !important;
 }
 

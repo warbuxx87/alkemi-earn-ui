@@ -140,7 +140,7 @@ const LendTableActive = ({ data = [], USDPrice, userWalletNetwork }) => {
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        Supplied
+                                        Balance
                                     </Typography>
                                 </LendTableCell>
                                 <LendTableCell

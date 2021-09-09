@@ -7,6 +7,9 @@ import { getAggregatedDepositAPY } from "./lend";
 import { getAggregatedBorrowAPY } from "./borrow";
 
 import { walletNetworkName } from "./onboard";
+import { getPool } from "../status/pool";
+
+import constants from "constants/constant.json";
 
 const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(
@@ -109,9 +112,11 @@ export const getCombinedAPY = createSelector(
 
 export const getUSDPrice = (state) => {
     const currentNetworkName = walletNetworkName(state);
+    const pool = getPool(state);
 
     if (currentNetworkName) {
-        const contractAddress = address[currentNetworkName][`address_USDC`];
+        const contractAddress =
+            address[currentNetworkName][pool][`address_USDC`];
 
         const assetPrices = Object.values(
             _.get(state, "contracts.MoneyMarket.assetPrices", {})
@@ -179,14 +184,24 @@ export const getAggregatedBalance = createSelector(
 
 export const getMarketLiquidity = (state) => {
     const currentNetworkName = walletNetworkName(state);
+    const pool = getPool(state);
 
     if (currentNetworkName) {
         const assetLiquidity = {};
 
+        // Retrieve current pool (permissioned or open)
+        const currentPool = getPool(state);
+
+        const address_MoneyMarket =
+            currentPool === "open"
+                ? address[currentNetworkName].address_open_MoneyMarket
+                : address[currentNetworkName].address_MoneyMarket;
+
         Object.keys(state.contracts).forEach((asset) => {
-            if (asset !== "MoneyMarket") {
+            if (constants.assets.includes(asset)) {
                 let assetName = "address_" + asset;
-                const assetAddress = address[currentNetworkName][assetName];
+                const assetAddress =
+                    address[currentNetworkName][pool][assetName];
                 //  console.log(assetAddress);
 
                 try {
@@ -196,10 +211,7 @@ export const getMarketLiquidity = (state) => {
 
                     liquidity.forEach((balance) => {
                         // only want to grab balanceOf each tokenContract for MoneyMarket Contract
-                        if (
-                            balance.args[0] ===
-                            address[currentNetworkName].address_MoneyMarket
-                        ) {
+                        if (balance.args[0] === address_MoneyMarket) {
                             //  console.log(balance);
                             let value = _.get(balance, "value");
                             // console.log(value);

@@ -37,8 +37,11 @@ function Borrow({
     onActivate,
     USDPrice,
     txs,
+    needKYC,
     walletIsKYCd,
     userWalletNetwork,
+    marketsData,
+    walletConnected,
 }) {
     const classes = useStyles();
     return (
@@ -49,10 +52,10 @@ function Borrow({
                         <BorrowCardValue />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <BorrowCardLimit />
+                        <BorrowCardAPY />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <BorrowCardAPY />
+                        <BorrowCardLimit />
                     </Grid>
                     {!!activeBorrow.length && (
                         <Grid item lg={12} xs={12}>
@@ -70,7 +73,10 @@ function Borrow({
                                 onActivate={onActivate}
                                 txs={txs}
                                 walletIsKYCd={walletIsKYCd}
+                                needKYC={needKYC}
                                 userWalletNetwork={userWalletNetwork}
+                                marketsData={marketsData}
+                                walletConnected={walletConnected}
                             />
                         </Grid>
                     )}

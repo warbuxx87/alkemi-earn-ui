@@ -38,8 +38,14 @@ function Lend({
     USDPrice,
     displayAllocateButton,
     txs,
+    needKYC,
     walletIsKYCd,
     userWalletNetwork,
+
+    calculatedInterest,
+    fetchInterestErrorStatus,
+    marketsData,
+    walletConnected,
 }) {
     const classes = useStyles();
     return (
@@ -50,10 +56,14 @@ function Lend({
                         <LendCardValue />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <LendCardInterest />
+                        <LendCardAPY />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <LendCardAPY />
+                        <LendCardInterest
+                            calculatedInterest={calculatedInterest}
+                            fetchInterestErrorStatus={fetchInterestErrorStatus}
+                            walletConnected={walletConnected}
+                        />
                     </Grid>
                     {!!activeLend.length && (
                         <Grid item lg={12} xs={12}>
@@ -72,7 +82,10 @@ function Lend({
                                 displayAllocateButton={displayAllocateButton}
                                 txs={txs}
                                 walletIsKYCd={walletIsKYCd}
+                                needKYC={needKYC}
                                 userWalletNetwork={userWalletNetwork}
+                                marketsData={marketsData}
+                                walletConnected={walletConnected}
                             />
                         </Grid>
                     )}{" "}

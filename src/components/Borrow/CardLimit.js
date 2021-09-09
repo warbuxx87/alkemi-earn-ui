@@ -12,9 +12,11 @@ import {
     CardHeader,
     Divider,
     LinearProgress,
+    Tooltip,
     Typography,
     makeStyles,
 } from "@material-ui/core";
+import Help from "@material-ui/icons/HelpOutline";
 
 // Section 3: Components & Containers import from the application
 
@@ -29,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     item: {
         textAlign: "center",
         justifyContent: "center",
+        paddingRight: "4px",
     },
     progress: {
         margin: theme.spacing(0, 1, 0, 3),
@@ -36,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
         background: "rgb(255 254 254 / 10%)",
         height: 7,
         borderRadius: 5,
+    },
+    help: {
+        width: "16px",
+        height: "16px",
+        color: "#868998",
     },
 }));
 
@@ -45,7 +53,17 @@ function BorrowLimit({ borrowLimit }) {
     // Section 5: Code Component
     return (
         <Card>
-            <CardHeader title="Borrow Limit" className={classes.item} />
+            <Box display="flex" alignItems="center" justifyContent="center">
+                <CardHeader title="Borrow Limit" className={classes.item} />
+                <Tooltip
+                    className={classes.Tooltip}
+                    title="Liquidation occurs if limit equals or exceeds 100%"
+                    placement="bottom"
+                    arrow
+                >
+                    <Help className={classes.help} />
+                </Tooltip>
+            </Box>
             <Divider />
             <CardContent>
                 <Box
@@ -56,7 +74,7 @@ function BorrowLimit({ borrowLimit }) {
                     alignItems="center"
                     flexWrap="wrap"
                 >
-                    <Typography variant="h3" color="textPrimary">
+                    <Typography variant="h2" color="textPrimary">
                         {borrowLimit.toFixed(2)}%
                     </Typography>
                     <LinearProgress

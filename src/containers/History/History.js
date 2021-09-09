@@ -23,7 +23,7 @@ import {
 // Section 4: Container Code
 
 const HistoryContainer = ({ txPending, txError }) => {
-    useFetchTx(); // gets txList from Etherscan
+    useFetchTx(true); // gets user wallet's tx list
 
     const walletConnected = useSelector(isWalletConnected);
 

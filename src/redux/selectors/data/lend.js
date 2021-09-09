@@ -1,9 +1,14 @@
 // Libs
 import { createSelector } from "reselect";
 import _ from "lodash";
+import Big from "big.js";
+import web3 from "web3";
+
 import address from "constants/address_map.json";
 import { walletNetworkName } from "redux/selectors/data/onboard";
-import web3 from "web3";
+import { getPool } from "redux/selectors/status/pool";
+
+import constants from "constants/constant.json";
 
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
 
@@ -23,7 +28,7 @@ function calculateUtilization(totalBorrow, totalSupply) {
 const getAllowances = (state) => {
     const allowances = {};
     Object.keys(state.contracts).forEach((asset) => {
-        if (asset !== "MoneyMarket") {
+        if (constants.assets.includes(asset)) {
             const allowance = Object.values(state.contracts[asset].allowance);
             allowances[asset] = _.get(allowance, "[0].value", "0") !== "0";
         }
@@ -128,6 +133,7 @@ const getAssetPrices = (state) => {
 const getLendAsset = createSelector(
     (state) => lendAssetSelector(state),
     (state) => walletNetworkName(state),
+    (state) => getPool(state),
     (state) => lendBalanceSelector(state),
     (state) => lendAPYSelector(state),
     (state) => lendRateMantissaSelector(state),
@@ -139,6 +145,7 @@ const getLendAsset = createSelector(
     (
         assets,
         network,
+        pool,
         lendBalances,
         lendAPY,
         lendMantissa,
@@ -162,8 +169,9 @@ const getLendAsset = createSelector(
             let USDprice = "0";
             let liquidity = "0";
 
-            if (network) {
-                const token_address = address[network][`address_${asset.unit}`];
+            if (network && address[network] && address[network][pool]) {
+                const token_address =
+                    address[network][pool][`address_${asset.unit}`];
                 balance = lendBalances[token_address] || "0";
                 apy = lendAPY[token_address] || "0";
                 mantissa = lendMantissa[token_address] || "0";
@@ -181,7 +189,8 @@ const getLendAsset = createSelector(
                 ).toString();
 
                 // Replaced now with address_USDC
-                USDprice = assetPrices[address[network][`address_USDC`]] || "0";
+                USDprice =
+                    assetPrices[address[network][pool][`address_USDC`]] || "0";
             }
             return {
                 ...asset,
@@ -241,3 +250,27 @@ export const getLendPending = (state) =>
     Object.values(state.data.lend.assets).filter((asset) => asset.pending);
 
 export const getLendError = (state) => state.data.lend.error;
+
+//
+
+export const getCalculatedInterests = (state) => {
+    const calculatedInterests = state.data.lend.calculatedInterests;
+    let totalCalculatedInterest = Big(0);
+
+    for (let [key] of Object.entries(calculatedInterests)) {
+        // some entries might not have the value ready yet (or errored), display anyway
+        try {
+            if (calculatedInterests[key]) {
+                totalCalculatedInterest = totalCalculatedInterest.plus(
+                    Big(calculatedInterests[key])
+                );
+            }
+        } catch (e) {}
+    }
+
+    return totalCalculatedInterest.toFixed(18);
+};
+
+export const getInterestErrorStatus = (state) => {
+    return state.data.lend.fetchInterestError;
+};

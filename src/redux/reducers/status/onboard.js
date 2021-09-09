@@ -6,7 +6,7 @@ import {
     SET_WALLET_BALANCE,
 } from "redux/actions/status/onboard";
 
-const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
+const DEFAULT_NETWORK = parseInt(process.env.REACT_APP_DEFAULT_NETWORK, 10);
 
 // Define initial state
 const initialState = {

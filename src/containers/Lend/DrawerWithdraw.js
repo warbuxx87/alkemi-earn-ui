@@ -24,7 +24,9 @@ import DrizzleContext from "utils/DrizzleContext";
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
-import { getTransactions } from "redux/selectors/status";
+import { getTransactions } from "redux/selectors/status/status";
+
+import { getPool } from "redux/selectors/status/pool";
 
 const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
@@ -37,6 +39,8 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
 
     const [amount, setAmount] = React.useState("");
     const [shouldSendMax, setShouldSendMax] = React.useState(false);
+
+    const currentPool = useSelector(getPool);
 
     const onSetAmount = (newValue) => {
         setShouldSendMax(false);
@@ -114,6 +118,8 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
             buttonsLabel="Withdraw"
             triggerButtonColor="secondary"
             triggerButtonVariant="outlined"
+            triggerDrawerColor="primary"
+            triggerApyColor="primary"
             enableButtonClick={enableWithdraw}
             onButtonClick={() =>
                 onTx({
@@ -124,6 +130,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
                     amount,
                     shouldSendMax,
                     type: "withdraw",
+                    currentPool,
                 })
             }
             isDoingAction={isProcessing}

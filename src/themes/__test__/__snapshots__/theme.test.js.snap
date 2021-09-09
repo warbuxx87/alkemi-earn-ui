@@ -55,6 +55,11 @@ Object {
         "paddingTop": 22,
       },
     },
+    "MuiBackdrop": Object {
+      "root": Object {
+        "backgroundColor": "rgba(0, 1, 6, 0.7)",
+      },
+    },
     "MuiButton": Object {
       "root": Object {
         "textTransform": "capitalize",
@@ -62,7 +67,7 @@ Object {
     },
     "MuiDivider": Object {
       "root": Object {
-        "backgroundColor": "#000000",
+        "backgroundColor": "rgba(255, 255, 255, 0.10)",
       },
     },
     "MuiInput": Object {
@@ -91,9 +96,16 @@ Object {
         "color": "#000000",
       },
     },
-    "MuiPopover": Object {
-      "paper": Object {
-        "border": "solid 1px #080808",
+    "MuiTab": Object {
+      "root": Object {
+        "&:first-of-type": Object {
+          "marginLeft": "0px !important",
+        },
+        "marginLeft": "16px !important",
+        "marginRight": "16px !important",
+        "minWidth": "fit-content !important",
+        "paddingLeft": "0px !important",
+        "paddingRight": "0px !important",
       },
     },
     "MuiToolbar": Object {
@@ -103,12 +115,12 @@ Object {
     },
     "MuiTooltip": Object {
       "arrow": Object {
-        "color": "#000",
+        "color": "#fff",
       },
       "tooltip": Object {
-        "backgroundColor": "#000",
-        "color": "#fff",
-        "fontSize": "12px",
+        "backgroundColor": "#fff",
+        "color": "#000",
+        "fontSize": "11px",
         "fontWeight": 400,
       },
     },
@@ -129,9 +141,10 @@ Object {
     },
     "augmentColor": [Function],
     "background": Object {
-      "dark": "#1B1B1B",
-      "default": "#000000",
-      "paper": "#0d0e10",
+      "dark": "#000000",
+      "default": "#08090c",
+      "light": "#161a1f",
+      "paper": "#13161a",
     },
     "common": Object {
       "black": "#000",
@@ -177,9 +190,9 @@ Object {
     },
     "secondary": Object {
       "contrastText": "#000",
-      "dark": "rgb(178, 178, 178)",
-      "light": "rgb(255, 255, 255)",
-      "main": "#ffffff",
+      "dark": "rgb(151, 152, 155)",
+      "light": "rgb(223, 225, 228)",
+      "main": "#d8dade",
     },
     "success": Object {
       "contrastText": "#fff",
@@ -191,17 +204,18 @@ Object {
       "disabled": "rgba(255, 255, 255, 1)",
       "hint": "rgba(184, 233, 134, 1)",
       "icon": "rgba(255, 255, 255, 0.5)",
-      "primary": "#ffffff",
-      "secondary": "#8c8c8c",
+      "primary": "#d8dade",
+      "secondary": "#868998",
       "success": "#3cb34f",
     },
     "tonalOffset": 0.2,
     "type": "dark",
     "warning": Object {
       "contrastText": "#fff",
-      "dark": "rgb(178, 70, 36)",
-      "light": "rgb(255, 131, 92)",
-      "main": "#ff6534",
+      "dark": "rgb(145, 65, 39)",
+      "hover": "rgb(145, 65, 39)",
+      "light": "rgb(217, 125, 96)",
+      "main": "#d05d39",
     },
   },
   "props": Object {},
@@ -258,7 +272,7 @@ Object {
   "typography": Object {
     "body1": Object {
       "@media (min-width:1940px)": Object {
-        "fontSize": "0.9375rem",
+        "fontSize": "1rem",
       },
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
       "fontSize": "0.875rem",
@@ -313,13 +327,13 @@ Object {
       },
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
       "fontSize": "1.5rem",
-      "fontWeight": 500,
+      "fontWeight": 400,
       "letterSpacing": "-0.00833em",
       "lineHeight": 1.2,
     },
     "h3": Object {
       "@media (min-width:1940px)": Object {
-        "fontSize": "1.625rem",
+        "fontSize": "1.5rem",
       },
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
       "fontSize": "1.375rem",
@@ -366,18 +380,15 @@ Object {
     "pxToRem": [Function],
     "round": [Function],
     "subtitle1": Object {
-      "@media (min-width:1940px)": Object {
-        "fontSize": "0.8125rem",
-      },
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-      "fontSize": "0.75rem",
+      "fontSize": "0.8125rem",
       "fontWeight": 400,
       "letterSpacing": "0.00938em",
       "lineHeight": 1.7,
     },
     "subtitle2": Object {
       "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
-      "fontSize": 11,
+      "fontSize": "0.875rem",
       "fontWeight": 400,
       "letterSpacing": "0.00714em",
       "lineHeight": 1.3,

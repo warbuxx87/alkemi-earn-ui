@@ -4,12 +4,13 @@ exports[`<LayoutSkeleton /> matches snapshot 1`] = `
 <div
   className="LayoutSkeleton-frame-1"
 >
+  <PoolSelectContainer />
   <Connect(WithWidth(WithStyles(Sidebar))) />
   <div
     className="LayoutSkeleton-content-3"
   >
     <AppBarContainer />
-    <ConnectionBanner />
+    <Banner />
     <LayoutContent />
   </div>
 </div>

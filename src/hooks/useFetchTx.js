@@ -13,8 +13,8 @@ import DrizzleContext from "utils/DrizzleContext";
 import { fetchTx } from "redux/actions/data/tx";
 
 import { walletAddress } from "redux/selectors/data/onboard";
+import { getPool } from "redux/selectors/status/pool";
 
-// Retrieve the tx List every 60 seconds from EtherScan
 const useFetchTx = (fetchPeriodically = false) => {
     const drizzle = useContext(DrizzleContext);
     const dispatch = useDispatch();
@@ -23,8 +23,10 @@ const useFetchTx = (fetchPeriodically = false) => {
     const currentNetworkName = useSelector(walletNetworkName);
     const address = useSelector(walletAddress);
 
+    const currentPool = useSelector(getPool);
+
     useEffect(
-        (fetchPeriodically) => {
+        () => {
             let timer;
 
             const getTxList = (fetchPeriodically) => {
@@ -33,11 +35,15 @@ const useFetchTx = (fetchPeriodically = false) => {
                         currentNetworkName,
                         address,
                         drizzle,
+                        currentPool,
                     })
                 );
 
                 if (fetchPeriodically === true) {
-                    timer = setTimeout(getTxList, 60 * 1000);
+                    timer = setTimeout(
+                        () => getTxList(fetchPeriodically),
+                        60 * 1000
+                    );
                 }
             };
 
@@ -55,6 +61,7 @@ const useFetchTx = (fetchPeriodically = false) => {
             walletConnected,
             drizzle,
             fetchPeriodically,
+            currentPool,
             dispatch,
         ] // TODO check blocksData constant refresh
     );

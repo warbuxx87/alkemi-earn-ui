@@ -13,12 +13,19 @@ import DrizzleContext from "utils/DrizzleContext";
 import { onTx } from "redux/actions/status/transactions";
 
 import useOnboard from "hooks/useOnboard";
+import useFetchInterest from "hooks/useFetchInterest";
+import useFetchMarkets from "hooks/useFetchMarkets";
+
+import constants from "constants/constant.json";
+import marketsByNetwork from "constants/markets_by_network.json";
 
 // Section 3: Selectors
 import {
     getLendError,
     getLendActive,
     getLendInactive,
+    getCalculatedInterests,
+    getInterestErrorStatus,
 } from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -29,11 +36,16 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
+
+import { getPool, isKYCPool } from "redux/selectors/status/pool";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const { onConnect } = useOnboard();
+    useFetchInterest();
+
+    const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -46,6 +58,44 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
 
+    const calculatedInterest = useSelector(getCalculatedInterests);
+    const fetchInterestErrorStatus = useSelector(getInterestErrorStatus);
+    const currentPool = useSelector(getPool);
+    const needKYC = useSelector(isKYCPool);
+
+    const [inactiveMarketsData, setInactiveMarketsData] = React.useState([]);
+    const [activeMarketsData, setActiveMarketsData] = React.useState([]);
+
+    React.useEffect(() => {
+        if (!userWalletNetwork) return;
+        if (!currentPool) return;
+
+        const network = constants.network_type[userWalletNetwork];
+
+        const arrayOfAssets = marketsByNetwork[network][currentPool];
+
+        setInactiveMarketsData(
+            inactiveLend.filter((marketData) =>
+                arrayOfAssets.includes(marketData.unit)
+            )
+        );
+    }, [inactiveLend, currentPool, userWalletNetwork]);
+
+    React.useEffect(() => {
+        if (!userWalletNetwork) return;
+        if (!currentPool) return;
+
+        const network = constants.network_type[userWalletNetwork];
+
+        const arrayOfAssets = marketsByNetwork[network][currentPool];
+
+        setActiveMarketsData(
+            activeLend.filter((marketData) =>
+                arrayOfAssets.includes(marketData.unit)
+            )
+        );
+    }, [activeLend, currentPool, userWalletNetwork]);
+
     const activateAsset = (asset) =>
         onActivate({
             drizzle,
@@ -53,12 +103,13 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             userWalletAddress,
             asset,
             type: "approve",
+            currentPool,
         });
 
     return (
         <Lend
-            inactiveLend={inactiveLend}
-            activeLend={activeLend}
+            inactiveLend={inactiveMarketsData}
+            activeLend={activeMarketsData}
             onActivate={walletConnected ? activateAsset : onConnect}
             errorLend={errorLend}
             USDPrice={USDPrice}
@@ -67,7 +118,12 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             }
             txs={txs}
             walletIsKYCd={walletIsKYCd}
+            needKYC={needKYC}
             userWalletNetwork={userWalletNetwork}
+            calculatedInterest={calculatedInterest}
+            fetchInterestErrorStatus={fetchInterestErrorStatus}
+            marketsData={marketsData}
+            walletConnected={walletConnected}
         />
     );
 };

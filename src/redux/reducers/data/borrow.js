@@ -32,6 +32,8 @@ const assets = {
     WBTC: createData("Wrapped Bitcoin", "WBTC", wbtc, "0"),
 };
 
+const allowedActionNames = ["DAI", "USDC", "WBTC"]; // under the hood ETH is used out of user wallet, we cannot change all references form WETH to ETH as WETH is used in some other places, so this is the cleanest way found to make this exception for ETH
+
 // Define initial state
 const initialState = {
     assets,
@@ -47,10 +49,17 @@ const borrowReducer = (state = initialState, action) => {
                     // don't update wallet balance of the main smartContract
                     // need this filter so that main contracts liquidity is not returned as the user's local wallet balance
                     if (
+                        // check if the contract address linked to the action is not the address of moneyMarket (in any of the networks)
                         !Object.values(address)
                             .map((net) => net.address_MoneyMarket)
-                            .includes(action.args[0]) && // check if the contract address linked to the action is not the address of moneyMarket (in any of the networks)
-                        action.name !== "WETH" // under the hood ETH is used out of user wallet, we cannot change all references form WETH to ETH as WETH is used in some other places, so this is the cleanest way found to make this exception for ETH
+                            .includes(action.args[0]) &&
+                        !Object.values(address)
+                            .map((net) => net.address_open_MoneyMarket)
+                            .includes(action.args[0]) &&
+                        !Object.values(address)
+                            .map((net) => net.address_ALK_TOKEN)
+                            .includes(action.args[0]) &&
+                        allowedActionNames.includes(action.name)
                     ) {
                         return {
                             ...state,

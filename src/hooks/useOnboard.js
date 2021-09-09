@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import onboard from "utils/onboard";
 
 import { initContracts, deleteAllContracts } from "utils/contracts";
-import { resetLendData } from "redux/actions/data/lend";
+import { resetLendData, cancelFetchInterest } from "redux/actions/data/lend";
 import { resetBorrowData } from "redux/actions/data/borrow";
 import { resetTxDataAndCancelFetch } from "redux/actions/data/tx";
 
@@ -27,8 +27,12 @@ import {
     walletNetwork,
     walletBalance,
 } from "redux/selectors/data/onboard";
+import { getPool } from "redux/selectors/status/pool";
 
 import DrizzleContext from "utils/DrizzleContext";
+
+import address from "constants/address_map.json";
+import constants from "constants/constant.json";
 
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
@@ -44,6 +48,8 @@ const useOnboard = () => {
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
     const userWalletBalance = useSelector(walletBalance);
+
+    const currentPool = useSelector(getPool);
 
     // get previous selected wallet
     useEffect(() => {
@@ -89,7 +95,8 @@ const useOnboard = () => {
     const resetStoreData = useCallback(() => {
         dispatch(resetLendData());
         dispatch(resetBorrowData());
-        dispatch(resetTxDataAndCancelFetch());
+        dispatch(resetTxDataAndCancelFetch(dispatch));
+        dispatch(cancelFetchInterest());
         // ADD more stores to reset if needs be
     }, [dispatch]);
 
@@ -145,14 +152,22 @@ const useOnboard = () => {
                     dispatch(setWalletAddress(currentWalletAddress));
                 }
 
+                const network = constants.network_type[currentWalletNetwork];
+                const address_MoneyMarket =
+                    currentPool === "open"
+                        ? address[network].address_open_MoneyMarket
+                        : address[network].address_MoneyMarket;
+
                 // account connected
-                initContracts(
+                initContracts({
                     drizzle,
-                    currentWalletAddress,
-                    currentWalletNetwork,
+                    userWalletAddress: currentWalletAddress,
+                    userWalletNetwork: currentWalletNetwork,
                     currentWalletBalance,
-                    forceUpdate
-                );
+                    forceUpdate,
+                    address_MoneyMarket,
+                    currentPool,
+                });
 
                 if (drizzle && drizzle.web3 && drizzle.web3.currentProvider) {
                     try {
@@ -228,6 +243,7 @@ const useOnboard = () => {
         currentState.network,
         currentState.balance,
         userWalletBalance,
+        currentPool,
     ]);
 
     const onConnect = async () => {

@@ -21,8 +21,13 @@ import {
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
-import { isWalletKYCd, getTransactions } from "redux/selectors/status";
+import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
+import { getPool, isKYCPool } from "redux/selectors/status/pool";
+
+// Section 4: Import Underlying Components / Containers
+
+// Section 5: Code Container
 const DrawerAllocateContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
@@ -30,10 +35,14 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
+    const needKYC = useSelector(isKYCPool);
+
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
 
     const [amount, setAmount] = React.useState("");
+
+    const currentPool = useSelector(getPool);
 
     const onSetAmount = (newValue) => {
         const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
@@ -98,6 +107,7 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
                     amount,
                     type: "allocate",
                     shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
+                    currentPool,
                 })
             }
             isDoingAction={isProcessing}
@@ -112,7 +122,7 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
                 asset.unit,
                 userWalletNetwork
             )}`}
-            walletIsKYCd={walletIsKYCd}
+            walletIsKYCd={needKYC ? walletIsKYCd : true}
         />
     );
 };

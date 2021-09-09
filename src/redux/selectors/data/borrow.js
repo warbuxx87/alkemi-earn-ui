@@ -3,9 +3,11 @@ import { createSelector } from "reselect";
 import _ from "lodash";
 import address from "constants/address_map.json";
 import { walletNetworkName } from "redux/selectors/data/onboard";
+import { getPool } from "redux/selectors/status/pool";
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
 import web3 from "web3";
 import Big from "big.js";
+import constants from "constants/constant.json";
 
 // Helpers
 function calculateInterest(rateMantissa) {
@@ -23,7 +25,7 @@ function calculateUtilization(totalBorrow, totalSupply) {
 const getAllowances = (state) => {
     const allowances = {};
     Object.keys(state.contracts).forEach((asset) => {
-        if (asset !== "MoneyMarket") {
+        if (constants.assets.includes(asset)) {
             const allowance = Object.values(state.contracts[asset].allowance);
             allowances[asset] = _.get(allowance, "[0].value", "0") !== "0";
         }
@@ -144,6 +146,7 @@ const borrowPrincipalSelector = (state) => {
 const getBorrowAsset = createSelector(
     (state) => borrowAssetSelector(state),
     (state) => walletNetworkName(state),
+    (state) => getPool(state),
     (state) => borrowBalanceSelector(state),
     (state) => borrowAPYSelector(state),
     (state) => borrowPrincipalSelector(state),
@@ -157,6 +160,7 @@ const getBorrowAsset = createSelector(
     (
         assets,
         network,
+        pool,
         borrowBalances,
         borrowAPY,
         borrowPrincipal,
@@ -167,8 +171,8 @@ const getBorrowAsset = createSelector(
         marketLiquidity,
         collateralRatio,
         originationFee
-    ) =>
-        Object.values(assets).map((asset) => {
+    ) => {
+        return Object.values(assets).map((asset) => {
             let balance = "0";
             let ethBalance = "0";
             let weight = "0";
@@ -181,8 +185,9 @@ const getBorrowAsset = createSelector(
             let safeBorrowToken = "0";
             let totalBorrowed = "0";
             let liquidity = "0";
-            if (network && address[network]) {
-                const token_address = address[network][`address_${asset.unit}`];
+            if (network && address[network] && address[network][pool]) {
+                const token_address =
+                    address[network][pool][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
                 apy = borrowAPY[token_address] || "0";
                 principal = borrowPrincipal[token_address] || "0";
@@ -199,7 +204,8 @@ const getBorrowAsset = createSelector(
                 ).toString();
 
                 // Replaced now with address_USDC
-                USDprice = assetPrices[address[network][`address_USDC`]] || "0";
+                USDprice =
+                    assetPrices[address[network][pool][`address_USDC`]] || "0";
             }
 
             if (network && accountLiquidity && price && price > 0) {
@@ -274,7 +280,8 @@ const getBorrowAsset = createSelector(
                 safeBorrowToken,
                 liquidity,
             };
-        })
+        });
+    }
 );
 
 export const getBorrowActive = createSelector(getBorrowAsset, (assets) =>
