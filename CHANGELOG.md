@@ -1,3 +1,81 @@
+# [1.21.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.20.0...v1.21.0) (2021-09-09)
+
+
+### Bug Fixes
+
+* adapt ui to sc change UI-488 ([4400906](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4400906d0d205ff16dced3b99144c6608ea88cf2))
+* adapt ui to sc changes UI-488 ([a6d85cb](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a6d85cb0f38fe77a5beaf73bb274e42c8d2864e9))
+* add open pool mainnet address UI-481 ([aafbb05](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/aafbb05bab066b3191caf8f9e89dd2332f156645))
+* adding a few more memory to the build and test as pipeline failed UI-474 ([b36e08c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b36e08c210da2155516ec7714457aeca3fc06ef7))
+* change drawer colors for borrow and repay UI-491 ([d44ee30](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d44ee30e3e92d64f05a5c8c9e7cefa309ef7145b))
+* changed memory again as it failed UI-474 ([644c7b1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/644c7b1d298af58be81f1b93e1fd6e9d68d2e7aa))
+* disable validation of max and min value UI-474 ([44cc729](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/44cc729a70e7ff6658d7c9f5ed5d8d354700b097))
+* fixing lint errors UI-474 ([b23b779](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b23b7796095f9ecba25fe77a3df27c3550c8d7cd))
+* hide wrongly formatted txs UI-474 ([c1c8b2b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c1c8b2b7db33471e80325eb8a7c27384fa82998f))
+* https everywhere UI-474 ([2a3b5a5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2a3b5a5ffb8ef337e395de1a1a077b5ebdb97576))
+* modify smart contracts methods UI-485 ([6a8167b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6a8167b1c6e43964dcd8d1aea7116578694de0eb))
+* reverse disabling max and min checks, and changing brackets to parentheses UI-474 ([099517b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/099517b2ab5b940173253513c2cc78d32761d49c))
+* show icons for pool selection on sidebar UI-474 ([5af0108](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5af01089bf5b6633867cf891eaf55a11c98da1e8))
+* sonarcloud detected bugs UI-474 ([a45ba33](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a45ba33a1cedd2fb23a58db09bdcd6cae21ec789))
+* still increasing memory for build UI-474 ([80d6276](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/80d6276b4df4c17b40ada7ebbece97e3f3a3ba49))
+* update package UI-474 ([4601f28](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4601f287e2cff773c50e0a94da07cbf37a05409f))
+* wrong contract status data, and add mainnet addresses UI-485 ([2cf130e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2cf130e9516fbd06900f86eb2ce90e4afa9bb8c6))
+
+
+### Features
+
+* better ux UI-489 ([72872a0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/72872a0be42cce6367864d824d0f35c1c0bc3c01))
+* change pool with sidebar switcher UI-474 ([4b87745](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4b87745456eb1b5fcd3e34629b23ac61cddbdef5))
+* changed contract addresses for reward control and abi UI-474 ([dd96bba](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dd96bba66df147b74a5d44e22ff3d8089f428259))
+* changing open-rinkeby contract UI-474 ([d4d36f9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d4d36f9d4e1d0c1122ce4c023fcc128428c8029a))
+* config markets to show by network and pool UI-484 ([e448bb7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e448bb781e68f54d936cf2a4cc5fe2a68706a6c6))
+* display alert when switching from verified to open pools UI-474 ([3e2664f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3e2664f9b708b911967e0c8367f3a1ad334bfc8b))
+* display open pool icon UI-474 ([4105de9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4105de92c7f63b1ed875832accb04b9abc9cd533))
+* doubling sonarcloud memory UI-474 ([b89d964](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b89d96470b7d13d1890997de651c8ee1641eab6e))
+* filter markets data by network and pool UI-484 ([f2a911e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f2a911e8a8ba05eee03692e808a5c52d4fe06b11))
+* layout fixes and display warning of pre tge freeze UI-486 ([396a650](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/396a650a3087cf3d9d75bfc8151dcd6a6eab6f1b))
+* show modal on start to switch pools and set one as default UI-474 ([aca39f0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/aca39f07c3ef44a82599b0b54ffdd2c7d3e732de))
+
+
+
+# [1.21.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.20.0...v1.21.0) (2021-09-09)
+
+
+### Bug Fixes
+
+* adapt ui to sc change UI-488 ([4400906](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4400906d0d205ff16dced3b99144c6608ea88cf2))
+* adapt ui to sc changes UI-488 ([a6d85cb](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a6d85cb0f38fe77a5beaf73bb274e42c8d2864e9))
+* add open pool mainnet address UI-481 ([aafbb05](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/aafbb05bab066b3191caf8f9e89dd2332f156645))
+* adding a few more memory to the build and test as pipeline failed UI-474 ([b36e08c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b36e08c210da2155516ec7714457aeca3fc06ef7))
+* change drawer colors for borrow and repay UI-491 ([d44ee30](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d44ee30e3e92d64f05a5c8c9e7cefa309ef7145b))
+* changed memory again as it failed UI-474 ([644c7b1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/644c7b1d298af58be81f1b93e1fd6e9d68d2e7aa))
+* disable validation of max and min value UI-474 ([44cc729](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/44cc729a70e7ff6658d7c9f5ed5d8d354700b097))
+* fixing lint errors UI-474 ([b23b779](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b23b7796095f9ecba25fe77a3df27c3550c8d7cd))
+* hide wrongly formatted txs UI-474 ([c1c8b2b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c1c8b2b7db33471e80325eb8a7c27384fa82998f))
+* https everywhere UI-474 ([2a3b5a5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2a3b5a5ffb8ef337e395de1a1a077b5ebdb97576))
+* modify smart contracts methods UI-485 ([6a8167b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6a8167b1c6e43964dcd8d1aea7116578694de0eb))
+* reverse disabling max and min checks, and changing brackets to parentheses UI-474 ([099517b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/099517b2ab5b940173253513c2cc78d32761d49c))
+* show icons for pool selection on sidebar UI-474 ([5af0108](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5af01089bf5b6633867cf891eaf55a11c98da1e8))
+* sonarcloud detected bugs UI-474 ([a45ba33](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a45ba33a1cedd2fb23a58db09bdcd6cae21ec789))
+* still increasing memory for build UI-474 ([80d6276](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/80d6276b4df4c17b40ada7ebbece97e3f3a3ba49))
+* update package UI-474 ([4601f28](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4601f287e2cff773c50e0a94da07cbf37a05409f))
+* wrong contract status data, and add mainnet addresses UI-485 ([2cf130e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2cf130e9516fbd06900f86eb2ce90e4afa9bb8c6))
+
+
+### Features
+
+* better ux UI-489 ([72872a0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/72872a0be42cce6367864d824d0f35c1c0bc3c01))
+* change pool with sidebar switcher UI-474 ([4b87745](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4b87745456eb1b5fcd3e34629b23ac61cddbdef5))
+* changed contract addresses for reward control and abi UI-474 ([dd96bba](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dd96bba66df147b74a5d44e22ff3d8089f428259))
+* changing open-rinkeby contract UI-474 ([d4d36f9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d4d36f9d4e1d0c1122ce4c023fcc128428c8029a))
+* config markets to show by network and pool UI-484 ([e448bb7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e448bb781e68f54d936cf2a4cc5fe2a68706a6c6))
+* display alert when switching from verified to open pools UI-474 ([3e2664f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3e2664f9b708b911967e0c8367f3a1ad334bfc8b))
+* display open pool icon UI-474 ([4105de9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4105de92c7f63b1ed875832accb04b9abc9cd533))
+* doubling sonarcloud memory UI-474 ([b89d964](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b89d96470b7d13d1890997de651c8ee1641eab6e))
+* filter markets data by network and pool UI-484 ([f2a911e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f2a911e8a8ba05eee03692e808a5c52d4fe06b11))
+* layout fixes and display warning of pre tge freeze UI-486 ([396a650](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/396a650a3087cf3d9d75bfc8151dcd6a6eab6f1b))
+* show modal on start to switch pools and set one as default UI-474 ([aca39f0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/aca39f07c3ef44a82599b0b54ffdd2c7d3e732de))
+
 # [1.20.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.19.2...v1.20.0) (2021-09-09)
 
 
