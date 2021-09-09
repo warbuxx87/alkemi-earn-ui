@@ -83,14 +83,15 @@ const fetchTxCall = ({
         .then((data) => {
             if (data) {
                 const userTxList = JSON.parse(data);
+                const validTxs = userTxList.filter((tx) => {
+                    return tx.symbol !== undefined;
+                });
 
-                dispatch(fetchTxSuccess(userTxList));
+                dispatch(fetchTxSuccess(validTxs));
 
                 dispatch(
                     fetchTimestampsOfBlocks({
-                        blocks: userTxList.map(
-                            ({ blockNumber }) => blockNumber
-                        ),
+                        blocks: validTxs.map(({ blockNumber }) => blockNumber),
                         drizzle,
                     })
                 );
