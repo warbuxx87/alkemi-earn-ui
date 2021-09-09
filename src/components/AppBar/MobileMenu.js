@@ -142,9 +142,16 @@ export default function MobileMenu({ walletIsLiquidator }) {
                             <ListItem
                                 button
                                 component="a"
-                                href="https://discord.gg/Y9vmtFjhHB"
+                                href="https://snapshot.org/#/alkemidao.eth"
                             >
-                                <ListItemText primary="Join Discord" />
+                                <ListItemText primary="Governance" />
+                            </ListItem>
+                            <ListItem
+                                button
+                                component="a"
+                                href="https://kyc.alkemi.network/#/auth/signup"
+                            >
+                                <ListItemText primary="Get KYC Verified" />
                             </ListItem>
                         </List>
                     </Box>
