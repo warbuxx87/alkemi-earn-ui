@@ -1,3 +1,19 @@
+# [1.20.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.19.2...v1.20.0) (2021-09-09)
+
+
+### Features
+
+* changing open rinkeby contract address UI-490 ([b64168d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b64168d409add7d9c3b665c21eb545d93c77ae64))
+
+
+
+# [1.20.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.19.2...v1.20.0) (2021-09-09)
+
+
+### Features
+
+* changing open rinkeby contract address UI-490 ([b64168d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b64168d409add7d9c3b665c21eb545d93c77ae64))
+
 ## [1.19.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.19.1...v1.19.2) (2021-09-08)
 
 
