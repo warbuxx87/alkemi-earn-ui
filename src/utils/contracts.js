@@ -38,10 +38,9 @@ export const initContracts = ({
     if (resolved !== false)
         constants.assets.forEach((asset) => {
             const network = constants.network_type[userWalletNetwork];
-
             const arrayOfAssets = marketsByNetwork[network][currentPool];
 
-            if (arrayOfAssets.includes[asset])
+            if (arrayOfAssets.includes(asset))
                 initAssetContract({
                     drizzle,
                     userWalletAddress,

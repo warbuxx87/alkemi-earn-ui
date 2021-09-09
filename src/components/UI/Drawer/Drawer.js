@@ -218,15 +218,13 @@ const DrawerWrapper = ({
                                 value={amount}
                                 fullWidth={true}
                             />
-                            {/*
+
                             <span
                                 className={classes.maxTips}
                                 onClick={onSetMax}
                             >
                                 MAX
                             </span>
-
-                            */}
                         </div>
                         <Grid className={classes.rateInfo}>
                             <Grid container className={classes.rateRow}>
@@ -313,9 +311,7 @@ const DrawerWrapper = ({
                                     onButtonClick({ asset, amount });
                                     handleClose();
                                 }}
-                                disabled={
-                                    false /*!enableButtonClick || isDoingAction*/
-                                }
+                                disabled={!enableButtonClick || isDoingAction}
                                 size="large"
                                 fullWidth={true}
                             >
