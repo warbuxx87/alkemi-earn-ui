@@ -9,7 +9,7 @@
             "interest_url": "https://api.alkemi.network/interest"
         },
         "open": {
-            "history_url": "https://mainnet.open.api.alkemi.network//history",
+            "history_url": "https://mainnet.open.api.alkemi.network/history",
             "markets_url": "https://mainnet.open.api.alkemi.network/markets",
             "accounts_url": "https://mainnet.open.api.alkemi.network/accounts",
             "liquidations_url": "https://mainnet.open.api.alkemi.network/liquidations",
