@@ -1,3 +1,19 @@
+## [1.21.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.21.0...v1.21.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* fixing history url UI-495 ([37a342c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/37a342c4ff839f44dfe67dce624ef7713072b0cb))
+
+
+
+## [1.21.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.21.0...v1.21.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* fixing history url UI-495 ([37a342c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/37a342c4ff839f44dfe67dce624ef7713072b0cb))
+
 # [1.21.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.20.0...v1.21.0) (2021-09-09)
 
 
