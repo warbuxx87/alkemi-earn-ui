@@ -187,6 +187,11 @@ export const formatStringNumber = (
     }
 };
 
+export const multiplyBigNumbers = (num1, num2) => {
+    let bigNum1 = Big(num1);
+    return bigNum1.times(Big(num2)).toString();
+};
+
 // Breaks a number (in string format) to the main number & fraction
 export const formattedNumberToSplitNumber = (formattedNumber) => {
     const splitNumber = formattedNumber.split(".");

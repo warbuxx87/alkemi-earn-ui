@@ -5,8 +5,14 @@ import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Section 2: internal imports
-import { formatNumber } from "utils/ui";
+import {
+    formatNumber,
+    fromWei,
+    multiplyBigNumbers,
+    formatPriceWithCurrency,
+} from "utils/ui";
 import DrizzleContext from "utils/DrizzleContext";
+import useFetchALKPrice from "hooks/useFetchALKPrice";
 
 // Section 3: Selectors
 import { walletClaimableALKRewards } from "redux/selectors/data/rewards";
@@ -32,6 +38,11 @@ const RewardsContainer = () => {
     const txs = useSelector(getTransactions);
 
     const [isProcessing, setIsProcessing] = React.useState(false);
+    const [claimableALKRewardUSD, setClaimableALKRewardUSD] = React.useState(
+        "0.00"
+    );
+
+    const { ALKUSDPrice } = useFetchALKPrice(true);
 
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
@@ -57,11 +68,24 @@ const RewardsContainer = () => {
         );
     };
 
+    React.useEffect(() => {
+        if (claimableALKReward && ALKUSDPrice) {
+            const claimableALKRewardNumber = fromWei(claimableALKReward);
+            const value = formatPriceWithCurrency(
+                multiplyBigNumbers(ALKUSDPrice, claimableALKRewardNumber),
+                "USD"
+            );
+
+            setClaimableALKRewardUSD(value);
+        }
+    }, [claimableALKReward, ALKUSDPrice]);
+
     return (
         <Rewards
             claimableALKReward={formatNumber(claimableALKReward, "ALK")}
             onClaimALK={onClaimALK}
             isDoingAction={isProcessing}
+            claimableALKRewardUSD={claimableALKRewardUSD}
         />
     );
 };
