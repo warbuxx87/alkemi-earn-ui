@@ -266,7 +266,10 @@ const LendTable = ({
                                                 )}
                                             </Box>
                                         )}
-                                        {row.activated ? (
+                                        {row.activated ||
+                                        (walletConnected &&
+                                            (needKYC ? walletIsKYCd : true) &&
+                                            row.unit === "WETH") ? (
                                             <DepositButton asset={row} />
                                         ) : (
                                             <Tooltip

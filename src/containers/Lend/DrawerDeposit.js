@@ -84,14 +84,16 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     };
 
     React.useEffect(() => {
-        // Retrieves an estimation of gas price and adds 2 gwei to it on starts
-        drizzle.web3.eth.getGasPrice().then((result) => {
-            const calculatedResult = web3.utils
-                .toBN("2000000000") // adds 2 gwei to the result estimation of gasPrice from the last blocks
-                .add(web3.utils.toBN(result));
+        if (drizzle && drizzle.web3 && drizzle.web3.eth) {
+            // Retrieves an estimation of gas price and adds 2 gwei to it on starts
+            drizzle.web3.eth.getGasPrice().then((result) => {
+                const calculatedResult = web3.utils
+                    .toBN("2000000000") // adds 2 gwei to the result estimation of gasPrice from the last blocks
+                    .add(web3.utils.toBN(result));
 
-            setEstimationOfGasPrice(calculatedResult.toString());
-        });
+                setEstimationOfGasPrice(calculatedResult.toString());
+            });
+        }
     }, [drizzle.web3.eth]);
 
     React.useEffect(() => {

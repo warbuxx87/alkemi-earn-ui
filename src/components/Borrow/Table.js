@@ -256,7 +256,10 @@ const BorrowTable = ({
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={2}></Box>
-                                        {Row.activated ? (
+                                        {Row.activated ||
+                                        (walletConnected &&
+                                            (needKYC ? walletIsKYCd : true) &&
+                                            Row.unit === "WETH") ? (
                                             <BorrowDrawerContainer
                                                 asset={Row}
                                             />
