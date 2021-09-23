@@ -1,3 +1,33 @@
+# [1.22.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.21.1...v1.22.0) (2021-09-23)
+
+
+### Bug Fixes
+
+* adding new rinkeby contract UI-503 ([03f87f1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/03f87f1fce13a01dea442e8a7bfe648b86944c33))
+* avoid crashing on load lend UI-507 ([54d342c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/54d342c77fa4e3ffbe0b9ac1c3564089b46a2c89))
+* let user lend and borrow eth directly UI-497 ([7c0b58b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7c0b58bdcfdc0026bbefd825d0db9d51bdb50a34))
+
+
+### Features
+
+* display user accrued alk tokens in usd UI-498 ([9d699e1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9d699e17c085cf0fadaacc27e2665d57a0271330))
+
+
+
+# [1.22.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.21.1...v1.22.0) (2021-09-23)
+
+
+### Bug Fixes
+
+* adding new rinkeby contract UI-503 ([03f87f1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/03f87f1fce13a01dea442e8a7bfe648b86944c33))
+* avoid crashing on load lend UI-507 ([54d342c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/54d342c77fa4e3ffbe0b9ac1c3564089b46a2c89))
+* let user lend and borrow eth directly UI-497 ([7c0b58b](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7c0b58bdcfdc0026bbefd825d0db9d51bdb50a34))
+
+
+### Features
+
+* display user accrued alk tokens in usd UI-498 ([9d699e1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9d699e17c085cf0fadaacc27e2665d57a0271330))
+
 ## [1.21.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.21.0...v1.21.1) (2021-09-17)
 
 
