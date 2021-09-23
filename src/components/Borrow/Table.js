@@ -257,7 +257,9 @@ const BorrowTable = ({
                                     >
                                         <Box mr={2}></Box>
                                         {Row.activated ||
-                                        Row.unit === "WETH" ? (
+                                        (walletConnected &&
+                                            (needKYC ? walletIsKYCd : true) &&
+                                            Row.unit === "WETH") ? (
                                             <BorrowDrawerContainer
                                                 asset={Row}
                                             />
