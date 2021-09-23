@@ -256,7 +256,8 @@ const BorrowTable = ({
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={2}></Box>
-                                        {Row.activated ? (
+                                        {Row.activated ||
+                                        Row.unit === "WETH" ? (
                                             <BorrowDrawerContainer
                                                 asset={Row}
                                             />

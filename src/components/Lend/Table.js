@@ -266,7 +266,8 @@ const LendTable = ({
                                                 )}
                                             </Box>
                                         )}
-                                        {row.activated ? (
+                                        {row.activated ||
+                                        row.unit === "WETH" ? (
                                             <DepositButton asset={row} />
                                         ) : (
                                             <Tooltip
