@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import _ from "lodash";
-
 import { isWalletConnected } from "redux/selectors/data/onboard";
 
 // Retrieve the ALK USD price every 30 seconds
