@@ -27,6 +27,12 @@ const useFetchMarkets = (fetchPeriodically = false) => {
 
     const currentPool = useSelector(getPool);
 
+    const [lastPool, setLastPool] = useState("");
+
+    useEffect(() => {
+        setLastPool(currentPool);
+    }, [currentPool]);
+
     useEffect(() => {
         let timer;
 
@@ -46,6 +52,8 @@ const useFetchMarkets = (fetchPeriodically = false) => {
                     return res.text();
                 })
                 .then((data) => {
+                    if (lastPool !== currentPool) return; // prevent slower resolution and verified data overriding open data due to the fact that verified pool is the default one
+
                     if (data) {
                         let obj_data = JSON.parse(data);
 
@@ -154,7 +162,13 @@ const useFetchMarkets = (fetchPeriodically = false) => {
         return () => {
             if (timer) clearTimeout(timer);
         };
-    }, [dispatch, fetchPeriodically, currentNetworkName, currentPool]);
+    }, [
+        dispatch,
+        fetchPeriodically,
+        currentNetworkName,
+        currentPool,
+        lastPool,
+    ]);
 
     return { marketsData, supplyArray, borrowArray, calculationsTotals };
 };
