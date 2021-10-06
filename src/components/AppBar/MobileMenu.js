@@ -142,7 +142,7 @@ export default function MobileMenu({ walletIsLiquidator }) {
                             <ListItem
                                 button
                                 component="a"
-                                href="https://snapshot.org/#/alkemidao.eth"
+                                href="https://vote.alkemi.network/#/"
                             >
                                 <ListItemText primary="Governance" />
                             </ListItem>

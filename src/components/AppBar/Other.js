@@ -116,7 +116,7 @@ function Other() {
                     <MenuItem
                         className={classes.menuitem}
                         onClick={handleClose}
-                        href="https://snapshot.org/#/alkemidao.eth"
+                        href="https://vote.alkemi.network/#/"
                         target="_blank"
                         component="a"
                     >
