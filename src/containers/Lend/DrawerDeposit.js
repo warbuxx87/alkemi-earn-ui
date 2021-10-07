@@ -94,7 +94,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 setEstimationOfGasPrice(calculatedResult.toString());
             });
         }
-    }, [drizzle.web3.eth]);
+    }, [drizzle, drizzle.web3, drizzle.web3.eth]);
 
     React.useEffect(() => {
         const runEstimateOfMethodCall = () => {
