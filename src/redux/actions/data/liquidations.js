@@ -55,7 +55,6 @@ const fetchLiquidationsError = (error) => ({
 
 const fetchLiquidationsCall = ({
     currentNetworkName,
-    address,
     currentPool,
     dispatch,
 }) => {
@@ -67,7 +66,8 @@ const fetchLiquidationsCall = ({
 
     dispatch(fetchLiquidationsPending());
 
-    fetch(url_map[currentNetworkName].liquidations_url)
+    const url = `${url_map[currentNetworkName][currentPool].liquidations_url}?health=125`; // health is set to 125 as default value
+    fetch(url)
         .then((res) => {
             return res.text();
         })
