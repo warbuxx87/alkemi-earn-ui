@@ -16,11 +16,12 @@ const useFetchLiquidations = (fetchPeriodically = false) => {
     useEffect(() => {
         let timer;
 
-        const getLiquidations = (fetchPeriodically) => {
+        const getLiquidations = (fetchPeriodically, forceRefresh = false) => {
             dispatch(
                 fetchLiquidations({
                     currentNetworkName,
                     currentPool,
+                    forceRefresh,
                 })
             );
 
@@ -33,7 +34,7 @@ const useFetchLiquidations = (fetchPeriodically = false) => {
         };
 
         if (currentNetworkName !== undefined) {
-            getLiquidations(fetchPeriodically);
+            getLiquidations(fetchPeriodically, true);
         }
 
         return () => {

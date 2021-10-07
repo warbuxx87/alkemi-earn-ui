@@ -75,7 +75,18 @@ const fetchLiquidationsCall = ({
             if (data) {
                 const obj_data = JSON.parse(data);
 
-                dispatch(fetchLiquidationsSuccess(obj_data));
+                const validEntries = obj_data.filter((liquidation) => {
+                    return (
+                        liquidation.borrow !== undefined &&
+                        Array.isArray(liquidation.borrow) &&
+                        liquidation.borrow.length > 0 &&
+                        liquidation.supply !== undefined &&
+                        Array.isArray(liquidation.supply) &&
+                        liquidation.supply.length > 0
+                    );
+                });
+
+                dispatch(fetchLiquidationsSuccess(validEntries));
             }
         })
         .catch((error) => {
@@ -96,15 +107,22 @@ const throttledFetchLiquidations = _.throttle(
 
 export const fetchLiquidations = ({
     currentNetworkName,
-    address,
     currentPool,
+    forceRefresh,
 }) => async (dispatch) => {
-    throttledFetchLiquidations({
-        currentNetworkName,
-        address,
-        currentPool,
-        dispatch,
-    });
+    if (forceRefresh) {
+        fetchLiquidationsCall({
+            currentNetworkName,
+            currentPool,
+            dispatch,
+        });
+    } else {
+        throttledFetchLiquidations({
+            currentNetworkName,
+            currentPool,
+            dispatch,
+        });
+    }
 };
 
 // TODO: to be merged in transactions (when the other drawers are refactored in UI-359)
