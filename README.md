@@ -41,7 +41,11 @@ npm install # install node dependencies locally
 ### Start application
 
 ```bash
-npm start # start application in dev mode
+npm run dev # start application in dev mode (.env.dev config)
+```
+
+```bash
+npm start # start application in mainnet mode (.env config)
 ```
 
 ## Contributing guidelines
