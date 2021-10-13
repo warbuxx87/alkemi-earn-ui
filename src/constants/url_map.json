@@ -34,27 +34,5 @@
             "reports_url": "https://rinkeby.open.api.alkemi.network/reports",
             "interest_url": "https://rinkeby.open.api.alkemi.network/interest"
         }
-    },
-    "ropsten": {
-        "permissioned": {
-            "history_url": "https://ropsten.api.alkemi.network/history",
-            "markets_url": "https://ropsten.api.alkemi.network/markets",
-            "accounts_url": "https://ropsten.api.alkemi.network/accounts",
-            "liquidations_url": "https://ropsten.api.alkemi.network/liquidations",
-            "reports_url": "https://ropsten.api.alkemi.network/reports",
-            "interest_url": "https://ropsten.api.alkemi.network/interest"
-        },
-        "open": {}
-    },
-    "kovan": {
-        "permissioned": {
-            "history_url": "https://kovan.api.alkemi.network/history",
-            "markets_url": "https://kovan.api.alkemi.network/markets",
-            "accounts_url": "https://kovan.api.alkemi.network/accounts",
-            "liquidations_url": "https://kovan.api.alkemi.network/liquidations",
-            "reports_url": "https://kovan.api.alkemi.network/reports",
-            "interest_url": "https://kovan.api.alkemi.network/interest"
-        },
-        "open": {}
     }
 }

@@ -21,12 +21,7 @@ import { setEthBorrowBalance } from "redux/actions/data/borrow";
 
 import Web3 from "web3";
 
-import {
-    isWalletConnected,
-    walletAddress,
-    walletNetwork,
-    walletBalance,
-} from "redux/selectors/data/onboard";
+import { isWalletConnected, walletBalance } from "redux/selectors/data/onboard";
 import { getPool } from "redux/selectors/status/pool";
 
 import DrizzleContext from "utils/DrizzleContext";
@@ -45,8 +40,6 @@ const useOnboard = () => {
 
     const walletConnected = useSelector(isWalletConnected);
 
-    const userWalletAddress = useSelector(walletAddress);
-    const userWalletNetwork = useSelector(walletNetwork);
     const userWalletBalance = useSelector(walletBalance);
 
     const currentPool = useSelector(getPool);
@@ -132,20 +125,25 @@ const useOnboard = () => {
 
     useEffect(() => {
         const initDrizzleData = (forceUpdate = false) => {
+            if (
+                currentState.network &&
+                !constants.supportedNetworks.includes(currentState.network)
+            ) {
+                // TODO: Notify that it's an unsupported network in dev mode
+                return;
+            } else if (currentState.network == null) {
+                return;
+            }
+
             if (walletConnected === true) {
-                let currentWalletAddress = userWalletAddress;
-                let currentWalletNetwork = userWalletNetwork;
+                let currentWalletAddress = currentState.address;
+                let currentWalletNetwork = currentState.network;
                 let currentWalletBalance = userWalletBalance;
 
                 if (drizzle && !forceUpdate) {
                     const web3 = new Web3(window.currentlyUsedProvider);
 
                     drizzle.web3 = web3; // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
-
-                    // set it in sync vars as redux stores data async here it seems
-                    currentWalletAddress = currentState.address;
-
-                    currentWalletNetwork = currentState.network;
 
                     // The order matters here
                     dispatch(setWalletNetwork(currentWalletNetwork));
@@ -235,8 +233,6 @@ const useOnboard = () => {
     }, [
         drizzle,
         walletConnected,
-        userWalletAddress,
-        userWalletNetwork,
         resetStoreData,
         dispatch,
         currentState.address,
@@ -253,8 +249,7 @@ const useOnboard = () => {
             deleteCurrentData();
 
             const readyToTransact = await onboard.walletCheck();
-            dispatch(setWalletNetwork(currentState.network));
-            dispatch(setWalletAddress(currentState.address));
+
             dispatch(setWalletConnected(readyToTransact));
 
             if (!readyToTransact) {
