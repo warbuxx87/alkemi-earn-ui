@@ -66,7 +66,7 @@ const fetchLiquidationsCall = ({
 
     dispatch(fetchLiquidationsPending());
 
-    const url = `${url_map[currentNetworkName][currentPool].liquidations_url}?health=125`; // health is set to 125 as default value
+    const url = `${url_map[currentNetworkName][currentPool].liquidations_url}`;
     fetch(url)
         .then((res) => {
             return res.text();
@@ -137,6 +137,7 @@ export const onLiquidateAction = ({
     targetAccount,
     type,
     liquidationId,
+    maxAmount,
 }) => async (dispatch) => {
     handle_liquidate_click({
         drizzle,
@@ -147,6 +148,7 @@ export const onLiquidateAction = ({
         assetCollateral,
         assetBorrow,
         targetAccount,
+        maxAmount,
     })
         .then((stackId) => {
             dispatch(transactionTriggered(liquidationId, stackId, type));

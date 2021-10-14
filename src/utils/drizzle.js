@@ -3,6 +3,7 @@ import { toWei } from "utils/ui";
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
 import { initAssetContract } from "utils/contracts";
+import Big from "big.js";
 
 // Approve Unlimited amount of ERC20 tokens to interact with protocol
 export const handle_approve_click = async ({
@@ -227,29 +228,53 @@ export const handle_liquidate_click = async ({
     assetCollateral,
     assetBorrow,
     targetAccount,
+    maxAmount,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
+
     const myAccount = userWalletAddress;
     //const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     //const token_address = address[network][`address_${symbol}`];
     let weiAmount = amount.toString();
 
-    if (weiAmount === "-1") {
-        weiAmount = constants.max_uint;
-    } else {
-        weiAmount = toWei(amount, symbol);
-    }
+    let sendLiquidate;
+    if (symbol === "WETH" || symbol === "ETH") {
+        const maxAmountBig = Big(maxAmount);
+        const positiveMaxAmount = maxAmountBig.abs();
+        const ethLiquidationAmount = positiveMaxAmount.times(Big(1.01));
+        const maxWeiAmount = toWei(ethLiquidationAmount.toFixed(18)); // toFixed 18 removes potential overflow of digits before converting to wei
 
-    const sendLiquidate = MoneyMarketContract.methods.liquidateBorrow.cacheSend(
-        targetAccount,
-        assetBorrow,
-        assetCollateral,
-        weiAmount,
-        {
-            from: myAccount,
+        const requestedAmountClose = maxWeiAmount;
+        sendLiquidate = MoneyMarketContract.methods.liquidateBorrow.cacheSend(
+            targetAccount,
+            assetBorrow,
+            assetCollateral,
+            requestedAmountClose,
+            {
+                from: myAccount,
+                value: requestedAmountClose,
+            }
+        );
+    } else {
+        if (weiAmount === "-1") {
+            weiAmount = constants.max_uint;
+        } else {
+            weiAmount = toWei(amount, symbol);
         }
-    );
+
+        const requestedAmountClose = weiAmount;
+
+        sendLiquidate = MoneyMarketContract.methods.liquidateBorrow.cacheSend(
+            targetAccount,
+            assetBorrow,
+            assetCollateral,
+            requestedAmountClose,
+            {
+                from: myAccount,
+            }
+        );
+    }
 
     return sendLiquidate;
 };
