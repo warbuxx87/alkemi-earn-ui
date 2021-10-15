@@ -17,9 +17,20 @@ const LiquidateContainer = () => {
     const liquidationsList = useSelector(getLiquidationsList);
     const userWalletNetwork = useSelector(walletNetwork);
 
+    const [liquidationsToDisplay, setLiquidationsToDisplay] = React.useState(
+        []
+    );
+
+    React.useEffect(() => {
+        const filteredLiquidations = liquidationsList.filter((liquidation) => {
+            return liquidation.shortfallUSD >= 1; // filters liquidations to only equal or above one dollar, could be removed once we implement UI-519
+        });
+        setLiquidationsToDisplay(filteredLiquidations);
+    }, [liquidationsList]);
+
     return (
         <Liquidate
-            liquidationsList={liquidationsList}
+            liquidationsList={liquidationsToDisplay}
             userWalletNetwork={userWalletNetwork}
         />
     );

@@ -28,7 +28,7 @@ const useFetchLiquidations = (fetchPeriodically = false) => {
             if (fetchPeriodically === true) {
                 timer = setTimeout(
                     () => getLiquidations(fetchPeriodically),
-                    30 * 1000
+                    10 * 1000
                 );
             }
         };

@@ -203,6 +203,10 @@ const DrawerLiquidateWrapper = ({
     walletIsKYCd,
 
     maxAmountForToken,
+    maxAmountToDisplay,
+
+    walletConnected,
+    onConnect,
 }) => {
     const classes = DrawerLiquidateClass();
 
@@ -375,17 +379,6 @@ const DrawerLiquidateWrapper = ({
         return theValue * appliedPercentage;
     };
 
-    const displayPayAmountofTokensforInput = (amount) => {
-        let youPay = 0;
-        if (amount) {
-            youPay = parseFloat(amount);
-        }
-        if (amount === -1) {
-            youPay = maxAmountForToken(selectedLoanAsset);
-        }
-        return youPay.toFixed(6);
-    };
-
     const displayReceiveAmountOfTokensForInput = (pay, receive) => {
         // get Pay Asset Oracle Price
         const assetMarketDataForPay = marketsData.find((e) => e.symbol === pay);
@@ -524,8 +517,9 @@ const DrawerLiquidateWrapper = ({
                                 onChange={(e) => onSetAmount(e.target.value)}
                                 value={
                                     amount < 0
-                                        ? displayPayAmountofTokensforInput(
-                                              amount
+                                        ? maxAmountToDisplay(
+                                              amount,
+                                              selectedLoanAsset
                                           )
                                         : amount
                                 }
@@ -607,7 +601,10 @@ const DrawerLiquidateWrapper = ({
                                     container
                                     justify="flex-end"
                                 >
-                                    {displayPayAmountofTokensforInput(amount)}{" "}
+                                    {maxAmountToDisplay(
+                                        amount,
+                                        selectedLoanAsset
+                                    )}{" "}
                                     {
                                         selectedLoanAsset === "WETH"
                                             ? "ETH"
@@ -723,15 +720,20 @@ const DrawerLiquidateWrapper = ({
                                 variant="contained"
                                 color="primary"
                                 onClick={() => {
-                                    onButtonClick({
-                                        assetCollateral:
-                                            selectedCollateralAssetData.asset,
-                                        assetBorrow:
-                                            selectedLoanAssetData.asset,
+                                    if (walletConnected) {
+                                        onButtonClick({
+                                            assetCollateral:
+                                                selectedCollateralAssetData.asset,
+                                            assetBorrow:
+                                                selectedLoanAssetData.asset,
 
-                                        symbol: selectedLoanAsset,
-                                    });
-                                    handleClose();
+                                            symbol: selectedLoanAsset,
+                                        });
+                                    } else {
+                                        onConnect();
+                                    }
+
+                                    handleClose(); // will hide the drawer if user is disconnected and that might be a little bit annoying, solution if it really is to make the connect modal display above the liquidate drawer
                                 }}
                                 size="large"
                                 fullWidth={true}
