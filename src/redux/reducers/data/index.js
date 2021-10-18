@@ -5,6 +5,7 @@ import lend from "./lend";
 import borrow from "./borrow";
 import liquidations from "./liquidations";
 import history from "./history";
+import markets from "./markets";
 
 export default combineReducers({
     tx,
@@ -12,5 +13,6 @@ export default combineReducers({
     borrow,
     liquidations,
     history,
+    markets,
     // other data reducers go here
 });

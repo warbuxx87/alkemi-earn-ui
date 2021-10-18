@@ -19,6 +19,7 @@ import { toWei, assetToDecimals } from "utils/ui";
 import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 import { isKYCPool } from "redux/selectors/status/pool";
+import { getMarkets } from "redux/selectors/data/markets";
 
 // Section 4: Import Components / Containers
 import DrawerLiquidate from "components/UI/Drawer/DrawerLiquidate";
@@ -35,6 +36,8 @@ const LiquidateDrawerContainer = ({
 
     liquidationId,
 }) => {
+    useFetchMarkets(true);
+
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
@@ -44,7 +47,7 @@ const LiquidateDrawerContainer = ({
 
     const needKYC = useSelector(isKYCPool);
 
-    const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
+    const marketsData = useSelector(getMarkets);
 
     const [amount, setAmount] = React.useState("");
     const [isProcessing, setIsProcessing] = React.useState(false);

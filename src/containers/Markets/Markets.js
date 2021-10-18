@@ -11,15 +11,20 @@ import { format_str_to_kmb } from "utils/ui";
 
 // Section 3: Selectors
 import { walletNetwork } from "redux/selectors/data/onboard";
+import {
+    getBorrowArray,
+    getCalculationsTotals,
+    getMarkets,
+    getSupplyArray,
+} from "redux/selectors/data/markets";
 
 // Section 4: Container body
 const MarketsContainer = () => {
-    const {
-        marketsData,
-        supplyArray,
-        borrowArray,
-        calculationsTotals,
-    } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
+    useFetchMarkets(true);
+    const marketsData = useSelector(getMarkets);
+    const supplyArray = useSelector(getSupplyArray);
+    const borrowArray = useSelector(getBorrowArray);
+    const calculationsTotals = useSelector(getCalculationsTotals);
 
     const userWalletNetwork = useSelector(walletNetwork);
 

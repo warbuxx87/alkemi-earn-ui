@@ -39,13 +39,15 @@ import {
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
 import { getPool, isKYCPool } from "redux/selectors/status/pool";
+import { getMarkets } from "redux/selectors/data/markets";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     const { onConnect } = useOnboard();
     useFetchInterest();
+    useFetchMarkets(true);
 
-    const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
+    const marketsData = useSelector(getMarkets);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 

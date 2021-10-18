@@ -35,14 +35,18 @@ import {
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 import { getPool, isKYCPool } from "redux/selectors/status/pool";
 
+import { getMarkets } from "redux/selectors/data/markets";
+
 // Section 4: components
 import Borrow from "components/Borrow/Borrow";
 
 // Section 5: Code Container
 const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
+    useFetchMarkets(true);
+
     const { onConnect } = useOnboard();
 
-    const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
+    const marketsData = useSelector(getMarkets);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
