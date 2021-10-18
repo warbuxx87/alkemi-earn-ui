@@ -39,3 +39,5 @@ export const walletClaimableALKRewards = (state) => {
 //     }
 //     return 0;
 // };
+
+export const getAlkPrice = (state) => state.data.rewards.alkPrice;
