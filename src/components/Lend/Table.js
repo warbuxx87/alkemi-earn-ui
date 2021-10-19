@@ -262,9 +262,6 @@ const LendTable = ({
                                                 symbol: row.unit,
                                             })}
                                             alkApy={alkApyPerMarket[row.unit]}
-                                            userWalletNetwork={
-                                                userWalletNetwork
-                                            }
                                         />
                                     </Typography>
                                     <Typography

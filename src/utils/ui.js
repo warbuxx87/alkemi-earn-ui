@@ -52,8 +52,8 @@ const minDecimalsHigherValueAsset = 5; // minimum number of decimals to display 
 export const sumUpTwoNumbers = (num1, num2, decimals) => {
     let decimalPoints = 2;
     if (decimals) decimalPoints = decimals;
-    const bigNum1 = num1 ? Big(num1) : Big(0);
-    const bigNum2 = num2 ? Big(num2) : Big(0);
+    const bigNum1 = num1 && !isNaN(num1) ? Big(num1) : Big(0);
+    const bigNum2 = num2 && !isNaN(num2) ? Big(num2) : Big(0);
 
     return bigNum1.add(bigNum2).toFixed(decimalPoints);
 };

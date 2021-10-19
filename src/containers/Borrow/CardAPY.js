@@ -5,11 +5,16 @@ import CardAPY from "components/UI/Cards/CardAPY";
 
 import { getAggregatedBorrowAPY } from "redux/selectors/data/borrow";
 
-const CardAPYContainer = () => {
+const CardAPYContainer = ({ aggregatedAlkApy }) => {
     const totalBorrowAPY = useSelector(getAggregatedBorrowAPY);
 
     return (
-        <CardAPY totalAPY={totalBorrowAPY} color="warning" title="Loan APY%" />
+        <CardAPY
+            totalAPY={totalBorrowAPY}
+            aggregatedAlkApy={aggregatedAlkApy}
+            color="warning"
+            title="Loan APY%"
+        />
     );
 };
 

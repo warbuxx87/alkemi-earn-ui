@@ -21,7 +21,8 @@ import {
 import BorrowDrawerBorrow from "containers/Borrow/DrawerBorrow";
 import BorrowDrawerRepay from "containers/Borrow/DrawerRepay";
 import BorrowTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
+import { formatNumber, ETHBalanceToUSD } from "utils/ui";
+import APYDisplay from "components/UI/APYDisplay";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -72,7 +73,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const BorrowTableActive = ({ data = [], USDPrice, userWalletNetwork }) => {
+const BorrowTableActive = ({
+    data = [],
+    USDPrice,
+    userWalletNetwork,
+    alkApyPerMarket,
+}) => {
+    console.log("alkApyPerMarket: ", alkApyPerMarket);
     const classes = useStyles();
     return (
         <Box mt={2}>
@@ -178,7 +185,10 @@ const BorrowTableActive = ({ data = [], USDPrice, userWalletNetwork }) => {
                                         color="textPrimary"
                                         className={classes.label}
                                     >
-                                        {formatPercent(row.apy)}
+                                        <APYDisplay
+                                            apy={row.apy}
+                                            alkApy={alkApyPerMarket[row.unit]}
+                                        />
                                     </Typography>
                                     <Typography
                                         variant="body2"

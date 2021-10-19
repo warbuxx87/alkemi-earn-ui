@@ -48,6 +48,7 @@ function Lend({
     walletConnected,
 
     alkApyPerMarket,
+    aggregatedAlkApy,
 }) {
     const classes = useStyles();
     return (
@@ -58,7 +59,10 @@ function Lend({
                         <LendCardValue />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <LendCardAPY />
+                        <LendCardAPY
+                            walletConnected={walletConnected}
+                            aggregatedAlkApy={aggregatedAlkApy}
+                        />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
                         <LendCardInterest

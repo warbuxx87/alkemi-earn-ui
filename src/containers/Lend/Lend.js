@@ -18,6 +18,7 @@ import useFetchMarkets from "hooks/useFetchMarkets";
 
 import constants from "constants/constant.json";
 import marketsByNetwork from "constants/markets_by_network.json";
+import useFetchALKPrice from "hooks/useFetchALKPrice";
 
 // Section 3: Selectors
 import {
@@ -39,8 +40,11 @@ import {
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
 import { getPool, isKYCPool } from "redux/selectors/status/pool";
-import { getMarkets, getAlkApyPerMarket } from "redux/selectors/data/markets";
-import useFetchALKPrice from "hooks/useFetchALKPrice";
+import {
+    getMarkets,
+    getAlkApyPerMarket,
+    getAggregatedAlkApy,
+} from "redux/selectors/data/markets";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
@@ -52,6 +56,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
 
     const marketsData = useSelector(getMarkets);
     const alkApyPerMarket = useSelector(getAlkApyPerMarket);
+    const aggregatedAlkApy = useSelector(getAggregatedAlkApy);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -131,6 +136,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             marketsData={marketsData}
             walletConnected={walletConnected}
             alkApyPerMarket={alkApyPerMarket}
+            aggregatedAlkApy={aggregatedAlkApy}
         />
     );
 };

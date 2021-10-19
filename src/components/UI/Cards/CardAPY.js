@@ -18,7 +18,7 @@ import {
 
 // Section 3: Components & Containers import from the application
 
-import { formatPercent } from "utils/ui";
+import APYDisplay from "components/UI/APYDisplay";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = (props) =>
@@ -53,7 +53,7 @@ const useStyles = (props) =>
         },
     }));
 
-function CardAPY({ totalAPY, ...props }) {
+function CardAPY({ totalAPY, aggregatedAlkApy, walletConnected, ...props }) {
     const classes = useStyles(props)();
 
     // Section 5: Code Component
@@ -75,7 +75,14 @@ function CardAPY({ totalAPY, ...props }) {
                         color="textPrimary"
                         className={classes.label}
                     >
-                        {formatPercent(totalAPY)}
+                        {walletConnected === true ? (
+                            <APYDisplay
+                                apy={totalAPY}
+                                alkApy={aggregatedAlkApy}
+                            />
+                        ) : (
+                            "0.00%"
+                        )}
                     </Typography>
                 </Box>
             </CardContent>
@@ -86,6 +93,7 @@ function CardAPY({ totalAPY, ...props }) {
 // Section 6: Documentation with PropTypes
 CardAPY.propTypes = {
     totalAPY: PropTypes.string,
+    aggregatedAlkApy: PropTypes.string,
 };
 
 // Section 7:  Connect styles and export

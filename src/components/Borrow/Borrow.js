@@ -42,6 +42,9 @@ function Borrow({
     userWalletNetwork,
     marketsData,
     walletConnected,
+
+    alkApyPerMarket,
+    aggregatedAlkApy,
 }) {
     const classes = useStyles();
     return (
@@ -52,7 +55,7 @@ function Borrow({
                         <BorrowCardValue />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <BorrowCardAPY />
+                        <BorrowCardAPY aggregatedAlkApy={aggregatedAlkApy} />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
                         <BorrowCardLimit />
@@ -63,6 +66,7 @@ function Borrow({
                                 data={activeBorrow}
                                 USDPrice={USDPrice}
                                 userWalletNetwork={userWalletNetwork}
+                                alkApyPerMarket={alkApyPerMarket}
                             />
                         </Grid>
                     )}
@@ -77,6 +81,7 @@ function Borrow({
                                 userWalletNetwork={userWalletNetwork}
                                 marketsData={marketsData}
                                 walletConnected={walletConnected}
+                                alkApyPerMarket={alkApyPerMarket}
                             />
                         </Grid>
                     )}

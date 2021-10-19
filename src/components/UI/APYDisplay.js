@@ -19,8 +19,7 @@ const APYDisplay = ({ apy, alkApy }) => {
 
     return (
         <>
-            APY: {apy}% | ALKAPY: {alkApy}% | Combined:{" "}
-            {sumUpTwoNumbers(apy, alkApy, 2)}
+            {apy}% | {alkApy}% | {/*combined*/ sumUpTwoNumbers(apy, alkApy, 2)}%
         </>
     );
 };
