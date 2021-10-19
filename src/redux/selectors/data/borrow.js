@@ -1,13 +1,16 @@
 // Libs
 import { createSelector } from "reselect";
 import _ from "lodash";
+import Big from "big.js";
+
 import address from "constants/address_map.json";
 import { walletNetworkName } from "redux/selectors/data/onboard";
 import { getPool } from "redux/selectors/status/pool";
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
 import web3 from "web3";
-import Big from "big.js";
 import constants from "constants/constant.json";
+import { fromWei } from "utils/ui";
+import { getAlkApyPerMarket } from "./markets";
 
 // Helpers
 function calculateInterest(rateMantissa) {
@@ -203,6 +206,10 @@ const getBorrowAsset = createSelector(
                     ethBalance / web3.utils.fromWei(totalBorrowed)
                 ).toString();
 
+                if (!isNaN(weight) && isFinite(weight))
+                    weight = Big(weight).toFixed(0);
+                else weight = "0";
+
                 // Replaced now with address_USDC
                 USDprice =
                     assetPrices[address[network][pool][`address_USDC`]] || "0";
@@ -320,5 +327,37 @@ export const getAggregatedBorrowAPY = createSelector(
         }
 
         return totalAPY.toString();
+    }
+);
+
+export const getAggregatedAlkApy = createSelector(
+    getBorrowActive,
+    walletNetworkName,
+    getAlkApyPerMarket,
+    (activeAssets, network, alkApyPerMarket) => {
+        let totalAlkApy = Big(0);
+
+        if (network) {
+            activeAssets.forEach((asset) => {
+                let bigWeight = Big(
+                    asset.weight &&
+                        !isNaN(asset.weight) &&
+                        isFinite(asset.weight)
+                        ? fromWei(asset.weight)
+                        : 0
+                );
+                let bigApyForMarket = Big(
+                    alkApyPerMarket[asset.unit] &&
+                        !isNaN(alkApyPerMarket[asset.unit])
+                        ? alkApyPerMarket[asset.unit]
+                        : 0
+                );
+
+                const apyForAsset = bigWeight.times(Big(bigApyForMarket));
+                totalAlkApy = totalAlkApy.add(apyForAsset);
+            });
+        }
+
+        return totalAlkApy.toFixed(2);
     }
 );

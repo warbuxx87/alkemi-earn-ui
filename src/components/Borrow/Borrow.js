@@ -55,7 +55,10 @@ function Borrow({
                         <BorrowCardValue />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <BorrowCardAPY aggregatedAlkApy={aggregatedAlkApy} />
+                        <BorrowCardAPY
+                            walletConnected={walletConnected}
+                            aggregatedAlkApy={aggregatedAlkApy}
+                        />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
                         <BorrowCardLimit />

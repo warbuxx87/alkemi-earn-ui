@@ -56,7 +56,6 @@ const fetchAlkPriceCall = ({ dispatch }) => {
         .then((data) => {
             if (data) {
                 let obj_data = JSON.parse(data);
-
                 dispatch(fetchAlkPriceSuccess(obj_data[0].current_price));
             }
         })

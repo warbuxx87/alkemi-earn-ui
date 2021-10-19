@@ -27,6 +27,7 @@ import {
     getLendInactive,
     getCalculatedInterests,
     getInterestErrorStatus,
+    getAggregatedAlkApy,
 } from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -40,11 +41,7 @@ import {
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
 import { getPool, isKYCPool } from "redux/selectors/status/pool";
-import {
-    getMarkets,
-    getAlkApyPerMarket,
-    getAggregatedAlkApy,
-} from "redux/selectors/data/markets";
+import { getMarkets, getAlkApyPerMarket } from "redux/selectors/data/markets";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {

@@ -118,7 +118,7 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                         alignItems="center"
                     >
                         <Typography variant="h1" color="textPrimary">
-                            {formatPercent(combinedAPY)}
+                            {combinedAPY}%
                         </Typography>
                         <Box>{displayAPYIcon(classes, combinedAPY)}</Box>
                     </Box>

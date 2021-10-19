@@ -4,6 +4,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import Big from "big.js";
 
 // Section 2: Material-UI imports
 import {
@@ -79,7 +80,6 @@ const BorrowTableActive = ({
     userWalletNetwork,
     alkApyPerMarket,
 }) => {
-    console.log("alkApyPerMarket: ", alkApyPerMarket);
     const classes = useStyles();
     return (
         <Box mt={2}>
@@ -186,7 +186,9 @@ const BorrowTableActive = ({
                                         className={classes.label}
                                     >
                                         <APYDisplay
-                                            apy={row.apy}
+                                            apy={Big(row.apy)
+                                                .times(100)
+                                                .toFixed(2)}
                                             alkApy={alkApyPerMarket[row.unit]}
                                         />
                                     </Typography>

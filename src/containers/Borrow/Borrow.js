@@ -36,14 +36,11 @@ import {
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 import { getPool, isKYCPool } from "redux/selectors/status/pool";
 
-import {
-    getMarkets,
-    getAlkApyPerMarket,
-    getAggregatedAlkApy,
-} from "redux/selectors/data/markets";
+import { getMarkets, getAlkApyPerMarket } from "redux/selectors/data/markets";
 
 // Section 4: components
 import Borrow from "components/Borrow/Borrow";
+import { getAggregatedAlkApy } from "redux/selectors/data/borrow";
 
 // Section 5: Code Container
 const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
