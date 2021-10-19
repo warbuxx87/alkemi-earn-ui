@@ -8,6 +8,7 @@ import Markets from "components/Markets/Markets";
 import useFetchMarkets from "hooks/useFetchMarkets";
 
 import { format_str_to_kmb } from "utils/ui";
+import useFetchALKPrice from "hooks/useFetchALKPrice";
 
 // Section 3: Selectors
 import { walletNetwork } from "redux/selectors/data/onboard";
@@ -16,15 +17,19 @@ import {
     getCalculationsTotals,
     getMarkets,
     getSupplyArray,
+    getAlkApyPerMarket,
 } from "redux/selectors/data/markets";
 
 // Section 4: Container body
 const MarketsContainer = () => {
+    useFetchALKPrice();
     useFetchMarkets(true);
+
     const marketsData = useSelector(getMarkets);
     const supplyArray = useSelector(getSupplyArray);
     const borrowArray = useSelector(getBorrowArray);
     const calculationsTotals = useSelector(getCalculationsTotals);
+    const alkApyPerMarket = useSelector(getAlkApyPerMarket);
 
     const userWalletNetwork = useSelector(walletNetwork);
 
@@ -67,6 +72,7 @@ const MarketsContainer = () => {
             collateralRatioContent={collateralRatioContent()}
             totalDepositsContent={totalDepositsContent}
             userWalletNetwork={userWalletNetwork}
+            alkApyPerMarket={alkApyPerMarket}
         />
     );
 };
