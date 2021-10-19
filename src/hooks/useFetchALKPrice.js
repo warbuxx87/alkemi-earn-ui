@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { fetchAlkPriceCall } from "redux/actions/data/rewards";
+import { fetchAlkPrice } from "redux/actions/data/rewards";
 
 // Retrieve the ALK USD price every 30 seconds
 const useFetchALKPrice = (fetchPeriodically = false) => {
@@ -12,7 +12,7 @@ const useFetchALKPrice = (fetchPeriodically = false) => {
 
         // move this async call to redux if needs to be called from more than one place
         const get_ALK_price = () => {
-            fetchAlkPriceCall({ dispatch });
+            dispatch(fetchAlkPrice());
         };
 
         const getALKPriceData = (fetchPeriodically) => {
@@ -21,7 +21,7 @@ const useFetchALKPrice = (fetchPeriodically = false) => {
             if (fetchPeriodically === true) {
                 timer = setTimeout(
                     () => getALKPriceData(fetchPeriodically),
-                    30 * 1000
+                    15 * 1000
                 );
             }
         };
@@ -31,7 +31,7 @@ const useFetchALKPrice = (fetchPeriodically = false) => {
         return () => {
             if (timer) clearTimeout(timer);
         };
-    }, [fetchPeriodically]);
+    }, [dispatch, fetchPeriodically]);
 };
 
 export default useFetchALKPrice;

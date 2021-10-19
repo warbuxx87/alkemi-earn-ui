@@ -21,7 +21,9 @@ import DepositButton from "containers/Lend/DrawerDeposit";
 import WithdrawButton from "containers/Lend/DrawerWithdraw";
 import LendTableCell from "components/UI/TableCell";
 
-import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
+import APYDisplay from "components/UI/APYDisplay";
+
+import { formatNumber, ETHBalanceToUSD } from "utils/ui";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,7 +73,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const LendTableActive = ({ data = [], USDPrice, userWalletNetwork }) => {
+const LendTableActive = ({
+    data = [],
+    USDPrice,
+    userWalletNetwork,
+    alkApyPerMarket,
+}) => {
     const classes = useStyles();
 
     return (
@@ -177,7 +184,10 @@ const LendTableActive = ({ data = [], USDPrice, userWalletNetwork }) => {
                                         color="textPrimary"
                                         className={classes.label}
                                     >
-                                        {formatPercent(row.apy)}
+                                        <APYDisplay
+                                            apy={row.apy}
+                                            alkApy={alkApyPerMarket[row.unit]}
+                                        />
                                     </Typography>
                                     <Typography
                                         variant="body2"

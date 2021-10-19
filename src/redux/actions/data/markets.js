@@ -141,7 +141,8 @@ export const fetchMarketsCall = ({
                     })
                 );
             }
-        });
+        })
+        .catch((e) => dispatch(fetchMarketsError()));
 };
 
 // This call may be fetched from multiple containers but only executes once every 15 seconds

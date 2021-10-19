@@ -43,7 +43,7 @@ const fetchAlkPriceError = (error) => ({
 // --------- ALK PRICE METHOD ACTIONS ---------  //
 //                                               //
 
-export const fetchAlkPriceCall = ({ dispatch }) => {
+const fetchAlkPriceCall = ({ dispatch }) => {
     dispatch(fetchAlkPricePending());
 
     const alk_price_api =

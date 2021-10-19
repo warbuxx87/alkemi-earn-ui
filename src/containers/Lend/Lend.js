@@ -39,15 +39,19 @@ import {
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
 import { getPool, isKYCPool } from "redux/selectors/status/pool";
-import { getMarkets } from "redux/selectors/data/markets";
+import { getMarkets, getAlkApyPerMarket } from "redux/selectors/data/markets";
+import useFetchALKPrice from "hooks/useFetchALKPrice";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
+    useFetchALKPrice();
+
     const { onConnect } = useOnboard();
     useFetchInterest();
     useFetchMarkets(true);
 
     const marketsData = useSelector(getMarkets);
+    const alkApyPerMarket = useSelector(getAlkApyPerMarket);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -126,6 +130,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             fetchInterestErrorStatus={fetchInterestErrorStatus}
             marketsData={marketsData}
             walletConnected={walletConnected}
+            alkApyPerMarket={alkApyPerMarket}
         />
     );
 };
