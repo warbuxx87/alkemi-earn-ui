@@ -134,9 +134,11 @@ export const getCombinedAlkApy = createSelector(
             return null;
 
         // might need to consider using BN, but there will be an issue with decimal values in totalCombinedAPY values
-        const totalCombinedValue = Big(totalBorrowValue).add(
+        let totalCombinedValue = Big(totalBorrowValue).add(
             Big(totalDepositValue)
         );
+
+        if (totalCombinedValue.eq(0)) totalCombinedValue = Big(1);
 
         // calculate Weight
         const totalBorrowWeight = Big(totalBorrowValue).div(
