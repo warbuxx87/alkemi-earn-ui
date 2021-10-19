@@ -55,7 +55,6 @@ const fetchLiquidationsError = (error) => ({
 
 const fetchLiquidationsCall = ({
     currentNetworkName,
-    address,
     currentPool,
     dispatch,
 }) => {
@@ -67,7 +66,8 @@ const fetchLiquidationsCall = ({
 
     dispatch(fetchLiquidationsPending());
 
-    fetch(url_map[currentNetworkName].liquidations_url)
+    const url = `${url_map[currentNetworkName][currentPool].liquidations_url}`;
+    fetch(url)
         .then((res) => {
             return res.text();
         })
@@ -75,7 +75,18 @@ const fetchLiquidationsCall = ({
             if (data) {
                 const obj_data = JSON.parse(data);
 
-                dispatch(fetchLiquidationsSuccess(obj_data));
+                const validEntries = obj_data.filter((liquidation) => {
+                    return (
+                        liquidation.borrow !== undefined &&
+                        Array.isArray(liquidation.borrow) &&
+                        liquidation.borrow.length > 0 &&
+                        liquidation.supply !== undefined &&
+                        Array.isArray(liquidation.supply) &&
+                        liquidation.supply.length > 0
+                    );
+                });
+
+                dispatch(fetchLiquidationsSuccess(validEntries));
             }
         })
         .catch((error) => {
@@ -96,15 +107,22 @@ const throttledFetchLiquidations = _.throttle(
 
 export const fetchLiquidations = ({
     currentNetworkName,
-    address,
     currentPool,
+    forceRefresh,
 }) => async (dispatch) => {
-    throttledFetchLiquidations({
-        currentNetworkName,
-        address,
-        currentPool,
-        dispatch,
-    });
+    if (forceRefresh) {
+        fetchLiquidationsCall({
+            currentNetworkName,
+            currentPool,
+            dispatch,
+        });
+    } else {
+        throttledFetchLiquidations({
+            currentNetworkName,
+            currentPool,
+            dispatch,
+        });
+    }
 };
 
 // TODO: to be merged in transactions (when the other drawers are refactored in UI-359)
@@ -119,6 +137,7 @@ export const onLiquidateAction = ({
     targetAccount,
     type,
     liquidationId,
+    maxAmount,
 }) => async (dispatch) => {
     handle_liquidate_click({
         drizzle,
@@ -129,6 +148,7 @@ export const onLiquidateAction = ({
         assetCollateral,
         assetBorrow,
         targetAccount,
+        maxAmount,
     })
         .then((stackId) => {
             dispatch(transactionTriggered(liquidationId, stackId, type));
