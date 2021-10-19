@@ -199,7 +199,8 @@ Object {
                           <h1
                             class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary"
                           >
-                            0.00%
+                            0
+                            %
                           </h1>
                           <div
                             class="MuiBox-root MuiBox-root-68"
@@ -709,7 +710,8 @@ Object {
                         <h1
                           class="MuiTypography-root MuiTypography-h1 MuiTypography-colorTextPrimary"
                         >
-                          0.00%
+                          0
+                          %
                         </h1>
                         <div
                           class="MuiBox-root MuiBox-root-68"

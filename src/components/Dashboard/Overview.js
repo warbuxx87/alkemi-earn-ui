@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import { Box, Grid, SvgIcon, Typography, makeStyles } from "@material-ui/core";
 
 import { ArrowUp as UpIcon, ArrowDown as DownIcon } from "react-feather";
-import { formatPercent } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
 import SplitNumber from "components/UI/SplitNumber";
