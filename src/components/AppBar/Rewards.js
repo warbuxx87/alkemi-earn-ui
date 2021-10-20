@@ -131,7 +131,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-function Rewards({ claimableALKReward, onClaimALK, isDoingAction }) {
+function Rewards({
+    claimableALKReward,
+    onClaimALK,
+    isDoingAction,
+    claimableALKRewardUSD,
+}) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -198,7 +203,7 @@ function Rewards({ claimableALKReward, onClaimALK, isDoingAction }) {
                     className={classes.header}
                     justifyContent="space-between"
                 >
-                    <Box>Your Alk Rewards</Box>
+                    <Box>Your ALK Rewards</Box>
                     <Box>
                         <IconButton onClick={handleClose}>
                             <SvgIcon fontSize="default">
@@ -256,7 +261,7 @@ function Rewards({ claimableALKReward, onClaimALK, isDoingAction }) {
                                 color="textSecondary"
                                 align="center"
                             >
-                                = $0.00 USD
+                                {claimableALKRewardUSD} USD
                             </Typography>
                         }
                     </Box>

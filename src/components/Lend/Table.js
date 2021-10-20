@@ -22,7 +22,12 @@ import {
 import LendTableCell from "components/UI/TableCell";
 import DepositButton from "containers/Lend/DrawerDeposit";
 import AllocateButton from "containers/Lend/DrawerAllocate";
-import { formatNumber, formatPercent, format_str_to_percent } from "utils/ui";
+import {
+    formatNumber,
+    formatPercent,
+    formatStringNumber,
+    format_str_to_percent,
+} from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -95,6 +100,7 @@ const LendTable = ({
     needKYC,
     userWalletNetwork,
     marketsData,
+
     walletConnected,
 }) => {
     const classes = useStyles();
@@ -119,6 +125,35 @@ const LendTable = ({
                     userWalletNetwork
                 );
             else return formatPercent(apy);
+        }
+    };
+
+    const displayLiquidity = ({
+        liquidity,
+        marketsData,
+        userWalletNetwork,
+        walletConnected,
+        symbol,
+    }) => {
+        const assetLiquidity = formatNumber(
+            liquidity,
+            symbol,
+            userWalletNetwork
+        );
+        if (walletConnected) {
+            return assetLiquidity;
+        } else {
+            const asset = marketsData.find((market) => {
+                return market.symbol === symbol;
+            });
+
+            if (asset && asset.symbol) {
+                return formatStringNumber(
+                    asset.balance,
+                    asset.symbol,
+                    userWalletNetwork
+                );
+            } else return assetLiquidity;
         }
     };
 
@@ -199,11 +234,13 @@ const LendTable = ({
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(
-                                            row.liquidity,
-                                            row.unit,
-                                            userWalletNetwork
-                                        )}
+                                        {displayLiquidity({
+                                            liquidity: row.liquidity,
+                                            marketsData,
+                                            userWalletNetwork,
+                                            walletConnected,
+                                            symbol: row.unit,
+                                        })}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -266,7 +303,10 @@ const LendTable = ({
                                                 )}
                                             </Box>
                                         )}
-                                        {row.activated ? (
+                                        {row.activated ||
+                                        (walletConnected &&
+                                            (needKYC ? walletIsKYCd : true) &&
+                                            row.unit === "WETH") ? (
                                             <DepositButton asset={row} />
                                         ) : (
                                             <Tooltip

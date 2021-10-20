@@ -46,6 +46,9 @@ const TWO_DECIMAL_PLACES_NETWORK_ID = parseInt(
 
 const orgFee = 0.001;
 
+const maxDecimalsHigherValueAsset = 5; // maximum number of decimals to display for WBTC & ETH
+const minDecimalsHigherValueAsset = 5; // minimum number of decimals to display for WBTC & ETH
+
 export const getTokenIcon = (symbol) => {
     const icon = token2icon[symbol];
     return icon;
@@ -111,10 +114,6 @@ export const bigNumberToLocale = (value) => {
 export const formatNumber = (value, unit, userWalletNetwork) => {
     const maxDecimals = 2; // maximum number of decimals to display by default
     // const minDecimals = 2; // minimum number of decimals to display by default
-
-    const maxDecimalsHigherValueAsset = 5; // maximum number of decimals to display for WBTC & ETH
-    const minDecimalsHigherValueAsset = 5; // minimum number of decimals to display for WBTC & ETH
-
     if (!value) {
         if (unit === "ALK") return "0.000";
         else return 0;
@@ -177,6 +176,10 @@ export const formatStringNumber = (
     preferredDecimalsPlaces
 ) => {
     if (userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID) {
+        if (unit === "WETH") {
+            let bigValue = Big(value);
+            return bigValue.toFixed(maxDecimalsHigherValueAsset);
+        }
         let bigValue = Big(value);
         return bigValue.toFixed(2);
     } else if (preferredDecimalsPlaces !== undefined) {
@@ -185,6 +188,11 @@ export const formatStringNumber = (
     } else {
         return value;
     }
+};
+
+export const multiplyBigNumbers = (num1, num2) => {
+    let bigNum1 = Big(num1);
+    return bigNum1.times(Big(num2)).toString();
 };
 
 // Breaks a number (in string format) to the main number & fraction

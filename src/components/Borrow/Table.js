@@ -21,7 +21,12 @@ import {
 // Section 3: Components & Containers import from the application
 import BorrowTableCell from "components/UI/TableCell";
 import BorrowDrawerContainer from "containers/Borrow/DrawerBorrow";
-import { formatNumber, formatPercent, format_str_to_percent } from "utils/ui";
+import {
+    formatNumber,
+    formatPercent,
+    format_str_to_percent,
+    formatStringNumber,
+} from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -120,6 +125,35 @@ const BorrowTable = ({
         }
     };
 
+    const displayLiquidity = ({
+        liquidity,
+        marketsData,
+        userWalletNetwork,
+        walletConnected,
+        symbol,
+    }) => {
+        const assetLiquidity = formatNumber(
+            liquidity,
+            symbol,
+            userWalletNetwork
+        );
+        if (walletConnected) {
+            return assetLiquidity;
+        } else {
+            const asset = marketsData.find((market) => {
+                return market.symbol === symbol;
+            });
+
+            if (asset && asset.symbol) {
+                return formatStringNumber(
+                    asset.balance,
+                    asset.symbol,
+                    userWalletNetwork
+                );
+            } else return assetLiquidity;
+        }
+    };
+
     return (
         <Box mt={1}>
             <Typography
@@ -197,11 +231,13 @@ const BorrowTable = ({
                                         variant="body1"
                                         color="textPrimary"
                                     >
-                                        {formatNumber(
-                                            Row.liquidity,
-                                            Row.unit,
-                                            userWalletNetwork
-                                        )}
+                                        {displayLiquidity({
+                                            liquidity: Row.liquidity,
+                                            marketsData,
+                                            userWalletNetwork,
+                                            walletConnected,
+                                            symbol: Row.unit,
+                                        })}
                                     </Typography>
                                     <Typography
                                         variant="body2"
@@ -256,7 +292,10 @@ const BorrowTable = ({
                                         justifyContent="flex-end"
                                     >
                                         <Box mr={2}></Box>
-                                        {Row.activated ? (
+                                        {Row.activated ||
+                                        (walletConnected &&
+                                            (needKYC ? walletIsKYCd : true) &&
+                                            Row.unit === "WETH") ? (
                                             <BorrowDrawerContainer
                                                 asset={Row}
                                             />
