@@ -8,6 +8,7 @@ import Big from "big.js";
 import {
     Box,
     Card,
+    fade,
     CardHeader,
     FormControlLabel,
     Paper,
@@ -45,7 +46,10 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
     },
     label: {
-        marginLeft: theme.spacing(1),
+        display: "inline-flex",
+        flexGrow: 0,
+        whiteSpace: "nowrap",
+        flexShrink: 0,
     },
     item: {
         textAlign: "left",
@@ -258,6 +262,7 @@ const TableMarkets = ({ marketsData, alkApyPerMarket, userWalletNetwork }) => {
                                             <Typography
                                                 variant="body1"
                                                 color="textPrimary"
+                                                className={classes.label}
                                             >
                                                 <APYDisplay
                                                     apy={Big(item.supplyAPR)
@@ -276,6 +281,7 @@ const TableMarkets = ({ marketsData, alkApyPerMarket, userWalletNetwork }) => {
                                             <Typography
                                                 variant="body1"
                                                 color="textPrimary"
+                                                className={classes.label}
                                             >
                                                 <APYDisplay
                                                     apy={Big(item.borrowAPR)

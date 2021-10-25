@@ -267,7 +267,7 @@ const BorrowTable = ({
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        APY
+                                        Total APY
                                     </Typography>
                                 </BorrowTableCell>
                                 {/*<BorrowTableCell
