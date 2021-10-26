@@ -3,7 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
-
+import Big from "big.js";
 // Section 2: Material-UI imports
 import {
     Box,
@@ -22,12 +22,9 @@ import {
 import LendTableCell from "components/UI/TableCell";
 import DepositButton from "containers/Lend/DrawerDeposit";
 import AllocateButton from "containers/Lend/DrawerAllocate";
-import {
-    formatNumber,
-    formatPercent,
-    formatStringNumber,
-    format_str_to_percent,
-} from "utils/ui";
+import { formatNumber, formatStringNumber } from "utils/ui";
+
+import APYDisplay from "components/UI/APYDisplay";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -102,29 +99,27 @@ const LendTable = ({
     marketsData,
 
     walletConnected,
+    alkApyPerMarket,
 }) => {
     const classes = useStyles();
 
-    const displayAPY = ({
+    const retrieveApy = ({
         apy,
         marketsData,
-        userWalletNetwork,
+        // userWalletNetwork,
         walletConnected,
         symbol,
     }) => {
         if (walletConnected) {
-            return formatPercent(apy);
+            return Big(apy).times(100).toFixed(2);
         } else {
             const asset = marketsData.find((market) => {
                 return market.symbol === symbol;
             });
 
-            if (asset && asset.symbol)
-                return format_str_to_percent(
-                    asset.supplyAPR,
-                    userWalletNetwork
-                );
-            else return formatPercent(apy);
+            if (asset && asset.symbol) {
+                return Big(asset.supplyAPR).times(100).toFixed(2);
+            } else return Big(apy).times(100).toFixed(2);
         }
     };
 
@@ -258,13 +253,17 @@ const LendTable = ({
                                         color="textPrimary"
                                         className={classes.label}
                                     >
-                                        {displayAPY({
-                                            apy: row.apy,
-                                            marketsData,
-                                            userWalletNetwork,
-                                            walletConnected,
-                                            symbol: row.unit,
-                                        })}
+                                        <APYDisplay
+                                            apy={retrieveApy({
+                                                apy: row.apy,
+                                                marketsData,
+                                                userWalletNetwork,
+                                                walletConnected,
+                                                symbol: row.unit,
+                                            })}
+                                            alkApy={alkApyPerMarket[row.unit]}
+                                            typeOfAPY={"lend"}
+                                        />
                                     </Typography>
                                     <Typography
                                         variant="body2"

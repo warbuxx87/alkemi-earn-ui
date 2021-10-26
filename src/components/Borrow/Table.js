@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import Big from "big.js";
 
 // Section 2: Material-UI imports
 import {
@@ -21,12 +22,9 @@ import {
 // Section 3: Components & Containers import from the application
 import BorrowTableCell from "components/UI/TableCell";
 import BorrowDrawerContainer from "containers/Borrow/DrawerBorrow";
-import {
-    formatNumber,
-    formatPercent,
-    format_str_to_percent,
-    formatStringNumber,
-} from "utils/ui";
+import { formatNumber, formatStringNumber } from "utils/ui";
+
+import APYDisplay from "components/UI/APYDisplay";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -99,29 +97,28 @@ const BorrowTable = ({
     needKYC,
     marketsData,
     walletConnected,
+
+    alkApyPerMarket,
 }) => {
     const classes = useStyles();
 
-    const displayAPY = ({
+    const retrieveApy = ({
         apy,
         marketsData,
-        userWalletNetwork,
+        // userWalletNetwork,
         walletConnected,
         symbol,
     }) => {
         if (walletConnected) {
-            return formatPercent(apy);
+            return Big(apy).times(100).toFixed(2);
         } else {
             const asset = marketsData.find((market) => {
                 return market.symbol === symbol;
             });
 
             if (asset && asset.symbol)
-                return format_str_to_percent(
-                    asset.borrowAPR,
-                    userWalletNetwork
-                );
-            else return formatPercent(apy);
+                return Big(asset.borrowAPR).times(100).toFixed(2);
+            else return Big(apy).times(100).toFixed(2);
         }
     };
 
@@ -255,19 +252,23 @@ const BorrowTable = ({
                                         color="textPrimary"
                                         className={classes.label}
                                     >
-                                        {displayAPY({
-                                            apy: Row.apy,
-                                            marketsData,
-                                            userWalletNetwork,
-                                            walletConnected,
-                                            symbol: Row.unit,
-                                        })}
+                                        <APYDisplay
+                                            apy={retrieveApy({
+                                                apy: Row.apy,
+                                                marketsData,
+                                                userWalletNetwork,
+                                                walletConnected,
+                                                symbol: Row.unit,
+                                            })}
+                                            alkApy={alkApyPerMarket[Row.unit]}
+                                            typeOfAPY={"borrow"}
+                                        />
                                     </Typography>
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"
                                     >
-                                        APY
+                                        Total APY
                                     </Typography>
                                 </BorrowTableCell>
                                 {/*<BorrowTableCell

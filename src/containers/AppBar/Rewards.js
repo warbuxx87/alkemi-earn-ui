@@ -21,14 +21,17 @@ import { walletAddress } from "redux/selectors/data/onboard";
 
 import { getTransactions } from "redux/selectors/status/status";
 
+import { getAlkPrice } from "redux/selectors/data/rewards";
+
 // Section 4: components
 import Rewards from "components/AppBar/Rewards";
 import { onTx } from "redux/actions/status/transactions";
-
 // Section 5: Code Container
 const RewardsContainer = () => {
     const dispatch = useDispatch();
 
+    useFetchALKPrice();
+    const ALKUSDPrice = useSelector(getAlkPrice);
     const drizzle = useContext(DrizzleContext);
 
     const claimableALKReward = useSelector(walletClaimableALKRewards);
@@ -41,8 +44,6 @@ const RewardsContainer = () => {
     const [claimableALKRewardUSD, setClaimableALKRewardUSD] = React.useState(
         "0.00"
     );
-
-    const { ALKUSDPrice } = useFetchALKPrice(true);
 
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {

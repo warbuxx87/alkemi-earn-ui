@@ -4,6 +4,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import Big from "big.js";
 
 // Section 2: Material-UI imports
 import {
@@ -21,7 +22,9 @@ import DepositButton from "containers/Lend/DrawerDeposit";
 import WithdrawButton from "containers/Lend/DrawerWithdraw";
 import LendTableCell from "components/UI/TableCell";
 
-import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
+import APYDisplay from "components/UI/APYDisplay";
+
+import { formatNumber, ETHBalanceToUSD } from "utils/ui";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,7 +74,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const LendTableActive = ({ data = [], USDPrice, userWalletNetwork }) => {
+const LendTableActive = ({
+    data = [],
+    USDPrice,
+    userWalletNetwork,
+    alkApyPerMarket,
+}) => {
     const classes = useStyles();
 
     return (
@@ -177,7 +185,13 @@ const LendTableActive = ({ data = [], USDPrice, userWalletNetwork }) => {
                                         color="textPrimary"
                                         className={classes.label}
                                     >
-                                        {formatPercent(row.apy)}
+                                        <APYDisplay
+                                            apy={Big(row.apy)
+                                                .times(100)
+                                                .toFixed(2)}
+                                            alkApy={alkApyPerMarket[row.unit]}
+                                            typeOfAPY={"lend"}
+                                        />
                                     </Typography>
                                     <Typography
                                         variant="body2"

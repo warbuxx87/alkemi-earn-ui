@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import { Box, Grid, SvgIcon, Typography, makeStyles } from "@material-ui/core";
 
 import { ArrowUp as UpIcon, ArrowDown as DownIcon } from "react-feather";
-import { formatPercent } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
 import SplitNumber from "components/UI/SplitNumber";
@@ -118,7 +117,7 @@ function Overview({ aggregatedBalance, combinedAPY }) {
                         alignItems="center"
                     >
                         <Typography variant="h1" color="textPrimary">
-                            {formatPercent(combinedAPY)}
+                            {combinedAPY}%
                         </Typography>
                         <Box>{displayAPYIcon(classes, combinedAPY)}</Box>
                     </Box>
