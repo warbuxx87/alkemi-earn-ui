@@ -1,3 +1,19 @@
+## [1.24.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.0...v1.24.1) (2021-10-26)
+
+
+### Bug Fixes
+
+* whitelist wbtc market for open pool UI-520 ([37f7e7a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/37f7e7ae3d68dce3b06f7cb5a8a90b8718311654))
+
+
+
+## [1.24.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.0...v1.24.1) (2021-10-26)
+
+
+### Bug Fixes
+
+* whitelist wbtc market for open pool UI-520 ([37f7e7a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/37f7e7ae3d68dce3b06f7cb5a8a90b8718311654))
+
 # [1.24.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.23.1...v1.24.0) (2021-10-26)
 
 
