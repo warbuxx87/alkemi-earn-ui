@@ -110,6 +110,8 @@ function BorrowBalance({
                                             : "0.00"
                                     }
                                     alkApy={aggregatedAlkApy}
+                                    showTooltip={false}
+                                    typeOfAPY={"borrow"}
                                 />
                             ) : (
                                 "0.00%"

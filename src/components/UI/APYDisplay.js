@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import {
     Box,
     Divider,
-    Grid,
     Tooltip,
     Typography,
     makeStyles,
@@ -17,7 +16,7 @@ import {
 // } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import { sumUpTwoNumbers } from "utils/ui";
+import { sumUpTwoNumbers, negativeValueOfNumber } from "utils/ui";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     divider: {
@@ -34,11 +33,35 @@ const useStyles = makeStyles((theme) => ({
 // }));
 
 // Section 5: Code Component
-function APYDisplay({ apy, alkApy }) {
+
+// typeOfAPY is lend or borrow
+function APYDisplay({ apy, alkApy, showTooltip, typeOfAPY }) {
     const classes = useStyles();
-    // const classes = useStyles();
-    return (
-        <>
+
+    const displayTypeOfApyLabel = ({ typeOfAPY }) => {
+        if (typeOfAPY === "lend") {
+            return "Lending";
+        } else if (typeOfAPY === "borrow") {
+            return "Borrowing";
+        } else {
+            return "Network";
+        }
+    };
+
+    const displayCombinedValue = ({ apy, alkApy, typeOfAPY }) => {
+        if (typeOfAPY === "borrow") {
+            return `${sumUpTwoNumbers(
+                negativeValueOfNumber(apy, 2),
+                alkApy,
+                2
+            )}%`;
+        } else {
+            return `${sumUpTwoNumbers(apy, alkApy, 2)}%`;
+        }
+    };
+
+    const displayToolTip = () => {
+        return (
             <Tooltip
                 className={classes.Tooltips}
                 title={
@@ -51,7 +74,8 @@ function APYDisplay({ apy, alkApy }) {
                                         variant="body2"
                                         className={classes.text}
                                     >
-                                        Network APY:
+                                        {displayTypeOfApyLabel({ typeOfAPY })}{" "}
+                                        APY:
                                     </Typography>
                                 </Box>
                                 <Box ml={1.5} flexGrow="1">
@@ -61,7 +85,7 @@ function APYDisplay({ apy, alkApy }) {
                                         align="right"
                                         className={classes.text}
                                     >
-                                        {apy}%
+                                        {negativeValueOfNumber(apy, 2)}%
                                     </Typography>
                                 </Box>
                             </Box>
@@ -107,13 +131,12 @@ function APYDisplay({ apy, alkApy }) {
                                         className={classes.text}
                                     >
                                         {
-                                            /*combined*/ sumUpTwoNumbers(
+                                            /*combined*/ displayCombinedValue({
                                                 apy,
                                                 alkApy,
-                                                2
-                                            )
+                                                typeOfAPY,
+                                            })
                                         }
-                                        %
                                     </Typography>
                                 </Box>
                             </Box>
@@ -123,8 +146,24 @@ function APYDisplay({ apy, alkApy }) {
                 placement="bottom"
                 arrow
             >
-                <Box>{/*combined*/ sumUpTwoNumbers(apy, alkApy, 2)}%</Box>
+                <Box>
+                    {
+                        /*combined*/ displayCombinedValue({
+                            apy,
+                            alkApy,
+                            typeOfAPY,
+                        })
+                    }
+                </Box>
             </Tooltip>
+        );
+    };
+    // const classes = useStyles();
+    return (
+        <>
+            {showTooltip === false
+                ? displayCombinedValue({ apy, alkApy, typeOfAPY })
+                : displayToolTip({ apy, alkApy, typeOfAPY })}
         </>
     );
 }
@@ -133,6 +172,8 @@ function APYDisplay({ apy, alkApy }) {
 APYDisplay.propTypes = {
     apy: PropTypes.string.isRequired,
     alkApy: PropTypes.string.isRequired,
+    showTooltip: PropTypes.bool.isRequired,
+    typeOfAPY: PropTypes.string.isRequired,
 };
 
 // Section 7:  Connect styles and export

@@ -53,7 +53,13 @@ const useStyles = (props) =>
         },
     }));
 
-function CardAPY({ totalAPY, aggregatedAlkApy, walletConnected, ...props }) {
+function CardAPY({
+    totalAPY,
+    aggregatedAlkApy,
+    walletConnected,
+    typeOfAPY,
+    ...props
+}) {
     const classes = useStyles(props)();
 
     // Section 5: Code Component
@@ -79,6 +85,8 @@ function CardAPY({ totalAPY, aggregatedAlkApy, walletConnected, ...props }) {
                             <APYDisplay
                                 apy={totalAPY}
                                 alkApy={aggregatedAlkApy}
+                                showTooltip={false}
+                                typeOfAPY={typeOfAPY}
                             />
                         ) : (
                             "0.00%"

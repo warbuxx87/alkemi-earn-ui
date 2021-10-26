@@ -118,7 +118,6 @@ const LendTable = ({
             });
 
             if (asset && asset.symbol) {
-                console.log("VALUE HERREEEEE");
                 return Big(asset.supplyAPR).times(100).toFixed(2);
             } else return Big(apy).times(100).toFixed(2);
         }
@@ -263,6 +262,7 @@ const LendTable = ({
                                                 symbol: row.unit,
                                             })}
                                             alkApy={alkApyPerMarket[row.unit]}
+                                            typeOfAPY={"lend"}
                                         />
                                     </Typography>
                                     <Typography

@@ -110,6 +110,8 @@ function DepositBalance({
                                             : "0.00"
                                     }
                                     alkApy={aggregatedAlkApy}
+                                    showTooltip={false}
+                                    typeOfAPY={"lend"}
                                 />
                             ) : (
                                 "0.00%"

@@ -8,7 +8,6 @@ import Big from "big.js";
 import {
     Box,
     Card,
-    fade,
     CardHeader,
     FormControlLabel,
     Paper,
@@ -273,6 +272,7 @@ const TableMarkets = ({ marketsData, alkApyPerMarket, userWalletNetwork }) => {
                                                             item.symbol
                                                         ]
                                                     }
+                                                    typeOfAPY={"lend"}
                                                 />
                                             </Typography>
                                         </MarketsTableCell>
@@ -292,6 +292,7 @@ const TableMarkets = ({ marketsData, alkApyPerMarket, userWalletNetwork }) => {
                                                             item.symbol
                                                         ]
                                                     }
+                                                    typeOfAPY={"borrow"}
                                                 />
                                             </Typography>
                                         </MarketsTableCell>

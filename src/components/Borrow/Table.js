@@ -261,6 +261,7 @@ const BorrowTable = ({
                                                 symbol: Row.unit,
                                             })}
                                             alkApy={alkApyPerMarket[Row.unit]}
+                                            typeOfAPY={"borrow"}
                                         />
                                     </Typography>
                                     <Typography

@@ -190,6 +190,7 @@ const LendTableActive = ({
                                                 .times(100)
                                                 .toFixed(2)}
                                             alkApy={alkApyPerMarket[row.unit]}
+                                            typeOfAPY={"lend"}
                                         />
                                     </Typography>
                                     <Typography

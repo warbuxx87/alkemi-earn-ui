@@ -151,7 +151,7 @@ export const getCombinedAlkApy = createSelector(
         // calculate combined or net APY% position for user
         const totalCombinedAPY = Big(totalDepositAPY)
             .times(Big(totalDepositWeight))
-            .minus(Big(totalBorrowAPY).times(Big(totalBorrowWeight)));
+            .add(Big(totalBorrowAPY).times(Big(totalBorrowWeight))); // for ALK APY, the compined APY is going to be always positive unlike base lend and borrow APY, because it's added, unlike with the base APY where borrow amount is substracted from lend
 
         return parseFloat(totalCombinedAPY.toFixed(2));
     }

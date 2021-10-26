@@ -190,6 +190,7 @@ const BorrowTableActive = ({
                                                 .times(100)
                                                 .toFixed(2)}
                                             alkApy={alkApyPerMarket[row.unit]}
+                                            typeOfAPY={"borrow"}
                                         />
                                     </Typography>
                                     <Typography

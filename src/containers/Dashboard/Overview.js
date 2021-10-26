@@ -26,7 +26,7 @@ const OverviewContainer = () => {
 
         if (combinedAlkApy) combinedValues += combinedAlkApy;
 
-        setCombinedApyAndAlkApy(combinedValues);
+        setCombinedApyAndAlkApy(Big(combinedValues).toFixed(2));
     }, [combinedAPY, combinedAlkApy]);
 
     return (

@@ -22,6 +22,7 @@ const CardAPYContainer = ({ walletConnected, aggregatedAlkApy }) => {
             walletConnected={walletConnected}
             color="warning"
             title="Loan APY%"
+            typeOfAPY={"borrow"}
         />
     );
 };
