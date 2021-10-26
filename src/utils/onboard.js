@@ -4,7 +4,7 @@ const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
 const DAPP_ID = process.env.REACT_APP_DAPP_ID;
 const INFURA_ID = process.env.REACT_APP_INFURA_ID;
-const ALLOW_ALL_NETWORKS = process.env.REACT_APP_ALLOW_ALL_NETWORKS;
+// const ALLOW_ALL_NETWORKS = process.env.REACT_APP_ALLOW_ALL_NETWORKS;
 
 // const FORTMATIC_TEST_KEY = process.env.REACT_APP_FORTMATIC_TEST_KEY;
 // const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
@@ -21,8 +21,8 @@ const walletChecks = [
     // { checkName: "balance", minimumBalance: "1000000" },
 ];
 
-if (!["true", true].includes(ALLOW_ALL_NETWORKS))
-    walletChecks.push({ checkName: "network" }); // connects only to default network
+// if (!["true", true].includes(ALLOW_ALL_NETWORKS))
+//     walletChecks.push({ checkName: "network" }); // connects only to default network
 
 const wallets = [
     { walletName: "metamask", preferred: true },
