@@ -46,6 +46,9 @@ function Lend({
     fetchInterestErrorStatus,
     marketsData,
     walletConnected,
+
+    alkApyPerMarket,
+    aggregatedAlkApy,
 }) {
     const classes = useStyles();
     return (
@@ -56,7 +59,10 @@ function Lend({
                         <LendCardValue />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
-                        <LendCardAPY />
+                        <LendCardAPY
+                            walletConnected={walletConnected}
+                            aggregatedAlkApy={aggregatedAlkApy}
+                        />
                     </Grid>
                     <Grid item lg={4} sm={6} xs={12}>
                         <LendCardInterest
@@ -71,6 +77,7 @@ function Lend({
                                 data={activeLend}
                                 USDPrice={USDPrice}
                                 userWalletNetwork={userWalletNetwork}
+                                alkApyPerMarket={alkApyPerMarket}
                             />
                         </Grid>
                     )}
@@ -86,6 +93,7 @@ function Lend({
                                 userWalletNetwork={userWalletNetwork}
                                 marketsData={marketsData}
                                 walletConnected={walletConnected}
+                                alkApyPerMarket={alkApyPerMarket}
                             />
                         </Grid>
                     )}{" "}

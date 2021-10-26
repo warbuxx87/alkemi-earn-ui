@@ -1,3 +1,69 @@
+## [1.24.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.0...v1.24.1) (2021-10-26)
+
+
+### Bug Fixes
+
+* whitelist wbtc market for open pool UI-520 ([37f7e7a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/37f7e7ae3d68dce3b06f7cb5a8a90b8718311654))
+
+
+
+## [1.24.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.0...v1.24.1) (2021-10-26)
+
+
+### Bug Fixes
+
+* whitelist wbtc market for open pool UI-520 ([37f7e7a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/37f7e7ae3d68dce3b06f7cb5a8a90b8718311654))
+
+# [1.24.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.23.1...v1.24.0) (2021-10-26)
+
+
+### Bug Fixes
+
+* handle div by zero UI-510 ([6f7f357](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6f7f35767ca8ce0070c7e7815418e445214d56cc))
+
+
+### Features
+
+* display borrow apy UI-510 ([bae051d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bae051d49234ba6b563c1c58e70b0cc0d2d64914))
+* display combined apy for lend UI-510 ([dfb3f29](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dfb3f2958f440c475fd1c9a1567d150424410a40))
+* display combined apy in protocol overview UI-510 ([0d0bb07](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0d0bb07c6ca98d25487525aff92bc0fc8882338d))
+* display combined apy on dashboard UI-510 ([508a456](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/508a456143170590060c1c156cf299b1b9352cc6))
+* save alk price to state UI-510 ([6552774](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6552774915b82e8f73526a71e05478240b7678f7))
+
+
+
+# [1.24.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.23.1...v1.24.0) (2021-10-26)
+
+
+### Bug Fixes
+
+* handle div by zero UI-510 ([6f7f357](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6f7f35767ca8ce0070c7e7815418e445214d56cc))
+
+
+### Features
+
+* display borrow apy UI-510 ([bae051d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/bae051d49234ba6b563c1c58e70b0cc0d2d64914))
+* display combined apy for lend UI-510 ([dfb3f29](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/dfb3f2958f440c475fd1c9a1567d150424410a40))
+* display combined apy in protocol overview UI-510 ([0d0bb07](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0d0bb07c6ca98d25487525aff92bc0fc8882338d))
+* display combined apy on dashboard UI-510 ([508a456](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/508a456143170590060c1c156cf299b1b9352cc6))
+* save alk price to state UI-510 ([6552774](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6552774915b82e8f73526a71e05478240b7678f7))
+
+## [1.23.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.23.0...v1.23.1) (2021-10-26)
+
+
+### Bug Fixes
+
+* allow all networks UI-522 ([0db80f2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0db80f2c0aac7225ff88185011a3270f4e309f14))
+
+
+
+## [1.23.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.23.0...v1.23.1) (2021-10-26)
+
+
+### Bug Fixes
+
+* allow all networks UI-522 ([0db80f2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0db80f2c0aac7225ff88185011a3270f4e309f14))
+
 # [1.23.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.22.0...v1.23.0) (2021-10-20)
 
 

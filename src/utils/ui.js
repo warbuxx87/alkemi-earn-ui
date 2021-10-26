@@ -49,6 +49,24 @@ const orgFee = 0.001;
 const maxDecimalsHigherValueAsset = 5; // maximum number of decimals to display for WBTC & ETH
 const minDecimalsHigherValueAsset = 5; // minimum number of decimals to display for WBTC & ETH
 
+export const negativeValueOfNumber = (num1, decimals) => {
+    let decimalPoints = 2;
+    if (decimals) decimalPoints = decimals;
+    const bigNum1 = num1 && !isNaN(num1) ? Big(num1) : Big(0);
+    const bigNum2 = Big(-1);
+
+    return bigNum1.times(bigNum2).toFixed(decimalPoints);
+};
+
+export const sumUpTwoNumbers = (num1, num2, decimals) => {
+    let decimalPoints = 2;
+    if (decimals) decimalPoints = decimals;
+    const bigNum1 = num1 && !isNaN(num1) ? Big(num1) : Big(0);
+    const bigNum2 = num2 && !isNaN(num2) ? Big(num2) : Big(0);
+
+    return bigNum1.add(bigNum2).toFixed(decimalPoints);
+};
+
 export const getTokenIcon = (symbol) => {
     const icon = token2icon[symbol];
     return icon;

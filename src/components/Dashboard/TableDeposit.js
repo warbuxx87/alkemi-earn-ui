@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import Big from "big.js";
 
 // Section 2: Material-UI imports
 import {
@@ -17,7 +18,9 @@ import {
 
 //import { useHistory } from "react-router-dom";
 import DepositTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
+import { formatNumber, ETHBalanceToUSD } from "utils/ui";
+
+import APYDisplay from "components/UI/APYDisplay";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -62,6 +65,8 @@ export default function DepositTables({
     activeReserves,
     USDPrice,
     userWalletNetwork,
+    // aggregatedAlkApy,
+    alkApyPerMarket,
 }) {
     const classes = useStyles();
     //  let history = useHistory();
@@ -159,7 +164,11 @@ export default function DepositTables({
                                     variant="body1"
                                     className={classes.label}
                                 >
-                                    {formatPercent(row.apy)}
+                                    <APYDisplay
+                                        apy={Big(row.apy).times(100).toFixed(2)}
+                                        alkApy={alkApyPerMarket[row.unit]}
+                                        typeOfAPY={"lend"}
+                                    />
                                 </Typography>
                                 <Typography
                                     variant="body2"

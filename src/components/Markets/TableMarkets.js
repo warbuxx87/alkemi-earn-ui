@@ -2,6 +2,7 @@
 
 // Section 1: React low level imports
 import React from "react";
+import Big from "big.js";
 
 // Section 2: Material-UI imports
 import {
@@ -27,6 +28,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { format_str_to_kmb, format_str_to_percent } from "utils/ui";
 
 import MarketsTableCell from "components/UI/TableCell";
+import APYDisplay from "components/UI/APYDisplay";
 
 // tokens icons
 import WETH from "assets/images/WETH.svg";
@@ -43,7 +45,10 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
     },
     label: {
-        marginLeft: theme.spacing(1),
+        display: "inline-flex",
+        flexGrow: 0,
+        whiteSpace: "nowrap",
+        flexShrink: 0,
     },
     item: {
         textAlign: "left",
@@ -66,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Section 5: Code Component
-const TableMarkets = ({ marketsData, userWalletNetwork }) => {
+const TableMarkets = ({ marketsData, alkApyPerMarket, userWalletNetwork }) => {
     const classes = useStyles();
 
     const [toggleUSD, setToggleUSD] = React.useState(false);
@@ -256,11 +261,19 @@ const TableMarkets = ({ marketsData, userWalletNetwork }) => {
                                             <Typography
                                                 variant="body1"
                                                 color="textPrimary"
+                                                className={classes.label}
                                             >
-                                                {format_str_to_percent(
-                                                    item.supplyAPR,
-                                                    userWalletNetwork
-                                                )}
+                                                <APYDisplay
+                                                    apy={Big(item.supplyAPR)
+                                                        .times(100)
+                                                        .toFixed(2)}
+                                                    alkApy={
+                                                        alkApyPerMarket[
+                                                            item.symbol
+                                                        ]
+                                                    }
+                                                    typeOfAPY={"lend"}
+                                                />
                                             </Typography>
                                         </MarketsTableCell>
                                         <MarketsTableCell align="right">
@@ -268,11 +281,19 @@ const TableMarkets = ({ marketsData, userWalletNetwork }) => {
                                             <Typography
                                                 variant="body1"
                                                 color="textPrimary"
+                                                className={classes.label}
                                             >
-                                                {format_str_to_percent(
-                                                    item.borrowAPR,
-                                                    userWalletNetwork
-                                                )}
+                                                <APYDisplay
+                                                    apy={Big(item.borrowAPR)
+                                                        .times(100)
+                                                        .toFixed(2)}
+                                                    alkApy={
+                                                        alkApyPerMarket[
+                                                            item.symbol
+                                                        ]
+                                                    }
+                                                    typeOfAPY={"borrow"}
+                                                />
                                             </Typography>
                                         </MarketsTableCell>
                                         <MarketsTableCell align="right">
