@@ -1,3 +1,45 @@
+# [1.23.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.22.0...v1.23.0) (2021-10-20)
+
+
+### Bug Fixes
+
+* adding mem to pipeline UI-518 ([c483801](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c4838013794667b1d26aa52b3e7fbd9512250f97))
+* change governance link to new vote link UI-513 ([e7ec84e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e7ec84e77e396898a497130e48bb2d21a5b367d8))
+* hide badly formatted liquidations and force refresh on wallet connection UI-518 ([27f48a9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/27f48a945817153794ff9d57f2da1d4e4b8e86da))
+* hide liquidation opportunities below  UI-518 ([cd3df11](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/cd3df11918a9d1b6713d1499cc6fe8f162706fa2))
+* improve liquidation handling UI-518 ([a369827](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a369827360d4068e43a93988013b05d9afb8cf19))
+* just raised docker memory by 1024, trying to make the pipeline pass. UI-505 ([a23cfe4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a23cfe4710b5631c0b92b0b0026be79fa1adb24c))
+* properly retrieve liquidations UI-518 ([515df5a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/515df5ad552bfc3e50d520207205de1b694e7bac))
+* remove support for deprecated networks UI-506 ([67ef733](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/67ef733561b4893ae807a890d8fdbdf128675c10))
+* still increasing memory as pipeline still fails UI-505 ([f227714](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f227714a5c752b02dd33a8054efdd9adf0cdc051))
+
+
+### Features
+
+* display liquidity before a user has connected UI-505 ([4ea7bee](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4ea7beef5dbd7a2b24fd94d1aa58638930f1d958))
+
+
+
+# [1.23.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.22.0...v1.23.0) (2021-10-20)
+
+
+### Bug Fixes
+
+* adding mem to pipeline UI-518 ([c483801](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c4838013794667b1d26aa52b3e7fbd9512250f97))
+* change governance link to new vote link UI-513 ([e7ec84e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e7ec84e77e396898a497130e48bb2d21a5b367d8))
+* hide badly formatted liquidations and force refresh on wallet connection UI-518 ([27f48a9](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/27f48a945817153794ff9d57f2da1d4e4b8e86da))
+* hide liquidation opportunities below  UI-518 ([cd3df11](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/cd3df11918a9d1b6713d1499cc6fe8f162706fa2))
+* improve liquidation handling UI-518 ([a369827](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a369827360d4068e43a93988013b05d9afb8cf19))
+* just raised docker memory by 1024, trying to make the pipeline pass. UI-505 ([a23cfe4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a23cfe4710b5631c0b92b0b0026be79fa1adb24c))
+* properly retrieve liquidations UI-518 ([515df5a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/515df5ad552bfc3e50d520207205de1b694e7bac))
+* remove support for deprecated networks UI-506 ([67ef733](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/67ef733561b4893ae807a890d8fdbdf128675c10))
+* still increasing memory as pipeline still fails UI-505 ([f227714](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f227714a5c752b02dd33a8054efdd9adf0cdc051))
+
+
+### Features
+
+* display liquidity before a user has connected UI-505 ([4ea7bee](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4ea7beef5dbd7a2b24fd94d1aa58638930f1d958))
+
 # [1.22.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.21.1...v1.22.0) (2021-09-23)
 
 
