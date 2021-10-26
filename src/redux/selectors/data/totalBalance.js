@@ -1,10 +1,17 @@
 import { createSelector } from "reselect";
 import _ from "lodash";
 import web3 from "web3";
+import Big from "big.js";
 
 import address from "constants/address_map.json";
-import { getAggregatedDepositAPY } from "./lend";
-import { getAggregatedBorrowAPY } from "./borrow";
+import {
+    getAggregatedAlkApy as getAggregatedAlkApyDeposit,
+    getAggregatedDepositAPY,
+} from "./lend";
+import {
+    getAggregatedAlkApy as getAggregatedAlkApyBorrow,
+    getAggregatedBorrowAPY,
+} from "./borrow";
 
 import { walletNetworkName } from "./onboard";
 import { getPool } from "../status/pool";
@@ -107,6 +114,46 @@ export const getCombinedAPY = createSelector(
             totalBorrowAPY * totalBorrowWeight;
 
         return totalCombinedAPY;
+    }
+);
+
+export const getCombinedAlkApy = createSelector(
+    getBorrowAccountValue,
+    getDepositAccountValue,
+    (state) => getAggregatedAlkApyDeposit(state),
+    (state) => getAggregatedAlkApyBorrow(state),
+    (totalBorrowValue, totalDepositValue, totalDepositAPY, totalBorrowAPY) => {
+        if (
+            !(
+                totalBorrowValue &&
+                totalDepositValue &&
+                totalDepositAPY &&
+                totalBorrowAPY
+            )
+        )
+            return null;
+
+        // might need to consider using BN, but there will be an issue with decimal values in totalCombinedAPY values
+        let totalCombinedValue = Big(totalBorrowValue).add(
+            Big(totalDepositValue)
+        );
+
+        if (totalCombinedValue.eq(0)) totalCombinedValue = Big(1);
+
+        // calculate Weight
+        const totalBorrowWeight = Big(totalBorrowValue).div(
+            Big(totalCombinedValue)
+        );
+        const totalDepositWeight = Big(totalDepositValue).div(
+            Big(totalCombinedValue)
+        );
+
+        // calculate combined or net APY% position for user
+        const totalCombinedAPY = Big(totalDepositAPY)
+            .times(Big(totalDepositWeight))
+            .add(Big(totalBorrowAPY).times(Big(totalBorrowWeight))); // for ALK APY, the compined APY is going to be always positive unlike base lend and borrow APY, because it's added, unlike with the base APY where borrow amount is substracted from lend
+
+        return parseFloat(totalCombinedAPY.toFixed(2));
     }
 );
 

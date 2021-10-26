@@ -1,3 +1,19 @@
+## [1.23.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.23.0...v1.23.1) (2021-10-26)
+
+
+### Bug Fixes
+
+* allow all networks UI-522 ([0db80f2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0db80f2c0aac7225ff88185011a3270f4e309f14))
+
+
+
+## [1.23.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.23.0...v1.23.1) (2021-10-26)
+
+
+### Bug Fixes
+
+* allow all networks UI-522 ([0db80f2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0db80f2c0aac7225ff88185011a3270f4e309f14))
+
 # [1.23.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.22.0...v1.23.0) (2021-10-20)
 
 

@@ -18,6 +18,7 @@ import useFetchMarkets from "hooks/useFetchMarkets";
 
 import constants from "constants/constant.json";
 import marketsByNetwork from "constants/markets_by_network.json";
+import useFetchALKPrice from "hooks/useFetchALKPrice";
 
 // Section 3: Selectors
 import {
@@ -26,6 +27,7 @@ import {
     getLendInactive,
     getCalculatedInterests,
     getInterestErrorStatus,
+    getAggregatedAlkApy,
 } from "redux/selectors/data/lend";
 
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -39,13 +41,19 @@ import {
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 
 import { getPool, isKYCPool } from "redux/selectors/status/pool";
+import { getMarkets, getAlkApyPerMarket } from "redux/selectors/data/markets";
 
 // Section 4: Container
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
+    useFetchALKPrice();
+
     const { onConnect } = useOnboard();
     useFetchInterest();
+    useFetchMarkets(true);
 
-    const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
+    const marketsData = useSelector(getMarkets);
+    const alkApyPerMarket = useSelector(getAlkApyPerMarket);
+    const aggregatedAlkApy = useSelector(getAggregatedAlkApy);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
@@ -124,6 +132,8 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             fetchInterestErrorStatus={fetchInterestErrorStatus}
             marketsData={marketsData}
             walletConnected={walletConnected}
+            alkApyPerMarket={alkApyPerMarket}
+            aggregatedAlkApy={aggregatedAlkApy}
         />
     );
 };

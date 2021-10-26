@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import Big from "big.js";
 
 // Section 2: Material-UI imports
 import {
@@ -16,10 +17,11 @@ import {
 } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
+import APYDisplay from "components/UI/APYDisplay";
 
 //import { useHistory } from "react-router-dom";
 import BorrowTableCell from "components/UI/TableCell";
-import { formatNumber, formatPercent, ETHBalanceToUSD } from "utils/ui";
+import { formatNumber, ETHBalanceToUSD } from "utils/ui";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -64,6 +66,7 @@ export default function BorrowTables({
     activeReserves,
     USDPrice,
     userWalletNetwork,
+    alkApyPerMarket,
 }) {
     const classes = useStyles();
 
@@ -164,7 +167,11 @@ export default function BorrowTables({
                                     color="textPrimary"
                                     className={classes.label}
                                 >
-                                    {formatPercent(row.apy)}
+                                    <APYDisplay
+                                        apy={Big(row.apy).times(100).toFixed(2)}
+                                        alkApy={alkApyPerMarket[row.unit]}
+                                        typeOfAPY={"borrow"}
+                                    />
                                 </Typography>
                                 <Typography
                                     variant="body2"

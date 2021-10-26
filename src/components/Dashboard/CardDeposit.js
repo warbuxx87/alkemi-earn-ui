@@ -3,13 +3,14 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import Big from "big.js";
 
 // Section 2: Material-UI imports
 import { Box, Grid, Paper, Typography, makeStyles } from "@material-ui/core";
-import { formatPercent } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
 import SplitNumber from "components/UI/SplitNumber";
+import APYDisplay from "components/UI/APYDisplay";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +42,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function DepositBalance({ totalDeposit, currency, apy }) {
+function DepositBalance({
+    totalDeposit,
+    aggregatedAlkApy,
+    apy,
+    walletConnected,
+}) {
     const classes = useStyles();
 
     // Section 5: Code Component
@@ -96,7 +102,20 @@ function DepositBalance({ totalDeposit, currency, apy }) {
                             align="right"
                             className={classes.apy}
                         >
-                            {formatPercent(apy)}
+                            {walletConnected === true ? (
+                                <APYDisplay
+                                    apy={
+                                        !isNaN(apy)
+                                            ? Big(apy).times(100).toFixed(2)
+                                            : "0.00"
+                                    }
+                                    alkApy={aggregatedAlkApy}
+                                    showTooltip={false}
+                                    typeOfAPY={"lend"}
+                                />
+                            ) : (
+                                "0.00%"
+                            )}
                         </Typography>
                     </Grid>
                 </Grid>
