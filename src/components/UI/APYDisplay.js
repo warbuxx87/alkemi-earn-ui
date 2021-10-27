@@ -85,7 +85,10 @@ function APYDisplay({ apy, alkApy, showTooltip, typeOfAPY }) {
                                         align="right"
                                         className={classes.text}
                                     >
-                                        {negativeValueOfNumber(apy, 2)}%
+                                        {typeOfAPY === "borrow"
+                                            ? negativeValueOfNumber(apy, 2)
+                                            : apy}
+                                        %
                                     </Typography>
                                 </Box>
                             </Box>
