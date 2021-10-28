@@ -25,7 +25,7 @@
         "@sentry/tracing": "^6.2.5",
         "apexcharts": "^3.26.0",
         "big.js": "^6.0.3",
-        "bnc-onboard": "^1.27.0",
+        "bnc-onboard": "^1.35.2",
         "chart.js": "^3.1.0",
         "clsx": "^1.1.1",
         "connected-react-router": "^6.9.1",
