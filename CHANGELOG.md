@@ -1,3 +1,21 @@
+## [1.24.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.1...v1.24.2) (2021-10-28)
+
+
+### Bug Fixes
+
+* add condition to display apy in tooltip UI-523 ([54d0934](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/54d093426188d56bfeb4b1999b381ca412765c3f))
+* update onboard UI-525 ([1cb4610](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1cb4610d756b45044ec2efaa173343576931e4e2))
+
+
+
+## [1.24.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.1...v1.24.2) (2021-10-28)
+
+
+### Bug Fixes
+
+* add condition to display apy in tooltip UI-523 ([54d0934](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/54d093426188d56bfeb4b1999b381ca412765c3f))
+* update onboard UI-525 ([1cb4610](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1cb4610d756b45044ec2efaa173343576931e4e2))
+
 ## [1.24.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.0...v1.24.1) (2021-10-26)
 
 
