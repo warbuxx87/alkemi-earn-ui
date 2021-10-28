@@ -26,13 +26,14 @@ const walletChecks = [
 
 const wallets = [
     { walletName: "metamask", preferred: true },
-    { walletName: "trust", preferred: true },
-    { walletName: "coinbase", preferred: true },
     {
         walletName: "walletConnect",
-        preferred: true,
+        preferred: false,
         infuraKey: INFURA_ID, // your infura id [String][Optional if rpc is provided instead]
     },
+    { walletName: "trust", preferred: false },
+    { walletName: "coinbase", preferred: false },
+
     // {
     //     walletName: "portis",
     //     apiKey: PORTIS_KEY,
