@@ -24,6 +24,11 @@ definitions:
         - step: &test
               name: "Test"
 
+              runs-on:
+                  - self.hosted
+                  - awsglobalrunner
+                  - linux
+
               caches:
                   - node
               script:
@@ -38,6 +43,12 @@ definitions:
         - step: &analyze
               name: Code Analysis
               size: 2x
+
+              runs-on:
+                  - self.hosted
+                  - awsglobalrunner
+                  - linux
+
               caches:
                   - node
                   - sonar
@@ -61,6 +72,11 @@ definitions:
 
               size: 2x
 
+              runs-on:
+                  - self.hosted
+                  - awsglobalrunner
+                  - linux
+
               caches:
                   - node
               script:
@@ -81,6 +97,12 @@ definitions:
               caches:
                   - node
               name: "Upload to AWS"
+
+              runs-on:
+                  - self.hosted
+                  - awsglobalrunner
+                  - linux
+
               script:
                   # ZIP PACKAGE INSTALLATIONS
                   - echo "Zip & Upload"
