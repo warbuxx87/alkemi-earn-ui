@@ -1,3 +1,19 @@
+# [1.25.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.2...v1.25.0) (2021-10-29)
+
+
+### Features
+
+* adding runners to pipeline UI-526 ([041039d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/041039da2e15f74eb9f3e542b257fee895a1f5ce))
+
+
+
+# [1.25.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.2...v1.25.0) (2021-10-29)
+
+
+### Features
+
+* adding runners to pipeline UI-526 ([041039d](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/041039da2e15f74eb9f3e542b257fee895a1f5ce))
+
 ## [1.24.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.1...v1.24.2) (2021-10-28)
 
 
