@@ -57,7 +57,7 @@ function BorrowLimit({ borrowLimit }) {
                 <CardHeader title="Borrow Limit" className={classes.item} />
                 <Tooltip
                     className={classes.Tooltip}
-                    title="Liquidation occurs if limit equals or exceeds 100%"
+                    title="Liquidations occurs if limit equals or exceeds 100%"
                     placement="bottom"
                     arrow
                 >

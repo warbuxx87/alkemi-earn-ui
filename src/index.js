@@ -40,20 +40,20 @@ Sentry.init({
 export class App extends Component {
     render() {
         return (
-            <ErrorBoundary FallbackComponent={ErrorFallbackComponent}>
-                <CacheBuster>
-                    <Provider store={store}>
-                        <Drizzle>
-                            <ConnectedRouter history={history}>
-                                <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={theme}>
+                <ErrorBoundary FallbackComponent={ErrorFallbackComponent}>
+                    <CacheBuster>
+                        <Provider store={store}>
+                            <Drizzle>
+                                <ConnectedRouter history={history}>
                                     <CssBaseline />
                                     <Layout />
-                                </MuiThemeProvider>
-                            </ConnectedRouter>
-                        </Drizzle>
-                    </Provider>
-                </CacheBuster>
-            </ErrorBoundary>
+                                </ConnectedRouter>
+                            </Drizzle>
+                        </Provider>
+                    </CacheBuster>
+                </ErrorBoundary>
+            </MuiThemeProvider>
         );
     }
 }
