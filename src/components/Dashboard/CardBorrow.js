@@ -3,13 +3,14 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import Big from "big.js";
 
 // Section 2: Material-UI imports
 import { Box, Grid, Paper, Typography, makeStyles } from "@material-ui/core";
-import { formatPercent } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
 import SplitNumber from "components/UI/SplitNumber";
+import APYDisplay from "components/UI/APYDisplay";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +42,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function BorrowBalance({ totalBorrow, currency, apy }) {
+function BorrowBalance({
+    totalBorrow,
+    aggregatedAlkApy,
+    apy,
+    walletConnected,
+}) {
     const classes = useStyles();
 
     // Section 5: Code Component
@@ -96,7 +102,20 @@ function BorrowBalance({ totalBorrow, currency, apy }) {
                             align="right"
                             className={classes.apy}
                         >
-                            {formatPercent(apy)}
+                            {walletConnected ? (
+                                <APYDisplay
+                                    apy={
+                                        !isNaN(apy)
+                                            ? Big(apy).times(100).toFixed(2)
+                                            : "0.00"
+                                    }
+                                    alkApy={aggregatedAlkApy}
+                                    showTooltip={false}
+                                    typeOfAPY={"borrow"}
+                                />
+                            ) : (
+                                "0.00%"
+                            )}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -104,7 +123,6 @@ function BorrowBalance({ totalBorrow, currency, apy }) {
         </Paper>
     );
 }
-
 // Section 6: Documentation with PropTypes
 BorrowBalance.propTypes = {
     className: PropTypes.string,

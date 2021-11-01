@@ -1,18 +1,10 @@
 {
     "main": {
         "permissioned": ["DAI", "USDC", "WBTC", "WETH"],
-        "open": ["USDC", "WETH"]
+        "open": ["USDC", "WETH", "WBTC"]
     },
     "rinkeby": {
         "permissioned": ["DAI", "USDC", "WBTC", "WETH"],
-        "open": ["USDC", "WETH"]
-    },
-    "ropsten": {
-        "permissioned": ["DAI", "USDC", "WBTC", "WETH"],
-        "open": ["USDC", "WETH"]
-    },
-    "kovan": {
-        "permissioned": ["DAI", "USDC", "WBTC", "WETH"],
-        "open": ["USDC", "WETH"]
+        "open": ["USDC", "WETH", "WBTC"]
     }
 }

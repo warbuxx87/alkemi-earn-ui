@@ -11,6 +11,8 @@ import { getPool } from "redux/selectors/status/pool";
 import constants from "constants/constant.json";
 
 import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
+import { getAlkApyPerMarket } from "./markets";
+import { fromWei } from "utils/ui";
 
 // Helpers
 function calculateInterest(rateMantissa) {
@@ -188,6 +190,10 @@ const getLendAsset = createSelector(
                     ethBalance / web3.utils.fromWei(totalSupplied)
                 ).toString();
 
+                if (!isNaN(weight) && isFinite(weight))
+                    weight = Big(weight).toFixed(0);
+                else weight = "0";
+
                 // Replaced now with address_USDC
                 USDprice =
                     assetPrices[address[network][pool][`address_USDC`]] || "0";
@@ -231,6 +237,38 @@ export const getAggregatedDepositAPY = createSelector(
         }
 
         return totalAPY.toString();
+    }
+);
+
+export const getAggregatedAlkApy = createSelector(
+    getLendActive,
+    walletNetworkName,
+    getAlkApyPerMarket,
+    (activeAssets, network, alkApyPerMarket) => {
+        let totalAlkApy = Big(0);
+
+        if (network) {
+            activeAssets.forEach((asset) => {
+                let bigWeight = Big(
+                    asset.weight &&
+                        !isNaN(asset.weight) &&
+                        isFinite(asset.weight)
+                        ? fromWei(asset.weight)
+                        : 0
+                );
+                let bigApyForMarket = Big(
+                    alkApyPerMarket[asset.unit] &&
+                        !isNaN(alkApyPerMarket[asset.unit])
+                        ? alkApyPerMarket[asset.unit]
+                        : 0
+                );
+
+                const apyForAsset = bigWeight.times(Big(bigApyForMarket));
+                totalAlkApy = totalAlkApy.add(apyForAsset);
+            });
+        }
+
+        return totalAlkApy.toFixed(2);
     }
 );
 

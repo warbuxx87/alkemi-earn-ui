@@ -6,7 +6,11 @@ import { bindActionCreators, compose } from "redux";
 import web3 from "web3";
 import * as yup from "yup";
 
+import Big from "big.js";
+
 // Section 2: internal imports
+import useOnboard from "hooks/useOnboard";
+
 import DrizzleContext from "utils/DrizzleContext";
 
 import { onLiquidateAction } from "redux/actions/data/liquidations";
@@ -16,9 +20,14 @@ import useFetchMarkets from "hooks/useFetchMarkets";
 import { toWei, assetToDecimals } from "utils/ui";
 
 // Section 3: Selectors
-import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
+import {
+    isWalletConnected,
+    walletAddress,
+    walletNetwork,
+} from "redux/selectors/data/onboard";
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
 import { isKYCPool } from "redux/selectors/status/pool";
+import { getMarkets } from "redux/selectors/data/markets";
 
 // Section 4: Import Components / Containers
 import DrawerLiquidate from "components/UI/Drawer/DrawerLiquidate";
@@ -35,16 +44,20 @@ const LiquidateDrawerContainer = ({
 
     liquidationId,
 }) => {
+    useFetchMarkets(true);
+    const { onConnect } = useOnboard();
+
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
+    const walletConnected = useSelector(isWalletConnected);
 
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
 
     const needKYC = useSelector(isKYCPool);
 
-    const { marketsData } = useFetchMarkets(true); // optimize useFetchMarkets (with a throttled call in redux action) if it's used from more than one place
+    const marketsData = useSelector(getMarkets);
 
     const [amount, setAmount] = React.useState("");
     const [isProcessing, setIsProcessing] = React.useState(false);
@@ -151,6 +164,30 @@ const LiquidateDrawerContainer = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [txs]);
 
+    const maxAmountToDisplay = (amount, selectedLoanAsset) => {
+        let youPay = 0;
+        if (amount) {
+            youPay = parseFloat(amount);
+        }
+        if (amount === -1) {
+            if (selectedLoanAsset === "WETH" || selectedLoanAsset === "ETH") {
+                youPay = maxAmountForToken(selectedLoanAsset);
+
+                const youPayBig = Big(youPay);
+                const ethPayment = youPayBig.times(Big(1.01));
+
+                return ethPayment.toFixed(6);
+            } else {
+                youPay = maxAmountForToken(selectedLoanAsset);
+                let youPayBig = Big(youPay);
+                const positiveValue = youPayBig.abs();
+
+                return positiveValue.toFixed(6);
+            }
+        }
+        return youPay.toFixed(6);
+    };
+
     return (
         <DrawerLiquidate
             buttonsLabel="Liquidate"
@@ -168,6 +205,7 @@ const LiquidateDrawerContainer = ({
                     type: "liquidate",
 
                     liquidationId,
+                    maxAmount: maxAmountForToken(symbol),
                 });
             }}
             onSetMax={onSetMax}
@@ -185,6 +223,9 @@ const LiquidateDrawerContainer = ({
             marketsData={marketsData}
             walletIsKYCd={needKYC ? walletIsKYCd : true}
             maxAmountForToken={maxAmountForToken}
+            maxAmountToDisplay={maxAmountToDisplay}
+            walletConnected={walletConnected}
+            onConnect={onConnect}
         />
     );
 };

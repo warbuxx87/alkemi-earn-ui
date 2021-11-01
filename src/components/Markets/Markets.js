@@ -51,6 +51,7 @@ const Markets = ({
     collateralRatioContent,
     totalDepositsContent,
     userWalletNetwork,
+    alkApyPerMarket,
 }) => {
     const classes = useStyles();
 
@@ -140,6 +141,7 @@ const Markets = ({
                         <MarketsTable
                             marketsData={marketsData}
                             userWalletNetwork={userWalletNetwork}
+                            alkApyPerMarket={alkApyPerMarket}
                         />
                     </Grid>
                 </Grid>

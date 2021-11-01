@@ -11,5 +11,6 @@
         "42": "kovan"
     },
     "max_uint": "115792089237316195423570985008687907853269984665640564039457584007913129639935",
-    "assets": ["DAI", "USDC", "WBTC", "WETH"]
+    "assets": ["DAI", "USDC", "WBTC", "WETH"],
+    "supportedNetworks": [1, 4]
 }
