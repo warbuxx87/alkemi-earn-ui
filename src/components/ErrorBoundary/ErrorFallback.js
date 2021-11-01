@@ -1,8 +1,8 @@
 import React from "react";
-import { withStyles, useMediaQuery, useTheme } from "@material-ui/core/styles";
+import { withStyles, useTheme } from "@material-ui/core/styles";
 import { Box, Container, Typography, Button } from "@material-ui/core";
 import image from "assets/images/404.svg";
-import { darkTheme } from "themes/theme";
+// import { darkTheme } from "themes/theme";
 
 const styles = (theme) => ({
     root: {
