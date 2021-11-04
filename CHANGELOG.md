@@ -1,3 +1,19 @@
+## [1.25.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.25.0...v1.25.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* add checks to handle undefined selector values UI-521 ([8ec5a8f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8ec5a8fbd374977feed9259fc0bb5a897423d80c))
+
+
+
+## [1.25.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.25.0...v1.25.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* add checks to handle undefined selector values UI-521 ([8ec5a8f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/8ec5a8fbd374977feed9259fc0bb5a897423d80c))
+
 # [1.25.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.24.2...v1.25.0) (2021-10-29)
 
 
