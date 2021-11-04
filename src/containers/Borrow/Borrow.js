@@ -111,6 +111,20 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
             currentPool,
         });
 
+    const [waitt, setwaitt] = React.useState(false);
+
+    React.useEffect(() => {
+        console.log(
+            ":rocket: ~ file: Borrow.js ~ line 97 ~ React.useEffect ~ useEffect"
+        );
+
+        setTimeout(() => {
+            setwaitt(true);
+        }, 3000);
+
+        if (waitt) throw new Error(":boom: CABOOM :boom:");
+    }, [waitt]);
+
     return (
         <Borrow
             inactiveBorrow={inactiveMarketsData}

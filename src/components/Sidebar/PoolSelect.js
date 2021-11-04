@@ -100,6 +100,7 @@ export const PoolPopover = (props) => {
                     vertical: "bottom",
                 }}
                 transformOrigin={{
+                    horizontal: "left",
                     vertical: "bottom",
                 }}
                 keepMounted

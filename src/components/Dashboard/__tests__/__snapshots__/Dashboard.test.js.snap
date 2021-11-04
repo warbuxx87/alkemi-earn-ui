@@ -21,7 +21,7 @@ Object {
               class="MuiBox-root MuiBox-root-10"
             >
               <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"
@@ -116,7 +116,7 @@ Object {
                 class="MuiBox-root MuiBox-root-20 makeStyles-item-16"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
                 >
                   <div
                     class="MuiGrid-root MuiGrid-item"
@@ -169,7 +169,7 @@ Object {
                 class="MuiBox-root MuiBox-root-27 makeStyles-item-23"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
                 >
                   <div
                     class="MuiGrid-root MuiGrid-item"
@@ -396,7 +396,7 @@ Object {
             class="MuiBox-root MuiBox-root-10"
           >
             <div
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
             >
               <div
                 class="MuiGrid-root MuiGrid-item"
@@ -491,7 +491,7 @@ Object {
               class="MuiBox-root MuiBox-root-20 makeStyles-item-16"
             >
               <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"
@@ -544,7 +544,7 @@ Object {
               class="MuiBox-root MuiBox-root-27 makeStyles-item-23"
             >
               <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"

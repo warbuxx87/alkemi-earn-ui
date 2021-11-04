@@ -881,6 +881,9 @@ export default connect(mapStateToProps)(AppBar);
 
 ## Others
 
+**Error handling:**
+Refer to [to this article](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) for handling async errors using our built ErrorFallback.js file.
+
 ### Material-UI
 
 #### Theme
