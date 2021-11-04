@@ -1,3 +1,33 @@
+# [1.26.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.25.1...v1.26.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* resolve material ui warnings UI-514 ([c98a49c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c98a49c8c09a3e85186b7381cfb05cc8f8c4999f))
+* update abis and properly format number for repay UI-514 ([97355a3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/97355a3fbf66285967d823f9001d880743dcb192))
+
+
+### Features
+
+* add error boundary component UI-514 ([78f7296](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/78f72967b3a9ed12de3e1654e15bce884594a232))
+* add refresh button to error boundary UI-514 ([90cfc1c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/90cfc1cc7254b8ba727bca9ec43550d322fb2588))
+
+
+
+# [1.26.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.25.1...v1.26.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* resolve material ui warnings UI-514 ([c98a49c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c98a49c8c09a3e85186b7381cfb05cc8f8c4999f))
+* update abis and properly format number for repay UI-514 ([97355a3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/97355a3fbf66285967d823f9001d880743dcb192))
+
+
+### Features
+
+* add error boundary component UI-514 ([78f7296](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/78f72967b3a9ed12de3e1654e15bce884594a232))
+* add refresh button to error boundary UI-514 ([90cfc1c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/90cfc1cc7254b8ba727bca9ec43550d322fb2588))
+
 ## [1.25.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.25.0...v1.25.1) (2021-11-04)
 
 
