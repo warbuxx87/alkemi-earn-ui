@@ -71,7 +71,7 @@ Object {
           >
             <div>
               <div
-                class="MuiCollapse-container MuiCollapse-entered"
+                class="MuiCollapse-root MuiCollapse-entered"
                 style="min-height: 0px;"
               >
                 <div
@@ -154,7 +154,7 @@ Object {
                     class="MuiBox-root MuiBox-root-65"
                   >
                     <div
-                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
                     >
                       <div
                         class="MuiGrid-root MuiGrid-item"
@@ -249,7 +249,7 @@ Object {
                       class="MuiBox-root MuiBox-root-69 makeStyles-item-30"
                     >
                       <div
-                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
                       >
                         <div
                           class="MuiGrid-root MuiGrid-item"
@@ -302,7 +302,7 @@ Object {
                       class="MuiBox-root MuiBox-root-70 makeStyles-item-37"
                     >
                       <div
-                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
                       >
                         <div
                           class="MuiGrid-root MuiGrid-item"
@@ -582,7 +582,7 @@ Object {
         >
           <div>
             <div
-              class="MuiCollapse-container MuiCollapse-entered"
+              class="MuiCollapse-root MuiCollapse-entered"
               style="min-height: 0px;"
             >
               <div
@@ -665,7 +665,7 @@ Object {
                   class="MuiBox-root MuiBox-root-65"
                 >
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
                   >
                     <div
                       class="MuiGrid-root MuiGrid-item"
@@ -760,7 +760,7 @@ Object {
                     class="MuiBox-root MuiBox-root-69 makeStyles-item-30"
                   >
                     <div
-                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
                     >
                       <div
                         class="MuiGrid-root MuiGrid-item"
@@ -813,7 +813,7 @@ Object {
                     class="MuiBox-root MuiBox-root-70 makeStyles-item-37"
                   >
                     <div
-                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
                     >
                       <div
                         class="MuiGrid-root MuiGrid-item"

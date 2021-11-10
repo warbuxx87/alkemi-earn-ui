@@ -6,6 +6,8 @@ import { bindActionCreators, compose } from "redux";
 import web3 from "web3";
 import * as yup from "yup";
 
+import Big from "big.js";
+
 // Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
 
@@ -57,18 +59,23 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
         if (asset.unit === "ETH" || asset.unit === "WETH") {
             // Cannot send MAX_UINT on repays for ETH, (means risk of dust)
 
+            const bigBalance = Big(asset.balance);
+            const higherBalanceForPayments = bigBalance
+                .times(Big(1.01))
+                .toFixed(0);
+
             // If user sets all their ether, they cannot make the transaction, choice here is to limit what they can repay from a calculated gas fee originating from past gas cost * (gas price estimation + 2 gwei)
             const calculatedDifference = web3.utils
                 .toBN(asset.wallet)
                 .sub(
                     web3.utils
                         .toBN(estimationOfRepayMethodCall)
-                        .add(web3.utils.toBN(asset.balance * 1.01))
+                        .add(web3.utils.toBN(higherBalanceForPayments))
                 ); // user's ether - (estimation of gas + borrowed amount)
 
             if (calculatedDifference.gte(web3.utils.toBN("0"))) {
                 // user has on their wallet enough to pay for borrowed balance and gas
-                setAmount(fromWei(asset.balance * 1.01, asset.unit));
+                setAmount(fromWei(higherBalanceForPayments, asset.unit));
             } else {
                 const calculatedMax = web3.utils
                     .toBN(asset.wallet)
@@ -167,10 +174,16 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                         allowedAmount = web3.utils.toBN(
                             calculatedMax.toString()
                         );
+
+                        const bigBalance = Big(asset.balance);
+                        const higherBalanceForPayments = bigBalance
+                            .times(Big(1.01))
+                            .toFixed(0);
+
                         // if user repaying ETH allow 101% repayment of balance owed
                         repayAmount = web3.utils
                             .toBN(toWei(amount, asset.unit))
-                            .lte(web3.utils.toBN(asset.balance * 1.01));
+                            .lte(web3.utils.toBN(higherBalanceForPayments));
                     }
 
                     return (

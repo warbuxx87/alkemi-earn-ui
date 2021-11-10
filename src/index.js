@@ -4,6 +4,10 @@ import ReactDOM from "react-dom";
 //Cache bust
 import CacheBuster from "./CacheBuster";
 
+// Error handler
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallbackComponent from "components/ErrorBoundary/ErrorFallback";
+
 // sentry libs
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
@@ -36,18 +40,20 @@ Sentry.init({
 export class App extends Component {
     render() {
         return (
-            <CacheBuster>
-                <Provider store={store}>
-                    <Drizzle>
-                        <ConnectedRouter history={history}>
-                            <MuiThemeProvider theme={theme}>
-                                <CssBaseline />
-                                <Layout />
-                            </MuiThemeProvider>
-                        </ConnectedRouter>
-                    </Drizzle>
-                </Provider>
-            </CacheBuster>
+            <MuiThemeProvider theme={theme}>
+                <ErrorBoundary FallbackComponent={ErrorFallbackComponent}>
+                    <CacheBuster>
+                        <Provider store={store}>
+                            <Drizzle>
+                                <ConnectedRouter history={history}>
+                                    <CssBaseline />
+                                    <Layout />
+                                </ConnectedRouter>
+                            </Drizzle>
+                        </Provider>
+                    </CacheBuster>
+                </ErrorBoundary>
+            </MuiThemeProvider>
         );
     }
 }
