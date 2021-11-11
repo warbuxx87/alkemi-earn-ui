@@ -1,3 +1,19 @@
+## [1.26.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.0...v1.26.1) (2021-11-11)
+
+
+### Bug Fixes
+
+* handle reading 6th entry from null var UI-533 ([f2b506a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f2b506ae501f14285cb079b57c23ed6019b91eaa))
+
+
+
+## [1.26.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.0...v1.26.1) (2021-11-11)
+
+
+### Bug Fixes
+
+* handle reading 6th entry from null var UI-533 ([f2b506a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f2b506ae501f14285cb079b57c23ed6019b91eaa))
+
 # [1.26.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.25.1...v1.26.0) (2021-11-04)
 
 
