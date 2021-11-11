@@ -16,7 +16,12 @@ import {
 // } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import { sumUpTwoNumbers } from "utils/ui";
+import {
+    sumUpTwoNumbers,
+    negativeValueOfNumber,
+    isStringNumberPositive,
+    absoluteValue,
+} from "utils/ui";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     divider: {
@@ -50,7 +55,14 @@ function APYDisplay({ apy, alkApy, showTooltip, typeOfAPY }) {
 
     const displayCombinedValue = ({ apy, alkApy, typeOfAPY }) => {
         if (typeOfAPY === "borrow") {
-            return `${sumUpTwoNumbers(apy, alkApy, 2)}%`;
+            const borrowAPY = sumUpTwoNumbers(
+                negativeValueOfNumber(apy, 2),
+                alkApy,
+                2
+            );
+
+            const absBorrowAPY = absoluteValue(borrowAPY, 2);
+            return `${absBorrowAPY}%`;
         } else {
             return `${sumUpTwoNumbers(apy, alkApy, 2)}%`;
         }

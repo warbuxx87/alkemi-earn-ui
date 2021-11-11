@@ -64,7 +64,31 @@ export const sumUpTwoNumbers = (num1, num2, decimals) => {
     const bigNum1 = num1 && !isNaN(num1) ? Big(num1) : Big(0);
     const bigNum2 = num2 && !isNaN(num2) ? Big(num2) : Big(0);
 
-    return bigNum1.add(bigNum2).toFixed(decimalPoints);
+    const result = bigNum1.add(bigNum2);
+
+    return result.toFixed(decimalPoints);
+};
+
+// converts string type numbers to Big number and check for positivity
+export const isStringNumberPositive = (theNumber) => {
+    if (isNaN(theNumber)) return;
+
+    const bigNumber = Big(theNumber);
+
+    return bigNumber.gte(Big(0));
+};
+
+export const absoluteValue = (theNumber, decimals) => {
+    if (isNaN(theNumber)) return;
+
+    let decimalPoints = 2;
+    if (decimals) decimalPoints = decimals;
+
+    const bigNumber = Big(theNumber);
+
+    const result = bigNumber.abs();
+
+    return result.toFixed(decimalPoints);
 };
 
 export const getTokenIcon = (symbol) => {
@@ -228,14 +252,12 @@ export const breakNumberFromDecimalPoint = (
     theNumber,
     shouldFormatNumber = true
 ) => {
-    const {
-        leftOfDecimalPoint,
-        rightOfDecimalPoint,
-    } = formattedNumberToSplitNumber(
-        shouldFormatNumber
-            ? formatNumber(theNumber.toString(), "ETH")
-            : theNumber
-    );
+    const { leftOfDecimalPoint, rightOfDecimalPoint } =
+        formattedNumberToSplitNumber(
+            shouldFormatNumber
+                ? formatNumber(theNumber.toString(), "ETH")
+                : theNumber
+        );
 
     const numbersOnLeft = leftOfDecimalPoint.replace("-", ""); // remove negative
     let numberOnRightToDisplay = rightOfDecimalPoint;
