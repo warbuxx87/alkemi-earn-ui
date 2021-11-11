@@ -3,31 +3,16 @@
         "constant": true,
         "inputs": [],
         "name": "alkemiEarnVerified",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
         "constant": true,
-        "inputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
+        "inputs": [{ "name": "", "type": "address" }],
         "name": "alkAccrued",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -35,26 +20,12 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "name": "",
-                "type": "address"
-            },
-            {
-                "name": "",
-                "type": "address"
-            }
+            { "name": "", "type": "bool" },
+            { "name": "", "type": "address" },
+            { "name": "", "type": "address" }
         ],
         "name": "alkBorrowerIndex",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -63,12 +34,7 @@
         "constant": true,
         "inputs": [],
         "name": "alkemiEarnPublic",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -76,22 +42,11 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "name": "",
-                "type": "address"
-            }
+            { "name": "", "type": "bool" },
+            { "name": "", "type": "address" }
         ],
         "name": "allMarketsIndex",
-        "outputs": [
-            {
-                "name": "",
-                "type": "bool"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "bool" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -100,12 +55,7 @@
         "constant": true,
         "inputs": [],
         "name": "owner",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -113,26 +63,12 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "name": "",
-                "type": "address"
-            },
-            {
-                "name": "",
-                "type": "address"
-            }
+            { "name": "", "type": "bool" },
+            { "name": "", "type": "address" },
+            { "name": "", "type": "address" }
         ],
         "name": "alkSupplierIndex",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -140,22 +76,11 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "name": "",
-                "type": "uint256"
-            }
+            { "name": "", "type": "bool" },
+            { "name": "", "type": "uint256" }
         ],
         "name": "allMarkets",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -164,12 +89,7 @@
         "constant": true,
         "inputs": [],
         "name": "MAXIMUM_NUMBER_OF_MARKETS",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint8"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint8" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -177,25 +97,13 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "name": "",
-                "type": "address"
-            }
+            { "name": "", "type": "bool" },
+            { "name": "", "type": "address" }
         ],
         "name": "alkBorrowState",
         "outputs": [
-            {
-                "name": "index",
-                "type": "uint224"
-            },
-            {
-                "name": "block",
-                "type": "uint32"
-            }
+            { "name": "index", "type": "uint224" },
+            { "name": "block", "type": "uint32" }
         ],
         "payable": false,
         "stateMutability": "view",
@@ -205,12 +113,7 @@
         "constant": true,
         "inputs": [],
         "name": "newOwner",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -219,12 +122,7 @@
         "constant": true,
         "inputs": [],
         "name": "alkRate",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -232,25 +130,13 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "name": "",
-                "type": "address"
-            }
+            { "name": "", "type": "bool" },
+            { "name": "", "type": "address" }
         ],
         "name": "alkSupplyState",
         "outputs": [
-            {
-                "name": "index",
-                "type": "uint224"
-            },
-            {
-                "name": "block",
-                "type": "uint32"
-            }
+            { "name": "index", "type": "uint224" },
+            { "name": "block", "type": "uint32" }
         ],
         "payable": false,
         "stateMutability": "view",
@@ -260,12 +146,7 @@
         "constant": true,
         "inputs": [],
         "name": "alkAddress",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -273,22 +154,11 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "name": "",
-                "type": "address"
-            }
+            { "name": "", "type": "bool" },
+            { "name": "", "type": "address" }
         ],
         "name": "alkSpeeds",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -297,12 +167,7 @@
         "constant": true,
         "inputs": [],
         "name": "initializationDone",
-        "outputs": [
-            {
-                "name": "",
-                "type": "bool"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "bool" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -310,21 +175,9 @@
     {
         "anonymous": false,
         "inputs": [
-            {
-                "indexed": true,
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "newSpeed",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "indexed": true, "name": "market", "type": "address" },
+            { "indexed": false, "name": "newSpeed", "type": "uint256" },
+            { "indexed": false, "name": "isVerified", "type": "bool" }
         ],
         "name": "AlkSpeedUpdated",
         "type": "event"
@@ -332,21 +185,9 @@
     {
         "anonymous": false,
         "inputs": [
-            {
-                "indexed": true,
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "name": "supplier",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "supplierDelta",
-                "type": "uint256"
-            },
+            { "indexed": true, "name": "market", "type": "address" },
+            { "indexed": true, "name": "supplier", "type": "address" },
+            { "indexed": false, "name": "supplierDelta", "type": "uint256" },
             {
                 "indexed": false,
                 "name": "supplierAccruedAlk",
@@ -357,11 +198,7 @@
                 "name": "supplyIndexMantissa",
                 "type": "uint256"
             },
-            {
-                "indexed": false,
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "indexed": false, "name": "isVerified", "type": "bool" }
         ],
         "name": "DistributedSupplierAlk",
         "type": "event"
@@ -369,21 +206,9 @@
     {
         "anonymous": false,
         "inputs": [
-            {
-                "indexed": true,
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "name": "borrower",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "borrowerDelta",
-                "type": "uint256"
-            },
+            { "indexed": true, "name": "market", "type": "address" },
+            { "indexed": true, "name": "borrower", "type": "address" },
+            { "indexed": false, "name": "borrowerDelta", "type": "uint256" },
             {
                 "indexed": false,
                 "name": "borrowerAccruedAlk",
@@ -394,11 +219,7 @@
                 "name": "borrowIndexMantissa",
                 "type": "uint256"
             },
-            {
-                "indexed": false,
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "indexed": false, "name": "isVerified", "type": "bool" }
         ],
         "name": "DistributedBorrowerAlk",
         "type": "event"
@@ -406,26 +227,14 @@
     {
         "anonymous": false,
         "inputs": [
-            {
-                "indexed": true,
-                "name": "participant",
-                "type": "address"
-            },
+            { "indexed": true, "name": "participant", "type": "address" },
             {
                 "indexed": false,
                 "name": "participantAccrued",
                 "type": "uint256"
             },
-            {
-                "indexed": false,
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "indexed": false, "name": "market", "type": "address" },
+            { "indexed": false, "name": "isVerified", "type": "bool" }
         ],
         "name": "TransferredAlk",
         "type": "event"
@@ -433,16 +242,8 @@
     {
         "anonymous": false,
         "inputs": [
-            {
-                "indexed": true,
-                "name": "owner",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "name": "newOwner",
-                "type": "address"
-            }
+            { "indexed": true, "name": "owner", "type": "address" },
+            { "indexed": true, "name": "newOwner", "type": "address" }
         ],
         "name": "OwnerUpdate",
         "type": "event"
@@ -450,21 +251,9 @@
     {
         "anonymous": false,
         "inputs": [
-            {
-                "indexed": true,
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "numberOfMarkets",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "indexed": true, "name": "market", "type": "address" },
+            { "indexed": false, "name": "numberOfMarkets", "type": "uint256" },
+            { "indexed": false, "name": "isVerified", "type": "bool" }
         ],
         "name": "MarketAdded",
         "type": "event"
@@ -472,21 +261,9 @@
     {
         "anonymous": false,
         "inputs": [
-            {
-                "indexed": true,
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "numberOfMarkets",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "indexed": true, "name": "market", "type": "address" },
+            { "indexed": false, "name": "numberOfMarkets", "type": "uint256" },
+            { "indexed": false, "name": "isVerified", "type": "bool" }
         ],
         "name": "MarketRemoved",
         "type": "event"
@@ -494,22 +271,10 @@
     {
         "constant": false,
         "inputs": [
-            {
-                "name": "_owner",
-                "type": "address"
-            },
-            {
-                "name": "_alkemiEarnVerified",
-                "type": "address"
-            },
-            {
-                "name": "_alkemiEarnPublic",
-                "type": "address"
-            },
-            {
-                "name": "_alkAddress",
-                "type": "address"
-            }
+            { "name": "_owner", "type": "address" },
+            { "name": "_alkemiEarnVerified", "type": "address" },
+            { "name": "_alkemiEarnPublic", "type": "address" },
+            { "name": "_alkAddress", "type": "address" }
         ],
         "name": "initializer",
         "outputs": [],
@@ -520,18 +285,9 @@
     {
         "constant": false,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "supplier",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "supplier", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "refreshAlkSupplyIndex",
         "outputs": [],
@@ -542,18 +298,9 @@
     {
         "constant": false,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "borrower",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "borrower", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "refreshAlkBorrowIndex",
         "outputs": [],
@@ -573,14 +320,8 @@
     {
         "constant": false,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "updateAlkSupplyIndex",
         "outputs": [],
@@ -591,14 +332,8 @@
     {
         "constant": false,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "updateAlkBorrowIndex",
         "outputs": [],
@@ -609,18 +344,9 @@
     {
         "constant": false,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "supplier",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "supplier", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "distributeSupplierAlk",
         "outputs": [],
@@ -631,18 +357,9 @@
     {
         "constant": false,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "borrower",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "borrower", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "distributeBorrowerAlk",
         "outputs": [],
@@ -652,12 +369,7 @@
     },
     {
         "constant": false,
-        "inputs": [
-            {
-                "name": "holder",
-                "type": "address"
-            }
-        ],
+        "inputs": [{ "name": "holder", "type": "address" }],
         "name": "claimAlk",
         "outputs": [],
         "payable": false,
@@ -667,18 +379,9 @@
     {
         "constant": false,
         "inputs": [
-            {
-                "name": "holder",
-                "type": "address"
-            },
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "holder", "type": "address" },
+            { "name": "market", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "claimAlk",
         "outputs": [],
@@ -690,31 +393,16 @@
         "constant": true,
         "inputs": [],
         "name": "getBlockNumber",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
         "constant": true,
-        "inputs": [
-            {
-                "name": "participant",
-                "type": "address"
-            }
-        ],
+        "inputs": [{ "name": "participant", "type": "address" }],
         "name": "getAlkAccrued",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -723,12 +411,7 @@
         "constant": true,
         "inputs": [],
         "name": "getAlkAddress",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "address" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -738,14 +421,8 @@
         "inputs": [],
         "name": "getAlkemiEarnAddress",
         "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            },
-            {
-                "name": "",
-                "type": "address"
-            }
+            { "name": "", "type": "address" },
+            { "name": "", "type": "address" }
         ],
         "payable": false,
         "stateMutability": "view",
@@ -754,53 +431,20 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "getMarketStats",
         "outputs": [
-            {
-                "name": "isSupported",
-                "type": "bool"
-            },
-            {
-                "name": "blockNumber",
-                "type": "uint256"
-            },
-            {
-                "name": "interestRateModel",
-                "type": "address"
-            },
-            {
-                "name": "totalSupply",
-                "type": "uint256"
-            },
-            {
-                "name": "supplyRateMantissa",
-                "type": "uint256"
-            },
-            {
-                "name": "supplyIndex",
-                "type": "uint256"
-            },
-            {
-                "name": "totalBorrows",
-                "type": "uint256"
-            },
-            {
-                "name": "borrowRateMantissa",
-                "type": "uint256"
-            },
-            {
-                "name": "borrowIndex",
-                "type": "uint256"
-            }
+            { "name": "isSupported", "type": "bool" },
+            { "name": "blockNumber", "type": "uint256" },
+            { "name": "interestRateModel", "type": "address" },
+            { "name": "totalSupply", "type": "uint256" },
+            { "name": "supplyRateMantissa", "type": "uint256" },
+            { "name": "supplyIndex", "type": "uint256" },
+            { "name": "totalBorrows", "type": "uint256" },
+            { "name": "borrowRateMantissa", "type": "uint256" },
+            { "name": "borrowIndex", "type": "uint256" }
         ],
         "payable": false,
         "stateMutability": "view",
@@ -809,22 +453,11 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "getMarketTotalSupply",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -832,22 +465,11 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "getMarketTotalBorrows",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -855,26 +477,12 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "supplier",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "supplier", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "getSupplyBalance",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
@@ -882,38 +490,19 @@
     {
         "constant": true,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "borrower",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "borrower", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "getBorrowBalance",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"
     },
     {
         "constant": false,
-        "inputs": [
-            {
-                "name": "_newOwner",
-                "type": "address"
-            }
-        ],
+        "inputs": [{ "name": "_newOwner", "type": "address" }],
         "name": "transferOwnership",
         "outputs": [],
         "payable": false,
@@ -932,14 +521,8 @@
     {
         "constant": false,
         "inputs": [
-            {
-                "name": "market",
-                "type": "address"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "market", "type": "address" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "addMarket",
         "outputs": [],
@@ -950,14 +533,8 @@
     {
         "constant": false,
         "inputs": [
-            {
-                "name": "id",
-                "type": "uint256"
-            },
-            {
-                "name": "isVerified",
-                "type": "bool"
-            }
+            { "name": "id", "type": "uint256" },
+            { "name": "isVerified", "type": "bool" }
         ],
         "name": "removeMarket",
         "outputs": [],
@@ -967,12 +544,7 @@
     },
     {
         "constant": false,
-        "inputs": [
-            {
-                "name": "_alkAddress",
-                "type": "address"
-            }
-        ],
+        "inputs": [{ "name": "_alkAddress", "type": "address" }],
         "name": "setAlkAddress",
         "outputs": [],
         "payable": false,
@@ -981,12 +553,7 @@
     },
     {
         "constant": false,
-        "inputs": [
-            {
-                "name": "_alkemiEarnVerified",
-                "type": "address"
-            }
-        ],
+        "inputs": [{ "name": "_alkemiEarnVerified", "type": "address" }],
         "name": "setAlkemiEarnVerifiedAddress",
         "outputs": [],
         "payable": false,
@@ -995,12 +562,7 @@
     },
     {
         "constant": false,
-        "inputs": [
-            {
-                "name": "_alkemiEarnPublic",
-                "type": "address"
-            }
-        ],
+        "inputs": [{ "name": "_alkemiEarnPublic", "type": "address" }],
         "name": "setAlkemiEarnPublicAddress",
         "outputs": [],
         "payable": false,
@@ -1009,12 +571,7 @@
     },
     {
         "constant": false,
-        "inputs": [
-            {
-                "name": "_alkRate",
-                "type": "uint256"
-            }
-        ],
+        "inputs": [{ "name": "_alkRate", "type": "uint256" }],
         "name": "setAlkRate",
         "outputs": [],
         "payable": false,
@@ -1023,19 +580,9 @@
     },
     {
         "constant": true,
-        "inputs": [
-            {
-                "name": "user",
-                "type": "address"
-            }
-        ],
+        "inputs": [{ "name": "user", "type": "address" }],
         "name": "getAlkRewards",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
         "stateMutability": "view",
         "type": "function"

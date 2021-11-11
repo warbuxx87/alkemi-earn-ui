@@ -156,6 +156,15 @@
     {
         "constant": true,
         "inputs": [],
+        "name": "_guardCounter",
+        "outputs": [{ "name": "", "type": "uint256" }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
         "name": "closeFactorMantissa",
         "outputs": [{ "name": "", "type": "uint256" }],
         "payable": false,
@@ -226,8 +235,8 @@
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": true, "name": "account", "type": "address" },
-            { "indexed": true, "name": "asset", "type": "address" },
+            { "indexed": false, "name": "account", "type": "address" },
+            { "indexed": false, "name": "asset", "type": "address" },
             { "indexed": false, "name": "amount", "type": "uint256" },
             { "indexed": false, "name": "startingBalance", "type": "uint256" },
             { "indexed": false, "name": "newBalance", "type": "uint256" }
@@ -238,8 +247,8 @@
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": true, "name": "account", "type": "address" },
-            { "indexed": true, "name": "asset", "type": "address" },
+            { "indexed": false, "name": "account", "type": "address" },
+            { "indexed": false, "name": "asset", "type": "address" },
             { "indexed": false, "name": "amount", "type": "uint256" },
             { "indexed": false, "name": "startingBalance", "type": "uint256" },
             { "indexed": false, "name": "newBalance", "type": "uint256" }
@@ -250,8 +259,8 @@
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": true, "name": "account", "type": "address" },
-            { "indexed": true, "name": "asset", "type": "address" },
+            { "indexed": false, "name": "account", "type": "address" },
+            { "indexed": false, "name": "asset", "type": "address" },
             { "indexed": false, "name": "amount", "type": "uint256" },
             { "indexed": false, "name": "startingBalance", "type": "uint256" },
             {
@@ -267,8 +276,8 @@
     {
         "anonymous": false,
         "inputs": [
-            { "indexed": true, "name": "account", "type": "address" },
-            { "indexed": true, "name": "asset", "type": "address" },
+            { "indexed": false, "name": "account", "type": "address" },
+            { "indexed": false, "name": "asset", "type": "address" },
             { "indexed": false, "name": "amount", "type": "uint256" },
             { "indexed": false, "name": "startingBalance", "type": "uint256" },
             { "indexed": false, "name": "newBalance", "type": "uint256" }
