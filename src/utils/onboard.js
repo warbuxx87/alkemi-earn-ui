@@ -28,7 +28,7 @@ const wallets = [
     { walletName: "metamask", preferred: true },
     {
         walletName: "walletConnect",
-        preferred: false,
+        preferred: true,
         infuraKey: INFURA_ID, // your infura id [String][Optional if rpc is provided instead]
     },
     { walletName: "trust", preferred: false },
@@ -65,7 +65,8 @@ const onboard = Onboard({
 
             switch (wallet.name) {
                 case "Fortmatic": {
-                    window.currentlyUsedProvider = wallet.instance.getProvider();
+                    window.currentlyUsedProvider =
+                        wallet.instance.getProvider();
                     break;
                 }
                 default:
