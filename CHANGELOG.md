@@ -1,3 +1,19 @@
+## [1.26.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.1...v1.26.2) (2021-11-12)
+
+
+### Bug Fixes
+
+* show wallet connect UI-534 ([591c0fd](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/591c0fd4826f5221d840be6854113399fe9cd7b8))
+
+
+
+## [1.26.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.1...v1.26.2) (2021-11-12)
+
+
+### Bug Fixes
+
+* show wallet connect UI-534 ([591c0fd](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/591c0fd4826f5221d840be6854113399fe9cd7b8))
+
 ## [1.26.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.0...v1.26.1) (2021-11-11)
 
 
