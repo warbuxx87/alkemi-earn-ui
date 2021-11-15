@@ -1,3 +1,39 @@
+## [1.26.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.2...v1.26.3) (2021-11-15)
+
+
+### Bug Fixes
+
+* calculate apy for loan properly UI-531 ([ce4f079](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ce4f0797e36befe5ba92b82063ef121b861529ba))
+* change label color depending on apy value UI-528 ([5c27d79](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5c27d7976acc9f86b797038163482100262d1290))
+* make loan apy positive UI-531 ([77223d3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/77223d3c7dc9648fad76d00ce1d90e49f350ba54))
+
+
+
+## [1.26.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.2...v1.26.3) (2021-11-15)
+
+
+### Bug Fixes
+
+* calculate apy for loan properly UI-531 ([ce4f079](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ce4f0797e36befe5ba92b82063ef121b861529ba))
+* change label color depending on apy value UI-528 ([5c27d79](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5c27d7976acc9f86b797038163482100262d1290))
+* make loan apy positive UI-531 ([77223d3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/77223d3c7dc9648fad76d00ce1d90e49f350ba54))
+
+## [1.26.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.1...v1.26.2) (2021-11-12)
+
+
+### Bug Fixes
+
+* show wallet connect UI-534 ([591c0fd](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/591c0fd4826f5221d840be6854113399fe9cd7b8))
+
+
+
+## [1.26.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.1...v1.26.2) (2021-11-12)
+
+
+### Bug Fixes
+
+* show wallet connect UI-534 ([591c0fd](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/591c0fd4826f5221d840be6854113399fe9cd7b8))
+
 ## [1.26.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.0...v1.26.1) (2021-11-11)
 
 

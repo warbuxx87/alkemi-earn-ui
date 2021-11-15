@@ -160,16 +160,11 @@ export default function DepositTables({
                                 </Typography>
                             </DepositTableCell>
                             <DepositTableCell align="right">
-                                <Typography
-                                    variant="body1"
-                                    className={classes.label}
-                                >
-                                    <APYDisplay
-                                        apy={Big(row.apy).times(100).toFixed(2)}
-                                        alkApy={alkApyPerMarket[row.unit]}
-                                        typeOfAPY={"lend"}
-                                    />
-                                </Typography>
+                                <APYDisplay
+                                    apy={Big(row.apy).times(100).toFixed(2)}
+                                    alkApy={alkApyPerMarket[row.unit]}
+                                    typeOfAPY={"lend"}
+                                />
                                 <Typography
                                     variant="body2"
                                     color="textSecondary"
