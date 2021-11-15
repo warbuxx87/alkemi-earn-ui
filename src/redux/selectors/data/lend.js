@@ -110,22 +110,30 @@ const getUtilizationValues = (state) => {
         Object.values(
             _.get(state, "contracts.MoneyMarket.markets", {})
         ).forEach((market) => {
-            if (
-                market &&
-                market.args &&
-                (Array.isArray(market.args) ||
-                    (typeof market.args === "object" &&
-                        market.args !== null)) && // expectation here is for market to be an object, array check is added as an alternative
-                market.args[0] !== undefined &&
-                market.value[6] !== undefined &&
-                market.value[3] !== undefined
-            )
-                return (utilizationRates[market.args[0]] = calculateUtilization(
-                    market.value[6],
-                    market.value[3]
-                ));
+            try {
+                if (
+                    market &&
+                    market.args &&
+                    market.value &&
+                    (Array.isArray(market.args) ||
+                        (typeof market.args === "object" &&
+                            market.args != null)) && // expectation here is for args to be an object, array check is added as an alternative
+                    (Array.isArray(market.value) ||
+                        (typeof market.value === "object" &&
+                            market.value != null)) && // expectation here is for value to be an object, array check is added as an alternative
+                    market.args[0] !== undefined &&
+                    market.value[6] !== undefined &&
+                    market.value[3] !== undefined
+                )
+                    return (utilizationRates[market.args[0]] =
+                        calculateUtilization(market.value[6], market.value[3]));
+            } catch (e) {
+                console.error(e);
+            }
         });
-    } catch (e) {}
+    } catch (e) {
+        console.error(e);
+    }
     return utilizationRates;
 };
 
