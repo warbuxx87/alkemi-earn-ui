@@ -180,19 +180,11 @@ const BorrowTableActive = ({
                                     align="right"
                                     style={{ width: "18%" }}
                                 >
-                                    <Typography
-                                        variant="body1"
-                                        color="textPrimary"
-                                        className={classes.label}
-                                    >
-                                        <APYDisplay
-                                            apy={Big(row.apy)
-                                                .times(100)
-                                                .toFixed(2)}
-                                            alkApy={alkApyPerMarket[row.unit]}
-                                            typeOfAPY={"borrow"}
-                                        />
-                                    </Typography>
+                                    <APYDisplay
+                                        apy={Big(row.apy).times(100).toFixed(2)}
+                                        alkApy={alkApyPerMarket[row.unit]}
+                                        typeOfAPY={"borrow"}
+                                    />
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"

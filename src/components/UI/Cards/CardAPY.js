@@ -76,22 +76,23 @@ function CardAPY({
                     alignItems="center"
                     flexWrap="wrap"
                 >
-                    <Typography
-                        variant="h2"
-                        color="textPrimary"
-                        className={classes.label}
-                    >
-                        {walletConnected === true ? (
-                            <APYDisplay
-                                apy={totalAPY}
-                                alkApy={aggregatedAlkApy}
-                                showTooltip={false}
-                                typeOfAPY={typeOfAPY}
-                            />
-                        ) : (
-                            "0.00%"
-                        )}
-                    </Typography>
+                    {walletConnected === true ? (
+                        <APYDisplay
+                            apy={totalAPY}
+                            alkApy={aggregatedAlkApy}
+                            showTooltip={false}
+                            typeOfAPY={typeOfAPY}
+                            typeOfLabel={"Big"}
+                        />
+                    ) : (
+                        <Typography
+                            variant="h2"
+                            color="textPrimary"
+                            className={classes.label}
+                        >
+                            0.00%
+                        </Typography>
+                    )}
                 </Box>
             </CardContent>
         </Card>

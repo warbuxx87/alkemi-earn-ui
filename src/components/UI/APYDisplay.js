@@ -2,8 +2,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import clsx from "clsx";
+
 // Section 2: Material-UI imports
-// import {
 
 import {
     Box,
@@ -11,12 +12,18 @@ import {
     Tooltip,
     Typography,
     makeStyles,
+    fade,
 } from "@material-ui/core";
 
 // } from "@material-ui/core";
 
 // Section 3: Components & Containers import from the application
-import { sumUpTwoNumbers, negativeValueOfNumber } from "utils/ui";
+import {
+    sumUpTwoNumbers,
+    negativeValueOfNumber,
+    isStringNumberPositive,
+    absoluteValue,
+} from "utils/ui";
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
     divider: {
@@ -27,6 +34,63 @@ const useStyles = makeStyles((theme) => ({
     text: {
         fontSize: 11,
     },
+
+    // Base styling
+    baseLabelStyling: {
+        alignItems: "center",
+        display: "inline-flex",
+        flexGrow: 0,
+        whiteSpace: "nowrap",
+        cursor: "default",
+        flexShrink: 0,
+        justifyContent: "center",
+        letterSpacing: 0.5,
+        minWidth: 20,
+        textTransform: "uppercase",
+    },
+
+    // Base regular styling
+    baseRegularLabelStyling: {
+        fontFamily: theme.typography.fontFamily,
+        borderRadius: 2,
+        height: 24,
+        padding: theme.spacing(0.5, 0.5),
+    },
+
+    warningRegularLabel: {
+        color: theme.palette.warning.main,
+        backgroundColor: fade(theme.palette.warning.main, 0.08),
+    },
+
+    successRegularLabel: {
+        color: theme.palette.success.main,
+        backgroundColor: fade(theme.palette.success.main, 0.08),
+    },
+
+    baseBigLabelStyling: {
+        borderRadius: 4,
+        padding: theme.spacing(0, 1),
+    },
+
+    warningBigLabel: {
+        // similar styling reside in UI/CardAPY.js
+        color: theme.palette.warning.main,
+        backgroundColor: fade(theme.palette.warning.main, 0.08),
+    },
+    successBigLabel: {
+        color: theme.palette.success.main,
+        backgroundColor: fade(theme.palette.success.main, 0.08),
+    },
+
+    successNumberOnly: {
+        color: theme.palette.success.main,
+    },
+
+    warningNumberOnly: {
+        color: theme.palette.warning.main,
+    },
+
+    defaultLabel: {},
 }));
 
 // const useStyles = makeStyles((theme) => ({
@@ -35,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
 // Section 5: Code Component
 
 // typeOfAPY is lend or borrow
-function APYDisplay({ apy, alkApy, showTooltip, typeOfAPY }) {
+function APYDisplay({ apy, alkApy, showTooltip, typeOfAPY, typeOfLabel }) {
     const classes = useStyles();
 
     const displayTypeOfApyLabel = ({ typeOfAPY }) => {
@@ -48,16 +112,56 @@ function APYDisplay({ apy, alkApy, showTooltip, typeOfAPY }) {
         }
     };
 
-    const displayCombinedValue = ({ apy, alkApy, typeOfAPY }) => {
+    const calculateAPY = ({ apy, alkApy, typeOfAPY }) => {
         if (typeOfAPY === "borrow") {
-            return `${sumUpTwoNumbers(
+            const borrowAPY = sumUpTwoNumbers(
                 negativeValueOfNumber(apy, 2),
                 alkApy,
                 2
-            )}%`;
+            );
+
+            return `${borrowAPY}`;
         } else {
-            return `${sumUpTwoNumbers(apy, alkApy, 2)}%`;
+            return `${sumUpTwoNumbers(apy, alkApy, 2)}`;
         }
+    };
+
+    const displayCombinedValue = ({ apy, alkApy, typeOfAPY }) => {
+        const calculatedCombinedAPY = calculateAPY({ apy, alkApy, typeOfAPY });
+
+        if (typeOfAPY === "borrow") {
+            return `${absoluteValue(calculatedCombinedAPY, 2)}%`;
+        } else {
+            return `${calculatedCombinedAPY}%`;
+        }
+    };
+
+    const selectLabelStyling = ({ apy, alkApy, typeOfAPY, typeOfLabel }) => {
+        let setTypeOfLabel = typeOfLabel;
+        if (!setTypeOfLabel) setTypeOfLabel = "Regular"; // default
+
+        const isPositive = isStringNumberPositive(
+            calculateAPY({ apy, alkApy, typeOfAPY })
+        );
+
+        let labelStyling = classes.defaultLabel;
+
+        if (typeOfLabel === "NumberOnly") {
+            labelStyling =
+                classes[`${!isPositive ? "warning" : "success"}NumberOnly`];
+        } else {
+            labelStyling = clsx(
+                classes.baseLabelStyling,
+                classes[`base${setTypeOfLabel}LabelStyling`],
+                classes[
+                    !isPositive
+                        ? `warning${setTypeOfLabel}Label`
+                        : `success${setTypeOfLabel}Label`
+                ]
+            );
+        }
+
+        return labelStyling;
     };
 
     const displayToolTip = () => {
@@ -85,10 +189,7 @@ function APYDisplay({ apy, alkApy, showTooltip, typeOfAPY }) {
                                         align="right"
                                         className={classes.text}
                                     >
-                                        {typeOfAPY === "borrow"
-                                            ? negativeValueOfNumber(apy, 2)
-                                            : apy}
-                                        %
+                                        {apy}%
                                     </Typography>
                                 </Box>
                             </Box>
@@ -164,9 +265,37 @@ function APYDisplay({ apy, alkApy, showTooltip, typeOfAPY }) {
     // const classes = useStyles();
     return (
         <>
-            {showTooltip === false
-                ? displayCombinedValue({ apy, alkApy, typeOfAPY })
-                : displayToolTip({ apy, alkApy, typeOfAPY })}
+            {typeOfLabel === "NumberOnly" ? (
+                <Typography
+                    variant="h3"
+                    color="textPrimary"
+                    align="right"
+                    className={selectLabelStyling({
+                        apy,
+                        alkApy,
+                        typeOfAPY,
+                        typeOfLabel,
+                    })}
+                >
+                    {showTooltip === false
+                        ? displayCombinedValue({ apy, alkApy, typeOfAPY })
+                        : displayToolTip({ apy, alkApy, typeOfAPY })}
+                </Typography>
+            ) : (
+                <Typography
+                    variant={typeOfLabel === "Big" ? "h2" : "body1"} // defaults to regular config
+                    className={selectLabelStyling({
+                        apy,
+                        alkApy,
+                        typeOfAPY,
+                        typeOfLabel,
+                    })}
+                >
+                    {showTooltip === false
+                        ? displayCombinedValue({ apy, alkApy, typeOfAPY })
+                        : displayToolTip({ apy, alkApy, typeOfAPY })}
+                </Typography>
+            )}
         </>
     );
 }
