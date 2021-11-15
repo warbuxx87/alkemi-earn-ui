@@ -258,23 +258,15 @@ const TableMarkets = ({ marketsData, alkApyPerMarket, userWalletNetwork }) => {
                                         </MarketsTableCell>
                                         <MarketsTableCell align="right">
                                             {" "}
-                                            <Typography
-                                                variant="body1"
-                                                color="textPrimary"
-                                                className={classes.label}
-                                            >
-                                                <APYDisplay
-                                                    apy={Big(item.supplyAPR)
-                                                        .times(100)
-                                                        .toFixed(2)}
-                                                    alkApy={
-                                                        alkApyPerMarket[
-                                                            item.symbol
-                                                        ]
-                                                    }
-                                                    typeOfAPY={"lend"}
-                                                />
-                                            </Typography>
+                                            <APYDisplay
+                                                apy={Big(item.supplyAPR)
+                                                    .times(100)
+                                                    .toFixed(2)}
+                                                alkApy={
+                                                    alkApyPerMarket[item.symbol]
+                                                }
+                                                typeOfAPY={"lend"}
+                                            />
                                         </MarketsTableCell>
                                         <MarketsTableCell align="right">
                                             {" "}

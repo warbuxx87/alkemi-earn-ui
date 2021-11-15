@@ -9,7 +9,6 @@ import {
     Box,
     Button,
     CircularProgress,
-    fade,
     Table,
     TableBody,
     TableRow,
@@ -46,24 +45,7 @@ const useStyles = makeStyles((theme) => ({
         height: "34px",
         marginTop: "3px",
     },
-    label: {
-        fontFamily: theme.typography.fontFamily,
-        alignItems: "center",
-        borderRadius: 2,
-        display: "inline-flex",
-        flexGrow: 0,
-        whiteSpace: "nowrap",
-        cursor: "default",
-        flexShrink: 0,
-        height: 24,
-        justifyContent: "center",
-        letterSpacing: 0.5,
-        minWidth: 20,
-        padding: theme.spacing(0.5, 0.5),
-        textTransform: "uppercase",
-        color: theme.palette.success.main,
-        backgroundColor: fade(theme.palette.success.main, 0.08),
-    },
+
     btnActiveOutline: {
         minWidth: 100,
         minHeight: 32,
@@ -248,23 +230,19 @@ const LendTable = ({
                                     align="right"
                                     style={{ width: "18%" }}
                                 >
-                                    <Typography
-                                        variant="body1"
-                                        color="textPrimary"
-                                        className={classes.label}
-                                    >
-                                        <APYDisplay
-                                            apy={retrieveApy({
-                                                apy: row.apy,
-                                                marketsData,
-                                                userWalletNetwork,
-                                                walletConnected,
-                                                symbol: row.unit,
-                                            })}
-                                            alkApy={alkApyPerMarket[row.unit]}
-                                            typeOfAPY={"lend"}
-                                        />
-                                    </Typography>
+                                    <APYDisplay
+                                        apy={retrieveApy({
+                                            apy: row.apy,
+                                            marketsData,
+                                            userWalletNetwork,
+                                            walletConnected,
+                                            symbol: row.unit,
+                                        })}
+                                        alkApy={alkApyPerMarket[row.unit]}
+                                        typeOfAPY={"lend"}
+                                        typeOfLabel={"Regular"}
+                                    />
+
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"

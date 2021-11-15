@@ -46,24 +46,6 @@ const useStyles = makeStyles((theme) => ({
         height: "34px",
         marginTop: "3px",
     },
-    label: {
-        fontFamily: theme.typography.fontFamily,
-        alignItems: "center",
-        borderRadius: 2,
-        display: "inline-flex",
-        flexGrow: 0,
-        whiteSpace: "nowrap",
-        cursor: "default",
-        flexShrink: 0,
-        height: 24,
-        justifyContent: "center",
-        letterSpacing: 0.5,
-        minWidth: 20,
-        padding: theme.spacing(0.5, 0.5),
-        textTransform: "uppercase",
-        color: theme.palette.warning.main,
-        backgroundColor: fade(theme.palette.warning.main, 0.1),
-    },
     btnActiveOutline: {
         minWidth: 100,
         minHeight: 32,
@@ -247,23 +229,18 @@ const BorrowTable = ({
                                     align="right"
                                     style={{ width: "18%" }}
                                 >
-                                    <Typography
-                                        variant="body1"
-                                        color="textPrimary"
-                                        className={classes.label}
-                                    >
-                                        <APYDisplay
-                                            apy={retrieveApy({
-                                                apy: Row.apy,
-                                                marketsData,
-                                                userWalletNetwork,
-                                                walletConnected,
-                                                symbol: Row.unit,
-                                            })}
-                                            alkApy={alkApyPerMarket[Row.unit]}
-                                            typeOfAPY={"borrow"}
-                                        />
-                                    </Typography>
+                                    <APYDisplay
+                                        apy={retrieveApy({
+                                            apy: Row.apy,
+                                            marketsData,
+                                            userWalletNetwork,
+                                            walletConnected,
+                                            symbol: Row.unit,
+                                        })}
+                                        alkApy={alkApyPerMarket[Row.unit]}
+                                        typeOfAPY={"borrow"}
+                                        typeOfLabel={"Regular"}
+                                    />
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"

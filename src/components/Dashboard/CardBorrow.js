@@ -96,27 +96,29 @@ function BorrowBalance({
                         >
                             Borrow APY
                         </Typography>
-                        <Typography
-                            variant="h3"
-                            color="textPrimary"
-                            align="right"
-                            className={classes.apy}
-                        >
-                            {walletConnected ? (
-                                <APYDisplay
-                                    apy={
-                                        !isNaN(apy)
-                                            ? Big(apy).times(100).toFixed(2)
-                                            : "0.00"
-                                    }
-                                    alkApy={aggregatedAlkApy}
-                                    showTooltip={false}
-                                    typeOfAPY={"borrow"}
-                                />
-                            ) : (
-                                "0.00%"
-                            )}
-                        </Typography>
+
+                        {walletConnected ? (
+                            <APYDisplay
+                                apy={
+                                    !isNaN(apy)
+                                        ? Big(apy).times(100).toFixed(2)
+                                        : "0.00"
+                                }
+                                alkApy={aggregatedAlkApy}
+                                showTooltip={false}
+                                typeOfAPY={"borrow"}
+                                typeOfLabel="NumberOnly"
+                            />
+                        ) : (
+                            <Typography
+                                variant="h3"
+                                color="textPrimary"
+                                align="right"
+                                className={classes.apy}
+                            >
+                                0.00%
+                            </Typography>
+                        )}
                     </Grid>
                 </Grid>
             </Box>
