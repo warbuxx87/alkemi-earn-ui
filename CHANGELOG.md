@@ -1,3 +1,19 @@
+## [1.26.4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.3...v1.26.4) (2021-11-18)
+
+
+### Bug Fixes
+
+* use proper block time average for calculating apy UI-529 ([3661c06](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3661c06f47b7df35ed16a874612a01f0a1b09e7f))
+
+
+
+## [1.26.4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.3...v1.26.4) (2021-11-18)
+
+
+### Bug Fixes
+
+* use proper block time average for calculating apy UI-529 ([3661c06](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3661c06f47b7df35ed16a874612a01f0a1b09e7f))
+
 ## [1.26.3](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.2...v1.26.3) (2021-11-15)
 
 
