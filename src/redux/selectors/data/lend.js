@@ -14,12 +14,9 @@ import { getMarketLiquidity } from "redux/selectors/data/totalBalance";
 import { getAlkApyPerMarket } from "./markets";
 import { fromWei } from "utils/ui";
 
+import { calculateInterest } from "utils/commonHelpers";
+
 // Helpers
-function calculateInterest(rateMantissa) {
-    const total_blocks_per_year = (3600 * 24 * 365) / 15;
-    let rateAPY = (rateMantissa * total_blocks_per_year) / 1e18;
-    return rateAPY;
-}
 
 function calculateUtilization(totalBorrow, totalSupply) {
     const utilization = totalBorrow / totalSupply;
