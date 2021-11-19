@@ -1,3 +1,19 @@
+## [1.26.5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.4...v1.26.5) (2021-11-19)
+
+
+### Bug Fixes
+
+* keep consistent numbers formatting for liquidity UI-530 ([f4646e4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f4646e4568c191cc86e9b0fad8a6af69114a2a7a))
+
+
+
+## [1.26.5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.4...v1.26.5) (2021-11-19)
+
+
+### Bug Fixes
+
+* keep consistent numbers formatting for liquidity UI-530 ([f4646e4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f4646e4568c191cc86e9b0fad8a6af69114a2a7a))
+
 ## [1.26.4](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.3...v1.26.4) (2021-11-18)
 
 
