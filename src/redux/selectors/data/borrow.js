@@ -12,13 +12,9 @@ import constants from "constants/constant.json";
 import { fromWei } from "utils/ui";
 import { getAlkApyPerMarket } from "./markets";
 
-// Helpers
-function calculateInterest(rateMantissa) {
-    const total_blocks_per_year = (3600 * 24 * 365) / 15;
-    let rateAPY = (rateMantissa * total_blocks_per_year) / 1e18;
-    return rateAPY;
-}
+import { calculateInterest } from "utils/commonHelpers";
 
+// Helpers
 function calculateUtilization(totalBorrow, totalSupply) {
     const utilization = totalBorrow / totalSupply;
 

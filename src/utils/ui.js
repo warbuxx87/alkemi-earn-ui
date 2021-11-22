@@ -217,18 +217,22 @@ export const formatStringNumber = (
     userWalletNetwork,
     preferredDecimalsPlaces
 ) => {
-    if (userWalletNetwork === TWO_DECIMAL_PLACES_NETWORK_ID) {
-        if (unit === "WETH") {
+    try {
+        if (parseInt(userWalletNetwork, 10) === TWO_DECIMAL_PLACES_NETWORK_ID) {
+            if (["WETH", "WBTC", "ETH"].includes(unit)) {
+                let bigValue = Big(value);
+                return bigValue.toFixed(maxDecimalsHigherValueAsset);
+            }
             let bigValue = Big(value);
-            return bigValue.toFixed(maxDecimalsHigherValueAsset);
+            return bigValue.toFixed(2);
+        } else if (preferredDecimalsPlaces !== undefined) {
+            let bigValue = Big(value);
+            return bigValue.toFixed(preferredDecimalsPlaces);
+        } else {
+            return value;
         }
-        let bigValue = Big(value);
-        return bigValue.toFixed(2);
-    } else if (preferredDecimalsPlaces !== undefined) {
-        let bigValue = Big(value);
-        return bigValue.toFixed(preferredDecimalsPlaces);
-    } else {
-        return value;
+    } catch (e) {
+        console.error(e);
     }
 };
 
