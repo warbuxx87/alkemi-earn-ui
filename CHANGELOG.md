@@ -1,3 +1,12 @@
+## [1.26.6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.5...v1.26.6) (2021-11-24)
+
+
+### Bug Fixes
+
+* removing duplicates in CHANGELOG, rmoving semantic-changelog UI-538 ([3197425](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3197425733ce39cb918415d68bad63452b58b466))
+
+
+
 ## [1.26.5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.4...v1.26.5) (2021-11-19)
 
 
