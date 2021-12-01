@@ -1,9 +1,12 @@
-import { readyToTransact } from "utils/onboard"; // TODO: Should probably be replaced by checking if address is selected and such
+import { readyToTransact } from "utils/onboardConfig"; // TODO: Should probably be replaced by checking if address is selected and such
 import { toWei } from "utils/ui";
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
 import { initAssetContract } from "utils/contracts";
 import Big from "big.js";
+
+import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
+import { ethers } from "ethers";
 
 // Approve Unlimited amount of ERC20 tokens to interact with protocol
 export const handle_approve_click = async ({
@@ -76,12 +79,12 @@ export const handle_deposit_click = async ({
     asset,
     shouldSendMax,
     currentPool,
+    library,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
 
-    const MoneyMarketContract = drizzle.contracts.MoneyMarket;
     const token_address =
         address[network][currentPool][`address_${asset.unit}`];
     const unit = asset.unit;
@@ -89,27 +92,35 @@ export const handle_deposit_click = async ({
     let weiAmount = amount;
     if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
 
-    let sendDeposit;
+    const address_MoneyMarket =
+        currentPool === "open"
+            ? address[network].address_open_MoneyMarket
+            : address[network].address_MoneyMarket;
+    const MoneyMarketEthers = new ethers.Contract(
+        address_MoneyMarket,
+        MoneyMarket_ABI,
+        library.getSigner(myAccount)
+    );
+    console.log("MoneyMarketEthers: ", MoneyMarketEthers);
+
+    let sendSupply;
     if (unit === "WETH" || unit === "ETH") {
-        sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
-            token_address,
-            weiAmount,
-            {
-                from: myAccount,
-                value: weiAmount,
-            }
-        );
+        try {
+            sendSupply = await MoneyMarketEthers.supply(
+                token_address,
+                weiAmount,
+                { value: weiAmount }
+            );
+        } catch (e) {
+            console.error("Error supplying: ", e);
+        }
     } else {
-        sendDeposit = MoneyMarketContract.methods.supply.cacheSend(
-            token_address,
-            weiAmount,
-            {
-                from: myAccount,
-            }
-        );
+        sendSupply = await MoneyMarketEthers.supply(token_address, weiAmount);
     }
 
-    return sendDeposit;
+    console.log("sendSupply: ", sendSupply);
+
+    return sendSupply;
 };
 
 // Borrow Tokens from Lending Pool
@@ -152,6 +163,7 @@ export const handle_repay_click = async ({
     asset,
     shouldSendMax,
     currentPool,
+    library,
 }) => {
     if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
@@ -164,27 +176,44 @@ export const handle_repay_click = async ({
     let weiAmount = amount;
     if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
 
-    let sendRepay;
+    const address_MoneyMarket =
+        currentPool === "open"
+            ? address[network].address_open_MoneyMarket
+            : address[network].address_MoneyMarket;
+    const MoneyMarketEthers = new ethers.Contract(
+        address_MoneyMarket,
+        MoneyMarket_ABI,
+        library.getSigner(myAccount)
+    );
+    console.log("MoneyMarketEthers Repay: ", MoneyMarketEthers);
 
-    if (unit === "WETH" || unit === "ETH") {
-        sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
-            token_address,
-            weiAmount,
-            {
-                from: myAccount,
-                value: weiAmount,
-            }
-        );
-    } else {
-        sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
-            token_address,
-            weiAmount,
-            {
-                from: myAccount,
-            }
-        );
-    }
-    return sendRepay;
+    const sendSupply = await MoneyMarketEthers.repayBorrow(
+        token_address,
+        weiAmount
+    );
+    console.log("sendSupply: ", sendSupply);
+
+    // let sendRepay;
+
+    // if (unit === "WETH" || unit === "ETH") {
+    //     sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
+    //         token_address,
+    //         weiAmount,
+    //         {
+    //             from: myAccount,
+    //             value: weiAmount,
+    //         }
+    //     );
+    // } else {
+    //     sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
+    //         token_address,
+    //         weiAmount,
+    //         {
+    //             from: myAccount,
+    //         }
+    //     );
+    // }
+    // return sendRepay;
 };
 
 // Withdraw tokens from lending pool

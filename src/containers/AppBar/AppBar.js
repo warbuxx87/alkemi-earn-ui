@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 // Section 2: internal imports
-import useOnboard from "hooks/useOnboard";
+import useWalletSelect from "hooks/useWalletSelect";
 import useWatchEtherBalance from "hooks/useWatchEtherBalance";
 import usePoolManager from "hooks/usePoolManager";
 
@@ -33,7 +33,7 @@ const locationToTitles = {
 
 // Section 5: Code Container
 const AppBarContainer = () => {
-    const { onConnect, onReset } = useOnboard();
+    const { onConnect, onReset } = useWalletSelect();
     useWatchEtherBalance();
     usePoolManager();
 

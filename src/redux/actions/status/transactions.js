@@ -69,37 +69,41 @@ const actionToCall = {
     claim: handle_claim_ALK_click,
 };
 
-export const onTx = ({
-    drizzle,
-    userWalletNetwork,
-    userWalletAddress,
-    amount,
-    asset,
-    shouldSendMax,
-    type,
-    currentPool,
-}) => async (dispatch) => {
-    const amountToSend =
-        shouldSendMax === true ? constants["max_uint"] : amount;
-
-    actionToCall[type]({
+export const onTx =
+    ({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
-        amount: amountToSend,
+        amount,
         asset,
         shouldSendMax,
+        type,
         currentPool,
-    })
-        .then((stackId) => {
-            dispatch(transactionTriggered(asset.unit, stackId, type));
+        library,
+    }) =>
+    async (dispatch) => {
+        const amountToSend =
+            shouldSendMax === true ? constants["max_uint"] : amount;
+
+        actionToCall[type]({
+            drizzle,
+            userWalletNetwork,
+            userWalletAddress,
+            amount: amountToSend,
+            asset,
+            shouldSendMax,
+            currentPool,
+            library,
         })
-        .catch((error) => {
-            triggerToastDisplay({
-                toastMessageVariant: "failure",
-                displayMessage: "Something went wrong",
-                displaySecondaryMessage: error.message,
+            .then((stackId) => {
+                dispatch(transactionTriggered(asset.unit, stackId, type));
+            })
+            .catch((error) => {
+                triggerToastDisplay({
+                    toastMessageVariant: "failure",
+                    displayMessage: "Something went wrong",
+                    displaySecondaryMessage: error.message,
+                });
+                //dispatch(depositError(asset.unit, error.message));
             });
-            //dispatch(depositError(asset.unit, error.message));
-        });
-};
+    };

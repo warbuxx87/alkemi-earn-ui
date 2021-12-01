@@ -5,6 +5,8 @@ import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
+import { useWeb3React } from "@web3-react/core";
+
 // Section 2: internal imports
 import Lend from "components/Lend/Lend";
 
@@ -12,7 +14,6 @@ import DrizzleContext from "utils/DrizzleContext";
 
 import { onTx } from "redux/actions/status/transactions";
 
-import useOnboard from "hooks/useOnboard";
 import useFetchInterest from "hooks/useFetchInterest";
 import useFetchMarkets from "hooks/useFetchMarkets";
 
@@ -47,7 +48,8 @@ import { getMarkets, getAlkApyPerMarket } from "redux/selectors/data/markets";
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     useFetchALKPrice();
 
-    const { onConnect } = useOnboard();
+    const { onConnect, library } = useWeb3React();
+
     useFetchInterest();
     useFetchMarkets(true);
 
@@ -104,7 +106,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
         );
     }, [activeLend, currentPool, userWalletNetwork]);
 
-    const activateAsset = (asset) =>
+    const activateAsset = (asset) => {
         onActivate({
             drizzle,
             userWalletNetwork,
@@ -112,7 +114,9 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             asset,
             type: "approve",
             currentPool,
+            library,
         });
+    };
 
     return (
         <Lend

@@ -10,7 +10,7 @@ import DrizzleContext from "utils/DrizzleContext";
 
 import { onTx } from "redux/actions/status/transactions";
 
-import useOnboard from "hooks/useOnboard";
+import useWalletSelect from "hooks/useWalletSelect";
 
 import constants from "constants/constant.json";
 import marketsByNetwork from "constants/markets_by_network.json";
@@ -47,7 +47,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
     useFetchALKPrice();
     useFetchMarkets(true);
 
-    const { onConnect } = useOnboard();
+    const { onConnect } = useWalletSelect();
 
     const marketsData = useSelector(getMarkets);
     const alkApyPerMarket = useSelector(getAlkApyPerMarket);

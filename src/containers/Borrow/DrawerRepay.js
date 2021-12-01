@@ -9,6 +9,8 @@ import * as yup from "yup";
 import Big from "big.js";
 
 // Section 2: internal imports
+import useOnboard from "hooks/useWalletSelect";
+
 import Drawer from "components/UI/Drawer/Drawer";
 
 import DrizzleContext from "utils/DrizzleContext";
@@ -35,6 +37,9 @@ import { getPool } from "redux/selectors/status/pool";
 
 const DrawerRepayContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
+
+    const { library } = useOnboard();
+
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
@@ -47,13 +52,10 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
 
     const currentPool = useSelector(getPool);
 
-    const [estimationOfGasPrice, setEstimationOfGasPrice] = React.useState(
-        "3000000000"
-    ); // defaults to 3 gwei
-    const [
-        estimationOfRepayMethodCall,
-        setEstimationOfRepayMethodCall,
-    ] = React.useState("1050000000000000"); // defaults to 3 gwei * 350000
+    const [estimationOfGasPrice, setEstimationOfGasPrice] =
+        React.useState("3000000000"); // defaults to 3 gwei
+    const [estimationOfRepayMethodCall, setEstimationOfRepayMethodCall] =
+        React.useState("1050000000000000"); // defaults to 3 gwei * 350000
 
     const onSetMax = () => {
         if (asset.unit === "ETH" || asset.unit === "WETH") {
@@ -239,6 +241,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                     shouldSendMax,
                     type: "repay",
                     currentPool,
+                    library,
                 })
             }
             isDoingAction={isProcessing}

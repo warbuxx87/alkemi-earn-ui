@@ -9,7 +9,7 @@ import * as yup from "yup";
 import Big from "big.js";
 
 // Section 2: internal imports
-import useOnboard from "hooks/useOnboard";
+import useWalletSelect from "hooks/useWalletSelect";
 
 import DrizzleContext from "utils/DrizzleContext";
 
@@ -45,7 +45,7 @@ const LiquidateDrawerContainer = ({
     liquidationId,
 }) => {
     useFetchMarkets(true);
-    const { onConnect } = useOnboard();
+    const { onConnect } = useWalletSelect();
 
     const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);

@@ -2,7 +2,7 @@
 import { useEffect, useCallback, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import onboard from "utils/onboard";
+import onboard from "utils/onboardConfig";
 
 import { initContracts, deleteAllContracts } from "utils/contracts";
 import { resetLendData, cancelFetchInterest } from "redux/actions/data/lend";
@@ -47,9 +47,8 @@ const useOnboard = () => {
     // get previous selected wallet
     useEffect(() => {
         const checkIfPreviouslySelectedWallet = async () => {
-            const previouslySelectedWallet = window.localStorage.getItem(
-                "selectedWallet"
-            );
+            const previouslySelectedWallet =
+                window.localStorage.getItem("selectedWallet");
 
             if (
                 previouslySelectedWallet !== undefined &&
