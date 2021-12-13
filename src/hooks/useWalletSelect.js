@@ -1,5 +1,5 @@
 // Section 1: React imports
-import { useEffect, useState, useCallback, useContext } from "react";
+import { useEffect, useState, useCallback, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useWeb3React } from "@web3-react/core";
@@ -50,7 +50,7 @@ const connectorsByName = {
     WalletConnect: walletconnect,
 };
 
-const useOnboard = () => {
+const useWalletSelect = () => {
     // web3-react
     const {
         connector,
@@ -72,10 +72,15 @@ const useOnboard = () => {
     const selectedWallet = useSelector(getSelectedWallet);
 
     // state
-    const [wallet, setWallet] = useState({});
-    const [onboard, setOnboard] = useState(null);
-
     const [providerInitialized, setProviderInitialized] = useState(false);
+
+    // track active state
+    const prevActiveRef = useRef();
+
+    useEffect(() => {
+        prevActiveRef.current = active;
+    });
+    const prevActive = prevActiveRef.current;
 
     // drizzle
     const drizzle = useContext(DrizzleContext);
@@ -86,8 +91,8 @@ const useOnboard = () => {
                 return;
             }
 
-            console.log("update: ", update);
-            // TODO update wallet
+            // console.log("Update happened --->: ", update);
+            // TODO react to type of update, example: {account: '0xnewWalletAddress'}
         },
         [connector, error]
     );
@@ -128,81 +133,86 @@ const useOnboard = () => {
     }, [connector]);
 
     useEffect(() => {
-        dispatch(setActivatedWallet());
-        // TODO: connect drizzle
-    }, [active]);
+        const initDrizzleData = (
+            active,
+            library,
+            providerInitialized,
+            forceUpdate = false
+        ) => {
+            if (
+                active === true &&
+                providerInitialized === false &&
+                library.provider
+            ) {
+                // Could consider turning this into some sort of mutex
+
+                // console.log('library.provider: ', library.provider);
+
+                setProviderInitialized(true);
+
+                // address network
+                let currentWalletAddress = account;
+                let currentWalletNetwork = chainId.toString();
+                if (!currentWalletAddress && !currentWalletNetwork) return;
+                // console.log('currentWalletNetwork: ', currentWalletNetwork);
+                // console.log('currentWalletAddress: ', currentWalletAddress);
+
+                window.currentlyUsedProvider = library.provider;
+
+                const web3 = new Web3(library.provider);
+
+                drizzle.web3 = web3; // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
+
+                // The order matters here
+                dispatch(setWalletNetwork(currentWalletNetwork));
+                dispatch(setWalletAddress(currentWalletAddress));
+
+                // Init drizzle contracts set up
+                const network = constants.network_type[currentWalletNetwork];
+                const address_MoneyMarket =
+                    currentPool === "open"
+                        ? address[network].address_open_MoneyMarket
+                        : address[network].address_MoneyMarket;
+
+                console.log("address_MoneyMarket: ", address_MoneyMarket);
+
+                // account connected
+                initContracts({
+                    drizzle,
+                    userWalletAddress: currentWalletAddress,
+                    userWalletNetwork: currentWalletNetwork,
+
+                    forceUpdate,
+                    address_MoneyMarket,
+                    currentPool,
+                });
+            }
+        };
+
+        if (active && prevActive === false) {
+            // only initDrizzleData when provider/web3-react wasn't active before because providerInitialized is not tracked fast enough
+            dispatch(setActivatedWallet());
+            dispatch(setWalletConnected(true));
+
+            if (providerInitialized === false) {
+                // could be optional
+                initDrizzleData(active, library, providerInitialized, false);
+            }
+        }
+    }, [providerInitialized, active, library]);
 
     useEffect(() => {
-        console.log("useEffect chainId: ", chainId);
+        // console.log("useEffect chainId: ", chainId);
     }, [chainId]);
 
     useEffect(() => {
-        console.log("useEffect account: ", account);
+        // console.log("useEffect account: ", account);
+        // TODO: Might want to dispatch(setWalletAddress(currentWalletAddress)); here
     }, [account]);
 
     useEffect(() => {
-        console.log("useEffect library: ", library);
+        // console.log("useEffect library: ", library);
     }, [library]);
-
-    // const initDrizzleData = (forceUpdate = false) => {
-    //     if (
-    //         walletConnected === true
-    //         && providerInitialized === false
-    //         && wallet.name !== undefined
-    //         && wallet.provider) { // Could consider turning this into some sort of mutex
-
-    //         const currentState = onboard.getState();
-    //         console.log('****currentState: ', currentState);
-    //         console.log('wallet: ', wallet);
-
-    //         // address network
-    //         let currentWalletAddress = currentState.address;
-    //         let currentWalletNetwork = currentState.network;
-    //         if (!currentWalletAddress && !currentWalletNetwork) return
-
-    //         activate(connectorsByName[wallet.name]) // async call to connect web3-react to to the provider, TODO: Test with wallet connect
-
-    //         switch (wallet.name) {
-    //             // case "Fortmatic": {
-    //             //     window.currentlyUsedProvider =
-    //             //         wallet.instance.getProvider(); // TODO: Re-test again when bringing back formatic
-    //             //     break;
-    //             // }
-    //             default:
-    //                 window.currentlyUsedProvider = wallet.provider;
-    //         }
-
-    //         // Init drizzle
-    //         if (drizzle && !forceUpdate) {
-    //             const web3 = new Web3(wallet.provider);
-
-    //             drizzle.web3 = web3; // best method found to update drizzle's web3, have to manually update contracts and clean up store and usage of network and account address
-
-    //             // The order matters here
-    //             dispatch(setWalletNetwork(currentWalletNetwork));
-    //             dispatch(setWalletAddress(currentWalletAddress));
-    //         }
-    //         // Init drizzle contracts set up
-    //         const network = constants.network_type[currentWalletNetwork];
-    //         const address_MoneyMarket =
-    //             currentPool === "open"
-    //                 ? address[network].address_open_MoneyMarket
-    //                 : address[network].address_MoneyMarket;
-
-    //         // account connected
-    //         initContracts({
-    //             drizzle,
-    //             userWalletAddress: currentWalletAddress,
-    //             userWalletNetwork: currentWalletNetwork,
-
-    //             forceUpdate,
-    //             address_MoneyMarket,
-    //             currentPool,
-    //         });
-
-    //         setProviderInitialized(true)
-    //     }
-    // };
 
     // useEffect(() => {
     //     initDrizzleData();
@@ -211,49 +221,49 @@ const useOnboard = () => {
     //     onboard
     // ]);
 
-    const resetStoreData = useCallback(() => {
-        dispatch(resetLendData());
-        dispatch(resetBorrowData());
-        dispatch(resetTxDataAndCancelFetch(dispatch));
-        dispatch(cancelFetchInterest());
-        // ADD more stores to reset if needs be
-    }, [dispatch]);
+    // const resetStoreData = useCallback(() => {
+    //     dispatch(resetLendData());
+    //     dispatch(resetBorrowData());
+    //     dispatch(resetTxDataAndCancelFetch(dispatch));
+    //     dispatch(cancelFetchInterest());
+    //     // ADD more stores to reset if needs be
+    // }, [dispatch]);
 
-    const deleteCurrentData = useCallback(() => {
-        deleteAllContracts(drizzle);
+    // const deleteCurrentData = useCallback(() => {
+    //     deleteAllContracts(drizzle);
 
-        dispatch(setWalletConnected(false));
-        dispatch(setWalletAddress(null));
-        dispatch(setWalletBalance(0));
-        dispatch(setEthLendBalance(0));
-        dispatch(setEthBorrowBalance(0));
-        dispatch(setWalletNetwork(DEFAULT_NETWORK));
+    //     dispatch(setWalletConnected(false));
+    //     dispatch(setWalletAddress(null));
+    //     dispatch(setWalletBalance(0));
+    //     dispatch(setEthLendBalance(0));
+    //     dispatch(setEthBorrowBalance(0));
+    //     dispatch(setWalletNetwork(DEFAULT_NETWORK));
 
-        resetStoreData();
+    //     resetStoreData();
 
-        try {
-            drizzle.web3.currentProvider.removeAllListeners("accountsChanged");
-            drizzle.web3.currentProvider.removeAllListeners("chainChanged");
-            drizzle.contractList = [];
-            drizzle.contracts = {};
+    //     try {
+    //         drizzle.web3.currentProvider.removeAllListeners("accountsChanged");
+    //         drizzle.web3.currentProvider.removeAllListeners("chainChanged");
+    //         drizzle.contractList = [];
+    //         drizzle.contracts = {};
 
-            drizzle = new Drizzle(drizzleOptions, store); // dirty
+    //         drizzle = new Drizzle(drizzleOptions, store); // dirty
 
-            drizzle.web3 = new Web3(); // Buggy
-        } catch (e) {
-            // Formatic doesn't subscribe to anything
-        }
-    }, [dispatch, drizzle, resetStoreData]);
+    //         drizzle.web3 = new Web3(); // Buggy
+    //     } catch (e) {
+    //         // Formatic doesn't subscribe to anything
+    //     }
+    // }, [dispatch, drizzle, resetStoreData]);
 
     const onReset = useCallback(async () => {
         // TODO: disconnect
-    }, [onboard]);
+    }, []);
 
     useEffect(() => {
-        console.log("---> From onboard selectedWallet: ", selectedWallet);
-
-        activate(connectorsByName[selectedWallet]);
-    }, [selectedWallet]);
+        if (selectedWallet && connectorsByName[selectedWallet] && !active) {
+            activate(connectorsByName[selectedWallet]);
+        }
+    }, [selectedWallet, active]); // TODO: see why this is called many times, and if it should be changed
 
     const onConnect = async () => {
         dispatch(setShowWalletModal(true));
@@ -266,4 +276,4 @@ const useOnboard = () => {
     };
 };
 
-export default useOnboard;
+export default useWalletSelect;

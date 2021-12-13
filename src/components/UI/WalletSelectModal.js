@@ -3,13 +3,8 @@ import PropTypes from "prop-types";
 import {
     Avatar,
     Box,
-    Button,
-    Checkbox,
     Dialog,
     DialogContent,
-    Divider,
-    FormControlLabel,
-    Link,
     Typography,
     makeStyles,
 } from "@material-ui/core";
@@ -17,8 +12,6 @@ import withWidth from "@material-ui/core/withWidth";
 
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import Verified from "@material-ui/icons/VerifiedUser";
-import Open from "@material-ui/icons/Public";
 
 import metamaskLogo from "assets/images/wallets/metamask.svg";
 import walletconnectLogo from "assets/images/wallets/walletconnect.svg";
@@ -118,9 +111,6 @@ function PoolDialog({ width, handleWalletSelect, selectedPool, open }) {
     const isSmallScreen = /xs/.test(width);
     const buttonProps = {
         orientation: isSmallScreen ? "vertical" : "horizontal",
-    };
-    const boxProps = {
-        order: isSmallScreen ? "0" : "3",
     };
 
     return (
