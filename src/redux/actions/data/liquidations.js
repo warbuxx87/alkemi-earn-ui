@@ -4,7 +4,7 @@ import _ from "lodash";
 
 import { transactionTriggered } from "redux/actions/status/transactions";
 
-import { handle_liquidate_click } from "utils/drizzle";
+import { handle_liquidate_click } from "utils/transactionsCalls";
 import { triggerToastDisplay } from "utils/notify";
 
 const url_map = require("constants/url_map.json");
@@ -105,41 +105,27 @@ const throttledFetchLiquidations = _.throttle(
 
 // Section 3: Action dispatch methods and async funcs
 
-export const fetchLiquidations = ({
-    currentNetworkName,
-    currentPool,
-    forceRefresh,
-}) => async (dispatch) => {
-    if (forceRefresh) {
-        fetchLiquidationsCall({
-            currentNetworkName,
-            currentPool,
-            dispatch,
-        });
-    } else {
-        throttledFetchLiquidations({
-            currentNetworkName,
-            currentPool,
-            dispatch,
-        });
-    }
-};
+export const fetchLiquidations =
+    ({ currentNetworkName, currentPool, forceRefresh }) =>
+    async (dispatch) => {
+        if (forceRefresh) {
+            fetchLiquidationsCall({
+                currentNetworkName,
+                currentPool,
+                dispatch,
+            });
+        } else {
+            throttledFetchLiquidations({
+                currentNetworkName,
+                currentPool,
+                dispatch,
+            });
+        }
+    };
 
 // TODO: to be merged in transactions (when the other drawers are refactored in UI-359)
-export const onLiquidateAction = ({
-    drizzle,
-    userWalletNetwork,
-    userWalletAddress,
-    symbol,
-    amount,
-    assetCollateral,
-    assetBorrow,
-    targetAccount,
-    type,
-    liquidationId,
-    maxAmount,
-}) => async (dispatch) => {
-    handle_liquidate_click({
+export const onLiquidateAction =
+    ({
         drizzle,
         userWalletNetwork,
         userWalletAddress,
@@ -148,16 +134,30 @@ export const onLiquidateAction = ({
         assetCollateral,
         assetBorrow,
         targetAccount,
+        type,
+        liquidationId,
         maxAmount,
-    })
-        .then((stackId) => {
-            dispatch(transactionTriggered(liquidationId, stackId, type));
+    }) =>
+    async (dispatch) => {
+        handle_liquidate_click({
+            drizzle,
+            userWalletNetwork,
+            userWalletAddress,
+            symbol,
+            amount,
+            assetCollateral,
+            assetBorrow,
+            targetAccount,
+            maxAmount,
         })
-        .catch((error) => {
-            triggerToastDisplay({
-                toastMessageVariant: "failure",
-                displayMessage: "Something went wrong",
-                displaySecondaryMessage: error.message,
+            .then((stackId) => {
+                dispatch(transactionTriggered(liquidationId, stackId, type));
+            })
+            .catch((error) => {
+                triggerToastDisplay({
+                    toastMessageVariant: "failure",
+                    displayMessage: "Something went wrong",
+                    displaySecondaryMessage: error.message,
+                });
             });
-        });
-};
+    };

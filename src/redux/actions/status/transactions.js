@@ -2,13 +2,13 @@
 
 import {
     handle_allocate_click,
-    handle_deposit_click,
+    handle_moneymarket_tx,
     handle_withdraw_click,
     handle_repay_click,
     handle_borrow_click,
     handle_approve_click,
     handle_claim_ALK_click,
-} from "utils/drizzle";
+} from "utils/transactionsCalls";
 
 import constants from "constants/constant.json";
 import { triggerToastDisplay } from "utils/notify";
@@ -60,13 +60,23 @@ export const transactionCanceled = (txHash) => ({
 // Section 3: Action dispatch methods and async funcs
 
 const actionToCall = {
-    deposit: handle_deposit_click,
+    deposit: handle_moneymarket_tx,
     allocate: handle_allocate_click,
     withdraw: handle_withdraw_click,
     repay: handle_repay_click,
     borrow: handle_borrow_click,
     approve: handle_approve_click,
     claim: handle_claim_ALK_click,
+};
+
+const realMethodNames = {
+    deposit: "supply",
+    allocate: "allocate",
+    withdraw: "withdraw",
+    repay: "repayBorrow",
+    borrow: "borrow",
+    approve: "approve",
+    claim: "claim",
 };
 
 export const onTx =
@@ -85,6 +95,9 @@ export const onTx =
         const amountToSend =
             shouldSendMax === true ? constants["max_uint"] : amount;
 
+        const methodName = realMethodNames[type];
+        // TODO: add wallet connect check to show modal
+
         actionToCall[type]({
             drizzle,
             userWalletNetwork,
@@ -94,16 +107,21 @@ export const onTx =
             shouldSendMax,
             currentPool,
             library,
+
+            selectedMethod: methodName,
+            handleETHCallsSeparately: ["supply", "repayBorrow"].includes(
+                methodName
+            ),
         })
-            .then((stackId) => {
-                dispatch(transactionTriggered(asset.unit, stackId, type));
+            .then((txInfo) => {
+                console.log("txInfo: ", txInfo);
+                // dispatch(transactionTriggered(asset.unit, stackId, type));
             })
             .catch((error) => {
-                triggerToastDisplay({
-                    toastMessageVariant: "failure",
-                    displayMessage: "Something went wrong",
-                    displaySecondaryMessage: error.message,
-                });
-                //dispatch(depositError(asset.unit, error.message));
+                // triggerToastDisplay({
+                //     toastMessageVariant: "failure",
+                //     displayMessage: "Something went wrong",
+                //     displaySecondaryMessage: error.message,
+                // });
             });
     };

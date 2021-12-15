@@ -25,7 +25,7 @@ import {
     assetToDecimals,
 } from "utils/ui";
 
-import { estimateGasForMethod } from "utils/drizzle";
+import { estimateGasForMethod } from "utils/transactionsCalls";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";

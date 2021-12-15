@@ -1,4 +1,5 @@
-import { readyToTransact } from "utils/onboardConfig"; // TODO: Should probably be replaced by checking if address is selected and such
+import Web3 from "web3";
+
 import { toWei } from "utils/ui";
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
@@ -16,7 +17,6 @@ export const handle_approve_click = async ({
     userWalletAddress,
     currentPool,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transaction");
     const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
 
@@ -52,7 +52,6 @@ export const handle_allocate_click = async ({
     amount,
     shouldSendMax,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     const unit = asset.unit;
     const tokenContract = drizzle.contracts[unit];
@@ -70,57 +69,133 @@ export const handle_allocate_click = async ({
     return sendAllocate;
 };
 
-// Deposit Tokens to Lending Pool
-export const handle_deposit_click = async ({
-    drizzle,
+// // Deposit Tokens to Lending Pool
+// export const handle_deposit_click = async ({
+//     drizzle,
+//     userWalletNetwork,
+//     userWalletAddress,
+//     amount,
+//     asset,
+//     shouldSendMax,
+//     currentPool,
+//     library,
+// }) => {
+//     return new Promise(async (resolve, reject) => {
+//         const myAccount = userWalletAddress;
+//         const network = constants.network_type[userWalletNetwork];
+
+//         const token_address =
+//             address[network][currentPool][`address_${asset.unit}`];
+//         const unit = asset.unit;
+
+//         let weiAmount = amount;
+//         if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
+
+//         const address_MoneyMarket =
+//             currentPool === "open"
+//                 ? address[network].address_open_MoneyMarket
+//                 : address[network].address_MoneyMarket;
+//         const MoneyMarketEthers = new ethers.Contract(
+//             address_MoneyMarket,
+//             MoneyMarket_ABI,
+//             library.getSigner(myAccount)
+//         );
+
+//         let sendSupply;
+//         if (unit === "WETH" || unit === "ETH") {
+//             try {
+//                 sendSupply = await MoneyMarketEthers.supply(
+//                     token_address,
+//                     weiAmount,
+//                     { value: weiAmount }
+//                 );
+//             } catch (e) {
+//                 console.error("Error supplying: ", e);
+//             }
+//         } else {
+//             sendSupply = await MoneyMarketEthers.supply(token_address, weiAmount);
+//         }
+
+//         console.log("sendSupply: ", sendSupply);
+
+//         console.log("Track hash: ", sendSupply.hash);
+
+//         resolve (sendSupply);
+
+//     });
+// };
+
+// generic MoneyMarketContract tx handler
+export const handle_moneymarket_tx = async ({
     userWalletNetwork,
     userWalletAddress,
+    userWalletName,
     amount,
     asset,
     shouldSendMax,
+    handleETHCallsSeparately,
+    selectedMethod,
     currentPool,
     library,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transact");
-    const myAccount = userWalletAddress;
-    const network = constants.network_type[userWalletNetwork];
+    return new Promise(async (resolve, reject) => {
+        const myAccount = userWalletAddress;
+        const network = constants.network_type[userWalletNetwork];
 
-    const token_address =
-        address[network][currentPool][`address_${asset.unit}`];
-    const unit = asset.unit;
+        const unit = asset.unit;
+        const token_address =
+            address[network][currentPool][`address_${asset.unit}`];
 
-    let weiAmount = amount;
-    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
+        let weiAmount = amount;
+        if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
 
-    const address_MoneyMarket =
-        currentPool === "open"
-            ? address[network].address_open_MoneyMarket
-            : address[network].address_MoneyMarket;
-    const MoneyMarketEthers = new ethers.Contract(
-        address_MoneyMarket,
-        MoneyMarket_ABI,
-        library.getSigner(myAccount)
-    );
-    console.log("MoneyMarketEthers: ", MoneyMarketEthers);
+        const sendValue =
+            handleETHCallsSeparately === true &&
+            (unit === "WETH" || unit === "ETH"); // For ETHs supply/repay are handled differently
 
-    let sendSupply;
-    if (unit === "WETH" || unit === "ETH") {
-        try {
-            sendSupply = await MoneyMarketEthers.supply(
-                token_address,
-                weiAmount,
-                { value: weiAmount }
-            );
-        } catch (e) {
-            console.error("Error supplying: ", e);
-        }
-    } else {
-        sendSupply = await MoneyMarketEthers.supply(token_address, weiAmount);
-    }
+        const web3 = new Web3(library.provider);
 
-    console.log("sendSupply: ", sendSupply);
+        const address_MoneyMarket =
+            currentPool === "open"
+                ? address[network].address_open_MoneyMarket
+                : address[network].address_MoneyMarket;
 
-    return sendSupply;
+        const MoneyMarketContract = new web3.eth.Contract(
+            MoneyMarket_ABI,
+            address_MoneyMarket
+        );
+
+        const getData = MoneyMarketContract.methods[selectedMethod](
+            token_address,
+            weiAmount
+        ).encodeABI();
+
+        const dataToSend = {
+            to: address_MoneyMarket,
+            from: myAccount,
+            data: getData,
+        };
+
+        if (sendValue) dataToSend.value = weiAmount;
+
+        console.log({
+            selectedMethod,
+            token_address,
+            weiAmount,
+            sendValue,
+            dataToSend,
+        });
+
+        web3.eth
+            .sendTransaction(dataToSend)
+            .once("transactionHash", (txHash) => {
+                const txInfo = { txHash };
+                txInfo.walletName = "WalletConnect";
+
+                resolve(txInfo);
+            })
+            .catch((err) => reject(err));
+    });
 };
 
 // Borrow Tokens from Lending Pool
@@ -133,7 +208,6 @@ export const handle_borrow_click = async ({
     shouldSendMax,
     currentPool,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
@@ -165,7 +239,6 @@ export const handle_repay_click = async ({
     currentPool,
     library,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
@@ -226,7 +299,6 @@ export const handle_withdraw_click = async ({
     shouldSendMax,
     currentPool,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
@@ -259,8 +331,6 @@ export const handle_liquidate_click = async ({
     targetAccount,
     maxAmount,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transact");
-
     const myAccount = userWalletAddress;
     //const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
@@ -316,7 +386,6 @@ export const estimateGasForMethod = async ({
     estimationOfGasPrice,
     method,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transact");
     if (!method) throw new Error("Must select a method");
 
     const myAccount = userWalletAddress;
@@ -340,7 +409,6 @@ export const handle_claim_ALK_click = async ({
     drizzle,
     userWalletAddress,
 }) => {
-    if (!(await readyToTransact())) throw new Error("not ready to transact");
     const myAccount = userWalletAddress;
 
     const RewardControlContract = drizzle.contracts.RewardControl;

@@ -3,9 +3,7 @@ import { useEffect, useState, useCallback, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useWeb3React } from "@web3-react/core";
-import { ConnectorUpdate, ConnectorEvent } from "@web3-react/types";
-
-import { Drizzle } from "@drizzle/store"; // dirty
+import { ConnectorEvent } from "@web3-react/types";
 
 // Section 2: Internal imports
 
@@ -173,8 +171,6 @@ const useWalletSelect = () => {
                     currentPool === "open"
                         ? address[network].address_open_MoneyMarket
                         : address[network].address_MoneyMarket;
-
-                console.log("address_MoneyMarket: ", address_MoneyMarket);
 
                 // account connected
                 initContracts({
