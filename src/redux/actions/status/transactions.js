@@ -20,15 +20,16 @@ import { triggerToastDisplay } from "utils/notify";
 //                                            //
 
 export const TRANSACTION_TRIGGERED = "TRANSACTION_TRIGGERED";
-export const transactionTriggered = (transactionLocalId, stackId, type) => ({
+export const transactionTriggered = (assetUnit, txData, type) => ({
     type: TRANSACTION_TRIGGERED,
     payload: {
-        stackId,
-        transactionLocalId, // this is NOT the tx hash on the blockchain, just a unique identifier locally (the type also helps as a second id when checking)
+        txData,
+        assetUnit,
         type,
     },
 });
 
+// remove when drizzle is completly out
 export const TRANSACTION_SENT = "TRANSACTION_SENT";
 export const transactionSent = (stackId, txHash) => {
     return {
@@ -113,9 +114,14 @@ export const onTx =
                 methodName
             ),
         })
-            .then((txInfo) => {
-                console.log("txInfo: ", txInfo);
-                // dispatch(transactionTriggered(asset.unit, stackId, type));
+            .then((txData) => {
+                dispatch(
+                    transactionTriggered({
+                        assetUnit: asset.unit,
+                        txData,
+                        type,
+                    })
+                );
             })
             .catch((error) => {
                 // triggerToastDisplay({

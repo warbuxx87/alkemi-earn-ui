@@ -9,6 +9,8 @@ import Big from "big.js";
 import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
 import { ethers } from "ethers";
 
+import { getProviderName } from "utils/web3Helpers";
+
 // Approve Unlimited amount of ERC20 tokens to interact with protocol
 export const handle_approve_click = async ({
     drizzle,
@@ -68,62 +70,6 @@ export const handle_allocate_click = async ({
     );
     return sendAllocate;
 };
-
-// // Deposit Tokens to Lending Pool
-// export const handle_deposit_click = async ({
-//     drizzle,
-//     userWalletNetwork,
-//     userWalletAddress,
-//     amount,
-//     asset,
-//     shouldSendMax,
-//     currentPool,
-//     library,
-// }) => {
-//     return new Promise(async (resolve, reject) => {
-//         const myAccount = userWalletAddress;
-//         const network = constants.network_type[userWalletNetwork];
-
-//         const token_address =
-//             address[network][currentPool][`address_${asset.unit}`];
-//         const unit = asset.unit;
-
-//         let weiAmount = amount;
-//         if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
-
-//         const address_MoneyMarket =
-//             currentPool === "open"
-//                 ? address[network].address_open_MoneyMarket
-//                 : address[network].address_MoneyMarket;
-//         const MoneyMarketEthers = new ethers.Contract(
-//             address_MoneyMarket,
-//             MoneyMarket_ABI,
-//             library.getSigner(myAccount)
-//         );
-
-//         let sendSupply;
-//         if (unit === "WETH" || unit === "ETH") {
-//             try {
-//                 sendSupply = await MoneyMarketEthers.supply(
-//                     token_address,
-//                     weiAmount,
-//                     { value: weiAmount }
-//                 );
-//             } catch (e) {
-//                 console.error("Error supplying: ", e);
-//             }
-//         } else {
-//             sendSupply = await MoneyMarketEthers.supply(token_address, weiAmount);
-//         }
-
-//         console.log("sendSupply: ", sendSupply);
-
-//         console.log("Track hash: ", sendSupply.hash);
-
-//         resolve (sendSupply);
-
-//     });
-// };
 
 // generic MoneyMarketContract tx handler
 export const handle_moneymarket_tx = async ({
@@ -186,13 +132,13 @@ export const handle_moneymarket_tx = async ({
             dataToSend,
         });
 
+        const walletName = getProviderName(library.provider);
         web3.eth
             .sendTransaction(dataToSend)
             .once("transactionHash", (txHash) => {
-                const txInfo = { txHash };
-                txInfo.walletName = "WalletConnect";
+                const txData = { txHash, walletName };
 
-                resolve(txInfo);
+                resolve(txData);
             })
             .catch((err) => reject(err));
     });

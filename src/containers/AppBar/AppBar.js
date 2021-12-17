@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import useWalletSelect from "hooks/useWalletSelect";
 import useWatchEtherBalance from "hooks/useWatchEtherBalance";
 import usePoolManager from "hooks/usePoolManager";
+import useWatchTxs from "hooks/useWatchTxs";
 
 // Section 3: Selectors
 import { isWalletConnected, walletAddress } from "redux/selectors/data/onboard";
@@ -36,6 +37,7 @@ const AppBarContainer = () => {
     const { onConnect, onReset } = useWalletSelect();
     useWatchEtherBalance();
     usePoolManager();
+    useWatchTxs();
 
     const [isWalletLiquidator, setIsWalletLiquidator] = useState(false);
 
