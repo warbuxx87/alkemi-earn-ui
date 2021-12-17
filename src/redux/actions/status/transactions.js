@@ -8,12 +8,14 @@ import {
     handle_borrow_click,
     handle_approve_click,
     handle_claim_ALK_click,
-} from "utils/transactionsCalls";
+} from "utils/transactionsSender";
 
 import constants from "constants/constant.json";
 import { triggerToastDisplay } from "utils/notify";
 
 // Section 2: Action types declarations and action creators
+import { getProviderName } from "utils/web3Helpers";
+import { setShowWalletConnectModal } from "redux/actions/status/walletConnect";
 
 //                                            //
 // --------- TRANSACTIONS ACTIONS ----------- //
@@ -99,6 +101,12 @@ export const onTx =
         const methodName = realMethodNames[type];
         // TODO: add wallet connect check to show modal
 
+        const walletName = getProviderName(library.provider);
+
+        if (walletName === "WalletConnect") {
+            dispatch(setShowWalletConnectModal(true));
+        }
+
         actionToCall[type]({
             drizzle,
             userWalletNetwork,
@@ -115,7 +123,18 @@ export const onTx =
             ),
         })
             .then((txData) => {
+                if (walletName === "WalletConnect") {
+                    dispatch(setShowWalletConnectModal(false));
+                }
+
+                triggerToastDisplay({
+                    toastMessageVariant: "processing",
+                    displayMessage: "Transaction pending...",
+                    displaySecondaryMessage: "This might take a few minutes",
+                });
+
                 dispatch(
+                    // For some reason this makes the function return or exit, keep last
                     transactionTriggered({
                         assetUnit: asset.unit,
                         txData,

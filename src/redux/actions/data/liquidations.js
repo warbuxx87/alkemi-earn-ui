@@ -4,7 +4,7 @@ import _ from "lodash";
 
 import { transactionTriggered } from "redux/actions/status/transactions";
 
-import { handle_liquidate_click } from "utils/transactionsCalls";
+import { handle_liquidate_click } from "utils/transactionsSender";
 import { triggerToastDisplay } from "utils/notify";
 
 const url_map = require("constants/url_map.json");

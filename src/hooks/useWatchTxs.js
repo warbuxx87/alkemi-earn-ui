@@ -2,6 +2,8 @@
 import { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import Web3 from "web3";
+
 // Section 2: internal imports
 import DrizzleContext from "utils/DrizzleContext";
 
@@ -20,6 +22,8 @@ import addressMap from "constants/address_map.json";
 import { triggerToastDisplay } from "utils/notify";
 
 import topics from "constants/topics";
+
+import { useWeb3React } from "@web3-react/core";
 
 const moneyMarketTopics = topics.MoneyMarket;
 
@@ -69,6 +73,8 @@ function getKeyByValue(object, value) {
 
 export default () => {
     const drizzle = useContext(DrizzleContext);
+    const { library, active, error } = useWeb3React();
+
     const dispatch = useDispatch();
 
     const walletConnected = useSelector(isWalletConnected); // Kind of useless to use here but won't hurt (hopefully)
@@ -99,7 +105,9 @@ export default () => {
                 //topics: ['0x12345...']
             };
 
-            watchers.MoneyMarket = drizzle.web3.eth.subscribe(
+            const web3 = new Web3(library.provider);
+
+            watchers.MoneyMarket = web3.eth.subscribe(
                 "logs",
                 options,
                 function (error, tx) {
@@ -126,7 +134,7 @@ export default () => {
                             // );
 
                             // decode the transaction data byte code so it's readable
-                            let result = drizzle.web3.eth.abi.decodeLog(
+                            let result = web3.eth.abi.decodeLog(
                                 contractInput,
                                 tx.data,
                                 tx.topics
@@ -209,7 +217,9 @@ export default () => {
                 // topics: assetsTopicsToWatch
             };
 
-            watchers[assetSymbol] = drizzle.web3.eth.subscribe(
+            const web3 = new Web3(library.provider);
+
+            watchers[assetSymbol] = web3.eth.subscribe(
                 "logs",
                 options,
                 function (error, tx) {
@@ -231,7 +241,7 @@ export default () => {
                             // @dev https://web3js.readthedocs.io/en/v1.2.7/web3-eth-abi.html#id18
                             // console.log("Tx topic matched allocateTo/approve");
 
-                            drizzle.web3.eth
+                            web3.eth
                                 .getTransaction(tx.transactionHash)
                                 .then((result) => {
                                     if (
@@ -292,7 +302,10 @@ export default () => {
             userWalletAddress !== undefined &&
             userWalletAddress != null &&
             currentNetworkName !== undefined &&
-            currentNetworkName != null
+            currentNetworkName != null &&
+            active &&
+            library &&
+            !error
         ) {
             clearWatchers(watchers);
 
@@ -301,6 +314,12 @@ export default () => {
             watchAssetLogs("WBTC");
             watchAssetLogs("WETH");
             watchAssetLogs("DAI");
+        } else if (error) {
+            try {
+                clearWatchers(watchers);
+            } catch (e) {
+                console.error("Error clearing transactions watchers ", e);
+            }
         }
 
         return () => {
@@ -310,7 +329,9 @@ export default () => {
         userWalletAddress,
         currentNetworkName,
         walletConnected,
-        drizzle,
+        library,
+        active,
+        error,
         dispatch,
     ]);
 };

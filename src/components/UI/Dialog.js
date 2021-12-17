@@ -10,7 +10,7 @@ import {
     makeStyles,
 } from "@material-ui/core";
 
-import icon from "assets/images/walletconnect.svg";
+import icon from "assets/images/wallets/walletconnect.svg";
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -30,28 +30,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AlertDialog() {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+export default function AlertDialog({ open, handleClose }) {
     const classes = useStyles();
 
     return (
         <div>
-            <Button
-                variant="outlined"
-                color="secondary"
-                onClick={handleClickOpen}
-            >
-                Open Notification
-            </Button>
             <Dialog
                 onClose={handleClose}
                 aria-labelledby="gnosis-notification"

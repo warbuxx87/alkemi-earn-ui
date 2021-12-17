@@ -17,6 +17,8 @@ import Banner from "components/UI/Banner";
 import PoolSelect from "containers/PoolSelect/PoolSelect";
 import WalletSelect from "containers/WalletSelect/WalletSelect";
 
+import WalletConnectModal from "containers/WalletConnectModal/WalletConnectModal";
+
 // Section 4: Define Styles function taking theme as argument and returning an object
 const styles = (theme) => ({
     frame: {
@@ -105,6 +107,7 @@ function LayoutSkeleton({
                     DISPLAY_FREEZE_OF_TXS={DISPLAY_FREEZE_OF_TXS}
                 />
                 <LayoutContent />
+                <WalletConnectModal />
             </div>
         </div>
     );

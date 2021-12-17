@@ -9,8 +9,6 @@ import Big from "big.js";
 import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
 import { ethers } from "ethers";
 
-import { getProviderName } from "utils/web3Helpers";
-
 // Approve Unlimited amount of ERC20 tokens to interact with protocol
 export const handle_approve_click = async ({
     drizzle,
@@ -75,7 +73,6 @@ export const handle_allocate_click = async ({
 export const handle_moneymarket_tx = async ({
     userWalletNetwork,
     userWalletAddress,
-    userWalletName,
     amount,
     asset,
     shouldSendMax,
@@ -124,19 +121,10 @@ export const handle_moneymarket_tx = async ({
 
         if (sendValue) dataToSend.value = weiAmount;
 
-        console.log({
-            selectedMethod,
-            token_address,
-            weiAmount,
-            sendValue,
-            dataToSend,
-        });
-
-        const walletName = getProviderName(library.provider);
         web3.eth
             .sendTransaction(dataToSend)
             .once("transactionHash", (txHash) => {
-                const txData = { txHash, walletName };
+                const txData = { txHash };
 
                 resolve(txData);
             })
@@ -204,7 +192,7 @@ export const handle_repay_click = async ({
         MoneyMarket_ABI,
         library.getSigner(myAccount)
     );
-    console.log("MoneyMarketEthers Repay: ", MoneyMarketEthers);
+    // console.log("MoneyMarketEthers Repay: ", MoneyMarketEthers);
 
     const sendSupply = await MoneyMarketEthers.repayBorrow(
         token_address,
