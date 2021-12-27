@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: 16,
         paddingBottom: 12,
     },
+    confirmButton: {
+        marginLeft: 12,
+    },
     image: {
         maxWidth: "28px",
         marginRight: "12px",
@@ -159,7 +162,7 @@ function SelectDatePopper({
                                             variant="h3"
                                             color="textPrimary"
                                         ></Typography>
-                                        <Box mt={2}>
+                                        <Box mt={3}>
                                             <KeyboardDatePicker
                                                 disableToolbar
                                                 fullWidth
@@ -205,10 +208,8 @@ function SelectDatePopper({
                                             </Box>
                                         )}
                                     </Box>
-
-                                    <Divider />
                                     <Box
-                                        p={2}
+                                        pt={1}
                                         display="flex"
                                         justifyContent="flex-end"
                                     >

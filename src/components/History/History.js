@@ -33,6 +33,7 @@ import { ExternalLink as LinkIcon } from "react-feather";
 import { openEtherScan, getTokenIcon, formatStringNumber } from "utils/ui";
 
 import HistoryTableCell from "components/UI/TableCell";
+import Reportpop from "components/UI/DateSelectPopper";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -317,6 +318,11 @@ const History = ({
                                 </MenuItem>
                             ))}
                         </TextField>
+                        <Reportpop
+                            address={address}
+                            walletConnected={walletConnected}
+                            currentNetworkName={currentNetworkName}
+                        />
                     </Box>
                 </Box>
                 <Table size="small" className="whitespace-pre">
