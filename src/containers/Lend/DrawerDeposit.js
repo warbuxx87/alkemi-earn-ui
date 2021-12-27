@@ -168,8 +168,8 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
-                aTx.type === "deposit" &&
+                aTx.assetUnit === asset.unit &&
+                aTx.type === "supply" &&
                 aTx.processing === true
             );
         });
@@ -197,7 +197,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                         asset,
                         amount,
                         shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
-                        type: "deposit",
+                        type: "supply",
                         currentPool,
                         library,
                     })

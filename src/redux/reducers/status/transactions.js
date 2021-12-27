@@ -14,19 +14,21 @@ const initialState = {
 const transactionsReducer = (state = initialState, action) => {
     switch (action.type) {
         case TRANSACTION_TRIGGERED: {
+            const newTransaction = {
+                ...state.txs[action.payload.txData.txHash], // might be une
+
+                txHash: action.payload.txData.txHash, // In the case of WalletConnect it's not the real one but the safeTx (temporary)
+                userWalletName: action.payload.txData.userWalletName, // MetaMask, WalletConnect...
+                type: action.payload.type, //
+                processing: true,
+                assetUnit: action.payload.assetUnit,
+            };
+
             return {
                 ...state,
                 txs: {
                     ...state.txs,
-                    [action.payload.txData.txHash]: {
-                        ...state.txs[action.payload.txData.txHash], // might be une
-
-                        txHash: action.payload.txData.txHash, // In the case of WalletConnect it's not the real one but the safeTx (temporary)
-                        userWalletName: action.payload.txData.userWalletName, // MetaMask, WalletConnect...
-                        type: action.payload.type, //
-                        processing: true,
-                        assetUnit: action.payload.assetUnit,
-                    },
+                    [action.payload.txData.txHash]: newTransaction,
                 },
             };
         }
@@ -37,6 +39,7 @@ const transactionsReducer = (state = initialState, action) => {
             if (tx === undefined) {
                 tx = Object.values(state.txs).find((aTx) => {
                     // Make an attempt to find equivalent tx, in the case of walletconnect
+                    // This is the fastest method to resolve for wallet connect but could get false positives in case the user is running two instances and making the same transaction (highly unlikely in mainnet)
                     return (
                         aTx.type === action.payload.type &&
                         aTx.assetUnit === action.payload.assetUnit
@@ -65,6 +68,8 @@ const transactionsReducer = (state = initialState, action) => {
             if (tx === undefined) {
                 tx = Object.values(state.txs).find((aTx) => {
                     // Make an attempt to find equivalent tx, in the case of walletconnect
+                    // This is the fastest method to resolve for wallet connect but could get false positives in case the user is running two instances and making the same transaction (highly unlikely in mainnet)
+
                     return (
                         aTx.type === action.payload.type &&
                         aTx.assetUnit === action.payload.assetUnit

@@ -22,7 +22,7 @@ import { setShowWalletConnectModal } from "redux/actions/status/walletConnect";
 //                                            //
 
 export const TRANSACTION_TRIGGERED = "TRANSACTION_TRIGGERED";
-export const transactionTriggered = (assetUnit, txData, type) => ({
+export const transactionTriggered = ({ assetUnit, txData, type }) => ({
     type: TRANSACTION_TRIGGERED,
     payload: {
         txData,
@@ -44,10 +44,12 @@ export const transactionSent = (stackId, txHash) => {
 };
 
 export const TRANSACTION_RESOLVED = "TRANSACTION_RESOLVED";
-export const transactionResolved = (txHash) => ({
+export const transactionResolved = ({ assetUnit, txHash, type }) => ({
     type: TRANSACTION_RESOLVED,
     payload: {
         txHash,
+        assetUnit,
+        type,
     },
 });
 
@@ -63,23 +65,13 @@ export const transactionCanceled = (txHash) => ({
 // Section 3: Action dispatch methods and async funcs
 
 const actionToCall = {
-    deposit: handle_moneymarket_tx,
+    supply: handle_moneymarket_tx,
     allocate: handle_allocate_click,
     withdraw: handle_withdraw_click,
-    repay: handle_repay_click,
+    repayBorrow: handle_repay_click,
     borrow: handle_borrow_click,
     approve: handle_approve_click,
     claim: handle_claim_ALK_click,
-};
-
-const realMethodNames = {
-    deposit: "supply",
-    allocate: "allocate",
-    withdraw: "withdraw",
-    repay: "repayBorrow",
-    borrow: "borrow",
-    approve: "approve",
-    claim: "claim",
 };
 
 export const onTx =
@@ -98,9 +90,6 @@ export const onTx =
         const amountToSend =
             shouldSendMax === true ? constants["max_uint"] : amount;
 
-        const methodName = realMethodNames[type];
-        // TODO: add wallet connect check to show modal
-
         const walletName = getProviderName(library.provider);
 
         if (walletName === "WalletConnect") {
@@ -117,10 +106,9 @@ export const onTx =
             currentPool,
             library,
 
-            selectedMethod: methodName,
-            handleETHCallsSeparately: ["supply", "repayBorrow"].includes(
-                methodName
-            ),
+            selectedMethod: type,
+            handleETHCallsSeparately: ["supply", "repayBorrow"].includes(type),
+            userWalletName: walletName,
         })
             .then((txData) => {
                 if (walletName === "WalletConnect") {
@@ -143,10 +131,10 @@ export const onTx =
                 );
             })
             .catch((error) => {
-                // triggerToastDisplay({
-                //     toastMessageVariant: "failure",
-                //     displayMessage: "Something went wrong",
-                //     displaySecondaryMessage: error.message,
-                // });
+                triggerToastDisplay({
+                    toastMessageVariant: "failure",
+                    displayMessage: "Something went wrong",
+                    displaySecondaryMessage: error.message,
+                });
             });
     };

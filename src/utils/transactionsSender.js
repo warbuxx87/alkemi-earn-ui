@@ -80,6 +80,7 @@ export const handle_moneymarket_tx = async ({
     selectedMethod,
     currentPool,
     library,
+    userWalletName,
 }) => {
     return new Promise(async (resolve, reject) => {
         const myAccount = userWalletAddress;
@@ -124,7 +125,7 @@ export const handle_moneymarket_tx = async ({
         web3.eth
             .sendTransaction(dataToSend)
             .once("transactionHash", (txHash) => {
-                const txData = { txHash };
+                const txData = { txHash, userWalletName };
 
                 resolve(txData);
             })

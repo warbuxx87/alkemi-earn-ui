@@ -212,7 +212,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
                 aTx.transactionLocalId === asset.unit &&
-                aTx.type === "repay" &&
+                aTx.type === "repayBorrow" &&
                 aTx.processing === true
             );
         });
@@ -239,7 +239,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                     asset,
                     amount,
                     shouldSendMax,
-                    type: "repay",
+                    type: "repayBorrow",
                     currentPool,
                     library,
                 })
