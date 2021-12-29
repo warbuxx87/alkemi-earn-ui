@@ -1,12 +1,8 @@
 // Section 1: Utilities imports and low level imports
 
 import {
-    handle_allocate_click,
+    handle_asset_contract_method_click,
     handle_moneymarket_tx,
-    handle_withdraw_click,
-    handle_repay_click,
-    handle_borrow_click,
-    handle_approve_click,
     handle_claim_ALK_click,
 } from "utils/transactionsSender";
 
@@ -66,17 +62,18 @@ export const transactionCanceled = (txHash) => ({
 
 const actionToCall = {
     supply: handle_moneymarket_tx,
-    allocate: handle_allocate_click,
-    withdraw: handle_withdraw_click,
-    repayBorrow: handle_repay_click,
-    borrow: handle_borrow_click,
-    approve: handle_approve_click,
+    borrow: handle_moneymarket_tx,
+    withdraw: handle_moneymarket_tx,
+    repayBorrow: handle_moneymarket_tx,
+
+    allocateTo: handle_asset_contract_method_click,
+    approve: handle_asset_contract_method_click,
+
     claim: handle_claim_ALK_click,
 };
 
 export const onTx =
     ({
-        drizzle,
         userWalletNetwork,
         userWalletAddress,
         amount,
@@ -87,7 +84,7 @@ export const onTx =
         library,
     }) =>
     async (dispatch) => {
-        const amountToSend =
+        let amountToSend =
             shouldSendMax === true ? constants["max_uint"] : amount;
 
         const walletName = getProviderName(library.provider);
@@ -97,7 +94,6 @@ export const onTx =
         }
 
         actionToCall[type]({
-            drizzle,
             userWalletNetwork,
             userWalletAddress,
             amount: amountToSend,

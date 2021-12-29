@@ -9,7 +9,7 @@ import * as yup from "yup";
 import Big from "big.js";
 
 // Section 2: internal imports
-import useOnboard from "hooks/useWalletSelect";
+import useWalletSelect from "hooks/useWalletSelect";
 
 import Drawer from "components/UI/Drawer/Drawer";
 
@@ -38,7 +38,7 @@ import { getPool } from "redux/selectors/status/pool";
 const DrawerRepayContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
 
-    const { library } = useOnboard();
+    const { library } = useWalletSelect();
 
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
@@ -211,7 +211,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
+                aTx.assetUnit === asset.unit &&
                 aTx.type === "repayBorrow" &&
                 aTx.processing === true
             );
@@ -233,7 +233,6 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
             showWarningColor={true}
             onButtonClick={() =>
                 onTx({
-                    drizzle,
                     userWalletNetwork,
                     userWalletAddress,
                     asset,

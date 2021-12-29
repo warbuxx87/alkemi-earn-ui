@@ -191,7 +191,6 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 enableButtonClick={enableDeposit}
                 onButtonClick={() =>
                     onTx({
-                        drizzle,
                         userWalletNetwork,
                         userWalletAddress,
                         asset,

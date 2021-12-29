@@ -6,7 +6,7 @@ import { bindActionCreators, compose } from "redux";
 // Section 2: internal imports
 import Drawer from "components/UI/Drawer/Drawer";
 
-import DrizzleContext from "utils/DrizzleContext";
+import useWalletSelect from "hooks/useWalletSelect";
 
 import { onTx } from "redux/actions/status/transactions";
 
@@ -29,7 +29,7 @@ import { getPool, isKYCPool } from "redux/selectors/status/pool";
 
 // Section 5: Code Container
 const DrawerAllocateContainer = ({ asset, onTx }) => {
-    const drizzle = useContext(DrizzleContext);
+    const { library } = useWalletSelect();
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
@@ -75,8 +75,8 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
-                aTx.type === "allocate" &&
+                aTx.assetUnit === asset.unit &&
+                aTx.type === "allocateTo" &&
                 aTx.processing === true
             );
         });
@@ -101,13 +101,14 @@ const DrawerAllocateContainer = ({ asset, onTx }) => {
             }
             onButtonClick={() =>
                 onTx({
-                    drizzle,
+                    userWalletNetwork,
                     userWalletAddress,
                     asset,
                     amount,
-                    type: "allocate",
+                    type: "allocateTo",
                     shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
                     currentPool,
+                    library,
                 })
             }
             isDoingAction={isProcessing}

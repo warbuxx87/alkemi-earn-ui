@@ -5,12 +5,8 @@ import React, { useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import { useWeb3React } from "@web3-react/core";
-
 // Section 2: internal imports
 import Lend from "components/Lend/Lend";
-
-import DrizzleContext from "utils/DrizzleContext";
 
 import { onTx } from "redux/actions/status/transactions";
 
@@ -20,6 +16,8 @@ import useFetchMarkets from "hooks/useFetchMarkets";
 import constants from "constants/constant.json";
 import marketsByNetwork from "constants/markets_by_network.json";
 import useFetchALKPrice from "hooks/useFetchALKPrice";
+
+import useWalletSelect from "hooks/useWalletSelect";
 
 // Section 3: Selectors
 import {
@@ -48,7 +46,7 @@ import { getMarkets, getAlkApyPerMarket } from "redux/selectors/data/markets";
 const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     useFetchALKPrice();
 
-    const { onConnect, library } = useWeb3React();
+    const { onConnect, library } = useWalletSelect();
 
     useFetchInterest();
     useFetchMarkets(true);
@@ -59,7 +57,6 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
-    const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
@@ -108,10 +105,12 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
 
     const activateAsset = (asset) => {
         onActivate({
-            drizzle,
             userWalletNetwork,
             userWalletAddress,
             asset,
+
+            shouldSendMax: true,
+
             type: "approve",
             currentPool,
             library,

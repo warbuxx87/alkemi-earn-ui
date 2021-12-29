@@ -9,6 +9,18 @@ import Big from "big.js";
 import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
 import { ethers } from "ethers";
 
+import WETH_ABI from "constants/ABI/WETH_ABI.json";
+import DAI_ABI from "constants/ABI/DAI_ABI.json";
+import USDC_ABI from "constants/ABI/USDC_ABI.json";
+import WBTC_ABI from "constants/ABI/WBTC_ABI.json";
+
+const ABIs = {
+    WETH: WETH_ABI,
+    DAI: DAI_ABI,
+    USDC: USDC_ABI,
+    WBTC: WBTC_ABI,
+};
+
 // Approve Unlimited amount of ERC20 tokens to interact with protocol
 export const handle_approve_click = async ({
     drizzle,
@@ -42,6 +54,62 @@ export const handle_approve_click = async ({
         }
     );
     return sendApprove;
+};
+
+export const handle_asset_contract_method_click = async ({
+    userWalletNetwork,
+    userWalletAddress,
+    userWalletName,
+    amount,
+    asset,
+    selectedMethod,
+    currentPool,
+    library,
+}) => {
+    return new Promise(async (resolve, reject) => {
+        const myAccount = userWalletAddress;
+        const network = constants.network_type[userWalletNetwork];
+
+        const unit = asset.unit;
+        const token_address = address[network][currentPool][`address_${unit}`];
+
+        const web3 = new Web3(library.provider);
+
+        const address_MoneyMarket =
+            currentPool === "open"
+                ? address[network].address_open_MoneyMarket
+                : address[network].address_MoneyMarket;
+
+        const tokenContract = new web3.eth.Contract(ABIs[unit], token_address);
+
+        let weiAmount = amount;
+        if (selectedMethod === "allocateTo") weiAmount = toWei(amount, unit);
+
+        const targetAddress =
+            selectedMethod === "approve" ? address_MoneyMarket : myAccount;
+
+        console.log("tokenContract: ", tokenContract);
+
+        const getData = tokenContract.methods[selectedMethod](
+            targetAddress,
+            weiAmount
+        ).encodeABI();
+
+        const dataToSend = {
+            to: token_address,
+            from: myAccount,
+            data: getData,
+        };
+
+        web3.eth
+            .sendTransaction(dataToSend)
+            .once("transactionHash", (txHash) => {
+                const txData = { txHash, userWalletName };
+
+                resolve(txData);
+            })
+            .catch((err) => reject(err)); // The transaction was rejected
+    });
 };
 
 // Mint new Test Tokens
@@ -129,7 +197,7 @@ export const handle_moneymarket_tx = async ({
 
                 resolve(txData);
             })
-            .catch((err) => reject(err));
+            .catch((err) => reject(err)); // The transaction was rejected
     });
 };
 

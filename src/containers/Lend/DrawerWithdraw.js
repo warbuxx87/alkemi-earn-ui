@@ -18,7 +18,7 @@ import {
     assetToDecimals,
 } from "utils/ui";
 
-import DrizzleContext from "utils/DrizzleContext";
+import useWalletSelect from "hooks/useWalletSelect";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -29,7 +29,8 @@ import { getTransactions } from "redux/selectors/status/status";
 import { getPool } from "redux/selectors/status/pool";
 
 const DrawerWithdrawContainer = ({ asset, onTx }) => {
-    const drizzle = useContext(DrizzleContext);
+    const { library } = useWalletSelect();
+
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
@@ -76,7 +77,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
+                aTx.assetUnit === asset.unit &&
                 aTx.type === "withdraw" &&
                 aTx.processing === true
             );
@@ -123,7 +124,6 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
             enableButtonClick={enableWithdraw}
             onButtonClick={() =>
                 onTx({
-                    drizzle,
                     userWalletNetwork,
                     userWalletAddress,
                     asset,
@@ -131,6 +131,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
                     shouldSendMax,
                     type: "withdraw",
                     currentPool,
+                    library,
                 })
             }
             isDoingAction={isProcessing}
