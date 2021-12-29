@@ -69,7 +69,7 @@ const actionToCall = {
     allocateTo: handle_asset_contract_method_click,
     approve: handle_asset_contract_method_click,
 
-    claim: handle_claim_ALK_click,
+    claimAlk: handle_claim_ALK_click,
 };
 
 export const onTx =

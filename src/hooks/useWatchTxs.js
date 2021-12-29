@@ -35,6 +35,8 @@ const moneyMarketTopics = topics.MoneyMarket;
 
 const assetsTopics = topics.assets;
 
+const rewardControlTopics = topics.RewardControl;
+
 const WSoptions = (projectId) => {
     return {
         timeout: 3600000, // ms -- 60 min
@@ -156,7 +158,6 @@ export default () => {
                 "logs",
                 options,
                 function (error, tx) {
-                    console.log("tx: ", tx);
                     if (error || tx == null) {
                         // console.log(
                         //     "Error when watching incoming transactions: ",
@@ -317,7 +318,91 @@ export default () => {
                                                 dispatch(
                                                     transactionResolved({
                                                         txHash: tx.transactionHash,
-                                                        assetSymbol,
+                                                        assetSymbol, // TODO: assetUnit ?
+                                                        type: resultType,
+                                                    })
+                                                );
+
+                                                triggerToastDisplay({
+                                                    toastMessageVariant:
+                                                        "success",
+                                                    displayMessage:
+                                                        "Transaction Successful",
+                                                    displaySecondaryMessage:
+                                                        messagePerType[
+                                                            resultType
+                                                        ] ||
+                                                        "Consult the transaction hash",
+                                                    currentNetworkName,
+                                                    txHash: tx.transactionHash,
+                                                });
+                                            }
+                                        }
+                                    }
+                                });
+                        }
+                    });
+                }
+            );
+        };
+
+        const watchRewardControlLogs = () => {
+            const options = {
+                address:
+                    addressMap[currentNetworkName][`address_RewardControl`],
+                //topics: ['0x12345...']
+            };
+
+            // let infuraProvider = new ethers.providers.InfuraProvider('rinkeby'); // TODO: adapt to network name // kind of a hack to get project id from infuraprovider
+
+            const web3 = new Web3(wssProvider(INFURA_ID));
+
+            watchers.RewardControl = web3.eth.subscribe(
+                "logs",
+                options,
+                function (error, tx) {
+                    console.log("tx: ", tx);
+                    if (error || tx == null) {
+                        // console.log(
+                        //     "Error when watching incoming transactions: ",
+                        //     error
+                        // );
+                        return;
+                    }
+
+                    tx.topics.forEach((topic) => {
+                        console.log("Found tx with this topic " + topic);
+
+                        if (topic === rewardControlTopics.claimAlk) {
+                            web3.eth
+                                .getTransaction(tx.transactionHash)
+                                .then((result) => {
+                                    if (
+                                        result.from.toLowerCase() ===
+                                        userWalletAddress.toLowerCase()
+                                    ) {
+                                        const resultType = getKeyByValue(
+                                            rewardControlTopics,
+                                            topic
+                                        );
+
+                                        if (
+                                            resultType !== undefined &&
+                                            resultType != null
+                                        ) {
+                                            if (
+                                                !notifiedTx.includes(
+                                                    tx.transactionHash
+                                                )
+                                            ) {
+                                                notifiedTx.push(
+                                                    tx.transactionHash
+                                                );
+
+                                                dispatch(
+                                                    transactionResolved({
+                                                        txHash: tx.transactionHash,
+                                                        assetUnit: "ALK",
                                                         type: resultType,
                                                     })
                                                 );
@@ -362,6 +447,7 @@ export default () => {
             watchAssetLogs("WBTC");
             watchAssetLogs("WETH");
             watchAssetLogs("DAI");
+            watchRewardControlLogs();
         } else if (error) {
             try {
                 clearWatchers(watchers);

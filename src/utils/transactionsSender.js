@@ -3,11 +3,11 @@ import Web3 from "web3";
 import { toWei } from "utils/ui";
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
-import { initAssetContract } from "utils/contracts";
+
 import Big from "big.js";
 
 import MoneyMarket_ABI from "constants/ABI/MoneyMarket_ABI.json";
-import { ethers } from "ethers";
+import RewardControl_ABI from "constants/ABI/RewardControl_ABI.json";
 
 import WETH_ABI from "constants/ABI/WETH_ABI.json";
 import DAI_ABI from "constants/ABI/DAI_ABI.json";
@@ -19,41 +19,6 @@ const ABIs = {
     DAI: DAI_ABI,
     USDC: USDC_ABI,
     WBTC: WBTC_ABI,
-};
-
-// Approve Unlimited amount of ERC20 tokens to interact with protocol
-export const handle_approve_click = async ({
-    drizzle,
-    userWalletNetwork,
-    asset,
-    userWalletAddress,
-    currentPool,
-}) => {
-    const myAccount = userWalletAddress;
-    const network = constants.network_type[userWalletNetwork];
-
-    const address_MoneyMarket =
-        currentPool === "open"
-            ? address[network].address_open_MoneyMarket
-            : address[network].address_MoneyMarket;
-
-    const tokenContract = initAssetContract({
-        drizzle,
-        userWalletAddress: myAccount,
-        asset: asset.unit,
-        address_MoneyMarket,
-        userWalletNetwork,
-        currentPool,
-    });
-
-    const sendApprove = tokenContract.methods.approve.cacheSend(
-        address_MoneyMarket,
-        constants.max_uint,
-        {
-            from: myAccount,
-        }
-    );
-    return sendApprove;
 };
 
 export const handle_asset_contract_method_click = async ({
@@ -110,31 +75,6 @@ export const handle_asset_contract_method_click = async ({
             })
             .catch((err) => reject(err)); // The transaction was rejected
     });
-};
-
-// Mint new Test Tokens
-export const handle_allocate_click = async ({
-    drizzle,
-    userWalletAddress,
-    asset,
-    amount,
-    shouldSendMax,
-}) => {
-    const myAccount = userWalletAddress;
-    const unit = asset.unit;
-    const tokenContract = drizzle.contracts[unit];
-
-    let weiAmount = amount;
-    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
-
-    const sendAllocate = tokenContract.methods.allocateTo.cacheSend(
-        myAccount,
-        weiAmount,
-        {
-            from: myAccount,
-        }
-    );
-    return sendAllocate;
 };
 
 // generic MoneyMarketContract tx handler
@@ -199,127 +139,6 @@ export const handle_moneymarket_tx = async ({
             })
             .catch((err) => reject(err)); // The transaction was rejected
     });
-};
-
-// Borrow Tokens from Lending Pool
-export const handle_borrow_click = async ({
-    drizzle,
-    userWalletNetwork,
-    userWalletAddress,
-    amount,
-    asset,
-    shouldSendMax,
-    currentPool,
-}) => {
-    const myAccount = userWalletAddress;
-    const network = constants.network_type[userWalletNetwork];
-    const MoneyMarketContract = drizzle.contracts.MoneyMarket;
-    const token_address =
-        address[network][currentPool][`address_${asset.unit}`];
-    const unit = asset.unit;
-
-    let weiAmount = amount;
-    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
-
-    const sendBorrow = MoneyMarketContract.methods.borrow.cacheSend(
-        token_address,
-        weiAmount,
-        {
-            from: myAccount,
-        }
-    );
-    return sendBorrow;
-};
-
-// Repay Borrowed Tokens from wallet back to Lending Pool
-export const handle_repay_click = async ({
-    drizzle,
-    userWalletNetwork,
-    userWalletAddress,
-    amount,
-    asset,
-    shouldSendMax,
-    currentPool,
-    library,
-}) => {
-    const myAccount = userWalletAddress;
-    const network = constants.network_type[userWalletNetwork];
-    const MoneyMarketContract = drizzle.contracts.MoneyMarket;
-    const token_address =
-        address[network][currentPool][`address_${asset.unit}`];
-    const unit = asset.unit;
-
-    let weiAmount = amount;
-    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
-
-    const address_MoneyMarket =
-        currentPool === "open"
-            ? address[network].address_open_MoneyMarket
-            : address[network].address_MoneyMarket;
-    const MoneyMarketEthers = new ethers.Contract(
-        address_MoneyMarket,
-        MoneyMarket_ABI,
-        library.getSigner(myAccount)
-    );
-    // console.log("MoneyMarketEthers Repay: ", MoneyMarketEthers);
-
-    const sendSupply = await MoneyMarketEthers.repayBorrow(
-        token_address,
-        weiAmount
-    );
-    console.log("sendSupply: ", sendSupply);
-
-    // let sendRepay;
-
-    // if (unit === "WETH" || unit === "ETH") {
-    //     sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
-    //         token_address,
-    //         weiAmount,
-    //         {
-    //             from: myAccount,
-    //             value: weiAmount,
-    //         }
-    //     );
-    // } else {
-    //     sendRepay = MoneyMarketContract.methods.repayBorrow.cacheSend(
-    //         token_address,
-    //         weiAmount,
-    //         {
-    //             from: myAccount,
-    //         }
-    //     );
-    // }
-    // return sendRepay;
-};
-
-// Withdraw tokens from lending pool
-export const handle_withdraw_click = async ({
-    drizzle,
-    userWalletNetwork,
-    userWalletAddress,
-    amount,
-    asset,
-    shouldSendMax,
-    currentPool,
-}) => {
-    const myAccount = userWalletAddress;
-    const network = constants.network_type[userWalletNetwork];
-    const MoneyMarketContract = drizzle.contracts.MoneyMarket;
-    const token_address =
-        address[network][currentPool][`address_${asset.unit}`];
-    const unit = asset.unit;
-
-    let weiAmount = amount;
-    if (shouldSendMax !== true) weiAmount = toWei(amount, unit);
-
-    const sendWithdraw = MoneyMarketContract.methods.withdraw.cacheSend(
-        token_address,
-        weiAmount,
-        {
-            from: myAccount,
-        }
-    );
-    return sendWithdraw;
 };
 
 // Borrow Tokens from Lending Pool
@@ -409,19 +228,44 @@ export const estimateGasForMethod = async ({
 };
 
 export const handle_claim_ALK_click = async ({
-    drizzle,
+    userWalletNetwork,
     userWalletAddress,
+    selectedMethod,
+    currentPool,
+    library,
+    userWalletName,
 }) => {
-    const myAccount = userWalletAddress;
+    return new Promise(async (resolve, reject) => {
+        const myAccount = userWalletAddress;
+        const network = constants.network_type[userWalletNetwork];
 
-    const RewardControlContract = drizzle.contracts.RewardControl;
+        const address_RewardControl = address[network].address_RewardControl;
 
-    const sendClaimAlk = RewardControlContract.methods.claimAlk.cacheSend(
-        myAccount,
-        {
+        const web3 = new Web3(library.provider);
+
+        const RewardControlContract = new web3.eth.Contract(
+            RewardControl_ABI,
+            address_RewardControl
+        );
+
+        const getData =
+            RewardControlContract.methods[selectedMethod](
+                myAccount
+            ).encodeABI();
+
+        const dataToSend = {
+            to: address_RewardControl,
             from: myAccount,
-        }
-    );
+            data: getData,
+        };
 
-    return sendClaimAlk;
+        web3.eth
+            .sendTransaction(dataToSend)
+            .once("transactionHash", (txHash) => {
+                const txData = { txHash, userWalletName };
+
+                resolve(txData);
+            })
+            .catch((err) => reject(err)); // The transaction was rejected
+    });
 };
