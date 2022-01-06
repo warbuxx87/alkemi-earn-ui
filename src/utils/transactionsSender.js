@@ -53,8 +53,6 @@ export const handle_asset_contract_method_click = async ({
         const targetAddress =
             selectedMethod === "approve" ? address_MoneyMarket : myAccount;
 
-        console.log("tokenContract: ", tokenContract);
-
         const getData = tokenContract.methods[selectedMethod](
             targetAddress,
             weiAmount
@@ -143,7 +141,7 @@ export const handle_moneymarket_tx = async ({
 
 // Borrow Tokens from Lending Pool
 export const handle_liquidate_click = async ({
-    drizzle,
+    library,
     userWalletNetwork,
     userWalletAddress,
     symbol,
@@ -152,52 +150,90 @@ export const handle_liquidate_click = async ({
     assetBorrow,
     targetAccount,
     maxAmount,
+    userWalletName,
+    currentPool,
+    selectedMethod,
 }) => {
-    const myAccount = userWalletAddress;
-    //const network = constants.network_type[userWalletNetwork];
-    const MoneyMarketContract = drizzle.contracts.MoneyMarket;
-    //const token_address = address[network][`address_${symbol}`];
-    let weiAmount = amount.toString();
+    return new Promise(async (resolve, reject) => {
+        const myAccount = userWalletAddress;
+        const network = constants.network_type[userWalletNetwork];
 
-    let sendLiquidate;
-    if (symbol === "WETH" || symbol === "ETH") {
-        const maxAmountBig = Big(maxAmount);
-        const positiveMaxAmount = maxAmountBig.abs();
-        const ethLiquidationAmount = positiveMaxAmount.times(Big(1.01));
-        const maxWeiAmount = toWei(ethLiquidationAmount.toFixed(18)); // toFixed 18 removes potential overflow of digits before converting to wei
+        const web3 = new Web3(library.provider);
 
-        const requestedAmountClose = maxWeiAmount;
-        sendLiquidate = MoneyMarketContract.methods.liquidateBorrow.cacheSend(
-            targetAccount,
-            assetBorrow,
-            assetCollateral,
-            requestedAmountClose,
-            {
+        const address_MoneyMarket =
+            currentPool === "open"
+                ? address[network].address_open_MoneyMarket
+                : address[network].address_MoneyMarket;
+
+        const MoneyMarketContract = new web3.eth.Contract(
+            MoneyMarket_ABI,
+            address_MoneyMarket
+        );
+
+        let weiAmount = amount.toString();
+
+        if (symbol === "WETH" || symbol === "ETH") {
+            const maxAmountBig = Big(maxAmount);
+            const positiveMaxAmount = maxAmountBig.abs();
+            const ethLiquidationAmount = positiveMaxAmount.times(Big(1.01));
+            const maxWeiAmount = toWei(ethLiquidationAmount.toFixed(18)); // toFixed 18 removes potential overflow of digits before converting to wei
+
+            const requestedAmountClose = maxWeiAmount;
+
+            const getData = MoneyMarketContract.methods["liquidateBorrow"](
+                targetAccount,
+                assetBorrow,
+                assetCollateral,
+                requestedAmountClose
+            ).encodeABI();
+
+            const dataToSend = {
+                to: address_MoneyMarket,
                 from: myAccount,
+                data: getData,
                 value: requestedAmountClose,
-            }
-        );
-    } else {
-        if (weiAmount === "-1") {
-            weiAmount = constants.max_uint;
+            };
+
+            web3.eth
+                .sendTransaction(dataToSend)
+                .once("transactionHash", (txHash) => {
+                    const txData = { txHash, userWalletName };
+
+                    resolve(txData);
+                })
+                .catch((err) => reject(err)); // The transaction was rejected
         } else {
-            weiAmount = toWei(amount, symbol);
-        }
-
-        const requestedAmountClose = weiAmount;
-
-        sendLiquidate = MoneyMarketContract.methods.liquidateBorrow.cacheSend(
-            targetAccount,
-            assetBorrow,
-            assetCollateral,
-            requestedAmountClose,
-            {
-                from: myAccount,
+            if (weiAmount === "-1") {
+                weiAmount = constants.max_uint;
+            } else {
+                weiAmount = toWei(amount, symbol);
             }
-        );
-    }
 
-    return sendLiquidate;
+            const requestedAmountClose = weiAmount;
+
+            const getData = MoneyMarketContract.methods[selectedMethod](
+                targetAccount,
+                assetBorrow,
+                assetCollateral,
+                requestedAmountClose
+            ).encodeABI();
+
+            const dataToSend = {
+                to: address_MoneyMarket,
+                from: myAccount,
+                data: getData,
+            };
+
+            web3.eth
+                .sendTransaction(dataToSend)
+                .once("transactionHash", (txHash) => {
+                    const txData = { txHash, userWalletName };
+
+                    resolve(txData);
+                })
+                .catch((err) => reject(err)); // The transaction was rejected
+        }
+    });
 };
 
 // Estimate method gas, NOT very reliable, since I noticed different values on metamask, but does the trick for the most part
@@ -231,7 +267,6 @@ export const handle_claim_ALK_click = async ({
     userWalletNetwork,
     userWalletAddress,
     selectedMethod,
-    currentPool,
     library,
     userWalletName,
 }) => {

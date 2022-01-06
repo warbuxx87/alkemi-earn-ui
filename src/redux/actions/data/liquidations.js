@@ -7,6 +7,9 @@ import { transactionTriggered } from "redux/actions/status/transactions";
 import { handle_liquidate_click } from "utils/transactionsSender";
 import { triggerToastDisplay } from "utils/notify";
 
+import { getProviderName } from "utils/web3Helpers";
+import { setShowWalletConnectModal } from "redux/actions/status/walletConnect";
+
 const url_map = require("constants/url_map.json");
 
 // Section 2: Action types declarations and action creators
@@ -126,7 +129,7 @@ export const fetchLiquidations =
 // TODO: to be merged in transactions (when the other drawers are refactored in UI-359)
 export const onLiquidateAction =
     ({
-        drizzle,
+        library,
         userWalletNetwork,
         userWalletAddress,
         symbol,
@@ -137,10 +140,17 @@ export const onLiquidateAction =
         type,
         liquidationId,
         maxAmount,
+        currentPool,
     }) =>
     async (dispatch) => {
+        const walletName = getProviderName(library.provider);
+
+        if (walletName === "WalletConnect") {
+            dispatch(setShowWalletConnectModal(true));
+        }
+
         handle_liquidate_click({
-            drizzle,
+            library,
             userWalletNetwork,
             userWalletAddress,
             symbol,
@@ -149,9 +159,27 @@ export const onLiquidateAction =
             assetBorrow,
             targetAccount,
             maxAmount,
+            userWalletName: walletName,
+            currentPool,
         })
-            .then((stackId) => {
-                dispatch(transactionTriggered(liquidationId, stackId, type));
+            .then((txData) => {
+                if (walletName === "WalletConnect") {
+                    dispatch(setShowWalletConnectModal(false));
+                }
+
+                triggerToastDisplay({
+                    toastMessageVariant: "processing",
+                    displayMessage: "Transaction pending...",
+                    displaySecondaryMessage: "This might take a few minutes",
+                });
+
+                dispatch(
+                    transactionTriggered({
+                        alternativeId: liquidationId,
+                        txData,
+                        type,
+                    })
+                );
             })
             .catch((error) => {
                 triggerToastDisplay({

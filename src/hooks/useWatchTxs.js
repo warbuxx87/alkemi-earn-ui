@@ -173,7 +173,8 @@ export default () => {
                             topic === moneyMarketTopics.supply ||
                             topic === moneyMarketTopics.withdraw ||
                             topic === moneyMarketTopics.borrow ||
-                            topic === moneyMarketTopics.repayBorrow
+                            topic === moneyMarketTopics.repayBorrow ||
+                            topic === moneyMarketTopics.liquidate
                         ) {
                             // @dev https://web3js.readthedocs.io/en/v1.2.7/web3-eth-abi.html#id18
                             // console.log(
@@ -235,18 +236,18 @@ export default () => {
                                             );
 
                                             // this will definitely display a success message even if it's triggered outside of the instance of the app
-                                            triggerToastDisplay({
-                                                toastMessageVariant: "success",
-                                                displayMessage:
-                                                    "Transaction Successful",
-                                                displaySecondaryMessage:
-                                                    messagePerType[
-                                                        resultType
-                                                    ] ||
-                                                    "Consult the transaction hash",
-                                                currentNetworkName,
-                                                txHash: tx.transactionHash,
-                                            });
+                                            // triggerToastDisplay({
+                                            //     toastMessageVariant: "success",
+                                            //     displayMessage:
+                                            //         "Transaction Successful",
+                                            //     displaySecondaryMessage:
+                                            //         messagePerType[
+                                            //             resultType
+                                            //         ] ||
+                                            //         "Consult the transaction hash",
+                                            //     currentNetworkName,
+                                            //     txHash: tx.transactionHash,
+                                            // });
                                         }
                                     }
                                 }
@@ -323,19 +324,19 @@ export default () => {
                                                     })
                                                 );
 
-                                                triggerToastDisplay({
-                                                    toastMessageVariant:
-                                                        "success",
-                                                    displayMessage:
-                                                        "Transaction Successful",
-                                                    displaySecondaryMessage:
-                                                        messagePerType[
-                                                            resultType
-                                                        ] ||
-                                                        "Consult the transaction hash",
-                                                    currentNetworkName,
-                                                    txHash: tx.transactionHash,
-                                                });
+                                                // triggerToastDisplay({
+                                                //     toastMessageVariant:
+                                                //         "success",
+                                                //     displayMessage:
+                                                //         "Transaction Successful",
+                                                //     displaySecondaryMessage:
+                                                //         messagePerType[
+                                                //             resultType
+                                                //         ] ||
+                                                //         "Consult the transaction hash",
+                                                //     currentNetworkName,
+                                                //     txHash: tx.transactionHash,
+                                                // });
                                             }
                                         }
                                     }
@@ -361,7 +362,6 @@ export default () => {
                 "logs",
                 options,
                 function (error, tx) {
-                    console.log("tx: ", tx);
                     if (error || tx == null) {
                         // console.log(
                         //     "Error when watching incoming transactions: ",
@@ -371,8 +371,6 @@ export default () => {
                     }
 
                     tx.topics.forEach((topic) => {
-                        console.log("Found tx with this topic " + topic);
-
                         if (topic === rewardControlTopics.claimAlk) {
                             web3.eth
                                 .getTransaction(tx.transactionHash)
@@ -502,6 +500,7 @@ export default () => {
                 })
                 .then(function (data) {
                     if (
+                        !data ||
                         !data.transactionHash ||
                         data.confirmations.length < 1
                     ) {

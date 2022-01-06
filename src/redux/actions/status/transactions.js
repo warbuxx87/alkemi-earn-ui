@@ -18,12 +18,18 @@ import { setShowWalletConnectModal } from "redux/actions/status/walletConnect";
 //                                            //
 
 export const TRANSACTION_TRIGGERED = "TRANSACTION_TRIGGERED";
-export const transactionTriggered = ({ assetUnit, txData, type }) => ({
+export const transactionTriggered = ({
+    assetUnit,
+    txData,
+    type,
+    alternativeId,
+}) => ({
     type: TRANSACTION_TRIGGERED,
     payload: {
         txData,
         assetUnit,
         type,
+        alternativeId,
     },
 });
 
@@ -40,12 +46,18 @@ export const transactionSent = (stackId, txHash) => {
 };
 
 export const TRANSACTION_RESOLVED = "TRANSACTION_RESOLVED";
-export const transactionResolved = ({ assetUnit, txHash, type }) => ({
+export const transactionResolved = ({
+    assetUnit,
+    txHash,
+    type,
+    alternativeId,
+}) => ({
     type: TRANSACTION_RESOLVED,
     payload: {
         txHash,
-        assetUnit,
+        assetUnit, // used as ID for most transactions
         type,
+        alternativeId, // for liquidatiuons
     },
 });
 

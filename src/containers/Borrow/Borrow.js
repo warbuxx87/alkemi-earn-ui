@@ -6,8 +6,6 @@ import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 // Section 2: internal imports
-import DrizzleContext from "utils/DrizzleContext";
-
 import { onTx } from "redux/actions/status/transactions";
 
 import useWalletSelect from "hooks/useWalletSelect";
@@ -47,7 +45,7 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
     useFetchALKPrice();
     useFetchMarkets(true);
 
-    const { onConnect } = useWalletSelect();
+    const { onConnect, library } = useWalletSelect();
 
     const marketsData = useSelector(getMarkets);
     const alkApyPerMarket = useSelector(getAlkApyPerMarket);
@@ -55,7 +53,6 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
 
-    const drizzle = useContext(DrizzleContext);
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
@@ -103,12 +100,15 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
 
     const activateAsset = (asset) =>
         onActivate({
-            drizzle,
             userWalletNetwork,
             userWalletAddress,
             asset,
+
+            shouldSendMax: true,
+
             type: "approve",
             currentPool,
+            library,
         });
 
     return (

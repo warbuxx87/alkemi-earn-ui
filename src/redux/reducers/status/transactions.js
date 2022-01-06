@@ -22,6 +22,7 @@ const transactionsReducer = (state = initialState, action) => {
                 type: action.payload.type, //
                 processing: true,
                 assetUnit: action.payload.assetUnit,
+                alternativeId: action.payload.alternativeId,
             };
 
             return {
@@ -42,7 +43,8 @@ const transactionsReducer = (state = initialState, action) => {
                     // This is the fastest method to resolve for wallet connect but could get false positives in case the user is running two instances and making the same transaction (highly unlikely in mainnet)
                     return (
                         aTx.type === action.payload.type &&
-                        aTx.assetUnit === action.payload.assetUnit
+                        (aTx.assetUnit === action.payload.assetUnit ||
+                            aTx.alternativeId === action.payload.alternativeId)
                     );
                 });
             }
@@ -72,7 +74,8 @@ const transactionsReducer = (state = initialState, action) => {
 
                     return (
                         aTx.type === action.payload.type &&
-                        aTx.assetUnit === action.payload.assetUnit
+                        (aTx.assetUnit === action.payload.assetUnit ||
+                            aTx.alternativeId === action.payload.alternativeId)
                     );
                 });
             }
