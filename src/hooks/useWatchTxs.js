@@ -1,5 +1,5 @@
 // Section 1: React/Redux low level imports
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Web3 from "web3";
@@ -115,7 +115,7 @@ function getKeyByValue(object, value) {
     });
 }
 
-export default () => {
+const useWatchTxs = () => {
     const { library, active, error } = useWeb3React();
 
     const dispatch = useDispatch();
@@ -458,6 +458,7 @@ export default () => {
             clearWatchers(watchers);
         };
     }, [
+        currentPool,
         userWalletAddress,
         currentNetworkName,
         walletConnected,
@@ -523,8 +524,10 @@ export default () => {
                 });
         };
 
-        foundTxs.map((tx) => {
+        foundTxs.forEach((tx) => {
             fetchWalletConnectRealTx(tx.txHash);
         });
-    }, [txs]);
+    }, [dispatch, txs]);
 };
+
+export default useWatchTxs;

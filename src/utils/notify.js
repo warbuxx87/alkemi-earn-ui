@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Notify from "components/UI/Notify";
 
 // 3. constants imports
-import errorMessage from "constants/error_code";
 import constants from "constants/constant.json";
 
 import {

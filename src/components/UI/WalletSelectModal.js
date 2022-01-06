@@ -154,7 +154,7 @@ function PoolDialog({ width, handleWalletSelect, selectedPool, open }) {
                                     variant="rounded"
                                     className={classes.avatar}
                                 >
-                                    <img src={wallet.logo} />
+                                    <img src={wallet.logo} alt={wallet.title} />
                                 </Avatar>{" "}
                                 <Box pt={1}>
                                     <Typography
