@@ -4,9 +4,6 @@ exports[`<App /> matches snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-     
-     
-    
     <div>
       <div
         class="MuiContainer-root makeStyles-container-2"
