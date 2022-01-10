@@ -128,8 +128,7 @@ const useWalletSelect = () => {
                 return;
             }
 
-            if (update.chainId || update.account) onReset();
-            // TODO react to type of update, example: {account: '0xnewWalletAddress'}
+            if (update.chainId || update.account) onReset(); // might need to react to more events
         },
         [connector, onReset]
     );
@@ -256,9 +255,10 @@ const useWalletSelect = () => {
 
     useEffect(() => {
         if (selectedWallet && connectorsByName[selectedWallet] && !active) {
+            // protects from being called multiple times
             activate(connectorsByName[selectedWallet]);
         }
-    }, [selectedWallet, active, activate]); // TODO: see why this is called many times, and if it should be changed
+    }, [selectedWallet, active, activate]);
 
     const onConnect = async () => {
         dispatch(setShowWalletModal(true));

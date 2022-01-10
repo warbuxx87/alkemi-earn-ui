@@ -6,10 +6,6 @@ import Web3 from "web3";
 
 import { useWeb3React } from "@web3-react/core";
 
-// import { ethers } from "ethers";
-
-import Web3WsProvider from "web3-providers-ws";
-
 // Section 2: internal imports
 import {
     isWalletConnected,
@@ -29,49 +25,13 @@ import topics from "constants/topics";
 
 import { getTransactions } from "redux/selectors/status/status";
 
-const INFURA_ID = process.env.REACT_APP_INFURA_ID;
+const url_map_external_tools = require("constants/url_map_external_tools.json");
 
 const moneyMarketTopics = topics.MoneyMarket;
 
 const assetsTopics = topics.assets;
 
 const rewardControlTopics = topics.RewardControl;
-
-const WSoptions = (projectId) => {
-    return {
-        timeout: 3600000, // ms -- 60 min
-
-        // Useful for credentialed urls, e.g: ws://username:password@localhost:8546
-        headers: {
-            authorization: `Basic :${projectId}`,
-        },
-
-        //  Useful if requests result are large
-        clientConfig: {
-            maxReceivedFrameSize: 100000000, // bytes - default: 1MiB
-            maxReceivedMessageSize: 100000000, // bytes - default: 8MiB
-
-            // Useful to keep a connection alive
-            keepalive: true,
-            keepaliveInterval: 15000, // ms
-        },
-
-        // Enable auto reconnection
-        reconnect: {
-            auto: true,
-            delay: 5000, // ms
-            maxAttempts: 100000,
-            onTimeout: true,
-        },
-    };
-};
-
-const wssProvider = (projectId) => {
-    return new Web3WsProvider(
-        `wss://rinkeby.infura.io/ws/v3/${projectId}`, // TODO: adapt to network
-        WSoptions(projectId)
-    );
-};
 
 // define data structure for input for moneymarket contract
 const contractInput = [
@@ -150,9 +110,7 @@ const useWatchTxs = () => {
                 //topics: ['0x12345...']
             };
 
-            // let infuraProvider = new ethers.providers.InfuraProvider('rinkeby'); // TODO: adapt to network name // kind of a hack to get project id from infuraprovider
-
-            const web3 = new Web3(wssProvider(INFURA_ID));
+            const web3 = new Web3(library.provider);
 
             watchers.MoneyMarket = web3.eth.subscribe(
                 "logs",
@@ -354,9 +312,7 @@ const useWatchTxs = () => {
                 //topics: ['0x12345...']
             };
 
-            // let infuraProvider = new ethers.providers.InfuraProvider('rinkeby'); // TODO: adapt to network name // kind of a hack to get project id from infuraprovider
-
-            const web3 = new Web3(wssProvider(INFURA_ID));
+            const web3 = new Web3(library.provider);
 
             watchers.RewardControl = web3.eth.subscribe(
                 "logs",
@@ -469,65 +425,70 @@ const useWatchTxs = () => {
     ]);
 
     useEffect(() => {
-        const foundTxs = Object.values(txs).filter((aTx) => {
-            return (
-                aTx.userWalletName === "WalletConnect" &&
-                aTx.foundRealTx !== true &&
-                aTx.processing === true
-            );
-        });
+        if (
+            !currentNetworkName ||
+            !url_map_external_tools[currentNetworkName]
+                .gnosis_multisig_transactions_url
+        ) {
+            const foundTxs = Object.values(txs).filter((aTx) => {
+                return (
+                    aTx.userWalletName === "WalletConnect" &&
+                    aTx.foundRealTx !== true &&
+                    aTx.processing === true
+                );
+            });
 
-        const fetchWalletConnectRealTx = (txHash) => {
-            fetch(
-                `https://safe-transaction.rinkeby.gnosis.io/api/v1/multisig-transactions/${txHash}`,
-                {
-                    // TODO: adapt link to mainnet
-                    method: "GET",
-                    headers: { accept: "application/json" },
-                }
-            )
-                .then((response) => {
-                    if (
-                        response.status === 404 ||
-                        response.statusText === "Not Found"
-                    ) {
-                        setTimeout(
-                            () => fetchWalletConnectRealTx(txHash),
-                            5 * 1000
-                        );
-                    } else {
-                        return response.json();
+            const fetchWalletConnectRealTx = (txHash) => {
+                fetch(
+                    `${url_map_external_tools[currentNetworkName].gnosis_multisig_transactions_url}/${txHash}`,
+                    {
+                        method: "GET",
+                        headers: { accept: "application/json" },
                     }
-                })
-                .then(function (data) {
-                    if (
-                        !data ||
-                        !data.transactionHash ||
-                        data.confirmations.length < 1
-                    ) {
-                        // NB: This is very slow to resolve, as in receiving a confirmation
-                        setTimeout(
-                            () => fetchWalletConnectRealTx(txHash),
-                            3 * 1000
-                        );
-                    } else {
-                        dispatch(
-                            transactionResolved({
-                                txHash: txHash,
-                            })
-                        );
-                        // dispatch safe tx resolved
-                    }
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
-        };
+                )
+                    .then((response) => {
+                        if (
+                            response.status === 404 ||
+                            response.statusText === "Not Found"
+                        ) {
+                            setTimeout(
+                                () => fetchWalletConnectRealTx(txHash),
+                                5 * 1000
+                            );
+                        } else {
+                            return response.json();
+                        }
+                    })
+                    .then(function (data) {
+                        if (
+                            !data ||
+                            !data.transactionHash ||
+                            data.confirmations.length < 1
+                        ) {
+                            // NB: This is very slow to resolve, as in receiving a confirmation
+                            setTimeout(
+                                () => fetchWalletConnectRealTx(txHash),
+                                3 * 1000
+                            );
+                        } else {
+                            dispatch(
+                                transactionResolved({
+                                    txHash: txHash,
+                                })
+                            );
+                            // dispatch safe tx resolved
+                        }
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                    });
+            };
 
-        foundTxs.forEach((tx) => {
-            fetchWalletConnectRealTx(tx.txHash);
-        });
-    }, [dispatch, txs]);
+            foundTxs.forEach((tx) => {
+                fetchWalletConnectRealTx(tx.txHash);
+            });
+        }
+    }, [dispatch, txs, currentNetworkName]);
 };
 
 export default useWatchTxs;

@@ -60,7 +60,6 @@
         "reselect": "^4.0.0",
         "styled-components": "^5.2.3",
         "web3": "^1.6.1",
-        "web3-providers-ws": "^1.6.1",
         "web3modal": "^1.9.4",
         "yup": "^0.32.9"
     },

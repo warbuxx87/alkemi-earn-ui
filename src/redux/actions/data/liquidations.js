@@ -126,7 +126,7 @@ export const fetchLiquidations =
         }
     };
 
-// TODO: to be merged in transactions (when the other drawers are refactored in UI-359)
+// Could be merged in transactions with other method calls
 export const onLiquidateAction =
     ({
         library,
