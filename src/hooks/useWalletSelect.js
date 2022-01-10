@@ -246,7 +246,7 @@ const useWalletSelect = () => {
 
     // useEffect(() => {
     //     // console.log("useEffect account: ", account);
-    //     // TODO: Might want to dispatch(setWalletAddress(currentWalletAddress)); here
+    //     // Might want to dispatch(setWalletAddress(currentWalletAddress)); here
     // }, [account]);
 
     // useEffect(() => {

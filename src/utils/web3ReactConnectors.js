@@ -13,7 +13,6 @@ export const walletconnect = new WalletConnectConnector({
     rpc: { 1: RPC_URL_MAINNET, 4: RPC_URL_RINKEBY },
     infuraId: INFURA_ID,
     bridge: "https://bridge.walletconnect.org",
-    chainId: 4, // TODO: add mainnet dynamically
-
     qrcode: true,
+    // preferredNetworkId: 1
 });

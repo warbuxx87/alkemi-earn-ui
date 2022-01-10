@@ -426,8 +426,8 @@ const useWatchTxs = () => {
 
     useEffect(() => {
         if (
-            !currentNetworkName ||
-            !url_map_external_tools[currentNetworkName]
+            currentNetworkName &&
+            url_map_external_tools[currentNetworkName]
                 .gnosis_multisig_transactions_url
         ) {
             const foundTxs = Object.values(txs).filter((aTx) => {
