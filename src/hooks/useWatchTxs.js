@@ -277,7 +277,7 @@ const useWatchTxs = () => {
                                                 dispatch(
                                                     transactionResolved({
                                                         txHash: tx.transactionHash,
-                                                        assetSymbol, // TODO: assetUnit ?
+                                                        assetUnit: assetSymbol,
                                                         type: resultType,
                                                     })
                                                 );
@@ -425,6 +425,8 @@ const useWatchTxs = () => {
     ]);
 
     useEffect(() => {
+        const notifiedTx = []; // tracking fired notifications by txHash (protects against web3.subscribe firing multiple times)
+
         if (
             currentNetworkName &&
             url_map_external_tools[currentNetworkName]
@@ -471,12 +473,16 @@ const useWatchTxs = () => {
                                 3 * 1000
                             );
                         } else {
-                            dispatch(
-                                transactionResolved({
-                                    txHash: txHash,
-                                })
-                            );
-                            // dispatch safe tx resolved
+                            if (!notifiedTx.includes(txHash)) {
+                                notifiedTx.push(txHash);
+
+                                dispatch(
+                                    transactionResolved({
+                                        txHash: txHash,
+                                        realTx: data.transactionHash,
+                                    })
+                                );
+                            }
                         }
                     })
                     .catch((e) => {
@@ -485,7 +491,8 @@ const useWatchTxs = () => {
             };
 
             foundTxs.forEach((tx) => {
-                fetchWalletConnectRealTx(tx.txHash);
+                if (!notifiedTx.includes(tx.txHash))
+                    fetchWalletConnectRealTx(tx.txHash);
             });
         }
     }, [dispatch, txs, currentNetworkName]);

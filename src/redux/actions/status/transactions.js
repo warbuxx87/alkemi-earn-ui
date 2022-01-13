@@ -51,6 +51,7 @@ export const transactionResolved = ({
     txHash,
     type,
     alternativeId,
+    realTx,
 }) => ({
     type: TRANSACTION_RESOLVED,
     payload: {
@@ -58,6 +59,7 @@ export const transactionResolved = ({
         assetUnit, // used as ID for most transactions
         type,
         alternativeId, // for liquidatiuons
+        realTx, // walletconnect
     },
 });
 

@@ -31,6 +31,8 @@ const eventToDisplayMessage = {
     liquidate: "Borrow Liquidated",
 };
 
+// could add a tracker for already notified txs here
+
 const contractTXNotifier = (store) => (next) => (action) => {
     if (!action) next(action); // could be replaced with a simple return since we don't really have an action
 
@@ -71,7 +73,9 @@ const contractTXNotifier = (store) => (next) => (action) => {
                 toastMessageVariant,
                 displayMessage,
                 displaySecondaryMessage,
-                txHash: action.payload.txHash,
+                txHash: action.payload.realTx
+                    ? action.payload.realTx
+                    : action.payload.txHash, // for wallet connect
                 currentNetworkName,
             });
     }

@@ -59,6 +59,7 @@ const transactionsReducer = (state = initialState, action) => {
                         ...state.txs[tx.txHash],
                         processing: false,
                         resolved: true, // unused for now
+                        realTx: action.payload.realTx, // for wallet connect
                     },
                 },
             };
