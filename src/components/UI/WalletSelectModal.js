@@ -102,10 +102,11 @@ const wallets = [
         title: "Wallet Connect",
         name: "WalletConnect",
         logo: walletconnectLogo,
+        description: "Gnosis WalletConnect Safe App",
     },
 ];
 
-function PoolDialog({ width, handleWalletSelect, selectedPool, open }) {
+function WalletSelectModal({ width, handleWalletSelect, selectedPool, open }) {
     const classes = useStyles();
 
     const isSmallScreen = /xs/.test(width);
@@ -183,9 +184,9 @@ function PoolDialog({ width, handleWalletSelect, selectedPool, open }) {
     );
 }
 
-PoolDialog.propTypes = {
+WalletSelectModal.propTypes = {
     /** The name of the current breakpoint, for example "sm" */
     width: PropTypes.string.isRequired,
 };
 
-export default withWidth()(PoolDialog);
+export default withWidth()(WalletSelectModal);
