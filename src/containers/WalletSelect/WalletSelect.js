@@ -23,7 +23,16 @@ const WalletSelectContainer = () => {
     const open = useSelector(showWallet);
 
     const handleWalletSelect = (event, selectedWallet) => {
-        dispatch(setSelectedWallet(selectedWallet));
+        if (selectedWallet === "installMetaMask") {
+            const newWindow = window.open(
+                "https://metamask.io/",
+                "_blank",
+                "noopener,noreferrer"
+            );
+            if (newWindow) newWindow.opener = null;
+        } else {
+            dispatch(setSelectedWallet(selectedWallet));
+        }
     };
 
     return (

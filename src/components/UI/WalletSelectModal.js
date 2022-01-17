@@ -106,12 +106,57 @@ const wallets = [
     },
 ];
 
+const installMetaMask = {
+    title: "Install MetaMask",
+    name: "installMetaMask",
+    logo: metamaskLogo,
+    description:
+        "You don't have MetaMask or a similar browser extension installed, click here to download from the official website.",
+};
+
 function WalletSelectModal({ width, handleWalletSelect, selectedPool, open }) {
     const classes = useStyles();
 
     const isSmallScreen = /xs/.test(width);
     const buttonProps = {
         orientation: isSmallScreen ? "vertical" : "horizontal",
+    };
+
+    // displays wallets and ignore metamask if not inject (it has no way of detecting if it's metamask or for example injected brave)
+    const displayWallet = (wallet) => {
+        if (wallet.name === "MetaMask" && !(window.web3 || window.ethereum)) {
+            wallet = installMetaMask;
+        }
+
+        return (
+            <ToggleButton
+                value={wallet.name}
+                aria-label="Verified"
+                disableRipple
+                disableFocusRipple
+                className={classes.mainButton}
+                key={wallet.name}
+            >
+                <Avatar variant="rounded" className={classes.avatar}>
+                    <img src={wallet.logo} alt={wallet.title} />
+                </Avatar>{" "}
+                <Box pt={1}>
+                    <Typography className={classes.toggleTitle} variant="body1">
+                        {wallet.title}
+                    </Typography>
+                </Box>
+                {wallet.description ? (
+                    <Box pt={1}>
+                        <Typography
+                            className={classes.toggleSubtitle}
+                            variant="body2"
+                        >
+                            {wallet.description}
+                        </Typography>
+                    </Box>
+                ) : null}
+            </ToggleButton>
+        );
     };
 
     return (
@@ -143,41 +188,7 @@ function WalletSelectModal({ width, handleWalletSelect, selectedPool, open }) {
                         className={classes.toggleButton}
                         {...buttonProps}
                     >
-                        {wallets.map((wallet) => (
-                            <ToggleButton
-                                value={wallet.name}
-                                aria-label="Verified"
-                                disableRipple
-                                disableFocusRipple
-                                className={classes.mainButton}
-                                key={wallet.name}
-                            >
-                                <Avatar
-                                    variant="rounded"
-                                    className={classes.avatar}
-                                >
-                                    <img src={wallet.logo} alt={wallet.title} />
-                                </Avatar>{" "}
-                                <Box pt={1}>
-                                    <Typography
-                                        className={classes.toggleTitle}
-                                        variant="body1"
-                                    >
-                                        {wallet.title}
-                                    </Typography>
-                                </Box>
-                                {wallet.description ? (
-                                    <Box pt={1}>
-                                        <Typography
-                                            className={classes.toggleSubtitle}
-                                            variant="body2"
-                                        >
-                                            {wallet.description}
-                                        </Typography>
-                                    </Box>
-                                ) : null}
-                            </ToggleButton>
-                        ))}
+                        {wallets.map((wallet) => displayWallet(wallet))}
                     </ToggleButtonGroup>
                 </DialogContent>
             </Dialog>
