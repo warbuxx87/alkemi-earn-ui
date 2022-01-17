@@ -33,6 +33,15 @@ export const setSelectedWallet = (selectedWallet) => ({
 });
 
 // Declare action type as a constant
+export const SET_RESET_SELECTION_WALLET = "SET_RESET_SELECTION_WALLET";
+
+// Declare action creator
+export const setResetSelectionWallet = () => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: SET_RESET_SELECTION_WALLET,
+});
+
+// Declare action type as a constant
 export const SET_ACTIVATED_WALLET = "SET_ACTIVATED_WALLET";
 
 // Declare action creator

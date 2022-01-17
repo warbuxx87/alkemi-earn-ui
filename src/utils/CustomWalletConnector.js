@@ -57,22 +57,27 @@ export class WalletConnectConnector extends AbstractConnector {
     }
 
     async activate() {
-        if (!this.walletConnectProvider) {
-            const WalletConnectProvider = await import(
-                "@walletconnect/web3-provider"
-            ).then((m) => m?.default ?? m);
-            this.walletConnectProvider = new WalletConnectProvider({
-                bridge: this.bridge,
-                rpc: this.rpc,
-                qrcode: this.qrcode,
-                pollingInterval: this.pollingInterval,
-                chainId: this.preferredNetworkId,
-            });
+        if (this.walletConnectProvider) {
+            this.deactivate();
         }
+
+        const WalletConnectProvider = await import(
+            "@walletconnect/web3-provider"
+        ).then((m) => m?.default ?? m);
+
+        this.walletConnectProvider = new WalletConnectProvider({
+            bridge: this.bridge,
+            rpc: this.rpc,
+            qrcode: this.qrcode,
+            pollingInterval: this.pollingInterval,
+            chainId: this.preferredNetworkId,
+        });
 
         const account = await this.walletConnectProvider
             .enable()
-            .then((accounts) => accounts[0])
+            .then((accounts) => {
+                return accounts[0];
+            })
             .catch((error) => {
                 if (error.message === "User closed modal") {
                     throw new UserRejectedRequestError();

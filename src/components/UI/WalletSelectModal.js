@@ -150,6 +150,7 @@ function WalletSelectModal({ width, handleWalletSelect, selectedPool, open }) {
                                 disableRipple
                                 disableFocusRipple
                                 className={classes.mainButton}
+                                key={wallet.name}
                             >
                                 <Avatar
                                     variant="rounded"

@@ -38,6 +38,8 @@ import DrizzleContext from "utils/DrizzleContext";
 import address from "constants/address_map.json";
 import constants from "constants/constant.json";
 
+import { setResetSelectionWallet } from "redux/actions/status/walletSelect";
+
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
 const connectorsByName = {
@@ -254,11 +256,15 @@ const useWalletSelect = () => {
     // }, [library]);
 
     useEffect(() => {
+        // protects from being called multiple times
         if (selectedWallet && connectorsByName[selectedWallet] && !active) {
-            // protects from being called multiple times
-            activate(connectorsByName[selectedWallet]);
+            activate(connectorsByName[selectedWallet], undefined, true).catch(
+                (error) => {
+                    dispatch(setResetSelectionWallet());
+                }
+            );
         }
-    }, [selectedWallet, active, activate]);
+    }, [selectedWallet, active, activate, dispatch]);
 
     const onConnect = async () => {
         dispatch(setShowWalletModal(true));

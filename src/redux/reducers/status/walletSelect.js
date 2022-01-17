@@ -3,6 +3,7 @@ import {
     SET_SELECTED_WALLET,
     SET_ACTIVATED_WALLET,
     SHOW_WALLET_MODAL,
+    SET_RESET_SELECTION_WALLET,
 } from "redux/actions/status/walletSelect";
 
 // Define initial state
@@ -28,6 +29,15 @@ const poolReducer = (state = initialState, action) => {
                 ...state,
                 selectedWallet: action.payload.selectedWallet,
                 activating: true,
+            };
+        }
+
+        case SET_RESET_SELECTION_WALLET: {
+            // after error
+            return {
+                ...state,
+                selectedWallet: null,
+                activating: false,
             };
         }
 
