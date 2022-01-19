@@ -105,10 +105,6 @@ const useWalletSelect = () => {
             drizzle.web3.currentProvider.removeAllListeners("chainChanged");
             drizzle.contractList = [];
             drizzle.contracts = {};
-
-            // drizzle = new Drizzle(drizzleOptions, store); // dirty
-
-            // drizzle.web3 = new Web3(); // Buggy
         } catch (e) {
             // Formatic doesn't subscribe to anything
         }
