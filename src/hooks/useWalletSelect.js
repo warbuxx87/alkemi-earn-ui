@@ -7,7 +7,12 @@ import { ConnectorEvent } from "@web3-react/types";
 
 // Section 2: Internal imports
 
-import { injected, walletconnect } from "utils/web3ReactConnectors";
+import {
+    injected,
+    walletconnect,
+    LedgerHQFrame,
+    safeMultisigConnector,
+} from "utils/web3ReactConnectors";
 
 import { initContracts, deleteAllContracts } from "utils/contracts";
 import { resetLendData, cancelFetchInterest } from "redux/actions/data/lend";
@@ -39,12 +44,16 @@ import address from "constants/address_map.json";
 import constants from "constants/constant.json";
 
 import { setResetSelectionWallet } from "redux/actions/status/walletSelect";
+import { isIframe } from "web3-ledgerhq-frame-connector";
+import { useSafeAppConnection } from "@gnosis.pm/safe-apps-web3-react";
 
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
 const connectorsByName = {
     MetaMask: injected,
     WalletConnect: walletconnect,
+    LedgerLive: LedgerHQFrame,
+    GnosisSafeApp: safeMultisigConnector,
 };
 
 const useWalletSelect = () => {
@@ -261,6 +270,37 @@ const useWalletSelect = () => {
             );
         }
     }, [selectedWallet, active, activate, dispatch]);
+
+    useEffect(() => {
+        if (isIframe() && !active) {
+            // debugger;
+            activate(connectorsByName["LedgerLive"], undefined, true).catch(
+                (error) => {
+                    dispatch(setResetSelectionWallet());
+                }
+            );
+        }
+    }, [selectedWallet, active, activate, dispatch, connector]);
+
+    const triedToConnectToSafe = useSafeAppConnection(safeMultisigConnector);
+
+    useEffect(() => {
+        if (triedToConnectToSafe && !active) {
+            // debugger;
+            activate(connectorsByName["GnosisSafeApp"], undefined, true).catch(
+                (error) => {
+                    dispatch(setResetSelectionWallet());
+                }
+            );
+        }
+    }, [
+        selectedWallet,
+        active,
+        activate,
+        dispatch,
+        connector,
+        triedToConnectToSafe,
+    ]);
 
     const onConnect = async () => {
         dispatch(setShowWalletModal(true));

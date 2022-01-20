@@ -16,5 +16,8 @@
     "start_url": ".",
     "display": "standalone",
     "theme_color": "#000000",
-    "background_color": "#ffffff"
+    "background_color": "#ffffff",
+    "description": "Alkemi Earn App",
+    "iconPath": "images/icon-512x512.png",
+    "providedBy": {"name": "Alkemi", "url": "https://alkemi.network"}
 }
