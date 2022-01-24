@@ -54,4 +54,15 @@ export const setWalletBalance = (walletBalance) => ({
     },
 });
 
+// Declare action type as a constant
+export const SET_WALLET_IS_IFRAME = "SET_WALLET_IS_IFRAME";
+
+// Declare action creator
+export const setWalletIsIframe = (isIFrame) => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: SET_WALLET_IS_IFRAME,
+    payload: {
+        isIFrame,
+    },
+});
 // Section 3: Action dispatch methods and async funcs

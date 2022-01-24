@@ -4,6 +4,7 @@ import {
     SET_WALLET_ADDRESS,
     SET_WALLET_NETWORK,
     SET_WALLET_BALANCE,
+    SET_WALLET_IS_IFRAME,
 } from "redux/actions/status/onboard";
 
 const DEFAULT_NETWORK = parseInt(process.env.REACT_APP_DEFAULT_NETWORK, 10);
@@ -14,6 +15,7 @@ const initialState = {
     walletAddress: null,
     walletNetwork: DEFAULT_NETWORK,
     walletBalance: "0.0000",
+    isIFrame: false,
 };
 
 // Implement "reducer" function with initial state as default state
@@ -41,6 +43,12 @@ const onboardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 walletBalance: action.payload.walletBalance,
+            };
+
+        case SET_WALLET_IS_IFRAME:
+            return {
+                ...state,
+                isIFrame: action.payload.isIFrame,
             };
 
         default:

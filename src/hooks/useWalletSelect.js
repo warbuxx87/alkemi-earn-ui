@@ -24,6 +24,7 @@ import {
     setWalletAddress,
     setWalletNetwork,
     setWalletBalance,
+    setWalletIsIframe,
 } from "redux/actions/status/onboard";
 
 import { setEthLendBalance } from "redux/actions/data/lend";
@@ -106,6 +107,7 @@ const useWalletSelect = () => {
         dispatch(setEthLendBalance(0));
         dispatch(setEthBorrowBalance(0));
         dispatch(setWalletNetwork(DEFAULT_NETWORK));
+        dispatch(setWalletIsIframe(false));
 
         resetStoreData();
 
@@ -271,27 +273,31 @@ const useWalletSelect = () => {
         }
     }, [selectedWallet, active, activate, dispatch]);
 
-    useEffect(() => {
-        if (isIframe() && !active) {
-            // debugger;
-            activate(connectorsByName["LedgerLive"], undefined, true).catch(
-                (error) => {
-                    dispatch(setResetSelectionWallet());
-                }
-            );
-        }
-    }, [selectedWallet, active, activate, dispatch, connector]);
-
     const triedToConnectToSafe = useSafeAppConnection(safeMultisigConnector);
 
     useEffect(() => {
-        if (triedToConnectToSafe && !active) {
-            // debugger;
-            activate(connectorsByName["GnosisSafeApp"], undefined, true).catch(
-                (error) => {
+        if (isIframe() && !active) {
+            dispatch(setWalletIsIframe(true));
+
+            if (LedgerHQFrame.isLedgerApp()) {
+                // debugger;
+
+                activate(connectorsByName["LedgerLive"], undefined, true).catch(
+                    (error) => {
+                        dispatch(setResetSelectionWallet());
+                    }
+                );
+            } else if (triedToConnectToSafe) {
+                // debugger;
+
+                activate(
+                    connectorsByName["GnosisSafeApp"],
+                    undefined,
+                    true
+                ).catch((error) => {
                     dispatch(setResetSelectionWallet());
-                }
-            );
+                });
+            }
         }
     }, [
         selectedWallet,
