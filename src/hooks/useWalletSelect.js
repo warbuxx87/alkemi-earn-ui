@@ -256,7 +256,7 @@ const useWalletSelect = () => {
         if (selectedWallet && connectorsByName[selectedWallet] && !active) {
             activate(connectorsByName[selectedWallet], undefined, true).catch(
                 (error) => {
-                    dispatch(setResetSelectionWallet());
+                    dispatch(setResetSelectionWallet(true, selectedWallet));
                 }
             );
         }

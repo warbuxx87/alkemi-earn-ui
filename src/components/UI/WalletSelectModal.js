@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
 
 const wallets = [
     {
-        title: "Browser Wallet",
+        title: "MetaMask",
         name: "MetaMask",
         logo: metamaskLogo,
         description: "Metamask and other browser extensions",
@@ -106,6 +106,11 @@ const wallets = [
     },
 ];
 
+const walletsLabels = {
+    MetaMask: "MetaMask",
+    WalletConnect: "Wallet Connect",
+};
+
 const installMetaMask = {
     title: "Install MetaMask",
     name: "installMetaMask",
@@ -114,7 +119,15 @@ const installMetaMask = {
         "You don't have MetaMask or a similar browser extension installed, click here to download from the official website.",
 };
 
-function WalletSelectModal({ width, handleWalletSelect, selectedPool, open }) {
+function WalletSelectModal({
+    width,
+    handleWalletSelect,
+    showWalletSelection,
+    askToConnect,
+    lastSelectedWallet,
+    handleTryAgain,
+    handleDismiss,
+}) {
     const classes = useStyles();
 
     const isSmallScreen = /xs/.test(width);
@@ -124,7 +137,12 @@ function WalletSelectModal({ width, handleWalletSelect, selectedPool, open }) {
 
     // displays wallets and ignore metamask if not inject (it has no way of detecting if it's metamask or for example injected brave)
     const displayWallet = (wallet) => {
-        if (wallet.name === "MetaMask" && !(window.web3 || window.ethereum)) {
+        if (
+            wallet.name === "MetaMask" &&
+            !window.ethereum &&
+            !window.ethereum.isMetaMask &&
+            !window.ethereum._metamask
+        ) {
             wallet = installMetaMask;
         }
 
@@ -159,11 +177,41 @@ function WalletSelectModal({ width, handleWalletSelect, selectedPool, open }) {
         );
     };
 
+    const displayWalletSelection = () => {
+        return (
+            <DialogContent className={classes.dialogContent}>
+                <ToggleButtonGroup
+                    exclusive
+                    onChange={handleWalletSelect}
+                    aria-label="Wallet Select"
+                    className={classes.toggleButton}
+                    {...buttonProps}
+                >
+                    {wallets.map((wallet) => displayWallet(wallet))}
+                </ToggleButtonGroup>
+            </DialogContent>
+        );
+    };
+
+    const displayAskToConnect = () => {
+        return (
+            <>
+                Alkemi Earn needs access to your wallet, please login and
+                authorize access to your {walletsLabels[lastSelectedWallet]}{" "}
+                accounts to continue.
+                <button onClick={() => handleTryAgain(lastSelectedWallet)}>
+                    Try again
+                </button>
+                <button onClick={handleDismiss}>Dismiss</button>
+            </>
+        );
+    };
+
     return (
         <div>
             <Dialog
                 aria-labelledby="pool-select"
-                open={open}
+                open={showWalletSelection || askToConnect}
                 disableEscapeKeyDown
                 disableBackdropClick
                 maxWidth="md"
@@ -179,18 +227,8 @@ function WalletSelectModal({ width, handleWalletSelect, selectedPool, open }) {
                         Select Wallet
                     </Typography>
                 </Box>
-                <DialogContent className={classes.dialogContent}>
-                    <ToggleButtonGroup
-                        value={selectedPool}
-                        exclusive
-                        onChange={handleWalletSelect}
-                        aria-label="Pool Select"
-                        className={classes.toggleButton}
-                        {...buttonProps}
-                    >
-                        {wallets.map((wallet) => displayWallet(wallet))}
-                    </ToggleButtonGroup>
-                </DialogContent>
+                {showWalletSelection === true ? displayWalletSelection() : null}
+                {askToConnect === true ? displayAskToConnect() : null}
             </Dialog>
         </div>
     );
