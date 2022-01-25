@@ -131,9 +131,9 @@ function WalletSelectModal({
     const displayWallet = (wallet) => {
         if (
             wallet.name === "MetaMask" &&
-            !window.ethereum &&
-            !window.ethereum.isMetaMask &&
-            !window.ethereum._metamask
+            (!window.ethereum ||
+                !window.ethereum.isMetaMask ||
+                !window.ethereum._metamask)
         ) {
             wallet = installMetaMask;
         }
