@@ -17,7 +17,7 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 import metamaskLogo from "assets/images/wallets/metamask.svg";
-import walletconnectLogo from "assets/images/wallets/walletconnect.svg";
+import walletconnectLogo from "assets/images/wallets/walletconnect-logo.svg";
 
 const useStyles = makeStyles((theme) => ({
     dialog: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
     dialogContent: {
         paddingTop: "0px",
-        paddingBottom: "24px",
+        paddingBottom: "0px",
     },
     toggleSubtitle: {
         textTransform: "none",
@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
         "& .MuiButtonBase-root": {
             borderRadius: "4px",
             padding: "16px",
+            marginBottom: "24px",
         },
         "& .MuiToggleButton-label": {
             flexDirection: "column",
