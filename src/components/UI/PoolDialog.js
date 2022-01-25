@@ -62,9 +62,6 @@ const useStyles = makeStyles((theme) => ({
             width: "270px",
             borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
         },
-        "& .MuiToggleButton-root:hover": {
-            backgroundColor: "transparent",
-        },
 
         "& .MuiToggleButton-root.Mui-selected": {
             backgroundColor: "rgba(255, 255, 255, 0.02)",
@@ -123,14 +120,14 @@ function PoolDialog({
                 maxWidth="md"
                 className={classes.dialog}
             >
-                <Box p={4}>
+                <Box pt={3} pb={3} px={3}>
                     <Typography
                         variant="h4"
                         color="textPrimary"
                         align="center"
                         className={classes.title}
                     >
-                        Select liquidity pool
+                        Select Liquidity Pool
                     </Typography>
                 </Box>
                 <DialogContent className={classes.dialogContent}>
