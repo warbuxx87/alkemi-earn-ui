@@ -8,91 +8,59 @@ import "react-toastify/dist/ReactToastify.css";
 import Notify from "components/UI/Notify";
 
 // 3. constants imports
-import errorMessage from "constants/error_code";
 import constants from "constants/constant.json";
+
+import {
+    // TRANSACTION_TRIGGERED,
+    TRANSACTION_RESOLVED,
+    TRANSACTION_CANCELED,
+} from "redux/actions/status/transactions";
+
+import { getTransactions } from "redux/selectors/status/transactions";
+
+const eventToDisplayMessage = {
+    supply: "Deposit Received",
+    borrow: "Borrow Taken",
+    withdraw: "Deposit Withdrawn",
+    repayBorrow: "Borrow Repaid",
+
+    allocateTo: "Tokens Minted",
+    approve: "Asset Authorized",
+
+    claimAlk: "Claimed ALK tokens",
+    liquidate: "Borrow Liquidated",
+};
+
+// could add a tracker for already notified txs here
 
 const contractTXNotifier = (store) => (next) => (action) => {
     if (!action) next(action); // could be replaced with a simple return since we don't really have an action
 
-    const actionTypeConfirmation = "TX_CONFIRMATION";
-    const actionTypeSend = "TX_BROADCASTED";
-    const actionTypeSuccess = "TX_SUCCESSFUL";
-    const actionTypeError = "TX_ERROR";
-
     if (
-        action.type === actionTypeSend ||
-        action.type === actionTypeSuccess ||
-        action.type === actionTypeError ||
-        action.type === actionTypeConfirmation
+        action &&
+        // action.type === TRANSACTION_TRIGGERED ||
+        (action.type === TRANSACTION_RESOLVED ||
+            action.type === TRANSACTION_CANCELED)
     ) {
         let displayMessage;
         let displaySecondaryMessage;
         let toastMessageVariant;
-        let errorCode;
-        // the transaction is still processing
-        if (action.type === actionTypeSend) {
-            toastMessageVariant = "processing";
-            displayMessage = "Transaction pending...";
-            displaySecondaryMessage = "This might take a few minutes";
-            //console.log("Tx Send event fired", displayMessage);
-        }
+
         // This means it's been mined on the network
-        if (action.type === actionTypeSuccess) {
-            // console.log("Tx Success event fired", displayMessage);
-
-            //console.log("Tx Receipt Object", action.receipt);
+        if (action && action.type === TRANSACTION_RESOLVED) {
             toastMessageVariant = "success";
-            displaySecondaryMessage = "Transaction Successful";
+            displayMessage = "Transaction Successful";
 
-            if (action.receipt.events.Approval) {
-                displayMessage = "Asset Authorized";
-            }
+            const txs = getTransactions(store.getState());
 
-            if (action.receipt.events.SupplyReceived) {
-                displayMessage = "Deposit Received";
-            }
+            const tx = txs[action.payload.txHash];
 
-            if (action.receipt.events.BorrowTaken) {
-                displayMessage = "Borrow Taken";
-            }
-
-            if (action.receipt.events.BorrowRepaid) {
-                displayMessage = "Borrow Repaid";
-            }
-
-            if (action.receipt.events.BorrowLiquidated) {
-                displayMessage = "Borrow Liquidated";
-            }
-
-            if (action.receipt.events.SupplyWithdrawn) {
-                displayMessage = "Deposit Withdrawn";
-            }
-
-            if (action.receipt.events.Transfer) {
-                displayMessage = "Tokens Minted";
-            }
-
-            if (action.receipt.events.TransferredAlk) {
-                displayMessage = "Claimed ALK tokens";
-            }
-
-            // Contract can still fail even if transaction was Successful
-            // If Failure event detected in receipt object then return transaction failed rather than Successful to user
-            // Error code is in txReceipt.Failure.returnValues.error
-            // We then use this code to identify error message returned to user from constants/error_codes
-            if (action.receipt.events.Failure) {
-                errorCode = action.receipt.events.Failure.returnValues.error;
-                toastMessageVariant = "failure";
-                displayMessage = errorMessage[errorCode];
-                displaySecondaryMessage = "Transaction Failed";
-            }
-        }
-
-        if (action.type === actionTypeError) {
+            // hash for liquidations might be broken userWalletName|type
+            if (tx) displaySecondaryMessage = eventToDisplayMessage[tx.type];
+        } else if (action && action.type === TRANSACTION_CANCELED) {
             toastMessageVariant = "failure";
             displayMessage = "Transaction failed";
             displaySecondaryMessage = "Transaction was cancelled";
-            //console.log("Tx Error event fired", displayMessage);
         }
 
         const currentNetworkName =
@@ -100,13 +68,14 @@ const contractTXNotifier = (store) => (next) => (action) => {
                 store.getState().status.onboard.walletNetwork
             ];
 
-        // Ghost notification triggered, TODO: check the source of it
         if (toastMessageVariant !== undefined)
             triggerToastDisplay({
                 toastMessageVariant,
                 displayMessage,
                 displaySecondaryMessage,
-                txHash: action.txHash,
+                txHash: action.payload.realTx
+                    ? action.payload.realTx
+                    : action.payload.txHash, // for wallet connect
                 currentNetworkName,
             });
     }

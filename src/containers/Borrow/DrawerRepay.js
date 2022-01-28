@@ -9,6 +9,8 @@ import * as yup from "yup";
 import Big from "big.js";
 
 // Section 2: internal imports
+import useWalletSelect from "hooks/useWalletSelect";
+
 import Drawer from "components/UI/Drawer/Drawer";
 
 import DrizzleContext from "utils/DrizzleContext";
@@ -23,7 +25,7 @@ import {
     assetToDecimals,
 } from "utils/ui";
 
-import { estimateGasForMethod } from "utils/drizzle";
+import { estimateGasForMethod } from "utils/transactionsSender";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -35,6 +37,9 @@ import { getPool } from "redux/selectors/status/pool";
 
 const DrawerRepayContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
+
+    const { library } = useWalletSelect();
+
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
@@ -47,13 +52,10 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
 
     const currentPool = useSelector(getPool);
 
-    const [estimationOfGasPrice, setEstimationOfGasPrice] = React.useState(
-        "3000000000"
-    ); // defaults to 3 gwei
-    const [
-        estimationOfRepayMethodCall,
-        setEstimationOfRepayMethodCall,
-    ] = React.useState("1050000000000000"); // defaults to 3 gwei * 350000
+    const [estimationOfGasPrice, setEstimationOfGasPrice] =
+        React.useState("3000000000"); // defaults to 3 gwei
+    const [estimationOfRepayMethodCall, setEstimationOfRepayMethodCall] =
+        React.useState("1050000000000000"); // defaults to 3 gwei * 350000
 
     const onSetMax = () => {
         if (asset.unit === "ETH" || asset.unit === "WETH") {
@@ -209,8 +211,8 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
-                aTx.type === "repay" &&
+                aTx.assetUnit === asset.unit &&
+                aTx.type === "repayBorrow" &&
                 aTx.processing === true
             );
         });
@@ -231,14 +233,14 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
             showWarningColor={true}
             onButtonClick={() =>
                 onTx({
-                    drizzle,
                     userWalletNetwork,
                     userWalletAddress,
                     asset,
                     amount,
                     shouldSendMax,
-                    type: "repay",
+                    type: "repayBorrow",
                     currentPool,
+                    library,
                 })
             }
             isDoingAction={isProcessing}

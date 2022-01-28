@@ -1,0 +1,8 @@
+{
+    "main": {
+        "gnosis_multisig_transactions_url": "https://safe-transaction.gnosis.io/api/v1/multisig-transactions"
+    },
+    "rinkeby": {
+        "gnosis_multisig_transactions_url": "https://safe-transaction.rinkeby.gnosis.io/api/v1/multisig-transactions"
+    }
+}
