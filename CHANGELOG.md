@@ -1,3 +1,26 @@
+# [1.27.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.6...v1.27.0) (2022-01-28)
+
+
+### Bug Fixes
+
+* ask user to install metamask when no inject provider is detect UI-508 ([ee532c1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ee532c10d5b1e0ae9a9ff56e7d895135636a1c72))
+* make wallet connect show a qr code every time UI-508 ([5273703](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5273703c7f5968fe53d0e3f47f2d293d81f96552))
+* properly track wallet connect transactions UI-508 ([b8e1ecd](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b8e1ecd69c2e2c31942599bbf9d1131de99c5347))
+* send wallet connect transaction and get temporary tx UI-508 ([fcb5ee6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/fcb5ee648be9da21a40111f8f5f136cc4bcc3017))
+* show modal to ask user to connect and limit injected wallet selection to metamask UI-508 ([a2247a5](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a2247a57c4e1798c41148aa67b2f4a05ebfd9bb7))
+
+
+### Features
+
+* replace onboard with custom wallet selection and connect to web3-react UI-508 ([d08b96f](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d08b96f72e032ce67214521ada14f01cc136bb0a))
+* track metamask transactions UI-508 ([f70664c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/f70664cfc9b8f728d76f19045c014b4f073f4806))
+* track walletconnect transactions UI-508 ([15d7b46](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/15d7b461011a06847a861beaae87929d0d305224))
+* tracking all transactions UI-508 ([30e90c6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/30e90c6be44cdc3ab4ca4f03657218a74c1e235d))
+* trigger triggered tx notification and display gnosis wallet modal UI-508 ([ca5e9be](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ca5e9be49ee517fca8924c2c49183b560be83e10))
+* ui reacts to wallet connection UI-508 ([5434a29](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/5434a2978d2f253dc3be44ea8e78b6ff51d0c2f2))
+
+
+
 ## [1.26.6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.5...v1.26.6) (2021-11-24)
 
 
