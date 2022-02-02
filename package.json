@@ -65,7 +65,7 @@
     },
     "scripts": {
         "generate-build-version": "node generate-build-version",
-        "start": "PORT=3006 react-scripts start",
+        "start": "react-scripts start",
         "dev": "env-cmd -f .env.dev npm run start",
         "start:rinkeby": "env-cmd -f .env.rinkeby npm run start",
         "build": "react-scripts build",
