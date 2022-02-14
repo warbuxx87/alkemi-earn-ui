@@ -23,3 +23,7 @@ export const walletNetwork = (state) => {
 // Returns walletNetwork Name (Example: rinkeby)
 export const walletNetworkName = (state) =>
     constants.network_type[state.status.onboard.walletNetwork];
+
+export const isIFrame = (state) => {
+    return state.status.onboard.isIFrame;
+};

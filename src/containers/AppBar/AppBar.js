@@ -6,12 +6,17 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 // Section 2: internal imports
-import useOnboard from "hooks/useOnboard";
+import useWalletSelect from "hooks/useWalletSelect";
 import useWatchEtherBalance from "hooks/useWatchEtherBalance";
 import usePoolManager from "hooks/usePoolManager";
+import useWatchTxs from "hooks/useWatchTxs";
 
 // Section 3: Selectors
-import { isWalletConnected, walletAddress } from "redux/selectors/data/onboard";
+import {
+    isWalletConnected,
+    walletAddress,
+    isIFrame,
+} from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, isLiquidator } from "redux/selectors/status/status";
 
@@ -33,9 +38,10 @@ const locationToTitles = {
 
 // Section 5: Code Container
 const AppBarContainer = () => {
-    const { onConnect, onReset } = useOnboard();
+    const { onConnect, onReset } = useWalletSelect();
     useWatchEtherBalance();
     usePoolManager();
+    useWatchTxs();
 
     const [isWalletLiquidator, setIsWalletLiquidator] = useState(false);
 
@@ -43,6 +49,7 @@ const AppBarContainer = () => {
     const currentAddress = useSelector(walletAddress);
     const walletIsKYCd = useSelector(isWalletKYCd);
     const walletIsLiquidator = useSelector(isLiquidator);
+    const walletIsIFrame = useSelector(isIFrame);
 
     const currentPool = useSelector(getPool);
 
@@ -74,6 +81,7 @@ const AppBarContainer = () => {
             walletConnected={walletConnected}
             walletIsLiquidator={isWalletLiquidator}
             displayKYCStatus={currentPool !== "open"}
+            walletIsIFrame={walletIsIFrame}
         />
     );
 };

@@ -4,9 +4,6 @@ exports[`<LayoutContent /> matches snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-     
-     
-    
     <div>
       <div>
         <div

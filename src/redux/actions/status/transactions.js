@@ -1,34 +1,39 @@
 // Section 1: Utilities imports and low level imports
 
 import {
-    handle_allocate_click,
-    handle_deposit_click,
-    handle_withdraw_click,
-    handle_repay_click,
-    handle_borrow_click,
-    handle_approve_click,
+    handle_asset_contract_method_click,
+    handle_moneymarket_tx,
     handle_claim_ALK_click,
-} from "utils/drizzle";
+} from "utils/transactionsSender";
 
 import constants from "constants/constant.json";
 import { triggerToastDisplay } from "utils/notify";
 
 // Section 2: Action types declarations and action creators
+import { getProviderName } from "utils/web3Helpers";
+import { setShowWalletConnectModal } from "redux/actions/status/walletConnect";
 
 //                                            //
 // --------- TRANSACTIONS ACTIONS ----------- //
 //                                            //
 
 export const TRANSACTION_TRIGGERED = "TRANSACTION_TRIGGERED";
-export const transactionTriggered = (transactionLocalId, stackId, type) => ({
+export const transactionTriggered = ({
+    assetUnit,
+    txData,
+    type,
+    alternativeId,
+}) => ({
     type: TRANSACTION_TRIGGERED,
     payload: {
-        stackId,
-        transactionLocalId, // this is NOT the tx hash on the blockchain, just a unique identifier locally (the type also helps as a second id when checking)
+        txData,
+        assetUnit,
         type,
+        alternativeId,
     },
 });
 
+// remove when drizzle is completly out
 export const TRANSACTION_SENT = "TRANSACTION_SENT";
 export const transactionSent = (stackId, txHash) => {
     return {
@@ -41,10 +46,20 @@ export const transactionSent = (stackId, txHash) => {
 };
 
 export const TRANSACTION_RESOLVED = "TRANSACTION_RESOLVED";
-export const transactionResolved = (txHash) => ({
+export const transactionResolved = ({
+    assetUnit,
+    txHash,
+    type,
+    alternativeId,
+    realTx,
+}) => ({
     type: TRANSACTION_RESOLVED,
     payload: {
         txHash,
+        assetUnit, // used as ID for most transactions
+        type,
+        alternativeId, // for liquidatiuons
+        realTx, // walletconnect
     },
 });
 
@@ -60,46 +75,76 @@ export const transactionCanceled = (txHash) => ({
 // Section 3: Action dispatch methods and async funcs
 
 const actionToCall = {
-    deposit: handle_deposit_click,
-    allocate: handle_allocate_click,
-    withdraw: handle_withdraw_click,
-    repay: handle_repay_click,
-    borrow: handle_borrow_click,
-    approve: handle_approve_click,
-    claim: handle_claim_ALK_click,
+    supply: handle_moneymarket_tx,
+    borrow: handle_moneymarket_tx,
+    withdraw: handle_moneymarket_tx,
+    repayBorrow: handle_moneymarket_tx,
+
+    allocateTo: handle_asset_contract_method_click,
+    approve: handle_asset_contract_method_click,
+
+    claimAlk: handle_claim_ALK_click,
 };
 
-export const onTx = ({
-    drizzle,
-    userWalletNetwork,
-    userWalletAddress,
-    amount,
-    asset,
-    shouldSendMax,
-    type,
-    currentPool,
-}) => async (dispatch) => {
-    const amountToSend =
-        shouldSendMax === true ? constants["max_uint"] : amount;
-
-    actionToCall[type]({
-        drizzle,
+export const onTx =
+    ({
         userWalletNetwork,
         userWalletAddress,
-        amount: amountToSend,
+        amount,
         asset,
         shouldSendMax,
+        type,
         currentPool,
-    })
-        .then((stackId) => {
-            dispatch(transactionTriggered(asset.unit, stackId, type));
+        library,
+    }) =>
+    async (dispatch) => {
+        let amountToSend =
+            shouldSendMax === true ? constants["max_uint"] : amount;
+
+        const walletName = getProviderName(library.provider);
+
+        if (walletName === "WalletConnect") {
+            dispatch(setShowWalletConnectModal(true));
+        }
+
+        actionToCall[type]({
+            userWalletNetwork,
+            userWalletAddress,
+            amount: amountToSend,
+            asset,
+            shouldSendMax,
+            currentPool,
+            library,
+
+            selectedMethod: type,
+            handleETHCallsSeparately: ["supply", "repayBorrow"].includes(type),
+            userWalletName: walletName,
         })
-        .catch((error) => {
-            triggerToastDisplay({
-                toastMessageVariant: "failure",
-                displayMessage: "Something went wrong",
-                displaySecondaryMessage: error.message,
+            .then((txData) => {
+                if (walletName === "WalletConnect") {
+                    dispatch(setShowWalletConnectModal(false));
+                }
+
+                triggerToastDisplay({
+                    toastMessageVariant: "processing",
+                    displayMessage: "Transaction pending...",
+                    displaySecondaryMessage: "This might take a few minutes",
+                });
+
+                dispatch(
+                    // For some reason this makes the function return or exit, keep last
+                    transactionTriggered({
+                        assetUnit: asset.unit,
+                        txData,
+                        type,
+                    })
+                );
+            })
+            .catch((error) => {
+                triggerToastDisplay({
+                    toastMessageVariant: "failure",
+                    displayMessage: "Something went wrong",
+                    displaySecondaryMessage: error.message,
+                });
             });
-            //dispatch(depositError(asset.unit, error.message));
-        });
-};
+    };

@@ -90,7 +90,7 @@ export const getCollateralRatio = (state) => {
         state,
         "contracts.MoneyMarket.collateralRatio"
     );
-    if (collateralRatio["0x0"]) {
+    if (collateralRatio && collateralRatio["0x0"]) {
         //console.log("collateralRatio", collateralRatio["0x0"].value);
         return _.get(collateralRatio, "['0x0'].value");
     }
@@ -99,7 +99,7 @@ export const getCollateralRatio = (state) => {
 
 export const getOriginationFee = (state) => {
     const originationFee = _.get(state, "contracts.MoneyMarket.originationFee");
-    if (originationFee["0x0"]) {
+    if (originationFee && originationFee["0x0"]) {
         return _.get(originationFee, "['0x0'].value");
     }
     return null;

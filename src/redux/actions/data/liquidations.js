@@ -4,8 +4,11 @@ import _ from "lodash";
 
 import { transactionTriggered } from "redux/actions/status/transactions";
 
-import { handle_liquidate_click } from "utils/drizzle";
+import { handle_liquidate_click } from "utils/transactionsSender";
 import { triggerToastDisplay } from "utils/notify";
+
+import { getProviderName } from "utils/web3Helpers";
+import { setShowWalletConnectModal } from "redux/actions/status/walletConnect";
 
 const url_map = require("constants/url_map.json");
 
@@ -105,42 +108,28 @@ const throttledFetchLiquidations = _.throttle(
 
 // Section 3: Action dispatch methods and async funcs
 
-export const fetchLiquidations = ({
-    currentNetworkName,
-    currentPool,
-    forceRefresh,
-}) => async (dispatch) => {
-    if (forceRefresh) {
-        fetchLiquidationsCall({
-            currentNetworkName,
-            currentPool,
-            dispatch,
-        });
-    } else {
-        throttledFetchLiquidations({
-            currentNetworkName,
-            currentPool,
-            dispatch,
-        });
-    }
-};
+export const fetchLiquidations =
+    ({ currentNetworkName, currentPool, forceRefresh }) =>
+    async (dispatch) => {
+        if (forceRefresh) {
+            fetchLiquidationsCall({
+                currentNetworkName,
+                currentPool,
+                dispatch,
+            });
+        } else {
+            throttledFetchLiquidations({
+                currentNetworkName,
+                currentPool,
+                dispatch,
+            });
+        }
+    };
 
-// TODO: to be merged in transactions (when the other drawers are refactored in UI-359)
-export const onLiquidateAction = ({
-    drizzle,
-    userWalletNetwork,
-    userWalletAddress,
-    symbol,
-    amount,
-    assetCollateral,
-    assetBorrow,
-    targetAccount,
-    type,
-    liquidationId,
-    maxAmount,
-}) => async (dispatch) => {
-    handle_liquidate_click({
-        drizzle,
+// Could be merged in transactions with other method calls
+export const onLiquidateAction =
+    ({
+        library,
         userWalletNetwork,
         userWalletAddress,
         symbol,
@@ -148,16 +137,55 @@ export const onLiquidateAction = ({
         assetCollateral,
         assetBorrow,
         targetAccount,
+        type,
+        liquidationId,
         maxAmount,
-    })
-        .then((stackId) => {
-            dispatch(transactionTriggered(liquidationId, stackId, type));
+        currentPool,
+    }) =>
+    async (dispatch) => {
+        const walletName = getProviderName(library.provider);
+
+        if (walletName === "WalletConnect") {
+            dispatch(setShowWalletConnectModal(true));
+        }
+
+        handle_liquidate_click({
+            library,
+            userWalletNetwork,
+            userWalletAddress,
+            symbol,
+            amount,
+            assetCollateral,
+            assetBorrow,
+            targetAccount,
+            maxAmount,
+            userWalletName: walletName,
+            currentPool,
         })
-        .catch((error) => {
-            triggerToastDisplay({
-                toastMessageVariant: "failure",
-                displayMessage: "Something went wrong",
-                displaySecondaryMessage: error.message,
+            .then((txData) => {
+                if (walletName === "WalletConnect") {
+                    dispatch(setShowWalletConnectModal(false));
+                }
+
+                triggerToastDisplay({
+                    toastMessageVariant: "processing",
+                    displayMessage: "Transaction pending...",
+                    displaySecondaryMessage: "This might take a few minutes",
+                });
+
+                dispatch(
+                    transactionTriggered({
+                        alternativeId: liquidationId,
+                        txData,
+                        type,
+                    })
+                );
+            })
+            .catch((error) => {
+                triggerToastDisplay({
+                    toastMessageVariant: "failure",
+                    displayMessage: "Something went wrong",
+                    displaySecondaryMessage: error.message,
+                });
             });
-        });
-};
+    };

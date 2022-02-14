@@ -9,6 +9,8 @@ import * as yup from "yup";
 // Section 2: internal imports
 import DrizzleContext from "utils/DrizzleContext";
 
+import useWalletSelect from "hooks/useWalletSelect";
+
 import { onTx } from "redux/actions/status/transactions";
 
 import {
@@ -19,7 +21,7 @@ import {
     assetToDecimals,
 } from "utils/ui";
 
-import { estimateGasForMethod } from "utils/drizzle";
+import { estimateGasForMethod } from "utils/transactionsSender";
 
 // Section 3: Selectors
 import { getUSDPrice } from "redux/selectors/data/totalBalance";
@@ -35,6 +37,8 @@ import Drawer from "components/UI/Drawer/Drawer";
 // Section 5: Code Container
 const DepositDrawerContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
+    const { library } = useWalletSelect();
+
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
@@ -49,13 +53,10 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
 
     const currentPool = useSelector(getPool);
 
-    const [estimationOfGasPrice, setEstimationOfGasPrice] = React.useState(
-        "3000000000"
-    ); // defaults to 3 gwei
-    const [
-        estimationOfDepositMethodCall,
-        setEstimationOfDepositMethodCall,
-    ] = React.useState("1050000000000000"); // defaults to 3 gwei * 350000
+    const [estimationOfGasPrice, setEstimationOfGasPrice] =
+        React.useState("3000000000"); // defaults to 3 gwei
+    const [estimationOfDepositMethodCall, setEstimationOfDepositMethodCall] =
+        React.useState("1050000000000000"); // defaults to 3 gwei * 350000
 
     const onSetAmount = (newValue) => {
         const numberOfDecimalsForAsset = assetToDecimals[asset.unit]
@@ -167,8 +168,8 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
-                aTx.type === "deposit" &&
+                aTx.assetUnit === asset.unit &&
+                aTx.type === "supply" &&
                 aTx.processing === true
             );
         });
@@ -190,14 +191,14 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 enableButtonClick={enableDeposit}
                 onButtonClick={() =>
                     onTx({
-                        drizzle,
                         userWalletNetwork,
                         userWalletAddress,
                         asset,
                         amount,
                         shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount
-                        type: "deposit",
+                        type: "supply",
                         currentPool,
+                        library,
                     })
                 }
                 isDoingAction={isProcessing}

@@ -1,5 +1,5 @@
 // Section 1: React/Redux low level imports
-import React, { useContext, useCallback } from "react";
+import React, { useCallback } from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
@@ -9,9 +9,7 @@ import * as yup from "yup";
 import Big from "big.js";
 
 // Section 2: internal imports
-import useOnboard from "hooks/useOnboard";
-
-import DrizzleContext from "utils/DrizzleContext";
+import useWalletSelect from "hooks/useWalletSelect";
 
 import { onLiquidateAction } from "redux/actions/data/liquidations";
 
@@ -26,7 +24,7 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
-import { isKYCPool } from "redux/selectors/status/pool";
+import { getPool, isKYCPool } from "redux/selectors/status/pool";
 import { getMarkets } from "redux/selectors/data/markets";
 
 // Section 4: Import Components / Containers
@@ -45,15 +43,17 @@ const LiquidateDrawerContainer = ({
     liquidationId,
 }) => {
     useFetchMarkets(true);
-    const { onConnect } = useOnboard();
+    const { onConnect } = useWalletSelect();
 
-    const drizzle = useContext(DrizzleContext);
+    const { library } = useWalletSelect();
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
     const walletConnected = useSelector(isWalletConnected);
 
     const walletIsKYCd = useSelector(isWalletKYCd);
     const txs = useSelector(getTransactions);
+
+    const currentPool = useSelector(getPool);
 
     const needKYC = useSelector(isKYCPool);
 
@@ -152,7 +152,7 @@ const LiquidateDrawerContainer = ({
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === liquidationId && // using liquidationId as ID instead of asset for this transaction
+                aTx.alternativeId === liquidationId && // using liquidationId as ID instead of asset for this transaction
                 aTx.type === "liquidate" &&
                 aTx.processing === true
             );
@@ -194,7 +194,6 @@ const LiquidateDrawerContainer = ({
             shortfallETH={shortfallETH}
             onButtonClick={({ symbol, assetCollateral, assetBorrow }) => {
                 onLiquidateAction({
-                    drizzle,
                     userWalletNetwork,
                     userWalletAddress,
                     symbol,
@@ -206,6 +205,9 @@ const LiquidateDrawerContainer = ({
 
                     liquidationId,
                     maxAmount: maxAmountForToken(symbol),
+
+                    library,
+                    currentPool,
                 });
             }}
             onSetMax={onSetMax}

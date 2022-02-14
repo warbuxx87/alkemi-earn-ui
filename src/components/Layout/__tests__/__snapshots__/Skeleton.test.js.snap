@@ -5,6 +5,7 @@ exports[`<LayoutSkeleton /> matches snapshot 1`] = `
   className="LayoutSkeleton-frame-1"
 >
   <PoolSelectContainer />
+  <WalletSelectContainer />
   <Connect(WithWidth(WithStyles(Sidebar))) />
   <div
     className="LayoutSkeleton-content-3"
@@ -12,6 +13,7 @@ exports[`<LayoutSkeleton /> matches snapshot 1`] = `
     <AppBarContainer />
     <Banner />
     <LayoutContent />
+    <WalletConnectModal />
   </div>
 </div>
 `;

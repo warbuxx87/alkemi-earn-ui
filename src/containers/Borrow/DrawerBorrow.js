@@ -1,5 +1,5 @@
 // Section 1: React/Redux low level imports
-import React, { useContext } from "react";
+import React from "react";
 import { connect, useSelector } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
@@ -19,7 +19,7 @@ import {
     formatETHMoneyOrgFee,
 } from "utils/ui";
 
-import DrizzleContext from "utils/DrizzleContext";
+import useWalletSelect from "hooks/useWalletSelect";
 
 import constants from "constants/constant.json";
 
@@ -38,7 +38,8 @@ import Drawer from "components/UI/Drawer/Drawer";
 
 // Section 5: Code Container
 const BorrowDrawerContainer = ({ asset, onTx }) => {
-    const drizzle = useContext(DrizzleContext);
+    const { library } = useWalletSelect();
+
     const userWalletAddress = useSelector(walletAddress);
     const userWalletNetwork = useSelector(walletNetwork);
 
@@ -86,9 +87,8 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
 
     const [isProcessing, setIsProcessing] = React.useState(false);
 
-    const [formattedOrginationFee, setFormattedOrginationFee] = React.useState(
-        "0.00"
-    );
+    const [formattedOrginationFee, setFormattedOrginationFee] =
+        React.useState("0.00");
 
     const [calculatedBorrowFee, setCalculatedBorrowFee] = React.useState(0);
 
@@ -129,7 +129,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
     React.useEffect(() => {
         const tx = Object.values(txs).filter((aTx) => {
             return (
-                aTx.transactionLocalId === asset.unit &&
+                aTx.assetUnit === asset.unit &&
                 aTx.type === "borrow" &&
                 aTx.processing === true
             );
@@ -181,7 +181,6 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
             showWarningColor={true}
             onButtonClick={() =>
                 onTx({
-                    drizzle,
                     userWalletNetwork,
                     userWalletAddress,
                     asset,
@@ -189,6 +188,7 @@ const BorrowDrawerContainer = ({ asset, onTx }) => {
                     type: "borrow",
                     shouldSendMax: false, // shouldSendMax==true will send max_UINT, for this call we should not send it and set a precise amount,
                     currentPool,
+                    library,
                 })
             }
             isDoingAction={isProcessing}

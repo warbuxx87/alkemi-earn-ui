@@ -164,6 +164,7 @@ export default function DepositTables({
                                     apy={Big(row.apy).times(100).toFixed(2)}
                                     alkApy={alkApyPerMarket[row.unit]}
                                     typeOfAPY={"lend"}
+                                    showTooltip={true}
                                 />
                                 <Typography
                                     variant="body2"

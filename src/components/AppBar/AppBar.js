@@ -97,6 +97,7 @@ function AppBar({
     walletIsKYCd,
     walletIsLiquidator,
     displayKYCStatus,
+    walletIsIFrame,
 }) {
     const classes = useStyles();
 
@@ -265,7 +266,7 @@ function AppBar({
                             </MenuItem>
                         ) /* TODO: show when using more than a single wallet */
                     }
-                    {accountAddress ? (
+                    {accountAddress && !walletIsIFrame ? (
                         <MenuItem
                             className={classes.menuitem}
                             onClick={handleOnReset}
