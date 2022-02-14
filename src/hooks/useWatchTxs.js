@@ -434,7 +434,8 @@ const useWatchTxs = () => {
         ) {
             const foundTxs = Object.values(txs).filter((aTx) => {
                 return (
-                    aTx.userWalletName === "WalletConnect" &&
+                    (aTx.userWalletName === "WalletConnect" ||
+                        aTx.userWalletName === "GnosisSafeApp") &&
                     aTx.foundRealTx !== true &&
                     aTx.processing === true
                 );

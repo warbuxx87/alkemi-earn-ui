@@ -12,7 +12,11 @@ import usePoolManager from "hooks/usePoolManager";
 import useWatchTxs from "hooks/useWatchTxs";
 
 // Section 3: Selectors
-import { isWalletConnected, walletAddress } from "redux/selectors/data/onboard";
+import {
+    isWalletConnected,
+    walletAddress,
+    isIFrame,
+} from "redux/selectors/data/onboard";
 
 import { isWalletKYCd, isLiquidator } from "redux/selectors/status/status";
 
@@ -45,6 +49,7 @@ const AppBarContainer = () => {
     const currentAddress = useSelector(walletAddress);
     const walletIsKYCd = useSelector(isWalletKYCd);
     const walletIsLiquidator = useSelector(isLiquidator);
+    const walletIsIFrame = useSelector(isIFrame);
 
     const currentPool = useSelector(getPool);
 
@@ -76,6 +81,7 @@ const AppBarContainer = () => {
             walletConnected={walletConnected}
             walletIsLiquidator={isWalletLiquidator}
             displayKYCStatus={currentPool !== "open"}
+            walletIsIFrame={walletIsIFrame}
         />
     );
 };
