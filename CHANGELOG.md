@@ -1,3 +1,24 @@
+# [1.28.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.27.0...v1.28.0) (2022-02-14)
+
+
+### Bug Fixes
+
+* adding cors logic to nginx UI-542 ([294b8f7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/294b8f7326d022da2b32cb691695e2d1a019f26a))
+* chaning nginx conf for frame-ancestors UI-542 ([43b3c54](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/43b3c54024e1619005dc5e144930981e53659995))
+* just removing port 3006 from script so that it uses default 3000 UI-542 ([6c5ff28](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6c5ff28856da7429dcd99677b40c52ca16f4227b))
+* trying to fix nginx gnosis-safe domain allow UI-542 ([c351ebf](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c351ebf686363894251abf62b42e3d231c2fd6ce))
+
+
+### Features
+
+* added gnosis and ledger app integration UI-542 ([1d790ac](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1d790acaa0c4baa8c0ac0fd581f03aa1209fcfdf))
+* added logic to remove disconnect button. refactored gnosis and ledger connectors UI-542 ([0d18f07](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/0d18f07c6142a92e750e1703b2a7cd8a010b94c7))
+* adding gnosis-safe domain without subdomain UI-542 ([2c9d55c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/2c9d55c112448c199c4329b81cc550fa5fe40ba9))
+* adding manifest and nginx change for iframe UI-542 ([af6d7dd](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/af6d7dd074818e5e051afcf716287f04f26b504a))
+* track gnosis safe app transactions UI-542 ([9d01381](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/9d01381500c3ce233f0606fec450c8c7d4f3e7f5))
+
+
+
 # [1.27.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.26.6...v1.27.0) (2022-01-28)
 
 
