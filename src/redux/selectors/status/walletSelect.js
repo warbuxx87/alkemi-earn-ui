@@ -13,3 +13,11 @@ export const isActivating = (state) => {
 export const isActivated = (state) => {
     return state.status.walletSelect.activated;
 };
+
+export const isAskingToConnect = (state) => {
+    return state.status.walletSelect.askToConnect;
+};
+
+export const getLastSelectedWallet = (state) => {
+    return state.status.walletSelect.lastSelectedWallet;
+};

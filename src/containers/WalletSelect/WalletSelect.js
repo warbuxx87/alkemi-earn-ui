@@ -7,10 +7,18 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 // Section 2: internal imports
-import { setSelectedWallet } from "redux/actions/status/walletSelect";
+import {
+    setSelectedWallet,
+    setDismissWalletSelection,
+} from "redux/actions/status/walletSelect";
 
 // Section 3: Selectors
-import { showWallet } from "redux/selectors/status/walletSelect";
+import {
+    showWallet,
+    isAskingToConnect,
+    getLastSelectedWallet,
+    isActivating,
+} from "redux/selectors/status/walletSelect";
 
 // Section 4: components
 import WalletSelectModal from "components/UI/WalletSelectModal";
@@ -20,7 +28,10 @@ const WalletSelectContainer = () => {
     // redux
     const dispatch = useDispatch();
 
-    const open = useSelector(showWallet);
+    const showWalletSelection = useSelector(showWallet);
+    const askToConnect = useSelector(isAskingToConnect);
+    const lastSelectedWallet = useSelector(getLastSelectedWallet);
+    const activating = useSelector(isActivating);
 
     const handleWalletSelect = (event, selectedWallet) => {
         if (selectedWallet === "installMetaMask") {
@@ -35,11 +46,28 @@ const WalletSelectContainer = () => {
         }
     };
 
+    const handleTryAgain = (lastSelectedWallet) => {
+        dispatch(setSelectedWallet(lastSelectedWallet));
+    };
+
+    const handleDismiss = () => {
+        dispatch(setDismissWalletSelection());
+    };
+
     return (
-        <WalletSelectModal
-            handleWalletSelect={handleWalletSelect}
-            open={open}
-        />
+        <>
+            {!activating &&
+            (showWalletSelection === true || askToConnect === true) ? (
+                <WalletSelectModal
+                    handleWalletSelect={handleWalletSelect}
+                    showWalletSelection={showWalletSelection}
+                    askToConnect={askToConnect}
+                    lastSelectedWallet={lastSelectedWallet}
+                    handleTryAgain={handleTryAgain}
+                    handleDismiss={handleDismiss}
+                />
+            ) : null}
+        </>
     );
 };
 

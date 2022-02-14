@@ -4,6 +4,7 @@ import {
     SET_ACTIVATED_WALLET,
     SHOW_WALLET_MODAL,
     SET_RESET_SELECTION_WALLET,
+    SET_DISMISS_WALLET_SELECTION,
 } from "redux/actions/status/walletSelect";
 
 // Define initial state
@@ -12,6 +13,8 @@ const initialState = {
     selectedWallet: null,
     activating: false,
     activated: false,
+    askToConnect: false,
+    lastSelectedWallet: null,
 };
 
 // Implement "reducer" function with initial state as default state
@@ -28,6 +31,11 @@ const poolReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedWallet: action.payload.selectedWallet,
+
+                askToConnect: false,
+                lastSelectedWallet: null,
+                // lastSelectedWallet: action.payload.selectedWallet,
+
                 activating: true,
             };
         }
@@ -38,6 +46,9 @@ const poolReducer = (state = initialState, action) => {
                 ...state,
                 selectedWallet: null,
                 activating: false,
+                askToConnect: action.payload.askToConnect,
+                lastSelectedWallet: action.payload.lastSelectedWallet,
+                showWalletModal: false,
             };
         }
 
@@ -47,6 +58,12 @@ const poolReducer = (state = initialState, action) => {
                 activating: false,
                 activated: true,
                 showWalletModal: false, // could be managed somewhere else
+            };
+        }
+
+        case SET_DISMISS_WALLET_SELECTION: {
+            return {
+                initialState,
             };
         }
 

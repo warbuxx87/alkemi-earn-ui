@@ -36,9 +36,26 @@ export const setSelectedWallet = (selectedWallet) => ({
 export const SET_RESET_SELECTION_WALLET = "SET_RESET_SELECTION_WALLET";
 
 // Declare action creator
-export const setResetSelectionWallet = () => ({
+// @param askToConnect
+export const setResetSelectionWallet = (
+    askToConnect = false,
+    lastSelectedWallet = null
+) => ({
     // Respect FSA standard format (type, payload, meta properties)
     type: SET_RESET_SELECTION_WALLET,
+    payload: {
+        askToConnect,
+        lastSelectedWallet,
+    },
+});
+
+// Declare action type as a constant
+export const SET_DISMISS_WALLET_SELECTION = "SET_DISMISS_WALLET_SELECTION";
+
+// Declare action creator
+export const setDismissWalletSelection = () => ({
+    // Respect FSA standard format (type, payload, meta properties)
+    type: SET_DISMISS_WALLET_SELECTION,
 });
 
 // Declare action type as a constant

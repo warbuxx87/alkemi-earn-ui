@@ -115,6 +115,7 @@ const BorrowTable = ({
             symbol,
             userWalletNetwork
         );
+
         if (walletConnected) {
             return assetLiquidity;
         } else {
@@ -128,7 +129,9 @@ const BorrowTable = ({
                     asset.symbol,
                     userWalletNetwork
                 );
-            } else return assetLiquidity;
+            } else {
+                return assetLiquidity;
+            }
         }
     };
 
