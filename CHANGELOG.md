@@ -1,3 +1,12 @@
+## [1.28.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.28.0...v1.28.1) (2022-02-15)
+
+
+### Bug Fixes
+
+* hotfix for broken infura URL UI-542 ([488e14e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/488e14e41ad38f58297a494200db67b70e6c6c4e))
+
+
+
 # [1.28.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.27.0...v1.28.0) (2022-02-14)
 
 
