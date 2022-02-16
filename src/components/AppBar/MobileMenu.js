@@ -26,6 +26,7 @@ import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
 import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
 import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
 import SidebarHeader from "containers/Sidebar/Header";
+import SidebarFiatItem from "components/Sidebar/FiatItem";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const DrawerClass = makeStyles((theme) =>
@@ -106,6 +107,7 @@ export default function MobileMenu({ walletIsLiquidator }) {
                             {walletIsLiquidator === true ? (
                                 <SidebarLiquidateItem />
                             ) : null}
+                            <SidebarFiatItem />
                         </List>
                     </Box>
                     <Divider />

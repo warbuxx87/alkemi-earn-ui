@@ -25,6 +25,7 @@ import SidebarBorrowItem from "containers/Sidebar/BorrowItem";
 import SidebarMarketsItem from "containers/Sidebar/MarketsItem";
 import SidebarHistoryItem from "containers/Sidebar/HistoryItem";
 import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
+import SidebarFiatItem from "components/Sidebar/FiatItem";
 import SidebarHeader from "containers/Sidebar/Header";
 import PoolSelectContainer from "containers/Sidebar/PoolSelect";
 
@@ -138,6 +139,7 @@ function Sidebar({
                             {walletIsLiquidator === true ? (
                                 <SidebarLiquidateItem />
                             ) : null}
+                            <SidebarFiatItem />
                         </List>
                     </Box>
                     <Divider className={classes.divider} />
