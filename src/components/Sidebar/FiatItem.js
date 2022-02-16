@@ -26,7 +26,7 @@ const SidebarFiatItem = ({ onClick }) => (
             </Typography>
         }
         onClick={onClick}
-        href="//feedback.alkemi.network/feature-requests"
+        href="https://alkemi.banxa.com/"
         target="_blank"
         component="a"
     />
