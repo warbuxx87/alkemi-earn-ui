@@ -136,6 +136,8 @@ function Rewards({
     onClaimALK,
     isDoingAction,
     claimableALKRewardUSD,
+    onAddTokenToMetamask,
+    displayAddToken,
 }) {
     const [open, setOpen] = React.useState(false);
 
@@ -266,6 +268,24 @@ function Rewards({
                         }
                     </Box>
                 </Box>
+
+                {displayAddToken ? (
+                    <Box sx={{ mx: 2, mt: 2 }}>
+                        <Button
+                            autoFocus
+                            type="button"
+                            className={classes.btnModal}
+                            variant="contained"
+                            color="secondary"
+                            size="large"
+                            fullWidth={true}
+                            onClick={onAddTokenToMetamask}
+                        >
+                            <>Add ALK token to MetaMask</>
+                        </Button>
+                    </Box>
+                ) : null}
+
                 <Box p={2}>
                     <Button
                         autoFocus

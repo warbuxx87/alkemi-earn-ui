@@ -11,7 +11,7 @@ export const getProviderName = (provider) => {
 
     if (provider.safe && provider.sdk) return "GnosisSafeApp";
 
-    if (provider.isMetaMask === true) return "MetaMask";
+    if (provider.isMetaMask === true) return "MetaMask"; // could add check of _metamask exists
 
     return "Injected"; // Generic name
 };
