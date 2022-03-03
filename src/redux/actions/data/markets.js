@@ -47,17 +47,16 @@ const fetchMarketsError = (error) => ({
 
 export const fetchMarketsCall = ({
     currentNetworkName,
-    currentPool,
-    lastPool,
+    poolToRetrieve,
     dispatch,
 }) => {
     if (
-        !url_map[currentNetworkName][currentPool] ||
-        !url_map[currentNetworkName][currentPool].markets_url
+        !url_map[currentNetworkName][poolToRetrieve] ||
+        !url_map[currentNetworkName][poolToRetrieve].markets_url
     )
         return;
 
-    const markets_api = url_map[currentNetworkName][currentPool].markets_url;
+    const markets_api = url_map[currentNetworkName][poolToRetrieve].markets_url;
 
     dispatch(fetchMarketsPending());
 
@@ -66,14 +65,12 @@ export const fetchMarketsCall = ({
             return res.text();
         })
         .then((data) => {
-            // if (lastPool !== currentPool) return; // prevent slower resolution and verified data overriding open data due to the fact that verified pool is the default one
-
             if (data) {
                 let obj_data = JSON.parse(data);
 
                 // filtering data by network and pool
                 const arrayOfAssets =
-                    marketsByNetwork[currentNetworkName][currentPool];
+                    marketsByNetwork[currentNetworkName][poolToRetrieve];
 
                 const dataFilteredByAssets = obj_data.filter((marketData) =>
                     arrayOfAssets.includes(Object.values(marketData)[0].symbol)
@@ -132,14 +129,16 @@ export const fetchMarketsCall = ({
                     return e;
                 });
 
-                dispatch(
-                    fetchMarketsSuccess({
-                        marketsData: arr_items,
-                        supplyArray: supply_array,
-                        borrowArray: borrow_array,
-                        calculationsTotals: totals,
-                    })
-                );
+                const resultFetchedMarketsData = {
+                    poolToRetrieve,
+
+                    marketsData: arr_items,
+                    supplyArray: supply_array,
+                    borrowArray: borrow_array,
+                    calculationsTotals: totals,
+                };
+
+                dispatch(fetchMarketsSuccess(resultFetchedMarketsData));
             }
         })
         .catch((e) => dispatch(fetchMarketsError()));
@@ -152,15 +151,13 @@ const throttledFetchMarkets = _.throttle(fetchMarketsCall, 15 * 1000, {
 
 // Section 3: Action dispatch methods and async funcs
 
-export const fetchMarkets = ({
-    currentNetworkName,
-    currentPool,
-    lastPool,
-}) => async (dispatch) => {
-    throttledFetchMarkets({
-        currentNetworkName,
-        currentPool,
-        lastPool,
-        dispatch,
-    });
-};
+export const fetchMarkets =
+    ({ currentNetworkName, poolToRetrieve, lastPool }) =>
+    async (dispatch) => {
+        throttledFetchMarkets({
+            currentNetworkName,
+            poolToRetrieve,
+            lastPool,
+            dispatch,
+        });
+    };

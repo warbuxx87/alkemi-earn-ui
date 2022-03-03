@@ -8,12 +8,25 @@ import {
 
 // Define initial state
 const initialState = {
-    pending: false,
-    marketsData: [],
-    supplyArray: [],
-    borrowArray: [],
-    calculationsTotals: {},
-    error: null,
+    open: {
+        // open and permissioned could be set dynamically, but just to predict data structure, these has been set as such for now
+        pending: false,
+        error: null,
+
+        marketsData: [],
+        supplyArray: [],
+        borrowArray: [],
+        calculationsTotals: {},
+    },
+    permissioned: {
+        pending: false,
+        error: null,
+
+        marketsData: [],
+        supplyArray: [],
+        borrowArray: [],
+        calculationsTotals: {},
+    },
 };
 
 // Implement "reducer" function with initial state as default state
@@ -28,18 +41,24 @@ const txReducer = (state = initialState, action) => {
         case FETCH_MARKETS_SUCCESS: {
             return {
                 ...state,
-                pending: false,
-                marketsData: action.payload.marketsData,
-                supplyArray: action.payload.supplyArray,
-                borrowArray: action.payload.borrowArray,
-                calculationsTotals: action.payload.calculationsTotals,
+                [action.payload.poolToRetrieve]: {
+                    pending: false,
+                    marketsData: action.payload.marketsData,
+                    supplyArray: action.payload.supplyArray,
+                    borrowArray: action.payload.borrowArray,
+                    calculationsTotals: action.payload.calculationsTotals,
+                },
             };
         }
         case FETCH_MARKETS_ERROR:
             return {
                 ...state,
-                pending: false,
-                error: action.error,
+                [action.payload.currentPool]: {
+                    ...state[action.payload.currentPool],
+
+                    pending: false,
+                    error: action.error,
+                },
             };
 
         // case RESET_MARKETS_DATA:

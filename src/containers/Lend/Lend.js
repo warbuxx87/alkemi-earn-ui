@@ -51,8 +51,8 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
     useFetchInterest();
     useFetchMarkets(true);
 
-    const marketsData = useSelector(getMarkets);
-    const alkApyPerMarket = useSelector(getAlkApyPerMarket);
+    const marketsData = useSelector(getMarkets());
+    const alkApyPerMarket = useSelector(getAlkApyPerMarket());
     const aggregatedAlkApy = useSelector(getAggregatedAlkApy);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store

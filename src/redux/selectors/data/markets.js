@@ -1,17 +1,33 @@
 import Big from "big.js";
+import { getPool } from "../status/pool";
 import { getAlkPrice } from "./rewards";
 
 // Stats Selectors
-export const getMarkets = (state) => state.data.markets.marketsData;
-export const getSupplyArray = (state) => state.data.markets.supplyArray;
-export const getBorrowArray = (state) => state.data.markets.borrowArray;
-export const getCalculationsTotals = (state) =>
-    state.data.markets.calculationsTotals;
-export const getTxPending = (state) => state.data.markets.pending;
-export const getTxError = (state) => state.data.markets.error;
 
-export const getAlkApyPerMarket = (state) => {
-    const marketData = state.data.markets.marketsData;
+const getMarketsStoreData = (state, dataName, pool) => {
+    let targetPool = pool;
+    if (!targetPool) targetPool = getPool(state);
+
+    return state.data.markets[targetPool][dataName];
+};
+
+export const getMarkets = (pool) => (state) => {
+    return getMarketsStoreData(state, "marketsData", pool);
+};
+
+export const getSupplyArray = (pool) => (state) =>
+    getMarketsStoreData(state, "supplyArray", pool);
+export const getBorrowArray = (pool) => (state) =>
+    getMarketsStoreData(state, "borrowArray", pool);
+export const getCalculationsTotals = (pool) => (state) =>
+    state.data.markets[pool].calculationsTotals;
+export const getTxPending = (pool) => (state) =>
+    getMarketsStoreData(state, "pending", pool);
+export const getTxError = (pool) => (state) =>
+    getMarketsStoreData(state, "error", pool);
+
+export const getAlkApyPerMarket = (pool) => (state) => {
+    const marketData = getMarketsStoreData(state, "marketsData", pool);
     const alkPrice = getAlkPrice(state);
 
     const alkApyPerMarket = {};

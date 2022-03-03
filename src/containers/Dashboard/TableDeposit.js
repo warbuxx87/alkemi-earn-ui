@@ -29,7 +29,7 @@ const TableDepositContainer = ({ activeReserves }) => {
 
     const userWalletNetwork = useSelector(walletNetwork);
 
-    const alkApyPerMarket = useSelector(getAlkApyPerMarket);
+    const alkApyPerMarket = useSelector(getAlkApyPerMarket());
 
     return (
         <TableSupply

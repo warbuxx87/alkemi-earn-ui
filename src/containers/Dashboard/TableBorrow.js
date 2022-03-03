@@ -25,7 +25,7 @@ const TableBorrowContainer = ({ activeReserves }) => {
 
     const aggregatedAlkApy = useSelector(getAggregatedAlkApy);
 
-    const alkApyPerMarket = useSelector(getAlkApyPerMarket);
+    const alkApyPerMarket = useSelector(getAlkApyPerMarket());
 
     return (
         <TableBorrow

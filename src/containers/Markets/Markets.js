@@ -20,18 +20,26 @@ import {
     getAlkApyPerMarket,
 } from "redux/selectors/data/markets";
 
+import { getPool } from "redux/selectors/status/pool";
+
 // Section 4: Container body
 const MarketsContainer = () => {
     useFetchALKPrice();
     useFetchMarkets(true);
 
-    const marketsData = useSelector(getMarkets);
-    const supplyArray = useSelector(getSupplyArray);
-    const borrowArray = useSelector(getBorrowArray);
-    const calculationsTotals = useSelector(getCalculationsTotals);
-    const alkApyPerMarket = useSelector(getAlkApyPerMarket);
+    const currentPool = useSelector(getPool);
+
+    const [pool, setPool] = React.useState(currentPool);
+
+    const marketsData = useSelector(getMarkets(pool));
+    const supplyArray = useSelector(getSupplyArray(pool));
+    const borrowArray = useSelector(getBorrowArray(pool));
+    const calculationsTotals = useSelector(getCalculationsTotals(pool));
+    const alkApyPerMarket = useSelector(getAlkApyPerMarket(pool));
 
     const userWalletNetwork = useSelector(walletNetwork);
+
+    const [poolWasChanged, setPoolWasChanged] = React.useState(false); // tracks changed by user
 
     const totalBorrowedContent = `$${
         calculationsTotals && calculationsTotals.totalBorrowBalanceUSD
@@ -63,8 +71,20 @@ const MarketsContainer = () => {
             : 0
     }`;
 
+    // Change of pool
+    React.useEffect(() => {
+        if (!poolWasChanged) setPool(currentPool);
+    }, [poolWasChanged, currentPool]);
+
+    const handleChangePool = (event) => {
+        if (!poolWasChanged) setPoolWasChanged(true);
+
+        setPool(event.target.value);
+    };
+
     return (
         <Markets
+            currentPool={currentPool}
             marketsData={marketsData}
             supplyArray={supplyArray}
             borrowArray={borrowArray}
@@ -73,6 +93,9 @@ const MarketsContainer = () => {
             totalDepositsContent={totalDepositsContent}
             userWalletNetwork={userWalletNetwork}
             alkApyPerMarket={alkApyPerMarket}
+            handleChangePool={handleChangePool}
+            pool={pool}
+            setPool={setPool}
         />
     );
 };

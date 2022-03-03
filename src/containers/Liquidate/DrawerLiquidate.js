@@ -57,7 +57,7 @@ const LiquidateDrawerContainer = ({
 
     const needKYC = useSelector(isKYCPool);
 
-    const marketsData = useSelector(getMarkets);
+    const marketsData = useSelector(getMarkets());
 
     const [amount, setAmount] = React.useState("");
     const [isProcessing, setIsProcessing] = React.useState(false);

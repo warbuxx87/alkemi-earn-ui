@@ -14,8 +14,8 @@ import {
     Divider,
     Grid,
     makeStyles,
-    // MenuItem,
-    // TextField,
+    MenuItem,
+    TextField,
     // Typography,
 } from "@material-ui/core";
 
@@ -44,20 +44,21 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 12,
     },
 }));
-// const pools = [
-//     {
-//         value: "combined",
-//         label: "Combined Pools",
-//     },
-//     {
-//         value: "verified",
-//         label: "Verified Pool",
-//     },
-//     {
-//         value: "open",
-//         label: "Open Pool",
-//     },
-// ];
+
+const pools = [
+    {
+        value: "combined",
+        label: "Combined Pools",
+    },
+    {
+        value: "permissioned",
+        label: "Verified Pool",
+    },
+    {
+        value: "open",
+        label: "Open Pool",
+    },
+];
 
 // Section 5: Code Component
 const Markets = ({
@@ -69,17 +70,15 @@ const Markets = ({
     totalDepositsContent,
     userWalletNetwork,
     alkApyPerMarket,
+
+    handleChangePool,
+    pool,
 }) => {
     const classes = useStyles();
-    // const [pool, setPool] = React.useState("Combined Pools");
-
-    // const handleChange = (event) => {
-    //     setPool(event.target.value);
-    // };
 
     return (
         <Container maxWidth={false} className={classes.container}>
-            {/* <Box
+            <Box
                 component="form"
                 sx={{
                     "& .MuiTextField-root": { m: 1, width: "25ch" },
@@ -94,7 +93,7 @@ const Markets = ({
                         id="pool-select"
                         select
                         value={pool}
-                        onChange={handleChange}
+                        onChange={handleChangePool}
                         variant="outlined"
                         size="small"
                         className={classes.assetField}
@@ -107,7 +106,8 @@ const Markets = ({
                         ))}
                     </TextField>
                 </div>
-            </Box> */}
+            </Box>
+
             <Box mt={3}>
                 <Grid container spacing={3}>
                     <Grid item lg={4} sm={6} xs={12}>

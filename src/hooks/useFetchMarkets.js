@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { walletNetworkName } from "redux/selectors/data/onboard";
-import { getPool } from "redux/selectors/status/pool";
 
 import { fetchMarketsCall } from "redux/actions/data/markets";
 
@@ -12,26 +11,23 @@ const useFetchMarkets = (fetchPeriodically = false) => {
 
     const currentNetworkName = useSelector(walletNetworkName);
 
-    const currentPool = useSelector(getPool);
-
-    const [lastPool, setLastPool] = useState("");
-
-    useEffect(() => {
-        setLastPool(currentPool);
-    }, [currentPool]);
-
     useEffect(() => {
         let timer;
 
         // move this async call to redux if needs to be called from more than one place
         const get_markets_data = () => {
-            if (lastPool === currentPool)
-                fetchMarketsCall({
-                    currentNetworkName,
-                    currentPool,
-                    lastPool,
-                    dispatch,
-                }); // prevent slower resolution and verified data overriding open data due to the fact that verified pool is the default one
+            // We retrieve data for both pools
+            fetchMarketsCall({
+                currentNetworkName,
+                poolToRetrieve: "permissioned",
+                dispatch,
+            });
+
+            fetchMarketsCall({
+                currentNetworkName,
+                poolToRetrieve: "open",
+                dispatch,
+            });
         };
 
         const getMarketsData = (fetchPeriodically) => {
@@ -50,13 +46,7 @@ const useFetchMarkets = (fetchPeriodically = false) => {
         return () => {
             if (timer) clearTimeout(timer);
         };
-    }, [
-        dispatch,
-        fetchPeriodically,
-        currentNetworkName,
-        currentPool,
-        lastPool,
-    ]);
+    }, [dispatch, fetchPeriodically, currentNetworkName]);
 };
 
 export default useFetchMarkets;

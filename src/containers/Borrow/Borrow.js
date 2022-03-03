@@ -47,8 +47,8 @@ const BorrowContainer = ({ inactiveBorrow, activeBorrow, onActivate }) => {
 
     const { onConnect, library } = useWalletSelect();
 
-    const marketsData = useSelector(getMarkets);
-    const alkApyPerMarket = useSelector(getAlkApyPerMarket);
+    const marketsData = useSelector(getMarkets());
+    const alkApyPerMarket = useSelector(getAlkApyPerMarket());
     const aggregatedAlkApy = useSelector(getAggregatedAlkApy);
 
     const USDPrice = useSelector(getUSDPrice); // retrieves the USD price from the store
