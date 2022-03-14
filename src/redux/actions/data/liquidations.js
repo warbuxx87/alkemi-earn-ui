@@ -10,7 +10,7 @@ import { triggerToastDisplay } from "utils/notify";
 import { getProviderName } from "utils/web3Helpers";
 import { setShowWalletConnectModal } from "redux/actions/status/walletConnect";
 
-const url_map = require("constants/url_map.json");
+const { getLiquidationsUrl } = require("utils/apiUrl");
 
 // Section 2: Action types declarations and action creators
 
@@ -61,15 +61,15 @@ const fetchLiquidationsCall = ({
     currentPool,
     dispatch,
 }) => {
-    if (
-        !url_map[currentNetworkName][currentPool] ||
-        !url_map[currentNetworkName][currentPool].liquidations_url
-    )
-        return;
+    const liquidationBaseUrl = getLiquidationsUrl(
+        currentNetworkName,
+        currentPool
+    );
+    if (!liquidationBaseUrl) return;
 
     dispatch(fetchLiquidationsPending());
 
-    const url = `${url_map[currentNetworkName][currentPool].liquidations_url}`;
+    const url = liquidationBaseUrl;
     fetch(url)
         .then((res) => {
             return res.text();
