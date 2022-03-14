@@ -10,6 +10,21 @@
     "files": [
         "dist"
     ],
+    "scripts": {
+        "generate-build-version": "node generate-build-version",
+        "start": "react-scripts start",
+        "local": "env-cmd -f .env.local npm run start",
+        "start:rinkeby": "env-cmd -f .env.rinkeby npm run start",
+        "build": "react-scripts build",
+        "build:staging": "env-cmd -f .env.dev npm run build",
+        "build:dev": "env-cmd -f .env.dev npm run build",
+        "distribute:prep": "rm -rf dist && mkdir dist && babel src -d dist --copy-files",
+        "analyze": "source-map-explorer 'build/static/js/*.js'",
+        "prettier": "prettier --write './**/*'",
+        "test": "react-scripts test --env=jsdom",
+        "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
+        "eject": "react-scripts eject"
+    },
     "dependencies": {
         "@date-io/moment": "^2.10.8",
         "@devexpress/dx-react-chart": "^2.7.5",
@@ -62,21 +77,6 @@
         "web3": "^1.6.1",
         "web3-ledgerhq-frame-connector": "1.0.1",
         "yup": "^0.32.9"
-    },
-    "scripts": {
-        "generate-build-version": "node generate-build-version",
-        "start": "react-scripts start",
-        "dev": "env-cmd -f .env.dev npm run start",
-        "start:rinkeby": "env-cmd -f .env.rinkeby npm run start",
-        "build": "react-scripts build",
-        "build:staging": "env-cmd -f .env.dev npm run build",
-        "build:dev": "env-cmd -f .env.dev npm run build",
-        "distribute:prep": "rm -rf dist && mkdir dist && babel src -d dist --copy-files",
-        "analyze": "source-map-explorer 'build/static/js/*.js'",
-        "prettier": "prettier --write './**/*'",
-        "test": "react-scripts test --env=jsdom",
-        "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
-        "eject": "react-scripts eject"
     },
     "lint-staged": {
         "src/**/*.{js,jsx,json,css}": [

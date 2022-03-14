@@ -3,7 +3,7 @@ import _ from "lodash";
 
 import { fetchTimestampsOfBlocks } from "./history";
 
-const url_map = require("constants/url_map.json");
+const { getHistoryUrl } = require("utils/apiUrl");
 
 // Section 2: Action types declarations and action creators
 
@@ -63,18 +63,14 @@ const fetchTxCall = ({
 }) => {
     if (!address) return;
 
-    if (
-        !url_map[currentNetworkName][currentPool] ||
-        !url_map[currentNetworkName][currentPool].history_url
-    )
-        return;
+    const historyBaseUrl = getHistoryUrl(currentNetworkName, currentPool);
+    if (!historyBaseUrl) return;
 
     dispatch(fetchTxPending());
 
     const params = "?account=" + address.toLowerCase();
 
-    const accountURL =
-        url_map[currentNetworkName][currentPool].history_url + params;
+    const accountURL = historyBaseUrl + params;
 
     fetch(accountURL)
         .then((res) => {
@@ -107,37 +103,39 @@ const throttledFetchTx = _.throttle(fetchTxCall, 60 * 1000, {
     trailing: false,
 });
 
-export const fetchTx = ({
-    currentNetworkName,
-    address,
-    drizzle,
-    currentPool,
-    fetchPeriodically,
-}) => async (dispatch) => {
-    if (fetchPeriodically)
-        // if fetchPeriodically set to true it will go through the throttled method
-        throttledFetchTx({
-            currentNetworkName,
-            address,
-            drizzle,
-            currentPool,
-            dispatch,
-        });
-    // if not, it will call on fetch directly no matter what
-    else
-        fetchTxCall({
-            currentNetworkName,
-            address,
-            drizzle,
-            currentPool,
-            dispatch,
-        });
+export const fetchTx =
+    ({
+        currentNetworkName,
+        address,
+        drizzle,
+        currentPool,
+        fetchPeriodically,
+    }) =>
+    async (dispatch) => {
+        if (fetchPeriodically)
+            // if fetchPeriodically set to true it will go through the throttled method
+            throttledFetchTx({
+                currentNetworkName,
+                address,
+                drizzle,
+                currentPool,
+                dispatch,
+            });
+        // if not, it will call on fetch directly no matter what
+        else
+            fetchTxCall({
+                currentNetworkName,
+                address,
+                drizzle,
+                currentPool,
+                dispatch,
+            });
 
-    // this is to avoid the throttle to block the call when the user reconnects their wallet.
-    // Of course as it is now, the call is triggered whenever the user opens the page, which good in a sense that the user wants fresh data each time
-    // <!> Should think about a different logic flow if useFetchTx start being used from different sources,
-    // The throttle code kept back so there is no need to rewrite it again, could be refactored later one if unnecessary
-};
+        // this is to avoid the throttle to block the call when the user reconnects their wallet.
+        // Of course as it is now, the call is triggered whenever the user opens the page, which good in a sense that the user wants fresh data each time
+        // <!> Should think about a different logic flow if useFetchTx start being used from different sources,
+        // The throttle code kept back so there is no need to rewrite it again, could be refactored later one if unnecessary
+    };
 
 // Reset Tx data and cancels throttled recurring fetch calls
 export const resetTxDataAndCancelFetch = () => (dispatch) => {
