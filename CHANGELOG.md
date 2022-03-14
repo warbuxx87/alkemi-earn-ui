@@ -1,3 +1,12 @@
+# [1.29.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.28.2...v1.29.0) (2022-03-14)
+
+
+### Features
+
+* added .env support for local api UI-553 ([b0c27c2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b0c27c25847ea536919f862d640b26fc8db44570))
+
+
+
 ## [1.28.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.28.1...v1.28.2) (2022-03-14)
 
 
