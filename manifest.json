@@ -1,0 +1,49 @@
+{
+    "id": "alkemiEarn",
+    "url": "https://earn.alkemi.network/",
+    "homepageUrl": "https://alkemi.network/",
+    "short_name": "Earn",
+    "name": "Alkemi Earn",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "images/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "description": "Alkemi Earn App",
+    "iconPath": "images/icon-512x512.png",
+    "icon": "images/icon-512x512.png",
+    "platform": "all",
+    "apiVersion": "0.0.1",
+    "manifestVersion": "1",
+    "branch": "stable",
+    "providedBy": {"name": "Alkemi", "url": "https://alkemi.network"},
+    "categories": [
+        "defi"
+      ],
+      "currencies": [
+        "ethereum"
+      ],
+      "content": {
+        "shortDescription": {
+          "en": "Earn high yields on your assets"
+        },
+        "description": {
+          "en": "Earn high yields on your assets with our professional DeFi borrowing and lending platform"
+        }
+      },
+      "permissions": [],
+      "domains": [
+        "https://*"
+      ]
+}
