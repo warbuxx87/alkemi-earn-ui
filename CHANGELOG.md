@@ -1,3 +1,12 @@
+## [1.28.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.28.1...v1.28.2) (2022-03-14)
+
+
+### Bug Fixes
+
+* adapt manifest.json location to gnosis safe requirements UI-557 ([27d9a62](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/27d9a62a233e7cfe862d3516cae3540a291d8869))
+
+
+
 ## [1.28.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.28.0...v1.28.1) (2022-02-15)
 
 
