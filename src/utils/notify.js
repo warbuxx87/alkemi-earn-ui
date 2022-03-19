@@ -4,7 +4,6 @@ import React from "react";
 // 2. Libraries imports
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { LedgerHQFrame } from "utils/web3ReactConnectors";
 
 import Notify from "components/UI/Notify";
 
