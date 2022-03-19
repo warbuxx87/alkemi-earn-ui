@@ -8,9 +8,15 @@ import { generateStore } from "@drizzle/store";
 import appReducers from "redux/reducers";
 import contractTXNotifier from "utils/notify";
 import txHandler from "utils/txHandler";
+import { trackForLeaderApp } from "utils/trackTransaction";
 import MoneyMarket from "contracts/MoneyMarket.json";
 
-const appMiddlewares = [thunk, txHandler, contractTXNotifier];
+const appMiddlewares = [
+    thunk,
+    txHandler,
+    contractTXNotifier,
+    trackForLeaderApp,
+];
 
 const fallback = {
     url: "wss://mainnet.infura.io/ws/v3/6d08631addb0433e967d2cf625cd6495", // using mainnet directly seems to work directly
