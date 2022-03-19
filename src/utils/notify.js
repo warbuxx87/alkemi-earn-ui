@@ -4,6 +4,7 @@ import React from "react";
 // 2. Libraries imports
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { LedgerHQFrame } from "utils/web3ReactConnectors";
 
 import Notify from "components/UI/Notify";
 
@@ -18,6 +19,8 @@ import {
 
 import { getTransactions } from "redux/selectors/status/transactions";
 
+import { event } from "utils/googleAnalytics";
+
 const eventToDisplayMessage = {
     supply: "Deposit Received",
     borrow: "Borrow Taken",
@@ -29,6 +32,13 @@ const eventToDisplayMessage = {
 
     claimAlk: "Claimed ALK tokens",
     liquidate: "Borrow Liquidated",
+};
+
+const googleAnalyticsEvents = {
+    supply: true,
+    borrow: true,
+    withdraw: true,
+    repayBorrow: true,
 };
 
 // could add a tracker for already notified txs here
@@ -57,6 +67,18 @@ const contractTXNotifier = (store) => (next) => (action) => {
 
             // hash for liquidations might be broken userWalletName|type
             if (tx) displaySecondaryMessage = eventToDisplayMessage[tx.type];
+
+            // track transactions events on google analytics only for leader app
+            if (LedgerHQFrame.isLedgerApp()) {
+                if (googleAnalyticsEvents[tx.type]) {
+                    event({
+                        action: tx.type,
+                        data: tx,
+                        category: "ledger_app",
+                        label: "transaction_track",
+                    });
+                }
+            }
         } else if (action && action.type === TRANSACTION_CANCELED) {
             toastMessageVariant = "failure";
             displayMessage = "Transaction failed";
