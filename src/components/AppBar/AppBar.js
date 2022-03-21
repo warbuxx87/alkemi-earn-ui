@@ -3,6 +3,7 @@
 // Section 1: React low level imports
 import React from "react";
 import PropTypes from "prop-types";
+import copy from "copy-to-clipboard";
 
 // Section 2: Material-UI imports
 import MuiAppBar from "@material-ui/core/AppBar";
@@ -110,6 +111,11 @@ function AppBar({
 
     const handleOnReset = () => {
         onReset();
+        setAnchorEl(null);
+    };
+
+    const handleOnCopyAddress = () => {
+        copy(accountAddress);
         setAnchorEl(null);
     };
 
@@ -267,12 +273,21 @@ function AppBar({
                         ) /* TODO: show when using more than a single wallet */
                     }
                     {accountAddress && !walletIsIFrame ? (
-                        <MenuItem
-                            className={classes.menuitem}
-                            onClick={handleOnReset}
-                        >
-                            Disconnect Wallet
-                        </MenuItem>
+                        <>
+                            <MenuItem
+                                className={classes.menuitem}
+                                onClick={handleOnCopyAddress}
+                            >
+                                Copy Address
+                            </MenuItem>
+
+                            <MenuItem
+                                className={classes.menuitem}
+                                onClick={handleOnReset}
+                            >
+                                Disconnect Wallet
+                            </MenuItem>
+                        </>
                     ) : null}
                 </Menu>
                 <Hidden mdDown>
