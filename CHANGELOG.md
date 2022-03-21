@@ -1,3 +1,13 @@
+## [1.30.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.30.0...v1.30.1) (2022-03-21)
+
+
+### Bug Fixes
+
+* fixed bring me back hom button UI-472 ([4d5c5cc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4d5c5cc31c6fef844b246ae38d6a697b4154fa1e))
+* test cases UI-472 ([1861acf](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1861acf74101c233b6242b072c5c641d16b5f986))
+
+
+
 # [1.30.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.29.0...v1.30.0) (2022-03-21)
 
 
