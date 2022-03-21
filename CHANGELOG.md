@@ -1,3 +1,17 @@
+# [1.30.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.29.0...v1.30.0) (2022-03-21)
+
+
+### Bug Fixes
+
+* fixed enable button spinner UI-554 ([3a76cfe](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3a76cfedc2b5724d84ae9b375459b9a3f23f30c0))
+
+
+### Features
+
+* added copy address option UI-271 ([6bc57f6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6bc57f616ad093922f52434fc6234264b6974072))
+
+
+
 # [1.29.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.28.2...v1.29.0) (2022-03-14)
 
 
