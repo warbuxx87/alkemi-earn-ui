@@ -1,3 +1,12 @@
+# [1.31.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.30.1...v1.31.0) (2022-03-23)
+
+
+### Features
+
+* added google analytics support for leager app UI-552 ([975fbc7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/975fbc7d67ce85c5fff21966d6bd8652f3328cef))
+
+
+
 ## [1.30.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.30.0...v1.30.1) (2022-03-21)
 
 
