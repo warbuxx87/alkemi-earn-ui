@@ -12,7 +12,7 @@ const googleAnalyticsEvents = {
     repayBorrow: true,
 };
 
-export const trackForLeaderApp = (store) => (next) => (action) => {
+export const trackForLedgerApp = (store) => (next) => (action) => {
     if (!action) next(action);
 
     if (action && action.type === TRANSACTION_RESOLVED) {

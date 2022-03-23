@@ -8,14 +8,14 @@ import { generateStore } from "@drizzle/store";
 import appReducers from "redux/reducers";
 import contractTXNotifier from "utils/notify";
 import txHandler from "utils/txHandler";
-import { trackForLeaderApp } from "utils/trackTransaction";
+import { trackForLedgerApp } from "utils/trackTransaction";
 import MoneyMarket from "contracts/MoneyMarket.json";
 
 const appMiddlewares = [
     thunk,
     txHandler,
     contractTXNotifier,
-    trackForLeaderApp,
+    trackForLedgerApp,
 ];
 
 const fallback = {
