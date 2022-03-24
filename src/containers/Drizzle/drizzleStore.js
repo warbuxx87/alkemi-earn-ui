@@ -2,7 +2,7 @@
 import thunk from "redux-thunk";
 
 // 2. Libraries imports
-import { generateStore } from "@drizzle/store";
+import { generateStore } from "@castrated-drizzle/store";
 
 // 3. internal imports
 import appReducers from "redux/reducers";

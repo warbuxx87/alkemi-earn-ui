@@ -4,7 +4,7 @@ import React from "react";
 import "assets/scss/style.scss";
 import store, { drizzleOptions } from "./drizzleStore.js";
 
-import { Drizzle } from "@drizzle/store";
+import { Drizzle } from "@castrated-drizzle/store";
 
 import DrizzleContext from "utils/DrizzleContext";
 
