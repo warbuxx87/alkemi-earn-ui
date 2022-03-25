@@ -20,6 +20,8 @@ import {
     isActivating,
 } from "redux/selectors/status/walletSelect";
 
+import { isWalletConnected } from "redux/selectors/data/onboard";
+
 // Section 4: components
 import WalletSelectModal from "components/UI/WalletSelectModal";
 
@@ -27,6 +29,8 @@ import WalletSelectModal from "components/UI/WalletSelectModal";
 const WalletSelectContainer = () => {
     // redux
     const dispatch = useDispatch();
+
+    const walletConnected = useSelector(isWalletConnected);
 
     const showWalletSelection = useSelector(showWallet);
     const askToConnect = useSelector(isAskingToConnect);
@@ -57,6 +61,7 @@ const WalletSelectContainer = () => {
     return (
         <>
             {!activating &&
+            !walletConnected &&
             (showWalletSelection === true || askToConnect === true) ? (
                 <WalletSelectModal
                     handleWalletSelect={handleWalletSelect}

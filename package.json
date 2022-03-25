@@ -25,12 +25,11 @@
         "eject": "react-scripts eject"
     },
     "dependencies": {
+        "@castrated-drizzle/store": "^1.6.3",
         "@date-io/moment": "^2.10.8",
         "@devexpress/dx-react-chart": "^2.7.5",
         "@devexpress/dx-react-chart-material-ui": "^2.7.5",
         "@devexpress/dx-react-core": "^2.7.5",
-        "@drizzle/react-plugin": "^1.5.3",
-        "@drizzle/store": "^1.5.3",
         "@gnosis.pm/safe-apps-web3-react": "0.6.8",
         "@ledgerhq/iframe-provider": "0.4.2",
         "@material-ui/core": "^4.11.3",
