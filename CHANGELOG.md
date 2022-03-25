@@ -1,3 +1,12 @@
+## [1.31.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.31.0...v1.31.1) (2022-03-25)
+
+
+### Bug Fixes
+
+* disable automatic popup of metamask UI-561 ([81b07ec](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/81b07ec8d70ffab5eeea290362da01dc41549e45))
+
+
+
 # [1.31.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.30.1...v1.31.0) (2022-03-23)
 
 
