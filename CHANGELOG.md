@@ -1,3 +1,54 @@
+## [1.31.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.31.0...v1.31.1) (2022-03-25)
+
+
+### Bug Fixes
+
+* disable automatic popup of metamask UI-561 ([81b07ec](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/81b07ec8d70ffab5eeea290362da01dc41549e45))
+
+
+
+# [1.31.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.30.1...v1.31.0) (2022-03-23)
+
+
+### Features
+
+* added google analytics support for leager app UI-552 ([975fbc7](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/975fbc7d67ce85c5fff21966d6bd8652f3328cef))
+
+
+
+## [1.30.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.30.0...v1.30.1) (2022-03-21)
+
+
+### Bug Fixes
+
+* fixed bring me back hom button UI-472 ([4d5c5cc](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/4d5c5cc31c6fef844b246ae38d6a697b4154fa1e))
+* test cases UI-472 ([1861acf](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1861acf74101c233b6242b072c5c641d16b5f986))
+
+
+
+# [1.30.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.29.0...v1.30.0) (2022-03-21)
+
+
+### Bug Fixes
+
+* fixed enable button spinner UI-554 ([3a76cfe](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3a76cfedc2b5724d84ae9b375459b9a3f23f30c0))
+
+
+### Features
+
+* added copy address option UI-271 ([6bc57f6](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/6bc57f616ad093922f52434fc6234264b6974072))
+
+
+
+# [1.29.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.28.2...v1.29.0) (2022-03-14)
+
+
+### Features
+
+* added .env support for local api UI-553 ([b0c27c2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b0c27c25847ea536919f862d640b26fc8db44570))
+
+
+
 ## [1.28.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.28.1...v1.28.2) (2022-03-14)
 
 

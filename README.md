@@ -48,6 +48,10 @@ npm run dev # start application in dev mode (.env.dev config)
 npm start # start application in mainnet mode (.env config)
 ```
 
+```bash
+npm run local # start application in mainnet mode with local api server (.env.local config)
+```
+
 ## Contributing guidelines
 
 Refer to [contributing guidelines](CONTRIBUTING.md)

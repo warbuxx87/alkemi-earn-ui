@@ -16,6 +16,6 @@ exports[`<NoWhere /> matches snapshot 1`] = `
       Oops... It seems that you are lost!
     </h1>
   </div>
-  <Connect(WithStyles(NoWhereDashboardButton)) />
+  <withRouter(Connect(WithStyles(NoWhereDashboardButton))) />
 </div>
 `;

@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { withRouter } from "react-router";
 
 import NoWhereDashboardButton from "components/NoWhere/DashboardButton";
 import { DASHBOARD } from "constants/routes";
 
-const mapDispatchToProps = (dispatch) => ({
-    onClick: () => dispatch(push(DASHBOARD)),
+const mapDispatchToProps = (_, props) => ({
+    onClick: () => props.history.push(DASHBOARD),
 });
 
-export default connect(undefined, mapDispatchToProps)(NoWhereDashboardButton);
+export default withRouter(connect(mapDispatchToProps)(NoWhereDashboardButton));

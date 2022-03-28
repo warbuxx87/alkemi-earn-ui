@@ -4,7 +4,7 @@ import _ from "lodash";
 import marketsByNetwork from "constants/markets_by_network.json";
 import { compare_supply, compare_borrow } from "utils/markets";
 
-const url_map = require("constants/url_map.json");
+const { getMarketsUrl } = require("utils/apiUrl");
 //                                      //
 // ------------ MARKETS ACTIONS -------- //
 //                                      //
@@ -51,13 +51,8 @@ export const fetchMarketsCall = ({
     lastPool,
     dispatch,
 }) => {
-    if (
-        !url_map[currentNetworkName][currentPool] ||
-        !url_map[currentNetworkName][currentPool].markets_url
-    )
-        return;
-
-    const markets_api = url_map[currentNetworkName][currentPool].markets_url;
+    const markets_api = getMarketsUrl(currentNetworkName, currentPool);
+    if (!markets_api) return;
 
     dispatch(fetchMarketsPending());
 
@@ -152,15 +147,13 @@ const throttledFetchMarkets = _.throttle(fetchMarketsCall, 15 * 1000, {
 
 // Section 3: Action dispatch methods and async funcs
 
-export const fetchMarkets = ({
-    currentNetworkName,
-    currentPool,
-    lastPool,
-}) => async (dispatch) => {
-    throttledFetchMarkets({
-        currentNetworkName,
-        currentPool,
-        lastPool,
-        dispatch,
-    });
-};
+export const fetchMarkets =
+    ({ currentNetworkName, currentPool, lastPool }) =>
+    async (dispatch) => {
+        throttledFetchMarkets({
+            currentNetworkName,
+            currentPool,
+            lastPool,
+            dispatch,
+        });
+    };

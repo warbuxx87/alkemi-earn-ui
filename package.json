@@ -1,6 +1,6 @@
 {
     "name": "@project-alkemi/alkemi-earn-ui",
-    "version": "1.28.2",
+    "version": "1.31.1",
     "homepage": "https://earn.alkemi.network",
     "repository": {
         "type": "git",
@@ -10,13 +10,26 @@
     "files": [
         "dist"
     ],
+    "scripts": {
+        "generate-build-version": "node generate-build-version",
+        "start": "react-scripts start",
+        "local": "env-cmd -f .env.local npm run start",
+        "dev": "env-cmd -f .env.dev npm run start",
+        "start:rinkeby": "env-cmd -f .env.rinkeby npm run start",
+        "build": "react-scripts build",
+        "distribute:prep": "rm -rf dist && mkdir dist && babel src -d dist --copy-files",
+        "analyze": "source-map-explorer 'build/static/js/*.js'",
+        "prettier": "prettier --write './**/*'",
+        "test": "react-scripts test --env=jsdom",
+        "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
+        "eject": "react-scripts eject"
+    },
     "dependencies": {
+        "@castrated-drizzle/store": "^1.6.3",
         "@date-io/moment": "^2.10.8",
         "@devexpress/dx-react-chart": "^2.7.5",
         "@devexpress/dx-react-chart-material-ui": "^2.7.5",
         "@devexpress/dx-react-core": "^2.7.5",
-        "@drizzle/react-plugin": "^1.5.3",
-        "@drizzle/store": "^1.5.3",
         "@gnosis.pm/safe-apps-web3-react": "0.6.8",
         "@ledgerhq/iframe-provider": "0.4.2",
         "@material-ui/core": "^4.11.3",
@@ -35,6 +48,7 @@
         "chart.js": "^3.1.0",
         "clsx": "^1.1.1",
         "connected-react-router": "^6.9.1",
+        "copy-to-clipboard": "^3.3.1",
         "env-cmd": "^10.1.0",
         "eslint-plugin-flowtype": "^5.7.0",
         "ethers": "^5.5.2",
@@ -62,21 +76,6 @@
         "web3": "^1.6.1",
         "web3-ledgerhq-frame-connector": "1.0.1",
         "yup": "^0.32.9"
-    },
-    "scripts": {
-        "generate-build-version": "node generate-build-version",
-        "start": "react-scripts start",
-        "dev": "env-cmd -f .env.dev npm run start",
-        "start:rinkeby": "env-cmd -f .env.rinkeby npm run start",
-        "build": "react-scripts build",
-        "build:staging": "env-cmd -f .env.dev npm run build",
-        "build:dev": "env-cmd -f .env.dev npm run build",
-        "distribute:prep": "rm -rf dist && mkdir dist && babel src -d dist --copy-files",
-        "analyze": "source-map-explorer 'build/static/js/*.js'",
-        "prettier": "prettier --write './**/*'",
-        "test": "react-scripts test --env=jsdom",
-        "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
-        "eject": "react-scripts eject"
     },
     "lint-staged": {
         "src/**/*.{js,jsx,json,css}": [
