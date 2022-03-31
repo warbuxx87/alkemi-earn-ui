@@ -1,7 +1,7 @@
 // Section 1: Utilities imports and low level imports
 import _ from "lodash";
 
-const url_map = require("constants/url_map.json");
+const { getInterestUrl } = require("utils/apiUrl");
 
 // Section 2: Action types declarations and action creators
 
@@ -61,12 +61,13 @@ const fetchInterestCall = ({
     dispatch,
 }) => {
     if (!address) return;
-    if (!url_map[currentNetworkName][currentPool].interest_url) return;
+
+    const interestBaseUrl = getInterestUrl(currentNetworkName, currentPool);
+    if (!interestBaseUrl) return;
 
     const params = `?account=${address.toLowerCase()}&asset=${asset}&type=savings&millisecondsBefore=86400000`;
 
-    const interestURL =
-        url_map[currentNetworkName][currentPool].interest_url + params;
+    const interestURL = interestBaseUrl + params;
 
     fetch(interestURL)
         .then((res) => {
@@ -100,35 +101,31 @@ const throttledFetchInterest = _.throttle(fetchInterestCall, 60 * 1000, {
     trailing: false,
 });
 
-export const fetchInterest = ({
-    currentNetworkName,
-    currentPool,
-    address,
-    asset,
-    fetchPeriodically,
-}) => async (dispatch) => {
-    if (fetchPeriodically)
-        // if fetchPeriodically set to true it will go through the throttled method
-        throttledFetchInterest({
-            currentNetworkName,
-            currentPool,
-            address,
-            asset,
-            dispatch,
-        });
-    // if not, it will call on fetch directly no matter what
-    else
-        fetchInterestCall({
-            currentNetworkName,
-            currentPool,
-            address,
-            asset,
-            dispatch,
-        });
+export const fetchInterest =
+    ({ currentNetworkName, currentPool, address, asset, fetchPeriodically }) =>
+    async (dispatch) => {
+        if (fetchPeriodically)
+            // if fetchPeriodically set to true it will go through the throttled method
+            throttledFetchInterest({
+                currentNetworkName,
+                currentPool,
+                address,
+                asset,
+                dispatch,
+            });
+        // if not, it will call on fetch directly no matter what
+        else
+            fetchInterestCall({
+                currentNetworkName,
+                currentPool,
+                address,
+                asset,
+                dispatch,
+            });
 
-    // this is to avoid the throttle to block the call when the user reconnects their wallet.
-    // Of course as it is now, the call is triggered whenever the user opens the page, which good in a sense that the user wants fresh data each time
-};
+        // this is to avoid the throttle to block the call when the user reconnects their wallet.
+        // Of course as it is now, the call is triggered whenever the user opens the page, which good in a sense that the user wants fresh data each time
+    };
 
 // Reset Tx data and cancels throttled recurring fetch calls
 export const cancelFetchInterest = () => () => {

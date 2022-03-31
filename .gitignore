@@ -9,3 +9,4 @@ dist
 .npmrc
 !.npmrc.example
 debug.log*
+.env.local
