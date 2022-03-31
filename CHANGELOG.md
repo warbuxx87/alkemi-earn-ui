@@ -1,3 +1,12 @@
+# [1.32.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.31.1...v1.32.0) (2022-03-31)
+
+
+### Features
+
+* change manifest description UI-565 ([cbf531c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/cbf531cb152884daf3db35622dc366d662fcda5f))
+
+
+
 ## [1.31.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.31.0...v1.31.1) (2022-03-25)
 
 
