@@ -13,11 +13,9 @@ import {
     CardHeader,
     Divider,
     Grid,
-    makeStyles,
-    // MenuItem,
-    // TextField,
-    // Typography,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 import Stats from "./CardStats";
@@ -136,7 +134,7 @@ const Markets = ({
                     className={classes.containerRow}
                 >
                     <Grid item lg={6} sm={6} xs={12}>
-                        <Card>
+                        <Card elevation={0}>
                             <CardHeader title="Deposits" />
                             <Divider />
                             <CardContent>
@@ -163,7 +161,7 @@ const Markets = ({
                     </Grid>
 
                     <Grid item lg={6} sm={6} xs={12}>
-                        <Card>
+                        <Card elevation={0}>
                             <CardHeader title="Borrowed" />
                             <Divider />
                             <CardContent>

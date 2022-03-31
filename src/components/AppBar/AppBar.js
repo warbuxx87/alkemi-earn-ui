@@ -5,19 +5,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import MuiAppBar from "@material-ui/core/AppBar";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import MuiAppBar from "@mui/material/AppBar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
-import {
-    Box,
-    Button,
-    Grid,
-    Hidden,
-    makeStyles,
-    Toolbar,
-    Typography,
-} from "@material-ui/core";
+import { Box, Button, Grid, Hidden, Toolbar, Typography } from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 import Rewards from "containers/AppBar/Rewards";
@@ -37,17 +31,17 @@ const useStyles = makeStyles((theme) => ({
         "& .MuiButton-label": {
             justifyContent: "flex-end",
         },
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("sm")]: {
             marginRight: 8,
         },
-        [theme.breakpoints.between("sm", "md")]: {
+        [theme.breakpoints.between("sm", "lg")]: {
             marginRight: 24,
         },
     },
     appBar: {
         paddingLeft: "0px",
         paddingRight: "0px",
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("sm")]: {
             paddingLeft: "16px",
             paddingRight: "16px",
             paddingTop: "8px",
@@ -75,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
         display: "inline-flex",
         paddingTop: "1px",
         height: "32px",
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("sm")]: {
             fontSize: "0.825rem",
         },
     },
@@ -167,6 +161,7 @@ function AppBar({
                     size="small"
                     onClick={handleOnConnect}
                     data-testid="connectButton"
+                    color="secondary"
                 >
                     Connect
                 </Button>
@@ -190,7 +185,7 @@ function AppBar({
                                 container
                                 alignItems="center"
                                 display="flex"
-                                justify="flex-end"
+                                justifyContent="flex-end"
                             >
                                 <Grid item>
                                     {displayWalletStatus({
@@ -226,7 +221,7 @@ function AppBar({
             className={classes.appBar}
         >
             <Toolbar disableGutters={true}>
-                <Hidden mdDown>
+                <Hidden lgDown>
                     <Typography
                         variant="h6"
                         color="textPrimary"
@@ -275,7 +270,7 @@ function AppBar({
                         </MenuItem>
                     ) : null}
                 </Menu>
-                <Hidden mdDown>
+                <Hidden lgDown>
                     <Box ml={1}>
                         <Other />
                     </Box>

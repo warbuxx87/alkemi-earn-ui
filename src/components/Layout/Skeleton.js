@@ -5,7 +5,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: UI imports
-import { withStyles, fade } from "@material-ui/core/styles";
+import { alpha } from "@mui/material/styles";
+
+import withStyles from "@mui/styles/withStyles";
 
 // Section 3: Components & Containers import from the application
 import LayoutContent from "containers/Layout/Content";
@@ -30,7 +32,7 @@ const styles = (theme) => ({
         height: "calc(100vh - 10px)",
     },
     alert: {
-        backgroundColor: fade(theme.palette.background.paper, 0.5),
+        backgroundColor: alpha(theme.palette.background.paper, 0.5),
     },
     content: {
         position: "relative",

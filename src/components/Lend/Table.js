@@ -14,8 +14,9 @@ import {
     TableRow,
     Typography,
     Tooltip,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 import LendTableCell from "components/UI/TableCell";

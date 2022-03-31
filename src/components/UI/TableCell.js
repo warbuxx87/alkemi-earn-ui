@@ -1,8 +1,8 @@
 // Section 1: React low level imports
 
 // Section 2: Material-UI imports
-import TableCell from "@material-ui/core/TableCell";
-import { withStyles } from "@material-ui/core/styles";
+import TableCell from "@mui/material/TableCell";
+import withStyles from "@mui/styles/withStyles";
 
 const styles = (theme) => ({
     root: {

@@ -3,7 +3,6 @@ import React from "react";
 import moment from "moment";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import DateFnsUtils from "@date-io/moment";
 
 // Section 2: Material-UI imports
 import {
@@ -13,13 +12,14 @@ import {
     Divider,
     Typography,
     FormHelperText,
-    makeStyles,
-} from "@material-ui/core";
+    TextField,
+} from "@mui/material";
 
-import {
-    KeyboardDatePicker,
-    MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
+import makeStyles from "@mui/styles/makeStyles";
+
+import DatePicker from "@mui/lab/DatePicker";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 // Section 3: Components & Containers import from the application
 import { Download as Export } from "react-feather";
@@ -102,7 +102,7 @@ function SelectDatePopper({
                 </Box>
                 <Divider />
                 <Box m={2}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <Formik
                             initialValues={{
                                 start: date.start || moment("01-01-2021"),
@@ -160,7 +160,7 @@ function SelectDatePopper({
                                             color="textPrimary"
                                         ></Typography>
                                         <Box mt={2}>
-                                            <KeyboardDatePicker
+                                            <DatePicker
                                                 disableToolbar
                                                 fullWidth
                                                 autoOk
@@ -176,10 +176,13 @@ function SelectDatePopper({
                                                     setFieldValue("start", date)
                                                 }
                                                 value={values.start}
+                                                renderInput={(params) => (
+                                                    <TextField {...params} />
+                                                )}
                                             />
                                         </Box>
                                         <Box mt={2} mb={1}>
-                                            <KeyboardDatePicker
+                                            <DatePicker
                                                 disableToolbar
                                                 fullWidth
                                                 autoOk
@@ -195,6 +198,9 @@ function SelectDatePopper({
                                                     setFieldValue("end", date)
                                                 }
                                                 value={values.end}
+                                                renderInput={(params) => (
+                                                    <TextField {...params} />
+                                                )}
                                             />
                                         </Box>
                                         {Boolean(touched.end && errors.end) && (
@@ -236,7 +242,7 @@ function SelectDatePopper({
                                 </form>
                             )}
                         </Formik>
-                    </MuiPickersUtilsProvider>
+                    </LocalizationProvider>
                 </Box>
             </Popover>
         </div>

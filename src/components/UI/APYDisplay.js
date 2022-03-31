@@ -6,16 +6,11 @@ import clsx from "clsx";
 
 // Section 2: Material-UI imports
 
-import {
-    Box,
-    Divider,
-    Tooltip,
-    Typography,
-    makeStyles,
-    fade,
-} from "@material-ui/core";
+import { Box, Divider, Tooltip, Typography, alpha } from "@mui/material";
 
-// } from "@material-ui/core";
+import makeStyles from "@mui/styles/makeStyles";
+
+// } from "@mui/material";
 
 // Section 3: Components & Containers import from the application
 import {
@@ -59,12 +54,12 @@ const useStyles = makeStyles((theme) => ({
 
     warningRegularLabel: {
         color: theme.palette.warning.main,
-        backgroundColor: fade(theme.palette.warning.main, 0.08),
+        backgroundColor: alpha(theme.palette.warning.main, 0.08),
     },
 
     successRegularLabel: {
         color: theme.palette.success.main,
-        backgroundColor: fade(theme.palette.success.main, 0.08),
+        backgroundColor: alpha(theme.palette.success.main, 0.08),
     },
 
     baseBigLabelStyling: {
@@ -75,11 +70,11 @@ const useStyles = makeStyles((theme) => ({
     warningBigLabel: {
         // similar styling reside in UI/CardAPY.js
         color: theme.palette.warning.main,
-        backgroundColor: fade(theme.palette.warning.main, 0.08),
+        backgroundColor: alpha(theme.palette.warning.main, 0.08),
     },
     successBigLabel: {
         color: theme.palette.success.main,
-        backgroundColor: fade(theme.palette.success.main, 0.08),
+        backgroundColor: alpha(theme.palette.success.main, 0.08),
     },
 
     successNumberOnly: {

@@ -1,6 +1,7 @@
 import React from "react";
-import { withStyles, useTheme } from "@material-ui/core/styles";
-import { Box, Container, Typography, Button } from "@material-ui/core";
+import { useTheme } from "@mui/material/styles";
+import withStyles from "@mui/styles/withStyles";
+import { Box, Container, Typography, Button } from "@mui/material";
 import image from "assets/images/404.svg";
 // import { darkTheme } from "themes/theme";
 

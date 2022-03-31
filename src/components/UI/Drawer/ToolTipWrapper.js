@@ -6,7 +6,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Tooltip } from "@material-ui/core";
+import { Tooltip } from "@mui/material";
 
 const ToolTipWrapper = ({ children, walletIsKYCd, toolTipTitle }) => {
     return (

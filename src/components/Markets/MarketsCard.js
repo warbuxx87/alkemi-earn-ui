@@ -12,8 +12,9 @@ import {
     CardHeader,
     Divider,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +38,7 @@ const MarketsCard = ({ title, cardContent }) => {
     const classes = useStyles();
 
     return (
-        <Card>
+        <Card elevation={0}>
             <CardHeader title={title} className={classes.item} />
             <Divider />
             <CardContent>

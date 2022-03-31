@@ -11,14 +11,15 @@ import {
     FormControlLabel,
     Link,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
-import withWidth from "@material-ui/core/withWidth";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import Verified from "@material-ui/icons/VerifiedUser";
-import Open from "@material-ui/icons/Public";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import Verified from "@mui/icons-material/VerifiedUser";
+import Open from "@mui/icons-material/Public";
 
 const useStyles = makeStyles((theme) => ({
     dialog: {
@@ -44,34 +45,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "0.875rem",
         fontWeight: "500",
         color: "#ffffff",
-    },
-    toggleButton: {
-        flexWrap: "wrap",
-        "& .MuiButtonBase-root": {
-            borderRadius: "4px",
-            padding: "16px",
-        },
-        "& .MuiToggleButton-label": {
-            flexDirection: "column",
-        },
-        "& .MuiToggleButtonGroup-groupedHorizontal:not(:first-child) ": {
-            marginLeft: 16,
-        },
-        "& .MuiToggleButton-root": {
-            borderTop: "1px solid rgba(255, 255, 255, 0.12)",
-            width: "270px",
-            borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
-        },
-
-        "& .MuiToggleButton-root.Mui-selected": {
-            backgroundColor: "rgba(255, 255, 255, 0.02)",
-            border: "solid 1px rgba(255, 255, 255, .7) ",
-        },
-    },
-    kyclink: {
-        borderLeft: "0px",
-        marginLeft: "4px !important",
-        minWidth: "268px",
     },
     verIcon: {
         color: "#ffffff",
@@ -101,14 +74,8 @@ function PoolDialog({
     open,
 }) {
     const classes = useStyles();
-
-    const isSmallScreen = /xs/.test(width);
-    const buttonProps = {
-        orientation: isSmallScreen ? "vertical" : "horizontal",
-    };
-    const boxProps = {
-        order: isSmallScreen ? "0" : "3",
-    };
+    const theme = useTheme();
+    const mdOnly = useMediaQuery(theme.breakpoints.down("md"));
 
     return (
         <div>
@@ -116,9 +83,11 @@ function PoolDialog({
                 aria-labelledby="pool-select"
                 open={open}
                 disableEscapeKeyDown
-                disableBackdropClick
                 maxWidth="md"
                 className={classes.dialog}
+                PaperProps={{
+                    elevation: 0,
+                }}
             >
                 <Box pt={3} pb={3} px={3}>
                     <Typography
@@ -132,12 +101,40 @@ function PoolDialog({
                 </Box>
                 <DialogContent className={classes.dialogContent}>
                     <ToggleButtonGroup
+                        orientation={mdOnly ? "vertical" : "horizontal"}
                         value={selectedPool}
                         exclusive
                         onChange={handlePoolChange}
                         aria-label="Pool Select"
-                        className={classes.toggleButton}
-                        {...buttonProps}
+                        sx={{
+                            flexWrap: "wrap",
+                            "& .MuiButtonBase-root": {
+                                borderRadius: "4px !important",
+                                padding: "16px",
+                                marginBottom: "24px",
+                            },
+                            "& .MuiToggleButtonGroup-groupedHorizontal:not(:first-child)":
+                                {
+                                    marginLeft: "16px",
+                                    borderLeft:
+                                        "solid 1px rgba(255, 255, 255, .12) ",
+                                    borderRadius: "4px !important",
+                                },
+                            "& .MuiToggleButton-root": {
+                                width: "270px",
+                                flexDirection: "column",
+                                marginBottom: "0px",
+                            },
+
+                            "& .MuiToggleButton-root.Mui-selected": {
+                                backgroundColor: "rgba(255, 255, 255, 0.02)",
+                                border: "solid 1px rgba(255, 255, 255, .7) ",
+                            },
+                            "& .MuiDialogContent-root ": {
+                                display: "flex",
+                                justifyContent: "center",
+                            },
+                        }}
                     >
                         <ToggleButton
                             value="permissioned"
@@ -178,8 +175,12 @@ function PoolDialog({
                         <Box
                             pt={1.5}
                             pb={1}
-                            className={classes.kyclink}
-                            {...boxProps}
+                            order={mdOnly ? "0" : "3"}
+                            sx={{
+                                borderLeft: "0px !important",
+                                marginLeft: "4px !important",
+                                minWidth: "268px !important",
+                            }}
                         >
                             <Typography
                                 className={classes.kycref}
@@ -273,4 +274,4 @@ PoolDialog.propTypes = {
     width: PropTypes.string.isRequired,
 };
 
-export default withWidth()(PoolDialog);
+export default PoolDialog;

@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Box, Typography, Grid, Tooltip } from "@material-ui/core";
+import { Box, Typography, Grid, Tooltip } from "@mui/material";
 
 import { HelpCircle as HelpIcon } from "react-feather";
 
@@ -40,7 +40,7 @@ function OriginationFeeDisplay({
                     </Tooltip>
                 </Box>
             </Grid>
-            <Grid item md={6} xs container justify="flex-end">
+            <Grid item md={6} xs container justifyContent="flex-end">
                 <Box>
                     {calculatedBorrowFee}{" "}
                     {asset.unit === "WETH" ? "ETH" : asset.unit}

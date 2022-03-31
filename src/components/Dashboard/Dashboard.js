@@ -4,15 +4,9 @@
 import React, { useState } from "react";
 
 // Section 2: Material-UI imports
-import {
-    Box,
-    Container,
-    Divider,
-    Grid,
-    makeStyles,
-    Tab,
-    Tabs,
-} from "@material-ui/core";
+import { Box, Container, Divider, Grid, Tab, Tabs } from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 import TableLimit from "containers/Dashboard/CardLimit";
@@ -89,6 +83,11 @@ function Dashboard() {
                                 textColor="secondary"
                                 variant="scrollable"
                                 className={classes.tabs}
+                                TabIndicatorProps={{
+                                    style: {
+                                        backgroundColor: "#ffffff",
+                                    },
+                                }}
                             >
                                 {tabs.map((tab) => (
                                     <Tab

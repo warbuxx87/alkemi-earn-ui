@@ -6,14 +6,14 @@ import {
     List,
     ListItem,
     ListItemText,
-    makeStyles,
     Popover,
     Typography,
-} from "@material-ui/core";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { usePopover } from "../../hooks/usePopover";
 import { Selector as SelectorIcon } from "../UI/Icons/selector";
-import Verified from "@material-ui/icons/VerifiedUser";
-import Open from "@material-ui/icons/Public";
+import Verified from "@mui/icons-material/VerifiedUser";
+import Open from "@mui/icons-material/Public";
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -52,17 +52,6 @@ const poolsIcons = {
     permissioned: <Verified color="secondary" fontSize="small" />,
     open: <Open color="secondary" fontSize="small" />,
 };
-
-// const poolsIcons = (id) => {
-//     switch(id) {
-//     case "permissioned":
-//         return  <CloudIcon />;
-//     case "open":
-//         return <img src={logo} />;
-//     default:
-//         return <CloudIcon />;
-//     }
-// }
 
 export const PoolPopover = (props) => {
     const { selectedPool, pools, onPoolChange } = props;
@@ -106,10 +95,16 @@ export const PoolPopover = (props) => {
                 keepMounted
                 onClose={handleClose}
                 open={open}
-                elevation={4}
+                elevation={2}
                 className={classes.popover}
             >
-                <List>
+                <List
+                    sx={{
+                        "&& .Mui-selected, && .Mui-selected:hover": {
+                            bgcolor: "rgba(255, 255, 255, 0.16)",
+                        },
+                    }}
+                >
                     {pools.map((pool) => (
                         <ListItem
                             key={pool.id}

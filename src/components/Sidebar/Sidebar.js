@@ -13,10 +13,10 @@ import {
     Hidden,
     Link,
     List,
-    withWidth,
-    withStyles,
     Typography,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import withStyles from "@mui/styles/withStyles";
 
 // Section 3: Components & Containers import from the application
 import SidebarDashboardItem from "containers/Sidebar/DashboardItem";
@@ -28,6 +28,10 @@ import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
 import SidebarFiatItem from "components/Sidebar/FiatItem";
 import SidebarHeader from "containers/Sidebar/Header";
 import PoolSelectContainer from "containers/Sidebar/PoolSelect";
+
+// FIXME checkout https://mui.com/components/use-media-query/#migrating-from-withwidth
+const withWidth = () => (WrappedComponent) => (props) =>
+    <WrappedComponent {...props} width="xs" />;
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -168,7 +172,7 @@ function Sidebar({
 
     return (
         <>
-            <Hidden mdDown>
+            <Hidden lgDown>
                 <Drawer
                     variant="permanent"
                     className={clsx(classes.drawer, {

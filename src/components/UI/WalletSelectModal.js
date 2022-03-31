@@ -7,17 +7,18 @@ import {
     Dialog,
     DialogContent,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-
-import withWidth from "@material-ui/core/withWidth";
-
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import Alert from "@mui/material/Alert";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 import metamaskLogo from "assets/images/wallets/metamask.svg";
 import walletconnectLogo from "assets/images/wallets/walletconnect-logo.svg";
+
+// FIXME checkout https://mui.com/components/use-media-query/#migrating-from-withwidth
 
 const useStyles = makeStyles((theme) => ({
     dialog: {
@@ -43,31 +44,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "0.875rem",
         fontWeight: "500",
         color: "#ffffff",
-    },
-    toggleButton: {
-        flexWrap: "wrap",
-        "& .MuiButtonBase-root": {
-            borderRadius: "4px",
-            padding: "16px",
-            marginBottom: "24px",
-        },
-        "& .MuiToggleButton-label": {
-            flexDirection: "column",
-        },
-        "& .MuiToggleButtonGroup-groupedHorizontal:not(:first-child) ": {
-            marginLeft: 16,
-        },
-        "& .MuiToggleButton-root": {
-            borderTop: "1px solid rgba(255, 255, 255, 0.12)",
-            width: "270px",
-            borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
-            marginBotton: "240px",
-        },
-
-        "& .MuiToggleButton-root.Mui-selected": {
-            backgroundColor: "rgba(255, 255, 255, 0.02)",
-            border: "solid 1px rgba(255, 255, 255, .7) ",
-        },
     },
     avatar: {
         backgroundColor: "transparent",
@@ -122,11 +98,8 @@ function WalletSelectModal({
     handleDismiss,
 }) {
     const classes = useStyles();
-
-    const isSmallScreen = /xs/.test(width);
-    const buttonProps = {
-        orientation: isSmallScreen ? "vertical" : "horizontal",
-    };
+    const theme = useTheme();
+    const mdOnly = useMediaQuery(theme.breakpoints.down("md"));
 
     // displays wallets and ignore metamask if not inject (it has no way of detecting if it's metamask or for example injected brave)
     const displayWallet = (wallet) => {
@@ -174,11 +147,37 @@ function WalletSelectModal({
         return (
             <DialogContent className={classes.dialogContent}>
                 <ToggleButtonGroup
+                    orientation={mdOnly ? "vertical" : "horizontal"}
                     exclusive
                     onChange={handleWalletSelect}
                     aria-label="Wallet Select"
-                    className={classes.toggleButton}
-                    {...buttonProps}
+                    sx={{
+                        "& .MuiButtonBase-root": {
+                            borderRadius: "4px",
+                            padding: "16px",
+                            marginBottom: "24px",
+                        },
+                        "& .MuiToggleButtonGroup-groupedHorizontal:not(:first-child)":
+                            {
+                                marginLeft: "16px",
+                                borderLeft:
+                                    "solid 1px rgba(255, 255, 255, .12) ",
+                                borderRadius: "4px",
+                            },
+                        "& .MuiToggleButton-root": {
+                            width: "270px",
+                            flexDirection: "column",
+                        },
+
+                        "& .MuiToggleButton-root.Mui-selected": {
+                            backgroundColor: "rgba(255, 255, 255, 0.02)",
+                            border: "solid 1px rgba(255, 255, 255, .7) ",
+                        },
+                        "& .MuiDialogContent-root ": {
+                            display: "flex",
+                            justifyContent: "center",
+                        },
+                    }}
                 >
                     {wallets.map((wallet) => displayWallet(wallet))}
                 </ToggleButtonGroup>
@@ -228,10 +227,12 @@ function WalletSelectModal({
     return (
         <div>
             <Dialog
+                PaperProps={{
+                    elevation: 0,
+                }}
                 aria-labelledby="pool-select"
                 open={showWalletSelection || askToConnect}
                 disableEscapeKeyDown
-                disableBackdropClick
                 maxWidth="md"
                 className={classes.dialog}
             >
@@ -275,4 +276,4 @@ WalletSelectModal.propTypes = {
     width: PropTypes.string.isRequired,
 };
 
-export default withWidth()(WalletSelectModal);
+export default WalletSelectModal;

@@ -8,15 +8,15 @@ import {
     Box,
     Button,
     Grid,
-    makeStyles,
     Dialog,
     Divider,
     Tooltip,
     Typography,
     SvgIcon,
     CircularProgress,
-} from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import IconButton from "@mui/material/IconButton";
 
 // Section 3: Components & Containers import from the application
 
@@ -34,17 +34,17 @@ const useStyles = makeStyles((theme) => ({
         "& .MuiButton-label": {
             justifyContent: "flex-end",
         },
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("sm")]: {
             marginRight: 8,
         },
-        [theme.breakpoints.between("sm", "md")]: {
+        [theme.breakpoints.between("sm", "lg")]: {
             marginRight: 24,
         },
     },
     appBar: {
         paddingLeft: "0px",
         paddingRight: "0px",
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("sm")]: {
             paddingLeft: "16px",
             paddingRight: "16px",
             paddingTop: "8px",
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
         display: "inline-flex",
         paddingTop: "1px",
         height: "32px",
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("sm")]: {
             fontSize: "0.825rem",
         },
     },
@@ -161,7 +161,7 @@ function Rewards({
                     container
                     alignItems="center"
                     display="flex"
-                    justify="flex-end"
+                    justifyContent="flex-end"
                 >
                     <Grid item>
                         <Box display="flex" px={1}>
@@ -193,6 +193,9 @@ function Rewards({
                 onClose={handleClose}
                 aria-labelledby="gnosis-notification"
                 open={open}
+                PaperProps={{
+                    elevation: 0,
+                }}
             >
                 <Box
                     pl={2}
@@ -205,7 +208,7 @@ function Rewards({
                 >
                     <Box>Your ALK Rewards</Box>
                     <Box>
-                        <IconButton onClick={handleClose}>
+                        <IconButton onClick={handleClose} size="large">
                             <SvgIcon fontSize="default">
                                 <XIcon />
                             </SvgIcon>

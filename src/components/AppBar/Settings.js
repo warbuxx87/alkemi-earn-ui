@@ -14,8 +14,9 @@ import {
     TextField,
     Tooltip,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 import { Settings as SettingsIcon } from "react-feather";
@@ -83,7 +84,12 @@ function Settings() {
     return (
         <>
             <Tooltip title="Settings">
-                <IconButton color="inherit" onClick={handleOpen} ref={ref}>
+                <IconButton
+                    color="inherit"
+                    onClick={handleOpen}
+                    ref={ref}
+                    size="large"
+                >
                     <SvgIcon fontSize="small">
                         <SettingsIcon />
                     </SvgIcon>

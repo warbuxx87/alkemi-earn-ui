@@ -13,18 +13,18 @@ import {
     FormControl,
     FormControlLabel,
     Grid,
-    makeStyles,
     Radio,
     RadioGroup,
     TextField,
     Typography,
-} from "@material-ui/core";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import Autocomplete from "@mui/material/Autocomplete";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
-import SwapVertIcon from "@material-ui/icons/SwapVert";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 // Section 3: Components & Containers import from the application
 
@@ -79,9 +79,10 @@ const useStyles = makeStyles((theme) => ({
         "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
             border: "2px solid #000000",
         },
-        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            border: "2px solid #000000",
-        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+                border: "2px solid #000000",
+            },
     },
     // collapse Div
     expand: {
@@ -290,7 +291,7 @@ const Swap = ({ ...rest }) => {
                                     md={6}
                                     xs
                                     container
-                                    justify="flex-end"
+                                    justifyContent="flex-end"
                                 >
                                     <Typography
                                         variant="body2"
@@ -319,7 +320,7 @@ const Swap = ({ ...rest }) => {
                                     md={6}
                                     xs
                                     container
-                                    justify="flex-end"
+                                    justifyContent="flex-end"
                                 >
                                     <Typography
                                         variant="body2"

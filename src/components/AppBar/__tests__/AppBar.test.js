@@ -4,7 +4,12 @@ import AppBar from "../AppBar";
 
 import { render, screen } from "@testing-library/react";
 
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import {
+    createTheme,
+    ThemeProvider,
+    StyledEngineProvider,
+    adaptV4Theme,
+} from "@mui/material/styles";
 
 import ComponentsWrapper from "utils/tests-utils/ComponentsWrapper";
 
@@ -30,8 +35,8 @@ describe("AppBar component", () => {
             </ComponentsWrapper>
         );
 
-        const connectButtonContent = screen.getByTestId("connectButton")
-            .textContent;
+        const connectButtonContent =
+            screen.getByTestId("connectButton").textContent;
 
         // value of connectButtonContent should be 'Connect'
         expect(connectButtonContent).toBe("Connect");
@@ -53,15 +58,19 @@ describe("AppBar component", () => {
 
     it("has title's value change when the prop change", async () => {
         // Setting the initialWidth as material-ui's mediaqueries do not react to window resize (as per the docs), this method works like a charm
-        let theme = createMuiTheme({
-            props: { MuiWithWidth: { initialWidth: "lg" } },
-        });
+        let theme = createTheme(
+            adaptV4Theme({
+                props: { MuiWithWidth: { initialWidth: "lg" } },
+            })
+        );
 
         const { rerender } = render(
             <ComponentsWrapper>
-                <MuiThemeProvider theme={theme}>
-                    <AppBar title="Dashboard" />
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={theme}>
+                        <AppBar title="Dashboard" />
+                    </ThemeProvider>
+                </StyledEngineProvider>
             </ComponentsWrapper>
         );
 
@@ -69,9 +78,11 @@ describe("AppBar component", () => {
 
         rerender(
             <ComponentsWrapper>
-                <MuiThemeProvider theme={theme}>
-                    <AppBar title="Borrow" />
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={theme}>
+                        <AppBar title="Borrow" />
+                    </ThemeProvider>
+                </StyledEngineProvider>
             </ComponentsWrapper>
         );
 
@@ -79,15 +90,19 @@ describe("AppBar component", () => {
         expect(screen.getByTestId("title").textContent).toBe("Borrow");
 
         // changing mediaQuery size
-        theme = createMuiTheme({
-            props: { MuiWithWidth: { initialWidth: "xs" } },
-        });
+        theme = createTheme(
+            adaptV4Theme({
+                props: { MuiWithWidth: { initialWidth: "xs" } },
+            })
+        );
 
         rerender(
             <ComponentsWrapper>
-                <MuiThemeProvider theme={theme}>
-                    <AppBar title="Borrow" />
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={theme}>
+                        <AppBar title="Borrow" />
+                    </ThemeProvider>
+                </StyledEngineProvider>
             </ComponentsWrapper>
         );
 

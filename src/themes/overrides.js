@@ -13,7 +13,7 @@ const overrides = {
     },
     MuiDivider: {
         root: {
-            backgroundColor: "rgba(255, 255, 255, 0.10)",
+            backgroundColor: "#0e0e0e",
         },
     },
 
@@ -24,9 +24,10 @@ const overrides = {
     },
     MuiInput: {
         root: {
-            "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
-                display: "none",
-            },
+            "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+                {
+                    display: "none",
+                },
         },
     },
     MuiTooltip: {
@@ -82,11 +83,6 @@ const overrides = {
     MuiPickersCalendarHeader: {
         dayLabel: {
             color: "#a7a7a7",
-        },
-    },
-    MuiBackdrop: {
-        root: {
-            backgroundColor: "rgba(0, 1, 6, 0.7)",
         },
     },
 };

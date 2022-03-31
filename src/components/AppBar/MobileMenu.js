@@ -13,8 +13,9 @@ import {
     ListItem,
     ListItemText,
     SvgIcon,
-} from "@material-ui/core";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import createStyles from "@mui/styles/createStyles";
 
 import { XCircle as XIcon, Menu as MenuIcon } from "react-feather";
 
@@ -90,7 +91,7 @@ export default function MobileMenu({ walletIsLiquidator }) {
                         p={1}
                     >
                         <SidebarHeader />
-                        <IconButton onClick={handleClose}>
+                        <IconButton onClick={handleClose} size="large">
                             <SvgIcon fontSize="small">
                                 <XIcon />
                             </SvgIcon>

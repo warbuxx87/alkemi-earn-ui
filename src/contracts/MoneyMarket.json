@@ -3,36 +3,28 @@
     "abi": [
         {
             "constant": true,
-            "inputs": [{ "name": "", "type": "address" }],
-            "name": "KYCAdmins",
-            "outputs": [{ "name": "", "type": "bool" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [{ "name": "", "type": "address" }],
-            "name": "customersWithKYC",
-            "outputs": [{ "name": "", "type": "bool" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "priceOracle",
-            "outputs": [{ "name": "", "type": "address" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
             "inputs": [],
             "name": "pendingAdmin",
-            "outputs": [{ "name": "", "type": "address" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "wethAddress",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -41,7 +33,12 @@
             "constant": true,
             "inputs": [],
             "name": "paused",
-            "outputs": [{ "name": "", "type": "bool" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -49,11 +46,36 @@
         {
             "constant": true,
             "inputs": [
-                { "name": "", "type": "address" },
-                { "name": "", "type": "address" }
+                {
+                    "name": "",
+                    "type": "address"
+                },
+                {
+                    "name": "",
+                    "type": "address"
+                }
             ],
             "name": "originationFeeBalance",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "oracle",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -62,25 +84,62 @@
             "constant": true,
             "inputs": [],
             "name": "liquidationDiscount",
-            "outputs": [{ "name": "mantissa", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "mantissa",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
         },
         {
             "constant": true,
-            "inputs": [{ "name": "", "type": "address" }],
+            "inputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
             "name": "markets",
             "outputs": [
-                { "name": "isSupported", "type": "bool" },
-                { "name": "blockNumber", "type": "uint256" },
-                { "name": "interestRateModel", "type": "address" },
-                { "name": "totalSupply", "type": "uint256" },
-                { "name": "supplyRateMantissa", "type": "uint256" },
-                { "name": "supplyIndex", "type": "uint256" },
-                { "name": "totalBorrows", "type": "uint256" },
-                { "name": "borrowRateMantissa", "type": "uint256" },
-                { "name": "borrowIndex", "type": "uint256" }
+                {
+                    "name": "isSupported",
+                    "type": "bool"
+                },
+                {
+                    "name": "blockNumber",
+                    "type": "uint256"
+                },
+                {
+                    "name": "interestRateModel",
+                    "type": "address"
+                },
+                {
+                    "name": "totalSupply",
+                    "type": "uint256"
+                },
+                {
+                    "name": "supplyRateMantissa",
+                    "type": "uint256"
+                },
+                {
+                    "name": "supplyIndex",
+                    "type": "uint256"
+                },
+                {
+                    "name": "totalBorrows",
+                    "type": "uint256"
+                },
+                {
+                    "name": "borrowRateMantissa",
+                    "type": "uint256"
+                },
+                {
+                    "name": "borrowIndex",
+                    "type": "uint256"
+                }
             ],
             "payable": false,
             "stateMutability": "view",
@@ -90,25 +149,12 @@
             "constant": true,
             "inputs": [],
             "name": "WETHContract",
-            "outputs": [{ "name": "", "type": "address" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "minimumCollateralRatioMantissa",
-            "outputs": [{ "name": "", "type": "uint256" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "maximumLiquidationDiscountMantissa",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -117,7 +163,12 @@
             "constant": true,
             "inputs": [],
             "name": "collateralRatio",
-            "outputs": [{ "name": "mantissa", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "mantissa",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -125,13 +176,25 @@
         {
             "constant": true,
             "inputs": [
-                { "name": "", "type": "address" },
-                { "name": "", "type": "address" }
+                {
+                    "name": "",
+                    "type": "address"
+                },
+                {
+                    "name": "",
+                    "type": "address"
+                }
             ],
             "name": "supplyBalances",
             "outputs": [
-                { "name": "principal", "type": "uint256" },
-                { "name": "interestIndex", "type": "uint256" }
+                {
+                    "name": "principal",
+                    "type": "uint256"
+                },
+                {
+                    "name": "interestIndex",
+                    "type": "uint256"
+                }
             ],
             "payable": false,
             "stateMutability": "view",
@@ -141,43 +204,31 @@
             "constant": true,
             "inputs": [],
             "name": "originationFee",
-            "outputs": [{ "name": "mantissa", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "mantissa",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
         },
         {
             "constant": true,
-            "inputs": [{ "name": "", "type": "uint256" }],
+            "inputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "name": "collateralMarkets",
-            "outputs": [{ "name": "", "type": "address" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "_guardCounter",
-            "outputs": [{ "name": "", "type": "uint256" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "closeFactorMantissa",
-            "outputs": [{ "name": "", "type": "uint256" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "rewardControl",
-            "outputs": [{ "name": "", "type": "address" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -186,16 +237,12 @@
             "constant": true,
             "inputs": [],
             "name": "admin",
-            "outputs": [{ "name": "", "type": "address" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [{ "name": "", "type": "address" }],
-            "name": "liquidators",
-            "outputs": [{ "name": "", "type": "bool" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -203,13 +250,25 @@
         {
             "constant": true,
             "inputs": [
-                { "name": "", "type": "address" },
-                { "name": "", "type": "address" }
+                {
+                    "name": "",
+                    "type": "address"
+                },
+                {
+                    "name": "",
+                    "type": "address"
+                }
             ],
             "name": "borrowBalances",
             "outputs": [
-                { "name": "principal", "type": "uint256" },
-                { "name": "interestIndex", "type": "uint256" }
+                {
+                    "name": "principal",
+                    "type": "uint256"
+                },
+                {
+                    "name": "interestIndex",
+                    "type": "uint256"
+                }
             ],
             "payable": false,
             "stateMutability": "view",
@@ -217,35 +276,87 @@
         },
         {
             "constant": true,
-            "inputs": [{ "name": "", "type": "address" }],
-            "name": "managers",
-            "outputs": [{ "name": "", "type": "bool" }],
+            "inputs": [],
+            "name": "initializationDone",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
         },
-        { "payable": true, "stateMutability": "payable", "type": "fallback" },
+        {
+            "payable": true,
+            "stateMutability": "payable",
+            "type": "fallback"
+        },
         {
             "anonymous": false,
             "inputs": [
-                { "indexed": true, "name": "Liquidator", "type": "address" },
-                { "indexed": false, "name": "newStatus", "type": "bool" }
+                {
+                    "indexed": false,
+                    "name": "wethAddress",
+                    "type": "address"
+                }
             ],
-            "name": "LiquidatorChanged",
+            "name": "WETHAddressSet",
             "type": "event"
         },
         {
             "anonymous": false,
             "inputs": [
-                { "indexed": false, "name": "account", "type": "address" },
-                { "indexed": false, "name": "asset", "type": "address" },
-                { "indexed": false, "name": "amount", "type": "uint256" },
+                {
+                    "indexed": false,
+                    "name": "Liquidator",
+                    "type": "address"
+                }
+            ],
+            "name": "LiquidatorAdded",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "Liquidator",
+                    "type": "address"
+                }
+            ],
+            "name": "LiquidatorRemoved",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "amount",
+                    "type": "uint256"
+                },
                 {
                     "indexed": false,
                     "name": "startingBalance",
                     "type": "uint256"
                 },
-                { "indexed": false, "name": "newBalance", "type": "uint256" }
+                {
+                    "indexed": false,
+                    "name": "newBalance",
+                    "type": "uint256"
+                }
             ],
             "name": "SupplyReceived",
             "type": "event"
@@ -253,15 +364,63 @@
         {
             "anonymous": false,
             "inputs": [
-                { "indexed": false, "name": "account", "type": "address" },
-                { "indexed": false, "name": "asset", "type": "address" },
-                { "indexed": false, "name": "amount", "type": "uint256" },
+                {
+                    "indexed": false,
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "amount",
+                    "type": "uint256"
+                },
                 {
                     "indexed": false,
                     "name": "startingBalance",
                     "type": "uint256"
                 },
-                { "indexed": false, "name": "newBalance", "type": "uint256" }
+                {
+                    "indexed": false,
+                    "name": "newBalance",
+                    "type": "uint256"
+                }
+            ],
+            "name": "SupplyOrgFeeAsAdmin",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "amount",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "startingBalance",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "newBalance",
+                    "type": "uint256"
+                }
             ],
             "name": "SupplyWithdrawn",
             "type": "event"
@@ -269,9 +428,21 @@
         {
             "anonymous": false,
             "inputs": [
-                { "indexed": false, "name": "account", "type": "address" },
-                { "indexed": false, "name": "asset", "type": "address" },
-                { "indexed": false, "name": "amount", "type": "uint256" },
+                {
+                    "indexed": false,
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "amount",
+                    "type": "uint256"
+                },
                 {
                     "indexed": false,
                     "name": "startingBalance",
@@ -282,7 +453,11 @@
                     "name": "borrowAmountWithFee",
                     "type": "uint256"
                 },
-                { "indexed": false, "name": "newBalance", "type": "uint256" }
+                {
+                    "indexed": false,
+                    "name": "newBalance",
+                    "type": "uint256"
+                }
             ],
             "name": "BorrowTaken",
             "type": "event"
@@ -290,15 +465,31 @@
         {
             "anonymous": false,
             "inputs": [
-                { "indexed": false, "name": "account", "type": "address" },
-                { "indexed": false, "name": "asset", "type": "address" },
-                { "indexed": false, "name": "amount", "type": "uint256" },
+                {
+                    "indexed": false,
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "amount",
+                    "type": "uint256"
+                },
                 {
                     "indexed": false,
                     "name": "startingBalance",
                     "type": "uint256"
                 },
-                { "indexed": false, "name": "newBalance", "type": "uint256" }
+                {
+                    "indexed": false,
+                    "name": "newBalance",
+                    "type": "uint256"
+                }
             ],
             "name": "BorrowRepaid",
             "type": "event"
@@ -306,21 +497,66 @@
         {
             "anonymous": false,
             "inputs": [
-                { "indexed": true, "name": "targetAccount", "type": "address" },
-                { "indexed": false, "name": "assetBorrow", "type": "address" },
+                {
+                    "indexed": false,
+                    "name": "targetAccount",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "assetBorrow",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "borrowBalanceBefore",
+                    "type": "uint256"
+                },
                 {
                     "indexed": false,
                     "name": "borrowBalanceAccumulated",
                     "type": "uint256"
                 },
-                { "indexed": false, "name": "amountRepaid", "type": "uint256" },
-                { "indexed": true, "name": "liquidator", "type": "address" },
+                {
+                    "indexed": false,
+                    "name": "amountRepaid",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "borrowBalanceAfter",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "liquidator",
+                    "type": "address"
+                },
                 {
                     "indexed": false,
                     "name": "assetCollateral",
                     "type": "address"
                 },
-                { "indexed": false, "name": "amountSeized", "type": "uint256" }
+                {
+                    "indexed": false,
+                    "name": "collateralBalanceBefore",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "collateralBalanceAccumulated",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "amountSeized",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "collateralBalanceAfter",
+                    "type": "uint256"
+                }
             ],
             "name": "BorrowLiquidated",
             "type": "event"
@@ -328,14 +564,155 @@
         {
             "anonymous": false,
             "inputs": [
-                { "indexed": true, "name": "asset", "type": "address" },
+                {
+                    "indexed": false,
+                    "name": "oldPendingAdmin",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "newPendingAdmin",
+                    "type": "address"
+                }
+            ],
+            "name": "NewPendingAdmin",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "oldAdmin",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "newAdmin",
+                    "type": "address"
+                }
+            ],
+            "name": "NewAdmin",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "oldOracle",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "newOracle",
+                    "type": "address"
+                }
+            ],
+            "name": "NewOracle",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "interestRateModel",
+                    "type": "address"
+                }
+            ],
+            "name": "SupportedMarket",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "oldCollateralRatioMantissa",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "newCollateralRatioMantissa",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "oldLiquidationDiscountMantissa",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "newLiquidationDiscountMantissa",
+                    "type": "uint256"
+                }
+            ],
+            "name": "NewRiskParameters",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "oldOriginationFeeMantissa",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "newOriginationFeeMantissa",
+                    "type": "uint256"
+                }
+            ],
+            "name": "NewOriginationFee",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "interestRateModel",
+                    "type": "address"
+                }
+            ],
+            "name": "SetMarketInterestRateModel",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "asset",
+                    "type": "address"
+                },
                 {
                     "indexed": false,
                     "name": "equityAvailableBefore",
                     "type": "uint256"
                 },
-                { "indexed": false, "name": "amount", "type": "uint256" },
-                { "indexed": true, "name": "owner", "type": "address" }
+                {
+                    "indexed": false,
+                    "name": "amount",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "owner",
+                    "type": "address"
+                }
             ],
             "name": "EquityWithdrawn",
             "type": "event"
@@ -343,27 +720,93 @@
         {
             "anonymous": false,
             "inputs": [
-                { "indexed": true, "name": "KYCAdmin", "type": "address" },
-                { "indexed": false, "name": "newStatus", "type": "bool" }
+                {
+                    "indexed": false,
+                    "name": "asset",
+                    "type": "address"
+                }
             ],
-            "name": "KYCAdminChanged",
+            "name": "SuspendedMarket",
             "type": "event"
         },
         {
             "anonymous": false,
             "inputs": [
-                { "indexed": true, "name": "KYCCustomer", "type": "address" },
-                { "indexed": false, "name": "newStatus", "type": "bool" }
+                {
+                    "indexed": false,
+                    "name": "newState",
+                    "type": "bool"
+                }
             ],
-            "name": "KYCCustomerChanged",
+            "name": "SetPaused",
             "type": "event"
         },
         {
             "anonymous": false,
             "inputs": [
-                { "indexed": false, "name": "error", "type": "uint256" },
-                { "indexed": false, "name": "info", "type": "uint256" },
-                { "indexed": false, "name": "detail", "type": "uint256" }
+                {
+                    "indexed": false,
+                    "name": "KYCAdmin",
+                    "type": "address"
+                }
+            ],
+            "name": "KYCAdminAdded",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "KYCAdmin",
+                    "type": "address"
+                }
+            ],
+            "name": "KYCAdminRemoved",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "KYCCustomer",
+                    "type": "address"
+                }
+            ],
+            "name": "KYCCustomerAdded",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "KYCCustomer",
+                    "type": "address"
+                }
+            ],
+            "name": "KYCCustomerRemoved",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "name": "error",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "info",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "detail",
+                    "type": "uint256"
+                }
             ],
             "name": "Failure",
             "type": "event"
@@ -380,11 +823,18 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "KYCAdmin", "type": "address" },
-                { "name": "newStatus", "type": "bool" }
+                {
+                    "name": "KYCAdmin",
+                    "type": "address"
+                }
             ],
-            "name": "_changeKYCAdmin",
-            "outputs": [],
+            "name": "addKYCAdmin",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
@@ -392,11 +842,18 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "customer", "type": "address" },
-                { "name": "newStatus", "type": "bool" }
+                {
+                    "name": "KYCAdmin",
+                    "type": "address"
+                }
             ],
-            "name": "_changeCustomerKYC",
-            "outputs": [],
+            "name": "removeKYCAdmin",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
@@ -404,20 +861,75 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "liquidator", "type": "address" },
-                { "name": "newStatus", "type": "bool" }
+                {
+                    "name": "customer",
+                    "type": "address"
+                }
             ],
-            "name": "_changeLiquidator",
-            "outputs": [],
+            "name": "addCustomerKYC",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "customer",
+                    "type": "address"
+                }
+            ],
+            "name": "removeCustomerKYC",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
         },
         {
             "constant": true,
-            "inputs": [{ "name": "asset", "type": "address" }],
-            "name": "assetPrices",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "inputs": [
+                {
+                    "name": "customer",
+                    "type": "address"
+                }
+            ],
+            "name": "verifyKYC",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "_KYCAdmin",
+                    "type": "address"
+                }
+            ],
+            "name": "checkKYCAdmin",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -425,16 +937,108 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "newPendingAdmin", "type": "address" },
-                { "name": "newOracle", "type": "address" },
-                { "name": "requestedState", "type": "bool" },
-                { "name": "originationFeeMantissa", "type": "uint256" },
-                { "name": "newCloseFactorMantissa", "type": "uint256" },
-                { "name": "wethContractAddress", "type": "address" },
-                { "name": "_rewardControl", "type": "address" }
+                {
+                    "name": "liquidator",
+                    "type": "address"
+                }
             ],
-            "name": "_adminFunctions",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "name": "addLiquidator",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "liquidator",
+                    "type": "address"
+                }
+            ],
+            "name": "removeLiquidator",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "liquidator",
+                    "type": "address"
+                }
+            ],
+            "name": "verifyLiquidator",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "getCollateralMarketsLength",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "asset",
+                    "type": "address"
+                }
+            ],
+            "name": "assetPrices",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "newPendingAdmin",
+                    "type": "address"
+                }
+            ],
+            "name": "_setPendingAdmin",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
@@ -443,16 +1047,69 @@
             "constant": false,
             "inputs": [],
             "name": "_acceptAdmin",
-            "outputs": [],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "newOracle",
+                    "type": "address"
+                }
+            ],
+            "name": "_setOracle",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "requestedState",
+                    "type": "bool"
+                }
+            ],
+            "name": "_setPaused",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
         },
         {
             "constant": true,
-            "inputs": [{ "name": "account", "type": "address" }],
+            "inputs": [
+                {
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
             "name": "getAccountLiquidity",
-            "outputs": [{ "name": "", "type": "int256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "int256"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -460,11 +1117,22 @@
         {
             "constant": true,
             "inputs": [
-                { "name": "account", "type": "address" },
-                { "name": "asset", "type": "address" }
+                {
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "name": "asset",
+                    "type": "address"
+                }
             ],
             "name": "getSupplyBalance",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -472,11 +1140,22 @@
         {
             "constant": true,
             "inputs": [
-                { "name": "account", "type": "address" },
-                { "name": "asset", "type": "address" }
+                {
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "name": "asset",
+                    "type": "address"
+                }
             ],
             "name": "getBorrowBalance",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -484,20 +1163,22 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "asset", "type": "address" },
-                { "name": "interestRateModel", "type": "address" }
+                {
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "name": "interestRateModel",
+                    "type": "address"
+                }
             ],
             "name": "_supportMarket",
-            "outputs": [{ "name": "", "type": "uint256" }],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [{ "name": "asset", "type": "address" }],
-            "name": "_suspendMarket",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
@@ -505,11 +1186,41 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "collateralRatioMantissa", "type": "uint256" },
-                { "name": "liquidationDiscountMantissa", "type": "uint256" }
+                {
+                    "name": "asset",
+                    "type": "address"
+                }
+            ],
+            "name": "_suspendMarket",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "collateralRatioMantissa",
+                    "type": "uint256"
+                },
+                {
+                    "name": "liquidationDiscountMantissa",
+                    "type": "uint256"
+                }
             ],
             "name": "_setRiskParameters",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
@@ -517,11 +1228,41 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "asset", "type": "address" },
-                { "name": "interestRateModel", "type": "address" }
+                {
+                    "name": "originationFeeMantissa",
+                    "type": "uint256"
+                }
+            ],
+            "name": "_setOriginationFee",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "name": "interestRateModel",
+                    "type": "address"
+                }
             ],
             "name": "_setMarketInterestRateModel",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
@@ -529,11 +1270,22 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "asset", "type": "address" },
-                { "name": "amount", "type": "uint256" }
+                {
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint256"
+                }
             ],
             "name": "_withdrawEquity",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
@@ -541,11 +1293,41 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "asset", "type": "address" },
-                { "name": "amount", "type": "uint256" }
+                {
+                    "name": "wethContractAddress",
+                    "type": "address"
+                }
+            ],
+            "name": "setWethAddress",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint256"
+                }
             ],
             "name": "supply",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": true,
             "stateMutability": "payable",
             "type": "function"
@@ -553,23 +1335,71 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "asset", "type": "address" },
-                { "name": "requestedAmount", "type": "uint256" }
+                {
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "sendEtherToUser",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "name": "requestedAmount",
+                    "type": "uint256"
+                }
             ],
             "name": "withdraw",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
         },
         {
             "constant": true,
-            "inputs": [{ "name": "userAddress", "type": "address" }],
+            "inputs": [
+                {
+                    "name": "userAddress",
+                    "type": "address"
+                }
+            ],
             "name": "calculateAccountValues",
             "outputs": [
-                { "name": "", "type": "uint256" },
-                { "name": "", "type": "uint256" },
-                { "name": "", "type": "uint256" }
+                {
+                    "name": "",
+                    "type": "uint256"
+                },
+                {
+                    "name": "",
+                    "type": "uint256"
+                },
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
             ],
             "payable": false,
             "stateMutability": "view",
@@ -578,11 +1408,22 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "asset", "type": "address" },
-                { "name": "amount", "type": "uint256" }
+                {
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint256"
+                }
             ],
             "name": "repayBorrow",
-            "outputs": [{ "name": "", "type": "uint256" }],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "payable": true,
             "stateMutability": "payable",
             "type": "function"
@@ -590,39 +1431,55 @@
         {
             "constant": false,
             "inputs": [
-                { "name": "targetAccount", "type": "address" },
-                { "name": "assetBorrow", "type": "address" },
-                { "name": "assetCollateral", "type": "address" },
-                { "name": "requestedAmountClose", "type": "uint256" }
+                {
+                    "name": "targetAccount",
+                    "type": "address"
+                },
+                {
+                    "name": "assetBorrow",
+                    "type": "address"
+                },
+                {
+                    "name": "assetCollateral",
+                    "type": "address"
+                },
+                {
+                    "name": "requestedAmountClose",
+                    "type": "uint256"
+                }
             ],
             "name": "liquidateBorrow",
-            "outputs": [{ "name": "", "type": "uint256" }],
-            "payable": true,
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [
-                { "name": "asset", "type": "address" },
-                { "name": "amount", "type": "uint256" }
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
             ],
-            "name": "borrow",
-            "outputs": [{ "name": "", "type": "uint256" }],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
         },
         {
-            "constant": true,
-            "inputs": [{ "name": "asset", "type": "address" }],
-            "name": "getMarketBalances",
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "borrow",
             "outputs": [
-                { "name": "", "type": "uint256" },
-                { "name": "", "type": "uint256" }
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
             ],
             "payable": false,
-            "stateMutability": "view",
+            "stateMutability": "nonpayable",
             "type": "function"
         }
     ],
@@ -1766,8 +2623,7 @@
                                             "name": "revert",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13290,
-                                                13291
+                                                13290, 13291
                                             ],
                                             "referencedDeclaration": 13290,
                                             "src": "1795:6:15",
@@ -7770,8 +8626,7 @@
                                                         "name": "require",
                                                         "nodeType": "Identifier",
                                                         "overloadedDeclarations": [
-                                                            13288,
-                                                            13289
+                                                            13288, 13289
                                                         ],
                                                         "referencedDeclaration": 13289,
                                                         "src": "18191:7:15",
@@ -8112,8 +8967,7 @@
                                                         "name": "require",
                                                         "nodeType": "Identifier",
                                                         "overloadedDeclarations": [
-                                                            13288,
-                                                            13289
+                                                            13288, 13289
                                                         ],
                                                         "referencedDeclaration": 13289,
                                                         "src": "18727:7:15",
@@ -10399,8 +11253,7 @@
                                                         "name": "require",
                                                         "nodeType": "Identifier",
                                                         "overloadedDeclarations": [
-                                                            13288,
-                                                            13289
+                                                            13288, 13289
                                                         ],
                                                         "referencedDeclaration": 13289,
                                                         "src": "21164:7:15",
@@ -21063,8 +21916,7 @@
                                             "name": "require",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13288,
-                                                13289
+                                                13288, 13289
                                             ],
                                             "referencedDeclaration": 13288,
                                             "src": "35240:7:15",
@@ -22078,8 +22930,7 @@
                                             "name": "require",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13288,
-                                                13289
+                                                13288, 13289
                                             ],
                                             "referencedDeclaration": 13288,
                                             "src": "36429:7:15",
@@ -22361,8 +23212,7 @@
                                             "name": "require",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13288,
-                                                13289
+                                                13288, 13289
                                             ],
                                             "referencedDeclaration": 13288,
                                             "src": "36681:7:15",
@@ -23114,8 +23964,7 @@
                                             "name": "require",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13288,
-                                                13289
+                                                13288, 13289
                                             ],
                                             "referencedDeclaration": 13288,
                                             "src": "37725:7:15",
@@ -23397,8 +24246,7 @@
                                             "name": "require",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13288,
-                                                13289
+                                                13288, 13289
                                             ],
                                             "referencedDeclaration": 13288,
                                             "src": "37977:7:15",
@@ -88697,8 +89545,7 @@
                                             "name": "revert",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13290,
-                                                13291
+                                                13290, 13291
                                             ],
                                             "referencedDeclaration": 13290,
                                             "src": "1795:6:15",
@@ -94701,8 +95548,7 @@
                                                         "name": "require",
                                                         "nodeType": "Identifier",
                                                         "overloadedDeclarations": [
-                                                            13288,
-                                                            13289
+                                                            13288, 13289
                                                         ],
                                                         "referencedDeclaration": 13289,
                                                         "src": "18191:7:15",
@@ -95043,8 +95889,7 @@
                                                         "name": "require",
                                                         "nodeType": "Identifier",
                                                         "overloadedDeclarations": [
-                                                            13288,
-                                                            13289
+                                                            13288, 13289
                                                         ],
                                                         "referencedDeclaration": 13289,
                                                         "src": "18727:7:15",
@@ -97330,8 +98175,7 @@
                                                         "name": "require",
                                                         "nodeType": "Identifier",
                                                         "overloadedDeclarations": [
-                                                            13288,
-                                                            13289
+                                                            13288, 13289
                                                         ],
                                                         "referencedDeclaration": 13289,
                                                         "src": "21164:7:15",
@@ -107994,8 +108838,7 @@
                                             "name": "require",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13288,
-                                                13289
+                                                13288, 13289
                                             ],
                                             "referencedDeclaration": 13288,
                                             "src": "35240:7:15",
@@ -109009,8 +109852,7 @@
                                             "name": "require",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13288,
-                                                13289
+                                                13288, 13289
                                             ],
                                             "referencedDeclaration": 13288,
                                             "src": "36429:7:15",
@@ -109292,8 +110134,7 @@
                                             "name": "require",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13288,
-                                                13289
+                                                13288, 13289
                                             ],
                                             "referencedDeclaration": 13288,
                                             "src": "36681:7:15",
@@ -110045,8 +110886,7 @@
                                             "name": "require",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13288,
-                                                13289
+                                                13288, 13289
                                             ],
                                             "referencedDeclaration": 13288,
                                             "src": "37725:7:15",
@@ -110328,8 +111168,7 @@
                                             "name": "require",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [
-                                                13288,
-                                                13289
+                                                13288, 13289
                                             ],
                                             "referencedDeclaration": 13288,
                                             "src": "37977:7:15",

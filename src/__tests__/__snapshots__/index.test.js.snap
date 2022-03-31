@@ -6,52 +6,47 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="ErrorFallback-root-63"
+        class="ErrorFallback-root-61"
       >
         <div
-          class="MuiContainer-root MuiContainer-maxWidthLg"
+          class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
         >
           <div
-            class="MuiBox-root MuiBox-root-130"
+            class="MuiBox-root css-1qm1lh"
           >
             <h2
-              class="MuiTypography-root MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignCenter"
+              class="MuiTypography-root MuiTypography-h2 MuiTypography-alignCenter css-d1qt2h-MuiTypography-root"
             >
               Oh no! Something Went Wrong
             </h2>
           </div>
           <h4
-            class="MuiTypography-root MuiTypography-h4 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+            class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter css-1b5o9os-MuiTypography-root"
           >
-            Cannot read property 'address_MoneyMarket' of undefined
+            Cannot read properties of undefined (reading 'address_MoneyMarket')
           </h4>
           <div
-            class="MuiBox-root MuiBox-root-131"
+            class="MuiBox-root css-gjw123"
           >
             <img
               alt="Error"
-              class="ErrorFallback-image-64"
+              class="ErrorFallback-image-62"
               src="404.svg"
             />
           </div>
           <div
-            class="MuiBox-root MuiBox-root-132"
+            class="MuiBox-root css-gjw123"
           >
-            <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+            <a
+              class="MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-km0dvb-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               to="/"
-              type="button"
             >
+              Back to home
               <span
-                class="MuiButton-label"
-              >
-                Back to home
-              </span>
-              <span
-                class="MuiTouchRipple-root"
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
               />
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -59,52 +54,47 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="ErrorFallback-root-63"
+      class="ErrorFallback-root-61"
     >
       <div
-        class="MuiContainer-root MuiContainer-maxWidthLg"
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
       >
         <div
-          class="MuiBox-root MuiBox-root-130"
+          class="MuiBox-root css-1qm1lh"
         >
           <h2
-            class="MuiTypography-root MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignCenter"
+            class="MuiTypography-root MuiTypography-h2 MuiTypography-alignCenter css-d1qt2h-MuiTypography-root"
           >
             Oh no! Something Went Wrong
           </h2>
         </div>
         <h4
-          class="MuiTypography-root MuiTypography-h4 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+          class="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter css-1b5o9os-MuiTypography-root"
         >
-          Cannot read property 'address_MoneyMarket' of undefined
+          Cannot read properties of undefined (reading 'address_MoneyMarket')
         </h4>
         <div
-          class="MuiBox-root MuiBox-root-131"
+          class="MuiBox-root css-gjw123"
         >
           <img
             alt="Error"
-            class="ErrorFallback-image-64"
+            class="ErrorFallback-image-62"
             src="404.svg"
           />
         </div>
         <div
-          class="MuiBox-root MuiBox-root-132"
+          class="MuiBox-root css-gjw123"
         >
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+          <a
+            class="MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-km0dvb-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             to="/"
-            type="button"
           >
+            Back to home
             <span
-              class="MuiButton-label"
-            >
-              Back to home
-            </span>
-            <span
-              class="MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
-          </button>
+          </a>
         </div>
       </div>
     </div>

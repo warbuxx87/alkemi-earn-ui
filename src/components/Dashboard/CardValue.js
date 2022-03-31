@@ -13,8 +13,8 @@ import {
     Divider,
     Grid,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { fromWei, formatPercent, format_str_to_kmb } from "utils/ui";
 
 // Section 3: Components & Containers import from the application
@@ -43,7 +43,7 @@ function Balance({ aggregatedBalance, currency, collateralRatio }) {
     const classes = useStyles();
     // Section 5: Code Component
     return (
-        <Card>
+        <Card elevation={0}>
             <CardContent className={classes.contentCard}>
                 <Box
                     className={classes.item}
@@ -54,7 +54,7 @@ function Balance({ aggregatedBalance, currency, collateralRatio }) {
                     <Grid
                         alignItems="center"
                         container
-                        justify="space-between"
+                        justifyContent="space-between"
                         spacing={3}
                     >
                         <Grid item>

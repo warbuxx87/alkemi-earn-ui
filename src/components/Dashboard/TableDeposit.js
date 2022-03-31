@@ -8,13 +8,14 @@ import Big from "big.js";
 // Section 2: Material-UI imports
 import {
     Box,
-    fade,
+    alpha,
     Table,
     TableBody,
     TableRow,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 //import { useHistory } from "react-router-dom";
 import DepositTableCell from "components/UI/TableCell";
@@ -57,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(1.5, 1),
         textTransform: "uppercase",
         color: theme.palette.success.main,
-        backgroundColor: fade(theme.palette.success.main, 0.08),
+        backgroundColor: alpha(theme.palette.success.main, 0.08),
     },
 }));
 

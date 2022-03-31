@@ -2,7 +2,12 @@
 import React from "react";
 import MobileMenu from "../MobileMenu";
 
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import {
+    createTheme,
+    ThemeProvider,
+    StyledEngineProvider,
+    adaptV4Theme,
+} from "@mui/material/styles";
 
 import { render, screen, fireEvent } from "@testing-library/react";
 
@@ -18,15 +23,19 @@ describe("MobileMenu component", () => {
 
     it("starts with menu closed", () => {
         // Setting the initialWidth as material-ui's mediaqueries do not react to window resize (as per the docs), this method works like a charm
-        const theme = createMuiTheme({
-            props: { MuiWithWidth: { initialWidth: "xs" } },
-        });
+        const theme = createTheme(
+            adaptV4Theme({
+                props: { MuiWithWidth: { initialWidth: "xs" } },
+            })
+        );
 
         render(
             <ComponentsWrapper>
-                <MuiThemeProvider theme={theme}>
-                    <MobileMenu />
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={theme}>
+                        <MobileMenu />
+                    </ThemeProvider>
+                </StyledEngineProvider>
             </ComponentsWrapper>
         );
 
@@ -35,15 +44,19 @@ describe("MobileMenu component", () => {
 
     it("open menu when openMenu button gets clicked", () => {
         // Setting the initialWidth as material-ui's mediaqueries do not react to window resize (as per the docs), this method works like a charm
-        const theme = createMuiTheme({
-            props: { MuiWithWidth: { initialWidth: "xs" } },
-        });
+        const theme = createTheme(
+            adaptV4Theme({
+                props: { MuiWithWidth: { initialWidth: "xs" } },
+            })
+        );
 
         render(
             <ComponentsWrapper>
-                <MuiThemeProvider theme={theme}>
-                    <MobileMenu />
-                </MuiThemeProvider>
+                <StyledEngineProvider injectFirst>
+                    <ThemeProvider theme={theme}>
+                        <MobileMenu />
+                    </ThemeProvider>
+                </StyledEngineProvider>
             </ComponentsWrapper>
         );
 

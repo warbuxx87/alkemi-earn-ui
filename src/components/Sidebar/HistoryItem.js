@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { History as HistoryIcon } from "../UI/Icons/history";
 
 // Section 3: Components & Containers import from the application

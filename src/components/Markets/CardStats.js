@@ -4,8 +4,8 @@
 import React from "react";
 
 // Section 2: Material-UI imports
-import { Box, LinearProgress, Typography } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { Box, LinearProgress, Typography } from "@mui/material";
+import withStyles from "@mui/styles/withStyles";
 
 // Section 3: Components & Containers import from the application
 import WETH from "assets/images/WETH.svg";

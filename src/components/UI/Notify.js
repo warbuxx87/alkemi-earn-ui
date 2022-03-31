@@ -1,12 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { IconButton, Box, CircularProgress } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
-import { AlertTitle } from "@material-ui/lab";
+import makeStyles from "@mui/styles/makeStyles";
+import { IconButton, Box, CircularProgress } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import { AlertTitle } from "@mui/material";
 
-import CloseIcon from "@material-ui/icons/Close";
-import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
-import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
+import CloseIcon from "@mui/icons-material/Close";
+import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
+import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 
 const useStyles = makeStyles((theme) => ({
     Success: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: 8,
         backgroundColor: "transparent",
         margin: "0px",
-        minWidth: "300px",
+        minWidth: "310px",
     },
     Title: {
         marginBottom: 0,

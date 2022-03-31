@@ -4,18 +4,13 @@
 import React from "react";
 
 // Section 2: Material-UI imports
-import {
-    IconButton,
-    Box,
-    Menu,
-    MenuItem,
-    SvgIcon,
-    makeStyles,
-} from "@material-ui/core";
+import { IconButton, Box, Menu, MenuItem, SvgIcon } from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 
-import MenuIcon from "@material-ui/icons/MoreHoriz";
+import MenuIcon from "@mui/icons-material/MoreHoriz";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({

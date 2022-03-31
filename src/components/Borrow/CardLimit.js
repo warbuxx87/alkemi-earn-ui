@@ -14,9 +14,9 @@ import {
     LinearProgress,
     Tooltip,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
-import Help from "@material-ui/icons/HelpOutline";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import Help from "@mui/icons-material/HelpOutline";
 
 // Section 3: Components & Containers import from the application
 
@@ -52,7 +52,7 @@ function BorrowLimit({ borrowLimit }) {
 
     // Section 5: Code Component
     return (
-        <Card>
+        <Card elevation={0}>
             <Box display="flex" alignItems="center" justifyContent="center">
                 <CardHeader title="Borrow Limit" className={classes.item} />
                 <Tooltip

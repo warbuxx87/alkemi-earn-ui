@@ -16,9 +16,10 @@ import {
     Grid,
     SvgIcon,
     Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
+import createStyles from "@mui/styles/createStyles";
 
 import { XCircle as XIcon } from "react-feather";
 
@@ -150,7 +151,7 @@ const DrawerWrapper = ({
                     className={classes.btnDrawer}
                     variant={triggerButtonVariant}
                     size="small"
-                    color={triggerButtonColor}
+                    color="secondary"
                     onClick={handleOpen}
                     disabled={walletIsKYCd !== true}
                 >
@@ -169,6 +170,7 @@ const DrawerWrapper = ({
                 onClose={handleClose}
                 open={isOpen}
                 variant="temporary"
+                elevation={0}
             >
                 <Box>
                     <Box
@@ -180,7 +182,7 @@ const DrawerWrapper = ({
                         <Typography variant="h4" color="textPrimary">
                             {mainTitle}
                         </Typography>
-                        <IconButton onClick={handleClose}>
+                        <IconButton onClick={handleClose} size="large">
                             <SvgIcon fontSize="small">
                                 <XIcon />
                             </SvgIcon>
@@ -265,7 +267,7 @@ const DrawerWrapper = ({
                                     md={6}
                                     xs
                                     container
-                                    justify="flex-end"
+                                    justifyContent="flex-end"
                                 >
                                     {formatPercent(asset.utilization)}
                                 </Grid>
@@ -289,7 +291,7 @@ const DrawerWrapper = ({
                                     md={6}
                                     xs
                                     container
-                                    justify="flex-end"
+                                    justifyContent="flex-end"
                                 >
                                     {usdPrice}
                                 </Grid>
@@ -313,7 +315,7 @@ const DrawerWrapper = ({
                                     md={6}
                                     xs
                                     container
-                                    justify="flex-end"
+                                    justifyContent="flex-end"
                                 >
                                     {balanceValue}
                                 </Grid>

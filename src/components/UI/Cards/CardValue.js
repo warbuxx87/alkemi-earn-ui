@@ -12,8 +12,9 @@ import {
     CardHeader,
     Divider,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 import SplitNumber from "components/UI/SplitNumber";
@@ -43,7 +44,7 @@ function TotalValue({ title, totalValue, currency, difference, ...rest }) {
 
     // Section 5: Code Component
     return (
-        <Card>
+        <Card elevation={0}>
             <CardHeader title={title} className={classes.item} />
             <Divider />
             <CardContent>

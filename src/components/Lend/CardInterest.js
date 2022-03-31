@@ -13,11 +13,11 @@ import {
     Divider,
     Tooltip,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
-import Help from "@material-ui/icons/HelpOutline";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import Help from "@mui/icons-material/HelpOutline";
 
-import { Skeleton } from "@material-ui/lab"; // Skeleton is still in lab and not in core (or atleast no export yet, seems that they forgot to do so)
+import { Skeleton } from "@mui/material";
 
 // Section 3: Components & Containers import from the application
 import SplitNumber from "components/UI/SplitNumber";
@@ -57,7 +57,12 @@ function CardValue({
 
     const loadingSkeleton = useMemo(
         () => (
-            <Skeleton variant="rect" width={137} height={25} animation="wave" />
+            <Skeleton
+                variant="rectangular"
+                width={137}
+                height={25}
+                animation="wave"
+            />
         ),
         []
     );
@@ -94,7 +99,7 @@ function CardValue({
 
     // Section 5: Code Component
     return (
-        <Card>
+        <Card elevation={0}>
             <Box display="flex" alignItems="center" justifyContent="center">
                 <CardHeader title="Interest Earned" className={classes.item} />
                 <Tooltip

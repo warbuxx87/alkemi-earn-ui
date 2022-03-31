@@ -12,9 +12,9 @@ import {
     Paper,
     Tooltip,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
-import Help from "@material-ui/icons/HelpOutline";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import Help from "@mui/icons-material/HelpOutline";
 
 // Section 3: Components & Containers import from the application
 
@@ -58,7 +58,7 @@ function BorrowLimit({ borrowLimit }) {
 
     // Section 5: Code Component
     return (
-        <Paper>
+        <Paper elevation={0}>
             <Box
                 className={classes.item}
                 display="flex"

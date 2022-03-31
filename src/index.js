@@ -21,8 +21,8 @@ import { Provider } from "react-redux";
 import store from "containers/Drizzle/drizzleStore.js";
 
 import { ConnectedRouter } from "connected-react-router";
-import { MuiThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "assets/scss/style.scss";
@@ -47,22 +47,24 @@ function getLibrary(provider, connector) {
 export class App extends Component {
     render() {
         return (
-            <MuiThemeProvider theme={theme}>
-                <ErrorBoundary FallbackComponent={ErrorFallbackComponent}>
-                    <CacheBuster>
-                        <Web3ReactProvider getLibrary={getLibrary}>
-                            <Provider store={store}>
-                                <Drizzle>
-                                    <ConnectedRouter history={history}>
-                                        <CssBaseline />
-                                        <Layout />
-                                    </ConnectedRouter>
-                                </Drizzle>
-                            </Provider>
-                        </Web3ReactProvider>
-                    </CacheBuster>
-                </ErrorBoundary>
-            </MuiThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={theme}>
+                    <ErrorBoundary FallbackComponent={ErrorFallbackComponent}>
+                        <CacheBuster>
+                            <Web3ReactProvider getLibrary={getLibrary}>
+                                <Provider store={store}>
+                                    <Drizzle>
+                                        <ConnectedRouter history={history}>
+                                            <CssBaseline />
+                                            <Layout />
+                                        </ConnectedRouter>
+                                    </Drizzle>
+                                </Provider>
+                            </Web3ReactProvider>
+                        </CacheBuster>
+                    </ErrorBoundary>
+                </ThemeProvider>
+            </StyledEngineProvider>
         );
     }
 }

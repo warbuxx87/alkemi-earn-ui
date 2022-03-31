@@ -9,13 +9,14 @@ import Big from "big.js";
 // Section 2: Material-UI imports
 import {
     Box,
-    fade,
+    alpha,
     Table,
     TableBody,
     TableRow,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 import DepositButton from "containers/Lend/DrawerDeposit";
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(0.5, 0.5),
         textTransform: "uppercase",
         color: theme.palette.success.main,
-        backgroundColor: fade(theme.palette.success.main, 0.08),
+        backgroundColor: alpha(theme.palette.success.main, 0.08),
     },
     btnActiveOutline: {
         minWidth: 100,

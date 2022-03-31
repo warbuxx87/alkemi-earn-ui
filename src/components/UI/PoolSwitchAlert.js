@@ -7,10 +7,10 @@ import {
     DialogContent,
     DialogTitle,
     Typography,
-    makeStyles,
     Link,
-} from "@material-ui/core";
-import WarningIcon from "@material-ui/icons/Warning";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import WarningIcon from "@mui/icons-material/Warning";
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -85,11 +85,13 @@ export default function PoolSwitchAlert({
                 onClose={handleClose}
                 aria-labelledby="gnosis-notification"
                 open={open}
+                PaperProps={{
+                    elevation: 0,
+                }}
             >
                 <DialogTitle
                     id="gnosis-notification"
                     onClose={handleClose}
-                    disableTypography
                     className={classes.title}
                 >
                     {" "}

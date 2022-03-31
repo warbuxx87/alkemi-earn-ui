@@ -5,7 +5,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Box, Container, Grid, makeStyles } from "@material-ui/core";
+import { Box, Container, Grid } from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 import LendTable from "./Table";

@@ -20,11 +20,12 @@ import {
     TablePagination,
     TextField,
     Typography,
-    makeStyles,
     MenuItem,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import { Skeleton } from "@material-ui/lab"; // Skeleton is still in lab and not in core (or atleast no export yet, seems that they forgot to do so)
+import makeStyles from "@mui/styles/makeStyles";
+
+import { Skeleton } from "@mui/material";
 
 import { ExternalLink as LinkIcon } from "react-feather";
 
@@ -33,6 +34,7 @@ import { ExternalLink as LinkIcon } from "react-feather";
 import { openEtherScan, getTokenIcon, formatStringNumber } from "utils/ui";
 
 import HistoryTableCell from "components/UI/TableCell";
+import Reportpop from "components/UI/DateSelectPopper";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 const useStyles = makeStyles((theme) => ({
@@ -198,7 +200,7 @@ const History = ({
 
             return (
                 <Skeleton
-                    variant="rect"
+                    variant="rectangular"
                     width={137}
                     height={20}
                     animation="wave"
@@ -228,7 +230,11 @@ const History = ({
     };
     return (
         <Box mt={3}>
-            <Card className={clsx(classes.root, className)} {...rest}>
+            <Card
+                elevation={0}
+                className={clsx(classes.root, className)}
+                {...rest}
+            >
                 {" "}
                 <Box p={2} pt={3}>
                     <Box display="flex" alignItems="center">
@@ -247,7 +253,7 @@ const History = ({
                                 MenuProps: {
                                     anchorOrigin: {
                                         vertical: "bottom",
-                                        horizontal: "left",
+                                        horizontal: "center",
                                     },
                                     getContentAnchorEl: null,
                                 },
@@ -274,7 +280,7 @@ const History = ({
                                 MenuProps: {
                                     anchorOrigin: {
                                         vertical: "bottom",
-                                        horizontal: "left",
+                                        horizontal: "center",
                                     },
                                     getContentAnchorEl: null,
                                 },
@@ -302,7 +308,7 @@ const History = ({
                                 MenuProps: {
                                     anchorOrigin: {
                                         vertical: "bottom",
-                                        horizontal: "left",
+                                        horizontal: "center",
                                     },
                                     getContentAnchorEl: null,
                                 },
@@ -317,6 +323,11 @@ const History = ({
                                 </MenuItem>
                             ))}
                         </TextField>
+                        <Reportpop
+                            address={address}
+                            walletConnected={walletConnected}
+                            currentNetworkName={currentNetworkName}
+                        />
                     </Box>
                 </Box>
                 <Table size="small" className="whitespace-pre">
@@ -485,6 +496,7 @@ const History = ({
                                                 currentNetworkName
                                             )}
                                             target="_blank"
+                                            size="large"
                                         >
                                             <SvgIcon fontSize="small">
                                                 <LinkIcon />
@@ -508,8 +520,8 @@ const History = ({
                     nextIconButtonProps={{
                         "aria-label": "Next Page",
                     }}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Card>
         </Box>

@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import ReportIcon from "@material-ui/icons/Report";
-import { withStyles } from "@material-ui/core/styles";
-import { grey } from "@material-ui/core/colors";
+import ReportIcon from "@mui/icons-material/Report";
+import withStyles from "@mui/styles/withStyles";
+import { grey } from "@mui/material/colors";
 
 import NoWhereDashboardButton from "../../containers/NoWhere/DashboardButton";
 

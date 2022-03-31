@@ -15,8 +15,9 @@ import {
     TableRow,
     TablePagination,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 import LiquidateButton from "containers/Liquidate/DrawerLiquidate";
@@ -67,7 +68,7 @@ const Liquidate = ({
 
     // Section 5: Code Component
     return (
-        <Card className={clsx(classes.root, className)} {...rest}>
+        <Card elevation={0} className={clsx(classes.root, className)} {...rest}>
             <PerfectScrollbar>
                 <Table className="whitespace-pre">
                     <TableHead>
@@ -252,8 +253,8 @@ const Liquidate = ({
                 nextIconButtonProps={{
                     "aria-label": "Next Page",
                 }}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </Card>
     );

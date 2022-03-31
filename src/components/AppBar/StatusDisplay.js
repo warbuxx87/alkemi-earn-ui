@@ -5,9 +5,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Box, makeStyles, Tooltip } from "@material-ui/core";
-import Status from "@material-ui/icons/VerifiedUser";
-import Open from "@material-ui/icons/Lens";
+import { Box, Tooltip } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import Status from "@mui/icons-material/VerifiedUser";
+import Open from "@mui/icons-material/Lens";
 
 // Section 3: Components & Containers import from the application
 

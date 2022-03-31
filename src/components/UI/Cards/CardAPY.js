@@ -11,10 +11,11 @@ import {
     CardContent,
     CardHeader,
     Divider,
-    fade,
+    alpha,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 
@@ -45,7 +46,7 @@ const useStyles = (props) =>
             padding: theme.spacing(0, 1),
             textTransform: "uppercase",
             color: theme.palette[props.color].main,
-            backgroundColor: fade(theme.palette[props.color].main, 0.08),
+            backgroundColor: alpha(theme.palette[props.color].main, 0.08),
         },
         item: {
             textAlign: "center",
@@ -64,7 +65,7 @@ function CardAPY({
 
     // Section 5: Code Component
     return (
-        <Card>
+        <Card elevation={0}>
             <CardHeader title={props.title} className={classes.item} />
             <Divider />
             <CardContent>

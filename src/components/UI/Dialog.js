@@ -7,8 +7,9 @@ import {
     DialogTitle,
     Divider,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 import icon from "assets/images/wallets/walletconnect.svg";
 
@@ -43,7 +44,6 @@ export default function AlertDialog({ open, handleClose }) {
                 <DialogTitle
                     id="gnosis-notification"
                     onClose={handleClose}
-                    disableTypography
                     className={classes.header}
                 >
                     <img

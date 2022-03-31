@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
+import Button from "@mui/material/Button";
+import withStyles from "@mui/styles/withStyles";
 
 const styles = (theme) => ({
     button: {
@@ -11,12 +11,7 @@ const styles = (theme) => ({
 });
 
 const NoWhereDashboardButton = ({ classes, onClick }) => (
-    <Button
-        variant="outlined"
-        color="default"
-        className={classes.button}
-        onClick={onClick}
-    >
+    <Button variant="outlined" className={classes.button} onClick={onClick}>
         Bring me back home!
     </Button>
 );

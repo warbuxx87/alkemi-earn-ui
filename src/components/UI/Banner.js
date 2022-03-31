@@ -2,9 +2,9 @@
 import React from "react";
 
 // Section 2: Material-UI imports
-import { Box, Collapse, IconButton } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-import CloseIcon from "@material-ui/icons/Close";
+import { Box, Collapse, IconButton } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import CloseIcon from "@mui/icons-material/Close";
 
 // Section 3: Components & Containers import from the application
 

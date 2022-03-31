@@ -22,9 +22,10 @@ import {
     Radio,
     InputAdornment,
     CircularProgress,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
+import createStyles from "@mui/styles/createStyles";
 
 import { XCircle as XIcon } from "react-feather";
 import { HelpCircle as HelpIcon } from "react-feather";
@@ -224,10 +225,8 @@ const DrawerLiquidateWrapper = ({
     const [selectedLoanAssetData, setSelectedLoanAssetData] = React.useState(
         {}
     );
-    const [
-        selectedCollateralAssetData,
-        setSelectedCollateralAssetData,
-    ] = React.useState({});
+    const [selectedCollateralAssetData, setSelectedCollateralAssetData] =
+        React.useState({});
 
     const handleChooseSupplyCoin = useCallback(
         (val) => {
@@ -285,7 +284,7 @@ const DrawerLiquidateWrapper = ({
                     <Grid
                         key={val.symbol}
                         container
-                        justify="space-between"
+                        justifyContent="space-between"
                         alignItems="center"
                         className={
                             selectedAsset === val.symbol
@@ -444,6 +443,7 @@ const DrawerLiquidateWrapper = ({
                 onClose={handleClose}
                 open={isOpen}
                 variant="temporary"
+                elevation={0}
             >
                 <Box>
                     <Box
@@ -455,7 +455,7 @@ const DrawerLiquidateWrapper = ({
                         <Typography variant="h4" color="textPrimary">
                             Liquidate
                         </Typography>
-                        <IconButton onClick={handleClose}>
+                        <IconButton onClick={handleClose} size="large">
                             <SvgIcon fontSize="small">
                                 <XIcon />
                             </SvgIcon>
@@ -464,16 +464,16 @@ const DrawerLiquidateWrapper = ({
                     <Divider />
 
                     {/*  <Box pt={5} p={2}>
-                        <Grid container className={classes.amount}>
-                            Outstanding Loans
-                        </Grid>
-                        {displayAssetsRadio({
-                            list: collateralAssetList,
-                            selectedAsset: selectedCollateralAsset,
-                            handleChooseCoin: handleChooseBorrowCoin,
-                            showDiscount: false,
-                        })}
-                    </Box>*/}
+                    <Grid container className={classes.amount}>
+                        Outstanding Loans
+                    </Grid>
+                    {displayAssetsRadio({
+                        list: collateralAssetList,
+                        selectedAsset: selectedCollateralAsset,
+                        handleChooseCoin: handleChooseBorrowCoin,
+                        showDiscount: false,
+                    })}
+                </Box>*/}
 
                     <Box pt={5} px={2}>
                         <Box pb={1}>
@@ -599,7 +599,7 @@ const DrawerLiquidateWrapper = ({
                                     md={6}
                                     xs
                                     container
-                                    justify="flex-end"
+                                    justifyContent="flex-end"
                                 >
                                     {maxAmountToDisplay(
                                         amount,
@@ -627,7 +627,7 @@ const DrawerLiquidateWrapper = ({
                                     md={6}
                                     xs
                                     container
-                                    justify="flex-end"
+                                    justifyContent="flex-end"
                                 >
                                     {displayReceiveAmountOfTokensForInput(
                                         selectedLoanAsset,
@@ -660,7 +660,7 @@ const DrawerLiquidateWrapper = ({
                                     md={6}
                                     xs
                                     container
-                                    justify="flex-end"
+                                    justifyContent="flex-end"
                                 >
                                     {getPercentage(
                                         displayReceiveAmountOfTokensForInput(
@@ -696,7 +696,7 @@ const DrawerLiquidateWrapper = ({
                                     md={6}
                                     xs
                                     container
-                                    justify="flex-end"
+                                    justifyContent="flex-end"
                                 >
                                     {(
                                         1.1 *

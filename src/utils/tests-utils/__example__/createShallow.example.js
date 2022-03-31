@@ -1,14 +1,14 @@
 import React from "react";
 import classNames from "classnames";
 
-import { withStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import withStyles from "@mui/styles/withStyles";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import createShallow from "../createShallow";
 
 const TestComponent = ({ classes }) => (
-    <IconButton className={classNames(classes.iconButton)}>
+    <IconButton className={classNames(classes.iconButton)} size="large">
         <MenuIcon />
     </IconButton>
 );

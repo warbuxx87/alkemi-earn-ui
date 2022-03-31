@@ -5,7 +5,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Section 2: Material-UI imports
-import { Box, Grid, SvgIcon, Typography, makeStyles } from "@material-ui/core";
+import { Box, Grid, SvgIcon, Typography } from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 import { ArrowUp as UpIcon, ArrowDown as DownIcon } from "react-feather";
 
@@ -76,7 +78,7 @@ function Overview({ aggregatedBalance, combinedAPY }) {
             <Grid
                 alignItems="center"
                 container
-                justify="space-between"
+                justifyContent="space-between"
                 spacing={3}
             >
                 <Grid item>

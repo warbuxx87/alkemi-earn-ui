@@ -10,7 +10,6 @@ import {
     Card,
     CardHeader,
     FormControlLabel,
-    Paper,
     Switch,
     Table,
     TableBody,
@@ -18,8 +17,9 @@ import {
     TableHead,
     TableRow,
     Typography,
-    makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 import PerfectScrollbar from "react-perfect-scrollbar";
 
@@ -97,7 +97,7 @@ const TableMarkets = ({ marketsData, alkApyPerMarket, userWalletNetwork }) => {
     };
 
     return (
-        <Card>
+        <Card elevation={0}>
             <CardHeader
                 title="Market Liquidity"
                 className={classes.header}
@@ -120,7 +120,7 @@ const TableMarkets = ({ marketsData, alkApyPerMarket, userWalletNetwork }) => {
                 }
             />
             <PerfectScrollbar>
-                <TableContainer component={Paper}>
+                <TableContainer>
                     <Table className={classes.table} aria-label="simple table">
                         <TableHead className={classes.tablehead}>
                             <TableRow>

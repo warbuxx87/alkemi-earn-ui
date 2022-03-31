@@ -1,7 +1,7 @@
 import React from "react";
 import toJson from "enzyme-to-json";
 
-import ReportIcon from "@material-ui/icons/Report";
+import ReportIcon from "@mui/icons-material/Report";
 
 import NoWhere from "../NoWhere";
 import NoWhereDashboardButton from "containers/NoWhere/DashboardButton";

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 export default function LiquidationChart({ borrowList }) {
     const [chartProps, setChartProps] = useState({

@@ -6,7 +6,9 @@ import PropTypes from "prop-types";
 import Big from "big.js";
 
 // Section 2: Material-UI imports
-import { Box, Grid, Paper, Typography, makeStyles } from "@material-ui/core";
+import { Box, Grid, Paper, Typography } from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 // Section 3: Components & Containers import from the application
 import SplitNumber from "components/UI/SplitNumber";
@@ -52,7 +54,7 @@ function BorrowBalance({
 
     // Section 5: Code Component
     return (
-        <Paper>
+        <Paper elevation={0}>
             <Box
                 className={classes.item}
                 display="flex"
@@ -63,7 +65,7 @@ function BorrowBalance({
                 <Grid
                     alignItems="center"
                     container
-                    justify="space-between"
+                    justifyContent="space-between"
                     spacing={3}
                 >
                     <Grid item>
