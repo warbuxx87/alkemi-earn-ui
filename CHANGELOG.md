@@ -1,3 +1,12 @@
+# [1.33.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.32.0...v1.33.0) (2022-04-01)
+
+
+### Features
+
+* default to open pool on ledger UI-562 ([40db612](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/40db612f4fa1913b9fe99981c7d178000e73efdc))
+
+
+
 # [1.32.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.31.1...v1.32.0) (2022-03-31)
 
 
