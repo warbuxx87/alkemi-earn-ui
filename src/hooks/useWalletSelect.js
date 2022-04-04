@@ -12,6 +12,7 @@ import {
     walletconnect,
     LedgerHQFrame,
     safeMultisigConnector,
+    walletlink,
 } from "utils/web3ReactConnectors";
 
 import { initContracts, deleteAllContracts } from "utils/contracts";
@@ -55,6 +56,7 @@ const connectorsByName = {
     WalletConnect: walletconnect,
     LedgerLive: LedgerHQFrame,
     GnosisSafeApp: safeMultisigConnector,
+    Coinbase: walletlink,
 };
 
 const useWalletSelect = () => {
