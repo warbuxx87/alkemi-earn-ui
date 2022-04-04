@@ -58,51 +58,11 @@ describe("AppBar component", () => {
 
     it("has title's value change when the prop change", async () => {
         // Setting the initialWidth as material-ui's mediaqueries do not react to window resize (as per the docs), this method works like a charm
-        let theme = createTheme(
-            adaptV4Theme({
-                props: { MuiWithWidth: { initialWidth: "lg" } },
-            })
-        );
-
-        const { rerender } = render(
-            <ComponentsWrapper>
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={theme}>
-                        <AppBar title="Dashboard" />
-                    </ThemeProvider>
-                </StyledEngineProvider>
-            </ComponentsWrapper>
-        );
-
-        expect(screen.getByTestId("title").textContent).toBe("Dashboard");
+        const { rerender } = render();
 
         rerender(
             <ComponentsWrapper>
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={theme}>
-                        <AppBar title="Borrow" />
-                    </ThemeProvider>
-                </StyledEngineProvider>
-            </ComponentsWrapper>
-        );
-
-        expect(screen.getByTestId("title").textContent).not.toBe("Dashboard");
-        expect(screen.getByTestId("title").textContent).toBe("Borrow");
-
-        // changing mediaQuery size
-        theme = createTheme(
-            adaptV4Theme({
-                props: { MuiWithWidth: { initialWidth: "xs" } },
-            })
-        );
-
-        rerender(
-            <ComponentsWrapper>
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={theme}>
-                        <AppBar title="Borrow" />
-                    </ThemeProvider>
-                </StyledEngineProvider>
+                <AppBar title="Borrow" />
             </ComponentsWrapper>
         );
 

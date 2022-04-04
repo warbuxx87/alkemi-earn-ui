@@ -24,113 +24,9 @@ Object {
       "xs": 0,
     },
   },
-  "components": Object {
-    "MuiAlert": Object {
-      "styleOverrides": Object {
-        "message": Object {
-          "fontSize": 13,
-          "paddingTop": 10,
-          "textTransform": "uppercase",
-        },
-        "root": Object {
-          "marginBottom": 32,
-          "marginTop": 8,
-        },
-      },
-    },
-    "MuiAppBar": Object {
-      "styleOverrides": Object {
-        "root": Object {
-          "boxShadow": "none",
-          "paddingBottom": 30,
-          "paddingTop": 22,
-        },
-      },
-    },
-    "MuiButton": Object {
-      "styleOverrides": Object {
-        "root": Object {
-          "textTransform": "capitalize",
-        },
-      },
-    },
-    "MuiDivider": Object {
-      "styleOverrides": Object {
-        "root": Object {
-          "backgroundColor": "#0e0e0e",
-        },
-      },
-    },
-    "MuiInput": Object {
-      "styleOverrides": Object {
-        "root": Object {
-          "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": Object {
-            "display": "none",
-          },
-        },
-      },
-    },
-    "MuiPickersCalendarHeader": Object {
-      "styleOverrides": Object {
-        "dayLabel": Object {
-          "color": "#a7a7a7",
-        },
-      },
-    },
-    "MuiPickersDay": Object {
-      "styleOverrides": Object {
-        "current": Object {
-          "backgroundColor": "#ffffff14",
-          "color": "#ffffff",
-          "fontWeight": "600",
-        },
-        "day": Object {
-          "color": "#ffffff",
-        },
-        "daySelected": Object {
-          "backgroundColor": "#ffffff",
-          "color": "#000000",
-        },
-      },
-    },
-    "MuiTab": Object {
-      "styleOverrides": Object {
-        "root": Object {
-          "&:first-of-type": Object {
-            "marginLeft": "0px !important",
-          },
-          "marginLeft": "16px !important",
-          "marginRight": "16px !important",
-          "minWidth": "fit-content !important",
-          "paddingLeft": "0px !important",
-          "paddingRight": "0px !important",
-        },
-      },
-    },
-    "MuiToolbar": Object {
-      "styleOverrides": Object {
-        "root": Object {
-          "disableGutters": "true",
-        },
-      },
-    },
-    "MuiTooltip": Object {
-      "styleOverrides": Object {
-        "arrow": Object {
-          "color": "#fff",
-        },
-        "tooltip": Object {
-          "backgroundColor": "#fff",
-          "color": "#000",
-          "fontSize": "11px",
-          "fontWeight": 400,
-        },
-      },
-    },
-  },
+  "components": Object {},
   "direction": "ltr",
   "mixins": Object {
-    "gutters": [Function],
     "toolbar": Object {
       "@media (min-width:0px) and (orientation: landscape)": Object {
         "minHeight": 48,
@@ -139,6 +35,90 @@ Object {
         "minHeight": 64,
       },
       "minHeight": 56,
+    },
+  },
+  "overrides": Object {
+    "MuiAlert": Object {
+      "message": Object {
+        "fontSize": 13,
+        "paddingTop": 10,
+        "textTransform": "uppercase",
+      },
+      "root": Object {
+        "marginBottom": 32,
+        "marginTop": 8,
+      },
+    },
+    "MuiAppBar": Object {
+      "root": Object {
+        "boxShadow": "none",
+        "paddingBottom": 30,
+        "paddingTop": 22,
+      },
+    },
+    "MuiButton": Object {
+      "root": Object {
+        "textTransform": "capitalize",
+      },
+    },
+    "MuiDivider": Object {
+      "root": Object {
+        "backgroundColor": "#0e0e0e",
+      },
+    },
+    "MuiInput": Object {
+      "root": Object {
+        "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": Object {
+          "display": "none",
+        },
+      },
+    },
+    "MuiPickersCalendarHeader": Object {
+      "dayLabel": Object {
+        "color": "#a7a7a7",
+      },
+    },
+    "MuiPickersDay": Object {
+      "current": Object {
+        "backgroundColor": "#ffffff14",
+        "color": "#ffffff",
+        "fontWeight": "600",
+      },
+      "day": Object {
+        "color": "#ffffff",
+      },
+      "daySelected": Object {
+        "backgroundColor": "#ffffff",
+        "color": "#000000",
+      },
+    },
+    "MuiTab": Object {
+      "root": Object {
+        "&:first-of-type": Object {
+          "marginLeft": "0px !important",
+        },
+        "marginLeft": "16px !important",
+        "marginRight": "16px !important",
+        "minWidth": "fit-content !important",
+        "paddingLeft": "0px !important",
+        "paddingRight": "0px !important",
+      },
+    },
+    "MuiToolbar": Object {
+      "root": Object {
+        "disableGutters": "true",
+      },
+    },
+    "MuiTooltip": Object {
+      "arrow": Object {
+        "color": "#fff",
+      },
+      "tooltip": Object {
+        "backgroundColor": "#fff",
+        "color": "#000",
+        "fontSize": "11px",
+        "fontWeight": 400,
+      },
     },
   },
   "palette": Object {
@@ -226,7 +206,6 @@ Object {
       "success": "#3cb34f",
     },
     "tonalOffset": 0.2,
-    "type": "dark",
     "warning": Object {
       "contrastText": "#fff",
       "dark": "rgb(145, 65, 39)",

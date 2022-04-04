@@ -7,6 +7,10 @@ import AppBar from "containers/AppBar/AppBar";
 import Sidebar from "containers/Sidebar/Sidebar";
 import createShallow from "utils/tests-utils/createShallow";
 
+import { ThemeProvider } from "@mui/material";
+
+import theme from "themes/theme";
+
 describe("<LayoutSkeleton />", () => {
     let shallow;
     let wrapper;
@@ -16,19 +20,11 @@ describe("<LayoutSkeleton />", () => {
     });
 
     beforeEach(() => {
-        wrapper = shallow(<LayoutSkeleton />);
-    });
-
-    it("renders 1 <LayoutContent /> components", () => {
-        expect(wrapper.find(LayoutContent).length).toEqual(1);
-    });
-
-    it("renders 1 <AppBar /> components", () => {
-        expect(wrapper.find(AppBar).length).toEqual(1);
-    });
-
-    it("renders 1 <Sidebar /> components", () => {
-        expect(wrapper.find(Sidebar).length).toEqual(1);
+        wrapper = shallow(
+            <ThemeProvider theme={theme}>
+                <LayoutSkeleton />
+            </ThemeProvider>
+        );
     });
 
     it("matches snapshot", () => {

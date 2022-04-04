@@ -1,62 +1,60 @@
-import { createTheme, adaptV4Theme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import typography from "./typography";
 import overrides from "./overrides";
 // import { softShadows, strongShadows } from './shadows';
 
-const darkTheme = createTheme(
-    adaptV4Theme({
-        // @dev use https://in-your-saas.github.io/material-ui-theme-editor/
-        typography,
-        overrides,
-        palette: {
-            mode: "dark",
-            common: {
-                black: "#000",
-                white: "rgba(255, 255, 255, 1)",
-                darkGrey: "#151617",
-            },
-            background: {
-                default: "#08090c", //Black
-                dark: "#000000", // Dark Grey #080a0c 1B1B1B
-                paper: "#13161a", // Light Grey  #0d0e10
-                light: "#161a1f",
-            },
-
-            primary: {
-                main: "#3cb34f", //Green
-                contrastText: "#fff",
-            },
-            secondary: {
-                main: "#d8dade", //White
-                contrastText: "#000",
-            },
-
-            warning: {
-                main: "#d05d39", //orange
-                contrastText: "#fff",
-                hover: "rgb(145, 65, 39)",
-            },
-
-            error: {
-                main: "#B6244F", //red
-                contrastText: "#fff",
-            },
-
-            success: {
-                main: "#3cb34f", //green
-                contrastText: "#fff",
-            },
-
-            text: {
-                primary: "#d8dade", // White
-                secondary: "#868998", // Light Grey
-                success: "#3cb34f", //Green
-                disabled: "rgba(255, 255, 255, 1)",
-                hint: "rgba(184, 233, 134, 1)",
-            },
+const darkTheme = createTheme({
+    // @dev use https://in-your-saas.github.io/material-ui-theme-editor/
+    typography,
+    overrides,
+    palette: {
+        mode: "dark",
+        common: {
+            black: "#000",
+            white: "rgba(255, 255, 255, 1)",
+            darkGrey: "#151617",
         },
-    })
-);
+        background: {
+            default: "#08090c", //Black
+            dark: "#000000", // Dark Grey #080a0c 1B1B1B
+            paper: "#13161a", // Light Grey  #0d0e10
+            light: "#161a1f",
+        },
+
+        primary: {
+            main: "#3cb34f", //Green
+            contrastText: "#fff",
+        },
+        secondary: {
+            main: "#d8dade", //White
+            contrastText: "#000",
+        },
+
+        warning: {
+            main: "#d05d39", //orange
+            contrastText: "#fff",
+            hover: "rgb(145, 65, 39)",
+        },
+
+        error: {
+            main: "#B6244F", //red
+            contrastText: "#fff",
+        },
+
+        success: {
+            main: "#3cb34f", //green
+            contrastText: "#fff",
+        },
+
+        text: {
+            primary: "#d8dade", // White
+            secondary: "#868998", // Light Grey
+            success: "#3cb34f", //Green
+            disabled: "rgba(255, 255, 255, 1)",
+            hint: "rgba(184, 233, 134, 1)",
+        },
+    },
+});
 
 // const lightTheme = createMuiTheme({
 //   // @dev use https://in-your-saas.github.io/material-ui-theme-editor/

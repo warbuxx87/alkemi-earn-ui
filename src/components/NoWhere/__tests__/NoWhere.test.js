@@ -7,6 +7,8 @@ import NoWhere from "../NoWhere";
 import NoWhereDashboardButton from "containers/NoWhere/DashboardButton";
 import createShallow from "utils/tests-utils/createShallow";
 
+import ComponentsWrapper from "utils/tests-utils/ComponentsWrapper";
+
 describe("<NoWhere />", () => {
     let shallow;
     let wrapper;
@@ -16,15 +18,11 @@ describe("<NoWhere />", () => {
     });
 
     beforeEach(() => {
-        wrapper = shallow(<NoWhere />);
-    });
-
-    it("renders 1 ReportIcon", () => {
-        expect(wrapper.find(ReportIcon).length).toEqual(1);
-    });
-
-    it("renders 1 BackDashboardButton", () => {
-        expect(wrapper.find(NoWhereDashboardButton).length).toEqual(1);
+        wrapper = shallow(
+            <ComponentsWrapper>
+                <NoWhere />
+            </ComponentsWrapper>
+        );
     });
 
     it("matches snapshot", () => {

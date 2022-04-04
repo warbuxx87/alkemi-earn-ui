@@ -15,11 +15,13 @@ import { render, screen } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 
 import { Router } from "react-router-dom";
+import { ThemeProvider } from "@mui/material";
 
 import { Provider } from "react-redux";
 import store from "containers/Drizzle/drizzleStore.js";
 
 import LayoutContent from "../Content";
+import defaultTheme from "themes/theme"; // use this if no custom theme is provided
 
 describe("<LayoutContent />", () => {
     let wrapper;
@@ -29,9 +31,11 @@ describe("<LayoutContent />", () => {
         history = createMemoryHistory();
         wrapper = render(
             <Provider store={store}>
-                <Router history={history}>
-                    <LayoutContent />
-                </Router>
+                <ThemeProvider theme={defaultTheme}>
+                    <Router history={history}>
+                        <LayoutContent />
+                    </Router>
+                </ThemeProvider>
             </Provider>
         );
     });

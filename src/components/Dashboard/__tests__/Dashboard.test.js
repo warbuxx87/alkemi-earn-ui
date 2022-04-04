@@ -7,6 +7,10 @@ import { render } from "@testing-library/react";
 
 import ComponentsWrapper from "utils/tests-utils/ComponentsWrapper";
 
+import { ThemeProvider } from "@mui/material";
+
+import theme from "themes/theme";
+
 // Section 2: Constants & Helper functions
 
 // Section 3: The Tests
@@ -15,9 +19,11 @@ describe("<App />", () => {
 
     beforeEach(() => {
         wrapper = render(
-            <ComponentsWrapper>
-                <Dashboard />
-            </ComponentsWrapper>
+            <ThemeProvider theme={theme}>
+                <ComponentsWrapper>
+                    <Dashboard />
+                </ComponentsWrapper>
+            </ThemeProvider>
         );
     });
 

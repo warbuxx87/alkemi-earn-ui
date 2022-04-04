@@ -17,7 +17,8 @@ Object {
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root NoWhere-nowhereIcon-14"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium NoWhere-nowhereIcon-14 css-i4bv87-MuiSvgIcon-root"
+              data-testid="ReportIcon"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -32,17 +33,13 @@ Object {
             </h1>
           </div>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined NoWhereDashboardButton-button-15"
+            class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root NoWhereDashboardButton-button-15 css-1o1bxpp-MuiButtonBase-root-MuiButton-root"
             tabindex="0"
             type="button"
           >
+            Bring me back home!
             <span
-              class="MuiButton-label"
-            >
-              Bring me back home!
-            </span>
-            <span
-              class="MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </button>
         </div>
@@ -62,7 +59,8 @@ Object {
         >
           <svg
             aria-hidden="true"
-            class="MuiSvgIcon-root NoWhere-nowhereIcon-14"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium NoWhere-nowhereIcon-14 css-i4bv87-MuiSvgIcon-root"
+            data-testid="ReportIcon"
             focusable="false"
             viewBox="0 0 24 24"
           >
@@ -77,17 +75,13 @@ Object {
           </h1>
         </div>
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-outlined NoWhereDashboardButton-button-15"
+          class="MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root NoWhereDashboardButton-button-15 css-1o1bxpp-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
+          Bring me back home!
           <span
-            class="MuiButton-label"
-          >
-            Bring me back home!
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>

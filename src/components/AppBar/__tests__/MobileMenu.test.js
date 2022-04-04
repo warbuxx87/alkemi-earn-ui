@@ -18,24 +18,22 @@ import ComponentsWrapper from "utils/tests-utils/ComponentsWrapper";
 // Section 3: The Tests
 describe("MobileMenu component", () => {
     it("renders without crashing", () => {
-        render(<MobileMenu></MobileMenu>);
+        render(
+            <ComponentsWrapper>
+                <MobileMenu></MobileMenu>
+            </ComponentsWrapper>
+        );
     });
 
     it("starts with menu closed", () => {
         // Setting the initialWidth as material-ui's mediaqueries do not react to window resize (as per the docs), this method works like a charm
-        const theme = createTheme(
-            adaptV4Theme({
-                props: { MuiWithWidth: { initialWidth: "xs" } },
-            })
-        );
+        const theme = createTheme({
+            props: { MuiWithWidth: { initialWidth: "xs" } },
+        });
 
         render(
-            <ComponentsWrapper>
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={theme}>
-                        <MobileMenu />
-                    </ThemeProvider>
-                </StyledEngineProvider>
+            <ComponentsWrapper theme={theme}>
+                <MobileMenu />
             </ComponentsWrapper>
         );
 
@@ -44,19 +42,13 @@ describe("MobileMenu component", () => {
 
     it("open menu when openMenu button gets clicked", () => {
         // Setting the initialWidth as material-ui's mediaqueries do not react to window resize (as per the docs), this method works like a charm
-        const theme = createTheme(
-            adaptV4Theme({
-                props: { MuiWithWidth: { initialWidth: "xs" } },
-            })
-        );
+        const theme = createTheme({
+            props: { MuiWithWidth: { initialWidth: "xs" } },
+        });
 
         render(
-            <ComponentsWrapper>
-                <StyledEngineProvider injectFirst>
-                    <ThemeProvider theme={theme}>
-                        <MobileMenu />
-                    </ThemeProvider>
-                </StyledEngineProvider>
+            <ComponentsWrapper theme={theme}>
+                <MobileMenu />
             </ComponentsWrapper>
         );
 
