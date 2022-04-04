@@ -36,7 +36,7 @@ const LayoutContent = () => {
     const currentPool = useSelector(getPool);
 
     useEffect(() => {
-        if (currentPool === "open") {
+        if (currentPool == "open") {
             setIsWalletLiquidator(true);
         } else {
             setIsWalletLiquidator(walletIsLiquidator);

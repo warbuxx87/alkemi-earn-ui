@@ -25,7 +25,7 @@ const useFetchMarkets = (fetchPeriodically = false) => {
 
         // move this async call to redux if needs to be called from more than one place
         const get_markets_data = () => {
-            if (lastPool === currentPool)
+            if (lastPool == currentPool)
                 fetchMarketsCall({
                     currentNetworkName,
                     currentPool,

@@ -64,7 +64,7 @@ const AppBarContainer = () => {
     }, [location]);
 
     useEffect(() => {
-        if (currentPool === "open") {
+        if (currentPool == "open") {
             setIsWalletLiquidator(true);
         } else {
             setIsWalletLiquidator(walletIsLiquidator);
@@ -80,7 +80,7 @@ const AppBarContainer = () => {
             walletIsKYCd={walletIsKYCd}
             walletConnected={walletConnected}
             walletIsLiquidator={isWalletLiquidator}
-            displayKYCStatus={currentPool !== "open"}
+            displayKYCStatus={currentPool != "open"}
             walletIsIFrame={walletIsIFrame}
         />
     );

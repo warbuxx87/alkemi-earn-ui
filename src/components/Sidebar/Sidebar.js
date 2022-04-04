@@ -122,7 +122,7 @@ function Sidebar({
                         variant="subtitle2"
                         className={classes.chiptext}
                     >
-                        {currentPool === "open" ? "OPEN" : "VERIFIED"}
+                        {currentPool == "open" ? "OPEN" : "VERIFIED"}
                     </Typography>
                 </Box>
             </Box>

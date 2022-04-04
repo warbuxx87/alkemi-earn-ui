@@ -41,7 +41,7 @@ export const handle_asset_contract_method_click = async ({
         const web3 = new Web3(library.provider);
 
         const address_MoneyMarket =
-            currentPool === "open"
+            currentPool == "open"
                 ? address[network].address_open_MoneyMarket
                 : address[network].address_MoneyMarket;
 
@@ -106,7 +106,7 @@ export const handle_moneymarket_tx = async ({
         const web3 = new Web3(library.provider);
 
         const address_MoneyMarket =
-            currentPool === "open"
+            currentPool == "open"
                 ? address[network].address_open_MoneyMarket
                 : address[network].address_MoneyMarket;
 
@@ -161,7 +161,7 @@ export const handle_liquidate_click = async ({
         const web3 = new Web3(library.provider);
 
         const address_MoneyMarket =
-            currentPool === "open"
+            currentPool == "open"
                 ? address[network].address_open_MoneyMarket
                 : address[network].address_MoneyMarket;
 

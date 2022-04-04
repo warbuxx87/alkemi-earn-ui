@@ -36,7 +36,7 @@ const PoolSelectContainer = () => {
     // On start
     React.useEffect(() => {
         if (currentPool) {
-            const newPool = pools.find((pool) => pool.id === currentPool);
+            const newPool = pools.find((pool) => pool.id == currentPool);
             setSelectedPool(newPool);
         }
     }, [currentPool]);
@@ -61,7 +61,7 @@ const PoolSelectContainer = () => {
     const handlePoolChange = (poolId) => {
         const newPool = pools.find((pool) => pool.id === poolId);
 
-        if (newPool.id !== currentPool) {
+        if (newPool.id != currentPool) {
             if (noShow) {
                 window.localStorage.setItem("changedPool", newPool.id);
 

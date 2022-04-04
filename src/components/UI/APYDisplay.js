@@ -279,7 +279,7 @@ function APYDisplay({ apy, alkApy, showTooltip, typeOfAPY, typeOfLabel }) {
                 >
                     {showTooltip === false
                         ? displayCombinedValue({ apy, alkApy, typeOfAPY })
-                        : displayToolTip({ apy, alkApy, typeOfAPY })}
+                        : displayToolTip()}
                 </Typography>
             ) : (
                 <Typography
@@ -293,7 +293,7 @@ function APYDisplay({ apy, alkApy, showTooltip, typeOfAPY, typeOfLabel }) {
                 >
                     {showTooltip === false
                         ? displayCombinedValue({ apy, alkApy, typeOfAPY })
-                        : displayToolTip({ apy, alkApy, typeOfAPY })}
+                        : displayToolTip()}
                 </Typography>
             )}
         </>

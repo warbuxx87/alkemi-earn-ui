@@ -210,7 +210,7 @@ const useWalletSelect = () => {
                 // Init drizzle contracts set up
                 const network = constants.network_type[currentWalletNetwork];
                 const address_MoneyMarket =
-                    currentPool === "open"
+                    currentPool == "open"
                         ? address[network].address_open_MoneyMarket
                         : address[network].address_MoneyMarket;
 

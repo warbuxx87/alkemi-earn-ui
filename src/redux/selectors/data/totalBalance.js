@@ -240,7 +240,7 @@ export const getMarketLiquidity = (state) => {
         const currentPool = getPool(state);
 
         const address_MoneyMarket =
-            currentPool === "open"
+            currentPool == "open"
                 ? address[currentNetworkName].address_open_MoneyMarket
                 : address[currentNetworkName].address_MoneyMarket;
 
