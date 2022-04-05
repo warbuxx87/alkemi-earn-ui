@@ -1,3 +1,12 @@
+# [1.34.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.33.0...v1.34.0) (2022-04-05)
+
+
+### Features
+
+* added coinbase wallet support UI-555 ([56e3125](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/56e312509b7f15b1d4fb94d6562943865e5358f5))
+
+
+
 # [1.33.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.32.0...v1.33.0) (2022-04-01)
 
 
