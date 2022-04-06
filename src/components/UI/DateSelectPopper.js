@@ -124,11 +124,11 @@ function SelectDatePopper({
                                 const startTimestamp = moment
                                     .utc(values.start)
                                     .startOf("day")
-                                    .unix(); // start of the the day
+                                    .toISOString(); // start of the the day
                                 const endTimestamp = moment
                                     .utc(values.end)
                                     .endOf("day")
-                                    .unix(); // last second of the the day
+                                    .toISOString(); // last second of the the day
 
                                 let subdomain = "api";
 
@@ -136,7 +136,7 @@ function SelectDatePopper({
                                     subdomain = `${currentNetworkName}.api`;
                                 }
 
-                                const link = `https://${subdomain}.alkemi.network/reports/${address}/?unix[$gte]=${startTimestamp}&unix[$lte]=${endTimestamp}`;
+                                const link = `https://${subdomain}.alkemi.network/reports?reportId=history&account=${address}&startDate=${startTimestamp}&endDate=${endTimestamp}&csvFormat=true`;
 
                                 window.open(link, "_blank");
                             }}
