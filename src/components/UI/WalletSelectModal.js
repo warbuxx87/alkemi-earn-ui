@@ -50,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
         "& .MuiButtonBase-root": {
             borderRadius: "4px",
             padding: "16px",
+            marginBottom: "16px",
+        },
+        "& .MuiButtonBase-root:last-child": {
             marginBottom: "24px",
         },
         "& .MuiToggleButton-label": {
