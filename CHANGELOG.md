@@ -1,3 +1,17 @@
+# [1.35.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.34.0...v1.35.0) (2022-04-07)
+
+
+### Bug Fixes
+
+* added proper margin between wallet buttons UI-568 ([3cd53cf](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3cd53cf22153822b2721110ab792b88c877783d8))
+
+
+### Features
+
+* added coinbase icon and fixed style UI-568 ([d408b74](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d408b7415a28a722e30529a8499ea55942802648))
+
+
+
 # [1.34.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.33.0...v1.34.0) (2022-04-05)
 
 
