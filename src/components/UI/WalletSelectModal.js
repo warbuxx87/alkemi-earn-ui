@@ -97,17 +97,11 @@ const wallets = [
         name: "WalletConnect",
         logo: walletconnectLogo,
     },
-    {
-        title: "Coinbase Wallet",
-        name: "Coinbase",
-        logo: walletconnectLogo,
-    },
 ];
 
 const walletsLabels = {
     MetaMask: "MetaMask",
     WalletConnect: "Wallet Connect",
-    Coinbase: "Coinbase",
 };
 
 const installMetaMask = {
