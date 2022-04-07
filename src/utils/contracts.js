@@ -162,7 +162,7 @@ export const initMarketContract = ({
     // get account balance
     MoneyMarketContract.methods.calculateAccountValues.cacheCall(myAddress);
 
-    if (currentPool !== "open") {
+    if (!["open", "open_1_5"].includes(currentPool)) {
         // verify KYC
         MoneyMarketContract.methods.customersWithKYC.cacheCall(myAddress);
 

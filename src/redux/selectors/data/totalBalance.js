@@ -17,6 +17,7 @@ import { walletNetworkName } from "./onboard";
 import { getPool } from "../status/pool";
 
 import constants from "constants/constant.json";
+import { getAddressMoneyMarketByPool } from "utils/poolSelectionHelper";
 
 const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(
@@ -239,10 +240,10 @@ export const getMarketLiquidity = (state) => {
         // Retrieve current pool (permissioned or open)
         const currentPool = getPool(state);
 
-        const address_MoneyMarket =
-            currentPool === "open"
-                ? address[currentNetworkName].address_open_MoneyMarket
-                : address[currentNetworkName].address_MoneyMarket;
+        const address_MoneyMarket = getAddressMoneyMarketByPool(
+            currentPool,
+            currentNetworkName
+        );
 
         Object.keys(state.contracts).forEach((asset) => {
             if (constants.assets.includes(asset)) {

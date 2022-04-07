@@ -50,19 +50,10 @@ const useStyles = makeStyles((theme) => ({
 
 const poolsIcons = {
     permissioned: <Verified color="secondary" fontSize="small" />,
+    permissioned_1_5: <Verified color="secondary" fontSize="small" />,
     open: <Open color="secondary" fontSize="small" />,
+    open_1_5: <Open color="secondary" fontSize="small" />,
 };
-
-// const poolsIcons = (id) => {
-//     switch(id) {
-//     case "permissioned":
-//         return  <CloudIcon />;
-//     case "open":
-//         return <img src={logo} />;
-//     default:
-//         return <CloudIcon />;
-//     }
-// }
 
 export const PoolPopover = (props) => {
     const { selectedPool, pools, onPoolChange } = props;

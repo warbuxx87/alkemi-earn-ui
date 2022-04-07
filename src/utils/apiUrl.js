@@ -2,10 +2,17 @@ const networks = {
     main: {
         permissioned: process.env.REACT_APP_API_BASE_URL_MAIN_PERMISSIONED,
         open: process.env.REACT_APP_API_BASE_URL_MAIN_OPEN,
+
+        // Add 1.5 proper URL pools when available
+        permissioned_1_5: process.env.REACT_APP_API_BASE_URL_MAIN_PERMISSIONED,
+        open_1_5: process.env.REACT_APP_API_BASE_URL_MAIN_OPEN,
     },
     rinkeby: {
         permissioned: process.env.REACT_APP_API_BASE_URL_RINKEBY_PERMISSIONED,
         open: process.env.REACT_APP_API_BASE_URL_RINKEBY_OPEN,
+        permissioned_1_5:
+            process.env.REACT_APP_API_BASE_URL_RINKEBY_PERMISSIONED_1_5,
+        open_1_5: process.env.REACT_APP_API_BASE_URL_RINKEBY_OPEN_1_5,
     },
 };
 

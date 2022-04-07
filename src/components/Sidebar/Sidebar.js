@@ -28,6 +28,7 @@ import SidebarLiquidateItem from "containers/Sidebar/LiquidateItem";
 import SidebarFiatItem from "components/Sidebar/FiatItem";
 import SidebarHeader from "containers/Sidebar/Header";
 import PoolSelectContainer from "containers/Sidebar/PoolSelect";
+import { getPoolName } from "utils/poolSelectionHelper";
 
 // Section 4: Define Styles function taking theme as argument and returning an object
 
@@ -122,7 +123,7 @@ function Sidebar({
                         variant="subtitle2"
                         className={classes.chiptext}
                     >
-                        {currentPool === "open" ? "OPEN" : "VERIFIED"}
+                        {getPoolName(currentPool)}
                     </Typography>
                 </Box>
             </Box>

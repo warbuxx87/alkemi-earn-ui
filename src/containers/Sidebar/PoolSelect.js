@@ -7,26 +7,30 @@ import { useSelector } from "react-redux";
 // Section 2: internal imports
 // import { onPoolChange } from "redux/actions/status/pool";
 import PoolSwitchAlert from "./PoolSwitchAlert";
+import { getAvailablePoolsByNetwork } from "utils/poolSelectionHelper";
 
 // Section 3: Selectors
 import { getPool } from "redux/selectors/status/pool";
+import { walletNetworkName } from "redux/selectors/data/onboard";
 
 // Section 4: components
 import { PoolPopover } from "components/Sidebar/PoolSelect";
 
-const pools = [
-    {
-        id: "permissioned",
-        name: "Verified Pool",
-    },
-    {
-        id: "open",
-        name: "Open Pool",
-    },
-];
+// Unify after having v1.5 contract for mainnet
 
 // Section 5: Code Container
 const PoolSelectContainer = () => {
+    const currentNetworkName = useSelector(walletNetworkName);
+
+    const [pools, setPools] = React.useState(
+        getAvailablePoolsByNetwork(currentNetworkName)
+    ); // defaults to mainnet version
+
+    // On start
+    React.useEffect(() => {
+        setPools(getAvailablePoolsByNetwork(currentNetworkName));
+    }, [currentNetworkName]);
+
     const currentPool = useSelector(getPool);
     const [openAlert, setOpenAlert] = React.useState(false);
     const [chosenPool, setChosenPool] = React.useState(false);
@@ -36,10 +40,13 @@ const PoolSelectContainer = () => {
     // On start
     React.useEffect(() => {
         if (currentPool) {
-            const newPool = pools.find((pool) => pool.id === currentPool);
+            let newPool = pools.find((pool) => pool.id === currentPool);
+
+            if (newPool === undefined) newPool = pools[0]; // mainnet as of now doesn't have v1.5 smart contract, default to verified
+
             setSelectedPool(newPool);
         }
-    }, [currentPool]);
+    }, [currentPool, currentNetworkName, pools]);
 
     // On start
     React.useEffect(() => {

@@ -175,25 +175,7 @@ function PoolDialog({
                                 </Typography>
                             </Box>
                         </ToggleButton>
-                        <Box
-                            pt={1.5}
-                            pb={1}
-                            className={classes.kyclink}
-                            {...boxProps}
-                        >
-                            <Typography
-                                className={classes.kycref}
-                                variant="subtitle1"
-                            >
-                                <Link
-                                    href="https://kyc.alkemi.network/#/auth/signup"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    Apply for KYC Verification{" "}
-                                </Link>
-                            </Typography>
-                        </Box>
+
                         <ToggleButton
                             value="open"
                             aria-label="Open"
@@ -225,6 +207,115 @@ function PoolDialog({
                                 >
                                     Alkemi Earn's 'Open' pool is accessible for
                                     all using Metamask.
+                                </Typography>
+                            </Box>
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+
+                    {/* for seperation onlu */}
+                    <Box
+                        pt={1.5}
+                        pb={1}
+                        className={classes.kyclink}
+                        {...boxProps}
+                    ></Box>
+
+                    {/* TODO: disable or hide on mainnet */}
+                    <ToggleButtonGroup
+                        value={selectedPool}
+                        exclusive
+                        onChange={handlePoolChange}
+                        aria-label="Pool Select"
+                        className={classes.toggleButton}
+                        {...buttonProps}
+                    >
+                        <ToggleButton
+                            value="permissioned_1_5"
+                            aria-label="Verified"
+                            disableRipple
+                            disableFocusRipple
+                            className={classes.mainButton}
+                        >
+                            <Avatar
+                                variant="rounded"
+                                className={classes.avatar}
+                            >
+                                <Box
+                                    display="flex"
+                                    className={classes.avatarimg}
+                                >
+                                    <Verified color="primary" />
+                                </Box>
+                            </Avatar>{" "}
+                            <Box pt={1}>
+                                <Typography
+                                    className={classes.toggleTitle}
+                                    variant="body1"
+                                >
+                                    NEW Earn Verified v1.5
+                                </Typography>
+                            </Box>
+                            <Box pt={1}>
+                                <Typography
+                                    className={classes.toggleSubtitle}
+                                    variant="body2"
+                                >
+                                    The all new v1.5 Alkemi Earn's 'Verified'
+                                    pool is only accessible for KYC approved
+                                    users.
+                                </Typography>
+                            </Box>
+                        </ToggleButton>
+                        <Box
+                            pt={1.5}
+                            pb={1}
+                            className={classes.kyclink}
+                            {...boxProps}
+                        >
+                            <Typography
+                                className={classes.kycref}
+                                variant="subtitle1"
+                            >
+                                <Link
+                                    href="https://kyc.alkemi.network/#/auth/signup"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Apply for KYC Verification{" "}
+                                </Link>
+                            </Typography>
+                        </Box>
+                        <ToggleButton
+                            value="open_1_5"
+                            aria-label="Open"
+                            disableRipple
+                        >
+                            <Avatar
+                                variant="rounded"
+                                className={classes.avatar}
+                            >
+                                <Box
+                                    display="flex"
+                                    className={classes.avatarimg}
+                                >
+                                    <Open color="primary" />
+                                </Box>
+                            </Avatar>{" "}
+                            <Box pt={1}>
+                                <Typography
+                                    className={classes.toggleTitle}
+                                    variant="body1"
+                                >
+                                    NEW Earn Open v1.5
+                                </Typography>
+                            </Box>
+                            <Box pt={1}>
+                                <Typography
+                                    className={classes.toggleSubtitle}
+                                    variant="body2"
+                                >
+                                    The all new v1.5 Alkemi Earn's 'Open' pool
+                                    is accessible for all using Metamask.
                                 </Typography>
                             </Box>
                         </ToggleButton>

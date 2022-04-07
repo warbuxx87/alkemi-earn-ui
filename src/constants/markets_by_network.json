@@ -1,10 +1,14 @@
 {
     "main": {
         "permissioned": ["DAI", "USDC", "WBTC", "WETH"],
-        "open": ["USDC", "WETH", "WBTC"]
+        "open": ["USDC", "WETH", "WBTC"],
+        "permissioned_1_5": [],
+        "open_1_5": []
     },
     "rinkeby": {
         "permissioned": ["DAI", "USDC", "WBTC", "WETH"],
-        "open": ["USDC", "WETH", "WBTC"]
+        "open": ["USDC", "WETH", "WBTC"],
+        "permissioned_1_5": ["DAI", "USDC", "WBTC", "WETH"],
+        "open_1_5": ["USDC", "WETH", "WBTC"]
     }
 }

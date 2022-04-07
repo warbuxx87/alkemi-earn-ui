@@ -3,7 +3,7 @@ import { SET_POOL } from "redux/actions/status/pool";
 
 // Define initial state
 const initialState = {
-    pool: "permissioned",
+    pool: "permissioned", // permissioned, open, permissioned_1_5, open_1_5
 };
 
 // Implement "reducer" function with initial state as default state

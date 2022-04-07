@@ -28,7 +28,7 @@ const Skeleton = () => {
     const currentPool = useSelector(getPool);
 
     useEffect(() => {
-        if (currentPool === "open") {
+        if (["open", "open_1_5"].includes(currentPool)) {
             setIsWalletLiquidator(true);
         } else {
             setIsWalletLiquidator(walletIsLiquidator);

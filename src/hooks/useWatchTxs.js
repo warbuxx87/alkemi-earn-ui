@@ -25,6 +25,8 @@ import topics from "constants/topics";
 
 import { getTransactions } from "redux/selectors/status/status";
 
+import { getAddressMoneyMarketByPool } from "utils/poolSelectionHelper";
+
 const url_map_external_tools = require("constants/url_map_external_tools.json");
 
 const moneyMarketTopics = topics.MoneyMarket;
@@ -99,10 +101,10 @@ const useWatchTxs = () => {
         let watchers = {};
         const notifiedTx = []; // tracking fired notifications by txHash (protects against web3.subscribe firing multiple times)
 
-        const address_MoneyMarket =
-            currentPool === "open"
-                ? addressMap[currentNetworkName].address_open_MoneyMarket
-                : addressMap[currentNetworkName].address_MoneyMarket;
+        const address_MoneyMarket = getAddressMoneyMarketByPool(
+            currentPool,
+            currentNetworkName
+        );
 
         const watchMoneyMarketLogs = () => {
             const options = {

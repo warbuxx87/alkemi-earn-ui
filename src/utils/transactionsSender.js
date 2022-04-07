@@ -13,6 +13,7 @@ import WETH_ABI from "constants/ABI/WETH_ABI.json";
 import DAI_ABI from "constants/ABI/DAI_ABI.json";
 import USDC_ABI from "constants/ABI/USDC_ABI.json";
 import WBTC_ABI from "constants/ABI/WBTC_ABI.json";
+import { getAddressMoneyMarketByPool } from "./poolSelectionHelper";
 
 const ABIs = {
     WETH: WETH_ABI,
@@ -40,10 +41,10 @@ export const handle_asset_contract_method_click = async ({
 
         const web3 = new Web3(library.provider);
 
-        const address_MoneyMarket =
-            currentPool === "open"
-                ? address[network].address_open_MoneyMarket
-                : address[network].address_MoneyMarket;
+        const address_MoneyMarket = getAddressMoneyMarketByPool(
+            currentPool,
+            network
+        );
 
         const tokenContract = new web3.eth.Contract(ABIs[unit], token_address);
 
@@ -105,10 +106,10 @@ export const handle_moneymarket_tx = async ({
 
         const web3 = new Web3(library.provider);
 
-        const address_MoneyMarket =
-            currentPool === "open"
-                ? address[network].address_open_MoneyMarket
-                : address[network].address_MoneyMarket;
+        const address_MoneyMarket = getAddressMoneyMarketByPool(
+            currentPool,
+            network
+        );
 
         const MoneyMarketContract = new web3.eth.Contract(
             MoneyMarket_ABI,
@@ -160,10 +161,10 @@ export const handle_liquidate_click = async ({
 
         const web3 = new Web3(library.provider);
 
-        const address_MoneyMarket =
-            currentPool === "open"
-                ? address[network].address_open_MoneyMarket
-                : address[network].address_MoneyMarket;
+        const address_MoneyMarket = getAddressMoneyMarketByPool(
+            currentPool,
+            network
+        );
 
         const MoneyMarketContract = new web3.eth.Contract(
             MoneyMarket_ABI,

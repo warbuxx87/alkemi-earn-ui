@@ -14,12 +14,27 @@
             "address_WBTC": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
             "address_WETH": "0x1f52453B32BFab737247114D56d756A6c37dd9Ef",
             "address_DAI": "0x6b175474e89094c44da98b954eedeac495271d0f"
+        },
+        "open_1_5": {
+            "address_USDC": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+            "address_WBTC": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+            "address_WETH": "0x8125afd067094cD573255f82795339b9fe2A40ab",
+            "address_DAI": "0x6b175474e89094c44da98b954eedeac495271d0f"
+        },
+        "permissioned_1_5": {
+            "address_USDC": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+            "address_WBTC": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+            "address_WETH": "0x1f52453B32BFab737247114D56d756A6c37dd9Ef",
+            "address_DAI": "0x6b175474e89094c44da98b954eedeac495271d0f"
         }
     },
     "rinkeby": {
         "address_MoneyMarket": "0xf10445a2bf3f6EBBdC5BF256F0c74D39D0505760",
+        "address_MoneyMarket_1_5": "0xa40aEb4B28417045D9b1aA29A17Fa26B3ce4d7e8",
         "address_open_MoneyMarket": "0xE6A282CB974e8F86bf67198d65e9C1Da2D23b40d",
+        "address_open_MoneyMarket_1_5": "0xb0d4CD157Ff1f15380169696Aa0643f0e9886A98",
         "address_RewardControl": "0x7876a5f1F36C869eE17320dA74761f8a4d6E1A34",
+        "address_RewardControl_1_5": "0x79fC5d17090Da9446c685662f3adC92Ee86AB8a0",
         "address_ALK_TOKEN": "***REMOVED***",
         "open": {
             "address_USDC": "0x4dbcdf9b62e891a7cec5a2568c3f4faf9e8abe2b",
@@ -31,6 +46,18 @@
             "address_USDC": "0x4dbcdf9b62e891a7cec5a2568c3f4faf9e8abe2b",
             "address_WBTC": "0x577d296678535e4903d59a4c929b718e1d575e0a",
             "address_WETH": "0xF7c05Cfc2e060dc2E8aBFCc334EaB420D6455fE6",
+            "address_DAI": "0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea"
+        },
+        "open_1_5": {
+            "address_USDC": "0x4dbcdf9b62e891a7cec5a2568c3f4faf9e8abe2b",
+            "address_WBTC": "0x577d296678535e4903d59a4c929b718e1d575e0a",
+            "address_WETH": "0x472d35d88Ac7534E3f42924Af180100ED00fE364",
+            "address_DAI": "0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea"
+        },
+        "permissioned_1_5": {
+            "address_USDC": "0x4dbcdf9b62e891a7cec5a2568c3f4faf9e8abe2b",
+            "address_WBTC": "0x577d296678535e4903d59a4c929b718e1d575e0a",
+            "address_WETH": "0x355aCC08cF05FCbD60209d41764DFab10B91Db71",
             "address_DAI": "0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea"
         }
     }

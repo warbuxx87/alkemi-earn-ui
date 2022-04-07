@@ -41,12 +41,12 @@ import { getSelectedWallet } from "redux/selectors/status/walletSelect";
 
 import DrizzleContext from "utils/DrizzleContext";
 
-import address from "constants/address_map.json";
 import constants from "constants/constant.json";
 
 import { setResetSelectionWallet } from "redux/actions/status/walletSelect";
 import { isIframe } from "web3-ledgerhq-frame-connector";
 import { useSafeAppConnection } from "@gnosis.pm/safe-apps-web3-react";
+import { getAddressMoneyMarketByPool } from "utils/poolSelectionHelper";
 
 const DEFAULT_NETWORK = process.env.REACT_APP_DEFAULT_NETWORK;
 
@@ -209,10 +209,10 @@ const useWalletSelect = () => {
 
                 // Init drizzle contracts set up
                 const network = constants.network_type[currentWalletNetwork];
-                const address_MoneyMarket =
-                    currentPool === "open"
-                        ? address[network].address_open_MoneyMarket
-                        : address[network].address_MoneyMarket;
+                const address_MoneyMarket = getAddressMoneyMarketByPool(
+                    currentPool,
+                    network
+                );
 
                 // account connected
                 initContracts({

@@ -59,8 +59,24 @@ export default function PoolSwitchAlert({
     const bodies = {
         permissioned: (
             <>
-                Now disconnecting from Alkemi Earn's 'Open' pool; KYC approval
-                is required to access the 'Verified' pool.:&nbsp;&nbsp;
+                Now disconnecting from Alkemi Earn's previously selected pool;
+                KYC approval is required to access the 'Verified'
+                pool.:&nbsp;&nbsp;
+                <Link
+                    href="https://kyc.alkemi.network/#/auth/signup"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={classes.link}
+                >
+                    Apply for KYC Verification here
+                </Link>
+            </>
+        ),
+        permissioned_1_5: (
+            <>
+                Now disconnecting from Alkemi Earn's previously selected pool;
+                KYC approval is required to access the v1.5 of the 'Verified'
+                pool.:&nbsp;&nbsp;
                 <Link
                     href="https://kyc.alkemi.network/#/auth/signup"
                     target="_blank"
@@ -73,8 +89,14 @@ export default function PoolSwitchAlert({
         ),
         open: (
             <>
-                Now disconnecting from Alkemi Earn's KYC 'Verified' pool;
+                Now disconnecting from Alkemi Earn's previously selected pool;
                 switching to the 'Open' pool.
+            </>
+        ),
+        open_1_5: (
+            <>
+                Now disconnecting from Alkemi Earn's previously selected pool;
+                switching to the v1.5 'Open' pool.
             </>
         ),
     };
