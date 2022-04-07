@@ -18,6 +18,7 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 import metamaskLogo from "assets/images/wallets/metamask.svg";
 import walletconnectLogo from "assets/images/wallets/walletconnect-logo.svg";
+import coinbaseLogo from "assets/images/wallets/coinbase.svg";
 
 const useStyles = makeStyles((theme) => ({
     dialog: {
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
         "& .MuiToggleButton-label": {
             flexDirection: "column",
         },
-        "& .MuiToggleButtonGroup-groupedHorizontal:not(:first-child) ": {
+        "& .MuiToggleButtonGroup-groupedHorizontal:nth-of-type(even)": {
             marginLeft: 16,
         },
         "& .MuiToggleButton-root": {
@@ -100,7 +101,7 @@ const wallets = [
     {
         title: "Coinbase Wallet",
         name: "Coinbase",
-        logo: walletconnectLogo,
+        logo: coinbaseLogo,
     },
 ];
 
