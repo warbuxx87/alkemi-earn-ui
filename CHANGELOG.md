@@ -1,3 +1,30 @@
+# [1.34.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.33.0...v1.34.0) (2022-04-05)
+
+
+### Features
+
+* added coinbase wallet support UI-555 ([56e3125](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/56e312509b7f15b1d4fb94d6562943865e5358f5))
+
+
+
+# [1.33.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.32.0...v1.33.0) (2022-04-01)
+
+
+### Features
+
+* default to open pool on ledger UI-562 ([40db612](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/40db612f4fa1913b9fe99981c7d178000e73efdc))
+
+
+
+# [1.32.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.31.1...v1.32.0) (2022-03-31)
+
+
+### Features
+
+* change manifest description UI-565 ([cbf531c](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/cbf531cb152884daf3db35622dc366d662fcda5f))
+
+
+
 ## [1.31.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.31.0...v1.31.1) (2022-03-25)
 
 

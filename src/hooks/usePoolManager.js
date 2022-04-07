@@ -4,6 +4,8 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+import { LedgerHQFrame } from "utils/web3ReactConnectors";
+
 // Section 2: internal imports
 import { setPool } from "redux/actions/status/pool";
 
@@ -12,13 +14,11 @@ const usePoolManager = () => {
 
     // On start
     useEffect(() => {
-        const previouslySetDefaultPool = window.localStorage.getItem(
-            "defaultPool"
-        );
+        const previouslySetDefaultPool =
+            window.localStorage.getItem("defaultPool");
 
-        const previouslyChangedPool = window.localStorage.getItem(
-            "changedPool"
-        );
+        const previouslyChangedPool =
+            window.localStorage.getItem("changedPool");
 
         if (
             previouslyChangedPool !== undefined &&
@@ -32,6 +32,11 @@ const usePoolManager = () => {
             typeof previouslySetDefaultPool === "string"
         ) {
             dispatch(setPool(previouslySetDefaultPool));
+        } else if (LedgerHQFrame.isLedgerApp()) {
+            // no change and no default means first run
+            window.localStorage.setItem("defaultPool", "open");
+
+            dispatch(setPool("open"));
         }
     }, [dispatch]); // Might cause a problem to have dispatch here
 };
