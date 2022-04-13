@@ -25,7 +25,7 @@
         "eject": "react-scripts eject"
     },
     "dependencies": {
-        "@castrated-drizzle/store": "^1.6.3",
+        "@castrated-drizzle/store": "^1.6.5",
         "@date-io/moment": "^2.10.8",
         "@devexpress/dx-react-chart": "^2.7.5",
         "@devexpress/dx-react-chart-material-ui": "^2.7.5",
