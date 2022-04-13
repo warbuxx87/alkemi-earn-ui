@@ -1,3 +1,12 @@
+## [1.35.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.35.0...v1.35.1) (2022-04-13)
+
+
+### Bug Fixes
+
+* upgrade custom drizzle version UI-569 ([876e396](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/876e3966f8777734af71deff49a0461c3867a535))
+
+
+
 # [1.35.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.34.0...v1.35.0) (2022-04-07)
 
 
