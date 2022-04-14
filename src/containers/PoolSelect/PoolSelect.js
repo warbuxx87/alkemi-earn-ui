@@ -4,6 +4,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+import { LedgerHQFrame } from "utils/web3ReactConnectors";
+
 // Section 2: internal imports
 // import { onPoolChange } from "redux/actions/status/pool";
 
@@ -17,16 +19,17 @@ import PoolDialog from "components/UI/PoolDialog";
 const PoolSelectContainer = () => {
     // On start
     React.useEffect(() => {
-        const previouslySetDefaultPool = window.localStorage.getItem(
-            "defaultPool"
-        );
+        const previouslySetDefaultPool =
+            window.localStorage.getItem("defaultPool");
 
         const previouslyChangedPool = window.localStorage.getItem(
             // needed because page will reload when selecting pool != from current one
             "changedPool"
         );
 
-        if (
+        if (LedgerHQFrame.isLedgerApp()) {
+            // do nothing
+        } else if (
             !(
                 previouslyChangedPool !== undefined && // if no previously selected pool
                 typeof previouslyChangedPool === "string"
