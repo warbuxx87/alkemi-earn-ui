@@ -23,9 +23,14 @@ export const trackForLedgerApp = (store) => (next) => (action) => {
                 if (googleAnalyticsEvents[tx.type]) {
                     event({
                         action: tx.type,
-                        data: tx,
+                        data: {
+                            ledger_assetUnit: tx.assetUnit,
+                            ledger_txHash: tx.txHash,
+                            ledger_type: tx.type,
+                            ledger_userWalletName: tx.userWalletName,
+                        },
                         category: "ledger_app",
-                        label: "transaction_track",
+                        label: "ledger_transaction_track",
                     });
                 }
             }
