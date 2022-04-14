@@ -1,3 +1,12 @@
+## [1.35.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.35.1...v1.35.2) (2022-04-14)
+
+
+### Bug Fixes
+
+* added dimension to see metadata UI-570 ([e0d3821](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e0d38212bf0c459cb2a9a0dd014b8fe69211a062))
+
+
+
 ## [1.35.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.35.0...v1.35.1) (2022-04-13)
 
 
