@@ -25,35 +25,22 @@ export const getPoolName = (currentPool) => {
 };
 
 export const getAvailablePoolsByNetwork = (network) => {
-    if (network === "rinkeby") {
-        return [
-            {
-                id: "permissioned",
-                name: "Verified Pool",
-            },
-            {
-                id: "open",
-                name: "Open Pool",
-            },
-            {
-                id: "open_1_5",
-                name: "NEW Open Pool V1.5",
-            },
-            {
-                id: "permissioned_1_5",
-                name: "NEW Verified Pool V1.5",
-            },
-        ];
-    } else {
-        return [
-            {
-                id: "permissioned",
-                name: "Verified Pool",
-            },
-            {
-                id: "open",
-                name: "Open Pool",
-            },
-        ];
-    }
+    return [
+        {
+            id: "permissioned",
+            name: "Verified Pool",
+        },
+        {
+            id: "open",
+            name: "Open Pool",
+        },
+        {
+            id: "open_1_5",
+            name: "NEW Open Pool V1.5",
+        },
+        {
+            id: "permissioned_1_5",
+            name: "NEW Verified Pool V1.5",
+        },
+    ];
 };
