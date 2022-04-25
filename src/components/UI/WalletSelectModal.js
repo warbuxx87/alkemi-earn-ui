@@ -18,6 +18,7 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 import metamaskLogo from "assets/images/wallets/metamask.svg";
 import walletconnectLogo from "assets/images/wallets/walletconnect-logo.svg";
+import coinbaseLogo from "assets/images/wallets/coinbase.svg";
 
 const useStyles = makeStyles((theme) => ({
     dialog: {
@@ -49,12 +50,15 @@ const useStyles = makeStyles((theme) => ({
         "& .MuiButtonBase-root": {
             borderRadius: "4px",
             padding: "16px",
+            marginBottom: "16px",
+        },
+        "& .MuiButtonBase-root:last-child": {
             marginBottom: "24px",
         },
         "& .MuiToggleButton-label": {
             flexDirection: "column",
         },
-        "& .MuiToggleButtonGroup-groupedHorizontal:not(:first-child) ": {
+        "& .MuiToggleButtonGroup-groupedHorizontal:nth-of-type(even)": {
             marginLeft: 16,
         },
         "& .MuiToggleButton-root": {
@@ -97,11 +101,17 @@ const wallets = [
         name: "WalletConnect",
         logo: walletconnectLogo,
     },
+    {
+        title: "Coinbase Wallet",
+        name: "Coinbase",
+        logo: coinbaseLogo,
+    },
 ];
 
 const walletsLabels = {
     MetaMask: "MetaMask",
     WalletConnect: "Wallet Connect",
+    Coinbase: "Coinbase",
 };
 
 const installMetaMask = {
