@@ -67,6 +67,12 @@ const lendReducer = (state = initialState, action) => {
                             .map((net) => net.address_open_MoneyMarket)
                             .includes(action.args[0]) &&
                         !Object.values(address)
+                            .map((net) => net.address_MoneyMarket_1_5)
+                            .includes(action.args[0]) &&
+                        !Object.values(address)
+                            .map((net) => net.address_open_MoneyMarket_1_5)
+                            .includes(action.args[0]) &&
+                        !Object.values(address)
                             .map((net) => net.address_ALK_TOKEN)
                             .includes(action.args[0]) &&
                         allowedActionNames.includes(action.name)
