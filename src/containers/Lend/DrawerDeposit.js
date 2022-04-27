@@ -54,7 +54,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     const currentPool = useSelector(getPool);
 
     const [estimationOfGasPrice, setEstimationOfGasPrice] =
-        React.useState("3000000000"); // defaults to 3 gwei
+        React.useState(null); // defaults to 3 gwei
     const [estimationOfDepositMethodCall, setEstimationOfDepositMethodCall] =
         React.useState("1050000000000000"); // defaults to 3 gwei * 350000
 
@@ -91,13 +91,15 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 const calculatedResult = web3.utils
                     .toBN("2000000000") // adds 2 gwei to the result estimation of gasPrice from the last blocks
                     .add(web3.utils.toBN(result));
-
                 setEstimationOfGasPrice(calculatedResult.toString());
             });
         }
     }, [drizzle, drizzle.web3, drizzle.web3.eth]);
 
     React.useEffect(() => {
+        if (estimationOfGasPrice === null) {
+            return null;
+        }
         const runEstimateOfMethodCall = () => {
             estimateGasForMethod({
                 drizzle,
@@ -105,6 +107,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 userWalletAddress,
                 estimationOfGasPrice,
                 method: "supply",
+                currentPool,
             })
                 .then((result) => {
                     const calculatedResult = web3.utils
@@ -127,6 +130,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
         userWalletAddress,
         drizzle,
         drizzle.web3.eth,
+        currentPool,
     ]);
 
     const [enableDeposit, setEnableDeposit] = React.useState(false);

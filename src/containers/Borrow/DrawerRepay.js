@@ -116,6 +116,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                 userWalletAddress,
                 estimationOfGasPrice,
                 method: "repayBorrow",
+                currentPool,
             })
                 .then((result) => {
                     const calculatedResult = web3.utils
@@ -135,6 +136,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
         userWalletNetwork,
         userWalletAddress,
         drizzle,
+        currentPool,
         drizzle.web3.eth,
     ]);
 

@@ -243,13 +243,14 @@ export const estimateGasForMethod = async ({
     userWalletAddress,
     estimationOfGasPrice,
     method,
+    currentPool,
 }) => {
     if (!method) throw new Error("Must select a method");
 
     const myAccount = userWalletAddress;
     const network = constants.network_type[userWalletNetwork];
     const MoneyMarketContract = drizzle.contracts.MoneyMarket;
-    const token_address = address[network][`address_WETH`];
+    const token_address = address[network][currentPool][`address_WETH`];
 
     const estimateMethodCall = await MoneyMarketContract.methods[method](
         token_address,
