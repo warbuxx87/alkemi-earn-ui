@@ -54,7 +54,7 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     const currentPool = useSelector(getPool);
 
     const [estimationOfGasPrice, setEstimationOfGasPrice] =
-        React.useState(null); // defaults to 3 gwei
+        React.useState("3000000000"); // defaults to 3 gwei
     const [estimationOfDepositMethodCall, setEstimationOfDepositMethodCall] =
         React.useState("1050000000000000"); // defaults to 3 gwei * 350000
 
@@ -97,9 +97,6 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
     }, [drizzle, drizzle.web3, drizzle.web3.eth]);
 
     React.useEffect(() => {
-        if (estimationOfGasPrice === null) {
-            return null;
-        }
         const runEstimateOfMethodCall = () => {
             estimateGasForMethod({
                 drizzle,
