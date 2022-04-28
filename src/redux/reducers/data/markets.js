@@ -17,11 +17,22 @@ const initialState = {
         supplyArray: [],
         borrowArray: [],
         calculationsTotals: {},
+
+        rawData: null, // raw markets data coming from the server, used to calculate combined data
     },
     permissioned: {
         pending: false,
         error: null,
 
+        marketsData: [],
+        supplyArray: [],
+        borrowArray: [],
+        calculationsTotals: {},
+
+        rawData: null, // raw markets data coming from the server, used to calculate combined data
+    },
+
+    combined: {
         marketsData: [],
         supplyArray: [],
         borrowArray: [],
@@ -47,6 +58,7 @@ const txReducer = (state = initialState, action) => {
                     supplyArray: action.payload.supplyArray,
                     borrowArray: action.payload.borrowArray,
                     calculationsTotals: action.payload.calculationsTotals,
+                    rawData: action.payload.rawData,
                 },
             };
         }

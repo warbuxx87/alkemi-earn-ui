@@ -58,6 +58,7 @@ export const negativeValueOfNumber = (num1, decimals) => {
     return bigNum1.times(bigNum2).toFixed(decimalPoints);
 };
 
+// With precise decimal places
 export const sumUpTwoNumbers = (num1, num2, decimals) => {
     let decimalPoints = 2;
     if (decimals) decimalPoints = decimals;
@@ -67,6 +68,47 @@ export const sumUpTwoNumbers = (num1, num2, decimals) => {
     const result = bigNum1.add(bigNum2);
 
     return result.toFixed(decimalPoints);
+};
+
+// String value
+export const sumUpTwoNumbers2 = (num1, num2) => {
+    const bigNum1 = num1 && !isNaN(num1) ? Big(num1) : Big(0);
+    const bigNum2 = num2 && !isNaN(num2) ? Big(num2) : Big(0);
+
+    const result = bigNum1.add(bigNum2);
+
+    return result.toString();
+};
+
+// String value
+export const subUpTwoNumbers2 = (num1, num2) => {
+    const bigNum1 = num1 && !isNaN(num1) ? Big(num1) : Big(0);
+    const bigNum2 = num2 && !isNaN(num2) ? Big(num2) : Big(0);
+
+    const result = bigNum1.sub(bigNum2);
+
+    return result.toString();
+};
+// String value
+export const multiplyTwoNumbers = (num1, num2) => {
+    const bigNum1 = num1 && !isNaN(num1) ? Big(num1) : Big(0);
+    const bigNum2 = num2 && !isNaN(num2) ? Big(num2) : Big(0);
+
+    const result = bigNum1.mul(bigNum2);
+
+    return result.toString();
+};
+
+// String value
+export const divideTwoNumbers = (num1, num2) => {
+    const bigNum1 = num1 && !isNaN(num1) ? Big(num1) : Big(0);
+    let bigNum2 = num2 && !isNaN(num2) ? Big(num2) : Big(1);
+
+    if (bigNum2.eq(Big(0))) bigNum2 = Big(1);
+
+    const result = bigNum1.div(bigNum2);
+
+    return result.toString();
 };
 
 // converts string type numbers to Big number and check for positivity

@@ -45,6 +45,86 @@ const fetchMarketsError = (error) => ({
 // ------------ MARKETS METHOD ACTIONS --------   //
 //                                               //
 
+const processFetchedData = (
+    obj_data,
+    currentNetworkName,
+    poolToRetrieve,
+    useAllAssets = false
+) => {
+    // filtering data by network and pool
+    const arrayOfAssets = useAllAssets
+        ? marketsByNetwork["main"]["permissioned"]
+        : marketsByNetwork[currentNetworkName][poolToRetrieve]; // use all assets will dispplay all supported assets
+
+    const dataFilteredByAssets = obj_data.filter((marketData) =>
+        arrayOfAssets.includes(Object.values(marketData)[0].symbol)
+    );
+    // could filter out past tokens from here based on only configured assets in UI
+
+    let key_markets = Object.keys(dataFilteredByAssets);
+
+    const arr_markets = key_markets.map((e) => {
+        return dataFilteredByAssets[e];
+    });
+
+    let totalSupplyBalanceUSD = 0;
+    let totalBorrowBalanceUSD = 0;
+
+    const arr_items = arr_markets.map((market) => {
+        let key_items = Object.values(market);
+
+        let asset = key_items[0];
+
+        totalSupplyBalanceUSD += parseFloat(asset.totalSupplyUSD);
+        totalBorrowBalanceUSD += parseFloat(asset.totalBorrowUSD);
+
+        return asset;
+    });
+
+    let totalCollateralRatio =
+        (totalSupplyBalanceUSD / totalBorrowBalanceUSD) * 100;
+
+    let totals = {};
+
+    totals.totalSupplyBalanceUSD = totalSupplyBalanceUSD.toFixed(2);
+    totals.totalBorrowBalanceUSD = totalBorrowBalanceUSD.toFixed(2);
+    totals.totalCollateralRatio = totalCollateralRatio.toFixed(2);
+
+    let supply_array = _.cloneDeep(arr_items);
+    let borrow_array = _.cloneDeep(arr_items);
+
+    supply_array.sort(compare_supply);
+    borrow_array.sort(compare_borrow);
+
+    supply_array = supply_array.map((e) => {
+        e.percentage_supply = Number(
+            (e.totalSupplyUSD / totals.totalSupplyBalanceUSD) * 100
+        ).toFixed(1);
+
+        return e;
+    });
+
+    borrow_array = borrow_array.map((e) => {
+        e.percentage_borrow = Number(
+            (e.totalBorrowUSD / totals.totalBorrowBalanceUSD) * 100
+        ).toFixed(1);
+
+        if (isNaN(e.percentage_borrow)) e.percentage_borrow = "0";
+        return e;
+    });
+
+    const resultFetchedMarketsData = {
+        poolToRetrieve,
+
+        marketsData: arr_items,
+        supplyArray: supply_array,
+        borrowArray: borrow_array,
+        calculationsTotals: totals,
+    };
+
+    return resultFetchedMarketsData;
+};
+
 export const fetchMarketsCall = ({
     currentNetworkName,
     poolToRetrieve,
@@ -68,80 +148,32 @@ export const fetchMarketsCall = ({
             if (data) {
                 let obj_data = JSON.parse(data);
 
-                // filtering data by network and pool
-                const arrayOfAssets =
-                    marketsByNetwork[currentNetworkName][poolToRetrieve];
-
-                const dataFilteredByAssets = obj_data.filter((marketData) =>
-                    arrayOfAssets.includes(Object.values(marketData)[0].symbol)
-                );
-                // could filter out past tokens from here based on only configured assets in UI
-
-                let key_markets = Object.keys(dataFilteredByAssets);
-
-                const arr_markets = key_markets.map((e) => {
-                    return dataFilteredByAssets[e];
-                });
-
-                let totalSupplyBalanceUSD = 0;
-                let totalBorrowBalanceUSD = 0;
-
-                const arr_items = arr_markets.map((market) => {
-                    let key_items = Object.values(market);
-
-                    let asset = key_items[0];
-
-                    totalSupplyBalanceUSD += parseFloat(asset.totalSupplyUSD);
-                    totalBorrowBalanceUSD += parseFloat(asset.totalBorrowUSD);
-
-                    return asset;
-                });
-
-                let totalCollateralRatio =
-                    (totalSupplyBalanceUSD / totalBorrowBalanceUSD) * 100;
-
-                let totals = {};
-
-                totals.totalSupplyBalanceUSD = totalSupplyBalanceUSD.toFixed(2);
-                totals.totalBorrowBalanceUSD = totalBorrowBalanceUSD.toFixed(2);
-                totals.totalCollateralRatio = totalCollateralRatio.toFixed(2);
-
-                let supply_array = _.cloneDeep(arr_items);
-                let borrow_array = _.cloneDeep(arr_items);
-
-                supply_array.sort(compare_supply);
-                borrow_array.sort(compare_borrow);
-
-                supply_array = supply_array.map((e) => {
-                    e.percentage_supply = Number(
-                        (e.totalSupplyUSD / totals.totalSupplyBalanceUSD) * 100
-                    ).toFixed(1);
-
-                    return e;
-                });
-
-                borrow_array = borrow_array.map((e) => {
-                    e.percentage_borrow = Number(
-                        (e.totalBorrowUSD / totals.totalBorrowBalanceUSD) * 100
-                    ).toFixed(1);
-
-                    if (isNaN(e.percentage_borrow)) e.percentage_borrow = "0";
-                    return e;
-                });
-
                 const resultFetchedMarketsData = {
-                    poolToRetrieve,
-
-                    marketsData: arr_items,
-                    supplyArray: supply_array,
-                    borrowArray: borrow_array,
-                    calculationsTotals: totals,
+                    ...processFetchedData(
+                        obj_data,
+                        currentNetworkName,
+                        poolToRetrieve
+                    ),
+                    rawData: obj_data,
                 };
 
                 dispatch(fetchMarketsSuccess(resultFetchedMarketsData));
             }
         })
         .catch((e) => dispatch(fetchMarketsError()));
+};
+
+export const processMarketsData = ({
+    obj_data,
+
+    dispatch,
+}) => {
+    const resultFetchedMarketsData = {
+        ...processFetchedData(obj_data, "", "combined", true),
+        rawData: obj_data,
+    };
+
+    dispatch(fetchMarketsSuccess(resultFetchedMarketsData));
 };
 
 // This call may be fetched from multiple containers but only executes once every 15 seconds

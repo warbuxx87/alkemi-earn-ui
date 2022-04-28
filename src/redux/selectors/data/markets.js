@@ -8,11 +8,22 @@ const getMarketsStoreData = (state, dataName, pool) => {
     let targetPool = pool;
     if (!targetPool) targetPool = getPool(state);
 
-    return state.data.markets[targetPool][dataName];
+    const resultData = state.data.markets[targetPool][dataName];
+
+    return resultData;
 };
 
 export const getMarkets = (pool) => (state) => {
     return getMarketsStoreData(state, "marketsData", pool);
+};
+
+// retrieve server data for each pool
+export const getMarketsRawData = (state) => {
+    return {
+        open: state.data.markets.open.rawData,
+        permissioned: state.data.markets.permissioned.rawData,
+        combined: state.data.markets.combined.rawData,
+    };
 };
 
 export const getSupplyArray = (pool) => (state) =>
