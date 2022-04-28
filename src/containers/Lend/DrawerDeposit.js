@@ -112,7 +112,8 @@ const DepositDrawerContainer = ({ asset, onTx }) => {
                 .then((result) => {
                     const calculatedResult = web3.utils
                         .toBN(estimationOfGasPrice)
-                        .mul(web3.utils.toBN(result.toString()));
+                        .mul(web3.utils.toBN(result.toString()))
+                        .mul(web3.utils.toBN("3"));
 
                     setEstimationOfDepositMethodCall(
                         calculatedResult.toString()
