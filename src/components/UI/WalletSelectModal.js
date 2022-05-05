@@ -17,6 +17,7 @@ import { useTheme } from "@mui/material/styles";
 
 import metamaskLogo from "assets/images/wallets/metamask.svg";
 import walletconnectLogo from "assets/images/wallets/walletconnect-logo.svg";
+import coinbaseLogo from "assets/images/wallets/coinbase.svg";
 
 // FIXME checkout https://mui.com/components/use-media-query/#migrating-from-withwidth
 
@@ -44,6 +45,34 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "0.875rem",
         fontWeight: "500",
         color: "#ffffff",
+    },
+    toggleButton: {
+        flexWrap: "wrap",
+        "& .MuiButtonBase-root": {
+            borderRadius: "4px",
+            padding: "16px",
+            marginBottom: "16px",
+        },
+        "& .MuiButtonBase-root:last-child": {
+            marginBottom: "24px",
+        },
+        "& .MuiToggleButton-label": {
+            flexDirection: "column",
+        },
+        "& .MuiToggleButtonGroup-groupedHorizontal:nth-of-type(even)": {
+            marginLeft: 16,
+        },
+        "& .MuiToggleButton-root": {
+            borderTop: "1px solid rgba(255, 255, 255, 0.12)",
+            width: "270px",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
+            marginBotton: "240px",
+        },
+
+        "& .MuiToggleButton-root.Mui-selected": {
+            backgroundColor: "rgba(255, 255, 255, 0.02)",
+            border: "solid 1px rgba(255, 255, 255, .7) ",
+        },
     },
     avatar: {
         backgroundColor: "transparent",
@@ -76,7 +105,7 @@ const wallets = [
     {
         title: "Coinbase Wallet",
         name: "Coinbase",
-        logo: walletconnectLogo,
+        logo: coinbaseLogo,
     },
 ];
 

@@ -1,3 +1,35 @@
+## [1.35.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.35.1...v1.35.2) (2022-04-14)
+
+
+### Bug Fixes
+
+* added dimension to see metadata UI-570 ([e0d3821](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e0d38212bf0c459cb2a9a0dd014b8fe69211a062))
+
+
+
+## [1.35.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.35.0...v1.35.1) (2022-04-13)
+
+
+### Bug Fixes
+
+* upgrade custom drizzle version UI-569 ([876e396](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/876e3966f8777734af71deff49a0461c3867a535))
+
+
+
+# [1.35.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.34.0...v1.35.0) (2022-04-07)
+
+
+### Bug Fixes
+
+* added proper margin between wallet buttons UI-568 ([3cd53cf](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/3cd53cf22153822b2721110ab792b88c877783d8))
+
+
+### Features
+
+* added coinbase icon and fixed style UI-568 ([d408b74](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/d408b7415a28a722e30529a8499ea55942802648))
+
+
+
 # [1.34.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.33.0...v1.34.0) (2022-04-05)
 
 
