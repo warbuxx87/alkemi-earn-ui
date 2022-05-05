@@ -24,7 +24,11 @@ import {
     walletNetwork,
 } from "redux/selectors/data/onboard";
 import { isWalletKYCd, getTransactions } from "redux/selectors/status/status";
-import { getPool, isKYCPool } from "redux/selectors/status/pool";
+import {
+    getPool,
+    getPoolMaxUint,
+    isKYCPool,
+} from "redux/selectors/status/pool";
 import { getMarkets } from "redux/selectors/data/markets";
 
 // Section 4: Import Components / Containers
@@ -54,6 +58,7 @@ const LiquidateDrawerContainer = ({
     const txs = useSelector(getTransactions);
 
     const currentPool = useSelector(getPool);
+    const maxUintForPool = useSelector(getPoolMaxUint);
 
     const needKYC = useSelector(isKYCPool);
 
@@ -205,6 +210,7 @@ const LiquidateDrawerContainer = ({
 
                     liquidationId,
                     maxAmount: maxAmountForToken(symbol),
+                    maxUintForPool,
 
                     library,
                     currentPool,

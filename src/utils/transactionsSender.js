@@ -154,6 +154,7 @@ export const handle_liquidate_click = async ({
     userWalletName,
     currentPool,
     selectedMethod,
+    maxUintForPool,
 }) => {
     return new Promise(async (resolve, reject) => {
         const myAccount = userWalletAddress;
@@ -205,7 +206,7 @@ export const handle_liquidate_click = async ({
                 .catch((err) => reject(err)); // The transaction was rejected
         } else {
             if (weiAmount === "-1") {
-                weiAmount = constants.max_uint;
+                weiAmount = maxUintForPool;
             } else {
                 weiAmount = toWei(amount, symbol);
             }

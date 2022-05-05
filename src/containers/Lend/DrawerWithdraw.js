@@ -26,7 +26,7 @@ import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import { getTransactions } from "redux/selectors/status/status";
 
-import { getPool } from "redux/selectors/status/pool";
+import { getPool, getPoolMaxUint } from "redux/selectors/status/pool";
 
 const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const { library } = useWalletSelect();
@@ -42,6 +42,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
     const [shouldSendMax, setShouldSendMax] = React.useState(false);
 
     const currentPool = useSelector(getPool);
+    const maxUintForPool = useSelector(getPoolMaxUint);
 
     const onSetAmount = (newValue) => {
         setShouldSendMax(false);
@@ -129,6 +130,7 @@ const DrawerWithdrawContainer = ({ asset, onTx }) => {
                     asset,
                     amount,
                     shouldSendMax,
+                    maxUintForPool,
                     type: "withdraw",
                     currentPool,
                     library,

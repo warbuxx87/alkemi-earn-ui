@@ -6,7 +6,6 @@ import {
     handle_claim_ALK_click,
 } from "utils/transactionsSender";
 
-import constants from "constants/constant.json";
 import { triggerToastDisplay } from "utils/notify";
 
 // Section 2: Action types declarations and action creators
@@ -93,13 +92,13 @@ export const onTx =
         amount,
         asset,
         shouldSendMax,
+        maxUintForPool,
         type,
         currentPool,
         library,
     }) =>
     async (dispatch) => {
-        let amountToSend =
-            shouldSendMax === true ? constants["max_uint"] : amount;
+        let amountToSend = shouldSendMax === true ? maxUintForPool : amount;
 
         const walletName = getProviderName(library.provider);
 
@@ -113,6 +112,7 @@ export const onTx =
             amount: amountToSend,
             asset,
             shouldSendMax,
+            maxUintForPool,
             currentPool,
             library,
 

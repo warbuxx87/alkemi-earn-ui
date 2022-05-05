@@ -33,7 +33,7 @@ import { walletAddress, walletNetwork } from "redux/selectors/data/onboard";
 
 import { getTransactions } from "redux/selectors/status/status";
 
-import { getPool } from "redux/selectors/status/pool";
+import { getPool, getPoolMaxUint } from "redux/selectors/status/pool";
 
 const DrawerRepayContainer = ({ asset, onTx }) => {
     const drizzle = useContext(DrizzleContext);
@@ -51,6 +51,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
     const [shouldSendMax, setShouldSendMax] = React.useState(false);
 
     const currentPool = useSelector(getPool);
+    const maxUintForPool = useSelector(getPoolMaxUint);
 
     const [estimationOfGasPrice, setEstimationOfGasPrice] =
         React.useState("3000000000"); // defaults to 3 gwei
@@ -238,6 +239,7 @@ const DrawerRepayContainer = ({ asset, onTx }) => {
                     asset,
                     amount,
                     shouldSendMax,
+                    maxUintForPool,
                     type: "repayBorrow",
                     currentPool,
                     library,

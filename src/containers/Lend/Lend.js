@@ -110,6 +110,7 @@ const LendContainer = ({ inactiveLend, activeLend, onActivate, errorLend }) => {
             asset,
 
             shouldSendMax: true,
+            maxUintForPool: constants.max_uint, // using max_uint instead of max_uint128 because it's an allocation call
 
             type: "approve",
             currentPool,
