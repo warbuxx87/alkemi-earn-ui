@@ -17,6 +17,7 @@ import {
     withStyles,
     Typography,
 } from "@material-ui/core";
+import { LedgerHQFrame } from "utils/web3ReactConnectors";
 
 // Section 3: Components & Containers import from the application
 import SidebarDashboardItem from "containers/Sidebar/DashboardItem";
@@ -146,9 +147,11 @@ function Sidebar({
                 </Box>
             </Box>
             <Box className={classes.bottom}>
-                <Box px={2}>
-                    <PoolSelectContainer />
-                </Box>
+                {LedgerHQFrame.isLedgerApp() ? null : (
+                    <Box px={2}>
+                        <PoolSelectContainer />
+                    </Box>
+                )}
                 <Box py={2} px={2}>
                     <Typography variant="body2" color="textSecondary">
                         <Link
