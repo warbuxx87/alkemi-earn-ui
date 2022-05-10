@@ -18,7 +18,6 @@ import {
     withStyles,
     Typography,
 } from "@material-ui/core";
-import { LedgerHQFrame } from "utils/web3ReactConnectors";
 
 // Section 3: Components & Containers import from the application
 import SidebarDashboardItem from "containers/Sidebar/DashboardItem";
