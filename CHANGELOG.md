@@ -1,3 +1,12 @@
+# [1.36.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.35.2...v1.36.0) (2022-05-10)
+
+
+### Features
+
+* removed banxa link in ledger app UI-576 ([ea5c42e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ea5c42e2cfffc55e4aeb94df4e6ccf671f8f66be))
+
+
+
 ## [1.35.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.35.1...v1.35.2) (2022-04-14)
 
 
