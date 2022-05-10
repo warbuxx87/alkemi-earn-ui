@@ -4,6 +4,7 @@
 import PropTypes from "prop-types";
 import { compose } from "redux";
 import clsx from "clsx";
+import { LedgerHQFrame } from "utils/web3ReactConnectors";
 
 // Section 2: Material-UI imports
 import {
@@ -139,7 +140,9 @@ function Sidebar({
                             {walletIsLiquidator === true ? (
                                 <SidebarLiquidateItem />
                             ) : null}
-                            <SidebarFiatItem />
+                            {LedgerHQFrame.isLedgerApp() ? null : (
+                                <SidebarFiatItem />
+                            )}
                         </List>
                     </Box>
                     <Divider className={classes.divider} />

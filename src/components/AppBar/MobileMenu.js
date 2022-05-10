@@ -15,6 +15,7 @@ import {
     SvgIcon,
 } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { LedgerHQFrame } from "utils/web3ReactConnectors";
 
 import { XCircle as XIcon, Menu as MenuIcon } from "react-feather";
 
@@ -107,7 +108,9 @@ export default function MobileMenu({ walletIsLiquidator }) {
                             {walletIsLiquidator === true ? (
                                 <SidebarLiquidateItem />
                             ) : null}
-                            <SidebarFiatItem />
+                            {LedgerHQFrame.isLedgerApp() ? null : (
+                                <SidebarFiatItem />
+                            )}
                         </List>
                     </Box>
                     <Divider />
