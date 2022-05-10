@@ -22,6 +22,7 @@ import {
     Radio,
     InputAdornment,
     CircularProgress,
+    Slider,
 } from "@material-ui/core";
 
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -224,10 +225,8 @@ const DrawerLiquidateWrapper = ({
     const [selectedLoanAssetData, setSelectedLoanAssetData] = React.useState(
         {}
     );
-    const [
-        selectedCollateralAssetData,
-        setSelectedCollateralAssetData,
-    ] = React.useState({});
+    const [selectedCollateralAssetData, setSelectedCollateralAssetData] =
+        React.useState({});
 
     const handleChooseSupplyCoin = useCallback(
         (val) => {
@@ -546,6 +545,18 @@ const DrawerLiquidateWrapper = ({
                                 {amount < 0 ? "CHANGE" : "MAX"}
                             </span>
                         </Box>
+                        <Slider
+                            size="small"
+                            min={0}
+                            step={0.001}
+                            max={maxAmountToDisplay(-1, selectedLoanAsset)}
+                            defaultValue={0}
+                            aria-label="Small"
+                            valueLabelDisplay="auto"
+                            onChange={(e, value) => {
+                                onSetAmount(value + "");
+                            }}
+                        />
                         <Box className={classes.inputWrap} pt={2}>
                             <Box display="flex" alignItems="center" pb={1}>
                                 <Typography variant="body1" color="textPrimary">
