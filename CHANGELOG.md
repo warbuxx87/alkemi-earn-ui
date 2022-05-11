@@ -1,3 +1,35 @@
+# [1.37.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.36.0...v1.37.0) (2022-05-10)
+
+
+### Bug Fixes
+
+* resolve merge conflic UI-577 ([89a1525](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/89a1525537a1add4f529ec6cb5bcb217ac6a1edc))
+
+
+### Features
+
+* removed switch for ledger app UI-577 ([1e06737](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/1e06737f6108f051fc3d77ec1742ad94128157fd))
+
+
+
+# [1.36.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.35.2...v1.36.0) (2022-05-10)
+
+
+### Features
+
+* removed banxa link in ledger app UI-576 ([ea5c42e](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/ea5c42e2cfffc55e4aeb94df4e6ccf671f8f66be))
+
+
+
+## [1.35.2](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.35.1...v1.35.2) (2022-04-14)
+
+
+### Bug Fixes
+
+* added dimension to see metadata UI-570 ([e0d3821](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/e0d38212bf0c459cb2a9a0dd014b8fe69211a062))
+
+
+
 ## [1.35.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.35.0...v1.35.1) (2022-04-13)
 
 
