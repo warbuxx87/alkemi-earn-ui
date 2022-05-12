@@ -12,6 +12,7 @@ import { triggerToastDisplay } from "utils/notify";
 // Section 2: Action types declarations and action creators
 import { getProviderName } from "utils/web3Helpers";
 import { setShowWalletConnectModal } from "redux/actions/status/walletConnect";
+import { trackForLedgerApp } from "utils/trackTransaction";
 
 //                                            //
 // --------- TRANSACTIONS ACTIONS ----------- //
@@ -124,6 +125,13 @@ export const onTx =
                 if (walletName === "WalletConnect") {
                     dispatch(setShowWalletConnectModal(false));
                 }
+
+                trackForLedgerApp({
+                    type,
+                    assetUnit: asset.unit,
+                    txHash: txData.txHash,
+                    userWalletName: txData.userWalletName,
+                });
 
                 triggerToastDisplay({
                     toastMessageVariant: "processing",
