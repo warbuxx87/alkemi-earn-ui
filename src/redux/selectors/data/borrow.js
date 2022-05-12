@@ -143,19 +143,6 @@ const borrowAPYSelector = (state) => {
     return borrowAPY;
 };
 
-const borrowPrincipalSelector = (state) => {
-    const borrowPrincipal = {};
-
-    try {
-        Object.values(
-            _.get(state, "contracts.MoneyMarket.borrowBalances", {})
-        ).forEach(
-            (loan) => (borrowPrincipal[loan.args[1]] = loan.value.principal)
-        );
-    } catch (e) {}
-    return borrowPrincipal;
-};
-
 // Create Borrow Selectors
 
 const getBorrowAsset = createSelector(
@@ -164,7 +151,6 @@ const getBorrowAsset = createSelector(
     (state) => getPool(state),
     (state) => borrowBalanceSelector(state),
     (state) => borrowAPYSelector(state),
-    (state) => borrowPrincipalSelector(state),
     (state) => getUtilizationValues(state),
     (state) => getAssetPrices(state),
     (state) => getAccountLiquidity(state),
@@ -178,7 +164,6 @@ const getBorrowAsset = createSelector(
         pool,
         borrowBalances,
         borrowAPY,
-        borrowPrincipal,
         marketUtilization,
         assetPrices,
         accountLiquidity,
@@ -192,7 +177,6 @@ const getBorrowAsset = createSelector(
             let ethBalance = "0";
             let weight = "0";
             let apy = "0";
-            let principal = "0";
             let utilization = "0";
             let price = "0";
             let USDprice = "0";
@@ -205,7 +189,6 @@ const getBorrowAsset = createSelector(
                     address[network][pool][`address_${asset.unit}`];
                 balance = borrowBalances[token_address] || "0";
                 apy = borrowAPY[token_address] || "0";
-                principal = borrowPrincipal[token_address] || "0";
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
                 totalBorrowed = accountTotalBorrow || "0";
@@ -291,7 +274,6 @@ const getBorrowAsset = createSelector(
                 ethBalance,
                 apy,
                 weight,
-                principal,
                 utilization,
                 price,
                 USDprice,

@@ -87,20 +87,6 @@ const lendRateMantissaSelector = (state) => {
     return supplyMantissa;
 };
 
-const lendPrincipalSelector = (state) => {
-    const supplyPrincipal = {};
-
-    try {
-        Object.values(
-            _.get(state, "contracts.MoneyMarket.supplyBalances", {})
-        ).forEach(
-            (deposit) =>
-                (supplyPrincipal[deposit.args[1]] = deposit.value.principal)
-        );
-    } catch (e) {}
-    return supplyPrincipal;
-};
-
 const getUtilizationValues = (state) => {
     const utilizationRates = {};
     try {
@@ -149,7 +135,6 @@ const getLendAsset = createSelector(
     (state) => lendBalanceSelector(state),
     (state) => lendAPYSelector(state),
     (state) => lendRateMantissaSelector(state),
-    (state) => lendPrincipalSelector(state),
     (state) => getUtilizationValues(state),
     (state) => getAssetPrices(state),
     (state) => getSupplyAccountValue(state), // TODO: refactor this to getLendAccountValue for consistency
@@ -161,7 +146,6 @@ const getLendAsset = createSelector(
         lendBalances,
         lendAPY,
         lendMantissa,
-        lendPrincipal,
         marketUtilization,
         assetPrices,
         accountTotalSupply,
@@ -172,7 +156,6 @@ const getLendAsset = createSelector(
             let balance = "0";
             let apy = "0";
             let mantissa = "0";
-            let principal = "0";
             let utilization = "0";
             let price = "0";
             let totalSupplied = "0";
@@ -187,7 +170,6 @@ const getLendAsset = createSelector(
                 balance = lendBalances[token_address] || "0";
                 apy = lendAPY[token_address] || "0";
                 mantissa = lendMantissa[token_address] || "0";
-                principal = lendPrincipal[token_address] || "0";
                 utilization = marketUtilization[token_address] || "0";
                 price = assetPrices[token_address] || "0";
                 totalSupplied = accountTotalSupply || "0";
@@ -214,7 +196,6 @@ const getLendAsset = createSelector(
                 ethBalance,
                 weight,
                 apy,
-                principal,
                 mantissa,
                 utilization,
                 price,

@@ -376,21 +376,6 @@ export const formatPercent = (num) => {
     }
 };
 
-export function calculateEarnings(balance, principal, unit, USDPrice) {
-    if (!USDPrice) return 0;
-
-    const fPrincipal = fromWei(principal, unit);
-    const fBalance = fromWei(balance, unit);
-    const fUSDprice = fromWei(USDPrice, "USDx");
-
-    let earnings = fBalance - fPrincipal;
-    earnings = earnings / fUSDprice;
-
-    earnings = formatPriceWithCurrency(earnings, "USD");
-
-    return earnings;
-}
-
 export const toDate = (timeStamp) => {
     const options = {
         year: "numeric",

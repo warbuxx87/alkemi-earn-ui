@@ -134,18 +134,6 @@ export const initMarketContract = ({
             address[network][currentPool][`address_${asset}`]
         );
 
-        // get each supplyBalances ( principle )
-        MoneyMarketContract.methods.supplyBalances.cacheCall(
-            myAddress,
-            address[network][currentPool][`address_${asset}`]
-        );
-
-        // get each borrowBalances ( principle )
-        MoneyMarketContract.methods.borrowBalances.cacheCall(
-            myAddress,
-            address[network][currentPool][`address_${asset}`]
-        );
-
         // get each asset Price
         MoneyMarketContract.methods.assetPrices.cacheCall(
             address[network][currentPool][`address_${asset}`]
@@ -180,7 +168,7 @@ export const initMarketContract = ({
     MoneyMarketContract.methods.originationFee.cacheCall();
 
     // get liquidationDiscount
-    MoneyMarketContract.methods.liquidationDiscount.cacheCall();
+    // MoneyMarketContract.methods.liquidationDiscount.cacheCall();
 
     // get admin
     MoneyMarketContract.methods.admin.cacheCall();

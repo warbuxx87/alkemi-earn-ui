@@ -23,9 +23,9 @@ const getDepositAccountValue = (state) => {
     const calculateAccountValues = Object.values(
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );
+    console.log("calculateAccountValues: ", calculateAccountValues);
     if (calculateAccountValues[0]) {
-        // console.log("Supply Account Value", calculateAccountValues[0].value[1]);
-        return _.get(calculateAccountValues, "[0].value[1]");
+        return _.get(calculateAccountValues, "[0].value[0]"); // breaks behaviour of v1
     }
     return null;
 };
@@ -47,7 +47,7 @@ const getBorrowAccountValue = (state) => {
         _.get(state, "contracts.MoneyMarket.calculateAccountValues", {})
     );
     if (calculateAccountValues[0]) {
-        return _.get(calculateAccountValues, "[0].value[2]");
+        return _.get(calculateAccountValues, "[0].value[1]"); // breaks behaviour of v1
     }
     return null;
 };
@@ -195,25 +195,27 @@ export const getUSDPrice = (state) => {
 export const getTotalDeposit = createSelector(
     getDepositAccountValue,
     getUSDPrice,
-    (depositValue, USDxPrice) =>
-        depositValue && USDxPrice
+    (depositValue, USDxPrice) => {
+        return depositValue && USDxPrice
             ? web3.utils
                   .toBN(depositValue)
                   .div(web3.utils.toBN(USDxPrice))
                   .toString()
-            : "0"
+            : "0";
+    }
 );
 
 export const getTotalBorrow = createSelector(
     getBorrowAccountValue,
     getUSDPrice,
-    (borrowValue, USDxPrice) =>
-        borrowValue && USDxPrice
+    (borrowValue, USDxPrice) => {
+        return borrowValue && USDxPrice
             ? web3.utils
                   .toBN(borrowValue)
                   .div(web3.utils.toBN(USDxPrice))
                   .toString()
-            : "0"
+            : "0";
+    }
 );
 
 export const getAggregatedBalance = createSelector(
