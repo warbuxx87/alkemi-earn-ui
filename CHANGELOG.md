@@ -1,3 +1,12 @@
+# [1.38.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.37.0...v1.38.0) (2022-05-12)
+
+
+### Features
+
+* track GA event while creating tx UI-578 ([c409669](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c4096697345ded0d92847d07a2caffb564974c92))
+
+
+
 # [1.37.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.36.0...v1.37.0) (2022-05-10)
 
 
