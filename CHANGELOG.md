@@ -1,3 +1,12 @@
+## [1.38.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.38.0...v1.38.1) (2022-06-09)
+
+
+### Bug Fixes
+
+* liquidations were not creating a transaction through our ui UI-579 ([17e15ca](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/17e15ca0b0bbcd72e9cda4cdb1e6fd1ad7b786ed))
+
+
+
 # [1.38.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.37.0...v1.38.0) (2022-05-12)
 
 
