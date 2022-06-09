@@ -211,7 +211,7 @@ export const handle_liquidate_click = async ({
 
             const requestedAmountClose = weiAmount;
 
-            const getData = MoneyMarketContract.methods[selectedMethod](
+            const getData = MoneyMarketContract.methods["liquidateBorrow"](
                 targetAccount,
                 assetBorrow,
                 assetCollateral,
