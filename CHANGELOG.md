@@ -1,3 +1,23 @@
+## [1.39.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.39.0...v1.39.1) (2022-09-28)
+
+
+### Bug Fixes
+
+* reverting pipeline node version to 10 UI-582 ([04f8529](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/04f8529369f53b53c986d0d26b3501fae7c7b518))
+
+
+
+# [1.39.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.38.1...v1.39.0) (2022-09-28)
+
+
+### Features
+
+* adding ledger enterprise test domain names UI-582 ([7d78446](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/7d78446cd809c0ea1e72a71ba48175203b9611e0))
+* changing again sonarcloud node version to 14, now in the right place UI-582 ([c742b64](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/c742b64c0d28d46f4d0247af1dd69b7203902017))
+* changing bitbucket pipeline nodejs version to 14 for sonarcloud UI-582 ([a22152a](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/a22152aa3f2eb78f819449c91a9e6d994473f9a8))
+
+
+
 ## [1.38.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.38.0...v1.38.1) (2022-06-09)
 
 
