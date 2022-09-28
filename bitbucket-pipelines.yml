@@ -1,4 +1,4 @@
-image: node:10
+image: node:14
 
 options:
   size: 2x
@@ -57,7 +57,7 @@ definitions:
                   - export NODE_OPTIONS=--max_old_space_size=6144
                   - npm install --quiet
                   - npm run test
-                  - pipe: sonarsource/sonarcloud-scan:1.2.1
+                  - pipe: sonarsource/sonarcloud-scan:1.4.0
 
         # DEFINE Code Quality Gate
         - step: &quality-gate
