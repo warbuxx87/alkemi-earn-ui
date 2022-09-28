@@ -1,3 +1,12 @@
+## [1.39.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.39.0...v1.39.1) (2022-09-28)
+
+
+### Bug Fixes
+
+* reverting pipeline node version to 10 UI-582 ([04f8529](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/04f8529369f53b53c986d0d26b3501fae7c7b518))
+
+
+
 # [1.39.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.38.1...v1.39.0) (2022-09-28)
 
 
