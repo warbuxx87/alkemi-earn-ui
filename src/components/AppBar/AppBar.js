@@ -134,7 +134,7 @@ function AppBar({
                     <StatusDisplay
                         color="success"
                         walletIsKYCd={walletIsKYCd}
-                        tooltipTitle="Connected | KYC Verified"
+                        tooltipTitle="Connected | KYC'd and whitelisted"
                         displayKYCStatus={displayKYCStatus}
                     />
                 );
@@ -143,7 +143,7 @@ function AppBar({
                     <StatusDisplay
                         color="warning"
                         walletIsKYCd={walletIsKYCd}
-                        tooltipTitle="Connected | Not KYC Verified"
+                        tooltipTitle="Connected | Not whitelisted"
                         displayKYCStatus={displayKYCStatus}
                     />
                 );

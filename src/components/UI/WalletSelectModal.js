@@ -19,6 +19,7 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import metamaskLogo from "assets/images/wallets/metamask.svg";
 import walletconnectLogo from "assets/images/wallets/walletconnect-logo.svg";
 import coinbaseLogo from "assets/images/wallets/coinbase.svg";
+import mmiLogo from "assets/images/wallets/mmi.svg";
 
 const useStyles = makeStyles((theme) => ({
     dialog: {
@@ -106,12 +107,18 @@ const wallets = [
         name: "Coinbase",
         logo: coinbaseLogo,
     },
+    {
+        title: "MetaMask Institutional",
+        name: "MMI",
+        logo: mmiLogo,
+    },
 ];
 
 const walletsLabels = {
     MetaMask: "MetaMask",
     WalletConnect: "Wallet Connect",
     Coinbase: "Coinbase",
+    MMI: "MetaMask Institutional",
 };
 
 const installMetaMask = {
@@ -209,7 +216,8 @@ function WalletSelectModal({
                             Alkemi Earn needs access to your wallet, please
                             login and authorize access to your{" "}
                             {walletsLabels[lastSelectedWallet]} account to
-                            continue and then click "try again".
+                            continue and then click "try again". Make sure you
+                            are connected to Mainnet Ethereum.
                         </Alert>
                     </Box>
                     <Box px={3} py={2} display="flex" justifyContent="flex-end">

@@ -3,6 +3,12 @@
 import _ from "lodash";
 
 export const isWalletKYCd = (state) => {
+    // console.log('state.status.blockTxForMMI.block: ', state.status.blockTxForMMI.block);
+    if (state.status.blockTxForMMI.block === true) {
+        // Addded for MMI
+        return false;
+    }
+
     const verifyKYC = Object.values(
         _.get(state, "contracts.MoneyMarket.customersWithKYC", {})
     );
@@ -11,6 +17,7 @@ export const isWalletKYCd = (state) => {
         const isKYCd = verifyKYC[0].value ? verifyKYC[0].value : false;
         return isKYCd;
     }
+
     return false;
 };
 

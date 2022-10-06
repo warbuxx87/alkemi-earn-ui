@@ -5,6 +5,7 @@ import transactions from "./transactions";
 import pool from "./pool";
 import walletSelect from "./walletSelect";
 import walletConnect from "./walletConnect";
+import blockTxForMMI from "./blockTxForMMI";
 
 export default combineReducers({
     onboard,
@@ -12,5 +13,6 @@ export default combineReducers({
     pool,
     walletSelect,
     walletConnect,
+    blockTxForMMI,
     // other status reducers go here
 });

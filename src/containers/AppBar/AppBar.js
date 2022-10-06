@@ -24,6 +24,7 @@ import { getPool } from "redux/selectors/status/pool";
 
 // Section 4: components
 import AppBar from "components/AppBar/AppBar";
+import useMMICheck from "hooks/useMMICheck";
 
 const locationToTitles = {
     "/dashboard": "Account Overview",
@@ -38,6 +39,7 @@ const locationToTitles = {
 
 // Section 5: Code Container
 const AppBarContainer = () => {
+    useMMICheck();
     const { onConnect, onReset } = useWalletSelect();
     useWatchEtherBalance();
     usePoolManager();
