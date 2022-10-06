@@ -1,17 +1,17 @@
 // Section 1: React imports
-import { useEffect, useState, useCallback, useContext, useRef } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useWeb3React } from "@web3-react/core";
 // import { ConnectorEvent } from "@web3-react/types";
 
-import Web3 from "web3";
+// import Web3 from "web3";
 import { ethers } from "ethers";
 
 // Section 2: Internal imports
 import { setBlockTxForMMI } from "redux/actions/status/blockTxForMMI";
 
-import { getPool, isKYCPool } from "redux/selectors/status/pool";
+import { isKYCPool } from "redux/selectors/status/pool";
 import { getSelectedWallet } from "redux/selectors/status/walletSelect";
 
 import { triggerToastDisplay } from "utils/notify";
@@ -262,7 +262,7 @@ const useMMICheck = () => {
                                                 );
 
                                             if (
-                                                recoveredAddress ==
+                                                recoveredAddress ===
                                                 CONST_VERIFIER_ADDRESS
                                             ) {
                                                 // all good unlock
@@ -354,7 +354,7 @@ const useMMICheck = () => {
                     // If the request fails, the Promise will reject with an error.
                 });
         }
-    }, [needKYC, library?.provider, selectedWallet]);
+    }, [needKYC, dispatch, library, library?.provider, selectedWallet]);
 
     return {};
 };
