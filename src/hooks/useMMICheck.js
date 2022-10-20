@@ -15,8 +15,9 @@ import { isKYCPool } from "redux/selectors/status/pool";
 import { getSelectedWallet } from "redux/selectors/status/walletSelect";
 
 import { triggerToastDisplay } from "utils/notify";
+import * as jose from "jose";
 
-const CONST_VERIFIER_ADDRESS = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
+const CONST_VERIFIER_ADDRESS = "0x76b5A39e3b33317073B0C2a6d1a2Fdaa8300C648";
 
 const useMMICheck = () => {
     // web3-react
@@ -85,7 +86,6 @@ const useMMICheck = () => {
             };
 
             const checkOnVeriteServers = (mmiToken) => {
-                console.log("mmiToken: ", mmiToken);
                 async function postData(url = "", data = {}) {
                     // Default options are marked with *
                     const response = await fetch(url, {
@@ -99,6 +99,23 @@ const useMMICheck = () => {
                         // redirect: 'follow', // manual, *follow, error
                         // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
                         body: JSON.stringify(data), // body data type must match "Content-Type" header
+                    });
+                    return response.json(); // parses JSON response into native JavaScript objects
+                }
+
+                async function postData2(url = "", data = {}) {
+                    // Default options are marked with *
+                    const response = await fetch(url, {
+                        method: "POST", // *GET, POST, PUT, DELETE, etc.
+                        // mode: 'cors', // no-cors, *cors, same-origin
+                        // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                        // credentials: 'same-origin', // include, *same-origin, omit
+                        headers: {
+                            "Content-type": "text/plain",
+                        },
+                        // redirect: 'follow', // manual, *follow, error
+                        // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                        body: data, // body data type must match "Content-Type" header
                     });
                     return response.json(); // parses JSON response into native JavaScript objects
                 }
@@ -121,23 +138,17 @@ const useMMICheck = () => {
                     chainId: 1337,
                     subject: library.provider.selectedAddress,
 
-                    // "name": "VerificationRegistry",
+                    name: "VerificationRegistry",
                     // "version": "1.0"
                 };
-
-                console.log("dataToSend: ", dataToSend);
 
                 postData(
                     "https://verifier-sandbox.circle.com/api/v1/verifications",
                     dataToSend
                 )
                     .then((data) => {
-                        console.log("data: ", data);
-
                         getData(data.challengeTokenUrl)
                             .then((data2) => {
-                                console.log("data2: ", data2);
-
                                 const dataToSend2 = {
                                     credential_fulfillment: {
                                         descriptor_map: [
@@ -174,24 +185,27 @@ const useMMICheck = () => {
                                 const PARAMS = {
                                     host_port: "verifier-sandbox.circle.com",
                                     did: "did:key:***REMOVED***",
-                                    subject:
-                                        "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+                                    // subject:
+                                    //     "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
                                     // "vc_jwt": "***REMOVED***"
                                 };
 
                                 const did = PARAMS["did"];
                                 const vc_jwt = mmiToken;
                                 // const host_port = PARAMS['host_port']
-                                const subject = PARAMS["subject"];
+                                const subject =
+                                    library.provider.selectedAddress;
 
                                 dataToSend2["nonce"] =
                                     data2["body"]["challenge"];
+
                                 dataToSend2["presentation_submission"][
                                     "definition_id"
                                 ] =
                                     data2["body"]["presentation_definition"][
                                         "id"
                                     ];
+
                                 dataToSend2["sub"] = subject;
                                 dataToSend2["iss"] = did;
                                 dataToSend2["vp"]["verifiableCredential"] = [
@@ -199,21 +213,22 @@ const useMMICheck = () => {
                                 ];
                                 dataToSend2["vp"]["holder"] = did;
 
-                                console.log("dataToSend2: ", dataToSend2);
-                                console.log(
-                                    "data2.reply_url: ",
-                                    data2.reply_url
-                                );
-                                postData(data2.reply_url, dataToSend2)
-                                    .then((data3) => {
-                                        console.log("data3: ", data3);
+                                const unsecuredJwt = new jose.UnsecuredJWT(
+                                    dataToSend2
+                                )
+                                    .setIssuedAt()
+                                    .setIssuer(did)
+                                    .setSubject(subject)
+                                    .encode();
 
+                                postData2(data2.reply_url, unsecuredJwt)
+                                    .then((data3) => {
                                         const signature = data3.signature;
                                         const expiration =
                                             data3.verificationResult.expiration;
 
                                         const domain = {
-                                            // name: "VerificationRegistry",
+                                            name: "VerificationRegistry",
                                             // version: "1.0",
                                             chainId: 1337,
                                             // verifyingContract: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
@@ -223,7 +238,7 @@ const useMMICheck = () => {
                                             VerificationResult: [
                                                 {
                                                     name: "schema",
-                                                    type: "string",
+                                                    type: "string[]",
                                                 },
                                                 {
                                                     name: "subject",
@@ -233,8 +248,13 @@ const useMMICheck = () => {
                                                     name: "expiration",
                                                     type: "uint256",
                                                 },
+                                                {
+                                                    name: "verifier_verification_id",
+                                                    type: "string",
+                                                },
                                             ],
                                         };
+
                                         const verificationResult = {
                                             schema: data3.verificationResult
                                                 .schema,
@@ -242,15 +262,10 @@ const useMMICheck = () => {
                                                 data3.verificationResult
                                                     .subject,
                                             expiration: expiration,
+                                            verifier_verification_id:
+                                                data3.verificationResult
+                                                    .verifier_verification_id,
                                         };
-
-                                        console.log("domain: ", domain);
-                                        console.log("types: ", types);
-                                        console.log(
-                                            "verificationResult: ",
-                                            verificationResult
-                                        );
-                                        console.log("signature: ", signature);
 
                                         try {
                                             const recoveredAddress =
@@ -282,6 +297,7 @@ const useMMICheck = () => {
                                                 triggerFailureMessageMMI();
                                             }
                                         } catch (e) {
+                                            console.log("e: ", e);
                                             triggerFailureMessageMMI();
                                         }
 
@@ -305,23 +321,6 @@ const useMMICheck = () => {
                         triggerFailureMessageMMI();
                     });
             };
-            console.log("library: ", library);
-            // library.provider
-
-            //         .request({
-            //             method: 'metamaskinstitutional_request_credentials',
-            //             params:
-            //         })
-            //         .then((result) => {
-            //             console.log('result: ', result);
-            //             // The result varies by RPC method.
-            //             // For example, this method will return a transaction hash hexadecimal string on success.
-            //         })
-            //         .catch((error) => {
-            //             console.log('error: ', error);
-            //             // If the request fails, the Promise will reject with an error.
-            //         });
-            // }
 
             const requestedCredentials = ["KYBPAMLAttestation"];
             library.provider
@@ -333,10 +332,6 @@ const useMMICheck = () => {
                     },
                 })
                 .then((result) => {
-                    console.log(
-                        'result["KYBPAMLAttestation"][0].token: ',
-                        result["KYBPAMLAttestation"][0].token
-                    );
                     // The result varies by RPC method.
                     // For example, this method will return a transaction hash hexadecimal string on success.
                     if (
