@@ -1,3 +1,12 @@
+# [1.40.0](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.39.1...v1.40.0) (2022-11-15)
+
+
+### Features
+
+* adding new domain name for gnosis safe cors UI-583 ([b4acb06](https://bitbucket.org/project-alkemi/alkemi-earn-ui/commits/b4acb06b233795b20420693c8e8430836a9af0ac))
+
+
+
 ## [1.39.1](https://bitbucket.org/project-alkemi/alkemi-earn-ui/compare/v1.39.0...v1.39.1) (2022-09-28)
 
 
