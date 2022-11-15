@@ -292,7 +292,7 @@ pipelines:
                   - step: *test
                   - step: *analyze
                   - step: *github
-                  - step: *docs
+                  # - step: *docs
             - step: *build
             - step: *upload
             - step: *deploy-production
