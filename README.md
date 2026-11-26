@@ -1,3 +1,23 @@
+# Alkemi Earn UI
+
+> React/Redux web app for Alkemi Earn: supply, borrow and track positions, with wallet connect and multi-network support. web3 · Material UI.
+
+<p>
+<img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React" />
+<img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=white" alt="Redux" />
+<img src="https://img.shields.io/badge/Material_UI-007FFF?style=flat-square&logo=mui&logoColor=white" alt="Material UI" />
+<img src="https://img.shields.io/badge/web3.js-F16822?style=flat-square&logo=web3dotjs&logoColor=white" alt="web3.js" />
+<img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" />
+<img src="https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white" alt="Nginx" />
+</p>
+
+**About this repo:** The main user-facing app for Alkemi Earn (2020–2022), with 699 commits. I'm the top contributor (387 commits, under two usernames), alongside pps, Alan Tran and Ben Cooper. It uses Drizzle/Redux state, wallet selection, i18n, snapshot tests, conventional commits and Docker/Nginx deploys. The original README follows.
+
+---
+
+<details open>
+<summary><b>Original README</b></summary>
+
 # Alkemi Earn | User Interface
 
 ![Version](https://img.shields.io/badge/version-1.8.0-blue.svg?cacheSeconds=2592000) [![Built with React](https://img.shields.io/badge/React-black?style=flat&logo=react)](https://docs.alkemi.network/earn-ui) [![Built on Ethereum](https://img.shields.io/badge/web3.js-blue?style=flat&logo=ethereum)](https://web3js.readthedocs.io/en/v1.3.0/) [![Twitter: AlkemiOfficial](https://img.shields.io/twitter/follow/AlkemiOfficial.svg?style=social)](https://twitter.com/AlkemiOfficial)
@@ -183,3 +203,6 @@ If you come across an issue with Alkemi Protocol contracts, do a search in the [
 ## 📝 License
 
 Copyright © 2020 [Alkemi Network](https://github.com/project-alkemi).
+
+
+</details>
